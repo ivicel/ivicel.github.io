@@ -34,3 +34,19 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
+THEME = 'pelican-bootstrap3'
+
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['i18n_subsites']
+PYGMENTS_STYLE = 'default'
+JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
+MARKDOWN = {
+    "extensions": [
+    "codehilite(css_class=highlight)", "extra", "toc", 'def_list',
+    'sane_lists',
+    'headerid',
+    'attr_list',
+    'tables',
+    'toc',
+    ]
+}
