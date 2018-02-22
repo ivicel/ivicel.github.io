@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'ivicel'
-SITENAME = 'Take Thoughts'
-SITEURL = ''
+SITENAME = 'Amber time'
+SITEURL = 'https://io.ivicel.info'
 
 PATH = 'content'
 

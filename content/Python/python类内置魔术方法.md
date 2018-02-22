@@ -53,12 +53,12 @@ print(a.x)          # 'A', a.__getattr__()并不会调用
 
 ### `__slots__` 的特殊性
 > 类变量`__slots__` 可赋值 string, iterable，字符list
-> 
+>
 > 定义`__slots__`变量后，类将不再使用`__dict__`来存储属性
-> 
+>
 > 类不会自动生成`__dict__`和`__weakref__`
 >
->
+> 
 >
 
 ### 对象方法
@@ -96,7 +96,7 @@ __delattr__(self, name)
 访问属性`self.x`时，首先会隐式调用`__getattribute__()`方法，只有在`__getattribute__()`中显示调用或者`raise`出`AttributeError`时，才会调用`__getattr__()`
 
 > 1. 类中没有定义`__getattribute__()`时，当`self.x`不存在时，默认`raise`出`AttributeError`
- 
+
 > 2. 类中有定义`__getattribute__()`时，访问`self.x`时，调用`__getattribute__()`，除非显示调用`__getattr__()`或者`raise`出`AttributeError`,才会调用`__getattr__()`如若存在
 > 3. 在定义`__getattribute__()`时，为避免无限递归调用，一般使用`object.__getattribute__(self, name)`来获取对象的值
 
@@ -184,7 +184,7 @@ __set_name__(self, owner, name)
 通常`data descriptor`都定义`__set__()`和`__get__()`，`non-data descriptor`只定义`__get__()`
 
 > The following methods only apply when an instance of the class containing the method (a so-called descriptor class) appears in an owner class (the descriptor must be in either the owner’s class dictionary or in the class dictionary for one of its parents). In the examples below, “the attribute” refers to the attribute whose name is the key of the property in the owner class’ `__dict__`.
-> 
+>
 > 只有描述符类的实例`instance`是`owner_class`中或`owner_class`的某一个父类中`__dict__`中属性的实例，描述符方法才会调用
 
 描述符调用`a.x`和`A.x`

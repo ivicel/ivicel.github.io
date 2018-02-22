@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>javascript 面向对象 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./javascript-mian-xiang-dui-xiang.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="description" content="对象属性特征 1.数据属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Writable]] 能否修改属性的值 [[Value]] 属性的数据值 2.访问器属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为数据属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Get]] 在读取属性时调用的函数 [[Set]] 在写入属性时调用的函数 对象属性查找 每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。 搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返 回该属性的值； 如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。 判断属性是否为对象本身属性或是在原型链中 hasOwnProperty() 方法断访问是属性是否是在实例中 in 操作符会在通过对象能够访问给富属性时返回 true …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="javascript 面向对象"/>
+        <meta property="og:url" content="./javascript-mian-xiang-dui-xiang.html"/>
+        <meta property="og:description" content="对象属性特征 1.数据属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Writable]] 能否修改属性的值 [[Value]] 属性的数据值 2.访问器属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为数据属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Get]] 在读取属性时调用的函数 [[Set]] 在写入属性时调用的函数 对象属性查找 每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。 搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返 回该属性的值； 如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。 判断属性是否为对象本身属性或是在原型链中 hasOwnProperty() 方法断访问是属性是否是在实例中 in 操作符会在通过对象能够访问给富属性时返回 true …"/>
+        <meta property="article:published_time" content="2017-03-21" />
+            <meta property="article:section" content="Javascript" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./javascript-mian-xiang-dui-xiang.html"
+                       rel="bookmark"
+                       title="Permalink to javascript 面向对象">
+                        javascript 面向对象
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-03-21T00:00:00+08:00"> Tue 21 March 2017</time>
+    </span>
+
+
+
+
+
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h4 id="_1">对象属性特征</h4>
+<p>1.数据属性
+<code>[[Configurable]]</code> 能否通过 <code>delete</code> 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性
+<code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
+<code>[[Writable]]</code> 能否修改属性的值
+<code>[[Value]]</code> 属性的数据值</p>
+<p>2.访问器属性
+<code>[[Configurable]]</code> 能否通过 <code>delete</code> 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为数据属性
+<code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
+<code>[[Get]]</code> 在读取属性时调用的函数
+<code>[[Set]]</code> 在写入属性时调用的函数</p>
+<h4 id="_2">对象属性查找</h4>
+<p>每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。</p>
+<p>搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返
+回该属性的值；</p>
+<p>如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。</p>
+<hr />
+<h4 id="_3">判断属性是否为对象本身属性或是在原型链中</h4>
+<p><code>hasOwnProperty()</code> 方法断访问是属性是否是在实例中</p>
+<p><code>in</code> 操作符会在通过对象能够访问给富属性时返回 <code>true</code>，无论该属性存在于实例中还是原型中。</p>
+<hr />
+<h4 id="_4">函数原型</h4>
+<p>只要创建一个函数，就会根据一组特定的规则为该函数创建一个 <code>prototype</code> 属性，该属性指向函数的原型对象</p>
+<p>默认的情况下，所有的原型对象都会自动获得一个 <code>constructor</code> (构造函数) 属性，这个属性包含一个指向 <code>prototype</code> 属性所在函数的指针</p>
+<p>当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向函数的原型对象。ECMAScript 5把这个指针叫做 <code>[[prototype]]</code> ，通过<code>Object.getPrototypeOf()</code> 访问到这个指针，或是使用非标准属性 <code>__proto__</code></p>
+<p><img alt="函数原型" src="../images/函数原型.png" /></p>
+<hr />
+<h4 id="_5">原型语法</h4>
+<p><strong>写法一</strong></p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>写法二</strong></p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span>
+    <span class="nx">age</span><span class="o">:</span> <span class="mi">29</span><span class="p">,</span>
+    <span class="nx">job</span><span class="o">:</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">,</span>
+    <span class="nx">sayName</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>写法二</strong>相当把 <code>Person.prototype</code> 重新指向新的对象</p>
+<h4 id="1">1. 工厂模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">createPerson</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="err">﻿</span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">person1</span> <span class="o">=</span> <span class="nx">createPerson</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Software Egineer&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">person2</span> <span class="o">=</span> <span class="nx">createPerson</span><span class="p">(</span><span class="s2">&quot;Greg&quot;</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="s2">&quot;Doctor&quot;</span><span class="p">);</span>
+</pre></div>
+
+
+<h4 id="2">2.构造函数模式</h4>
+<div class="highlight"><pre><span></span>    <span class="nx">fucntion</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+        <span class="p">};</span>
+        <span class="c1">// 等价 this.sayName = new Function(&quot;console.log(this.name)&quot;);</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Software Egineer&quot;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Greg&quot;</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="s2">&quot;Doctor&quot;</span><span class="p">);</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">==</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">//false, 说明在两个对象中，sayName是不同的对象</span>
+</pre></div>
+
+
+<h4 id="3">3.原型模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">;</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+    <span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>  <span class="c1">//&quot;Nicholas&quot;</span>
+
+    <span class="kd">var</span> <span class="nx">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+    <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>  <span class="c1">//&quot;Nicholas&quot;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">==</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span> <span class="c1">//true, 说明在两个对象中，sayName是相同的对象</span>
+</pre></div>
+
+
+<h4 id="4">4.组合使用构造函数模式和原型模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">friend</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Shelby&quot;</span><span class="p">,</span> <span class="s2">&quot;Court&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="o">:</span> <span class="nx">Person</span><span class="p">;</span>
+    <span class="nx">sayName</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Greg&quot;</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="s2">&quot;Doctor&quot;</span><span class="p">);</span>
+
+<span class="nx">person1</span><span class="p">.</span><span class="nx">friend</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Van&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">friends</span><span class="p">);</span>   <span class="c1">//&quot;Shelby, Count, Van&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person2</span><span class="p">.</span><span class="nx">friends</span><span class="p">);</span>       <span class="c1">//&quot;Shelby, Count&quot;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person1</span><span class="p">.</span><span class="nx">friends</span> <span class="o">===</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">friends</span><span class="p">);</span>   <span class="c1">//false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">===</span> <span class="nx">person2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">);</span>   <span class="c1">//true</span>
+</pre></div>
+
+
+<h4 id="5">5.动态原型模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">!=</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">friend</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">);</span>
+<span class="nx">friend</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
+</pre></div>
+
+
+<h4 id="6">6.寄生构造函数模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">job</span> <span class="o">=</span> <span class="nx">job</span><span class="p">;</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">friend</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">&quot;Software Engineer&quot;</span><span class="p">);</span>
+<span class="nx">friend</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>       <span class="c1">//&quot;Nicholas&quot;</span>
+</pre></div>
+
+
+<blockquote>
+<p>构造函数在不返回值的情况下，默认会返回新对象实例<br />
+而通过在构造函数的末尾添加一个 <code>return</code> 语句，可以重写调用构造函数时返回的值。<br />
+这种模式可以在行列的情况下用来为对象创建构造函数。<br />
+假如想创建一个具有额外方法的特殊数组，由于不能直接修改 <code>Array</code> 构造函数，可以使用这种模式</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">SpecialArray</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//创建数组</span>
+    <span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+    <span class="c1">//添加值</span>
+    <span class="nx">values</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+    <span class="c1">//添加方法</span>
+    <span class="nx">values</span><span class="p">.</span><span class="nx">toPipedString</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="c1">//返回数组</span>
+    <span class="k">return</span> <span class="nx">values</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">colors</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SpecialArray</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">colors</span><span class="p">.</span><span class="nx">toPipedString</span><span class="p">());</span> <span class="c1">//&quot;red|blue|green&quot;</span>
+</pre></div>
+
+
+<h4 id="7">7.稳妥构造函数模式</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">job</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+
+    <span class="nx">o</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="_6">原型链</h4>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">SuperType</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">property</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="c1">//something else</span>
+<span class="p">}</span>
+<span class="nx">SuperType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getSuperValue</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//some codes</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">property</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">SubType</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//something</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">subproperty</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//继承了 SuperType</span>
+<span class="nx">SubType</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SuperType</span><span class="p">();</span>
+<span class="nx">SubType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getSubValue</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">subproperty</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">//other codes</span>
+<span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance</span><span class="p">.</span><span class="nx">getSuperValue</span><span class="p">());</span>      <span class="c1">//true</span>
+</pre></div>
+
+
+<p><img alt="函数继承原型链" src="https://ivicel.github.io/images/函数继承原型链.png" /></p>
+<h4 id="_7">原型链继承的问题</h4>
+<ul>
+<li>创建子类型时，原先的超类型实例属性变成了子类的原型属性</li>
+<li>创建子类型时，没有办法在不影响所有对象实例的情况下给超类型的构造函数传递对数</li>
+</ul>
+<h4 id="_8">继承方法</h4>
+<h5 id="1_1">1. 借用构造函数（伪造对象、经典继承）</h5>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">SuperType</span><span class="p">(</span><span class="nx">newColor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">SubType</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//继承了 SuperType</span>
+    <span class="nx">SuperType</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">instance1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">();</span>
+<span class="nx">instance1</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">//&quot;red,blue,green,yellow,black&quot;</span>
+
+<span class="kd">var</span> <span class="nx">isntance1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">//&quot;red,blue,green,yellow&quot;</span>
+</pre></div>
+
+
+<h5 id="2_1">2. 组合继承（伪经典继承）</h5>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">SuperType</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="nx">SuperType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">SubType</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//继承属性</span>
+    <span class="nx">SuperType</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//继承方法</span>
+<span class="nx">SubType</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SuperType</span><span class="p">();</span>
+<span class="nx">SubType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayAge</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">instance1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+<span class="nx">instance1</span><span class="p">.</span><span class="nx">colors1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>      <span class="c1">//&quot;red,blue,green,black&quot;</span>
+<span class="nx">instance1</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>    <span class="c1">//&quot;Nicholas&quot;</span>
+<span class="nx">instance</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>      <span class="c1">//29</span>
+
+<span class="kd">var</span> <span class="nx">instance2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">(</span><span class="s2">&quot;Greg&quot;</span><span class="p">,</span> <span class="mi">27</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">instance2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">//&quot;red,blue,green&quot;</span>
+<span class="nx">instance2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>    <span class="c1">//&quot;Greg&quot;</span>
+<span class="nx">instance2</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>     <span class="c1">//27</span>
+</pre></div>
+
+
+<h5 id="3_1">3. 原型式继承</h5>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">object</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">o</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span>
+    <span class="nx">friends</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Shelby&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Court&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Van&quot;</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">anotherPerson</span> <span class="o">=</span> <span class="nx">object</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Greg&quot;</span><span class="p">;</span>
+<span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">friends</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Rob&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">yetAnotherPerson</span> <span class="o">=</span> <span class="nx">object</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">yetAnotherPerson</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Linda&quot;</span><span class="p">;</span>
+<span class="nx">yetAnotherPerson</span><span class="p">.</span><span class="nx">friends</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Barbie&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">friends</span><span class="p">);</span>  <span class="c1">//&quot;Shelby,Court,Van,Rob,Barbie&quot;</span>
+</pre></div>
+
+
+<blockquote>
+<p>使用 <code>Object.create()</code> 原型式继承。该函数接受两个参数：一个用作新对象原型的对象和一个（可选的）新对象定义额外属性的对象，覆盖原型卦象上的同名属性</p>
+</blockquote>
+<ul>
+<li><strong>使用一个参数</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span>
+    <span class="nx">friends</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Shelby&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Court&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Van&quot;</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">anotherPerson</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Greg&quot;</span><span class="p">;</span>
+<span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">friends</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Rob&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">yetAnotherPerson</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">yetAnotherPerson</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Linda&quot;</span><span class="p">;</span>
+<span class="nx">yetAnotherPerson</span><span class="p">.</span><span class="nx">friends</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Barbie&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">friends</span><span class="p">);</span>  <span class="c1">//&quot;Shelby,Court,Van,Rob,Barbie&quot;</span>
+</pre></div>
+
+
+<ul>
+<li><strong>使用两个参数，参数传入方式与 <code>Object.definePrototies()</code> 相同</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span>
+    <span class="nx">friends</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Shelby&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Court&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Van&quot;</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">anotherPerson</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="s2">&quot;Greg&quot;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>  <span class="c1">//&quot;Greg&quot;</span>
+</pre></div>
+
+
+<h5 id="4_1">4. 寄生式继承</h5>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">createAnother</span><span class="p">(</span><span class="nx">original</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//通过调用函数创建一个新对象</span>
+    <span class="kd">var</span> <span class="nx">clone</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">original</span><span class="p">);</span>
+    <span class="c1">//以某种方式来增强这个对象</span>
+    <span class="nx">clone</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="c1">//返回该对象</span>
+    <span class="k">return</span> <span class="nx">clone</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span>
+    <span class="nx">friends</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Shelby&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Court&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Van&quot;</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">anotherPerson</span> <span class="o">=</span> <span class="nx">createAnother</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">anotherPerson</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">();</span>  <span class="c1">//&quot;hi&quot;</span>
+</pre></div>
+
+
+<h5 id="5_1">5. 寄生组合式继承</h5>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">inheritPrototype</span><span class="p">(</span><span class="nx">subType</span><span class="p">,</span> <span class="nx">superType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//创建对象</span>
+    <span class="kd">var</span> <span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">superType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+    <span class="c1">//增强对象</span>
+    <span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">subType</span><span class="p">;</span>
+    <span class="c1">//指定对象</span>
+    <span class="nx">subType</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">prototype</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">SuperType</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="nx">SuperType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">SubType</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">SuperType</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">inheritPrototype</span><span class="p">(</span><span class="nx">SubType</span><span class="p">,</span> <span class="nx">SuperType</span><span class="p">);</span>
+<span class="nx">SubType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayAge</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SubType</span><span class="p">(</span><span class="s2">&quot;Nicholas&quot;</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+</pre></div>
+
+
+<p><img alt="寄生组合式继承" src="../images/寄生组合式继承.png" /></p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

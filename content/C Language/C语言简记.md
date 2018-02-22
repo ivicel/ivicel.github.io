@@ -26,17 +26,17 @@ int main(int argc, char **argv)
 ```
 
 #### **2. 关键字、保留字**
- 
 
-|          |            |           |         |
-----------|-------------|-------------|-------------|---------
-`auto`    | `else`      | `long`      | `switch`    | `break`  
-`enum`    | `register`  | `typedef`   | `case`      | `extern`
-`union`   | `char`      | `float`     | `short`     | `unsigned` 
-`const`   | `for`       | `signed`    | `void`      | `continue`
-`goto`    | `sizeof`    | `volatile`  | `default` 
-`if`      | `static`    | `while`     | `do`        | `int` 
-`struct`  | `_Packed`   | `double`
+| `auto`    | `else`     | `long`     | `switch`  | `break`    |
+| --------- | ---------- | ---------- | --------- | ---------- |
+| `enum`    | `register` | `typedef`  | `case`    | `extern`   |
+| `union`   | `char`     | `float`    | `short`   | `unsigned` |
+| `const`   | `for`      | `signed`   | `void`    | `continue` |
+| `goto`    | `sizeof`   | `volatile` | `default` | `if`       |
+| `static`  | `while`    | `do`       | `struct`  | `int`      |
+| `_Packed` | `double`   |            |           |            |
+
+
 
 
 #### **3. 数据类型**
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
 数据在系统中占据的内存大小，与系统类型有关
 
-![存储大小](https://ivicel.github.io/images/存储大小.jpg)
+![存储大小](../images/存储大小.jpg)
 
 `void`类型
 
@@ -454,7 +454,7 @@ token34 = 40
 
 #### **18. 类型转换**
 
-![强制类型转换](https://ivicel.github.io/images/强制类型转换.png)
+![强制类型转换](../images/强制类型转换.png)
 
 #### **19. 可变参数**
 
