@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pelican -s pelicanconf.py -o ivicel.github.io -d -D
+pelican -s pelicanconf.py -o io.ivicel.info -d -D
 git add .
 git commit -m "generate blog at $(date)"
 git push 
