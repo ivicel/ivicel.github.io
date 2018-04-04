@@ -1,6 +1,6 @@
 title: Android对象序列化方式
 date: 2018-04-01
-tag: android, 序列化, serializable, parceable
+tags: android, 序列化, serializable, parceable
 
 
 

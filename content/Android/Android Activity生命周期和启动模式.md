@@ -1,6 +1,6 @@
 title: Android Activity生命周期和启动模式
 date: 2018-04-01
-tag: activity, android
+tags: activity, android
 
 
 

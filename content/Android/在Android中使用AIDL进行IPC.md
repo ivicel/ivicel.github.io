@@ -1,6 +1,6 @@
 title: 在Android中使用AIDL进行IPC
 date: 2018-04-01
-tag: aidl, ipc, 进程间通信
+tags: aidl, ipc, 进程间通信
 
 
 

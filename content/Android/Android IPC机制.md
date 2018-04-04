@@ -1,6 +1,6 @@
 title: Android IPC机制
 date: 2018-04-01
-tag: IPC, Android, 进程间通信
+tags: IPC, Android, 进程间通信
 
 
 

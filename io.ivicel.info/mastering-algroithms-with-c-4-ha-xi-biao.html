@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Mastering Algroithms with C-4: 哈希表 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./mastering-algroithms-with-c-4-ha-xi-biao.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="算法,C,集合,数据结构" />
+        <meta name="description" content="哈希表通过一种最有效的检索方法--散列来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的. 所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突 链式哈希表(Chained Hash Table) 链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个&#34;桶(bucket)&#34; 链式哈希表在插入元素时, 将其键传入一个哈希函数h(k), 函数通过散列的方式告知元素属于哪个&#34;桶&#34;,然后在相应的链表头插入元素 在查找或删除元素时, 用同样的方式先找到元素的&#34;桶&#34;, 然后遍历相应的链表 每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低 冲突的发生 当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突. 链式哈希表当产生冲突时, 它就把元素放到冲突发生的&#34;桶&#34;中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多 理想的情况是, 把元素平均和随机的分配到每一个 …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Mastering Algroithms with C-4: 哈希表"/>
+        <meta property="og:url" content="./mastering-algroithms-with-c-4-ha-xi-biao.html"/>
+        <meta property="og:description" content="哈希表通过一种最有效的检索方法--散列来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的. 所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突 链式哈希表(Chained Hash Table) 链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个&#34;桶(bucket)&#34; 链式哈希表在插入元素时, 将其键传入一个哈希函数h(k), 函数通过散列的方式告知元素属于哪个&#34;桶&#34;,然后在相应的链表头插入元素 在查找或删除元素时, 用同样的方式先找到元素的&#34;桶&#34;, 然后遍历相应的链表 每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低 冲突的发生 当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突. 链式哈希表当产生冲突时, 它就把元素放到冲突发生的&#34;桶&#34;中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多 理想的情况是, 把元素平均和随机的分配到每一个 …"/>
+        <meta property="article:published_time" content="2017-03-24" />
+            <meta property="article:section" content="Data Structure Algorithms" />
+            <meta property="article:tag" content="算法" />
+            <meta property="article:tag" content="C" />
+            <meta property="article:tag" content="集合" />
+            <meta property="article:tag" content="数据结构" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./mastering-algroithms-with-c-4-ha-xi-biao.html"
+                       rel="bookmark"
+                       title="Permalink to Mastering Algroithms with C-4: 哈希表">
+                        Mastering Algroithms with C-4: 哈希表
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-03-24T00:00:00+08:00"> Fri 24 March 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/suan-fa.html">算法</a>
+        /
+	<a href="./tag/c.html">C</a>
+        /
+	<a href="./tag/ji-he.html">集合</a>
+        /
+	<a href="./tag/shu-ju-jie-gou.html">数据结构</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>哈希表通过一种最有效的检索方法--<strong>散列</strong>来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的.</p>
+<p>所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突</p>
+<h3 id="chained-hash-table">链式哈希表(Chained Hash Table)</h3>
+<p>链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个"桶(bucket)"</p>
+<p>链式哈希表在插入元素时, 将其键传入一个<strong>哈希函数</strong><code>h(k)</code>, 函数通过散列的方式告知元素属于哪个"桶",然后在相应的<strong>链表头</strong>插入元素</p>
+<p>在查找或删除元素时, 用同样的方式先找到元素的"桶", 然后遍历相应的链表</p>
+<p>每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低</p>
+<p><img alt="链式哈希表" src="../images/链式哈希表.png" /></p>
+<h4 id="_1">冲突的发生</h4>
+<p>当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突.</p>
+<p>链式哈希表当产生冲突时, 它就把元素放到冲突发生的"桶"中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多</p>
+<p>理想的情况是, 把元素平均和随机的分配到每一个"桶"中, 这种称为<strong>均匀散列</strong>(uniform hash). 实际情况只能是无限接近平均分配</p>
+<p>一个重要的因素--<strong>负载因子</strong>(load factor)</p>
+<p><code>a = n / m</code> 其中, <code>n</code>是元素个数, <code>m</code>是"桶"的个数</p>
+<p>最好的情况是每个链表的中的元素个数接近负载因子的数值</p>
+<h4 id="_2">选择哈希函数</h4>
+<p>哈希函数<code>h(k) = x</code>将键<code>k</code>映射到哈希表中的<code>x</code>位置, 大多数的散列方法假设<code>k</code>设整数, 这样<code>k</code>能够很容易的以数学的方式修改, 使<code>x</code>更加均匀的分布在表中, 当<code>k</code>不是一个整数时, 我们需要将<code>k</code>转换为整数</p>
+<ul>
+<li>取余法: <code>h(k) = k mod m</code></li>
+</ul>
+<p>通常选择的<code>m</code>会是一个素数, 且不要太接近于 2 的幂, 同时还要考虑存储的限制和负载因子</p>
+<ul>
+<li>乘法: <code>h(k) = m(kA mod 1)</code>, <code>A</code>(0&lt;A&lt;1)通常是 0.618 左右</li>
+</ul>
+<p>这种方法对<code>m</code>的选择不像取余法中那么慎重</p>
+<div class="highlight"><pre><span></span><span class="cm">/* 一个适用于处理字符串的哈希函数 */</span>
+<span class="cm">/* hashpjw.c */</span>
+
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">hashpjw</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">key</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">ptr</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xf0000000</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">^</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">);</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">^</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ptr</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* PRIME_TBLSIZ 是实际的表的大小 */</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="o">%</span> <span class="n">PRIME_TBLSIZ</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>链式哈希表头文件</p>
+<div class="highlight"><pre><span></span><span class="cm">/** chtbl.h */</span>
+<span class="cp">#ifndef CHTBL_H</span>
+<span class="cp">#define CHTBL_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;list.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* 链式哈希表结构 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">CHTbl_</span> <span class="p">{</span>
+    <span class="cm">/* &quot;桶的个数&quot; */</span>
+    <span class="kt">int</span> <span class="n">buckets</span><span class="p">;</span>
+    <span class="cm">/* hash_func 是自定义传入的哈希函数 */</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_func</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
+    <span class="cm">/* 元素数量 */</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">List</span> <span class="o">*</span><span class="n">table</span><span class="p">;</span>
+<span class="p">}</span><span class="n">CHTbl</span><span class="p">;</span>
+
+<span class="cm">/* 初始化哈希表 */</span>
+<span class="kt">int</span> <span class="nf">chtbl_init</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">int</span> <span class="n">buckets</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_func</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">),</span> 
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">));</span>
+<span class="cm">/* 销毁函数 */</span>
+<span class="kt">void</span> <span class="nf">chtbl_destroy</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">);</span>
+<span class="cm">/* 插入数据 */</span>
+<span class="kt">int</span> <span class="nf">chtbl_insert</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
+<span class="cm">/* 删除数据 */</span>
+<span class="kt">int</span> <span class="nf">chtbl_remove</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">);</span>
+<span class="cm">/* 查找数据 */</span>
+<span class="kt">int</span> <span class="nf">chtbl_lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">);</span>
+
+<span class="cp">#define chtbl_size(htbl) ((htbl)-&gt;size)</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+
+
+<p>链式哈希表的实现</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;list.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;chtbl.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">chtbl_init</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">int</span> <span class="n">buckets</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_func</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">),</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="cm">/* 初始化所需要多少个链表, 即多少个&quot;桶&quot;的内存 */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">=</span> <span class="p">(</span><span class="n">List</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">List</span><span class="p">)</span> <span class="o">*</span> <span class="n">buckets</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span> <span class="o">=</span> <span class="n">buckets</span><span class="p">;</span>
+    <span class="cm">/* 为每个链表设置销毁函数 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>   
+        <span class="cm">/* list_init(&amp;htbl-&gt;table[i], destroy); */</span>
+        <span class="n">list_init</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">destroy</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_func</span> <span class="o">=</span> <span class="n">hash_func</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">match</span> <span class="o">=</span> <span class="n">match</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">destroy</span> <span class="o">=</span> <span class="n">destroy</span><span class="p">;</span>
+    <span class="cm">/* 初始表长度 */</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">chtbl_destroy</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">list_destroy</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">htbl</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">CHTbl</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">chtbl_insert</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">retval</span><span class="p">;</span>
+
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+    <span class="cm">/* 不插入重复的数据 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">chtbl_lookup</span><span class="p">(</span><span class="n">htbl</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">temp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* hash the key */</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_func</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">retval</span> <span class="o">=</span> <span class="n">list_ins_next</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">bucket</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">retval</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">chtbl_remove</span><span class="p">(</span><span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ListElmt</span> <span class="o">*</span><span class="n">element</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">bucket</span><span class="p">;</span>
+    <span class="cm">/* 使用 hash 函数确认数据属于哪个&quot;桶&quot; */</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_func</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">;</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="cm">/* 在&quot;桶&quot;中查找, 即是查找链表 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">element</span> <span class="o">=</span> <span class="n">list_head</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">bucket</span><span class="p">);</span> <span class="n">element</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">list_next</span><span class="p">(</span><span class="n">element</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">list_data</span><span class="p">(</span><span class="n">element</span><span class="p">)))</span> <span class="p">{</span>
+            <span class="cm">/* 如果查找到相同数据, 删除这个元素 */</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">list_rem_next</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">--</span><span class="p">;</span>
+                <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">element</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">chtbl_lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">CHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ListElmt</span> <span class="o">*</span><span class="n">element</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">bucket</span><span class="p">;</span>
+    <span class="cm">/* Hash the key. */</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">element</span> <span class="o">=</span> <span class="n">lsit_head</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">+</span> <span class="n">buckets</span><span class="p">);</span> <span class="n">element</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">list_next</span><span class="p">(</span><span class="n">element</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">hb</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="n">list_data</span><span class="p">(</span><span class="n">element</span><span class="p">)))</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">list_data</span><span class="p">(</span><span class="n">element</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>链式哈希表的应用: 符号表</p>
+<p>在使用程序解析某种语法时, 为了能够更有效的管理程序中的符号信息, 通学使用一种叫做符号表的数据结构, 一般使用哈希表来实现. 对符号表进行插入数据时, 也即是向哈希表插入数据, 称为词法分析.</p>
+<p>下面的例子是一个非常简单的词法分析器, 分析传入的字符串, <code>next_token</code>从输入<code>istream</code>中取得下一个字符串, 如果没有了, 就返回退出</p>
+<p>假设输入的字符只有两种: 一种是数字, 另一种是数字之外的字符. 字符之间以空格隔开</p>
+<div class="highlight"><pre><span></span><span class="cm">/* lex.c */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;chtbl.h&quot;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="k">enum</span> <span class="n">Token_</span> <span class="p">{</span><span class="n">lexit</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">digit</span><span class="p">,</span> <span class="n">other</span><span class="p">}</span> <span class="n">Token</span><span class="p">;</span>
+
+<span class="n">Token</span> <span class="nf">lex</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">istream</span><span class="p">,</span> <span class="n">CHTbl</span> <span class="o">*</span><span class="n">symtbl</span><span class="p">);</span>
+
+<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">next_token</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">istream</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* check next there is a token */</span>
+    <span class="cm">/* return NULL; */</span>
+<span class="p">}</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Symbol_</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">lexeme</span><span class="p">;</span>
+    <span class="n">Token</span> <span class="n">token</span><span class="p">;</span>
+<span class="p">}</span><span class="n">Symbol</span><span class="p">;</span>
+
+<span class="n">Token</span> <span class="nf">lex</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">istream</span><span class="p">,</span> <span class="n">CHTbl</span> <span class="o">*</span><span class="n">symtbl</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Token</span> <span class="n">token</span><span class="p">;</span>
+    <span class="n">Symbol</span> <span class="o">*</span><span class="n">symbol</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">length</span><span class="p">,</span> <span class="n">retval</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">(</span><span class="n">Symbol</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Symbol</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">error</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* next_token 返回下一个字符或者 NULL */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">lexeme</span> <span class="o">=</span> <span class="n">next_token</span><span class="p">(</span><span class="n">istream</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* 如果没有下一个词 */</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">symbol</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">lexit</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="n">symbol</span><span class="o">-&gt;</span><span class="n">token</span> <span class="o">=</span> <span class="n">digit</span><span class="p">;</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">lexeme</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* -&gt; 和 [] 同一运算级, 从左到右 */</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">lexeme</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="cm">/* 检查是否是数字 */</span>
+                <span class="n">symbol</span><span class="o">-&gt;</span><span class="n">token</span> <span class="o">=</span> <span class="n">other</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">token</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">symbol</span><span class="o">-&gt;</span><span class="n">token</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Token</span><span class="p">));</span>
+        <span class="cm">/* 将符号插入哈希表中 */</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">retval</span> <span class="o">=</span> <span class="n">chtbl_insert</span><span class="p">(</span><span class="n">symtbl</span><span class="p">,</span> <span class="n">symbol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">symbol</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">error</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* 符号已经存在于哈希表中 */</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">symbol</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">token</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3 id="open-addressed-hash-tables">开地址哈希表(Open-Addressed Hash Tables)</h3>
+<p>在链式哈希表中, 元素存放在每个地址的"桶"中, 而在开地址哈希表中, 元素存放在表本身</p>
+<h4 id="_3">冲突解决</h4>
+<p>在开地址哈希表中, 探查这个表, 直到找到一个可以旋转元素的槽. 例如, 如果要插入一个元素, 我们探查槽位直到找一个空槽, 然后将元素插入些槽中. 如果要删除一个元素, 我们探查槽位直到定位到该元素或直到找一个空槽. 如果在找到元素之前找到一个空槽或遍历完所有槽位, 那么说明元素不在表中</p>
+<p>需要进行过多少次探查后就停止探查取决于: 哈希表的负载因子和元素均匀分布程度</p>
+<p>在开地址哈希表中<code>a=n/m</code>, 因为每个槽位至多能够容纳一个元素, 所以<code>a</code>总是小于等于 1, 假设进行均匀散列, 探查的槽位个数是<code>1/(1-a)</code>, 明显的当表中负载因子越大, 所探查次就越多</p>
+<h4 id="_4">线性探查</h4>
+<p>开地址哈希表中的一种简单的探查方法就是探查表中连续的槽位.</p>
+<p><code>h(k, i) = (h&lt;sup&gt;'&lt;/sup&gt;(k)+i) mod m</code>  0 &lt; i &lt; m-1(m 是表中槽位个数), h<sup>'</sup>是一个辅助函数, 比如取余法函数</p>
+<p><img alt="线性探查" src="../images/线性探查.png" /></p>
+<h4 id="_5">双散列</h4>
+<p>最有效地探查开地址哈希表的方法之一, 就是通过求两个辅助哈希函数的哈希编码之和, 来得到最终的哈希编码值</p>
+<p><code>h(h, i)  = (h&lt;sub&gt;1&lt;/sub&gt;(k) + i * h&lt;sub&gt;2&lt;/sub&gt;(k)) mod m</code><br />
+h<sub>1</sub>和h<sub>2</sub>分别是两个不两同的哈希辅助函数, 为了保证第二次访问任何一个槽之前, 其他所有槽都访问过了, 方法一是: m 必须是 2 次幂, 让 h<sub>2</sub> 返回一个奇数值; 另一种方法是选择 m 为一个素数, h<sub>2</sub> 返回值在 1 &lt;= h<sub>2</sub>(k) &lt;= m-1 之间</p>
+<p>通常情况下, 令h<sub>1</sub>(k) = k mod m, h<sub>2</sub>(k) = 1 + (k mod m<sup>'</sup>), 其中 m<sup>'</sup> 略小于 m, 类似 m-1, m-2. 双散列的优点是能够探查并产生较好的颁布, 缺点是必须限制 m 的值, 也是表的大小不变, 这样才能保证在一系列探查中访问表中所有槽之后才会再次探查任何槽</p>
+<p><img alt="双散列" src="../images/双散列.png" /></p>
+<p>开地址哈希表头文件</p>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef OHTBL_H</span>
+<span class="cp">#define OHTBL_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* 开地址哈希表表结构, 使用双散列方法 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">OHTbl_</span> <span class="p">{</span>
+    <span class="cm">/* 表中槽位个数 */</span>
+    <span class="kt">int</span> <span class="n">positions</span><span class="p">;</span>
+    <span class="cm">/* 一个哈希表初始化时, 空槽通常包含一个指向 NULL 的空指针</span>
+<span class="cm">     * 当删除一个元素时, 不能将删除元素的数据指向 NULL, 这是由于当查找</span>
+<span class="cm">     * 接下来的元素时, NULL 表明些槽位是空的, 随之探查过程将停止</span>
+<span class="cm">     * 这样一个或多个元素可能被插入之前删除过元素的槽位中, 但实际指向数据还存在</span>
+<span class="cm">     * </span>
+<span class="cm">     * 所以当删除一个元素, 把该槽们标记为一个特殊的值, 来指明这个地址曾经删除一个元素 </span>
+<span class="cm">     * </span>
+<span class="cm">     */</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">vacated</span><span class="p">;</span>
+    <span class="cm">/* 散列方法一 */</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_f1</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">);</span>
+    <span class="cm">/* 散列方法二 */</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_f2</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
+    <span class="cm">/* 表中元素数量 */</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+    <span class="cm">/* 槽位指针, 初始为 NULL, 插入数据后其指向数据 */</span>
+    <span class="kt">void</span> <span class="o">**</span><span class="n">table</span><span class="p">;</span>
+<span class="p">}</span><span class="n">OHTbl</span><span class="p">;</span>
+<span class="cm">/* 初始化哈希表 */</span>
+<span class="kt">int</span> <span class="nf">ohtbl_init</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">int</span> <span class="n">positions</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_f1</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">),</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_f2</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">));</span>
+<span class="cm">/* 销毁表 */</span>
+<span class="kt">void</span> <span class="nf">ohtbl_destroy</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">);</span>
+<span class="cm">/* 插入数据 */</span>
+<span class="kt">void</span> <span class="nf">ohtbl_insert</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
+<span class="cm">/* 删除数据 */</span>
+<span class="kt">int</span> <span class="nf">ohtbl_remove</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">);</span>
+<span class="cm">/* 查找数据 */</span>
+<span class="kt">int</span> <span class="nf">ohtbl_lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">);</span>
+<span class="cm">/* 哈希表大小 */</span>
+<span class="cp">#define ohtbl_size(htbl) ((htbl)-&gt;size)</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+
+
+<p>开地址哈希表的实现</p>
+<div class="highlight"><pre><span></span><span class="cm">/* ohtbl.c */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;ohtbl.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* 元素辅助 */</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">vacated</span><span class="p">;</span>
+<span class="cm">/* 初始化哈希表 */</span>
+<span class="kt">int</span> <span class="nf">ohtbl_init</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">int</span> <span class="n">positions</span><span class="p">,</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">hash_f1</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">),</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">hash_f2</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">),</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destory</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="cm">/* 为哈希表槽们指针申请内存 */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">positions</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* 初始槽位大小 */</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span> <span class="o">=</span> <span class="n">positions</span><span class="p">;</span>
+    <span class="cm">/* 将每个槽位都初始为 NULL */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* 初始辅助指针 */</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">vacated</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">vacated</span><span class="p">;</span>
+
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f1</span> <span class="o">=</span> <span class="n">hash_f1</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f2</span> <span class="o">=</span> <span class="n">hash_f2</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">match</span> <span class="o">=</span> <span class="n">match</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">destroy</span> <span class="o">=</span> <span class="n">destroy</span><span class="p">;</span>
+    <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/* 销毁 */</span>
+<span class="kt">void</span> <span class="nf">ohtbl_destroy</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">destroy</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* 遍历每个槽位, 如果槽为空, 并且槽位没有被标注过有元素插入, 销毁这个槽位 */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">vacated</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">);</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">htbl</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">OHTbl</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="cm">/* 插入元素 */</span>
+<span class="kt">int</span> <span class="nf">ohtbl_insert</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+    <span class="cm">/* 如果表的大小达到最大槽位数, 即哈希表已满, 无法再插入元素 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">==</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* 不插入相同的数据到表中 */</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ohtbl_lookup</span><span class="p">(</span><span class="n">htbl</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">temp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* use double hashing to hash the key */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* 双散列方法查找槽位 */</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f1</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f2</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span>
+        <span class="cm">/* 如果槽位为 NULL 或者该槽位没有指向标记值则可以将数据插入到这个槽位中 */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">vacated</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* 将槽位指向数据 */</span>
+            <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+            <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ohtbl_remove</span><span class="p">(</span><span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">position</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f1</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f2</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)))</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* 没有查找到数据 */</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">vacated</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* 元素被标注为删除过, 继续查找是否有冲突产生过 */</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="cm">/* 查找到元素, 对比其中数据 */</span>
+            <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">];</span>
+            <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">vacated</span><span class="p">;</span>
+            <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ohtbl_lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">OHTbl</span> <span class="o">*</span><span class="n">htbl</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f1</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">hash_f2</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)))</span> <span class="o">%</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">positions</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">htbl</span><span class="o">-&gt;</span><span class="n">table</span><span class="p">[</span><span class="n">position</span><span class="p">];</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

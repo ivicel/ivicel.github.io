@@ -1,6 +1,6 @@
-title: AIDL的源码分析
-date: 2018-04-01
-tag: aidl, 源码, 分析
+Title: AIDL的源码分析
+Date: 2018-04-01
+Tags: aidl, 源码, 分析
 
 
 
