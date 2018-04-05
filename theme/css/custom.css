@@ -1,0 +1,8 @@
+body {
+   line-height: 26px;
+}
+
+.h1, .h2, .h3, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

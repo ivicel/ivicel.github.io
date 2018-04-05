@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>aidl - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="ivicel" />
+    <meta name="keywords" content="aidl" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Amber time"/>
+        <meta property="og:url" content=".."/>
+        <meta property="og:description" content="Amber time"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="../category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="../category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="../category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="../category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="../category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="../category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="../aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html">AIDL生成的接口及Binder的分析</a></h2>
+                <div class="summary"><h3 id="1-android-binder">1. Android 上的 Binder</h3>
+<p>在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更<strong>高效</strong>, 也更<strong>安全</strong>, 其他<code>IPC</code>没有严格权限验证机制</p>
+<h4 id="11-binder">1.1 Binder 的构架</h4>
+<p>​        Binder 通信是基于 <strong>C/S 构架</strong>. 多个 C 端可以同步连接 S 端, 所以 S 端需要<strong>同步</strong>设置</p>
+<p><img alt="binder架构" src="../images/binder架构.jpg" /></p>
+<h4 id="1-2-binder">1-2 Binder 的机制</h4>
+<ul>
+<li>服务端向内核注册服务, 内核生成<code>binder_proc …</code></li></ul>
+                    <a class="btn btn-default btn-xs" href="../aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../zai-androidzhong-shi-yong-aidljin-xing-ipc.html">在Android中使用AIDL进行IPC</a></h2>
+                <div class="summary"><h5 id="aidl"><code>AIDL</code>基本介绍</h5>
+<p><code>AIDL</code>全称<code>Android Interface Define Language</code>, 后缀名是<code>.aidl</code>. 其支持以下几个数据类型</p>
+<ul>
+<li>基本数据类型<code>int</code>, <code>float</code>, <code>long</code>, <code>double</code>, <code>byte</code> , <code>short</code>, <code>boolean</code>, <code>char</code></li>
+<li><code>String</code>类型和<code>CharSequence</code>类型</li>
+<li><code>List</code>类型,  并其内<strong>元素</strong>可以是<strong>泛型</strong>. 但元素一定是可<code>Parcelable</code>类型或是其他<code>AIDL</code>支持的类型. 可选择将 <code>List</code> 用作 “通用” 类（例如，<code>List&lt;String&gt;</code>）。另一端实际接收的具体类始终是 <code>ArrayList</code>，但生成的方法使用的是 <code>List</code> 接口。</li>
+<li><code>Map</code>类型 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../zai-androidzhong-shi-yong-aidljin-xing-ipc.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

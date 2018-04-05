@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Android IPC机制 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./android-ipcji-zhi.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="IPC,Android,进程间通信" />
+        <meta name="description" content="开启多进程的方法 Android应用启动时会自动创建一个新的进程, 其进程名默认为包名, 为四大组件(Activity, Service, ContentProvider, Receiver)启动一个新的进程, 最简单的是在Manifest.xml中为其配置android:process进程名称. 有两种写法. 一是指定进程的全称:android:process=&#34;info.ivicel.github.android_ipc.another_process&#34;, 此时进程为一个全局进程, 其他应用可以通过ShareUID方式和它跑在同一进程中 二是简写: android:process=&#34;:remote&#34;. 这种写法其完整的进程名为包名:remote, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中 由于Android中为不同进程单独分配一个虚拟机来运行, 所以Android中不能通过共享内存来进行通信. 由于不能共享内存 …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Android IPC机制"/>
+        <meta property="og:url" content="./android-ipcji-zhi.html"/>
+        <meta property="og:description" content="开启多进程的方法 Android应用启动时会自动创建一个新的进程, 其进程名默认为包名, 为四大组件(Activity, Service, ContentProvider, Receiver)启动一个新的进程, 最简单的是在Manifest.xml中为其配置android:process进程名称. 有两种写法. 一是指定进程的全称:android:process=&#34;info.ivicel.github.android_ipc.another_process&#34;, 此时进程为一个全局进程, 其他应用可以通过ShareUID方式和它跑在同一进程中 二是简写: android:process=&#34;:remote&#34;. 这种写法其完整的进程名为包名:remote, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中 由于Android中为不同进程单独分配一个虚拟机来运行, 所以Android中不能通过共享内存来进行通信. 由于不能共享内存 …"/>
+        <meta property="article:published_time" content="2018-04-01" />
+            <meta property="article:section" content="Android" />
+            <meta property="article:tag" content="IPC" />
+            <meta property="article:tag" content="Android" />
+            <meta property="article:tag" content="进程间通信" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./android-ipcji-zhi.html"
+                       rel="bookmark"
+                       title="Permalink to Android IPC机制">
+                        Android IPC机制
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-04-01T00:00:00+08:00"> Sun 01 April 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/ipc.html">IPC</a>
+        /
+	<a href="./tag/android.html">Android</a>
+        /
+	<a href="./tag/jin-cheng-jian-tong-xin.html">进程间通信</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h5 id="_1">开启多进程的方法</h5>
+<p><code>Android</code>应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<code>Activity</code>, <code>Service</code>, <code>ContentProvider</code>, <code>Receiver</code>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
+<p>一是指定进程的全称:<code>android:process="info.ivicel.github.android_ipc.another_process"</code>, 此时进程为一个全局进程, 其他应用可以通过<code>ShareUID</code>方式和它跑在同一进程中</p>
+<p>二是简写: <code>android:process=":remote"</code>. 这种写法其完整的进程名为<code>包名:remote</code>, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中</p>
+<blockquote>
+<p>由于<code>Android</code>中为不同进程单独分配一个虚拟机来运行, 所以<code>Android</code>中不能通过<strong>共享内存</strong>来进行通信. </p>
+</blockquote>
+<p>由于不能<strong>共享内存</strong>, 便会造成:</p>
+<ol>
+<li>静态成员和单例模式完全失效</li>
+<li>线程的同步机制完全失效, 通过共享内存来<code>synchronized</code>, 锁对象/锁全局类都不是同一个了</li>
+<li><code>SharedPreferences</code>的可靠性下降. 这是因为<code>SharedPreferences</code>底层是通过<code>xml</code>文件的来实现的, 需要对文件的读写进行同步</li>
+<li><code>Application</code>会多次创建. 多进程会为每一个进程启动一<code>Application</code>, 相当多次启动应用. 可以在<code>Application</code>的<code>onCreate()</code>里打印出进程<code>id</code>证实启动了多次应用</li>
+</ol>
+<h5 id="androidipc"><code>Android</code>中<code>IPC</code>的几种方式</h5>
+<p>在<code>Android</code>中的<code>IPC</code>大致有以下几种: </p>
+<ul>
+<li>通过<code>Intent</code>的附加<code>extras</code>来传递, 其本质是通过<code>Bundle</code>来实现的</li>
+<li>通过共享文件</li>
+<li>通过<code>Binder</code>, 其底层是通过<code>AIDL</code>来实现</li>
+<li>通过<code>ContentProvider</code></li>
+<li>通过网络<code>Socket</code></li>
+<li>直接使用<code>AIDL</code></li>
+<li>通过<code>Messenger</code>, 注意这不是消息载体<code>Message</code></li>
+</ul>
+<ol>
+<li>
+<h6 id="bundle">使用<code>Bundle</code></h6>
+</li>
+</ol>
+<p><code>Bundle</code>的使用很是简单, 其实现了<code>Pacelable</code>接口, 可以直接传递各种可序列化的数据. </p>
+<ol>
+<li>
+<h6 id="_2">使用共享文件</h6>
+</li>
+</ol>
+<p>可以在进程<code>A</code>中写入文件, 在进程<code>B</code>中读出文件内容, 要注意的是读出的对象和写入时的对象其内容数据虽然一样, 但本质上是两个对象. 并且使用共享文件进行通信时, 如果要求的并发量过高, 其同步就越困难, 有可能出并发读/写时数据不一致的情况. 其适合使用在对数据同步要求不高的进程之间的通信.
+   <code>SharedPreferences</code>其底层的实现也是一个<code>.xml</code>文件, 但是系统对其读/写时, 会维护一个在内存里的缓存, 这使得多进程模式下对<code>SharedPreferences</code>的读写非常不可靠. 所以不要使用其行<code>IPC</code></p>
+<ol>
+<li>
+<h5 id="aidl">使用<code>AIDL</code>通信</h5>
+</li>
+</ol>
+<p>见 <a href="./在Android中使用AIDL进行IPC.md">在Android中使用AIDL进行IPC</a></p>
+<ol>
+<li>
+<h5 id="messenger">使用<code>Messenger</code></h5>
+</li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
