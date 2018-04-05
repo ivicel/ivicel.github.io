@@ -1,23 +1,24 @@
-Title: AIDL的源码分析
+Title: AIDL生成的接口及Binder的分析
 Date: 2018-04-01
 Tags: aidl, 源码, 分析
 
 
 
-#### `Android`上的`Binder`
+### 1. Android 上的 Binder
 
-在原`Linux`上已经有各种`IPC`, 管道, 信号, 信号量, `Socket`, 共享内存, 互斥锁. 但`Binder`能在`Android`这个特定的平台上会比其他更**高效**, 也更**安全**, 其他`IPC`没有严格权限验证机制
+在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更**高效**, 也更**安全**, 其他`IPC`没有严格权限验证机制
 
-##### `Binder`构架
+#### 1.1 Binder 的构架
 
-`Binder`通信是基于 **C/S 构架**. 多个 C 端可以同步连接 S 端, 所以 S 端需要**同步**设置
+​        Binder 通信是基于 **C/S 构架**. 多个 C 端可以同步连接 S 端, 所以 S 端需要**同步**设置
 
 ![binder架构](../images/binder架构.jpg)
 
-##### `Binder`机制
+#### 1-2 Binder 的机制
 
 * 服务端向内核注册服务, 内核生成`binder_proc`的数据结构信息
 * 注册之后客户端便可以获取到服务代理, 进而跟服务端通信
+
   `WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE)`
 * 这些都是在 native 和内核层帮助我们转换完成
 
@@ -31,8 +32,7 @@ Tags: aidl, 源码, 分析
 * 在`AIDL`中, 系统会给生成一个静态的内部类`Stub`. 继承了`Binder`同时实现了`IInterface`接口. 这说明这是一个本地的`Binder`, 并且可以作为远程`Server`来给`Client`传递数据的能力. 其内部真正使用**策略模式**来交给`Stub.Proxy`处理数据的交换
 
 
-
-#### `AIDL`文件实现分析
+#### 2. `AIDL`文件实现分析
 
 在系统自动生成的`BookManager.java`中, 主要结构:
 

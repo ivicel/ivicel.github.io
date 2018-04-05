@@ -37,9 +37,10 @@ DEFAULT_PAGINATION = 10
 RELATIVE_URLS = True
 THEME = 'pelican-bootstrap3'
 
+CUSTOM_CSS = "theme/css/custom.css"
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['i18n_subsites']
-PYGMENTS_STYLE = 'default'
+PYGMENTS_STYLE = 'emacs'
 JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
 MARKDOWN = {
     "extensions": [

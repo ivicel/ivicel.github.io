@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>AIDL的源码分析 - Amber time</title>
+    <title>AIDL本质及Binder的分析 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
 
 
-<link rel="canonical" href="./aidlde-yuan-ma-fen-xi.html">
+<link rel="canonical" href="./aidlben-zhi-ji-binderde-fen-xi.html">
 
         <meta name="author" content="ivicel" />
         <meta name="keywords" content="aidl,源码,分析" />
@@ -17,8 +17,8 @@
 
         <meta property="og:site_name" content="Amber time" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="AIDL的源码分析"/>
-        <meta property="og:url" content="./aidlde-yuan-ma-fen-xi.html"/>
+        <meta property="og:title" content="AIDL本质及Binder的分析"/>
+        <meta property="og:url" content="./aidlben-zhi-ji-binderde-fen-xi.html"/>
         <meta property="og:description" content="Android上的Binder 在原Linux上已经有各种IPC, 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但Binder能在Android这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 Binder构架 Binder通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 Binder机制 服务端向内核注册服务, 内核生成binder_proc的数据结构信息 注册之后客户端便可以获取到服务代理, 进而跟服务端通信 WindowManager …"/>
         <meta property="article:published_time" content="2018-04-01" />
             <meta property="article:section" content="Android" />
@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
     <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="./theme/css/pygments/default.css" rel="stylesheet">
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
     <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
 
 
@@ -93,10 +93,10 @@ Amber time            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="./aidlde-yuan-ma-fen-xi.html"
+                    <a href="./aidlben-zhi-ji-binderde-fen-xi.html"
                        rel="bookmark"
-                       title="Permalink to AIDL的源码分析">
-                        AIDL的源码分析
+                       title="Permalink to AIDL本质及Binder的分析">
+                        AIDL本质及Binder的分析
                     </a>
                 </h1>
             </header>
