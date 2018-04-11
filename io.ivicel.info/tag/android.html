@@ -99,14 +99,14 @@ Amber time            </a>
             <hr/>
             <article>
                 <h2><a href="../android-ipcji-zhi.html">Android IPC机制</a></h2>
-                <div class="summary"><h5 id="_1">开启多进程的方法</h5>
-<p><code>Android</code>应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<code>Activity</code>, <code>Service</code>, <code>ContentProvider</code>, <code>Receiver</code>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
+                <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
+<p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
 <p>一是指定进程的全称:<code>android:process="info.ivicel.github.android_ipc.another_process"</code>, 此时进程为一个全局进程, 其他应用可以通过<code>ShareUID</code>方式和它跑在同一进程中</p>
 <p>二是简写: <code>android:process=":remote"</code>. 这种写法其完整的进程名为<code>包名:remote</code>, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中</p>
 <blockquote>
-<p>由于<code>Android</code>中为不同进程单独分配一个虚拟机来运行, 所以<code>Android</code>中不能通过<strong>共享内存</strong>来进行通信. </p>
+<p>由于 Android 中为不同进程单独分配一个虚拟机来运行, 所以 Android 中不能通过<strong>共享内存</strong>来进行通信. </p>
 </blockquote>
-<p>由于不能<strong>共享内存 …</strong></p>
+<p>在 …</p>
                     <a class="btn btn-default btn-xs" href="../android-ipcji-zhi.html">more ...</a>
                 </div>
             </article>

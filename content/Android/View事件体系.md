@@ -1,4 +1,4 @@
-Title: Android开发艺术探索Ch03 - View 事件体系
+Title: View 事件体系
 Tags: view事件, view坐标, view滑动, view触摸
 Date: 2018-02-22
 
@@ -126,54 +126,52 @@ Date: 2018-02-22
 
      `Scroller`类是一个滑动的`Helper`类, 其本质上是使用`view.scrollTo`方法来滑动, 但内部有一个可定义`Interpolator`类, 即插值属性来提供滑动变动曲线, 使得滑动更加的流畅.
 
-     ```java
-     /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
-      * 在自定义 View 的构造方法获取一个 Scroller 实例
-      * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用
-      * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
-      * 若是没有完成, 则调用 View.scrollTo 来滑动 View 内容的位置, 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成
-      * 如此的反复回调直到滑动的完成
-      */
-     public class CustomView extends View {
-       	private Scroller mScroller;
-       
-     	public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
-           super(context, attrs, defStyleAtrr);
-           mScroller = new Scroller(context);
-         }
-       
-       	/* 提供一个外部使用的滚动方法, 参数为滚动的目标坐标, 同 view.scrollTo */
-       	public void smoothScrollTo(int destX, int destY) {
-           	int deltaX = destX - getScrollX();
-           	int deltaY = destY - getScrollY();
-           	/* 该方法并没有产生滑动, 而只是设置了一变量值, 比如初始位置和滑动距离, 滑动时间等 */
-           	mScroller.startScroll(getScrollX(), getScrollY(), deltaX, deltaY);
-           	/* 促使 view 进行重绘 */
-           	invalidate();
-         }
-       
-       	public void smoothScrollBy(int deltaX, int deltaY) {
-         	smoothScrollTo(mScroller.getCurrX() + deltaX, mScroller.getCurrY() + deltaY);  
-         }
-       
-       	@Override
-       	public void computeScroll() {
-             /* view 在绘制的时候会调用该方法
-              * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置
-              * 若是没有的话, 返回 true. 然后我们继续滑动 view 的位置 
-              */
-         	if (mScroller.computeScrollOffset()) {
-             	/* 真正的滑动调用, mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置, 而 getFinalX() 则获得最终位置. */
-               	scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-               	/* 因为滑动可能还没有完成, 所以再次调用一次 view 重绘 */
-               	postInvalidate();
-             }
+
+```Java
+ /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
+  * 在自定义 View 的构造方法获取一个 Scroller 实例
+  * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用
+  * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
+  * 若是没有完成, 则调用 View.scrollTo 来滑动 View 内容的位置, 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成
+  * 如此的反复回调直到滑动的完成
+  */
+ public class CustomView extends View {
+   	private Scroller mScroller;
+   
+ 	public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
+       super(context, attrs, defStyleAtrr);
+       mScroller = new Scroller(context);
+     }
+   
+   	/* 提供一个外部使用的滚动方法, 参数为滚动的目标坐标, 同 view.scrollTo */
+   	public void smoothScrollTo(int destX, int destY) {
+       	int deltaX = destX - getScrollX();
+       	int deltaY = destY - getScrollY();
+       	/* 该方法并没有产生滑动, 而只是设置了一变量值, 比如初始位置和滑动距离, 滑动时间等 */
+       	mScroller.startScroll(getScrollX(), getScrollY(), deltaX, deltaY);
+       	/* 促使 view 进行重绘 */
+       	invalidate();
+     }
+   
+   	public void smoothScrollBy(int deltaX, int deltaY) {
+     	smoothScrollTo(mScroller.getCurrX() + deltaX, mScroller.getCurrY() + deltaY);  
+     }
+   
+   	@Override
+   	public void computeScroll() {
+         /* view 在绘制的时候会调用该方法
+          * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置
+          * 若是没有的话, 返回 true. 然后我们继续滑动 view 的位置 
+          */
+     	if (mScroller.computeScrollOffset()) {
+         	/* 真正的滑动调用, mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置, 而 getFinalX() 则获得最终位置. */
+           	scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+           	/* 因为滑动可能还没有完成, 所以再次调用一次 view 重绘 */
+           	postInvalidate();
          }
      }
-     ```
-
-
-------
+ }
+```
 
 
 
@@ -318,7 +316,6 @@ public boolean onInterceptTouchEvent(ev) {
 
 ```java
 // View#dispatchTouchEvent
-
 public boolean dispatchTouchEvent(MotionEvent event) {
  	if (event.isTargetAccessibilityFocus()) {
      	// We don't have focus or no virtual descendant has it, do not handle the event.
@@ -564,35 +561,26 @@ public boolean onTouchEvent(MotionEvent event) {
 
 事件分发的一些总结:
 
-> 1.  `ACTION_DOWN` 是一个**特殊**的事件. 如果`View`只消耗了`ACTION_DOWN`事件(**返回`true`**), 那么序列里接下来的事件全都交给该`View`来消耗.
->
->    如果`View`没有消耗掉接下来比如`ACTION_MOVE`, `ACTION_UP`之类的事件(**返回`false`**), 那这些事件也不会回退给上一层父`ViewGroup`, 这些事件便会消失
->
-> 2. 如果某个`View`没有消耗掉`ACTION_DOWN`事件(返回了`false`), 那么同一个序列中的其他事件就不会再交给这个`View`了. 所有的事件包括第一个`ACTION_DOWN`都会被一层一层回退, 如果一直没有`View/ViewGroup`消耗掉, 最终会回退到`Activity`. 但在这一层层中, 我们可以检测到第一次的`ACTION_DOWN`调用, 然后决定是否要消耗事件序列. 原因同1
->
->    ​
->
->    一种特殊情况的举例: 
->
->    正常情况下, 一个事件序列只能被一个 `View` 拦截消耗, 但如果最后接收事件的 `View` 是不可`clickable`(包括单击, 长按), 那这个`View`只能在`onTouch`(如果调用`View#setOnTouchListener`设置了的话)捕获到, 然后会把这个序列事件(包括`ACTION_DOWN`)回退给父`ViewGroup`, 这个也证实第1点
->
->    ​
->
-> 3. `View`没有`onInterceptTouchEvent`方法的, 一但有事件传给它, 在没有设置`setTouchEventListener`或者该方法里的`onTouch`返回`false`时, 会调用`onTouchEvent`方法
->
-> 4. `view`如果不是`clickable`的, 默认情况下是不能消耗事件的, 非`clickable`的`view`可以设置`setTouchEventListener`来返回`true`截断被消耗事件
->
-> 5. `View`的`enable`属性并不影响`onTouchEvent`的默认返回值(`true`), 只有`clickable`才是
->
-> 6. `onClick`调用发生的前提是`view`是`clickable`, 并且在它的`View#onTouchEvent`消耗了`ACTION_DOWN`和`ACTION_UP`事件, 如果这其中一个被`setTouchEventListener`拦截消耗了, `click`事件不会被调用 
->
-> 7. `ViewGroup#requestDisallowInterceptTouchEvent`可以请求不拦截`ACTION_DOWN`以外的事件
+1. `ACTION_DOWN` 是一个**特殊**的事件. 如果`View`只消耗了`ACTION_DOWN`事件(**返回 true**), 那么序列里接下来的事件全都交给该 `View` 来消耗.
+
+   如果`View`没有消耗掉接下来比如`ACTION_MOVE`, `ACTION_UP`之类的事件(**返回`false`**), 那这些事件也不会回退给上一层父`ViewGroup`, 这些事件便会消失
+
+2. 如果某个`View`没有消耗掉`ACTION_DOWN`事件(返回了`false`), 那么同一个序列中的其他事件就不会再交给这个`View`了. 所有的事件包括第一个`ACTION_DOWN`都会被一层一层回退, 如果一直没有`View/ViewGroup`消耗掉, 最终会回退到`Activity`. 但在这一层层中, 我们可以检测到第一次的`ACTION_DOWN`调用, 然后决定是否要消耗事件序列. 原因同 **1**
+
+> 一种特殊情况的举例: 
+> 正常情况下, 一个事件序列只能被一个 `View` 拦截消耗, 但如果最后接收事件的 `View` 是不可`clickable`(包括单击, 长按), 那这个 `View` 只能在 `onTouch` (如果调用`View#setOnTouchListener`设置了的话)捕获到, 然后会把这个序列事件(包括 `ACTION_DOWN`)回退给父 `ViewGroup`, 这个也证实第 1 点
+
+3. `View` 没有 `onInterceptTouchEvent` 方法的, 一但有事件传给它, 在没有设置`setTouchEventListener` 或者该方法里的 `onTouch` 返回 `false` 时, 会调用 `onTouchEvent` 方法
+4. `view`如果不是`clickable`的, 默认情况下是不能消耗事件的, 非`clickable`的`view`可以设置`setTouchEventListener`来返回`true`截断被消耗事件
+5. `View` 的 `enable` 属性并不影响 `onTouchEvent` 的默认返回值(`true`), 只有`clickable`才是
+6. `onClick` 调用发生的前提是 `view` 是 `clickable`, 并且在它的`View#onTouchEvent` 消耗了 `ACTION_DOWN` 和 `ACTION_UP` 事件, 如果这其中一个被 `setTouchEventListener` 拦截消耗了, `click` 事件不会被调用 
+7. `ViewGroup#requestDisallowInterceptTouchEvent`可以请求不拦截`ACTION_DOWN`以外的事件
 
 
 
 **Reference**:
 
-1. http://blog.csdn.net/yanbober/article/details/50419117
-2. https://juejin.im/entry/571a591a2e958a006be9f473
-3. http://blog.csdn.net/carson_ho/article/details/54136311
+1. [http://blog.csdn.net/yanbober/article/details/50419117](http://blog.csdn.net/yanbober/article/details/50419117)
+2. [https://juejin.im/entry/571a591a2e958a006be9f473](https://juejin.im/entry/571a591a2e958a006be9f473)
+3. [http://blog.csdn.net/carson_ho/article/details/54136311](http://blog.csdn.net/carson_ho/article/details/54136311)
 4. <<Android开发艺术探索>>

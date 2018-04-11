@@ -84,6 +84,36 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../androidnei-cun-huan-cun-lrucache.html">Android内存缓存LruCache</a></h2>
+                <div class="summary"><h3 id="1-lrucahe">1. LruCahe 的使用</h3>
+<p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小, 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. </p>
+<blockquote>
+<p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
+</blockquote>
+<p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
+<div class="highlight"><pre><span></span><span class="c1">// 获得应用可使用的最大内存, 取 1/8 作为缓存</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">()</span> <span class="o">/</span> <span class="mi">8</span><span class="o">;</span>
+<span class="n">LruCache</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Bitmap</span><span class="o">&gt;</span> <span class="n">bitmapCache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LruCache</span><span class="o">&lt;&gt;(</span><span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="nf">sizeOf</span><span class="o">(</span><span class="n">String …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../androidnei-cun-huan-cun-lrucache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../androidying-pan-huan-cun-disklruccache.html">Android硬盘缓存DiskLrucCache</a></h2>
+                <div class="summary"><h3 id="1-disklrucache">1. DiskLruCache 的使用</h3>
+<p>DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 <a href="https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/StrictLineReader.java">这里</a> 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 <a href="https://developer.android.com/samples/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.html">这里</a> 找到源码. 另外一个 <a href="https://gist.github.com/ivicel/f98f9ba4420c9d2c5274f151b625f677">GitHub 备份地址</a></p>
+<blockquote>
+<p>Android Developer Sample 里的源码没有有效的初始化 redundantOpCount, 而是为 0. 这导致如果不断退出重进应用, 很难达到封顶的 2000 行, 即使 journal 已经超出 2000 行. </p>
+<p>GitHub 上已经添加</p>
+</blockquote>
+<p>一般来说我们都会把磁盘放到 sdcard 上, 也就是 <code>/sdcard …</code></p>
+                    <a class="btn btn-default btn-xs" href="../androidying-pan-huan-cun-disklruccache.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html">AIDL生成的接口及Binder的分析</a></h2>
                 <div class="summary"><h3 id="1-android-binder">1. Android 上的 Binder</h3>
 <p>在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更<strong>高效</strong>, 也更<strong>安全</strong>, 其他<code>IPC</code>没有严格权限验证机制</p>
@@ -113,14 +143,14 @@ Amber time            </a>
             <hr/>
             <article>
                 <h2><a href="../android-ipcji-zhi.html">Android IPC机制</a></h2>
-                <div class="summary"><h5 id="_1">开启多进程的方法</h5>
-<p><code>Android</code>应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<code>Activity</code>, <code>Service</code>, <code>ContentProvider</code>, <code>Receiver</code>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
+                <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
+<p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
 <p>一是指定进程的全称:<code>android:process="info.ivicel.github.android_ipc.another_process"</code>, 此时进程为一个全局进程, 其他应用可以通过<code>ShareUID</code>方式和它跑在同一进程中</p>
 <p>二是简写: <code>android:process=":remote"</code>. 这种写法其完整的进程名为<code>包名:remote</code>, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中</p>
 <blockquote>
-<p>由于<code>Android</code>中为不同进程单独分配一个虚拟机来运行, 所以<code>Android</code>中不能通过<strong>共享内存</strong>来进行通信. </p>
+<p>由于 Android 中为不同进程单独分配一个虚拟机来运行, 所以 Android 中不能通过<strong>共享内存</strong>来进行通信. </p>
 </blockquote>
-<p>由于不能<strong>共享内存 …</strong></p>
+<p>在 …</p>
                     <a class="btn btn-default btn-xs" href="../android-ipcji-zhi.html">more ...</a>
                 </div>
             </article>
@@ -247,44 +277,6 @@ Amber time            </a>
 <ul>
 <li>参数<code>position</code>指的是在滑动时<strong>当前显示页面</strong>的<strong>左边页面的位置</strong>, 具体来说是 …</li></ul></li></ol>
                     <a class="btn btn-default btn-xs" href="../android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../androidjia-zai-suo-lue-tu-pian-fang-zhi-oom.html">Android加载缩略图片防止OOM</a></h2>
-                <div class="summary"><p>依据想需要的大小生成<code>bitmap</code></p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Bitmap</span> <span class="nf">loadSpecifySizeImage</span><span class="o">(</span><span class="n">String</span> <span class="n">imagePath</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destWidth</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span><span class="o">();</span>
-    <span class="cm">/* 设置为true后, 在decode时不会真的加载图片而是获取图片信息 */</span>
-    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">srcWidth</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outWidth</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">srcHeight</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outHeight</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">inSampleSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">srcWidth</span> <span class="o">&gt;</span> <span class="n">destWidth</span> <span class="o">||</span> <span class="n">srcHeight</span> <span class="o">&gt;</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">float</span> <span class="n">widthScale</span> <span class="o">=</span> <span class="n">srcWidth</span> <span class="o">/</span> <span class="n">destWidth</span><span class="o">;</span>
-        <span class="kt">float</span> <span class="n">heightScale</span> <span class="o">=</span> <span class="n">srcHeight</span> <span class="o">/</span> <span class="n">destHeight …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../androidjia-zai-suo-lue-tu-pian-fang-zhi-oom.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../androidkai-fa-yi-zhu-tan-suo-ch03-view-shi-jian-ti-xi.html">Android开发艺术探索Ch03 - View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li><code>View</code>的坐标系</li>
-</ul>
-<p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
-<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
-<blockquote>
-<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.</p>
-<p>获得左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong></p>
-<p>获得右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
-<p>所以一个<code>view</code>的大小便可以这样计算</p>
-<p>宽度<code>width = getRight() - getLeft()</code></p>
-<p>高度<code>height = getBottom() - getTop()</code></p>
-<p>这4个方法获得是 …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="../androidkai-fa-yi-zhu-tan-suo-ch03-view-shi-jian-ti-xi.html">more ...</a>
                 </div>
             </article>
             <hr/>

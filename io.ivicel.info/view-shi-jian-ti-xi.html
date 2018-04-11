@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Android开发艺术探索Ch03 - View 事件体系 - Amber time</title>
+    <title>View 事件体系 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
 
 
-<link rel="canonical" href="./androidkai-fa-yi-zhu-tan-suo-ch03-view-shi-jian-ti-xi.html">
+<link rel="canonical" href="./view-shi-jian-ti-xi.html">
 
         <meta name="author" content="ivicel" />
         <meta name="keywords" content="view事件,view坐标,view滑动,view触摸" />
@@ -17,8 +17,8 @@
 
         <meta property="og:site_name" content="Amber time" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Android开发艺术探索Ch03 - View 事件体系"/>
-        <meta property="og:url" content="./androidkai-fa-yi-zhu-tan-suo-ch03-view-shi-jian-ti-xi.html"/>
+        <meta property="og:title" content="View 事件体系"/>
+        <meta property="og:url" content="./view-shi-jian-ti-xi.html"/>
         <meta property="og:description" content="view坐标和滑动方法 View的坐标系 屏幕的坐标原点为屏幕的左上角, 往右为正向x轴, 往下为正向y轴. 坐标参数顺序一般为左, 上, 右, 下 子view可以获取其相对于父ViewGroup的坐标. 这个要跟点击事件MotionEvent的坐标获取方法区别开来 view由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个view的大小和位置. 获得左上点坐标为 (View.getLeft(), View.getTop()) 获得右下点坐标 (View.getRight(), View.getBottom()) 所以一个view的大小便可以这样计算 宽度width = getRight() - getLeft() 高度height = getBottom() - getTop() 这4个方法获得是 …"/>
         <meta property="article:published_time" content="2018-02-22" />
             <meta property="article:section" content="Android" />
@@ -95,10 +95,10 @@ Amber time            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="./androidkai-fa-yi-zhu-tan-suo-ch03-view-shi-jian-ti-xi.html"
+                    <a href="./view-shi-jian-ti-xi.html"
                        rel="bookmark"
-                       title="Permalink to Android开发艺术探索Ch03 - View 事件体系">
-                        Android开发艺术探索Ch03 - View 事件体系
+                       title="Permalink to View 事件体系">
+                        View 事件体系
                     </a>
                 </h1>
             </header>
@@ -227,56 +227,54 @@ Amber time            </a>
 <li>
 <p>使用<code>Scroller</code>类.</p>
 <p><code>Scroller</code>类是一个滑动的<code>Helper</code>类, 其本质上是使用<code>view.scrollTo</code>方法来滑动, 但内部有一个可定义<code>Interpolator</code>类, 即插值属性来提供滑动变动曲线, 使得滑动更加的流畅.</p>
-<p>```java
- /<em> 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
-  * 在自定义 View 的构造方法获取一个 Scroller 实例
-  * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用
-  * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
-  * 若是没有完成, 则调用 View.scrollTo 来滑动 View 内容的位置, 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成
-  * 如此的反复回调直到滑动的完成
-  </em>/
- public class CustomView extends View {
-    private Scroller mScroller;</p>
-<div class="highlight"><pre><span></span>public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
-   super(context, attrs, defStyleAtrr);
-   mScroller = new Scroller(context);
- }
+</li>
+</ol>
+<div class="highlight"><pre><span></span> <span class="cm">/* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 </span>
+<span class="cm">  * 在自定义 View 的构造方法获取一个 Scroller 实例</span>
+<span class="cm">  * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用</span>
+<span class="cm">  * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动</span>
+<span class="cm">  * 若是没有完成, 则调用 View.scrollTo 来滑动 View 内容的位置, 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成</span>
+<span class="cm">  * 如此的反复回调直到滑动的完成</span>
+<span class="cm">  */</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomView</span> <span class="kd">extends</span> <span class="n">View</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Scroller</span> <span class="n">mScroller</span><span class="o">;</span>
 
-/* 提供一个外部使用的滚动方法, 参数为滚动的目标坐标, 同 view.scrollTo */
-public void smoothScrollTo(int destX, int destY) {
-    int deltaX = destX - getScrollX();
-    int deltaY = destY - getScrollY();
-    /* 该方法并没有产生滑动, 而只是设置了一变量值, 比如初始位置和滑动距离, 滑动时间等 */
-    mScroller.startScroll(getScrollX(), getScrollY(), deltaX, deltaY);
-    /* 促使 view 进行重绘 */
-    invalidate();
- }
+    <span class="kd">public</span> <span class="nf">CustomView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">defStyleAttr</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">defStyleAtrr</span><span class="o">);</span>
+       <span class="n">mScroller</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scroller</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+     <span class="o">}</span>
 
-public void smoothScrollBy(int deltaX, int deltaY) {
-    smoothScrollTo(mScroller.getCurrX() + deltaX, mScroller.getCurrY() + deltaY);  
- }
+    <span class="cm">/* 提供一个外部使用的滚动方法, 参数为滚动的目标坐标, 同 view.scrollTo */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">smoothScrollTo</span><span class="o">(</span><span class="kt">int</span> <span class="n">destX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destY</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">deltaX</span> <span class="o">=</span> <span class="n">destX</span> <span class="o">-</span> <span class="n">getScrollX</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">deltaY</span> <span class="o">=</span> <span class="n">destY</span> <span class="o">-</span> <span class="n">getScrollY</span><span class="o">();</span>
+        <span class="cm">/* 该方法并没有产生滑动, 而只是设置了一变量值, 比如初始位置和滑动距离, 滑动时间等 */</span>
+        <span class="n">mScroller</span><span class="o">.</span><span class="na">startScroll</span><span class="o">(</span><span class="n">getScrollX</span><span class="o">(),</span> <span class="n">getScrollY</span><span class="o">(),</span> <span class="n">deltaX</span><span class="o">,</span> <span class="n">deltaY</span><span class="o">);</span>
+        <span class="cm">/* 促使 view 进行重绘 */</span>
+        <span class="n">invalidate</span><span class="o">();</span>
+     <span class="o">}</span>
 
-@Override
-public void computeScroll() {
-     /* view 在绘制的时候会调用该方法
-      * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置
-      * 若是没有的话, 返回 true. 然后我们继续滑动 view 的位置 
-      */
-    if (mScroller.computeScrollOffset()) {
-        /* 真正的滑动调用, mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置, 而 getFinalX() 则获得最终位置. */
-        scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-        /* 因为滑动可能还没有完成, 所以再次调用一次 view 重绘 */
-        postInvalidate();
-     }
- }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">smoothScrollBy</span><span class="o">(</span><span class="kt">int</span> <span class="n">deltaX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">deltaY</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">smoothScrollTo</span><span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrX</span><span class="o">()</span> <span class="o">+</span> <span class="n">deltaX</span><span class="o">,</span> <span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrY</span><span class="o">()</span> <span class="o">+</span> <span class="n">deltaY</span><span class="o">);</span>  
+     <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">computeScroll</span><span class="o">()</span> <span class="o">{</span>
+         <span class="cm">/* view 在绘制的时候会调用该方法</span>
+<span class="cm">          * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置</span>
+<span class="cm">          * 若是没有的话, 返回 true. 然后我们继续滑动 view 的位置 </span>
+<span class="cm">          */</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">computeScrollOffset</span><span class="o">())</span> <span class="o">{</span>
+            <span class="cm">/* 真正的滑动调用, mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置, 而 getFinalX() 则获得最终位置. */</span>
+            <span class="n">scrollTo</span><span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrX</span><span class="o">(),</span> <span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrY</span><span class="o">());</span>
+            <span class="cm">/* 因为滑动可能还没有完成, 所以再次调用一次 view 重绘 */</span>
+            <span class="n">postInvalidate</span><span class="o">();</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
 </pre></div>
 
 
-<p>}
- ```</p>
-</li>
-</ol>
-<hr />
 <h5 id="view_1"><code>view</code>事件的分发体系</h5>
 <p>同一事件序列是指手指接触屏幕的那一刻起, 到手指离开屏幕的进结束, 这其中产的一系列事件. 这包括<code>ACTION_DOWN</code>和0个或多个<code>ACTION_MOVE</code>和<code>ACTION_UP</code>事件. </p>
 <p>在默认不做特殊处理的情况下一个事件序列只能被一个<code>view</code>处理</p>
@@ -413,7 +411,6 @@ public void computeScroll() {
 <li>二是作为<code>ViewGroup</code>的父类, 处理<code>ViewGroup#dispatchTouchEvent</code>(实际是在<code>ViewGroup#dispatchTransformedTouchEvent</code>)调用父类的<code>dispatchTouchEvent</code>时</li>
 </ul>
 <div class="highlight"><pre><span></span><span class="c1">// View#dispatchTouchEvent</span>
-
 <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">dispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">isTargetAccessibilityFocus</span><span class="o">())</span> <span class="o">{</span>
         <span class="c1">// We don&#39;t have focus or no virtual descendant has it, do not handle the event.</span>
@@ -658,41 +655,29 @@ public void computeScroll() {
 
 
 <p>事件分发的一些总结:</p>
-<blockquote>
 <ol>
-<li><code>ACTION_DOWN</code> 是一个<strong>特殊</strong>的事件. 如果<code>View</code>只消耗了<code>ACTION_DOWN</code>事件(<strong>返回<code>true</code></strong>), 那么序列里接下来的事件全都交给该<code>View</code>来消耗.</li>
+<li><code>ACTION_DOWN</code> 是一个<strong>特殊</strong>的事件. 如果<code>View</code>只消耗了<code>ACTION_DOWN</code>事件(<strong>返回 true</strong>), 那么序列里接下来的事件全都交给该 <code>View</code> 来消耗.</li>
 </ol>
 <p>如果<code>View</code>没有消耗掉接下来比如<code>ACTION_MOVE</code>, <code>ACTION_UP</code>之类的事件(<strong>返回<code>false</code></strong>), 那这些事件也不会回退给上一层父<code>ViewGroup</code>, 这些事件便会消失</p>
 <ol>
-<li>如果某个<code>View</code>没有消耗掉<code>ACTION_DOWN</code>事件(返回了<code>false</code>), 那么同一个序列中的其他事件就不会再交给这个<code>View</code>了. 所有的事件包括第一个<code>ACTION_DOWN</code>都会被一层一层回退, 如果一直没有<code>View/ViewGroup</code>消耗掉, 最终会回退到<code>Activity</code>. 但在这一层层中, 我们可以检测到第一次的<code>ACTION_DOWN</code>调用, 然后决定是否要消耗事件序列. 原因同1</li>
+<li>如果某个<code>View</code>没有消耗掉<code>ACTION_DOWN</code>事件(返回了<code>false</code>), 那么同一个序列中的其他事件就不会再交给这个<code>View</code>了. 所有的事件包括第一个<code>ACTION_DOWN</code>都会被一层一层回退, 如果一直没有<code>View/ViewGroup</code>消耗掉, 最终会回退到<code>Activity</code>. 但在这一层层中, 我们可以检测到第一次的<code>ACTION_DOWN</code>调用, 然后决定是否要消耗事件序列. 原因同 <strong>1</strong></li>
 </ol>
-<p>​</p>
-<p>一种特殊情况的举例: </p>
-<p>正常情况下, 一个事件序列只能被一个 <code>View</code> 拦截消耗, 但如果最后接收事件的 <code>View</code> 是不可<code>clickable</code>(包括单击, 长按), 那这个<code>View</code>只能在<code>onTouch</code>(如果调用<code>View#setOnTouchListener</code>设置了的话)捕获到, 然后会把这个序列事件(包括<code>ACTION_DOWN</code>)回退给父<code>ViewGroup</code>, 这个也证实第1点</p>
-<p>​</p>
-<ol>
-<li>
-<p><code>View</code>没有<code>onInterceptTouchEvent</code>方法的, 一但有事件传给它, 在没有设置<code>setTouchEventListener</code>或者该方法里的<code>onTouch</code>返回<code>false</code>时, 会调用<code>onTouchEvent</code>方法</p>
-</li>
-<li>
-<p><code>view</code>如果不是<code>clickable</code>的, 默认情况下是不能消耗事件的, 非<code>clickable</code>的<code>view</code>可以设置<code>setTouchEventListener</code>来返回<code>true</code>截断被消耗事件</p>
-</li>
-<li>
-<p><code>View</code>的<code>enable</code>属性并不影响<code>onTouchEvent</code>的默认返回值(<code>true</code>), 只有<code>clickable</code>才是</p>
-</li>
-<li>
-<p><code>onClick</code>调用发生的前提是<code>view</code>是<code>clickable</code>, 并且在它的<code>View#onTouchEvent</code>消耗了<code>ACTION_DOWN</code>和<code>ACTION_UP</code>事件, 如果这其中一个被<code>setTouchEventListener</code>拦截消耗了, <code>click</code>事件不会被调用 </p>
-</li>
-<li>
-<p><code>ViewGroup#requestDisallowInterceptTouchEvent</code>可以请求不拦截<code>ACTION_DOWN</code>以外的事件</p>
-</li>
-</ol>
+<blockquote>
+<p>一种特殊情况的举例: 
+正常情况下, 一个事件序列只能被一个 <code>View</code> 拦截消耗, 但如果最后接收事件的 <code>View</code> 是不可<code>clickable</code>(包括单击, 长按), 那这个 <code>View</code> 只能在 <code>onTouch</code> (如果调用<code>View#setOnTouchListener</code>设置了的话)捕获到, 然后会把这个序列事件(包括 <code>ACTION_DOWN</code>)回退给父 <code>ViewGroup</code>, 这个也证实第 1 点</p>
 </blockquote>
+<ol>
+<li><code>View</code> 没有 <code>onInterceptTouchEvent</code> 方法的, 一但有事件传给它, 在没有设置<code>setTouchEventListener</code> 或者该方法里的 <code>onTouch</code> 返回 <code>false</code> 时, 会调用 <code>onTouchEvent</code> 方法</li>
+<li><code>view</code>如果不是<code>clickable</code>的, 默认情况下是不能消耗事件的, 非<code>clickable</code>的<code>view</code>可以设置<code>setTouchEventListener</code>来返回<code>true</code>截断被消耗事件</li>
+<li><code>View</code> 的 <code>enable</code> 属性并不影响 <code>onTouchEvent</code> 的默认返回值(<code>true</code>), 只有<code>clickable</code>才是</li>
+<li><code>onClick</code> 调用发生的前提是 <code>view</code> 是 <code>clickable</code>, 并且在它的<code>View#onTouchEvent</code> 消耗了 <code>ACTION_DOWN</code> 和 <code>ACTION_UP</code> 事件, 如果这其中一个被 <code>setTouchEventListener</code> 拦截消耗了, <code>click</code> 事件不会被调用 </li>
+<li><code>ViewGroup#requestDisallowInterceptTouchEvent</code>可以请求不拦截<code>ACTION_DOWN</code>以外的事件</li>
+</ol>
 <p><strong>Reference</strong>:</p>
 <ol>
-<li>http://blog.csdn.net/yanbober/article/details/50419117</li>
-<li>https://juejin.im/entry/571a591a2e958a006be9f473</li>
-<li>http://blog.csdn.net/carson_ho/article/details/54136311</li>
+<li><a href="http://blog.csdn.net/yanbober/article/details/50419117">http://blog.csdn.net/yanbober/article/details/50419117</a></li>
+<li><a href="https://juejin.im/entry/571a591a2e958a006be9f473">https://juejin.im/entry/571a591a2e958a006be9f473</a></li>
+<li><a href="http://blog.csdn.net/carson_ho/article/details/54136311">http://blog.csdn.net/carson_ho/article/details/54136311</a></li>
 <li>&lt;<Android开发艺术探索>&gt;</li>
 </ol>
             </div>

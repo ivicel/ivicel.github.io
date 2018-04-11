@@ -84,20 +84,10 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../androidjia-zai-suo-lue-tu-pian-fang-zhi-oom.html">Android加载缩略图片防止OOM</a></h2>
-                <div class="summary"><p>依据想需要的大小生成<code>bitmap</code></p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Bitmap</span> <span class="nf">loadSpecifySizeImage</span><span class="o">(</span><span class="n">String</span> <span class="n">imagePath</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destWidth</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span><span class="o">();</span>
-    <span class="cm">/* 设置为true后, 在decode时不会真的加载图片而是获取图片信息 */</span>
-    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">srcWidth</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outWidth</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">srcHeight</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outHeight</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">inSampleSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">srcWidth</span> <span class="o">&gt;</span> <span class="n">destWidth</span> <span class="o">||</span> <span class="n">srcHeight</span> <span class="o">&gt;</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">float</span> <span class="n">widthScale</span> <span class="o">=</span> <span class="n">srcWidth</span> <span class="o">/</span> <span class="n">destWidth</span><span class="o">;</span>
-        <span class="kt">float</span> <span class="n">heightScale</span> <span class="o">=</span> <span class="n">srcHeight</span> <span class="o">/</span> <span class="n">destHeight …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../androidjia-zai-suo-lue-tu-pian-fang-zhi-oom.html">more ...</a>
+                <h2><a href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">Android高效加载图片防止OOM</a></h2>
+                <div class="summary"><p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
+<p><code>inSampleSize</code> 一般取为 2 的指数 …</p>
+                    <a class="btn btn-default btn-xs" href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">more ...</a>
                 </div>
             </article>
             <hr/>
