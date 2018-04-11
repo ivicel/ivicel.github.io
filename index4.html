@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Authors - Amber time</title>
+    <title>Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,7 +9,7 @@
 
 
 
-
+<link rel="canonical" href=".">
         <meta name="author" content="ivicel" />
 
     <!-- Open Graph tags -->
@@ -82,8 +82,79 @@ Amber time            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-  <h1>Authors on Amber time</h1>
-        <li><a href="./author/ivicel.html">ivicel</a> (32)</li>
+            <article>
+                <h2><a href="./pythonlei-nei-zhi-mo-zhu-fang-fa.html">Python类内置魔术方法</a></h2>
+                <div class="summary"><h3 id="_1">内置类特殊属性</h3>
+<div class="highlight"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="vm">__dict__</span>
+
+<span class="n">instance</span><span class="o">.</span><span class="vm">__class__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="vm">__bases__</span>
+
+<span class="n">definition</span><span class="o">.</span><span class="vm">__name__</span>
+
+<span class="n">definition</span><span class="o">.</span><span class="n">__qualname__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="vm">__mro__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+
+<span class="n">class</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+</pre></div>
+
+
+<p>自定义类都有一个<code>namespace</code>，即一个字典对象来存储类的属性。<code>C.x</code>即表示<code>C.__dict__['x']</code>，当类<code>C</code>中不存在属性<code>x</code>，会依据继承顺序<a href="https://www.python.org/download/releases/2.3/mro/"><code>MRO</code></a>表来查找该属性。</p>
+<p>如若查找完基类后，依然找不到属性，才会调相应用<code>C.__getattribute__()</code>、<code>C.__getattr__()</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __getattr__ …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./pythonlei-nei-zhi-mo-zhu-fang-fa.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./sql-jian-dan-su-ji.html">SQL 简单速记</a></h2>
+                <div class="summary"><h3 id="1"><strong>1. 检索数据</strong></h3>
+<div class="highlight"><pre><span></span><span class="cm">/* 单个列 */</span>
+<span class="k">SELECT</span> <span class="n">prod_name</span> <span class="k">FROM</span> <span class="n">Product</span><span class="p">;</span>
+<span class="cm">/* 多个列 */</span>
+<span class="k">SELECT</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_name</span> <span class="k">FROM</span> <span class="n">Products</span><span class="p">;</span>
+<span class="cm">/* 所有列 */</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Products</span><span class="p">;</span>
+<span class="cm">/* 检索不同值 */</span>
+<span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">vend_id</span> <span class="k">FROM</span> <span class="n">Products</span><span class="p">;</span>
+<span class="cm">/* 条件限制 */</span>
+<span class="k">SELECT</span> <span class="n">prod_id</span> <span class="k">FROM</span> <span class="n">Products</span> <span class="k">WHERE</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">prod_id</span> <span class="k">FROM</span> <span class="n">Products</span> <span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
+<span class="cm">/* 注释 */</span>
+<span class="cm">/*...多行注释*/</span>
+<span class="c1">--- 单行注释</span>
+</pre></div>
+
+
+<h3 id="2"><strong>2. 排序</strong></h3>
+<div class="highlight"><pre><span></span><span class="cm">/* 排序条件不一定出现在选择结果中 */</span>
+
+<span class="cm">/* 排序单个列 */</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span>  <span class="n">Products</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">prod_id …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./sql-jian-dan-su-ji.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev"><a href="./index3.html">&laquo;</a>
+                </li>
+                    <li class=""><a
+                            href="./index.html">1</a></li>
+                    <li class=""><a
+                            href="./index2.html">2</a></li>
+                    <li class=""><a
+                            href="./index3.html">3</a></li>
+                    <li class="active"><a
+                            href="./index4.html">4</a></li>
+                <li class="next disabled"><a href="#">&raquo;</a></li>
+        </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

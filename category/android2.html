@@ -84,6 +84,14 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">Android高效加载图片防止OOM</a></h2>
+                <div class="summary"><p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
+<p><code>inSampleSize</code> 一般取为 2 的指数 …</p>
+                    <a class="btn btn-default btn-xs" href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../anroid-fileproviderde-shi-yong.html">Anroid FileProvider的使用</a></h2>
                 <div class="summary"><blockquote>
 <p><code>FileProvider</code> 是在 <code>v4 support library</code> 里的, 使用之前要添加 <code>v4 support library</code> </p>
@@ -117,6 +125,26 @@ Amber time            </a>
 <li>OvershootInterpolator 向前甩一定值后再回到原来位置</li>
 </ul>
                     <a class="btn btn-default btn-xs" href="../interpolatorzhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
+                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
+<ul>
+<li><code>View</code>的坐标系</li>
+</ul>
+<p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
+<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
+<blockquote>
+<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.</p>
+<p>获得左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong></p>
+<p>获得右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
+<p>所以一个<code>view</code>的大小便可以这样计算</p>
+<p>宽度<code>width = getRight() - getLeft()</code></p>
+<p>高度<code>height = getBottom() - getTop()</code></p>
+<p>这4个方法获得是 …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
                 </div>
             </article>
             <hr/>
