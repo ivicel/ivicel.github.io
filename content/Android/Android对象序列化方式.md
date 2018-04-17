@@ -6,9 +6,7 @@ tags: android, 序列化, serializable, parceable
 
 `Android`内序列化对象主要有两种方式, 一是原`Java`自带的`Serializable`接口, 二是`Android`内自有的`Parcelable`接口
 
-
-
-##### `Serializable`接口
+### 1. `Serializable`接口
 
 `Java`自带的序列接口使用非常简单, 只要实现`Serializable`接口即可. `Serializable`接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. 
 
@@ -39,7 +37,7 @@ public class User implements Serializable {
 
 
 
-##### `Parcelable`接口
+### 2. `Parcelable`接口
 
 由`Parcelable`序列化的类可以自由在`Binder`中进行传输. 但实现的过程会比`Serializable`麻烦些. 但是`Serializable`在序列化和反序列化时需要大量的`I/O`操作, 效率会比较低. 在`Android`中推荐使用`Parcelable`, 其在内存中序列化后可以立马发送到网络中, 或者保存到设备上. 如果数据较小也可以使用`Serializable`来实现, 其优点是方便简单
 
