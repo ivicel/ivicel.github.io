@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>viewpager - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="ivicel" />
+    <meta name="keywords" content="viewpager" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Amber time"/>
+        <meta property="og:url" content=".."/>
+        <meta property="og:description" content="Amber time"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="../category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="../category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="../category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="../category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="../category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="../category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="../android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">Android 中自定义ViewPager, 添加页面指示器</a></h2>
+                <div class="summary"><ul>
+<li>在页面滑动时会回调<code>ViewPager.OnPageChangeListener</code>接口里的方法. 用<code>ViewPage.addOnPageChangeListener</code>添加和<code>ViewPage.removeOnPageChangeListener</code>删除监听回调方法. 如果不想实现所有方法, <code>ViewPager</code>内有个空的类<code>SimpleOnPageChangeListener</code>实现了这个接口, 继承这个类便可. <strong>注意可以多次调用<code>addOnPageChangeListener</code>方法添加多个回调, <code>ViewPager</code>按添加顺序进行调用, 所以在不需要回调时, 及时的使用<code>removeOnPageChangeListener</code>来删除回调方法</strong>. 另外还需要<strong>注意的是<code>ViewPager.getCurrentItem</code>返回值和<code>OnPageSelected</code>参数是一样的, 即是成功滑动后的目标页面索引, 无论当前页面是否还在滑动中</strong></li>
+</ul>
+<ol>
+<li>
+<p>在滑动的时候会调用<code>OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)</code></p>
+<ul>
+<li>参数<code>position</code>指的是在滑动时<strong>当前显示页面</strong>的<strong>左边页面的位置</strong>, 具体来说是 …</li></ul></li></ol>
+                    <a class="btn btn-default btn-xs" href="../android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

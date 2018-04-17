@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Java线程及线程池 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./javaxian-cheng-ji-xian-cheng-chi.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="线程,线程池,AsyncTask,Handler Thread" />
+        <meta name="description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Java线程及线程池"/>
+        <meta property="og:url" content="./javaxian-cheng-ji-xian-cheng-chi.html"/>
+        <meta property="og:description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …"/>
+        <meta property="article:published_time" content="2018-04-10" />
+            <meta property="article:section" content="Java" />
+            <meta property="article:tag" content="线程" />
+            <meta property="article:tag" content="线程池" />
+            <meta property="article:tag" content="AsyncTask" />
+            <meta property="article:tag" content="Handler Thread" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./javaxian-cheng-ji-xian-cheng-chi.html"
+                       rel="bookmark"
+                       title="Permalink to Java线程及线程池">
+                        Java线程及线程池
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-04-10T00:00:00+08:00"> Tue 10 April 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/xian-cheng.html">线程</a>
+        /
+	<a href="./tag/xian-cheng-chi.html">线程池</a>
+        /
+	<a href="./tag/asynctask.html">AsyncTask</a>
+        /
+	<a href="./tag/handler-thread.html">Handler Thread</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3 id="1-java">1. Java 线程池</h3>
+<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
+<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
+<ul>
+<li>Executor 接口定义了执行器 Runnable 执行方式</li>
+<li>ExecutorService 定义了线程具体接口</li>
+<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
+<li>AbstractExecutorService 线程池的实现的抽象类</li>
+<li>ThreadPoolExecutor 线程池的具体实现类</li>
+<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
+<li>Executors 线程池的辅助工具类</li>
+</ul>
+<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
+<ul>
+<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
+<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
+<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
+<li><code>newScheduledThreadPool</code> 固定大小, 可定时或周期执行的任务的线程池</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工厂方法</th>
+<th>corePoolSize</th>
+<th>maximumPoolSize</th>
+<th>keepAliveTime</th>
+<th>workQueue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>newCachedThreadPool</td>
+<td>0</td>
+<td>Integer.MAX_VALUE</td>
+<td>60s</td>
+<td>SynchronousQueue</td>
+</tr>
+<tr>
+<td>newFixedThreadPool</td>
+<td>nThreads</td>
+<td>nThreads</td>
+<td>0</td>
+<td>LinkedBlockingQueue</td>
+</tr>
+<tr>
+<td>newSingleThreadExecutor</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>LinkedBlockingQueue</td>
+</tr>
+<tr>
+<td>newScheduledThreadPool</td>
+<td>corePoolSze</td>
+<td>Integer.MAX_VALUE</td>
+<td>0</td>
+<td>DelayedWorkQueue</td>
+</tr>
+</tbody>
+</table>
+<h4 id="13-threadpoolexecutor">1.3 ThreadPoolExecutor 类</h4>
+<p>构造方法</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="nf">ThreadPoolExecutor</span><span class="o">(</span><span class="kt">int</span> <span class="n">corePoolSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">maximumPoolSize</span><span class="o">,</span> <span class="kt">long</span> <span class="n">keepAliveTime</span><span class="o">,</span> 
+        <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">,</span> <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span> <span class="n">workQueue</span><span class="o">,</span> <span class="n">ThreadFactory</span> <span class="n">threadFactory</span><span class="o">,</span>
+        <span class="n">RejectedExecutionHandle</span> <span class="n">rejectedHandler</span><span class="o">);</span>
+</pre></div>
+
+
+<ul>
+<li>corePoolSize: 线程池的基本大小, <strong>必须 &gt;= 0</strong>. 当有请求到来时, 若当前线程池中的线程数小于该值, 即使有空闲线程存在也会创建新的线程来处理该请求. 当线程数大于等于这个数值时, 才会根据是否存在空闲线程来决定是否创建新线程. </li>
+<li>maximumPoolSize: 线程池的最大大小, <strong>必须 &gt;= 1</strong>. 当线程池中的线程数等于该值时, 请求会被加入到请求队列, 等待有空闲线程来处理该请求</li>
+<li>keepAliveTime: 空闲线程存活时间, <strong>必须 &gt;= 0</strong></li>
+<li>unit: 存活时间的时间单位 </li>
+<li>workQueue:  任务队列, 不能为空.</li>
+<li>ArrayBlockingQueue: 基于数组的有界阻塞队列. </li>
+<li>LinkedBlockingQueue: 基于链表的无界阻塞队列.</li>
+<li>SynchronousQueue: 同步阻塞队列. 每插入一个元素必须等待另一个对应的删除操作完成</li>
+<li>PriorityBlockingQueue: 基于优先级的无界阻塞队列. </li>
+<li>threadFactory: 线程工厂, 有默认的工厂方法 <code>DefaultThreadFactory</code> 类. 用来新创建线程</li>
+<li>rejectedHandler: 线程饱和策略, 默认为 <code>ThreadPoolExecutor.AbortPolicy</code>. 当请求无法加入到请求队列时, 请求被拒绝时的处理方法</li>
+</ul>
+<h4 id="14">1.4 线程池执行策略</h4>
+<ol>
+<li>当新的请求到来时, 判断是否大于 coreSize, 大于则加入请求队列, 小于则直接新创建线程来处理</li>
+<li>判断空闲线程. 当线程池中的数量 &lt; maximum 时, 创建新的线程来处理队列中的任务</li>
+<li>判断能否加入到队列中, 不能则直接使用拒绝请求设置的策略, 能则等待空闲线程</li>
+<li>当无法创建新线程时, 不能加入到队列中的任务将被拒绝执行</li>
+</ol>
+<h3 id="reference">Reference:</h3>
+<ol>
+<li><a href="http://gityuan.com/2016/01/16/thread-pool/">http://gityuan.com/2016/01/16/thread-pool</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

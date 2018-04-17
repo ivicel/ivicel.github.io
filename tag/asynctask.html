@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>AsyncTask - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="ivicel" />
+    <meta name="keywords" content="AsyncTask" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Amber time"/>
+        <meta property="og:url" content=".."/>
+        <meta property="og:description" content="Amber time"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="../category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="../category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="../category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="../category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="../category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="../category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="../asynctaskji-zhi-fen-xi.html">AsyncTask机制分析</a></h2>
+                <div class="summary"><h3 id="1-asynctask">1. AsyncTask 的使用</h3>
+<p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
+<p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DownloadTask</span> <span class="kd">extends …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../asynctaskji-zhi-fen-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../javaxian-cheng-ji-xian-cheng-chi.html">Java线程及线程池</a></h2>
+                <div class="summary"><h3 id="1-java">1. Java 线程池</h3>
+<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
+<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
+<ul>
+<li>Executor 接口定义了执行器 Runnable 执行方式</li>
+<li>ExecutorService 定义了线程具体接口</li>
+<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
+<li>AbstractExecutorService 线程池的实现的抽象类</li>
+<li>ThreadPoolExecutor 线程池的具体实现类</li>
+<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
+<li>Executors 线程池的辅助工具类</li>
+</ul>
+<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
+<ul>
+<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
+<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
+<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
+<li><code>newScheduledThreadPool</code> 固定大小 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../javaxian-cheng-ji-xian-cheng-chi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Android高效加载图片防止OOM - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="andorid图片加载" />
+        <meta name="description" content="想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 1/option.inSampleSize 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize * 1/option.inSampleSize 大小. inSampleSize 一般取为 2 的指数 …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Android高效加载图片防止OOM"/>
+        <meta property="og:url" content="./androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html"/>
+        <meta property="og:description" content="想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 1/option.inSampleSize 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize * 1/option.inSampleSize 大小. inSampleSize 一般取为 2 的指数 …"/>
+        <meta property="article:published_time" content="2018-02-22" />
+            <meta property="article:section" content="Android" />
+            <meta property="article:tag" content="andorid图片加载" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html"
+                       rel="bookmark"
+                       title="Permalink to Android高效加载图片防止OOM">
+                        Android高效加载图片防止OOM
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-02-22T00:00:00+08:00"> Thu 22 February 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/andoridtu-pian-jia-zai.html">andorid图片加载</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
+<p><code>inSampleSize</code> 一般取为 2 的指数, 有些系统会对其向下取整为近似 2 的指数, 但不是所有系统都会这么做. 如果当长和宽的 <code>inSampleSize</code> 不一样时, 取较小的值, 这样可以让图片不至于模糊</p>
+<p>生成所需大小的 bitmap 的一般步骤:</p>
+<ol>
+<li><code>new</code> 一个新<code>BitmapFactory.Options</code> 对象, 并将其 <code>BitmapFactory.Options.inJustDecodeBounds</code> 设置为 <code>true</code>, 这样可以使其解析图片时, 并不会加载图片而只是解读其中信息</li>
+<li>获得图片的长和宽, 分别为所期望的长和宽进行对比, 取其中<strong>比值大</strong>的数</li>
+<li><code>BitmapFactory.Options.inJustDecodeBounds</code> 设置成 <code>false</code>, 重新解析出所需图片</li>
+</ol>
+<p>&lt;<Android开发权威指南>&gt;依据想需要的大小生成<code>bitmap</code>, 其取的值是较大值, 然后向下取整. 这样能获得更小的分辨率, 占用的内存更小</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Bitmap</span> <span class="nf">loadSpecifySizeImage</span><span class="o">(</span><span class="n">String</span> <span class="n">imagePath</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destWidth</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span><span class="o">();</span>
+    <span class="cm">/* 设置为true后, 在decode时不会真的加载图片而是获取图片信息 */</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">srcWidth</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outWidth</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">srcHeight</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outHeight</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">inSampleSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">srcWidth</span> <span class="o">&gt;</span> <span class="n">destWidth</span> <span class="o">||</span> <span class="n">srcHeight</span> <span class="o">&gt;</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">float</span> <span class="n">widthScale</span> <span class="o">=</span> <span class="n">srcWidth</span> <span class="o">/</span> <span class="n">destWidth</span><span class="o">;</span>
+        <span class="kt">float</span> <span class="n">heightScale</span> <span class="o">=</span> <span class="n">srcHeight</span> <span class="o">/</span> <span class="n">destHeight</span><span class="o">;</span>
+        <span class="cm">/* inSampleSize指的是将原图片的长宽都按 1/inSampleSize 缩放, 所以取比例较大的值 */</span>
+        <span class="n">inSampleSize</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">widhtScale</span> <span class="o">&gt;</span> <span class="n">heightScale</span> <span class="o">?</span> <span class="n">widthScale</span> <span class="o">:</span> <span class="n">heightScale</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">inSampleSize</span> <span class="o">=</span> <span class="n">inSampleSize</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Android Develper 官网的示例, 其严格的按 2 的倍数来取值</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Bitmap</span> <span class="nf">loadSpecifySizeImage</span><span class="o">(</span><span class="n">String</span> <span class="n">imagePath</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destWidth</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">Options</span><span class="o">();</span>
+    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">inSampleSize</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">options</span><span class="o">.</span><span class="na">outWidth</span> <span class="o">&gt;</span> <span class="n">destWidth</span> <span class="o">||</span> <span class="n">options</span><span class="o">.</span><span class="na">outHeight</span> <span class="o">&gt;</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 取一半值, 按 2 的倍数</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">halfWidth</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="na">outWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">halfHeight</span> <span class="o">=</span> <span class="n">opitons</span><span class="o">.</span><span class="na">outHeight</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">halfWidth</span> <span class="o">/</span> <span class="n">inSampleSize</span> <span class="o">&gt;=</span> <span class="n">destWidth</span> <span class="o">&amp;&amp;</span>
+               <span class="n">halfHeight</span> <span class="o">/</span> <span class="n">inSampleSize</span> <span class="o">&gt;=</span> <span class="n">destHeight</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">inSampleSize</span> <span class="o">*=</span> <span class="mi">2</span><span class="o">;</span>   
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="n">options</span><span class="o">.</span><span class="na">inJustDecodeBounds</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="n">otpions</span><span class="o">.</span><span class="na">inSampleSize</span> <span class="o">=</span> <span class="n">inSampleSize</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">imagePath</span><span class="o">,</span> <span class="n">options</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<h3 id="reference">Reference</h3>
+<ol>
+<li>&lt;<Android开发艺术>&gt;</li>
+<li>&lt;<Android开发权威指南>&gt;</li>
+<li><a href="https://developer.android.com/topic/performance/graphics/load-bitmap.html">https://developer.android.com/topic/performance/graphics/load-bitmap.html</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
