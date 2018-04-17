@@ -1,6 +1,6 @@
 title: AsyncTask机制分析
 date: 2018-04-10
-tag: 线程, 线程池, AsyncTask
+tags: 线程, 线程池, AsyncTask
 
 
 

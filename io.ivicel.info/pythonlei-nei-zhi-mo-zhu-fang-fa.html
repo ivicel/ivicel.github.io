@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python类内置魔术方法 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./pythonlei-nei-zhi-mo-zhu-fang-fa.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="description" content="内置类特殊属性 object.__dict__ instance.__class__ class.__bases__ definition.__name__ definition.__qualname__ class.__mro__ class.mro() class.__subclasses__() 自定义类都有一个namespace，即一个字典对象来存储类的属性。C.x即表示C.__dict__[&#39;x&#39;]，当类C中不存在属性x，会依据继承顺序MRO表来查找该属性。 如若查找完基类后，依然找不到属性，才会调相应用C.__getattribute__()、C.__getattr__() class A(object): def __getattr__(self, name): print(&#39;call __getattr__ …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python类内置魔术方法"/>
+        <meta property="og:url" content="./pythonlei-nei-zhi-mo-zhu-fang-fa.html"/>
+        <meta property="og:description" content="内置类特殊属性 object.__dict__ instance.__class__ class.__bases__ definition.__name__ definition.__qualname__ class.__mro__ class.mro() class.__subclasses__() 自定义类都有一个namespace，即一个字典对象来存储类的属性。C.x即表示C.__dict__[&#39;x&#39;]，当类C中不存在属性x，会依据继承顺序MRO表来查找该属性。 如若查找完基类后，依然找不到属性，才会调相应用C.__getattribute__()、C.__getattr__() class A(object): def __getattr__(self, name): print(&#39;call __getattr__ …"/>
+        <meta property="article:published_time" content="2017-03-20" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./pythonlei-nei-zhi-mo-zhu-fang-fa.html"
+                       rel="bookmark"
+                       title="Permalink to Python类内置魔术方法">
+                        Python类内置魔术方法
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-03-20T00:00:00+08:00"> Mon 20 March 2017</time>
+    </span>
+
+
+
+
+
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3 id="_1">内置类特殊属性</h3>
+<div class="highlight"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="vm">__dict__</span>
+
+<span class="n">instance</span><span class="o">.</span><span class="vm">__class__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="vm">__bases__</span>
+
+<span class="n">definition</span><span class="o">.</span><span class="vm">__name__</span>
+
+<span class="n">definition</span><span class="o">.</span><span class="n">__qualname__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="vm">__mro__</span>
+
+<span class="n">class</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+
+<span class="n">class</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+</pre></div>
+
+
+<p>自定义类都有一个<code>namespace</code>，即一个字典对象来存储类的属性。<code>C.x</code>即表示<code>C.__dict__['x']</code>，当类<code>C</code>中不存在属性<code>x</code>，会依据继承顺序<a href="https://www.python.org/download/releases/2.3/mro/"><code>MRO</code></a>表来查找该属性。</p>
+<p>如若查找完基类后，依然找不到属性，才会调相应用<code>C.__getattribute__()</code>、<code>C.__getattr__()</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __getattr__()&#39;</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>              <span class="c1"># &#39;X&#39;, __getattr__()并未调用</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>       <span class="c1"># {&#39;x&#39;: &#39;X&#39;}</span>
+
+<span class="c1">######################################</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __getattr__()&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;B&#39;</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">B</span><span class="p">()</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>          <span class="c1"># &#39;A&#39;, a.__getattr__()并不会调用</span>
+</pre></div>
+
+
+<h3 id="__slots__"><code>__slots__</code> 的特殊性</h3>
+<blockquote>
+<p>类变量<code>__slots__</code> 可赋值 string, iterable，字符list</p>
+<p>定义<code>__slots__</code>变量后，类将不再使用<code>__dict__</code>来存储属性</p>
+<p>类不会自动生成<code>__dict__</code>和<code>__weakref__</code></p>
+</blockquote>
+<h3 id="_2">对象方法</h3>
+<p>类中的对象方法(instance method\bound method), 其方法名也存在<code>M.__dict__</code>中，对象方法有两个只读变量<code>mehtod.__self__</code>和<code>method.__func__</code>，当调用方法时<code>method(arg1, arg2)</code>时，等于调用<code>method.__func__(method.__self__, arg1, arg2)</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">m</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call method m&#39;</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">m</span><span class="p">()</span>   <span class="c1"># a.m.__func__(a.m.__self__)</span>
+</pre></div>
+
+
+<h3 id="selfx">访问控制 <code>self.x</code></h3>
+<div class="highlight"><pre><span></span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># Attribute assignments and deletions update the instance’s dictionary, never a class’s dictionary.</span>
+<span class="c1"># If the class has a __setattr__() or __delattr__() method, </span>
+<span class="c1"># this is called instead of updating the instance dictionary directly.</span>
+<span class="c1"># 删除对象的属性或者对对象属性赋值，是直接对实例 __dict__ 的操作</span>
+<span class="c1"># 当定义了 __setattr__ 、__delattr__ 方法时，使用方法替代</span>
+<span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+
+
+<p>基类 <code>object</code> 中并没有 <code>__getattr__()</code> 方法，所以，只有当自定义类的自定义了<code>__getattr__()</code>方法，才有可能访问该方法</p>
+<p>访问属性<code>self.x</code>时，首先会隐式调用<code>__getattribute__()</code>方法，只有在<code>__getattribute__()</code>中显示调用或者<code>raise</code>出<code>AttributeError</code>时，才会调用<code>__getattr__()</code></p>
+<blockquote>
+<ol>
+<li>
+<p>类中没有定义<code>__getattribute__()</code>时，当<code>self.x</code>不存在时，默认<code>raise</code>出<code>AttributeError</code></p>
+</li>
+<li>
+<p>类中有定义<code>__getattribute__()</code>时，访问<code>self.x</code>时，调用<code>__getattribute__()</code>，除非显示调用<code>__getattr__()</code>或者<code>raise</code>出<code>AttributeError</code>,才会调用<code>__getattr__()</code>如若存在</p>
+</li>
+<li>在定义<code>__getattribute__()</code>时，为避免无限递归调用，一般使用<code>object.__getattribute__(self, name)</code>来获取对象的值</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;get =&gt; &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;get attribute =&gt; &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">()</span>  <span class="c1"># 隐式调用 __getattr__()</span>
+
+
+
+<span class="c1"># get attribute =&gt; b</span>
+<span class="c1"># get =&gt; b</span>
+<span class="c1"># None</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1">########################################</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;get =&gt; &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># get =&gt; b</span>
+<span class="c1"># None</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1">########################################</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;get attribute =&gt; &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+
+<span class="c1"># get attribute =&gt; b</span>
+<span class="c1"># None</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="selfx_1">自定义序列 self[x]</h3>
+<div class="highlight"><pre><span></span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>                       <span class="c1"># len() 方法</span>
+
+<span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>              <span class="c1"># self[key]</span>
+
+<span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>              <span class="c1"># self[key] = XXX</span>
+
+<span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>                 <span class="c1"># 迭代器</span>
+
+<span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>                  <span class="c1"># reversed() 方法</span>
+
+<span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>            <span class="c1"># in 和 not in 测试</span>
+
+<span class="fm">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>              <span class="c1"># self[key] 不存在时</span>
+</pre></div>
+
+
+<p>当类没有定义<code>__getitem__()</code>时，<code>self['x']</code>会产生<strong><code>Type Error</code>:object is not subscriptable</strong>, 定义<code>__getitem__()</code>后，类变成一个<strong>subscriptor</strong>，<code>self['x']</code>隐式调用<code>__getitem__()</code>。一般在普通的如<code>list</code>中，<code>x</code>不存在或错误会产生<code>KeyError</code>，超出范围则产生<code>IndexError</code></p>
+<h3 id="_3">描述符对象</h3>
+<div class="highlight"><pre><span></span><span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span>
+
+<span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span>
+
+<span class="fm">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span>
+
+<span class="c1"># 生成描述符实例时调用</span>
+<span class="n">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>当一个类实现<code>__get__()</code> <code>__set__()</code> <code>__delete__()</code>中一个方法，称为<strong>描述符类</strong>(<code>decriptor class</code>)</p>
+</blockquote>
+<p>定义 <code>__set__()</code> and/or <code>__delete__()</code>，称为<strong>数据描述符</strong>(<code>data descriptor</code>); 没有定义其中一个的称为<strong>非数据描述符</strong>(<code>non-data descriptor</code>)</p>
+<p>通常<code>data descriptor</code>都定义<code>__set__()</code>和<code>__get__()</code>，<code>non-data descriptor</code>只定义<code>__get__()</code></p>
+<blockquote>
+<p>The following methods only apply when an instance of the class containing the method (a so-called descriptor class) appears in an owner class (the descriptor must be in either the owner’s class dictionary or in the class dictionary for one of its parents). In the examples below, “the attribute” refers to the attribute whose name is the key of the property in the owner class’ <code>__dict__</code>.</p>
+<p>只有描述符类的实例<code>instance</code>是<code>owner_class</code>中或<code>owner_class</code>的某一个父类中<code>__dict__</code>中属性的实例，描述符方法才会调用</p>
+</blockquote>
+<p>描述符调用<code>a.x</code>和<code>A.x</code></p>
+<ol>
+<li>直接调用<code>x.__get__(a)</code></li>
+<li>实例对象绑定：<code>a.x</code>即<code>type(a).__dict__['x'].__get__(a, type(a))</code></li>
+<li>类绑定：<code>A.x</code>即<code>A.__dict__['x'].__get__(None, A)</code></li>
+<li>Super绑定(继承的类有类属性是描述符的实例对象)：<code>super(B, obj).m</code>查找<code>obj.__class__.__mro__</code>，当找到<code>A</code>类有<code>m</code>属性为描述符对象时调用<code>A.__dict__['m'].__get__(obj, obj.__class__)</code></li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># example</span>
+<span class="c1"># owner的类属性是一个decriptor的实例</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call A.__get__()&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;Class A&#39;</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+
+<span class="c1"># call A.__get__()</span>
+<span class="c1"># &#39;Class A&#39; </span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>  
+
+<span class="c1">##############################</span>
+
+<span class="c1"># owner的父类的属性是一个decriptor的实例</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call A.__get__()&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;Class A&#39;</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="c1"># print(&#39;call A.__get__()&#39;)</span>
+<span class="c1"># &#39;Class A&#39;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+
+<h4 id="_4">对象属性访问原理</h4>
+<ul>
+<li>访问顺序：</li>
+</ul>
+<blockquote>
+<p>资料描述器(<code>data descriptor</code>)优先于实例变量(<code>instance.attribute</code>)，实例变量优先于非资料描述器(<code>non-data descriptor</code>)，<code>__getattr__()</code>方法(如果对象中包含的话) 具有最低的优先级</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">descriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__get__()&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__set__()&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 资料描述符优先实例变量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>        <span class="c1">#=&gt; type(a).__dict__[&#39;x&#39;].__set__(a, type(a))</span>
+
+
+<span class="c1"># &#39;__set__()&#39;</span>
+<span class="c1"># &#39;__get__()&#39;</span>
+<span class="c1"># &#39;__set__()&#39;       </span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span>         <span class="c1">#=&gt; type(a).__dict__[&#39;x&#39;].__get__(a, type(a))</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>     <span class="c1">#=&gt; type(a).__dict__[&#39;x&#39;].__set__(a, type(a))</span>
+
+<span class="c1">##############################################</span>
+
+<span class="k">class</span> <span class="nc">descriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__get__()&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 实例变量优先非资料描述符</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>        <span class="c1">#=&gt; self.__dict__[&#39;x&#39;] = &#39;x&#39;</span>
+
+
+<span class="c1"># x</span>
+<span class="c1"># {&#39;x&#39;: &#39;x&#39;}        </span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>          
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>       
+
+<span class="c1">##############################################</span>
+
+<span class="k">class</span> <span class="nc">descriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__get__()&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">descriptor</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;__getattr__()&#39;</span><span class="p">)</span>
+
+<span class="c1"># &#39;__get__()&#39;   </span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="c1"># 非资料描述符优先 __getattr__ </span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span>         <span class="c1">#=&gt; type(a).__dict__[&#39;x&#39;].__get__(a, type(a))</span>
+</pre></div>
+
+
+<h4 id="descriptor">描述符(descriptor)举例</h4>
+<blockquote>
+<p>内置 property 的实现</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Property</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_func_getter</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_getter</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_setter&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_func_setter</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;can&#39;t set attribute&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setter</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_func_setter</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="nd">@Property</span>
+    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_x&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;xxxxxxxxxxxxx&#39;</span>
+
+    <span class="nd">@say_hello.setter</span>
+    <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;say hello again&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+
+
+<blockquote>
+<p><code>classmethod</code>和<code>staticmethod</code>的简单实现</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ClassMethod</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_f</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span>
+
+<span class="k">class</span> <span class="nc">StaticMethod</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_f</span> <span class="o">=</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f</span>
+</pre></div>
+
+
+<hr />
+<h3 id="_5">比较操作符</h3>
+<div class="highlight"><pre><span></span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># ==</span>
+
+<span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># !=</span>
+
+<span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># &lt;</span>
+
+<span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># &gt;</span>
+
+<span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># &lt;=</span>
+
+<span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>     <span class="c1"># &gt;=</span>
+</pre></div>
+
+
+<h3 id="_6">数值操作符</h3>
+<p>.1 一元操作符</p>
+<div class="highlight"><pre><span></span><span class="n">__post__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>          <span class="c1"># 取正 +some_object</span>
+
+<span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>           <span class="c1"># 取负 -some_object</span>
+
+<span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>           <span class="c1"># 绝对值 abs()</span>
+
+<span class="fm">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>        <span class="c1"># 取反 ~</span>
+
+<span class="n">__round__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>      <span class="c1"># 内建函数 round()</span>
+
+<span class="n">__floor__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>         <span class="c1"># math.floor() 函数，向下取整</span>
+
+<span class="n">__ceil__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>          <span class="c1"># math.ceil() 函数，向上取整</span>
+
+<span class="n">__trunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>         <span class="c1"># math.trunc() 函数，距离0最返的整数</span>
+</pre></div>
+
+
+<p>.2 算数操作符</p>
+<div class="highlight"><pre><span></span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__lshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="fm">__xor__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+</pre></div>
+
+
+<p>.3 反射算数运算符</p>
+<div class="highlight"><pre><span></span><span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rfloordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rtruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rpow__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__rlshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="n">_rand__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__ror__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__rxor__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+
+
+<p>.4 增强赋值运算符</p>
+<div class="highlight"><pre><span></span><span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__ifloordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__itruediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__imod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__ipow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__ilshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__irshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__iand__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
+<span class="fm">__ixor__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+
+
+<p>.5 类型转换操作符</p>
+<div class="highlight"><pre><span></span><span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__long__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__float__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__complex__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__oct__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__hex__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__index__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">__trunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="_7">类的表示</h3>
+<div class="highlight"><pre><span></span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="_8">反射</h3>
+<div class="highlight"><pre><span></span><span class="c1"># isinstance(instance, class) 方法</span>
+<span class="fm">__instancecheck__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>       
+
+<span class="c1"># issubclass(subclass, class) 方法</span>
+<span class="fm">__subclasscheck__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subclass</span><span class="p">)</span>       
+</pre></div>
+
+
+<h3 id="_9">抽象基类</h3>
+<div class="highlight"><pre><span></span>
+</pre></div>
+
+
+<h3 id="_10">可调用的对象</h3>
+<div class="highlight"><pre><span></span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">[</span><span class="n">args</span><span class="o">...</span><span class="p">])</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="p">()</span>     <span class="c1"># 调用A.__call__()</span>
+</pre></div>
+
+
+<h3 id="_11">上下文管理器</h3>
+<div class="highlight"><pre><span></span><span class="c1"># 使用 with 声明时调用，返回值即为 as 后的东西</span>
+<span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="c1"># 退出 with 时调用，处理 with 产生的 exception</span>
+<span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exceptiop_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="_12">拷贝</h3>
+<div class="highlight"><pre><span></span><span class="n">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memodict</span><span class="o">=</span><span class="p">)</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

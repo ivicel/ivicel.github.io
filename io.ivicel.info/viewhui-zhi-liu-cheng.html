@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>View绘制流程 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./viewhui-zhi-liu-cheng.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="android,view绘制" />
+        <meta name="description" content="一. view的MeasureSpec测量取值 对于DecorView其大小要求要ViewRootImpl中测量 如果要求MACTH_PARENT,就设置为窗口的大小windowSize, 模式为精确EXACTLY 如果要求为内容大小WRAP_CONTENT, 就设置为窗口大小windowSize, 模式为至多AT_MOST, 表示不能超过子view这个大小 默认设置为要求的大小rootDimension, 模式为精确EXACTLY java // ViewRootImpl#getRootMeasureSpec private static int getRootMeasureSpec(int windowSize, int rootDimension) { int measureSpec; switch (rootDimension) { case ViewGroup.LayoutParams.MATCH_PARENT: // Window can&#39;t …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="View绘制流程"/>
+        <meta property="og:url" content="./viewhui-zhi-liu-cheng.html"/>
+        <meta property="og:description" content="一. view的MeasureSpec测量取值 对于DecorView其大小要求要ViewRootImpl中测量 如果要求MACTH_PARENT,就设置为窗口的大小windowSize, 模式为精确EXACTLY 如果要求为内容大小WRAP_CONTENT, 就设置为窗口大小windowSize, 模式为至多AT_MOST, 表示不能超过子view这个大小 默认设置为要求的大小rootDimension, 模式为精确EXACTLY java // ViewRootImpl#getRootMeasureSpec private static int getRootMeasureSpec(int windowSize, int rootDimension) { int measureSpec; switch (rootDimension) { case ViewGroup.LayoutParams.MATCH_PARENT: // Window can&#39;t …"/>
+        <meta property="article:published_time" content="2018-02-22" />
+            <meta property="article:section" content="Android" />
+            <meta property="article:tag" content="android" />
+            <meta property="article:tag" content="view绘制" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./viewhui-zhi-liu-cheng.html"
+                       rel="bookmark"
+                       title="Permalink to View绘制流程">
+                        View绘制流程
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-02-22T00:00:00+08:00"> Thu 22 February 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/android.html">android</a>
+        /
+	<a href="./tag/viewhui-zhi.html">view绘制</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <ul>
+<li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>
+</ul>
+<ol>
+<li>
+<p>对于<code>DecorView</code>其大小要求要<code>ViewRootImpl</code>中测量</p>
+</li>
+<li>
+<p>如果要求<code>MACTH_PARENT</code>,就设置为窗口的大小<code>windowSize</code>, 模式为精确<code>EXACTLY</code></p>
+</li>
+<li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
+<li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
+</ol>
+<p><code>java
+   // ViewRootImpl#getRootMeasureSpec
+   private static int getRootMeasureSpec(int windowSize, int rootDimension) {
+           int measureSpec;
+           switch (rootDimension) {
+           case ViewGroup.LayoutParams.MATCH_PARENT:
+               // Window can't resize. Force root view to be windowSize.
+               measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.EXACTLY);
+               break;
+           case ViewGroup.LayoutParams.WRAP_CONTENT:
+               // Window can resize. Set max size for root view.
+               measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.AT_MOST);
+               break;
+           default:
+               // Window wants to be an exact size. Force root view to be that size.
+               measureSpec = MeasureSpec.makeMeasureSpec(rootDimension, MeasureSpec.EXACTLY);
+               break;
+           }
+           return measureSpec;
+       }</code></p>
+<div class="highlight"><pre><span></span>   ​
+
+2. 普通子`view`的大小要受到父`ViewGroup`的`MeasureSpec.getMode`的值(`UNSPECIFIED`, `EXACTLY`, `AT_MOST`)影响.子`view`的大小指子`view`的**内容+左右`margin`+左右`padding`值**
+
+![子view的MeasureSpec](../images/子view的MeasureSpec.png)
+
+子`view`的测量要从父`ViewGroup`开始, 在`ViewGroup#measureChildWithMargins`中, 如果这个`view`支持`margin`, `padding`的话
+
+​```java
+// ViewGroup#measureChildWithMargins
+
+protected void measureChildWithMargins(View child,
+            int parentWidthMeasureSpec, int widthUsed,
+            int parentHeightMeasureSpec, int heightUsed) {
+        final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+
+        final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+                mPaddingLeft + mPaddingRight + lp.leftMargin + lp.rightMargin
+                        + widthUsed, lp.width);
+        final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+                mPaddingTop + mPaddingBottom + lp.topMargin + lp.bottomMargin
+                        + heightUsed, lp.height);
+
+        child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+    }
+
+// 在计算 margin, padding 后, 调用 getChildMeasureSpec 来获得子 view 大小和模式 
+// 然后进行子 view 测量循环
+
+// ViewGroup#getChildMeasureSpec
+// 该方法结果取值为上表
+
+public static int getChildMeasureSpec(int spec, int padding, int childDimension) {
+        int specMode = MeasureSpec.getMode(spec);
+        int specSize = MeasureSpec.getSize(spec);
+
+        // 去掉 margin 和 padding 之后的大小, 负值表示超出父 ViewGroup, 则取 0
+        int size = Math.max(0, specSize - padding);
+
+        int resultSize = 0;
+        int resultMode = 0;
+
+        switch (specMode) {
+        // Parent has imposed an exact size on us
+        case MeasureSpec.EXACTLY:
+            if (childDimension &gt;= 0) {
+                resultSize = childDimension;
+                resultMode = MeasureSpec.EXACTLY;
+            } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                // Child wants to be our size. So be it.
+                resultSize = size;
+                resultMode = MeasureSpec.EXACTLY;
+            } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                // Child wants to determine its own size. It can&#39;t be
+                // bigger than us.
+                resultSize = size;
+                resultMode = MeasureSpec.AT_MOST;
+            }
+            break;
+
+        // Parent has imposed a maximum size on us
+        case MeasureSpec.AT_MOST:
+            if (childDimension &gt;= 0) {
+                // Child wants a specific size... so be it
+                resultSize = childDimension;
+                resultMode = MeasureSpec.EXACTLY;
+            } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                // Child wants to be our size, but our size is not fixed.
+                // Constrain child to not be bigger than us.
+                resultSize = size;
+                resultMode = MeasureSpec.AT_MOST;
+            } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                // Child wants to determine its own size. It can&#39;t be
+                // bigger than us.
+                resultSize = size;
+                resultMode = MeasureSpec.AT_MOST;
+            }
+            break;
+
+        // Parent asked to see how big we want to be
+        case MeasureSpec.UNSPECIFIED:
+            if (childDimension &gt;= 0) {
+                // Child wants a specific size... let him have it
+                resultSize = childDimension;
+                resultMode = MeasureSpec.EXACTLY;
+            } else if (childDimension == LayoutParams.MATCH_PARENT) {
+                // Child wants to be our size... find out how big it should
+                // be
+                resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+                resultMode = MeasureSpec.UNSPECIFIED;
+            } else if (childDimension == LayoutParams.WRAP_CONTENT) {
+                // Child wants to determine its own size.... find out how
+                // big it should be
+                resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+                resultMode = MeasureSpec.UNSPECIFIED;
+            }
+            break;
+        }
+        //noinspection ResourceType
+        return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
+    }
+</pre></div>
+
+
+<ul>
+<li>
+<h4 id="view">二. <code>View</code>的工作流程</h4>
+</li>
+</ul>
+<p><code>view</code>的测量分两种情况, 没有子<code>view</code>的测量, 另一种是测量<code>ViewGroup</code>, 此时需要再递归测量</p>
+<ol>
+<li>当测量<code>view</code>时会调用<code>View#measure</code>, 该方法是<code>final</code>不能重写. 如果<code>view</code>没有测量过或者是需要重新测量的, 该方法会调用<code>View#onMeasure</code>, 如有需要可以重写<code>View#onMeasure</code>, <strong>注意, 如果需要<code>view</code>支持<code>padding</code>属性则需要在此处理</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1">// View#onMeasure</span>
+
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onMeasure</span><span class="o">(</span><span class="kt">int</span> <span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="kt">int</span> <span class="n">heightMeasureSpec</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// getSuggestMinimumXXX 主要是检测是否设置了背景, 如果设置了取</span>
+    <span class="c1">// mMinXXX 和 background.mMinXXX 的中的最大值. 没有设置则取 mMinXXX</span>
+    <span class="c1">// mMinXXX 由 xml 中的 android:minHeight, android:minWidth 来设置</span>
+
+    <span class="n">setMeasuredDimension</span><span class="o">(</span>
+        <span class="n">getDefaultSize</span><span class="o">(</span><span class="n">getSuggestedMinimumWidth</span><span class="o">(),</span> <span class="n">widthMeasureSpec</span><span class="o">),</span>
+        <span class="n">getDefaultSize</span><span class="o">(</span><span class="n">getSuggestedMinimumHeight</span><span class="o">(),</span> <span class="n">heightMeasureSpec</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="c1">// View#getDefaultSize</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getDefaultSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">,</span> <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+      <span class="kt">int</span> <span class="n">specMode</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getMode</span><span class="o">(</span><span class="n">measureSpec</span><span class="o">);</span>
+      <span class="kt">int</span> <span class="n">specSize</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getSize</span><span class="o">(</span><span class="n">measureSpec</span><span class="o">);</span>
+
+      <span class="k">switch</span> <span class="o">(</span><span class="n">specMode</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 该值多用于系统控件的测量</span>
+        <span class="k">case</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">UNSPECIFIED</span><span class="o">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="c1">// 一般自定义 view 时使用这两个选项</span>
+        <span class="k">case</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">AT_MOST</span><span class="o">:</span>
+        <span class="k">case</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">EXACTLY</span><span class="o">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">specSize</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+      <span class="o">}</span>
+      <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+  <span class="o">}</span>
+
+<span class="c1">// View#getSuggestMinimumWidth</span>
+
+<span class="c1">// 如果 view 没有背景, 返回 android:minWidth, 默认为0</span>
+<span class="c1">// 如果 view 有背景, 返回 背景的最小宽度 和 android:minWidth 中的最大值 </span>
+<span class="c1">// 高度下同</span>
+<span class="kd">protected</span> <span class="kt">int</span> <span class="nf">getSuggestedMinimumWidth</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">mBackground</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="n">mMinWidth</span> <span class="o">:</span> 
+            <span class="n">max</span><span class="o">(</span><span class="n">mMinWidth</span><span class="o">,</span> <span class="n">mBackground</span><span class="o">.</span><span class="na">getMinimumWidth</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="c1">// View#getSuggestMinimumHeight</span>
+
+<span class="kd">protected</span> <span class="kt">int</span> <span class="nf">getSuggestedMinimumHeight</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="o">(</span><span class="n">mBackground</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="n">mMinHeight</span> <span class="o">:</span> 
+            <span class="n">max</span><span class="o">(</span><span class="n">mMinHeight</span><span class="o">,</span> <span class="n">mBackground</span><span class="o">.</span><span class="na">getMinimumHeight</span><span class="o">());</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>一般自定义<code>view</code>多使用<code>AT_MOST</code>, <code>EXACTLY</code>来指定大小</p>
+<p>这样其<code>specWidth</code>, <code>specHeight</code>就决定其宽/高度的大小. 所以当我们直接继承<code>View</code>来自定义<code>view</code>时, 如果设置<code>view</code>的宽/高为<code>wrap_content</code>时, 结合上表中的值, 可以知道如果我们不测量该<code>view</code>内容的大小, 其最终的大小为父<code>ViewGroup</code>的大小, 和设置<code>match_parent</code>一样. 可以使用以下的方法解决</p>
+<div class="highlight"><pre><span></span><span class="c1">// 重写该 view 的 onMeasure, 测量内容大小</span>
+
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onMeasure</span><span class="o">(</span><span class="kt">int</span> <span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="kt">int</span> <span class="n">heightMeasureSpec</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onMeasure</span><span class="o">(</span><span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="n">heightMeasureSpec</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">widthMeasureMode</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getMode</span><span class="o">(</span><span class="n">widthMeasureSpec</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">widthMeasureSize</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getSize</span><span class="o">(</span><span class="n">widthMeasureSpec</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="n">heightMeasureMode</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getMode</span><span class="o">(</span><span class="n">heightMeasureSpec</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">heightMeasureSize</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">getSize</span><span class="o">(</span><span class="n">heightMeasureSpec</span><span class="o">);</span>
+
+    <span class="c1">// mWidth, mHeight 是自己设定的一个默认的宽/高度</span>
+    <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span> <span class="n">lp</span> <span class="o">=</span> <span class="n">getLayoutParams</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="o">(</span><span class="n">widthSpecMode</span> <span class="o">==</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">AT_MOST</span> <span class="o">&amp;&amp;</span> 
+        <span class="n">lp</span><span class="o">.</span><span class="na">width</span> <span class="o">==</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">)</span> <span class="o">?</span> <span class="n">mWidth</span> <span class="o">:</span> <span class="n">widthMeasureSize</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="o">(</span><span class="n">heightSpecMode</span> <span class="o">==</span> <span class="n">MeasureSpec</span><span class="o">.</span><span class="na">AT_MOST</span> <span class="o">&amp;&amp;</span>
+        <span class="n">lp</span><span class="o">.</span><span class="na">height</span> <span class="o">==</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">WRAP_CONTENT</span><span class="o">)</span> <span class="o">?</span> <span class="n">mHeight</span> <span class="o">:</span> <span class="n">heightMeasureSize</span><span class="o">;</span>
+    <span class="n">setMeasuredDimension</span><span class="o">(</span><span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<ol>
+<li><code>ViewGroup</code>的<code>measure</code>过程. 对于<code>ViewGroup</code>来说, 除了要测量自己的大小外, 还有递归的测量各个子元素的大小. 由于不同的布局其测量方法定义不同, 所以<code>ViewGroup</code>没有默认的<code>onMeasure</code>方法, 而是需要具体的继承类来实现该方法. <code>onMeasure</code>中调用<code>measureChildren</code>或是<code>measureChildWithMargins</code>来测量子类</li>
+</ol>
+<p><strong>需要注意的是如果不需要子<code>view</code>支持<code>margin</code>时, 使用<code>ViewGroup#measureChildren</code>来测量, 否则应当使用<code>ViewGroup#measureChildWithMargins</code>, 自定义的<code>ViewGroup</code>在重写<code>onMeasure</code>时需要特别注意</strong></p>
+<p>```java
+   // ViewGroup#measureChildren</p>
+<p>// measureChild 主要递归的调用 view#measure 来测量子 view
+   // 的大小, 如果 view 不为 View.GONE 的话
+   protected void measureChildren(int widthMeasureSpec, int heightMeasureSpec) {
+       final int size = mChildrenCount;
+       final View[] children = mChildren;
+       for (int i = 0; i &lt; size; ++i) {
+           final View child = children[i];
+           if ((child.mViewFlags &amp; VISIBILITY_MASK) != GONE) {
+               measureChild(child, widthMeasureSpec, heightMeasureSpec);
+           }
+       }
+   }</p>
+<p>protected void measureChild(View child, int parentWidthMeasureSpec,
+           int parentHeightMeasureSpec) {
+       final LayoutParams lp = child.getLayoutParams();</p>
+<div class="highlight"><pre><span></span>   final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+           mPaddingLeft + mPaddingRight, lp.width);
+   final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+           mPaddingTop + mPaddingBottom, lp.height);
+
+   child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+</pre></div>
+
+
+<p>}
+   ```</p>
+<p>​</p>
+<p><code>layout</code>过程. 当<code>ViewGroup</code>的位置确定后, 其会调用<code>layout</code>, 并在其中调用 <code>onLayout</code>来遍历子<code>view</code>的<code>layout</code>方法来确定子<code>view</code>的位置. 子<code>view</code>的<code>layout</code>会调用自己的<code>onLayout</code>方法. <code>ViewGroup</code>没有默认实现<code>onLayout</code>, 交给具体的布局来实现, 以方法实现不同的布局</p>
+<p>​</p>
+<p>```java
+   // ViewGroup#layout</p>
+<p>@Override
+   public final void layout(int l, int t, int r, int b) {
+       if (!mSuppressLayout &amp;&amp; (mTransition == null ||        <br />
+            !mTransition.isChangingLayout())) {
+           if (mTransition != null) {
+               mTransition.layoutChange(this);
+           }
+           super.layout(l, t, r, b);
+       } else {
+           // record the fact that we noop'd it; request layout when transition finishes
+           mLayoutCalledWhileSuppressed = true;
+       }
+   }</p>
+<p>// View#layout</p>
+<p>public void layout(int l, int t, int r, int b) {
+       if ((mPrivateFlags3 &amp; PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT) != 0) {
+           onMeasure(mOldWidthMeasureSpec, mOldHeightMeasureSpec);
+           mPrivateFlags3 &amp;= ~PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT;
+       }</p>
+<div class="highlight"><pre><span></span>   int oldL = mLeft;
+   int oldT = mTop;
+   int oldB = mBottom;
+   int oldR = mRight;
+
+   boolean changed = isLayoutModeOptical(mParent) ?
+           setOpticalFrame(l, t, r, b) : setFrame(l, t, r, b);
+
+   if (changed || (mPrivateFlags &amp; PFLAG_LAYOUT_REQUIRED) == PFLAG_LAYOUT_REQUIRED) {
+       onLayout(changed, l, t, r, b);
+
+       if (shouldDrawRoundScrollbar()) {
+           if(mRoundScrollbarRenderer == null) {
+               mRoundScrollbarRenderer = new RoundScrollbarRenderer(this);
+           }
+       } else {
+           mRoundScrollbarRenderer = null;
+       }
+
+       mPrivateFlags &amp;= ~PFLAG_LAYOUT_REQUIRED;
+
+       ListenerInfo li = mListenerInfo;
+       if (li != null &amp;&amp; li.mOnLayoutChangeListeners != null) {
+           ArrayList&lt;OnLayoutChangeListener&gt; listenersCopy =
+                   (ArrayList&lt;OnLayoutChangeListener&gt;)li.mOnLayoutChangeListeners.clone();
+           int numListeners = listenersCopy.size();
+           for (int i = 0; i &lt; numListeners; ++i) {
+               listenersCopy.get(i).onLayoutChange(this, l, t, r, b, oldL, oldT, oldR, oldB);
+           }
+       }
+   }
+
+   mPrivateFlags &amp;= ~PFLAG_FORCE_LAYOUT;
+   mPrivateFlags3 |= PFLAG3_IS_LAID_OUT;
+
+   if ((mPrivateFlags3 &amp; PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT) != 0) {
+       mPrivateFlags3 &amp;= ~PFLAG3_NOTIFY_AUTOFILL_ENTER_ON_LAYOUT;
+       notifyEnterOrExitForAutoFillIfNeeded(true);
+   }
+</pre></div>
+
+
+<p>}
+   ```</p>
+<p>​   绘制过程<code>draw</code>. 绘制过程主要分为1.绘制背景<code>background.draw(canvas)</code>, 2.绘制自己<code>onDraw</code>, 3.绘制<code>children</code>.<code>dispatchDraw</code>方法, 4. 绘制装饰<code>onDrawScrollBars</code>. 主要调用<code>View#draw</code>方法</p>
+<p>​   在<code>View</code>中有一个<code>View#setWillNotDraw</code>方法, 设置<code>true</code>表示不绘制该<code>view</code>. 默认为<code>false</code>. 当继承<code>ViewGroup</code>时, 需要手动设置为<code>false</code>关闭该标志位以便通过<code>onDraw</code>来绘制<code>view</code></p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
