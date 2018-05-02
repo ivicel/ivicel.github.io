@@ -84,6 +84,16 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../a-ha-suan-fa-1.html">啊哈算法1</a></h2>
+                <div class="summary"><h3 id="1">1. 简单桶排序</h3>
+<p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
+<p>比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个.  对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列.</p>
+<p>对于 N …</p>
+                    <a class="btn btn-default btn-xs" href="../a-ha-suan-fa-1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
                 <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
 <p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
@@ -98,7 +108,6 @@ Amber time            </a>
     <span class="s1">&#39;kfour&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
     <span class="s1">&#39;kfive&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
 <span class="p">}</span>
-
 
 
 <span class="k">def</span> <span class="nf">greedy_set_covery …</span></pre></div>
@@ -312,42 +321,6 @@ Amber time            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="../matering-algorithms-with-c-2-zhan-he-dui-lie.html">Matering Algorithms with C-2: 栈和队列</a></h2>
-                <div class="summary"><p>栈: 后进先出(LIFO)</p>
-<p>队列: 先进先出(FIFO)</p>
-<ul>
-<li>栈和队列的一些应用<ol>
-<li>信号量: 同步多个进程访问共享资源</li>
-<li>事件处理</li>
-<li>X Window 系统, 使用队列来存储事件</li>
-<li>生产者-消费者问题, 生产者向队列中写入数据, 消费从队列中读出数据</li>
-<li>C 函数的调用, 函数的调用会将一些信息压入程序栈, 程序结束时将信息出栈</li>
-</ol>
-</li>
-</ul>
-<p>栈最常用的是使用链表来实现, 以下是栈的抽象数据类型头文件</p>
-<div class="highlight"><pre><span></span><span class="cm">/* stack.h */</span>
-<span class="cp">#ifndef STACK_H</span>
-<span class="cp">#define STACK_H</span>
-
-<span class="cm">/* 元素结点 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">StackElmt_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">StackElmt_</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">StackElmt</span><span class="p">;</span>
-
-<span class="cm">/* 栈结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Stack_</span> <span class="p">{</span>
-    <span class="cm">/* 栈大小 */</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-    <span class="cm">/* 指向栈顶结点 */</span>
-    <span class="n">StackElmt</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
-    <span class="kt">void …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../matering-algorithms-with-c-2-zhan-he-dui-lie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -408,7 +381,7 @@ Amber time            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 ivicel
+         <div class="col-xs-10">&copy; 2018 ivicel
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

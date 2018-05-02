@@ -83,6 +83,62 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./android-ipcji-zhi.html">Android IPC机制</a></h2>
+                <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
+<p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
+<p>一是指定进程的全称:<code>android:process="info.ivicel.github.android_ipc.another_process"</code>, 此时进程为一个全局进程, 其他应用可以通过<code>ShareUID</code>方式和它跑在同一进程中</p>
+<p>二是简写: <code>android:process=":remote"</code>. 这种写法其完整的进程名为<code>包名:remote</code>, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中</p>
+<blockquote>
+<p>由于 Android 中为不同进程单独分配一个虚拟机来运行, 所以 Android 中不能通过<strong>共享内存</strong>来进行通信. </p>
+</blockquote>
+<p>在 …</p>
+                    <a class="btn btn-default btn-xs" href="./android-ipcji-zhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./zai-androidzhong-shi-yong-aidljin-xing-ipc.html">在Android中使用AIDL进行IPC</a></h2>
+                <div class="summary"><h5 id="aidl"><code>AIDL</code>基本介绍</h5>
+<p><code>AIDL</code>全称<code>Android Interface Define Language</code>, 后缀名是<code>.aidl</code>. 其支持以下几个数据类型</p>
+<ul>
+<li>基本数据类型<code>int</code>, <code>float</code>, <code>long</code>, <code>double</code>, <code>byte</code> , <code>short</code>, <code>boolean</code>, <code>char</code></li>
+<li><code>String</code>类型和<code>CharSequence</code>类型</li>
+<li><code>List</code>类型,  并其内<strong>元素</strong>可以是<strong>泛型</strong>. 但元素一定是可<code>Parcelable</code>类型或是其他<code>AIDL</code>支持的类型. 可选择将 <code>List</code> 用作 “通用” 类（例如，<code>List&lt;String&gt;</code>）。另一端实际接收的具体类始终是 <code>ArrayList</code>，但生成的方法使用的是 <code>List</code> 接口。</li>
+<li><code>Map</code>类型 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="./zai-androidzhong-shi-yong-aidljin-xing-ipc.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./android-contnet-providernei-rong-ti-gong-qi.html">Android Contnet Provider内容提供器</a></h2>
+                <div class="summary"><h4 id="content-provider"><code>Content Provider</code>的优势:</h4>
+<hr />
+<ol>
+<li>可以用来提供进程间的通信</li>
+<li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
+<li>提供了一个<code>权限</code>限制</li>
+</ol>
+<h4 id="content-uri"><code>Content URI</code>的写法:</h4>
+<hr />
+<blockquote>
+<p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
+<p><code>content://com.example.myapp.provider/table1</code></p>
+<p><code>AUTHORITY</code>一般默认写成<code>包名.provider</code>, <code>包名.provider类名</code>, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突</p>
+<p>后面跟表名, 或者还可以跟修饰符<code>*</code>, <code>#</code>, </p>
+</blockquote>
+<p>书写规则</p>
+<p><code>*</code>表示匹配任意长度任意字符</p>
+<blockquote>
+<p><code>content://com.example.myapp.provider/*</code> 查询所有表中所有数据</p>
+</blockquote>
+<p><code>#</code>表示匹配任意长度的数字</p>
+<blockquote>
+<p><code>content://com.example.myapp.provider/table1 …</code></p></blockquote>
+                    <a class="btn btn-default btn-xs" href="./android-contnet-providernei-rong-ti-gong-qi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./android-xi-tong-quan-xian.html">Android 系统权限</a></h2>
                 <div class="summary"><h5 id="_1">危险权限</h5>
 <table>
@@ -249,75 +305,6 @@ Amber time            </a>
 
     <span class="kt">void</span> <span class="nf">f1 …</span></pre></div>
                     <a class="btn btn-default btn-xs" href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li><code>View</code>的坐标系</li>
-</ul>
-<p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
-<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
-<blockquote>
-<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.</p>
-<p>获得左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong></p>
-<p>获得右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
-<p>所以一个<code>view</code>的大小便可以这样计算</p>
-<p>宽度<code>width = getRight() - getLeft()</code></p>
-<p>高度<code>height = getBottom() - getTop()</code></p>
-<p>这4个方法获得是 …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="./view-shi-jian-ti-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./viewhui-zhi-liu-cheng.html">View绘制流程</a></h2>
-                <div class="summary"><ul>
-<li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>
-</ul>
-<ol>
-<li>
-<p>对于<code>DecorView</code>其大小要求要<code>ViewRootImpl</code>中测量</p>
-</li>
-<li>
-<p>如果要求<code>MACTH_PARENT</code>,就设置为窗口的大小<code>windowSize</code>, 模式为精确<code>EXACTLY</code></p>
-</li>
-<li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
-<li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
-</ol>
-<p><code>java
-   // ViewRootImpl#getRootMeasureSpec
-   private static int getRootMeasureSpec(int windowSize, int rootDimension) {
-           int measureSpec;
-           switch (rootDimension) {
-           case ViewGroup.LayoutParams.MATCH_PARENT:
-               // Window can't …</code></p>
-                    <a class="btn btn-default btn-xs" href="./viewhui-zhi-liu-cheng.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
-                <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
-<p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
-<p>一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解</p>
-<p>贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完</p>
-<div class="highlight"><pre><span></span><span class="n">state_needed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
-<span class="c1"># 各个电台广播可以覆盖到的地方</span>
-<span class="n">stations</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;kone&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;ktwo&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;mt&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kthree&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kfour&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kfive&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
-<span class="p">}</span>
-
-
-
-<span class="k">def</span> <span class="nf">greedy_set_covery …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./grokking-algorithms-3.html">more ...</a>
                 </div>
             </article>
             <hr/>

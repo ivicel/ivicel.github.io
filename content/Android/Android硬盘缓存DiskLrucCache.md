@@ -1,4 +1,4 @@
-title: Android硬盘缓存DiskLrucCache
+title: Android 硬盘缓存 DiskLrucCache
 date: 2018-04-04
 tags: 缓存, 磁盘缓存, lru, cache, disk cache
 

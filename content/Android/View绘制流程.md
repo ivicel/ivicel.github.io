@@ -12,7 +12,7 @@ Tags: android, view绘制
    2. 如果要求为内容大小`WRAP_CONTENT`, 就设置为窗口大小`windowSize`, 模式为至多`AT_MOST`, 表示不能超过子`view`这个大小
    3. 默认设置为要求的大小`rootDimension`, 模式为精确`EXACTLY`
 
-   ```java
+```java
    // ViewRootImpl#getRootMeasureSpec
    private static int getRootMeasureSpec(int windowSize, int rootDimension) {
            int measureSpec;
@@ -32,10 +32,9 @@ Tags: android, view绘制
            }
            return measureSpec;
        }
-   ```
 ```
 
-   ​
+
 
 2. 普通子`view`的大小要受到父`ViewGroup`的`MeasureSpec.getMode`的值(`UNSPECIFIED`, `EXACTLY`, `AT_MOST`)影响.子`view`的大小指子`view`的**内容+左右`margin`+左右`padding`值**
 
@@ -43,7 +42,8 @@ Tags: android, view绘制
 
 子`view`的测量要从父`ViewGroup`开始, 在`ViewGroup#measureChildWithMargins`中, 如果这个`view`支持`margin`, `padding`的话
 
-​```java
+
+```java
 // ViewGroup#measureChildWithMargins
 
 protected void measureChildWithMargins(View child,
@@ -204,7 +204,6 @@ protected int getSuggestedMinimumHeight() {
 
 ```java
 // 重写该 view 的 onMeasure, 测量内容大小
-
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
  	super.onMeasure(widthMeasureSpec, heightMeasureSpec);
   	
@@ -257,15 +256,10 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
    }
    ```
 
-   ​
-
    `layout`过程. 当`ViewGroup`的位置确定后, 其会调用`layout`, 并在其中调用 `onLayout`来遍历子`view`的`layout`方法来确定子`view`的位置. 子`view`的`layout`会调用自己的`onLayout`方法. `ViewGroup`没有默认实现`onLayout`, 交给具体的布局来实现, 以方法实现不同的布局
-
-   ​
 
    ```java
    // ViewGroup#layout
-
    @Override
    public final void layout(int l, int t, int r, int b) {
        if (!mSuppressLayout && (mTransition == null || 			
@@ -281,7 +275,6 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
    }
 
    // View#layout
-
    public void layout(int l, int t, int r, int b) {
        if ((mPrivateFlags3 & PFLAG3_MEASURE_NEEDED_BEFORE_LAYOUT) != 0) {
            onMeasure(mOldWidthMeasureSpec, mOldHeightMeasureSpec);
