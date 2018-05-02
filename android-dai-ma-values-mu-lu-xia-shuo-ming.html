@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Android 代码 values 目录下说明 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./android-dai-ma-values-mu-lu-xia-shuo-ming.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="resources,android资源文件,attrs,style,styleable" />
+        <meta name="description" content="对于 Android 源代码目录下 values/* 文件, 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值, 这样的便可以通过 R.[type].[name] 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 values/* 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型: 1. style 主题文件 主题文件一般有两种, 一个是 style, 一个是属性 attr style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Android 代码 values 目录下说明"/>
+        <meta property="og:url" content="./android-dai-ma-values-mu-lu-xia-shuo-ming.html"/>
+        <meta property="og:description" content="对于 Android 源代码目录下 values/* 文件, 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值, 这样的便可以通过 R.[type].[name] 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 values/* 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型: 1. style 主题文件 主题文件一般有两种, 一个是 style, 一个是属性 attr style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …"/>
+        <meta property="article:published_time" content="2018-04-22" />
+            <meta property="article:section" content="Android" />
+            <meta property="article:tag" content="resources" />
+            <meta property="article:tag" content="android资源文件" />
+            <meta property="article:tag" content="attrs" />
+            <meta property="article:tag" content="style" />
+            <meta property="article:tag" content="styleable" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./android-dai-ma-values-mu-lu-xia-shuo-ming.html"
+                       rel="bookmark"
+                       title="Permalink to Android 代码 values 目录下说明">
+                        Android 代码 values 目录下说明
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-04-22T00:00:00+08:00"> Sun 22 April 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/resources.html">resources</a>
+        /
+	<a href="./tag/androidzi-yuan-wen-jian.html">android资源文件</a>
+        /
+	<a href="./tag/attrs.html">attrs</a>
+        /
+	<a href="./tag/style.html">style</a>
+        /
+	<a href="./tag/styleable.html">styleable</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
+<h3 id="1-style">1. style 主题文件</h3>
+<p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
+<ol>
+<li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr 定义的.</strong> 使用 <code>R.style.[name]</code> 来引用. 在 xml 文件中使用 <code>style=@style/[name]</code> . 一般放在 <code>values/styles.xml</code></li>
+</ol>
+<p><code>xml
+   &lt;!-- 自定义主题并继承 support 包里的主题 
+    继承的主题可以在 3 个地方使用, 全局 application, 单个 activity, 某个 view  
+    --&gt;
+   &lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
+       &lt;!-- 覆写 support 主题里的值 --&gt;
+       &lt;item name="colorPrimary"&gt;@color/colorPrimary&lt;/item&gt;
+       &lt;!-- 覆写系统主题里的值, 这其实是一个 framework 里的内部 attr --&gt;
+       &lt;item name="android:textViewStyle"&gt;@style/BlueTextStyle&lt;/item&gt;
+       &lt;!-- 覆写系统主题里的值 --&gt;
+       &lt;item name="android:textSize"&gt;18sp&lt;/item&gt;
+       &lt;!-- 自定义的属性值 --&gt;
+       &lt;item name="source_name"&gt;sources&lt;/item&gt;
+   &lt;/style&gt;
+   &lt;attr name="source_name" format="string"/&gt; 
+   &lt;!-- 自定义的 style, 可以在 layout 中的 view 直接引用 style=@style/BlueTextStyle --&gt;
+   &lt;style name="BlueTextStyle"&gt;
+       &lt;item name="android:textColor"&gt;@android:color/holo_blue_light&lt;/item&gt;
+   &lt;/style&gt;</code></p>
+<ol>
+<li>使用 attr 的原因是为自定义 view 添加属性, 另外是方便更改属性的值. 有两种定义方式. </li>
+</ol>
+<p>一种是直接在 <code>resources</code> 下定义</p>
+<p><code>xml
+   &lt;resources&gt;
+       &lt;attr name="one" format="reference"/&gt;
+   &lt;/resources&gt;</code></p>
+<p>一种是在外面包一层 <code>declare-styleable</code> 标签. </p>
+<p><code>xml
+   &lt;!-- 引用整组为 R.styleable.MyAttrs, 单个为 R.styleable.MyAttrs_other_one --&gt;
+   &lt;resources&gt;
+       &lt;declare-styleable name="MyAttrs"&gt;
+           &lt;!-- 这个是 attr 的定义 --&gt;
+        &lt;attr name="other_one" format="reference"/&gt;
+           &lt;!-- 这个是对已经定义的 attr 引用, 没有 format 值 --&gt;
+           &lt;attr name="one"/&gt;
+    &lt;/declare-styleable&gt;
+   &lt;/resources&gt;</code></p>
+<p>使用 <code>declare-styleable</code> 主要有两点</p>
+<ul>
+<li>它提供了一个数组的引用 <code>R.styleable.[styleable-name]</code> 引用(组里成员引用为 <code>R.styleable.[styleable-name]_[attr-name]</code> 注意组名和成员名是用下划线_连接) 由于在使用 <code>Theme#obtainStyledAttributes()</code> 的参数, 如果我们直接引用 <code>R.attr.one</code> 也是要组成一个数组的</li>
+<li>如果我们有不同的自定义的 view, 比如 MyTextView, MyOtherTextView, 这样使用分组便于管理</li>
+</ul>
+<p>#### attr 属性的 format 取值</p>
+<blockquote>
+<p>当 attr 中没有 format 值时, 是对已经定义了的 attr 的引用</p>
+</blockquote>
+<ol>
+<li>
+<p><code>reference</code> 引用. 某个资源 ID.</p>
+<p>```xml
+  <attr name="my_bg" format="reference"/></p>
+<p><TextView
+    app:my_bg="@drawable/bg"/>
+  ```</p>
+</li>
+<li>
+<p><code>color</code> 颜色值.</p>
+</li>
+<li>
+<p><code>boolean</code> 布尔值</p>
+</li>
+<li>
+<p><code>dimension</code> 尺寸值</p>
+</li>
+<li>
+<p><code>float</code> 浮点数</p>
+</li>
+<li>
+<p><code>integer</code> 整型</p>
+</li>
+<li>
+<p><code>string</code> 字符串</p>
+</li>
+<li>
+<p><code>fraction</code> 百分数. 使用时类似系统 <code>android:pivotX="200%"</code></p>
+</li>
+<li>
+<p><code>enum</code> 枚举类型. 使用时只能取一个惟一值. </p>
+<p><code>xml
+  &lt;declare-styleable name="MyDirection"&gt; 
+      &lt;attr name="orientation"&gt; 
+          &lt;enum name="horizontal" value="0" /&gt; 
+          &lt;enum name="vertical" value="1" /&gt; 
+      &lt;/attr&gt;
+  &lt;/declare-styleable&gt;</code></p>
+</li>
+<li>
+<p><code>flag</code> 标志位, 使用时通过 <code>|</code> 竖线来设置单个或多个值, 如 <code>stateOne | stateTwo</code> 这样</p>
+<p>```xml
+   <declare-styleable name="MyState"> 
+       <attr name="windowSoftInputMode"> 
+           <flag name="stateOne" value="0x01" /> 
+           <flag name="stateTwo" value="0x10" /> 
+       </attr>
+   </declare-styleable></p>
+<p>```</p>
+</li>
+<li>
+<p>混合类型, 比如支持 <code>string|reference</code> 这种, 使用 <code>|</code> 竖线分隔开</p>
+</li>
+</ol>
+<h3 id="2">2. 其他资源文件</h3>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Bool">Bool</a> 布尔型, 只有(true/false)两个值</li>
+</ol>
+<p>使用 <code>R.bool.[name]</code>, <code>@bool/[name]</code> 来引用. 一般存放在 <code>values/bools.xml</code>. </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;bool</span> <span class="na">name=</span><span class="s">&quot;screen_small&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/bool&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</pre></div>
+
+
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Color">Color</a> 颜色, 一个 16 进制的值(#<em>RGB</em>, #<em>ARGB</em>, #<em>RRGGBB</em>, #<em>AARRGGBB</em>). 跟 <code>res/colors</code> 下的区别是, 这里的值一般只存储单一的颜色值. 使用 <code>R.color.[name]</code>, <code>@color/[name]</code> 来引用, 存放在 <code>values/colors.xml</code></li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nt">&lt;resources&gt;</span>
+   <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">&quot;opaque_red&quot;</span><span class="nt">&gt;</span>#f00<span class="nt">&lt;/color&gt;</span>
+   <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">&quot;translucent_red&quot;</span><span class="nt">&gt;</span>#80ff0000<span class="nt">&lt;/color&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</pre></div>
+
+
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Dimension">Dimension</a> 长度尺寸, 有 dp, sp, pt, px, mm, in 单位. 最主要用到的是 <code>dp</code> 和 <code>sp</code>. <code>dp</code> 是一种与设备 DPI 无关的单位, 换算公式为 <code>px = dp * (dpi / 160)</code>. 一共有 <code>ldpi(120)</code>, <code>mdpi(160)</code>, <code>hdpi(240)</code>, <code>xhdpi(320)</code>, <code>xxhdpi(480)</code>, <code>xxxhdpi(640)</code>, <code>nodpi</code>, <code>tvdpi</code>. 通过 <code>DisplayMetrics#densityDpi</code> 来获取该设备的 dpi, <code>DisplayMetrics.density</code> 来获取比值, 即 <strong>设备dpi / 基准dpi </strong>(<code>DisplayMetrics.densityDpi / 160</code>). 使用 <code>R.dimen.[name]</code>, <code>@dimen/[name]</code> 来引用</li>
+</ol>
+<blockquote>
+<p>注意: Android 只有以上几种 dpi 比值, 当设备 dpi 和上设定的不完全相等时, 会取近似值. 比如 165 取得 160</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;dimen</span> <span class="na">name=</span><span class="s">&quot;textview_height&quot;</span><span class="nt">&gt;</span>25dp<span class="nt">&lt;/dimen&gt;</span>
+    <span class="nt">&lt;dimen</span> <span class="na">name=</span><span class="s">&quot;font_size&quot;</span><span class="nt">&gt;</span>16sp<span class="nt">&lt;/dimen&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</pre></div>
+
+
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Id">ID</a> 独一无二的 ID 值. 一般我们会在 layout 文件中直接用 <code>@+id/id_name</code> 来建立, 不过, 当我们有许多地方需要用到这个 id 时, 单独建立文件 <code>values/ids.xml</code> 来设置这个 id, 然后在需要的地方引用就可. 特别是 <code>ConstraintLayout</code> 这个需要前后引用 id 来设定 view 的位置时, 就减少了工作量, 不必总使用 <code>@+id/id_name</code> 来保证 id 一定存在了.  通过 <code>R.id.[name]</code>, <code>@id/[name]</code>  来引用. 存放在 <code>values/ids.xml</code></li>
+</ol>
+<p>```xml
+  <resources>
+      <item type="id" name="button_ok" />
+  </resources></p>
+<p><!-- layout 中引用 -->
+  <Button android:id="@id/button_ok"/>
+  ```</p>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Integer">Integer</a> 整数值, 通过 <code>R.integer.[name]</code>, <code>@integer/[name]</code> 来引用. 存放在 <code>values/integers.xml</code></li>
+</ol>
+<p><code>xml
+  &lt;resources&gt;
+      &lt;integer name="max_speed"&gt;75&lt;/integer&gt;
+  &lt;/resources&gt;</code></p>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#IntegerArray">Integer Array</a> 整型数值, 通赤 <code>R.array.[name]</code> 来引用. 使用 java 来解析. <code>getResources().getInArray(R.array.bits)</code>. 存放在 <code>values/integers.xml</code></li>
+</ol>
+<p><code>xml
+  &lt;resources&gt;
+      &lt;integer-array name="bits"&gt;
+          &lt;item&gt;4&lt;/item&gt;
+          &lt;item&gt;8&lt;/item&gt;
+          &lt;item&gt;16&lt;/item&gt;
+          &lt;item&gt;32&lt;/item&gt;
+      &lt;/integer-array&gt;
+  &lt;/resources&gt;</code></p>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#TypedArray">Typed Array</a> 混合型数组, 可以引用其他的资源, 数组里可以是引用同一类型的值, 也可以是不同的类型, 当引用不同类型时, 在解析的时候就有注意判断类型值. 使用 <code>R.array.[name]</code> 引用, 然后有 Java 代码中使用 <code>obtainTypedArray()</code> 来解析具体的值. 存放在 <code>values/arrays.xml</code></li>
+</ol>
+<p><code>xml
+  &lt;resources&gt;
+      &lt;array name="icons"&gt;
+          &lt;item&gt;@drawable/home&lt;/item&gt;
+          &lt;item&gt;@drawable/settings&lt;/item&gt;
+          &lt;item&gt;@drawable/logout&lt;/item&gt;
+      &lt;/array&gt;
+  &lt;/resources&gt;</code></p>
+<p>java 解析代码示例</p>
+<p><code>java
+  TypedArray icons = getResources().obtainTypedArray(R.array.icons);
+  Drawable drawable = icons.getDrawable(0);</code></p>
+<ol>
+<li>
+<p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String</a> 字符串. 使用 <code>R.string.[name]</code>, <code>@string/[name]</code> 引用. 存放在 <code>values/strings.xml</code></p>
+</li>
+<li>
+<p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Array</a> 字符串数组. 使用 <code>R.array.[name]</code>, <code>@string/name</code> 引用. 放在 <code>values/strings.xml</code></p>
+</li>
+</ol>
+<p><code>Xml
+   &lt;resources&gt;
+       &lt;string-array name="planets_array"&gt;
+           &lt;item&gt;Mercury&lt;/item&gt;
+           &lt;item&gt;Venus&lt;/item&gt;
+           &lt;item&gt;Earth&lt;/item&gt;
+           &lt;item&gt;Mars&lt;/item&gt;
+       &lt;/string-array&gt;
+   &lt;/resources&gt;</code></p>
+<ol>
+<li>
+<p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Plurals</a> 英文中的单复数形式</p>
+<p><code>xml
+&lt;resources&gt;
+    &lt;plurals name="numberOfSongsAvailable"&gt;
+        &lt;item quantity="one"&gt;Znaleziono %d piosenkę.&lt;/item&gt;
+        &lt;item quantity="few"&gt;Znaleziono %d piosenki.&lt;/item&gt;
+        &lt;item quantity="other"&gt;Znaleziono %d piosenek.&lt;/item&gt;
+    &lt;/plurals&gt;
+&lt;/resources&gt;</code></p>
+<p>​</p>
+</li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

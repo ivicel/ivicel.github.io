@@ -98,6 +98,20 @@ Amber time            </a>
             </article>
             <hr/>
             <article>
+                <h2><a href="../android-dui-xiang-xu-lie-hua-fang-shi.html">Android 对象序列化方式</a></h2>
+                <div class="summary"><p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
+<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
+<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
+<blockquote>
+<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
+</blockquote>
+<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
+<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
+                    <a class="btn btn-default btn-xs" href="../android-dui-xiang-xu-lie-hua-fang-shi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../android-ipcji-zhi.html">Android IPC机制</a></h2>
                 <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
 <p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
@@ -108,20 +122,6 @@ Amber time            </a>
 </blockquote>
 <p>在 …</p>
                     <a class="btn btn-default btn-xs" href="../android-ipcji-zhi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../androiddui-xiang-xu-lie-hua-fang-shi.html">Android对象序列化方式</a></h2>
-                <div class="summary"><p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
-<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
-<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
-<blockquote>
-<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
-</blockquote>
-<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
-<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
-                    <a class="btn btn-default btn-xs" href="../androiddui-xiang-xu-lie-hua-fang-shi.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -275,13 +275,12 @@ Amber time            </a>
 <li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
 <li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
 </ol>
-<p><code>java
-   // ViewRootImpl#getRootMeasureSpec
-   private static int getRootMeasureSpec(int windowSize, int rootDimension) {
-           int measureSpec;
-           switch (rootDimension) {
-           case ViewGroup.LayoutParams.MATCH_PARENT:
-               // Window can't …</code></p>
+<div class="highlight"><pre><span></span>   <span class="c1">// ViewRootImpl#getRootMeasureSpec</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getRootMeasureSpec</span><span class="o">(</span><span class="kt">int</span> <span class="n">windowSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">;</span>
+           <span class="k">switch</span> <span class="o">(</span><span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">case</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">:</span>
+               <span class="c1">// Window can&#39;t …</span></pre></div>
                     <a class="btn btn-default btn-xs" href="../viewhui-zhi-liu-cheng.html">more ...</a>
                 </div>
             </article>

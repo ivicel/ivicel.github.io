@@ -98,13 +98,12 @@ Amber time            </a>
 <li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
 <li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
 </ol>
-<p><code>java
-   // ViewRootImpl#getRootMeasureSpec
-   private static int getRootMeasureSpec(int windowSize, int rootDimension) {
-           int measureSpec;
-           switch (rootDimension) {
-           case ViewGroup.LayoutParams.MATCH_PARENT:
-               // Window can't …</code></p>
+<div class="highlight"><pre><span></span>   <span class="c1">// ViewRootImpl#getRootMeasureSpec</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getRootMeasureSpec</span><span class="o">(</span><span class="kt">int</span> <span class="n">windowSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">;</span>
+           <span class="k">switch</span> <span class="o">(</span><span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">case</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">:</span>
+               <span class="c1">// Window can&#39;t …</span></pre></div>
                     <a class="btn btn-default btn-xs" href="../viewhui-zhi-liu-cheng.html">more ...</a>
                 </div>
             </article>
