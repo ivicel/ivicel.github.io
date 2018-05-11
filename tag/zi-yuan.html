@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>view事件 - Amber time</title>
+    <title>资源 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="view事件" />
+    <meta name="keywords" content="资源" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,24 +84,14 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
-</ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
-<p>​</p>
-<ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
-</ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 …</code></p>
-                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+                <h2><a href="../android-drawablezi-yuan.html">Android Drawable资源</a></h2>
+                <div class="summary"><h3 id="1-drawable">1. drawable 简述</h3>
+<p>drawable 在 Android 中是一个抽象的概念, 对应抽象类 <code>android.graphics.drawable.Drawable</code>, 包括了各种形式的图片, 层级样式, 状态样式等. drawable 可以在 <code>res/drawable</code> 中以 <code>xml</code> 来定义. 也可以在 java 中生成. 大概分为以下 10 种.</p>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Bitmap">Bitmap File</a> <code>.png</code>(最好), <code>.jpg</code>(次), <code>.gif</code>(尽量不要用)等格式的图片. 对应 <code>BitmapDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#NinePatch">Nine-Patch File</a> <code>.9.png</code> 图片.对应 <code>NinePatchDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#LayerList">Layer List</a> 多层次 drawable …</li></ol>
+                    <a class="btn btn-default btn-xs" href="../android-drawablezi-yuan.html">more ...</a>
                 </div>
             </article>
             <hr/>

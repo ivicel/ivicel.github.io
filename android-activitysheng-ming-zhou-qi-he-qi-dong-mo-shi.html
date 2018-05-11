@@ -148,17 +148,19 @@ Amber time            </a>
 <p>默认的<code>Activity</code>启动时的模式, 无论是否有这个实例, 都会新生成一个实例压入栈中. 在这个模式中,假如使用 <strong>B</strong> 启动了 <strong>A</strong>(为<code>standard</code>模式), <strong>A</strong> 是进入到 <strong>B</strong> 的<strong>任务栈</strong>吕. 所以当我们使用<code>ApplicationContext</code>启动一个<code>Activity</code>时会发生<code>RuntimeException</code>:<strong>Calling startActivity from outside of an activity context require the <code>FLAG_ACTIVITY_NEW_TASK</code> flag</strong>, 表明<code>ApplicationContext</code>是没有任务栈的, 要想从<code>ApplicationContext</code>启动一个<code>Activity</code>需要为其设置一个新的任务栈标志<code>FLAG_ACTIVITY_NEW_TASK</code>. 但这是一个很不好的编程行为, 不推荐</p>
 <ol>
 <li>
-<p><code>singleTop</code>栈顶复用模式
+<p><code>singleTop</code> 栈顶复用模式
    该模式主要是指<code>Activity</code>如果已经处于<strong>栈顶</strong>, 便不会再次新创建新的<code>Activity</code>入栈. 此时不会调用<code>onCreate()</code>方法而是调用<code>onNewIntent()</code>方法. 需要注意的是, 新的<code>Activity</code>的任务栈名称. 比如在任务栈 A 中是栈顶, 而在 B 不是, 此时要入的栈是 B, 那么还是要新创建再入栈. </p>
 </li>
 <li>
-<p><code>singelTask</code>栈内复用模式</p>
+<p><code>singelTask</code> 栈内复用模式</p>
 </li>
 </ol>
-<p>指的是如果要入栈的里头已经有了该<code>Activity</code>的实例, 则不会新创建实例. 而是把<code>Activty</code>"上头"的其他<code>Activity</code>出栈, 使其位于栈顶. 所以这个模式自带一个<strong><code>clearTop</code></strong>光环(标志位<code>FLAG_ACTIVITY_CLEAR_TOP</code>)<code>, 清除"头顶"的</code>Activity<code>.当不创建新的实例时, 也是调用其</code>onNewIntent()<code>方法
-   需要注意的是,</code>singleTask`也<strong>受到其配置的任务栈名称限制</strong>, 并不是创建了新的实例时就一定会创建新的任务栈. 要看配置以及任务是否已经存在. 这是一个容易搞混的地方.</p>
+<p>指的是如果要入栈的里头已经有了该 <code>Activity</code> 的实例, 则不会新创建实例. 而是把 <code>Activty</code> "上头"的其他 <code>Activity</code> 出栈, 使其位于栈顶. 所以这个模式自带一个 <strong><code>clearTop</code></strong> 光环(标志位 <code>FLAG_ACTIVITY_CLEAR_TOP</code>), 清除"头顶"的 <code>Activity</code>.当不创建新的实例时, 也是调用其<code>onNewIntent()</code>方法</p>
+<blockquote>
+<p>需要注意的是, <code>singleTask</code>也<strong>受到其配置的任务栈名称限制</strong>, 并不是创建了新的实例时就一定会创建新的任务栈. 要看配置以及任务是否已经存在. 这是一个容易搞混的地方.</p>
+</blockquote>
 <ol>
-<li><code>singleInstance</code>单实例模式
+<li><code>singleInstance</code> 单实例模式
    一种加强版的<code>singleTask</code>模式. 也自带<code>clearTop</code>. 在配置文件中设置, 自己在一个任务栈中, 调用时时只用生成一次实例, 之后会复用这个实例. </li>
 </ol>
 <blockquote>

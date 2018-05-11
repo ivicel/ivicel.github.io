@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>view事件 - Amber time</title>
+    <title>坐标 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="view事件" />
+    <meta name="keywords" content="坐标" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,24 +84,17 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
-</ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
-<p>​</p>
-<ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
-</ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 …</code></p>
-                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+                <h2><a href="../android-view-de-zuo-biao-xi.html">Android View 的坐标系</a></h2>
+                <div class="summary"><p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
+<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
+<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.
+左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong>, 右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
+<p><code>view</code> 的大小: </p>
+<p>宽度 <code>width = getRight() - getLeft()</code> </p>
+<p>高度 <code>height = getBottom() - getTop()</code></p>
+<blockquote>
+<p>这也是 <code>getWidth()</code>, <code>getHeight()</code> 的算法. 其和 <code>getMeasuredWidth …</code></p></blockquote>
+                    <a class="btn btn-default btn-xs" href="../android-view-de-zuo-biao-xi.html">more ...</a>
                 </div>
             </article>
             <hr/>

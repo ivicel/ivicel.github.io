@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>view事件 - Amber time</title>
+    <title>CircleImageView - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="view事件" />
+    <meta name="keywords" content="CircleImageView" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,24 +84,21 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
-</ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
-<p>​</p>
-<ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
-</ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 …</code></p>
-                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+                <h2><a href="../circleimageviewshi-xian-jie-xi.html">CircleImageView实现解析</a></h2>
+                <div class="summary"><h3 id="1-circleimageview">1. CircleImageView 的实现</h3>
+<h4 id="11">1.1 自定义的属性</h4>
+<p>CircleImageView 一共自定义的 5 个自定义属性</p>
+<ol>
+<li><code>civ_border_width</code> 边框的大小</li>
+<li><code>civ_border_color</code> 边框的颜色</li>
+<li><code>civ_border_overlay</code> 边框覆盖</li>
+<li><code>civ_fill_color</code> 图片背景填充, 已弃用, 使用 <code>civ_circle_background_color</code> 替代</li>
+</ol>
+<h4 id="12">1.2 流程</h4>
+<p>CircleImageView 是继承自系统控件 <code>android.widget.ImageView</code>, 而不是 support 里的兼容控件 <code>android.support.v7.widget.AppCompatImageView</code>, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包.</p>
+<blockquote>
+<p>CircleImageView …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="../circleimageviewshi-xian-jie-xi.html">more ...</a>
                 </div>
             </article>
             <hr/>

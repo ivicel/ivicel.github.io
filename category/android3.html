@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>view事件 - Amber time</title>
+    <title>Android - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="view事件" />
+    <meta name="keywords" content="Android" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -50,7 +50,7 @@ Amber time            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
+                        <li class="active">
                             <a href="../category/android.html">Android</a>
                         </li>
                         <li >
@@ -84,28 +84,42 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
+                <h2><a href="../viewhui-zhi-liu-cheng.html">View绘制流程</a></h2>
+                <div class="summary"><ul>
+<li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>
 </ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
-<p>​</p>
-<ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
-</ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 …</code></p>
-                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+<ol>
+<li>
+<p>对于<code>DecorView</code>其大小要求要<code>ViewRootImpl</code>中测量</p>
+</li>
+<li>
+<p>如果要求<code>MACTH_PARENT</code>,就设置为窗口的大小<code>windowSize</code>, 模式为精确<code>EXACTLY</code></p>
+</li>
+<li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
+<li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
+</ol>
+<div class="highlight"><pre><span></span>   <span class="c1">// ViewRootImpl#getRootMeasureSpec</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getRootMeasureSpec</span><span class="o">(</span><span class="kt">int</span> <span class="n">windowSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">;</span>
+           <span class="k">switch</span> <span class="o">(</span><span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">case</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">:</span>
+               <span class="c1">// Window can&#39;t …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../viewhui-zhi-liu-cheng.html">more ...</a>
                 </div>
             </article>
             <hr/>
 
+        <ul class="pagination">
+                <li class="prev"><a href="../category/android2.html">&laquo;</a>
+                </li>
+                    <li class=""><a
+                            href="../category/android.html">1</a></li>
+                    <li class=""><a
+                            href="../category/android2.html">2</a></li>
+                    <li class="active"><a
+                            href="../category/android3.html">3</a></li>
+                <li class="next disabled"><a href="#">&raquo;</a></li>
+        </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
