@@ -83,21 +83,96 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./interpolatorzhi.html">Interpolator值</a></h2>
+                <div class="summary"><ul>
+<li>AccelerateDecelerateInterpolator 动画从开始到结束，变化率是先加速后减速的过程。</li>
+<li>AccelerateInterpolator 动画从开始到结束，变化率是一个加速的过程。</li>
+<li>AnticipateInterpolator 开始的时候向后，然后向前甩</li>
+<li>AnticipateOvershootInterpolator 开始的时候向后，然后向前甩一定值后返回最后的值</li>
+<li>BounceInterpolator 动画结束的时候弹起</li>
+<li>CycleInterpolator 动画从开始到结束，变化率是循环给定次数的正弦曲线。</li>
+<li>DecelerateInterpolator 动画从开始到结束，变化率是一个减速的过程。</li>
+<li>LinearInterpolator 以常量速率改变</li>
+<li>OvershootInterpolator 向前甩一定值后再回到原来位置</li>
+</ul>
+                    <a class="btn btn-default btn-xs" href="./interpolatorzhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./javaxiao-shu-she-wei-qing-kuang.html">Java小数舍位情况</a></h2>
+                <div class="summary"><ol>
+<li><code>ROUND_UP</code>：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。</li>
+<li><code>ROUND_DOWN</code>：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。</li>
+<li><code>ROUND_CEILING</code>：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 <code>ROUND_UP</code>，若为负数，舍入行为类似于 <code>ROUND_DOWN</code>。<code>Math.round()</code> 方法就是使用的此模式。</li>
+<li><code>ROUND_FLOOR</code>：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 <code>ROUND_DOWN</code>；若为负数，舍入行为类似于 <code>ROUND_UP</code>。</li>
+<li><code>HALF_UP</code>：最近数字舍入 (5 进)。这是我们最经典的四舍五入。</li>
+<li><code>HALF_DOWN</code>：最近数字舍入 (5 舍)。在这里 5 是要舍弃的。</li>
+<li><code>HAIL_EVEN</code>：银行家舍入法。</li>
+</ol>
+<blockquote>
+<p>银行家舍入法:</p>
+<ol>
+<li>
+<p>舍去位小于5时, 直接舍去</p>
+</li>
+<li>
+<p>舍去位大于5时 …</p></li></ol></blockquote>
+                    <a class="btn btn-default btn-xs" href="./javaxiao-shu-she-wei-qing-kuang.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">Java中static关键字以及修饰符</a></h2>
+                <div class="summary"><blockquote>
+<p><code>Java</code>类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法)</p>
+<p>另外, <code>static</code>变量会优先于普通变量进行初始化, <code>static</code>变量也是按顺序</p>
+<p>只有<code>static</code>初始化完成, 普通变量才会初始化</p>
+</blockquote>
+<h4 id="1-static">1. <code>static</code>修饰类</h4>
+<div class="highlight"><pre><span></span><span class="c1">// 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用</span>
+<span class="c1">// 只能使用外部类的 static 变量和方法</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutterClass</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nf">OutterClass</span><span class="o">()</span> <span class="o">{}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{}</span>
+<span class="o">}</span>   
+</pre></div>
+
+
+<h4 id="2-static">2. <code>static</code>修饰成员变量</h4>
+<div class="highlight"><pre><span></span><span class="c1">// 修饰类成员变量时, 变量值会在第一次访问类时被赋值, 第一次new, 第一次访问变量</span>
+
+
+
+<span class="kd">class</span> <span class="nc">Bowl</span> <span class="o">{</span>
+    <span class="n">Bowl</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bowl(&quot;</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">void</span> <span class="nf">f1 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./view-shi-jian-ti-xi.html">View 事件体系</a></h2>
                 <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
 <ul>
-<li><code>View</code>的坐标系</li>
+<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
 </ul>
-<p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
-<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
-<blockquote>
-<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.</p>
-<p>获得左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong></p>
-<p>获得右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
-<p>所以一个<code>view</code>的大小便可以这样计算</p>
-<p>宽度<code>width = getRight() - getLeft()</code></p>
-<p>高度<code>height = getBottom() - getTop()</code></p>
-<p>这4个方法获得是 …</p></blockquote>
+<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
+<p>触摸事件产生时, 可以获取其位置.</p>
+<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
+<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
+<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
+<p>​</p>
+<ul>
+<li>滑动速度追踪<code>VelocityTracker</code></li>
+</ul>
+<p>滑动速度指的是在某一个时间段内的速度. </p>
+<p><code>java
+  /* 首先可以在 …</code></p>
                     <a class="btn btn-default btn-xs" href="./view-shi-jian-ti-xi.html">more ...</a>
                 </div>
             </article>
@@ -233,81 +308,6 @@ Amber time            </a>
 <p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
 <p>无向图: V={1, 2, 3 …</p></blockquote>
                     <a class="btn btn-default btn-xs" href="./matserting-algorithms-with-c-7-tu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">Matserting Algorithms with C-6: 堆和优先队列</a></h2>
-                <div class="summary"><h3 id="heap">堆 (Heap)</h3>
-<p>堆是一棵二叉树, 子结点存储的值比父结点的值大称为最小值堆, 子结点存储的值比父结点小称为最大值堆</p>
-<p>堆是有序的排列, 父子结点存在大小关系, 兄弟结点不存在直接的关系, 堆是快速取得最大/小值的数据结构</p>
-<p>堆的实现通常存储在一个连续的数组中, 从根结点为<code>0</code>位置, 任意结点<code>i</code>其父结点的的位置是<code>int((i-2)/2)</code>, 舍弃掉小数部分</p>
-<p>堆是左平衡的树, 随着结点的增加, 树会逐级从左至右增长.</p>
-<p>向堆中插入节点</p>
-<p><img alt="向堆中插入结点" src="../images/向堆中插入结点.png" /></p>
-<p>删除堆顶点</p>
-<p><img alt="删除堆顶点" src="../images/删除堆顶点.png" /></p>
-<div class="highlight"><pre><span></span><span class="cm">/* heap.h */</span>
-<span class="cp">#ifndef HEAP_H</span>
-<span class="cp">#define HEAP_H</span>
-<span class="cm">/* 堆的数据结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Heap_</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-    <span class="cm">/* 调用者自定义比较函数, 符合返回 &gt; 0, 不符合返回 &lt; 0, 相等返回 = 0 */</span>
-    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1 …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./matserting-algorithms-with-c-5-shu.html">Matserting Algorithms with C-5: 树</a></h2>
-                <div class="summary"><h3 id="binary-tree">二叉树(Binary tree)</h3>
-<p><img alt="二叉树" src="../images/二叉树.png" /></p>
-<p><strong>先序遍历</strong>: 根结点-&gt;左子结点-&gt;右子结点</p>
-<p><strong>中序遍历</strong>: 左子结点-&gt;根结点-&gt;右子结点</p>
-<p><strong>后序遍历</strong>: 左子结点-&gt;右子结点-&gt;根结占</p>
-<p><strong>层级遍历</strong>: 树根结点-&gt;下层左结点-&gt;该层右结点 (广度优先方法)</p>
-<p><img alt="树的遍历方法" src="../images/树的遍历方法.png" /></p>
-<blockquote>
-<p>树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的</p>
-</blockquote>
-<p>二叉的接口定义</p>
-<div class="highlight"><pre><span></span><span class="cm">/* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */</span>
-<span class="cm">/* bitree.h */</span>
-<span class="cp">#ifndef BITREE_H</span>
-<span class="cp">#define BITREE_H</span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-
-<span class="cm">/* 节点结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="cm">/* 左结点 */</span>
-    <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
-    <span class="cm">/* 右结点 */</span>
-    <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
-<span class="p">}</span><span class="n">BiTreeNode</span><span class="p">;</span>
-
-<span class="cm">/* 二叉树结构 */</span>
-<span class="k">typedef …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./matserting-algorithms-with-c-5-shu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./mastering-algroithms-with-c-4-ha-xi-biao.html">Mastering Algroithms with C-4: 哈希表</a></h2>
-                <div class="summary"><p>哈希表通过一种最有效的检索方法--<strong>散列</strong>来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的.</p>
-<p>所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突</p>
-<h3 id="chained-hash-table">链式哈希表(Chained Hash Table)</h3>
-<p>链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个"桶(bucket)"</p>
-<p>链式哈希表在插入元素时, 将其键传入一个<strong>哈希函数</strong><code>h(k)</code>, 函数通过散列的方式告知元素属于哪个"桶",然后在相应的<strong>链表头</strong>插入元素</p>
-<p>在查找或删除元素时, 用同样的方式先找到元素的"桶", 然后遍历相应的链表</p>
-<p>每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低</p>
-<p><img alt="链式哈希表" src="../images/链式哈希表.png" /></p>
-<h4 id="_1">冲突的发生</h4>
-<p>当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突.</p>
-<p>链式哈希表当产生冲突时, 它就把元素放到冲突发生的"桶"中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多</p>
-<p>理想的情况是, 把元素平均和随机的分配到每一个 …</p>
-                    <a class="btn btn-default btn-xs" href="./mastering-algroithms-with-c-4-ha-xi-biao.html">more ...</a>
                 </div>
             </article>
             <hr/>

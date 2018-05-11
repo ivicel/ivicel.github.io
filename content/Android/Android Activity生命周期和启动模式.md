@@ -43,15 +43,16 @@ tags: activity, android
 
    默认的`Activity`启动时的模式, 无论是否有这个实例, 都会新生成一个实例压入栈中. 在这个模式中,假如使用 **B** 启动了 **A**(为`standard`模式), **A** 是进入到 **B** 的**任务栈**吕. 所以当我们使用`ApplicationContext`启动一个`Activity`时会发生`RuntimeException`:**Calling startActivity from outside of an activity context require the `FLAG_ACTIVITY_NEW_TASK` flag**, 表明`ApplicationContext`是没有任务栈的, 要想从`ApplicationContext`启动一个`Activity`需要为其设置一个新的任务栈标志`FLAG_ACTIVITY_NEW_TASK`. 但这是一个很不好的编程行为, 不推荐
 
-2. `singleTop`栈顶复用模式
+2. `singleTop` 栈顶复用模式
    该模式主要是指`Activity`如果已经处于**栈顶**, 便不会再次新创建新的`Activity`入栈. 此时不会调用`onCreate()`方法而是调用`onNewIntent()`方法. 需要注意的是, 新的`Activity`的任务栈名称. 比如在任务栈 A 中是栈顶, 而在 B 不是, 此时要入的栈是 B, 那么还是要新创建再入栈. 
 
-3. `singelTask`栈内复用模式
+3. `singelTask` 栈内复用模式
 
-   指的是如果要入栈的里头已经有了该`Activity`的实例, 则不会新创建实例. 而是把`Activty`"上头"的其他`Activity`出栈, 使其位于栈顶. 所以这个模式自带一个**`clearTop`**光环(标志位`FLAG_ACTIVITY_CLEAR_TOP`)`, 清除"头顶"的`Activity`.当不创建新的实例时, 也是调用其`onNewIntent()`方法
-   需要注意的是, `singleTask`也**受到其配置的任务栈名称限制**, 并不是创建了新的实例时就一定会创建新的任务栈. 要看配置以及任务是否已经存在. 这是一个容易搞混的地方.
+   指的是如果要入栈的里头已经有了该 `Activity` 的实例, 则不会新创建实例. 而是把 `Activty` "上头"的其他 `Activity` 出栈, 使其位于栈顶. 所以这个模式自带一个 **`clearTop`** 光环(标志位 `FLAG_ACTIVITY_CLEAR_TOP`), 清除"头顶"的 `Activity`.当不创建新的实例时, 也是调用其`onNewIntent()`方法
 
-4. `singleInstance`单实例模式
+   > 需要注意的是, `singleTask`也**受到其配置的任务栈名称限制**, 并不是创建了新的实例时就一定会创建新的任务栈. 要看配置以及任务是否已经存在. 这是一个容易搞混的地方.
+
+4. `singleInstance` 单实例模式
    一种加强版的`singleTask`模式. 也自带`clearTop`. 在配置文件中设置, 自己在一个任务栈中, 调用时时只用生成一次实例, 之后会复用这个实例. 
 
 > 当`taskInffinity`和`allowTaskReparentint`结合使用时, `Activity`会任务栈中跳转走.

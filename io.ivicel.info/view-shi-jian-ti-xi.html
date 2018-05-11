@@ -13,13 +13,13 @@
 
         <meta name="author" content="ivicel" />
         <meta name="keywords" content="view事件,view坐标,view滑动,view触摸" />
-        <meta name="description" content="view坐标和滑动方法 View的坐标系 屏幕的坐标原点为屏幕的左上角, 往右为正向x轴, 往下为正向y轴. 坐标参数顺序一般为左, 上, 右, 下 子view可以获取其相对于父ViewGroup的坐标. 这个要跟点击事件MotionEvent的坐标获取方法区别开来 view由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个view的大小和位置. 获得左上点坐标为 (View.getLeft(), View.getTop()) 获得右下点坐标 (View.getRight(), View.getBottom()) 所以一个view的大小便可以这样计算 宽度width = getRight() - getLeft() 高度height = getBottom() - getTop() 这4个方法获得是 …" />
+        <meta name="description" content="view坐标和滑动方法 触摸事件MotionEvent和TouchSlop 单指触摸屏幕时, 一般会产生MotionEvent.ACTION_DOWN(手指接触屏幕时), MotionEvent.ACTION_MOVE(手指移动时), MotionEvent.ACTION_UP(手指离开屏幕时). 触摸事件产生时, 可以获取其位置. 获取其相对当前View的位置: 相对左边MotionEvent.getX(), 相对上边MotionEvent.getY() 获取共相对屏幕的位置: 相对屏幕左边MotionEvent.getRawX(), 相对屏幕上边MotionEvent.getRawY() TouchSlop为系统所能识别出的最小的距离, 其值由系统决定. 可以通过ViewConfiguration.getScaledTouchSlop()来获得 ​ 滑动速度追踪VelocityTracker 滑动速度指的是在某一个时间段内的速度. java /* 首先可以在 …" />
 
         <meta property="og:site_name" content="Amber time" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="View 事件体系"/>
         <meta property="og:url" content="./view-shi-jian-ti-xi.html"/>
-        <meta property="og:description" content="view坐标和滑动方法 View的坐标系 屏幕的坐标原点为屏幕的左上角, 往右为正向x轴, 往下为正向y轴. 坐标参数顺序一般为左, 上, 右, 下 子view可以获取其相对于父ViewGroup的坐标. 这个要跟点击事件MotionEvent的坐标获取方法区别开来 view由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个view的大小和位置. 获得左上点坐标为 (View.getLeft(), View.getTop()) 获得右下点坐标 (View.getRight(), View.getBottom()) 所以一个view的大小便可以这样计算 宽度width = getRight() - getLeft() 高度height = getBottom() - getTop() 这4个方法获得是 …"/>
+        <meta property="og:description" content="view坐标和滑动方法 触摸事件MotionEvent和TouchSlop 单指触摸屏幕时, 一般会产生MotionEvent.ACTION_DOWN(手指接触屏幕时), MotionEvent.ACTION_MOVE(手指移动时), MotionEvent.ACTION_UP(手指离开屏幕时). 触摸事件产生时, 可以获取其位置. 获取其相对当前View的位置: 相对左边MotionEvent.getX(), 相对上边MotionEvent.getY() 获取共相对屏幕的位置: 相对屏幕左边MotionEvent.getRawX(), 相对屏幕上边MotionEvent.getRawY() TouchSlop为系统所能识别出的最小的距离, 其值由系统决定. 可以通过ViewConfiguration.getScaledTouchSlop()来获得 ​ 滑动速度追踪VelocityTracker 滑动速度指的是在某一个时间段内的速度. java /* 首先可以在 …"/>
         <meta property="article:published_time" content="2018-02-22" />
             <meta property="article:section" content="Android" />
             <meta property="article:tag" content="view事件" />
@@ -127,31 +127,6 @@ Amber time            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li><code>View</code>的坐标系</li>
-</ul>
-<p>屏幕的坐标原点为屏幕的左上角, 往右为<strong>正向x轴</strong>, 往下为<strong>正向y轴</strong>. 坐标参数顺序一般为<code>左</code>, <code>上</code>, <code>右</code>, <code>下</code></p>
-<p>子<code>view</code>可以获取其相对于父<code>ViewGroup</code>的坐标.  这个要跟点击事件<code>MotionEvent</code>的坐标获取方法区别开来</p>
-<blockquote>
-<p><code>view</code>由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个<code>view</code>的大小和位置.</p>
-<p>获得左上点坐标为 <strong>(<code>View.getLeft()</code>, <code>View.getTop()</code>)</strong></p>
-<p>获得右下点坐标 <strong>(<code>View.getRight()</code>, <code>View.getBottom()</code>)</strong></p>
-<p>所以一个<code>view</code>的大小便可以这样计算</p>
-<p>宽度<code>width = getRight() - getLeft()</code></p>
-<p>高度<code>height = getBottom() - getTop()</code></p>
-<p>这4个方法获得是<code>view</code>布局时的原始坐标, 其值在测量布局后不会再改变. 而一个<code>view</code>真正在屏幕显示的位置是其偏移量<code>translate</code>和<strong>原始位置</strong>共同决定的. 这其中我们只要确定左上点的位置便可. 其实际左上点位置关系为:</p>
-<p>左上点横坐标: <code>float View.getX() = int View.getLeft() + float View.getTranslationX()</code></p>
-<p>左上点纵坐标: <code>float View.getY() = int View.getTop() + float View.getTranslationY()</code></p>
-<p>在引入了<code>Z轴</code>之后(<strong>API 21</strong>), <code>Z轴</code>关系为: <code>float View.getZ() = int View.getElevation() + float View.getTranslationZ()</code></p>
-</blockquote>
-<p>特别需要注意的是, 在<code>activity</code>中调用这些方法时, 得到的值是0, 因为此时<code>view</code>还未布局, 需要等要<code>view.onMeasure</code>之后才会进行赋值. 有4种方法来获取这些值.</p>
-<ol>
-<li>使用 <code>ViewTreeObserver</code>监听<code>view</code>的 Draw/Layout 事件</li>
-<li>将一个runnable添加到Layout队列中, 使用 <code>View.post</code></li>
-<li>重写<code>view.onLayout</code>方法</li>
-<li>重写<code>Activity.onWindowFocusChange</code>方法</li>
-</ol>
-<p><img alt="view坐标" src="../images/view坐标.png" /></p>
 <ul>
 <li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
 </ul>

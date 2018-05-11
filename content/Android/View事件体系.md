@@ -6,44 +6,6 @@ Date: 2018-02-22
 
 #####  `view`坐标和滑动方法
 
-- `View`的坐标系
-
-  屏幕的坐标原点为屏幕的左上角, 往右为**正向x轴**, 往下为**正向y轴**. 坐标参数顺序一般为`左`, `上`, `右`, `下`
-
-  子`view`可以获取其相对于父`ViewGroup`的坐标.  这个要跟点击事件`MotionEvent`的坐标获取方法区别开来
-
-  > `view`由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个`view`的大小和位置.
-  >
-  > 获得左上点坐标为 **(`View.getLeft()`, `View.getTop()`)**
-  >
-  > 获得右下点坐标 **(`View.getRight()`, `View.getBottom()`)**
-  >
-  > 所以一个`view`的大小便可以这样计算
-  >
-  > 宽度`width = getRight() - getLeft()`
-  >
-  > 高度`height = getBottom() - getTop()`
-  >
-  > 这4个方法获得是`view`布局时的原始坐标, 其值在测量布局后不会再改变. 而一个`view`真正在屏幕显示的位置是其偏移量`translate`和**原始位置**共同决定的. 这其中我们只要确定左上点的位置便可. 其实际左上点位置关系为:
-  >
-  > 左上点横坐标: `float View.getX() = int View.getLeft() + float View.getTranslationX()`
-  >
-  > 左上点纵坐标: `float View.getY() = int View.getTop() + float View.getTranslationY()`
-  >
-  > 在引入了`Z轴`之后(**API 21**), `Z轴`关系为: `float View.getZ() = int View.getElevation() + float View.getTranslationZ()`
-
-
-特别需要注意的是, 在`activity`中调用这些方法时, 得到的值是0, 因为此时`view`还未布局, 需要等要`view.onMeasure`之后才会进行赋值. 有4种方法来获取这些值.
-
-1. 使用 `ViewTreeObserver`监听`view`的 Draw/Layout 事件
-2. 将一个runnable添加到Layout队列中, 使用 `View.post`
-3. 重写`view.onLayout`方法
-4. 重写`Activity.onWindowFocusChange`方法
-
-![view坐标](../images/view坐标.png)
-
-
-
 * 触摸事件`MotionEvent`和`TouchSlop`
 
   单指触摸屏幕时, 一般会产生`MotionEvent.ACTION_DOWN`(手指接触屏幕时), `MotionEvent.ACTION_MOVE`(手指移动时), `MotionEvent.ACTION_UP`(手指离开屏幕时). 
