@@ -83,17 +83,37 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">Android高效加载图片防止OOM</a></h2>
+                <div class="summary"><p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
+<p><code>inSampleSize</code> 一般取为 2 的指数 …</p>
+                    <a class="btn btn-default btn-xs" href="./androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./anroid-fileproviderde-shi-yong.html">Anroid FileProvider的使用</a></h2>
+                <div class="summary"><blockquote>
+<p><code>FileProvider</code> 是在 <code>v4 support library</code> 里的, 使用之前要添加 <code>v4 support library</code> </p>
+<p>默认 <code>v7 support</code> 继承了 <code>v4</code></p>
+</blockquote>
+<ol>
+<li>在<code>manifest</code>中指定分享的文件, 具体的分享目录路径在<code>res/xml/filepaths</code>中指定, <code>android:authorities</code>为指定的认证, 自行定义, 一般为 <code>package name</code> + <code>fileprovider</code>, 其他为固定写法</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">package=</span><span class="s">&quot;com.example.myapp&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;application</span>
+        <span class="err">...</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;provider</span>
+            <span class="na">android:name …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./anroid-fileproviderde-shi-yong.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./interpolatorzhi.html">Interpolator值</a></h2>
                 <div class="summary"><ul>
-<li>AccelerateDecelerateInterpolator 动画从开始到结束，变化率是先加速后减速的过程。</li>
-<li>AccelerateInterpolator 动画从开始到结束，变化率是一个加速的过程。</li>
-<li>AnticipateInterpolator 开始的时候向后，然后向前甩</li>
-<li>AnticipateOvershootInterpolator 开始的时候向后，然后向前甩一定值后返回最后的值</li>
-<li>BounceInterpolator 动画结束的时候弹起</li>
-<li>CycleInterpolator 动画从开始到结束，变化率是循环给定次数的正弦曲线。</li>
-<li>DecelerateInterpolator 动画从开始到结束，变化率是一个减速的过程。</li>
-<li>LinearInterpolator 以常量速率改变</li>
-<li>OvershootInterpolator 向前甩一定值后再回到原来位置</li>
+<li></li>
 </ul>
                     <a class="btn btn-default btn-xs" href="./interpolatorzhi.html">more ...</a>
                 </div>
@@ -281,36 +301,6 @@ Amber time            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">Matserting Algorithms with C-7: 排序和搜索</a></h2>
-                <div class="summary"><h4 id="insertion-sort">插入排序(选择排序, 冒泡排序Insertion Sort)</h4>
-<p>插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n<sup>2</sup>)</p>
-<div class="highlight"><pre><span></span><span class="cm">/* issort.c */</span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-
-<span class="cm">/* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */</span>
-<span class="n">iint</span> <span class="nf">issort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="cm">/* char指针是 1 字节大小的指向, a[i * esize …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./matserting-algorithms-with-c-7-tu.html">Matserting Algorithms with C-7: 图</a></h2>
-                <div class="summary"><h3 id="graphs">图(Graphs)</h3>
-<p><img alt="图" src="../images/图.png" /></p>
-<p>图由<strong>顶点</strong>(vertices)和<strong>边</strong>(edges)组成, 图的边分为<strong>有向</strong>和<strong>无向</strong></p>
-<p>图表示为<code>G=(V, E)</code>, V 代表顶点的集合, E 和 V 是一种二元关系</p>
-<blockquote>
-<p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
-<p>无向图: V={1, 2, 3 …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="./matserting-algorithms-with-c-7-tu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="./index2.html">&laquo;</a>
@@ -323,6 +313,8 @@ Amber time            </a>
                             href="./index3.html">3</a></li>
                     <li class=""><a
                             href="./index4.html">4</a></li>
+                    <li class=""><a
+                            href="./index5.html">5</a></li>
                 <li class="next"><a
                         href="./index4.html">&raquo;</a></li>
         </ul>

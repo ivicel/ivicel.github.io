@@ -4,7 +4,11 @@ tags: activity, android
 
 
 
-##### `Activity` 的生命周期
+[TOC]
+
+
+
+### 1. Activity 的生命周期
 
 一般 `Activity` 生命周期为 `onCreate()` -> `onStart()` -> `onResume()` -> `onPause()` -> `onStop()` -> `onDestroy()`
 
@@ -35,7 +39,7 @@ tags: activity, android
 
 
 
-##### `Activity`的启动模式
+### 2. Activity 的启动模式
 
 `Activity`一共有四种启动模式. 应用程序都会有一个默认的**任务栈**, 其名字默认为**包名**, 任务栈采取**后进先出LIFO**, 可能通过设置`Manifest.xml`中`Activity`的`android:taskAffinity="包名.task_name"`来指定任务栈. `Activity`启动模式可以在`xml`中配置, 也可以在`java`代码中启动时设置(**除`singleInstance`外**), 运行时在`java`中指定优先级高于配置文件中的.
 
@@ -61,7 +65,7 @@ tags: activity, android
 
 
 
-##### `Intent`的过滤规则
+### 3. Intent 的过滤规则
 
 `intent-filter`需要匹配`action`, `category`, `data`三个项目. 可以混搭写, 同时匹配多个不同的. 还可以同时有多个`intent-filter`
 
@@ -109,7 +113,7 @@ context://info.ivicel.github.hello_android/table1
 
 
 
-#### Reference:
+### Reference:
 
 1. Android 开发艺术探索
 2. https://developer.android.com/reference/android/app/Activity.html

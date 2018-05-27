@@ -13,13 +13,13 @@
 
         <meta name="author" content="ivicel" />
         <meta name="keywords" content="android,content provider,内容提供器" />
-        <meta name="description" content="Content Provider的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 Content URI的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名.provider类名, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突 后面跟表名, 或者还可以跟修饰符*, #, 书写规则 *表示匹配任意长度任意字符 content://com.example.myapp.provider/* 查询所有表中所有数据 #表示匹配任意长度的数字 content://com.example.myapp.provider/table1 …" />
+        <meta name="description" content="1. Content Provider 的优势: 2. Content URI 的写法: MIME的写法 在AndroidManifest.xml中写法 创建一个自定义的Content Provider 除了使用ContentResolver外, 其他几种访问Content Provider方法 Contract Classses 1. Content Provider 的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 2. Content URI 的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名 …" />
 
         <meta property="og:site_name" content="Amber time" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Android Contnet Provider内容提供器"/>
         <meta property="og:url" content="./android-contnet-providernei-rong-ti-gong-qi.html"/>
-        <meta property="og:description" content="Content Provider的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 Content URI的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名.provider类名, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突 后面跟表名, 或者还可以跟修饰符*, #, 书写规则 *表示匹配任意长度任意字符 content://com.example.myapp.provider/* 查询所有表中所有数据 #表示匹配任意长度的数字 content://com.example.myapp.provider/table1 …"/>
+        <meta property="og:description" content="1. Content Provider 的优势: 2. Content URI 的写法: MIME的写法 在AndroidManifest.xml中写法 创建一个自定义的Content Provider 除了使用ContentResolver外, 其他几种访问Content Provider方法 Contract Classses 1. Content Provider 的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 2. Content URI 的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名 …"/>
         <meta property="article:published_time" content="2018-02-22" />
             <meta property="article:section" content="Android" />
             <meta property="article:tag" content="android" />
@@ -123,15 +123,26 @@ Amber time            </a>
         
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h4 id="content-provider"><code>Content Provider</code>的优势:</h4>
-<hr />
+                <div class="toc">
+<ul>
+<li><a href="#1-content-provider">1. Content Provider 的优势:</a></li>
+<li><a href="#2-content-uri">2. Content URI 的写法:</a><ul>
+<li><a href="#mime">MIME的写法</a></li>
+<li><a href="#androidmanifestxml">在AndroidManifest.xml中写法</a></li>
+<li><a href="#content-provider">创建一个自定义的Content Provider</a></li>
+<li><a href="#contentresolver-content-provider">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li>
+<li><a href="#contract-classses">Contract Classses</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="1-content-provider">1. Content Provider 的优势:</h3>
 <ol>
 <li>可以用来提供进程间的通信</li>
 <li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
 <li>提供了一个<code>权限</code>限制</li>
 </ol>
-<h4 id="content-uri"><code>Content URI</code>的写法:</h4>
-<hr />
+<h3 id="2-content-uri">2. Content URI 的写法:</h3>
 <blockquote>
 <p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
 <p><code>content://com.example.myapp.provider/table1</code></p>
@@ -200,7 +211,7 @@ Amber time            </a>
 </pre></div>
 
 
-<h4 id="content-provider_1">创建一个自定义的<code>Content Provider</code></h4>
+<h4 id="content-provider">创建一个自定义的<code>Content Provider</code></h4>
 <hr />
 <ol>
 <li>自定义一个类继承<code>ContentProvider</code>, 实现<code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code>方法</li>

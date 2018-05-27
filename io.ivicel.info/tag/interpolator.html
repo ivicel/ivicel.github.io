@@ -84,17 +84,23 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../android-dong-hua-fen-xi.html">Android 动画分析</a></h2>
+                <div class="summary"><p>Android 的动画分为以下两类:</p>
+<ol>
+<li>View 动画
+   * 补间动画(Tween Animation, <code>Animation</code> 类及其子类): 通过对 view 不断的作 rotate, scale, translate 等一系列操作从而达到动画效果, xml 文件放在 <code>res/anim/</code> 目录中
+   * 帧动画(Frame Animation, <code>AnimationDrawable</code> 类): 通过播放一系列预先生成好的图片达到的动画效果, 像电影胶片一样, 因为是不断的更换图片, 容易产生 OOM, xml 文件放在 <code>res/drawable/</code> 目录中</li>
+<li>属性动画(Property Animation): 通过不断的改变 view 的各种属性而达到动画效果,  帧动画存放在 <code>res/animator/</code> 中</li>
+</ol>
+<p>动画的定义可以由 xml 格式来定义, 也可以直接在 …</p>
+                    <a class="btn btn-default btn-xs" href="../android-dong-hua-fen-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../interpolatorzhi.html">Interpolator值</a></h2>
                 <div class="summary"><ul>
-<li>AccelerateDecelerateInterpolator 动画从开始到结束，变化率是先加速后减速的过程。</li>
-<li>AccelerateInterpolator 动画从开始到结束，变化率是一个加速的过程。</li>
-<li>AnticipateInterpolator 开始的时候向后，然后向前甩</li>
-<li>AnticipateOvershootInterpolator 开始的时候向后，然后向前甩一定值后返回最后的值</li>
-<li>BounceInterpolator 动画结束的时候弹起</li>
-<li>CycleInterpolator 动画从开始到结束，变化率是循环给定次数的正弦曲线。</li>
-<li>DecelerateInterpolator 动画从开始到结束，变化率是一个减速的过程。</li>
-<li>LinearInterpolator 以常量速率改变</li>
-<li>OvershootInterpolator 向前甩一定值后再回到原来位置</li>
+<li></li>
 </ul>
                     <a class="btn btn-default btn-xs" href="../interpolatorzhi.html">more ...</a>
                 </div>

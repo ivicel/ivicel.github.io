@@ -84,6 +84,37 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../interpolatorzhi.html">Interpolator值</a></h2>
+                <div class="summary"><ul>
+<li></li>
+</ul>
+                    <a class="btn btn-default btn-xs" href="../interpolatorzhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
+                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
+<ul>
+<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
+</ul>
+<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
+<p>触摸事件产生时, 可以获取其位置.</p>
+<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
+<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
+<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
+<p>​</p>
+<ul>
+<li>滑动速度追踪<code>VelocityTracker</code></li>
+</ul>
+<p>滑动速度指的是在某一个时间段内的速度. </p>
+<p><code>java
+  /* 首先可以在 …</code></p>
+                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../viewhui-zhi-liu-cheng.html">View绘制流程</a></h2>
                 <div class="summary"><ul>
 <li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>

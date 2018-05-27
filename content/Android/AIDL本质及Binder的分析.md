@@ -4,6 +4,8 @@ Tags: aidl, 源码, 分析
 
 
 
+[TOC]
+
 ### 1. Android 上的 Binder
 
 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更**高效**, 也更**安全**, 其他`IPC`没有严格权限验证机制
@@ -31,8 +33,7 @@ Tags: aidl, 源码, 分析
 * `Binder`类是内部对`IBinder`的实现, 代表**本地的对象**.`BinderProxy`是`Binder`的内部类, 代表着**远程进程**的`Binder`对象的本地代理
 * 在`AIDL`中, 系统会给生成一个静态的内部类`Stub`. 继承了`Binder`同时实现了`IInterface`接口. 这说明这是一个本地的`Binder`, 并且可以作为远程`Server`来给`Client`传递数据的能力. 其内部真正使用**策略模式**来交给`Stub.Proxy`处理数据的交换
 
-
-#### 2. `AIDL`文件实现分析
+### 2. AIDL 文件实现分析
 
 在系统自动生成的`BookManager.java`中, 主要结构:
 
@@ -176,7 +177,7 @@ public interface BookManager extends IInterface {
 
 
 
-#### Reference:
+### Reference:
 
 1. https://blog.csdn.net/freekiteyu/article/details/70082302
 2. https://blog.csdn.net/luoyanglizi/article/details/51958091
