@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>activity - Amber time</title>
+    <title>通知 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="activity" />
+    <meta name="keywords" content="通知" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,23 +84,26 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html">Android Activity生命周期和启动模式</a></h2>
+                <h2><a href="../android-tong-zhi.html">Android 通知</a></h2>
                 <div class="summary"><div class="toc">
 <ul>
-<li><a href="#1-activity">1. Activity 的生命周期</a></li>
-<li><a href="#2-activity">2. Activity 的启动模式</a></li>
-<li><a href="#3-intent">3. Intent 的过滤规则</a></li>
-<li><a href="#reference">Reference:</a></li>
+<li><a href="#1">1. 简介</a><ul>
+<li><a href="#11">1.1 通知可出现的地方</a></li>
+<li><a href="#12">1.2 通知基础结构</a></li>
+<li><a href="#13">1.3 通知的兼容性</a><ul>
+<li><a href="#andorid-41-api-level-16">Andorid 4.1, API level 16</a></li>
+<li><a href="#andorid-44-api-level-19">Andorid 4.4, API level 19</a></li>
+<li><a href="#andorid-50-api-level-21">Andorid 5.0, API level 21</a></li>
+<li><a href="#andorid-70-api-level-24">Andorid 7.0, API level 24</a></li>
+<li><a href="#andorid-80-api-level-26">Andorid 8.0, API level 26</a></li>
 </ul>
-</div>
-<h3 id="1-activity">1. Activity 的生命周期</h3>
-<p>一般 <code>Activity</code> 生命周期为 <code>onCreate()</code> -&gt; <code>onStart()</code> -&gt; <code>onResume()</code> -&gt; <code>onPause()</code> -&gt; <code>onStop()</code> -&gt; <code>onDestroy()</code></p>
-<p>官方的生命周期图:</p>
-<p><img alt="Activity Life Cycle" src="../images/activity_lifecycle.png" /></p>
-<p>需要注意的几个点:</p>
-<ol>
-<li>当一个 <code>Activity</code> <strong>A</strong> 启动加一个 <code>Activity</code> <strong>B</strong> 时, 只有 <strong>A</strong> 的 <code>onPause</code> 执行完返回时, <strong>B</strong> 才开始执行<code>onCreate</code> <code>onStart</code>, 直到 <code>onResume</code>显示在前台, <strong>A</strong> 会执行 <code>onStop</code> <code>onDestroy</code>, 所以在 <code>onPause</code>不能执行太 …</li></ol>
-                    <a class="btn btn-default btn-xs" href="../android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html">more ...</a>
+</li>
+</ul>
+</li>
+<li><a href="#2-notification-actions">2. 创建通知及通知行为(Notification actions)</a><ul>
+<li><a href="#21">2.1 基本通知的创建</a></li>
+<li><a href="#22-tap-action">2.2 …</a></li></ul></li></ul></div>
+                    <a class="btn btn-default btn-xs" href="../android-tong-zhi.html">more ...</a>
                 </div>
             </article>
             <hr/>

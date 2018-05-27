@@ -13,13 +13,13 @@
 
         <meta name="author" content="ivicel" />
         <meta name="keywords" content="aidl,源码,分析" />
-        <meta name="description" content="1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成binder_proc …" />
+        <meta name="description" content="1. Android 上的 Binder 1.1 Binder 的构架 1-2 Binder 的机制 2. AIDL 文件实现分析 Reference: 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 …" />
 
         <meta property="og:site_name" content="Amber time" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="AIDL生成的接口及Binder的分析"/>
         <meta property="og:url" content="./aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html"/>
-        <meta property="og:description" content="1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成binder_proc …"/>
+        <meta property="og:description" content="1. Android 上的 Binder 1.1 Binder 的构架 1-2 Binder 的机制 2. AIDL 文件实现分析 Reference: 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 …"/>
         <meta property="article:published_time" content="2018-04-01" />
             <meta property="article:section" content="Android" />
             <meta property="article:tag" content="aidl" />
@@ -123,7 +123,18 @@ Amber time            </a>
         
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <h3 id="1-android-binder">1. Android 上的 Binder</h3>
+                <div class="toc">
+<ul>
+<li><a href="#1-android-binder">1. Android 上的 Binder</a><ul>
+<li><a href="#11-binder">1.1 Binder 的构架</a></li>
+<li><a href="#1-2-binder">1-2 Binder 的机制</a></li>
+</ul>
+</li>
+<li><a href="#2-aidl">2. AIDL 文件实现分析</a></li>
+<li><a href="#reference">Reference:</a></li>
+</ul>
+</div>
+<h3 id="1-android-binder">1. Android 上的 Binder</h3>
 <p>在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更<strong>高效</strong>, 也更<strong>安全</strong>, 其他<code>IPC</code>没有严格权限验证机制</p>
 <h4 id="11-binder">1.1 Binder 的构架</h4>
 <p>​        Binder 通信是基于 <strong>C/S 构架</strong>. 多个 C 端可以同步连接 S 端, 所以 S 端需要<strong>同步</strong>设置</p>
@@ -143,7 +154,7 @@ Amber time            </a>
 <li><code>Binder</code>类是内部对<code>IBinder</code>的实现, 代表<strong>本地的对象</strong>.<code>BinderProxy</code>是<code>Binder</code>的内部类, 代表着<strong>远程进程</strong>的<code>Binder</code>对象的本地代理</li>
 <li>在<code>AIDL</code>中, 系统会给生成一个静态的内部类<code>Stub</code>. 继承了<code>Binder</code>同时实现了<code>IInterface</code>接口. 这说明这是一个本地的<code>Binder</code>, 并且可以作为远程<code>Server</code>来给<code>Client</code>传递数据的能力. 其内部真正使用<strong>策略模式</strong>来交给<code>Stub.Proxy</code>处理数据的交换</li>
 </ul>
-<h4 id="2-aidl">2. <code>AIDL</code>文件实现分析</h4>
+<h3 id="2-aidl">2. AIDL 文件实现分析</h3>
 <p>在系统自动生成的<code>BookManager.java</code>中, 主要结构:</p>
 <ul>
 <li><code>BookManager</code>扩展<code>andorid.os.IInterface</code>接口</li>
@@ -279,7 +290,7 @@ Amber time            </a>
 <p><code>AIDL</code> 的工作机制</p>
 <p><img alt="AIDL里的Binder工作流程" src="../images/aidl_binder工作机制.jpeg" /></p>
 <p>代码地址: <a href="https://github.com/ivicel/dev-android-samples/tree/master/AIDL-Demo">GitHub</a></p>
-<h4 id="reference">Reference:</h4>
+<h3 id="reference">Reference:</h3>
 <ol>
 <li>https://blog.csdn.net/freekiteyu/article/details/70082302</li>
 <li>https://blog.csdn.net/luoyanglizi/article/details/51958091</li>

@@ -85,29 +85,30 @@ Amber time            </a>
         <div class="col-sm-9">
             <article>
                 <h2><a href="../android-contnet-providernei-rong-ti-gong-qi.html">Android Contnet Provider内容提供器</a></h2>
-                <div class="summary"><h4 id="content-provider"><code>Content Provider</code>的优势:</h4>
-<hr />
+                <div class="summary"><div class="toc">
+<ul>
+<li><a href="#1-content-provider">1. Content Provider 的优势:</a></li>
+<li><a href="#2-content-uri">2. Content URI 的写法:</a><ul>
+<li><a href="#mime">MIME的写法</a></li>
+<li><a href="#androidmanifestxml">在AndroidManifest.xml中写法</a></li>
+<li><a href="#content-provider">创建一个自定义的Content Provider</a></li>
+<li><a href="#contentresolver-content-provider">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li>
+<li><a href="#contract-classses">Contract Classses</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="1-content-provider">1. Content Provider 的优势:</h3>
 <ol>
 <li>可以用来提供进程间的通信</li>
 <li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
 <li>提供了一个<code>权限</code>限制</li>
 </ol>
-<h4 id="content-uri"><code>Content URI</code>的写法:</h4>
-<hr />
+<h3 id="2-content-uri">2. Content URI 的写法:</h3>
 <blockquote>
 <p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
 <p><code>content://com.example.myapp.provider/table1</code></p>
-<p><code>AUTHORITY</code>一般默认写成<code>包名.provider</code>, <code>包名.provider类名</code>, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突</p>
-<p>后面跟表名, 或者还可以跟修饰符<code>*</code>, <code>#</code>, </p>
-</blockquote>
-<p>书写规则</p>
-<p><code>*</code>表示匹配任意长度任意字符</p>
-<blockquote>
-<p><code>content://com.example.myapp.provider/*</code> 查询所有表中所有数据</p>
-</blockquote>
-<p><code>#</code>表示匹配任意长度的数字</p>
-<blockquote>
-<p><code>content://com.example.myapp.provider/table1 …</code></p></blockquote>
+<p><code>AUTHORITY</code>一般默认写成<code>包名.provider</code>, <code>包名 …</code></p></blockquote>
                     <a class="btn btn-default btn-xs" href="../android-contnet-providernei-rong-ti-gong-qi.html">more ...</a>
                 </div>
             </article>
