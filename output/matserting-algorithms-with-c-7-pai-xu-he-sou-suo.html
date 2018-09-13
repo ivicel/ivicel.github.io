@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Matserting Algorithms with C-7: 排序和搜索 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="算法,C,数据结构,排序,搜索" />
+        <meta name="description" content="插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include &lt;stdlib.h&gt; #include &lt;string.h&gt; /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2)) { /* char指针是 1 字节大小的指向, a[i * esize …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Matserting Algorithms with C-7: 排序和搜索"/>
+        <meta property="og:url" content="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html"/>
+        <meta property="og:description" content="插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include &lt;stdlib.h&gt; #include &lt;string.h&gt; /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2)) { /* char指针是 1 字节大小的指向, a[i * esize …"/>
+        <meta property="article:published_time" content="2017-04-02" />
+            <meta property="article:section" content="Data Structure Algorithms" />
+            <meta property="article:tag" content="算法" />
+            <meta property="article:tag" content="C" />
+            <meta property="article:tag" content="数据结构" />
+            <meta property="article:tag" content="排序" />
+            <meta property="article:tag" content="搜索" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html"
+                       rel="bookmark"
+                       title="Permalink to Matserting Algorithms with C-7: 排序和搜索">
+                        Matserting Algorithms with C-7: 排序和搜索
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-04-02T00:00:00+08:00"> Sun 02 April 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/suan-fa.html">算法</a>
+        /
+	<a href="./tag/c.html">C</a>
+        /
+	<a href="./tag/shu-ju-jie-gou.html">数据结构</a>
+        /
+	<a href="./tag/pai-xu.html">排序</a>
+        /
+	<a href="./tag/sou-suo.html">搜索</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h4 id="insertion-sort">插入排序(选择排序, 冒泡排序Insertion Sort)</h4>
+<p>插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n<sup>2</sup>)</p>
+<div class="highlight"><pre><span></span><span class="cm">/* issort.c */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */</span>
+<span class="n">iint</span> <span class="nf">issort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="cm">/* char指针是 1 字节大小的指向, a[i * esize]则引用到了第 i 个大小为 esize 的地址 */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+
+    <span class="cm">/* allocate storage for the key element */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">esize</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span><span class="n">esize</span><span class="p">],</span> <span class="n">key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+            <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="cm">/*</span>
+<span class="cm">        等同上面的 while</span>
+<span class="cm">        for (i = j - 1; i &gt;= 0; i--) {</span>
+<span class="cm">            if (compare(&amp;a[i *esize], key) &gt; 0) {</span>
+<span class="cm">                memcpy(&amp;a[(i + 1) * esize], &amp;a[i * esize], esize);</span>
+<span class="cm">            } else {</span>
+<span class="cm">                break;</span>
+<span class="cm">            }</span>
+<span class="cm">        }</span>
+<span class="cm">        */</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">key</span><span class="p">,</span> <span class="n">esize</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="quick-sort">快速排序(Quick sort)</h4>
+<ol>
+<li>每次选择一个数据, 然后所有的数据和这个数对比, 小的放在左边, 大的放在右边</li>
+<li>然后对左, 右两边的新数组继续重复第一步, 一直到左, 右数组都为空, 依次返回数组</li>
+</ol>
+<p>快速排序的时间复杂度依赖于每次所选的数, 最坏为<code>O(n&lt;sup&gt;2&gt;&lt;/sup&gt;)</code>, 平均是<code>O(nlog n)</code></p>
+<p>为最大可能接近<code>O(nlog n)</code>, 每次都随机从数组中选择三个数, 取这三个数的中间值</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sort.h&quot;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">compare_int</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">int1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">int2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">int1</span> <span class="o">&gt;</span> <span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">int2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">int1</span> <span class="o">&lt;</span> <span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">int2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">pval</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">pval</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">esize</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">temp</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">esize</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">pval</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* 随机选取三个位置, 排序后取中间的值, 尽量保证左右两边的值是均匀的 */</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">issort</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="n">compare_int</span><span class="p">);</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">pval</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+
+    <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+    <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+    <span class="cm">/* 每选中一个数, 在调换位置之后都保证其左边的数不会符合 compare() &lt; 0 */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">k</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">pval</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">pval</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">temp</span><span class="p">,</span> <span class="n">esize</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">pval</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">k</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * data 是数组指向</span>
+<span class="cm"> * size 是数组大小</span>
+<span class="cm"> * esize 是每个元素的大小</span>
+<span class="cm"> * i 是数组的头结点下标, 初始为 0</span>
+<span class="cm"> * k 是数组末尾结点下标, 初始为 size - 1</span>
+<span class="cm"> * compare 是比较函数, 大于返回 1, 小于返回 -1, 等于返回 0</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">qksort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">j</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">compare</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="cm">/* 每次递归都先处理上个 key 的位置的左边的数据 */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">qksort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="cm">/* 将位置改到位置 */</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="_1">快速排序的例子: 目录列表</h4>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdi.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;dirent.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sort.h&quot;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Directory_</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">MAXNAMLEN</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span><span class="n">Directory</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">compare_dir</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">retval</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">retval</span> <span class="o">=</span> <span class="n">strcmp</span><span class="p">(((</span><span class="k">const</span> <span class="n">Directory</span> <span class="o">*</span><span class="p">)</span><span class="n">key1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">((</span><span class="k">const</span> <span class="n">Directory</span> <span class="o">*</span><span class="p">)</span><span class="n">key2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">directls</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="n">Directory</span> <span class="o">**</span><span class="n">dir</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">DIR</span> <span class="o">*</span><span class="n">dirptr</span><span class="p">;</span>
+    <span class="n">Directory</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">dirent</span> <span class="o">*</span><span class="n">curdir</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+    <span class="cm">/* 打开目录 */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">dirptr</span> <span class="o">=</span> <span class="n">opendir</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">dir</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">temp</span><span class="p">;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">((</span><span class="n">curdir</span> <span class="o">=</span> <span class="n">readdir</span><span class="p">(</span><span class="n">dirptr</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">Directory</span> <span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="o">*</span><span class="n">dir</span><span class="p">,</span> <span class="n">count</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Directory</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">free</span><span class="p">(</span><span class="o">*</span><span class="n">dir</span><span class="p">);</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">dir</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">strcpy</span><span class="p">(((</span><span class="o">*</span><span class="n">dir</span><span class="p">)[</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]).</span><span class="n">name</span><span class="p">,</span> <span class="n">curdir</span><span class="o">-&gt;</span><span class="n">d_name</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">closedir</span><span class="p">(</span><span class="n">dirptr</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">qksort</span><span class="p">(</span><span class="o">*</span><span class="n">dir</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Directory</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">compare_dir</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="merge-sort">归并排序(Merge Sort)</h4>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sort.h&quot;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+         <span class="o">*</span><span class="n">m</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ipos</span><span class="p">,</span> <span class="n">jpos</span><span class="p">,</span> <span class="n">mpos</span><span class="p">;</span>
+
+    <span class="n">ipos</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="n">jpos</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">mpos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">esize</span> <span class="o">*</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">ipos</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">||</span> <span class="n">jpos</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ipos</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">jpos</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">[</span><span class="n">mpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">jpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+                <span class="n">jpos</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">mpos</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">jpos</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">ipos</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">[</span><span class="n">mpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">ipos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+                <span class="n">ipos</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">mpos</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">ipos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">jpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">[</span><span class="n">mpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">ipos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+            <span class="n">ipos</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">mpos</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">[</span><span class="n">mpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">jpos</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+            <span class="n">jpos</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">mpos</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">esize</span> <span class="o">*</span> <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * data 是数组指向</span>
+<span class="cm"> * size 是数组大小</span>
+<span class="cm"> * esize 是每个元素的大小</span>
+<span class="cm"> * i 是数组的头结点下标, 初始为 0</span>
+<span class="cm"> * k 是数组末尾结点下标, 初始为 size - 1</span>
+<span class="cm"> * compare 是比较函数, 大于返回 1, 小于返回 -1, 等于返回 0</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">mgsort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(((</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">mgsort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">mgsort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="cm">/* 一种排序数组的方法, 每次会使用新的内存来保存左右值, 写回原数组后再释放 */</span>
+<span class="kt">int</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span>
+        <span class="n">pos_left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">pos_right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">left</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">length</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">length</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">esize</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* 随机确定某个数的位置 */</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">issort</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="n">compare_int</span><span class="p">);</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+    <span class="cm">/* 比较大小, 分到左右数组 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/* right */</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">right</span><span class="p">[</span><span class="n">pos_right</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+                <span class="n">pos_right</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="cm">/* left */</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">left</span><span class="p">[</span><span class="n">pos_left</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+                <span class="n">pos_left</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="cm">/* 分好的数组写回原数组, 然后释放左右数组 */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pos_left</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">left</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[(</span><span class="n">pos_left</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">key</span><span class="p">,</span> <span class="n">esize</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pos_right</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[(</span><span class="n">pos_left</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">right</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">esize</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">left</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+    <span class="cm">/* 在原数组上继续比较分好的左右两边 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pos_left</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pos_left</span><span class="p">,</span> <span class="n">esize</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pos_right</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">merge_sort</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[(</span><span class="n">pos_left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">esize</span><span class="p">],</span> <span class="n">pos_right</span><span class="p">,</span>
+        <span class="n">esize</span><span class="p">,</span> <span class="n">compare</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="counting-sort">计数排序(Counting Sort)</h4>
+<p>计数排序只能用于整型或者那些可以用整型来表示的数据集合, 通过计算一个集合中元素出现的次数来确定集合如何排列</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sort.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">ctsort</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">counts</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">counts</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">counts</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">counts</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cp">#### 基数排序(Radix Sort)</span>
+
+<span class="err">基数排序是一种高效的纯属排序算法</span><span class="p">,</span> <span class="err">其方法是将数据按位分开</span><span class="p">,</span> <span class="err">并从数据的最低有效位到最高有效位进行比较</span><span class="p">,</span> <span class="err">依次排序</span><span class="p">,</span> <span class="err">从而得到有序的数据集合</span>
+
+<span class="err">对于数据</span><span class="p">{</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">40</span><span class="p">}</span><span class="err">来说</span><span class="p">,</span> <span class="err">第一次对个位数进行从低到高排序后</span><span class="p">{</span><span class="mi">40</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">49</span><span class="p">},</span><span class="err">然后再对十位数个的数进行排序最后得到最终结果</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">49</span><span class="p">}</span>
+
+<span class="err">基数排序并不局限于对整型数据进行排序</span><span class="p">,</span> <span class="err">只要能把元素分割成整型数</span><span class="p">,</span> <span class="err">就可以使用基数排序</span>
+
+
+<span class="err">​```</span><span class="n">c</span>
+<span class="cp">#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;sort.h&quot;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="n">rxsort</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">counts</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">counts</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">pval</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">pow</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">pval</span><span class="p">)</span> <span class="o">%</span> <span class="n">k</span><span class="p">;</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">pval</span><span class="p">)</span> <span class="o">%</span> <span class="n">k</span><span class="p">;</span>
+            <span class="n">temp</span><span class="p">[</span><span class="n">counts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">counts</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="binary-search">二分查找(Binary Search)</h4>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;search.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">bisearch</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">sorted</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">target</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">right</span><span class="p">;</span>
+
+    <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+        <span class="k">switch</span> <span class="p">(</span><span class="n">compare</span><span class="p">(((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">sorted</span> <span class="o">+</span> <span class="p">(</span><span class="n">esize</span> <span class="o">*</span> <span class="n">middle</span><span class="p">)),</span> <span class="n">target</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+
+            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+
+            <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+                <span class="k">return</span> <span class="n">middle</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4 id="_2">二分查找示例: 拼写检查器</h4>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+
+<span class="cp">#define SPELL_SIZE 31</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">compare_str</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">str1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">str2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">retval</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">retval</span> <span class="o">=</span> <span class="n">strcmp</span><span class="p">((</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">str1</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">str2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * dictionary 是一个可接受的有序字符串数组</span>
+<span class="cm"> * size 是字典中字符串的个数</span>
+<span class="cm"> * word 是被检查的单词</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">spell</span><span class="p">(</span><span class="kt">char</span> <span class="p">(</span><span class="o">*</span><span class="n">dictionary</span><span class="p">)[</span><span class="n">SPELL_SIZE</span><span class="p">],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">word</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bisearch</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">SPELL_SIZE</span><span class="p">,</span> <span class="n">compare_str</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

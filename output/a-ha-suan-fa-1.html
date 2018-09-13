@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>啊哈算法1 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./a-ha-suan-fa-1.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="算法,排序" />
+        <meta name="description" content="1. 简单桶排序 对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据. 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个. 对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列. 对于 N …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="啊哈算法1"/>
+        <meta property="og:url" content="./a-ha-suan-fa-1.html"/>
+        <meta property="og:description" content="1. 简单桶排序 对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据. 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个. 对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列. 对于 N …"/>
+        <meta property="article:published_time" content="2018-04-22" />
+            <meta property="article:section" content="Data Structure Algorithms" />
+            <meta property="article:tag" content="算法" />
+            <meta property="article:tag" content="排序" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./a-ha-suan-fa-1.html"
+                       rel="bookmark"
+                       title="Permalink to 啊哈算法1">
+                        啊哈算法1
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-04-22T00:00:00+08:00"> Sun 22 April 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/suan-fa.html">算法</a>
+        /
+	<a href="./tag/pai-xu.html">排序</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3 id="1">1. 简单桶排序</h3>
+<p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
+<p>比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个.  对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列.</p>
+<p>对于 N 个数据, 其对应的范围为 M, 则需要初始化遍历 M 次, 然后再对数据序列遍历 N 次来排序, 简单桶排序的时间复杂度为 <code>O(N+M)</code></p>
+<p>对于小型的数据范围, 简单桶排序是一个非常快的算法, 而一但当数据量非常大, 或者范围非常大, 但有效数据只是很小的值, 比如范围为 1-1 亿, 数据只是为 [8, 5, 2, 3, ….] 这几个数时, 一样还需要 1 亿个桶, 但其中只用到了某几个桶而已, 这就造成了巨大的空间浪费, 而且所需要的时间也呈直线上升.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">randnumber</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">bucket_sort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">max</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Before:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">sorted_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">sorted_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_data</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sorted_data</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;After:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>Before:    [18, 97, 1, 59, 38, 70, 34, 32, 21, 80, 87, 33, 42, 49, 63, 99, 33, 5, 45, 39]</p>
+<p>After:     [1, 5, 18, 21, 32, 33, 33, 34, 38, 39, 42, 45, 49, 59, 63, 70, 80, 87, 97, 99]</p>
+</blockquote>
+<h3 id="2">2. 冒泡排序</h3>
+<p>冒泡排序的基本思想是: 每次都比较相邻的两个元素, 如果它们的顺序是错误的, 就交换位置.</p>
+<p>比如对于  [8, 5, 2, 3, 1, 5, 10] , 要从小到大来排序的话, 从 8 开始比较, 8 &gt; 5, 则交换变成 [5, 8, 2, 3, 1, 5, 10]. 再比较 8 &gt; 2, 变成  [5, 2, 8, 3, 1, 5, 10], 一直比下去直到第一轮完成时 [5, 2, 3, 1, 5, 8, 10], 第一轮便确定了最大值在最右边. 第二轮再从 5 开始比较, 一直比较到 8, 便可确定第二大的数.</p>
+<p>所以对于冒泡排序, 当有 n 个数时, 一共要比较 (n - 1 + n - 2 + … + 1) 次, 即该算法的时间复杂度为 <code>O( n&lt;sup&gt;2&lt;/sup&gt;)</code></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Befor:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;After:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>Befor:     [55, 4, 88, 68, 77, 49, 13, 14, 20, 69, 46, 54, 88, 41, 82, 47, 92, 27, 37, 2]
+After:     [2, 4, 13, 14, 20, 27, 37, 41, 46, 47, 49, 54, 55, 68, 69, 77, 82, 88, 88, 92]</p>
+</blockquote>
+<h3 id="3">3. 快速排序</h3>
+<p>快速排序主要的思想是采用分而治之的思想, 每次选取一个数, 然后比较剩余的数值, 比选定的数小的放在左边, 大的放在右边. 这样一来, 左右两边的数都确定了比该数大或小, 然后再对左边和右边分别进行现样的操作, 直到左右两边都分到只有一个数的时, 这样排序便完成.</p>
+<p>快速排序的内存优化方法在于, 在选定数之后, 从左边开始循环, 如果找一个比选定的数大的停止下来; 右边也是同样的循环, 直到找到比选定数小的, 这样交换两边找到的数, 交换之后再继续循环下来, 循环终止的条件是左右两边都指向同一个位置里的数据, 或者如果选定的数的位置为中间, 则循环到该位置. 如果选定的数为其他地方, 在循环停止后, 把选定的数移到分好类的数据中间.</p>
+<p>快速排序时间复杂度, 最坏情况下为 <code>O(n&lt;sup&gt;2&lt;/sup&gt;)</code>, 平均时间复杂度为 <code>O(nlog n)</code></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span>
+    <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">data</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">pivot</span> <span class="ow">and</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="n">l</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">data</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">pivot</span>
+
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">quick_sort</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+</pre></div>
+
+
+<p>因为我们总是指定左边第一个为标杆数, 所以总是要先从右边开始查找, 这样才能保证在停止从左右两边查找时, 停止的位置总是小于(或大于, 当降序时)指定的数. 反之, 如果指定右边的数, 要先从左边先检查起.</p>
+<p>递归版本的快排, 在数据量大的时候可能会爆栈, 解决办法是使用循环来代替递归, 或者使用尾递归</p>
+<p>下面是一个用循环来实现的快排, 用栈来保存左右边界值</p>
+<p>快排的时间复杂度能选择的标杆值 pivot 有很大的关系, 最好是能随机选择三个数, 排序后选择中间值</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="kt">int</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">ArrayIndexOutOfBoundsException</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">start</span><span class="o">];</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">right</span> <span class="o">&gt;</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">right</span><span class="o">--;</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">left</span><span class="o">++;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+            <span class="n">arr</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+            <span class="n">arr</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+            <span class="c1">// 因为设定的是当该数 == pivot 时也是需要交换, 所以为避免死循环, 需要手动移位</span>
+            <span class="n">right</span><span class="o">--;</span>
+            <span class="n">left</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">left</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">qsort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
+    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">empty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">high</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">low</span><span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">pos</span> <span class="o">&gt;</span> <span class="n">low</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// push left</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">low</span><span class="o">);</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">pos</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//push right</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">high</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<h3 id="reference">Reference:</h3>
+<ol>
+<li><a href="http://www.yebangyu.org/blog/2016/03/09/quicksort/">http://www.yebangyu.org/blog/2016/03/09/quicksort/</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

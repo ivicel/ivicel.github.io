@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>算法 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="ivicel" />
+    <meta name="keywords" content="算法" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Amber time"/>
+        <meta property="og:url" content=".."/>
+        <meta property="og:description" content="Amber time"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="../category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="../category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="../category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="../category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="../category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="../category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="../a-ha-suan-fa-1.html">啊哈算法1</a></h2>
+                <div class="summary"><h3 id="1">1. 简单桶排序</h3>
+<p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
+<p>比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个.  对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列.</p>
+<p>对于 N …</p>
+                    <a class="btn btn-default btn-xs" href="../a-ha-suan-fa-1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
+                <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
+<p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
+<p>一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解</p>
+<p>贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完</p>
+<div class="highlight"><pre><span></span><span class="n">state_needed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
+<span class="c1"># 各个电台广播可以覆盖到的地方</span>
+<span class="n">stations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;kone&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;ktwo&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;mt&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kthree&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kfour&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kfive&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">greedy_set_covery …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-3.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-1.html">Grokking Algorithms-1</a></h2>
+                <div class="summary"><h4 id="binary-search">binary search 二分法查找</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 二分法查找, 返回数值在 list 中的位置, 否则返回 None</span>
+<span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">num_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="c1"># 确定查找的数在列表中</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">num_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">num_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="c1"># 最小值位置</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># 最大值位置</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
+        <span class="c1"># 中间位置, 向下取整</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">hight</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">num_list</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">num_list …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-2.html">Grokking Algorithms-2</a></h2>
+                <div class="summary"><h4 id="_1">图</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 使用散列表来表示图</span>
+<span class="k">class</span> <span class="nc">GraphItem</span><span class="p">:</span>
+
+
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># 向图中加入顶点</span>
+
+    <span class="c1"># 删除顶点</span>
+    <span class="k">def</span> <span class="nf">dl</span>
+</pre></div>
+
+
+<h4 id="_2">广度优先算法</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 在图 graph 中从 start 到 item 的广度优先算法</span>
+<span class="k">def</span> <span class="nf">breadth_first_search</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">queue</span>
+    <span class="n">search_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="c1"># 将 start 顶点的邻接点加入到队列中</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 顶点标记为灰, 表示已经入队查找过</span>
+            <span class="n">element</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+            <span class="n">search_queue</span><span class="o">.</span><span class="n">put …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-2.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">Matserting Algorithms with C-7: 排序和搜索</a></h2>
+                <div class="summary"><h4 id="insertion-sort">插入排序(选择排序, 冒泡排序Insertion Sort)</h4>
+<p>插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n<sup>2</sup>)</p>
+<div class="highlight"><pre><span></span><span class="cm">/* issort.c */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */</span>
+<span class="n">iint</span> <span class="nf">issort</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">esize</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="cm">/* char指针是 1 字节大小的指向, a[i * esize …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../matserting-algorithms-with-c-7-tu.html">Matserting Algorithms with C-7: 图</a></h2>
+                <div class="summary"><h3 id="graphs">图(Graphs)</h3>
+<p><img alt="图" src="../images/图.png" /></p>
+<p>图由<strong>顶点</strong>(vertices)和<strong>边</strong>(edges)组成, 图的边分为<strong>有向</strong>和<strong>无向</strong></p>
+<p>图表示为<code>G=(V, E)</code>, V 代表顶点的集合, E 和 V 是一种二元关系</p>
+<blockquote>
+<p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
+<p>无向图: V={1, 2, 3 …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-7-tu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">Matserting Algorithms with C-6: 堆和优先队列</a></h2>
+                <div class="summary"><h3 id="heap">堆 (Heap)</h3>
+<p>堆是一棵二叉树, 子结点存储的值比父结点的值大称为最小值堆, 子结点存储的值比父结点小称为最大值堆</p>
+<p>堆是有序的排列, 父子结点存在大小关系, 兄弟结点不存在直接的关系, 堆是快速取得最大/小值的数据结构</p>
+<p>堆的实现通常存储在一个连续的数组中, 从根结点为<code>0</code>位置, 任意结点<code>i</code>其父结点的的位置是<code>int((i-2)/2)</code>, 舍弃掉小数部分</p>
+<p>堆是左平衡的树, 随着结点的增加, 树会逐级从左至右增长.</p>
+<p>向堆中插入节点</p>
+<p><img alt="向堆中插入结点" src="../images/向堆中插入结点.png" /></p>
+<p>删除堆顶点</p>
+<p><img alt="删除堆顶点" src="../images/删除堆顶点.png" /></p>
+<div class="highlight"><pre><span></span><span class="cm">/* heap.h */</span>
+<span class="cp">#ifndef HEAP_H</span>
+<span class="cp">#define HEAP_H</span>
+<span class="cm">/* 堆的数据结构 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Heap_</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+    <span class="cm">/* 调用者自定义比较函数, 符合返回 &gt; 0, 不符合返回 &lt; 0, 相等返回 = 0 */</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compare</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../matserting-algorithms-with-c-5-shu.html">Matserting Algorithms with C-5: 树</a></h2>
+                <div class="summary"><h3 id="binary-tree">二叉树(Binary tree)</h3>
+<p><img alt="二叉树" src="../images/二叉树.png" /></p>
+<p><strong>先序遍历</strong>: 根结点-&gt;左子结点-&gt;右子结点</p>
+<p><strong>中序遍历</strong>: 左子结点-&gt;根结点-&gt;右子结点</p>
+<p><strong>后序遍历</strong>: 左子结点-&gt;右子结点-&gt;根结占</p>
+<p><strong>层级遍历</strong>: 树根结点-&gt;下层左结点-&gt;该层右结点 (广度优先方法)</p>
+<p><img alt="树的遍历方法" src="../images/树的遍历方法.png" /></p>
+<blockquote>
+<p>树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的</p>
+</blockquote>
+<p>二叉的接口定义</p>
+<div class="highlight"><pre><span></span><span class="cm">/* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */</span>
+<span class="cm">/* bitree.h */</span>
+<span class="cp">#ifndef BITREE_H</span>
+<span class="cp">#define BITREE_H</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* 节点结构 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="cm">/* 左结点 */</span>
+    <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+    <span class="cm">/* 右结点 */</span>
+    <span class="k">struct</span> <span class="n">BiTreeNode_</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+<span class="p">}</span><span class="n">BiTreeNode</span><span class="p">;</span>
+
+<span class="cm">/* 二叉树结构 */</span>
+<span class="k">typedef …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-5-shu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../mastering-algroithms-with-c-4-ha-xi-biao.html">Mastering Algroithms with C-4: 哈希表</a></h2>
+                <div class="summary"><p>哈希表通过一种最有效的检索方法--<strong>散列</strong>来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的.</p>
+<p>所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突</p>
+<h3 id="chained-hash-table">链式哈希表(Chained Hash Table)</h3>
+<p>链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个"桶(bucket)"</p>
+<p>链式哈希表在插入元素时, 将其键传入一个<strong>哈希函数</strong><code>h(k)</code>, 函数通过散列的方式告知元素属于哪个"桶",然后在相应的<strong>链表头</strong>插入元素</p>
+<p>在查找或删除元素时, 用同样的方式先找到元素的"桶", 然后遍历相应的链表</p>
+<p>每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低</p>
+<p><img alt="链式哈希表" src="../images/链式哈希表.png" /></p>
+<h4 id="_1">冲突的发生</h4>
+<p>当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突.</p>
+<p>链式哈希表当产生冲突时, 它就把元素放到冲突发生的"桶"中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多</p>
+<p>理想的情况是, 把元素平均和随机的分配到每一个 …</p>
+                    <a class="btn btn-default btn-xs" href="../mastering-algroithms-with-c-4-ha-xi-biao.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../mastering-algroithms-with-c-3-ji-he.html">Mastering Algroithms with C-3: 集合</a></h2>
+                <div class="summary"><p>集合是不同对象的无序聚集</p>
+<ol>
+<li>集合的成员是无序的</li>
+<li>每一个成员只在集合中出现一次</li>
+</ol>
+<p>集合的定义: </p>
+<ul>
+<li>空集</li>
+<li>集合相等</li>
+<li>子集</li>
+</ul>
+<p>集合操作:</p>
+<ul>
+<li>交集</li>
+<li>并集</li>
+<li>差集</li>
+</ul>
+<p>实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n)</p>
+<p>由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率</p>
+<p>集合的抽象数据类型头文件定义</p>
+<div class="highlight"><pre><span></span><span class="cm">/* set.h */</span>
+<span class="cp">#ifndef SET_H</span>
+<span class="cp">#define SET_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* 集合元素 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="n">next</span><span class="p">;</span>
+<span class="p">}</span><span class="n">SetElmt</span><span class="p">;</span>
+<span class="cm">/* 集合结构 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Set_</span> <span class="p">{</span>
+    <span class="cm">/* 集合大小 */</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+    <span class="cm">/* 指向集合头结点 */</span>
+    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
+    <span class="cm">/* 集合尾结点 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../mastering-algroithms-with-c-3-ji-he.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev disabled"><a href="#">&laquo;</a></li>
+                    <li class="active"><a
+                            href="../tag/suan-fa.html">1</a></li>
+                    <li class=""><a
+                            href="../tag/suan-fa2.html">2</a></li>
+                <li class="next"><a
+                        href="../tag/suan-fa2.html">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

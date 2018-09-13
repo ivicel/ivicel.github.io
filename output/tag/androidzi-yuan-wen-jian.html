@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>android资源文件 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+    <meta name="author" content="ivicel" />
+    <meta name="keywords" content="android资源文件" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Amber time"/>
+        <meta property="og:url" content=".."/>
+        <meta property="og:description" content="Amber time"/>
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link href="../theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="../category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="../category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="../category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="../category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="../category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="../category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="../category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html">Android 代码 values 目录下说明</a></h2>
+                <div class="summary"><p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
+<h3 id="1-style">1. style 主题文件</h3>
+<p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
+<ol>
+<li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …</strong></li></ol>
+                    <a class="btn btn-default btn-xs" href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="../theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../theme/js/respond.min.js"></script>
+
+
+</body>
+</html>
