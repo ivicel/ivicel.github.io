@@ -559,6 +559,11 @@ __enter__(self)
 
 # 退出 with 时调用，处理 with 产生的 exception
 __exit__(self, exceptiop_type, exception_value, traceback)
+
+
+# 跟 async with 使用, 异步上下文, 除了必须返回一个 awaitable, 其他与上相同
+__aenter__(self)
+__aexit__(self, exec_type, exec_value, traceback)
 ```
 
 ### 拷贝
