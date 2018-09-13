@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>图 - Amber time</title>
+    <title>二叉树 - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="图" />
+    <meta name="keywords" content="二叉树" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,29 +84,19 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">数据结构(Python描述) 第 7 章 图</a></h2>
-                <div class="summary"><h4 id="1">1. 概念, 性质, 实现</h4>
-<h5 id="11">1.1 定义</h5>
-<p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
-<p>图分为有向图, 无向图. 根据边的关系类型来分</p>
+                <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">数据结构(Python描述) 第 6 章 二叉树与树</a></h2>
+                <div class="summary"><h4 id="1">1. 二叉树</h4>
+<h5 id="11">1.1 概念</h5>
 <ul>
-<li><strong>邻接点</strong>: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 <strong>邻接边</strong></li>
-<li>顶点的 <strong>度</strong>: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有<strong>出度</strong>和<strong>入度</strong>之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量</li>
-<li><strong>路径长度</strong>: 点 a 到点 b …</li></ul>
-                    <a class="btn btn-default btn-xs" href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../matserting-algorithms-with-c-7-tu.html">Matserting Algorithms with C-7: 图</a></h2>
-                <div class="summary"><h3 id="graphs">图(Graphs)</h3>
-<p><img alt="图" src="../images/图.png" /></p>
-<p>图由<strong>顶点</strong>(vertices)和<strong>边</strong>(edges)组成, 图的边分为<strong>有向</strong>和<strong>无向</strong></p>
-<p>图表示为<code>G=(V, E)</code>, V 代表顶点的集合, E 和 V 是一种二元关系</p>
-<blockquote>
-<p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
-<p>无向图: V={1, 2, 3 …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-7-tu.html">more ...</a>
+<li>不包含任何结点的称为<strong>空树</strong>, 只包含一个结点称为<strong>单点树</strong></li>
+<li>没有子结点的称为<strong>树叶</strong>, 非树叶结点称为<strong>分支结点</strong>, 对于二叉树有左分支, 右分支</li>
+<li>一个结点的子结点个数称为该结点的<strong>度数</strong>, 很明显度只能取 <code>[0, 1, 2]</code> 三个值</li>
+<li><strong>路径</strong>: 从祖先结点到子孙结点包含的一系列边, 称为路径. </li>
+<li>二叉树是分层的, 根结点所在为第 0 层. 树中结点的最大层数称为树的<strong>高度</strong></li>
+<li><strong>满二叉树</strong>: 二叉树中的所有分支结点的度数都是 2</li>
+<li><strong>扩充二叉树</strong>: 对于二叉树 T, 加入足够多的新的结点, 使 T 原有的结点的度都变成 2, 得到的这棵新树称为扩充二叉树. 扩充二叉树新加入的结点称为<strong>外部结点</strong>, 原来的结点称为<strong>内部结点</strong></li>
+<li><strong>完全二叉树</strong>: 对于高度为 h …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">more ...</a>
                 </div>
             </article>
             <hr/>

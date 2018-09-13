@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Python - Amber time</title>
+    <title>python - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="Python" />
+    <meta name="keywords" content="python" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -83,6 +83,63 @@ Amber time            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
+            <article>
+                <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">数据结构(Python描述) 第 7 章 图</a></h2>
+                <div class="summary"><h4 id="1">1. 概念, 性质, 实现</h4>
+<h5 id="11">1.1 定义</h5>
+<p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
+<p>图分为有向图, 无向图. 根据边的关系类型来分</p>
+<ul>
+<li><strong>邻接点</strong>: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 <strong>邻接边</strong></li>
+<li>顶点的 <strong>度</strong>: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有<strong>出度</strong>和<strong>入度</strong>之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量</li>
+<li><strong>路径长度</strong>: 点 a 到点 b …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html">数据结构(Python描述) 第 8 章 字典与集合</a></h2>
+                <div class="summary"><p>字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等.</p>
+<h4 id="1">1. 字典的线性表实现</h4>
+<ul>
+<li>使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 <code>O(1)</code>, 而在查找方面, 需要遍历所有的值, 所以是 <code>O(n)</code>, 删除操作也是一样需要 O(n). 基于这种表的字典: </li>
+<li>数据结构和算法简单, 检索方便</li>
+<li>检索效率低, 当表很大时, 检索很耗时</li>
+<li>删除操作也很耗时, 删除后还需要移动后面的数据</li>
+<li>依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是 <code>O(logN)</code>, 而在删除或者添加数据时, 为保证数组总是有序, 我们可能需要移动整个数组, 所以最差是 <code>O(n)</code>. 这种实现方法也不适合经常添加, 删除数据, 而如果一次生成, 多次查找 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../a-simple-steamkit-implement-with-using-pythonyi.html">A Simple SteamKit implement with using Python(一)</a></h2>
+                <div class="summary"><h4 id="1">1. 连接握手</h4>
+<ol>
+<li>
+<p>与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
+</li>
+<li>
+<p>我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
+</li>
+</ol>
+<blockquote>
+<p>这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
+</blockquote>
+<ol>
+<li>收到服务的 <code>session_key</code> 确认, 结果为 <code>EResult.OK</code> 时 …</li></ol>
+                    <a class="btn btn-default btn-xs" href="../a-simple-steamkit-implement-with-using-pythonyi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../wsgi-xie-yi.html">WSGI 协议</a></h2>
+                <div class="summary"><h4 id="1">1. 简介</h4>
+<p>WSGI(Web Server Gateway Interface) 定义在 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.</p>
+<p>WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种, 这样来看, 上层总是下层的 server, 下层是上层的 client …</p>
+                    <a class="btn btn-default btn-xs" href="../wsgi-xie-yi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
             <article>
                 <h2><a href="../grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
                 <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
@@ -213,7 +270,7 @@ Amber time            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 ivicel
+         <div class="col-xs-10">&copy; 2018 ivicel
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

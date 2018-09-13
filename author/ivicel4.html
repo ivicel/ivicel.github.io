@@ -83,6 +83,132 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
+                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
+<ul>
+<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
+</ul>
+<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
+<p>触摸事件产生时, 可以获取其位置.</p>
+<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
+<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
+<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
+<p>​</p>
+<ul>
+<li>滑动速度追踪<code>VelocityTracker</code></li>
+</ul>
+<p>滑动速度指的是在某一个时间段内的速度. </p>
+<p><code>java
+  /* 首先可以在 …</code></p>
+                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../viewhui-zhi-liu-cheng.html">View绘制流程</a></h2>
+                <div class="summary"><ul>
+<li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>
+</ul>
+<ol>
+<li>
+<p>对于<code>DecorView</code>其大小要求要<code>ViewRootImpl</code>中测量</p>
+</li>
+<li>
+<p>如果要求<code>MACTH_PARENT</code>,就设置为窗口的大小<code>windowSize</code>, 模式为精确<code>EXACTLY</code></p>
+</li>
+<li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
+<li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
+</ol>
+<div class="highlight"><pre><span></span>   <span class="c1">// ViewRootImpl#getRootMeasureSpec</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getRootMeasureSpec</span><span class="o">(</span><span class="kt">int</span> <span class="n">windowSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">;</span>
+           <span class="k">switch</span> <span class="o">(</span><span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">case</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">:</span>
+               <span class="c1">// Window can&#39;t …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../viewhui-zhi-liu-cheng.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
+                <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
+<p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
+<p>一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解</p>
+<p>贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完</p>
+<div class="highlight"><pre><span></span><span class="n">state_needed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
+<span class="c1"># 各个电台广播可以覆盖到的地方</span>
+<span class="n">stations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;kone&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;ktwo&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;mt&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kthree&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kfour&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
+    <span class="s1">&#39;kfive&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">greedy_set_covery …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-3.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-1.html">Grokking Algorithms-1</a></h2>
+                <div class="summary"><h4 id="binary-search">binary search 二分法查找</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 二分法查找, 返回数值在 list 中的位置, 否则返回 None</span>
+<span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">num_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="c1"># 确定查找的数在列表中</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">num_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">num_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="c1"># 最小值位置</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># 最大值位置</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
+        <span class="c1"># 中间位置, 向下取整</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">hight</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">num_list</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">num_list …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../grokking-algorithms-2.html">Grokking Algorithms-2</a></h2>
+                <div class="summary"><h4 id="_1">图</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 使用散列表来表示图</span>
+<span class="k">class</span> <span class="nc">GraphItem</span><span class="p">:</span>
+
+
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># 向图中加入顶点</span>
+
+    <span class="c1"># 删除顶点</span>
+    <span class="k">def</span> <span class="nf">dl</span>
+</pre></div>
+
+
+<h4 id="_2">广度优先算法</h4>
+<div class="highlight"><pre><span></span><span class="c1"># 在图 graph 中从 start 到 item 的广度优先算法</span>
+<span class="k">def</span> <span class="nf">breadth_first_search</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">queue</span>
+    <span class="n">search_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="c1"># 将 start 顶点的邻接点加入到队列中</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 顶点标记为灰, 表示已经入队查找过</span>
+            <span class="n">element</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+            <span class="n">search_queue</span><span class="o">.</span><span class="n">put …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-2.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">Matserting Algorithms with C-7: 排序和搜索</a></h2>
                 <div class="summary"><h4 id="insertion-sort">插入排序(选择排序, 冒泡排序Insertion Sort)</h4>
 <p>插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n<sup>2</sup>)</p>
@@ -184,209 +310,6 @@ Amber time            </a>
 <p>链式哈希表当产生冲突时, 它就把元素放到冲突发生的"桶"中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多</p>
 <p>理想的情况是, 把元素平均和随机的分配到每一个 …</p>
                     <a class="btn btn-default btn-xs" href="../mastering-algroithms-with-c-4-ha-xi-biao.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../mastering-algroithms-with-c-3-ji-he.html">Mastering Algroithms with C-3: 集合</a></h2>
-                <div class="summary"><p>集合是不同对象的无序聚集</p>
-<ol>
-<li>集合的成员是无序的</li>
-<li>每一个成员只在集合中出现一次</li>
-</ol>
-<p>集合的定义: </p>
-<ul>
-<li>空集</li>
-<li>集合相等</li>
-<li>子集</li>
-</ul>
-<p>集合操作:</p>
-<ul>
-<li>交集</li>
-<li>并集</li>
-<li>差集</li>
-</ul>
-<p>实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n)</p>
-<p>由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率</p>
-<p>集合的抽象数据类型头文件定义</p>
-<div class="highlight"><pre><span></span><span class="cm">/* set.h */</span>
-<span class="cp">#ifndef SET_H</span>
-<span class="cp">#define SET_H</span>
-
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-
-<span class="cm">/* 集合元素 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">SetElmt</span><span class="p">;</span>
-<span class="cm">/* 集合结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Set_</span> <span class="p">{</span>
-    <span class="cm">/* 集合大小 */</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-    <span class="cm">/* 指向集合头结点 */</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
-    <span class="cm">/* 集合尾结点 …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../mastering-algroithms-with-c-3-ji-he.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../matering-algorithms-with-c-2-zhan-he-dui-lie.html">Matering Algorithms with C-2: 栈和队列</a></h2>
-                <div class="summary"><p>栈: 后进先出(LIFO)</p>
-<p>队列: 先进先出(FIFO)</p>
-<ul>
-<li>栈和队列的一些应用<ol>
-<li>信号量: 同步多个进程访问共享资源</li>
-<li>事件处理</li>
-<li>X Window 系统, 使用队列来存储事件</li>
-<li>生产者-消费者问题, 生产者向队列中写入数据, 消费从队列中读出数据</li>
-<li>C 函数的调用, 函数的调用会将一些信息压入程序栈, 程序结束时将信息出栈</li>
-</ol>
-</li>
-</ul>
-<p>栈最常用的是使用链表来实现, 以下是栈的抽象数据类型头文件</p>
-<div class="highlight"><pre><span></span><span class="cm">/* stack.h */</span>
-<span class="cp">#ifndef STACK_H</span>
-<span class="cp">#define STACK_H</span>
-
-<span class="cm">/* 元素结点 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">StackElmt_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">StackElmt_</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">StackElmt</span><span class="p">;</span>
-
-<span class="cm">/* 栈结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Stack_</span> <span class="p">{</span>
-    <span class="cm">/* 栈大小 */</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-    <span class="cm">/* 指向栈顶结点 */</span>
-    <span class="n">StackElmt</span> <span class="o">*</span><span class="n">top</span><span class="p">;</span>
-    <span class="kt">void …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../matering-algorithms-with-c-2-zhan-he-dui-lie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../javascript.html">javascript</a></h2>
-                <div class="summary"><h4 id="_1">对象属性特征</h4>
-<p>1.数据属性
-<code>[[Configurable]]</code> 能否通过 <code>delete</code> 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性
-<code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
-<code>[[Writable]]</code> 能否修改属性的值
-<code>[[Value]]</code> 属性的数据值</p>
-<p>2.访问器属性
-<code>[[Configurable]]</code> 能否通过 <code>delete</code> 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为数据属性
-<code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
-<code>[[Get]]</code> 在读取属性时调用的函数
-<code>[[Set]]</code> 在写入属性时调用的函数</p>
-<h4 id="_2">对象属性查找</h4>
-<p>每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。</p>
-<p>搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返
-回该属性的值；</p>
-<p>如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。</p>
-<hr />
-<h4 id="_3">判断属性是否为对象本身属性或是在原型链中</h4>
-<p><code>hasOwnProperty()</code> 方法断访问是属性是否是在实例中</p>
-<p><code>in</code> 操作符会在通过对象能够访问给富属性时返回 <code>true …</code></p>
-                    <a class="btn btn-default btn-xs" href="../javascript.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../mastering-algorithms-with-c-1-lian-biao.html">Mastering Algorithms with C-1: 链表</a></h2>
-                <div class="summary"><blockquote>
-<p>函数的实现在判断元素结点是否为头结点或尾结点时, 并未使用 <code>list-&gt;head</code> <code>list-&gt;tail</code> 指针<br>
-而是判断该结点是否存在前一结点<code>element-&gt;prev</code>或后一结点<code>element-&gt;next</code>是否为空<br>
-这样从而导致在向指定结点前面或后面插入元素时, 不能过早将<code>element-prev</code> <code>element-&gt;next</code> 指向新结点<code>new_element</code> 以避免判断头尾结点失败</p>
-</blockquote>
-<h4 id="linked-list"><strong>单链表</strong>(Linked List)</h4>
-<div class="highlight"><pre><span></span><span class="cm">/* list.h */</span>
-
-<span class="cp">#ifndef LIST_H</span>
-<span class="cp">#define LIST_H</span>
-
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cm">/* 链表元素结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">ListElmt_</span> <span class="p">{</span>
-    <span class="cm">/* 指向实际数据地址 */</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>    
-    <span class="cm">/* 指向下一个结点元素的指针 */</span>
-    <span class="k">struct</span> <span class="n">ListElmt_</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>         
-<span class="p">}</span><span class="n">ListElmt</span><span class="p">;</span>
-
-<span class="cm">/* 链表的结构定义 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">List_ …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../mastering-algorithms-with-c-1-lian-biao.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../c-yu-yan-jian-ji.html">C 语言简记</a></h2>
-                <div class="summary"><p>First C program</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello C!!!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<h4 id="1"><strong>1. 注释</strong></h4>
-<div class="highlight"><pre><span></span><span class="cm">/* </span>
-<span class="cm"> *</span>
-<span class="cm"> * 注释不能嵌套 </span>
-<span class="cm"> *  </span>
-<span class="cm"> */</span>
-</pre></div>
-
-
-<h4 id="2"><strong>2. 关键字、保留字</strong></h4>
-<table>
-<thead>
-<tr>
-<th><code>auto</code></th>
-<th><code>else</code></th>
-<th><code>long</code></th>
-<th><code>switch</code></th>
-<th><code>break</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>enum</code></td>
-<td><code>register</code></td>
-<td><code>typedef</code></td>
-<td><code>case</code></td>
-<td><code>extern</code></td>
-</tr>
-<tr>
-<td><code>union</code></td>
-<td><code>char</code></td>
-<td><code>float</code></td>
-<td><code>short</code></td>
-<td><code>unsigned</code></td>
-</tr>
-<tr>
-<td><code>const</code></td>
-<td><code>for</code></td>
-<td><code>signed</code></td>
-<td><code>void</code></td>
-<td><code>continue</code></td>
-</tr>
-<tr>
-<td><code>goto</code></td>
-<td><code>sizeof</code></td>
-<td><code>volatile</code></td>
-<td><code>default</code></td>
-<td><code>if</code></td>
-</tr>
-<tr>
-<td><code>static</code></td>
-<td><code>while</code></td>
-<td><code>do …</code></td></tr></tbody></table>
-                    <a class="btn btn-default btn-xs" href="../c-yu-yan-jian-ji.html">more ...</a>
                 </div>
             </article>
             <hr/>

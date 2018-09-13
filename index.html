@@ -83,6 +83,80 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">数据结构(Python描述) 第 6 章 二叉树与树</a></h2>
+                <div class="summary"><h4 id="1">1. 二叉树</h4>
+<h5 id="11">1.1 概念</h5>
+<ul>
+<li>不包含任何结点的称为<strong>空树</strong>, 只包含一个结点称为<strong>单点树</strong></li>
+<li>没有子结点的称为<strong>树叶</strong>, 非树叶结点称为<strong>分支结点</strong>, 对于二叉树有左分支, 右分支</li>
+<li>一个结点的子结点个数称为该结点的<strong>度数</strong>, 很明显度只能取 <code>[0, 1, 2]</code> 三个值</li>
+<li><strong>路径</strong>: 从祖先结点到子孙结点包含的一系列边, 称为路径. </li>
+<li>二叉树是分层的, 根结点所在为第 0 层. 树中结点的最大层数称为树的<strong>高度</strong></li>
+<li><strong>满二叉树</strong>: 二叉树中的所有分支结点的度数都是 2</li>
+<li><strong>扩充二叉树</strong>: 对于二叉树 T, 加入足够多的新的结点, 使 T 原有的结点的度都变成 2, 得到的这棵新树称为扩充二叉树. 扩充二叉树新加入的结点称为<strong>外部结点</strong>, 原来的结点称为<strong>内部结点</strong></li>
+<li><strong>完全二叉树</strong>: 对于高度为 h …</li></ul>
+                    <a class="btn btn-default btn-xs" href="./shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">数据结构(Python描述) 第 7 章 图</a></h2>
+                <div class="summary"><h4 id="1">1. 概念, 性质, 实现</h4>
+<h5 id="11">1.1 定义</h5>
+<p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
+<p>图分为有向图, 无向图. 根据边的关系类型来分</p>
+<ul>
+<li><strong>邻接点</strong>: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 <strong>邻接边</strong></li>
+<li>顶点的 <strong>度</strong>: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有<strong>出度</strong>和<strong>入度</strong>之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量</li>
+<li><strong>路径长度</strong>: 点 a 到点 b …</li></ul>
+                    <a class="btn btn-default btn-xs" href="./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html">数据结构(Python描述) 第 8 章 字典与集合</a></h2>
+                <div class="summary"><p>字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等.</p>
+<h4 id="1">1. 字典的线性表实现</h4>
+<ul>
+<li>使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 <code>O(1)</code>, 而在查找方面, 需要遍历所有的值, 所以是 <code>O(n)</code>, 删除操作也是一样需要 O(n). 基于这种表的字典: </li>
+<li>数据结构和算法简单, 检索方便</li>
+<li>检索效率低, 当表很大时, 检索很耗时</li>
+<li>删除操作也很耗时, 删除后还需要移动后面的数据</li>
+<li>依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是 <code>O(logN)</code>, 而在删除或者添加数据时, 为保证数组总是有序, 我们可能需要移动整个数组, 所以最差是 <code>O(n)</code>. 这种实现方法也不适合经常添加, 删除数据, 而如果一次生成, 多次查找 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./a-simple-steamkit-implement-with-using-pythonyi.html">A Simple SteamKit implement with using Python(一)</a></h2>
+                <div class="summary"><h4 id="1">1. 连接握手</h4>
+<ol>
+<li>
+<p>与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
+</li>
+<li>
+<p>我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
+</li>
+</ol>
+<blockquote>
+<p>这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
+</blockquote>
+<ol>
+<li>收到服务的 <code>session_key</code> 确认, 结果为 <code>EResult.OK</code> 时 …</li></ol>
+                    <a class="btn btn-default btn-xs" href="./a-simple-steamkit-implement-with-using-pythonyi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./wsgi-xie-yi.html">WSGI 协议</a></h2>
+                <div class="summary"><h4 id="1">1. 简介</h4>
+<p>WSGI(Web Server Gateway Interface) 定义在 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.</p>
+<p>WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种, 这样来看, 上层总是下层的 server, 下层是上层的 client …</p>
+                    <a class="btn btn-default btn-xs" href="./wsgi-xie-yi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./android-tong-zhi.html">Android 通知</a></h2>
                 <div class="summary"><div class="toc">
 <ul>
@@ -163,84 +237,6 @@ Amber time            </a>
 <blockquote>
 <p>CircleImageView …</p></blockquote>
                     <a class="btn btn-default btn-xs" href="./circleimageviewshi-xian-jie-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./a-ha-suan-fa-1.html">啊哈算法1</a></h2>
-                <div class="summary"><h3 id="1">1. 简单桶排序</h3>
-<p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
-<p>比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个.  对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列.</p>
-<p>对于 N …</p>
-                    <a class="btn btn-default btn-xs" href="./a-ha-suan-fa-1.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./android-dai-ma-values-mu-lu-xia-shuo-ming.html">Android 代码 values 目录下说明</a></h2>
-                <div class="summary"><p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
-<h3 id="1-style">1. style 主题文件</h3>
-<p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
-<ol>
-<li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …</strong></li></ol>
-                    <a class="btn btn-default btn-xs" href="./android-dai-ma-values-mu-lu-xia-shuo-ming.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html">Android View类的构造方法及View的主题属性优先级相关</a></h2>
-                <div class="summary"><h3 id="1-layout-view">1. layout 里 view 的属性赋值</h3>
-<p>一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下:</p>
-<ul>
-<li>layout 中对属性直接赋值  </li>
-<li>layout 中覆盖 view 的 style </li>
-<li>构造方法里的 defStyleAttr </li>
-<li>构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定)</li>
-<li>定义/使用的主题里的值 </li>
-</ul>
-<ol>
-<li>在 <strong>layout</strong> 布局文件里对 view 直接赋值</li>
-</ol>
-<p><code>xml
-   &lt;TextView
-    android:textColor="#332211"/&gt;</code></p>
-<ol>
-<li>自定义一个 <code>style</code>, 然后在 <code>layout</code> 里的 <code>view …</code></li></ol>
-                    <a class="btn btn-default btn-xs" href="./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./asynctaskji-zhi-fen-xi.html">AsyncTask机制分析</a></h2>
-                <div class="summary"><h3 id="1-asynctask">1. AsyncTask 的使用</h3>
-<p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
-<p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DownloadTask</span> <span class="kd">extends …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./asynctaskji-zhi-fen-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./javaxian-cheng-ji-xian-cheng-chi.html">Java线程及线程池</a></h2>
-                <div class="summary"><h3 id="1-java">1. Java 线程池</h3>
-<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
-<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
-<ul>
-<li>Executor 接口定义了执行器 Runnable 执行方式</li>
-<li>ExecutorService 定义了线程具体接口</li>
-<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
-<li>AbstractExecutorService 线程池的实现的抽象类</li>
-<li>ThreadPoolExecutor 线程池的具体实现类</li>
-<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
-<li>Executors 线程池的辅助工具类</li>
-</ul>
-<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
-<ul>
-<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
-<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
-<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
-<li><code>newScheduledThreadPool</code> 固定大小 …</li></ul>
-                    <a class="btn btn-default btn-xs" href="./javaxian-cheng-ji-xian-cheng-chi.html">more ...</a>
                 </div>
             </article>
             <hr/>

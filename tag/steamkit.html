@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>图 - Amber time</title>
+    <title>steamkit - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="图" />
+    <meta name="keywords" content="steamkit" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -84,29 +84,22 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">数据结构(Python描述) 第 7 章 图</a></h2>
-                <div class="summary"><h4 id="1">1. 概念, 性质, 实现</h4>
-<h5 id="11">1.1 定义</h5>
-<p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
-<p>图分为有向图, 无向图. 根据边的关系类型来分</p>
-<ul>
-<li><strong>邻接点</strong>: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 <strong>邻接边</strong></li>
-<li>顶点的 <strong>度</strong>: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有<strong>出度</strong>和<strong>入度</strong>之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量</li>
-<li><strong>路径长度</strong>: 点 a 到点 b …</li></ul>
-                    <a class="btn btn-default btn-xs" href="../shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../matserting-algorithms-with-c-7-tu.html">Matserting Algorithms with C-7: 图</a></h2>
-                <div class="summary"><h3 id="graphs">图(Graphs)</h3>
-<p><img alt="图" src="../images/图.png" /></p>
-<p>图由<strong>顶点</strong>(vertices)和<strong>边</strong>(edges)组成, 图的边分为<strong>有向</strong>和<strong>无向</strong></p>
-<p>图表示为<code>G=(V, E)</code>, V 代表顶点的集合, E 和 V 是一种二元关系</p>
+                <h2><a href="../a-simple-steamkit-implement-with-using-pythonyi.html">A Simple SteamKit implement with using Python(一)</a></h2>
+                <div class="summary"><h4 id="1">1. 连接握手</h4>
+<ol>
+<li>
+<p>与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
+</li>
+<li>
+<p>我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
+</li>
+</ol>
 <blockquote>
-<p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
-<p>无向图: V={1, 2, 3 …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="../matserting-algorithms-with-c-7-tu.html">more ...</a>
+<p>这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
+</blockquote>
+<ol>
+<li>收到服务的 <code>session_key</code> 确认, 结果为 <code>EResult.OK</code> 时 …</li></ol>
+                    <a class="btn btn-default btn-xs" href="../a-simple-steamkit-implement-with-using-pythonyi.html">more ...</a>
                 </div>
             </article>
             <hr/>

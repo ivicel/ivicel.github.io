@@ -83,6 +83,132 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../android-ipcji-zhi.html">Android IPC机制</a></h2>
+                <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
+<p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
+<p>一是指定进程的全称:<code>android:process="info.ivicel.github.android_ipc.another_process"</code>, 此时进程为一个全局进程, 其他应用可以通过<code>ShareUID</code>方式和它跑在同一进程中</p>
+<p>二是简写: <code>android:process=":remote"</code>. 这种写法其完整的进程名为<code>包名:remote</code>, 并且此时进程为一个私有进程, 其他应用的组件不可以同时跑在该进程中</p>
+<blockquote>
+<p>由于 Android 中为不同进程单独分配一个虚拟机来运行, 所以 Android 中不能通过<strong>共享内存</strong>来进行通信. </p>
+</blockquote>
+<p>在 …</p>
+                    <a class="btn btn-default btn-xs" href="../android-ipcji-zhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../zai-androidzhong-shi-yong-aidljin-xing-ipc.html">在Android中使用AIDL进行IPC</a></h2>
+                <div class="summary"><h5 id="aidl"><code>AIDL</code>基本介绍</h5>
+<p><code>AIDL</code>全称<code>Android Interface Define Language</code>, 后缀名是<code>.aidl</code>. 其支持以下几个数据类型</p>
+<ul>
+<li>基本数据类型<code>int</code>, <code>float</code>, <code>long</code>, <code>double</code>, <code>byte</code> , <code>short</code>, <code>boolean</code>, <code>char</code></li>
+<li><code>String</code>类型和<code>CharSequence</code>类型</li>
+<li><code>List</code>类型,  并其内<strong>元素</strong>可以是<strong>泛型</strong>. 但元素一定是可<code>Parcelable</code>类型或是其他<code>AIDL</code>支持的类型. 可选择将 <code>List</code> 用作 “通用” 类（例如，<code>List&lt;String&gt;</code>）。另一端实际接收的具体类始终是 <code>ArrayList</code>，但生成的方法使用的是 <code>List</code> 接口。</li>
+<li><code>Map</code>类型 …</li></ul>
+                    <a class="btn btn-default btn-xs" href="../zai-androidzhong-shi-yong-aidljin-xing-ipc.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../android-contnet-providernei-rong-ti-gong-qi.html">Android Contnet Provider内容提供器</a></h2>
+                <div class="summary"><div class="toc">
+<ul>
+<li><a href="#1-content-provider">1. Content Provider 的优势:</a></li>
+<li><a href="#2-content-uri">2. Content URI 的写法:</a><ul>
+<li><a href="#mime">MIME的写法</a></li>
+<li><a href="#androidmanifestxml">在AndroidManifest.xml中写法</a></li>
+<li><a href="#content-provider">创建一个自定义的Content Provider</a></li>
+<li><a href="#contentresolver-content-provider">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li>
+<li><a href="#contract-classses">Contract Classses</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="1-content-provider">1. Content Provider 的优势:</h3>
+<ol>
+<li>可以用来提供进程间的通信</li>
+<li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
+<li>提供了一个<code>权限</code>限制</li>
+</ol>
+<h3 id="2-content-uri">2. Content URI 的写法:</h3>
+<blockquote>
+<p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
+<p><code>content://com.example.myapp.provider/table1</code></p>
+<p><code>AUTHORITY</code>一般默认写成<code>包名.provider</code>, <code>包名 …</code></p></blockquote>
+                    <a class="btn btn-default btn-xs" href="../android-contnet-providernei-rong-ti-gong-qi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../android-xi-tong-quan-xian.html">Android 系统权限</a></h2>
+                <div class="summary"><h5 id="_1">危险权限</h5>
+<table>
+<thead>
+<tr>
+<th>权限组</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CALENDAR</code></td>
+<td><code>WRITE_CALENDAR</code> <code>READ_CALENDAR</code></td>
+</tr>
+<tr>
+<td><code>CAMERA</code></td>
+<td><code>CAMERA</code></td>
+</tr>
+<tr>
+<td><code>CONTACTS</code></td>
+<td><code>READ_CONTACTS</code> <code>WRITE_CONTACTS</code> <code>GET_ACCOUNTS</code></td>
+</tr>
+<tr>
+<td><code>LOCATION</code></td>
+<td><code>ACCESS_FINE_LOCATION</code> <code>ACCESS_COARES_LOCATION</code></td>
+</tr>
+<tr>
+<td><code>MICROPHONE</code></td>
+<td><code>RECORD_AUDIO</code></td>
+</tr>
+<tr>
+<td><code>PHONE</code></td>
+<td><code>READ_PHONE_STATE</code> <code>CALL_PHONE</code> <code>READ_CALL_LOG</code> <code>WRITE_CALL_LOG</code> <code>ADD_VOICEMAIL</code> <code>USE_SIP</code> <code>PROCESS_OUTGOING_CALLS</code></td>
+</tr>
+<tr>
+<td><code>SENSORS</code></td>
+<td><code>BODY_SENSORS</code></td>
+</tr>
+<tr>
+<td><code>SMS</code></td>
+<td><code>SEND_SMS</code> <code>RECEIVE_SMS</code> <code>READ_SMS</code> <code>RECEIVE_WAP_PUSH</code> <code>RECEIVE_MMS</code></td>
+</tr>
+<tr>
+<td><code>STORAGE</code></td>
+<td><code>READ_EXTERNAL_STORAGE</code> <code>WRITE_EXTERNAL_STORAGE</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在 <strong>Android 4.4(SDK 19)</strong>及以上版本中, 系统会对<code>getExternalFilesDir(String)</code> 和<code>getExternalCacheDir()</code>这两个方法返回的目录自动授予 <code>READ_EXTERNAL_STORAGE …</code></li></ul>
+                    <a class="btn btn-default btn-xs" href="../android-xi-tong-quan-xian.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">Android 中自定义ViewPager, 添加页面指示器</a></h2>
+                <div class="summary"><ul>
+<li>在页面滑动时会回调<code>ViewPager.OnPageChangeListener</code>接口里的方法. 用<code>ViewPage.addOnPageChangeListener</code>添加和<code>ViewPage.removeOnPageChangeListener</code>删除监听回调方法. 如果不想实现所有方法, <code>ViewPager</code>内有个空的类<code>SimpleOnPageChangeListener</code>实现了这个接口, 继承这个类便可. <strong>注意可以多次调用<code>addOnPageChangeListener</code>方法添加多个回调, <code>ViewPager</code>按添加顺序进行调用, 所以在不需要回调时, 及时的使用<code>removeOnPageChangeListener</code>来删除回调方法</strong>. 另外还需要<strong>注意的是<code>ViewPager.getCurrentItem</code>返回值和<code>OnPageSelected</code>参数是一样的, 即是成功滑动后的目标页面索引, 无论当前页面是否还在滑动中</strong></li>
+</ul>
+<ol>
+<li>
+<p>在滑动的时候会调用<code>OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)</code></p>
+<ul>
+<li>参数<code>position</code>指的是在滑动时<strong>当前显示页面</strong>的<strong>左边页面的位置</strong>, 具体来说是 …</li></ul></li></ol>
+                    <a class="btn btn-default btn-xs" href="../android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">Android高效加载图片防止OOM</a></h2>
                 <div class="summary"><p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
 <p><code>inSampleSize</code> 一般取为 2 的指数 …</p>
@@ -172,132 +298,6 @@ Amber time            </a>
 
     <span class="kt">void</span> <span class="nf">f1 …</span></pre></div>
                     <a class="btn btn-default btn-xs" href="../javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../view-shi-jian-ti-xi.html">View 事件体系</a></h2>
-                <div class="summary"><h5 id="view"><code>view</code>坐标和滑动方法</h5>
-<ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
-</ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
-<p>​</p>
-<ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
-</ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 …</code></p>
-                    <a class="btn btn-default btn-xs" href="../view-shi-jian-ti-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../viewhui-zhi-liu-cheng.html">View绘制流程</a></h2>
-                <div class="summary"><ul>
-<li>一.  <code>view</code>的<code>MeasureSpec</code>测量取值</li>
-</ul>
-<ol>
-<li>
-<p>对于<code>DecorView</code>其大小要求要<code>ViewRootImpl</code>中测量</p>
-</li>
-<li>
-<p>如果要求<code>MACTH_PARENT</code>,就设置为窗口的大小<code>windowSize</code>, 模式为精确<code>EXACTLY</code></p>
-</li>
-<li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
-<li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
-</ol>
-<div class="highlight"><pre><span></span>   <span class="c1">// ViewRootImpl#getRootMeasureSpec</span>
-   <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getRootMeasureSpec</span><span class="o">(</span><span class="kt">int</span> <span class="n">windowSize</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
-           <span class="kt">int</span> <span class="n">measureSpec</span><span class="o">;</span>
-           <span class="k">switch</span> <span class="o">(</span><span class="n">rootDimension</span><span class="o">)</span> <span class="o">{</span>
-           <span class="k">case</span> <span class="n">ViewGroup</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">MATCH_PARENT</span><span class="o">:</span>
-               <span class="c1">// Window can&#39;t …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../viewhui-zhi-liu-cheng.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../grokking-algorithms-3.html">Grokking Algorithms-3</a></h2>
-                <div class="summary"><h4 id="set-covering">集合覆盖问题(Set Covering)</h4>
-<p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
-<p>一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解</p>
-<p>贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完</p>
-<div class="highlight"><pre><span></span><span class="n">state_needed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;mt&#39;</span><span class="p">,</span> <span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
-<span class="c1"># 各个电台广播可以覆盖到的地方</span>
-<span class="n">stations</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;kone&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;ktwo&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;wa&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;mt&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kthree&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kfour&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="s1">&#39;ut&#39;</span><span class="p">]),</span>
-    <span class="s1">&#39;kfive&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;az&#39;</span><span class="p">])</span>
-<span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">greedy_set_covery …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-3.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../grokking-algorithms-1.html">Grokking Algorithms-1</a></h2>
-                <div class="summary"><h4 id="binary-search">binary search 二分法查找</h4>
-<div class="highlight"><pre><span></span><span class="c1"># 二分法查找, 返回数值在 list 中的位置, 否则返回 None</span>
-<span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">num_list</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-    <span class="c1"># 确定查找的数在列表中</span>
-    <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">num_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="n">num_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">None</span>
-    <span class="c1"># 最小值位置</span>
-    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c1"># 最大值位置</span>
-    <span class="n">high</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
-        <span class="c1"># 中间位置, 向下取整</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">hight</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="k">if</span> <span class="n">num_list</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">:</span>
-            <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">elif</span> <span class="n">num_list …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-1.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../grokking-algorithms-2.html">Grokking Algorithms-2</a></h2>
-                <div class="summary"><h4 id="_1">图</h4>
-<div class="highlight"><pre><span></span><span class="c1"># 使用散列表来表示图</span>
-<span class="k">class</span> <span class="nc">GraphItem</span><span class="p">:</span>
-
-
-<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
-    <span class="n">item</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="c1"># 向图中加入顶点</span>
-
-    <span class="c1"># 删除顶点</span>
-    <span class="k">def</span> <span class="nf">dl</span>
-</pre></div>
-
-
-<h4 id="_2">广度优先算法</h4>
-<div class="highlight"><pre><span></span><span class="c1"># 在图 graph 中从 start 到 item 的广度优先算法</span>
-<span class="k">def</span> <span class="nf">breadth_first_search</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">queue</span>
-    <span class="n">search_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-    <span class="c1"># 将 start 顶点的邻接点加入到队列中</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># 顶点标记为灰, 表示已经入队查找过</span>
-            <span class="n">element</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
-            <span class="n">search_queue</span><span class="o">.</span><span class="n">put …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../grokking-algorithms-2.html">more ...</a>
                 </div>
             </article>
             <hr/>

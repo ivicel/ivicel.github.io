@@ -632,6 +632,11 @@ Amber time            </a>
 
 <span class="c1"># 退出 with 时调用，处理 with 产生的 exception</span>
 <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exceptiop_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
+
+
+<span class="c1"># 跟 async with 使用, 异步上下文, 除了必须返回一个 awaitable, 其他与上相同</span>
+<span class="n">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exec_type</span><span class="p">,</span> <span class="n">exec_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
 </pre></div>
 
 
