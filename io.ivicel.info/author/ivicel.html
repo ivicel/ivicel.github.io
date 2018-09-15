@@ -83,6 +83,27 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a></h2>
+                <div class="summary"><p><a href="https://github.com/ivicel/steam-key-python">steam-key-python</a> 是 <a href="https://github.com/zyfworks/steam-key">steam-key</a> 的python 移植, 原开发基于 node.js.</p>
+<p>使用到的主要开发包:</p>
+<ul>
+<li><a href="https://github.com/ValvePython/steam">steam</a> 一个用 python 实现的 steamkit</li>
+<li>flask web 框架</li>
+<li>gevent 异步框架</li>
+<li>uwsgi 后端 server</li>
+</ul>
+<h5 id="1-flask-websocket">1. flask 结合 websocket 问题</h5>
+<p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
+<div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/websocket</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Connection</span><span class="o">:</span> <span class="l">Upgrade</span>
+<span class="na">Upgrade</span><span class="o">:</span> <span class="l">websocket</span>
+<span class="na">Sec-WebSocket-Version</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">Sec-WebSocket-Key …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">数据结构(Python描述) 第 6 章 二叉树与树</a></h2>
                 <div class="summary"><h4 id="1">1. 二叉树</h4>
 <h5 id="11">1.1 概念</h5>
@@ -218,25 +239,6 @@ Amber time            </a>
 <blockquote>
 <p>这也是 <code>getWidth()</code>, <code>getHeight()</code> 的算法. 其和 <code>getMeasuredWidth …</code></p></blockquote>
                     <a class="btn btn-default btn-xs" href="../android-view-de-zuo-biao-xi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../circleimageviewshi-xian-jie-xi.html">CircleImageView实现解析</a></h2>
-                <div class="summary"><h3 id="1-circleimageview">1. CircleImageView 的实现</h3>
-<h4 id="11">1.1 自定义的属性</h4>
-<p>CircleImageView 一共自定义的 5 个自定义属性</p>
-<ol>
-<li><code>civ_border_width</code> 边框的大小</li>
-<li><code>civ_border_color</code> 边框的颜色</li>
-<li><code>civ_border_overlay</code> 边框覆盖</li>
-<li><code>civ_fill_color</code> 图片背景填充, 已弃用, 使用 <code>civ_circle_background_color</code> 替代</li>
-</ol>
-<h4 id="12">1.2 流程</h4>
-<p>CircleImageView 是继承自系统控件 <code>android.widget.ImageView</code>, 而不是 support 里的兼容控件 <code>android.support.v7.widget.AppCompatImageView</code>, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包.</p>
-<blockquote>
-<p>CircleImageView …</p></blockquote>
-                    <a class="btn btn-default btn-xs" href="../circleimageviewshi-xian-jie-xi.html">more ...</a>
                 </div>
             </article>
             <hr/>

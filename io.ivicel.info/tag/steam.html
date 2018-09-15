@@ -84,6 +84,27 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a></h2>
+                <div class="summary"><p><a href="https://github.com/ivicel/steam-key-python">steam-key-python</a> 是 <a href="https://github.com/zyfworks/steam-key">steam-key</a> 的python 移植, 原开发基于 node.js.</p>
+<p>使用到的主要开发包:</p>
+<ul>
+<li><a href="https://github.com/ValvePython/steam">steam</a> 一个用 python 实现的 steamkit</li>
+<li>flask web 框架</li>
+<li>gevent 异步框架</li>
+<li>uwsgi 后端 server</li>
+</ul>
+<h5 id="1-flask-websocket">1. flask 结合 websocket 问题</h5>
+<p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
+<div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/websocket</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Connection</span><span class="o">:</span> <span class="l">Upgrade</span>
+<span class="na">Upgrade</span><span class="o">:</span> <span class="l">websocket</span>
+<span class="na">Sec-WebSocket-Version</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">Sec-WebSocket-Key …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../a-simple-steamkit-implement-with-using-pythonyi.html">A Simple SteamKit implement with using Python(一)</a></h2>
                 <div class="summary"><h4 id="1">1. 连接握手</h4>
 <ol>

@@ -83,6 +83,25 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./circleimageviewshi-xian-jie-xi.html">CircleImageView实现解析</a></h2>
+                <div class="summary"><h3 id="1-circleimageview">1. CircleImageView 的实现</h3>
+<h4 id="11">1.1 自定义的属性</h4>
+<p>CircleImageView 一共自定义的 5 个自定义属性</p>
+<ol>
+<li><code>civ_border_width</code> 边框的大小</li>
+<li><code>civ_border_color</code> 边框的颜色</li>
+<li><code>civ_border_overlay</code> 边框覆盖</li>
+<li><code>civ_fill_color</code> 图片背景填充, 已弃用, 使用 <code>civ_circle_background_color</code> 替代</li>
+</ol>
+<h4 id="12">1.2 流程</h4>
+<p>CircleImageView 是继承自系统控件 <code>android.widget.ImageView</code>, 而不是 support 里的兼容控件 <code>android.support.v7.widget.AppCompatImageView</code>, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包.</p>
+<blockquote>
+<p>CircleImageView …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="./circleimageviewshi-xian-jie-xi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./a-ha-suan-fa-1.html">啊哈算法1</a></h2>
                 <div class="summary"><h3 id="1">1. 简单桶排序</h3>
 <p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
@@ -229,20 +248,6 @@ Amber time            </a>
 <ol>
 <li>当一个 <code>Activity</code> <strong>A</strong> 启动加一个 <code>Activity</code> <strong>B</strong> 时, 只有 <strong>A</strong> 的 <code>onPause</code> 执行完返回时, <strong>B</strong> 才开始执行<code>onCreate</code> <code>onStart</code>, 直到 <code>onResume</code>显示在前台, <strong>A</strong> 会执行 <code>onStop</code> <code>onDestroy</code>, 所以在 <code>onPause</code>不能执行太 …</li></ol>
                     <a class="btn btn-default btn-xs" href="./android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./android-dui-xiang-xu-lie-hua-fang-shi.html">Android 对象序列化方式</a></h2>
-                <div class="summary"><p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
-<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
-<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
-<blockquote>
-<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
-</blockquote>
-<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
-<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
-                    <a class="btn btn-default btn-xs" href="./android-dui-xiang-xu-lie-hua-fang-shi.html">more ...</a>
                 </div>
             </article>
             <hr/>
