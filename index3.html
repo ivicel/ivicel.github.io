@@ -83,6 +83,20 @@ Amber time            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="./android-dui-xiang-xu-lie-hua-fang-shi.html">Android 对象序列化方式</a></h2>
+                <div class="summary"><p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
+<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
+<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
+<blockquote>
+<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
+</blockquote>
+<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
+<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
+                    <a class="btn btn-default btn-xs" href="./android-dui-xiang-xu-lie-hua-fang-shi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="./android-ipcji-zhi.html">Android IPC机制</a></h2>
                 <div class="summary"><h4 id="1">1. 开启多进程的方法</h4>
 <p>Android 应用启动时会自动创建一个新的进程, 其进程名默认为<strong>包名</strong>, 为四大组件(<strong>Activity</strong> , <strong>Service</strong>, <strong>ContentProvider</strong>, <strong>BroadcastReceiver</strong>)启动一个新的进程, 最简单的是在<code>Manifest.xml</code>中为其配置<code>android:process</code>进程名称. 有两种写法. </p>
@@ -265,39 +279,6 @@ Amber time            </a>
 <li>
 <p>舍去位大于5时 …</p></li></ol></blockquote>
                     <a class="btn btn-default btn-xs" href="./javaxiao-shu-she-wei-qing-kuang.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">Java中static关键字以及修饰符</a></h2>
-                <div class="summary"><blockquote>
-<p><code>Java</code>类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法)</p>
-<p>另外, <code>static</code>变量会优先于普通变量进行初始化, <code>static</code>变量也是按顺序</p>
-<p>只有<code>static</code>初始化完成, 普通变量才会初始化</p>
-</blockquote>
-<h4 id="1-static">1. <code>static</code>修饰类</h4>
-<div class="highlight"><pre><span></span><span class="c1">// 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用</span>
-<span class="c1">// 只能使用外部类的 static 变量和方法</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutterClass</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="nf">OutterClass</span><span class="o">()</span> <span class="o">{}</span>
-
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{}</span>
-<span class="o">}</span>   
-</pre></div>
-
-
-<h4 id="2-static">2. <code>static</code>修饰成员变量</h4>
-<div class="highlight"><pre><span></span><span class="c1">// 修饰类成员变量时, 变量值会在第一次访问类时被赋值, 第一次new, 第一次访问变量</span>
-
-
-
-<span class="kd">class</span> <span class="nc">Bowl</span> <span class="o">{</span>
-    <span class="n">Bowl</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bowl(&quot;</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kt">void</span> <span class="nf">f1 …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">more ...</a>
                 </div>
             </article>
             <hr/>

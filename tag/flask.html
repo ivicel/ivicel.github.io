@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Python - Amber time</title>
+    <title>flask - Amber time</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
 
     <meta name="author" content="ivicel" />
-    <meta name="keywords" content="Python" />
+    <meta name="keywords" content="flask" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Amber time" />
@@ -68,7 +68,7 @@ Amber time            </a>
                         <li >
                             <a href="../category/javascript.html">Javascript</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="../category/python.html">Python</a>
                         </li>
             </ul>
@@ -101,65 +101,6 @@ Amber time            </a>
 <span class="na">Sec-WebSocket-Version</span><span class="o">:</span> <span class="l">13</span>
 <span class="na">Sec-WebSocket-Key …</span></pre></div>
                     <a class="btn btn-default btn-xs" href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../a-simple-steamkit-implement-with-using-pythonyi.html">A Simple SteamKit implement with using Python(一)</a></h2>
-                <div class="summary"><h4 id="1">1. 连接握手</h4>
-<ol>
-<li>
-<p>与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
-</li>
-<li>
-<p>我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
-</li>
-</ol>
-<blockquote>
-<p>这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
-</blockquote>
-<ol>
-<li>收到服务的 <code>session_key</code> 确认, 结果为 <code>EResult.OK</code> 时 …</li></ol>
-                    <a class="btn btn-default btn-xs" href="../a-simple-steamkit-implement-with-using-pythonyi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../wsgi-xie-yi.html">WSGI 协议</a></h2>
-                <div class="summary"><h4 id="1">1. 简介</h4>
-<p>WSGI(Web Server Gateway Interface) 定义在 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.</p>
-<p>WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种, 这样来看, 上层总是下层的 server, 下层是上层的 client …</p>
-                    <a class="btn btn-default btn-xs" href="../wsgi-xie-yi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../pythonlei-nei-zhi-mo-zhu-fang-fa.html">Python类内置魔术方法</a></h2>
-                <div class="summary"><h3 id="_1">内置类特殊属性</h3>
-<div class="highlight"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="vm">__dict__</span>
-
-<span class="n">instance</span><span class="o">.</span><span class="vm">__class__</span>
-
-<span class="n">class</span><span class="o">.</span><span class="vm">__bases__</span>
-
-<span class="n">definition</span><span class="o">.</span><span class="vm">__name__</span>
-
-<span class="n">definition</span><span class="o">.</span><span class="n">__qualname__</span>
-
-<span class="n">class</span><span class="o">.</span><span class="vm">__mro__</span>
-
-<span class="n">class</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
-
-<span class="n">class</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
-</pre></div>
-
-
-<p>自定义类都有一个<code>namespace</code>，即一个字典对象来存储类的属性。<code>C.x</code>即表示<code>C.__dict__['x']</code>，当类<code>C</code>中不存在属性<code>x</code>，会依据继承顺序<a href="https://www.python.org/download/releases/2.3/mro/"><code>MRO</code></a>表来查找该属性。</p>
-<p>如若查找完基类后，依然找不到属性，才会调相应用<code>C.__getattribute__()</code>、<code>C.__getattr__()</code></p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;call __getattr__ …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../pythonlei-nei-zhi-mo-zhu-fang-fa.html">more ...</a>
                 </div>
             </article>
             <hr/>

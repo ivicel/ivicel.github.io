@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植 - Amber time</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="./ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">
+
+        <meta name="author" content="ivicel" />
+        <meta name="keywords" content="python,flask,websocket,steam,steamkey" />
+        <meta name="description" content="steam-key-python 是 steam-key 的python 移植, 原开发基于 node.js. 使用到的主要开发包: steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商 GET /websocket HTTP/1.1 Connection: Upgrade Upgrade: websocket Sec-WebSocket-Version: 13 Sec-WebSocket-Key …" />
+
+        <meta property="og:site_name" content="Amber time" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植"/>
+        <meta property="og:url" content="./ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html"/>
+        <meta property="og:description" content="steam-key-python 是 steam-key 的python 移植, 原开发基于 node.js. 使用到的主要开发包: steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商 GET /websocket HTTP/1.1 Connection: Upgrade Upgrade: websocket Sec-WebSocket-Version: 13 Sec-WebSocket-Key …"/>
+        <meta property="article:published_time" content="2018-09-10" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="flask" />
+            <meta property="article:tag" content="websocket" />
+            <meta property="article:tag" content="steam" />
+            <meta property="article:tag" content="steamkey" />
+            <meta property="article:author" content="ivicel" />
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./theme/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Amber time            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="./category/android.html">Android</a>
+                        </li>
+                        <li >
+                            <a href="./category/c-language.html">C language</a>
+                        </li>
+                        <li >
+                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
+                        </li>
+                        <li >
+                            <a href="./category/database.html">Database</a>
+                        </li>
+                        <li >
+                            <a href="./category/java.html">Java</a>
+                        </li>
+                        <li >
+                            <a href="./category/javascript.html">Javascript</a>
+                        </li>
+                        <li class="active">
+                            <a href="./category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html"
+                       rel="bookmark"
+                       title="Permalink to 基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植">
+                        基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-09-10T00:00:00+08:00"> Mon 10 September 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/python.html">python</a>
+        /
+	<a href="./tag/flask.html">flask</a>
+        /
+	<a href="./tag/websocket.html">websocket</a>
+        /
+	<a href="./tag/steam.html">steam</a>
+        /
+	<a href="./tag/steamkey.html">steamkey</a>
+        
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p><a href="https://github.com/ivicel/steam-key-python">steam-key-python</a> 是 <a href="https://github.com/zyfworks/steam-key">steam-key</a> 的python 移植, 原开发基于 node.js.</p>
+<p>使用到的主要开发包:</p>
+<ul>
+<li><a href="https://github.com/ValvePython/steam">steam</a> 一个用 python 实现的 steamkit</li>
+<li>flask web 框架</li>
+<li>gevent 异步框架</li>
+<li>uwsgi 后端 server</li>
+</ul>
+<h5 id="1-flask-websocket">1. flask 结合 websocket 问题</h5>
+<p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
+<div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/websocket</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Connection</span><span class="o">:</span> <span class="l">Upgrade</span>
+<span class="na">Upgrade</span><span class="o">:</span> <span class="l">websocket</span>
+<span class="na">Sec-WebSocket-Version</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">Sec-WebSocket-Key</span><span class="o">:</span> <span class="l">KSk4Wty1NJInqzWMBbQqCQ==</span>
+</pre></div>
+
+
+<p>当我们收到这个请求时, 返回一个 response 来确定升级到</p>
+<div class="highlight"><pre><span></span>HTTP/1.1 101 Switching Protocols
+Server: nginx/1.15.3
+Date: Thu, 13 Sep 2018 05:56:14 GMT
+Connection: upgrade
+Upgrade: websocket
+Sec-WebSocket-Accept: B1HnOTYR2fZO2PT0y6LImuBQtzQ=
+</pre></div>
+
+
+<p>要让 flask 支持 websocket, 就要做到两点.</p>
+<ol>
+<li>获得原始的 TCP 连接, 而我们的 WSGI 程序获得的是只要环境变量和一个回调函数, 如 <code>def application(environ, start_response)</code>. 这样的话, 我们可以在最底层的 <code>middleware</code> 里把 socket 连接放到 environ 变量中, 比如 <code>environ['socket']</code>, 这样无论我们在哪一个中间件里都可以处理到最原始的连接. </li>
+<li>在获得到 TCP 连接后, 由于 Websocket 是基于 message 而不是基于 stream 的, 我们还需要实现 websocket 协议, 接管请求到 <code>/websocket</code> 的连接, 比如 ping/pong, send/receive</li>
+</ol>
+<p>以上两点 uWSGI 已经帮我们实现好, 在 <a href="https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html">uWSGI 文档</a>中提到了当使用 <code>--http-socket</code> 参数来运行的 wsgi 应用时, 只要我们检查 <code>environ['HTTP_SEC_WEBSOCKET_KEY']</code> 变量, 这是升级到 websocket 里的请求, 便可知道该连接之后想升级到 websocket. uWSGI 已经帮我们把实现了 websocket 协议, 我们只要使用以下几个接口即可</p>
+<div class="highlight"><pre><span></span><span class="c1"># 确定发回 Connection upgrade</span>
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_handshake</span><span class="p">([</span><span class="n">key</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">proto</span><span class="p">])</span>
+
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_recv</span><span class="p">()</span>
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_send_binary</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">(</span><span class="n">added</span> <span class="ow">in</span> <span class="mf">1.9</span><span class="o">.</span><span class="mi">21</span> <span class="n">to</span> <span class="n">support</span> <span class="n">binary</span> <span class="n">messages</span><span class="p">)</span>
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_recv_nb</span><span class="p">()</span>
+<span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_send_from_sharedarea</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> 
+</pre></div>
+
+
+<h5 id="2-flask-gevent">2. flask 和 gevent 问题</h5>
+<p>Flask 是同步执行的, 我们主要的请求都在 websocket 中, 所以我们只在每一个 websocket upgrade request 中 patch 所有的 socket 即可. </p>
+<h5 id="3">3. 代码实现</h5>
+<p>前面说到, 因为要检测 <code>environ</code> 的值, 我们可以使用一个中间件 <code>WebsocketMiddleware</code>, 这样当我们生成 <code>ws = Websocket(app)</code>, 然后使用 <code>@ws.route('/ws')</code> 时便说明, url <code>/ws</code> 使用 websocket 连接.</p>
+<div class="highlight"><pre><span></span>uWSGI ------ Websocket Middleware ---if is websocket---&gt; Websocket Application 
+                     |
+                     | else
+                     |
+              Flask Application
+</pre></div>
+
+
+<p>查看 flask 的源码可以看到在类 Flask 的最终实现 wsgi 协议的是方法 <code>wsgi_app()</code>, 并且源码里也说明了最好的中间件实现方式. </p>
+<div class="highlight"><pre><span></span><span class="c1"># 简化实现说明</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">.websocket</span> <span class="kn">import</span> <span class="n">Websocket</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># websocket_application</span>
+<span class="n">ws</span> <span class="o">=</span> <span class="n">Websocket</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">re</span>
+
+<span class="c1"># 我们会把 websocket 连接对象传给处理函数</span>
+<span class="c1"># ws 参数是一个按 websocket 标准接口实现的包装对象</span>
+<span class="c1"># 只需按标准接口调用</span>
+<span class="nd">@ws.route</span><span class="p">(</span><span class="s1">&#39;/ws&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">websocket_connect</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">ws</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;receive message: {!r}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+        <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+
+
+<p>主要类的实现, <code>Websocket</code> 类实现了一个 WGSI 协议, 接收从 uWSGI 的回调, 然后将请求放到 <code>WebsocketMiddleware</code> 中判断是否为 websocket, 不是的话发送到 flask application 来处理</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uwsgi</span>
+<span class="kn">import</span> <span class="nn">gevent</span>
+<span class="kn">from</span> <span class="nn">gevent.queue</span> <span class="kn">import</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">gevent.event</span> <span class="kn">import</span> <span class="n">Event</span>
+<span class="kn">from</span> <span class="nn">gevent.select</span> <span class="kn">import</span> <span class="n">select</span> <span class="k">as</span> <span class="n">gselect</span>
+<span class="kn">from</span> <span class="nn">gevent.monkey</span> <span class="kn">import</span> <span class="n">patch_all</span>
+<span class="kn">from</span> <span class="nn">werkzeug.routing</span> <span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">Rule</span>
+<span class="kn">from</span> <span class="nn">werkzeug.exceptions</span> <span class="kn">import</span> <span class="n">HTTPException</span>
+
+<span class="c1"># Websocket 类</span>
+<span class="k">class</span> <span class="nc">WebSocket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+        <span class="c1"># 路由表</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
+        <span class="c1"># 路由处理函数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># 在这里将 wsgi 应用设置为 WebSocketMiddleware</span>
+        <span class="c1"># 并且我们还保留了原 Flask.wsgi_app 的引用</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">WebSocketMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_url_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;添加到路由表&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;路由表&quot;&quot;&quot;</span>
+
+
+<span class="c1"># WebSocketMiddleware 类</span>
+<span class="k">class</span> <span class="nc">WebSocketMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wsgi_app</span><span class="p">,</span> <span class="n">websocket</span><span class="p">):</span>
+        <span class="c1"># Fask application</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">wsgi_app</span>
+        <span class="c1"># Websocket application</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ws</span> <span class="o">=</span> <span class="n">websocket</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="c1"># 当请求到达时, 我们先判断该路由是否在 websocket 中绑定了</span>
+        <span class="n">adapter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">bind_to_environ</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">endpoint</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">match</span><span class="p">()</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">view_functions</span><span class="p">[</span><span class="n">endpoint</span><span class="p">]</span>
+        <span class="k">except</span> <span class="n">HTTPException</span><span class="p">:</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c1"># websocket 的升级判断, 失败则使用 flask application 处理</span>
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="s1">&#39;HTTP_SEC_WEBSOCKET_KEY&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>    
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+
+        <span class="c1"># 回应客户端升级协议到 websocket</span>
+        <span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_handshake</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;HTTP_SEC_WEBSOCKET_KEY&#39;</span><span class="p">],</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HTTP_ORIGIN&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+        <span class="c1"># 使用 gevent 来处理, 发送消息的触发事件和队列</span>
+        <span class="n">send_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+        <span class="n">send_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="c1"># 接收消息的触发事件和队列</span>
+        <span class="n">recv_event</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+        <span class="n">recv_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+        <span class="c1"># WebSocketWrapper 是一个包装类, 提供了众所周知的 websocket 接口</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">WebSocketWrapper</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">connection_fd</span><span class="p">(),</span> <span class="n">send_event</span><span class="p">,</span>
+                                  <span class="n">send_queue</span><span class="p">,</span> <span class="n">recv_event</span><span class="p">,</span> <span class="n">recv_queue</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">listener</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+            <span class="n">gselect</span><span class="p">([</span><span class="n">client</span><span class="o">.</span><span class="n">fd</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[])</span>
+            <span class="n">recv_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+        <span class="c1"># handler 是我们的设置的路由函数, 在这我们派生出的 greenlet object 并把 weboscket wrapper 传给它</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="c1"># 设置当 socket 可读, 也即是有消息从客户端发过来时的回调</span>
+        <span class="n">listening</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                <span class="n">recv_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+                <span class="n">listening</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                <span class="n">handler</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="c1"># 一是路由回调需要发送消息, 消息会被加到发送队列等待发送</span>
+            <span class="c1"># 二是发送队列里有消息需要发送</span>
+            <span class="c1"># 三是从客户端那收到消息</span>
+            <span class="n">gevent</span><span class="o">.</span><span class="n">wait</span><span class="p">([</span><span class="n">handler</span><span class="p">,</span> <span class="n">send_event</span><span class="p">,</span> <span class="n">recv_event</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># 有消息需要发送</span>
+            <span class="k">if</span> <span class="n">send_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="n">send_queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+                        <span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">gevent</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                    <span class="n">send_event</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">closed</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">elif</span> <span class="n">recv_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>    <span class="c1"># 接收到消息</span>
+                <span class="n">recv_event</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_recv_nb</span><span class="p">()</span>
+                    <span class="k">while</span> <span class="n">message</span><span class="p">:</span>
+                        <span class="n">recv_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                        <span class="n">message</span> <span class="o">=</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">websocket_recv_nb</span><span class="p">()</span>
+                    <span class="n">listening</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                    <span class="n">client</span><span class="o">.</span><span class="n">closed</span> <span class="o">=</span> <span class="bp">True</span>
+
+            <span class="k">elif</span> <span class="n">handler</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span>
+                <span class="n">listening</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+
+
+<p>完整代码在: https://github.com/ivicel/steam-key-python</p>
+<h4 id="reference">Reference</h4>
+<ol>
+<li>
+<p>https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html</p>
+</li>
+<li>
+<p>https://github.com/zeekay/flask-uwsgi-websocket/</p>
+</li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" target="_blank">
+                You can modify those links in your config file
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 ivicel
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+
+</body>
+</html>

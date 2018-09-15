@@ -218,7 +218,7 @@ sed -E <span class="s1">&#39;/^import\s+&quot;[^\/]*$/s/&quot;(.*)&quot;;$/&quot
 <ol>
 <li>前三个握手包, 用来生成加密的通信, 有自己特定的定义</li>
 <li>protobuf 包, 包含一个 protobuf 消息</li>
-<li>multi message, 使用 gzip 压缩后的多个 protobuf messages</li>
+<li>multi message, (1) 根据 <code>CMsgMulti.size_unzipped</code> 是否 <strong>大于 0</strong> 来判断 <code>CMsgMulti.message_body</code> 是否启用了  gzip 压缩. (2) 如果是则要先先把 <code>message_body</code> 解压, 然后再解读里面的消息</li>
 </ol>
 <p>这三种包都会包含以下三个字段: </p>
 <ul>
@@ -311,6 +311,18 @@ III. recv &lt;ChannelEncryptResult&gt;
 |Protobuf message&lt;CMsgMulti&gt;|
 |                           |
 + + + + + + + + + + + + + + +
+
+Multi 包含一个或多个 message, 每个结构为, 前 4 个字节为消息长度 + message
++ - - - - - - - - - - - - - + 
+| 4 bytes message_len       |
++ - - - - - - - - - - - - - +   
+| message_len bytes message |
++ - - - - - - - - - - - - - +  
+| 4 bytes message_len       |
++ - - - - - - - - - - - - - +   
+| message_len bytes message |
++ - - - - - - - - - - - - - +
+
 
 4. send protobuf message
 + + + + + + + + + + + + + + + + + + + +
