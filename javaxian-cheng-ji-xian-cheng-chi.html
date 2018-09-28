@@ -1,132 +1,100 @@
+
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="zh">
 <head>
-    <title>Java线程及线程池 - Amber time</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
 
 
 
-<link rel="canonical" href="./javaxian-cheng-ji-xian-cheng-chi.html">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-        <meta name="author" content="ivicel" />
-        <meta name="keywords" content="线程,线程池,AsyncTask,Handler Thread" />
-        <meta name="description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …" />
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        <meta property="og:site_name" content="Amber time" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Java线程及线程池"/>
-        <meta property="og:url" content="./javaxian-cheng-ji-xian-cheng-chi.html"/>
-        <meta property="og:description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …"/>
-        <meta property="article:published_time" content="2018-04-10" />
-            <meta property="article:section" content="Java" />
-            <meta property="article:tag" content="线程" />
-            <meta property="article:tag" content="线程池" />
-            <meta property="article:tag" content="AsyncTask" />
-            <meta property="article:tag" content="Handler Thread" />
-            <meta property="article:author" content="ivicel" />
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …" />
+<meta name="keywords" content="线程, 线程池, AsyncTask, Handler Thread">
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<meta property="og:title" content="Java线程及线程池"/>
+<meta property="og:description" content="1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型 newCachedThreadPool 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 Integer.MAX_VALUE 可以看作是无限大小的 newFixedThreadPool 固定大小的线程池, 对于没有线程处理的请求会在 LinkedBlockingQueue 中等待处理 newSingleThreadExecutor 单一线程的线程池, 请求会被按队列顺序处理 newScheduledThreadPool 固定大小 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./javaxian-cheng-ji-xian-cheng-chi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-10 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="线程"/>
+<meta property="article:tag" content="线程池"/>
+<meta property="article:tag" content="AsyncTask"/>
+<meta property="article:tag" content="Handler Thread"/>
+<meta property="og:image" content="/images/favicon.ico">
 
-    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
-    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
-        <link href="./theme/css/custom.css" rel="stylesheet">
-
-
-
-
+  <title>Ivicel\s Ambertime &ndash; Java线程及线程池</title>
 
 </head>
 <body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="./" class="navbar-brand">
-Amber time            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li >
-                            <a href="./category/android.html">Android</a>
-                        </li>
-                        <li >
-                            <a href="./category/c-language.html">C language</a>
-                        </li>
-                        <li >
-                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
-                        </li>
-                        <li >
-                            <a href="./category/database.html">Database</a>
-                        </li>
-                        <li class="active">
-                            <a href="./category/java.html">Java</a>
-                        </li>
-                        <li >
-                            <a href="./category/javascript.html">Javascript</a>
-                        </li>
-                        <li >
-                            <a href="./category/python.html">Python</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="./javaxian-cheng-ji-xian-cheng-chi.html"
-                       rel="bookmark"
-                       title="Permalink to Java线程及线程池">
-                        Java线程及线程池
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-04-10T00:00:00+08:00"> Tue 10 April 2018</time>
-    </span>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
 
 
 
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="javaxian-cheng-ji-xian-cheng-chi">Java线程及线程池</h1>
+    <p>
+      Posted on Tue 10 April 2018 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
 
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/xian-cheng.html">线程</a>
-        /
-	<a href="./tag/xian-cheng-chi.html">线程池</a>
-        /
-	<a href="./tag/asynctask.html">AsyncTask</a>
-        /
-	<a href="./tag/handler-thread.html">Handler Thread</a>
-        
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h3 id="1-java">1. Java 线程池</h3>
+  <div>
+    <h3 id="1-java">1. Java 线程池</h3>
 <h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
 <p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
 <ul>
@@ -218,77 +186,53 @@ Amber time            </a>
 <ol>
 <li><a href="http://gityuan.com/2016/01/16/thread-pool/">http://gityuan.com/2016/01/16/thread-pool</a></li>
 </ol>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/xian-cheng.html">线程</a>
+      <a href="./tag/xian-cheng-chi.html">线程池</a>
+      <a href="./tag/asynctask.html">AsyncTask</a>
+      <a href="./tag/handler-thread.html">Handler Thread</a>
+    </p>
+  </div>
 
 
 
 
 
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2018 ivicel
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="./theme/js/jquery.min.js"></script>
+</article>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./theme/js/bootstrap.min.js"></script>
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="./theme/js/respond.min.js"></script>
 
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel\s Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
 
 </body>
 </html>

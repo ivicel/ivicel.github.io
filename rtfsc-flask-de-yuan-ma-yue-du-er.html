@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有 before_request 回调中返回 None, 才继续向下派发 rv = self.preprocess_request() if rv is None: rv = self.dispatch_request() except Exception as e: rv = self.handle_user_exception(e) return self.finalize_request(rv) 回调程序运行后 …" />
+<meta name="keywords" content="flask, python, 源代码阅读, RTFSC">
+
+<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<meta property="og:title" content="RTFSC: Flask 的源码阅读(二)"/>
+<meta property="og:description" content="1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有 before_request 回调中返回 None, 才继续向下派发 rv = self.preprocess_request() if rv is None: rv = self.dispatch_request() except Exception as e: rv = self.handle_user_exception(e) return self.finalize_request(rv) 回调程序运行后 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./rtfsc-flask-de-yuan-ma-yue-du-er.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-09-18 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="flask"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="源代码阅读"/>
+<meta property="article:tag" content="RTFSC"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel\s Ambertime &ndash; RTFSC: Flask 的源码阅读(二)</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="rtfsc-flask-de-yuan-ma-yue-du-er">RTFSC: Flask 的源码阅读(二)</h1>
+    <p>
+      Posted on Tue 18 September 2018 in <a href="./category/python.html">Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h4 id="1">1. 路由派发</h4>
+<p>由 <code>Flask.full_dispatch_request()</code> 发起路由派发</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">full_dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># before_first_request 的回调</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">try_trigger_before_first_request_functions</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># signal 注册的回调</span>
+        <span class="n">request_started</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># before_request 的回调, 在这我们也可以看到</span>
+        <span class="c1"># 只有 before_request 回调中返回 None, 才继续向下派发</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_request</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_request</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_user_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalize_request</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>回调程序运行后, 第一次有 request 到达时的注册方法</li>
+</ul>
+<p>在 <code>Flask.try_trigger_before_first_request_functions()</code> 运行我们在程序中使用 <code>before_first_request()</code> 注册的回调, 这是在程序运行时接收到第一次请求时调用, 可以注册多个回调方法, 检测第一次 request 只是使用了一个简单的标志位 <code>_got_first_request</code>.</p>
+<p><strong>需要注意的是</strong></p>
+<ol>
+<li>回调这些方法的时, 使用了线程锁 <code>_before_request_lock</code> 在保证方法总是在回调用 reqeust 之前被调用, 想像一下多线程版本时, 可以同时到达多个 request. </li>
+<li>在取得锁之后, 我们还在再次检查 <code>_got_first_request</code> 标志, 确保这些回调只调用过一次</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_before_request_lock</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_got_first_request</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1"># before_first_request_funcs 是注册的方法列表</span>
+    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">before_first_request_funcs</span><span class="p">:</span>
+        <span class="n">func</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_got_first_request</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>如果我们安装了 <code>blinker</code> , 这是一个同步的事件派发器, flask 为我们注册了一些事件, 像 <code>request-started</code>, <code>request-finished</code>, 以便我们在可以在程序外监听, 如果我们没有安装 <code>blinker</code>, 不会触发这些事件. 事件在 <code>flask.signals</code> 中</p>
+</li>
+<li>
+<p>下来便是由 <code>url_value_request</code> 注册的回调和由 <code>before_request</code> 注册的回调. 前者是的回调方法里接收两个参数, 一是 <code>reqeust.endpoint</code> 这个默认就是方法的 <code>__name__</code>, 二是  <code>request.view_args</code> 这个是请求的参数 <code>query_string</code>.  前者回调存放在 <code>Flask.url_value_preprocessor</code>, 后者在 <code>Flask.before_request_func</code></p>
+</li>
+</ul>
+<p>这里需要注意的是我们有两个地方可以注册该事件, 一是全局 <code>Flask</code>, 二是 <code>Blueprint</code>. 这两种回调方法都存放在同一个变量中. 这是一个 dict, 全局的注册 <code>key</code> 为 <code>None</code>, 对 <code>Blueprint</code> 则是 blueprint 的名称为 <code>key</code>.</p>
+<blockquote>
+<p>对象 <code>before_request</code> , 当其中有方法返回非 <code>None</code> 时, 该 request 便返回给客户端了</p>
+</blockquote>
+<ul>
+<li>下来派发到我们注册的路由方法</li>
+</ul>
+<p>```python
+  def dispatch_request(self):
+      # Request 是从 werkzeug.wrapper.Reqeust 继承来的
+      # 前面讲过, 当有 exception 时, exception 保存在 Request.routing_exception 中
+      req = _request_ctx_stack.top.request
+      if req.routing_exception is not None:
+          # 抛出异常或者抛出调试异常
+          self.raise_routing_exception(req)
+    # 没有问题
+      rule = req.url_rule
+    # 我们在注册 view_func 时, 可以提供一个 provide_automatic_options 参数
+      # 当这个为 True, 并且是 OPTIONS 请求时, 直接回复一个默认 option_response
+      if getattr(rule, 'provide_automatic_options', False) \
+         and req.method == 'OPTIONS':
+          return self.make_default_options_response()
+      # 终于来到我们自己注册的路由方法
+      return self.view_functions<a href="**req.view_args">rule.endpoint</a></p>
+<p>def raise_routing_exception(self, request):
+      # 非 debug 模式, 或者非重定向, 或是 (GET, HEAD, OPTIONS) 之一中的请求
+      # 直接抛出
+      if not self.debug \
+         or not isinstance(request.routing_exception, RequestRedirect) \
+         or request.method in ('GET', 'HEAD', 'OPTIONS'):
+          raise request.routing_exception
+    # 在 debug 模式下, 抛出不同的输出, 也就是我们调试时看到调试页面
+      from .debughelpers import FormDataRoutingRedirect
+      raise FormDataRoutingRedirect(request)</p>
+<p>```</p>
+<h4 id="2">2. 请求异常处理</h4>
+<p>如果在请求处理是发生异常, 会抛到 <code>full_dispatch_request()</code> 中, 在 <code>handle_user_exception()</code> 中处理</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handle_user_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="c1"># 确保当前系统中刚发生的异常是原先我们捕捉到的异常</span>
+    <span class="c1"># 如果不是的话, 那么向上 wsgi_app 中抛出 AssertionError</span>
+    <span class="c1"># 由 handle_exception() 来处理</span>
+    <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">exc_value</span> <span class="ow">is</span> <span class="n">e</span>
+    <span class="c1"># BadRequestKeyError 指的是比如请求时需要提供某个参数, 但没有提供</span>
+    <span class="c1"># 像 form 中 csrf_token, 那么会产生一个 KeyError, 而客户端则会收到一个 400 Bad Request</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;TRAP_BAD_REQUEST_ERRORS&#39;</span><span class="p">])</span>
+        <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">BadRequestKeyError</span><span class="p">)</span>
+        <span class="c1"># only set it if it&#39;s still the default description</span>
+        <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="n">BadRequestKeyError</span><span class="o">.</span><span class="n">description</span>
+    <span class="p">):</span>
+        <span class="n">e</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;KeyError: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+    <span class="c1"># trap_http_exception 受到配置 &#39;TRAP_HTTP_EXCEPTIONS&#39;, 这个会使用所有 exception </span>
+    <span class="c1"># 返回 True. 配置 &#39;TRAP_BAD_REQUEST_ERRORS&#39; 会单独捕捉 BAD_REQUEST</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trap_http_exception</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+        <span class="c1"># 默认的 http exception 处理.</span>
+        <span class="c1"># 先查找注册的 error handler, 没有的话直接返回 exception 对象</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_http_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1"># 查找注册了 error handler, 没有话重新抛出, 回到 handle_exception 处理</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_error_handler</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">reraise</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span>
+    <span class="c1"># handler() 要求返回的是一个 response</span>
+    <span class="k">return</span> <span class="n">handler</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+ <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;默认的 exception 处理方法, 非 debug 模式下, 返回 500 Internal Server Error</span>
+<span class="sd">       并记录到日志文件中</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
+    <span class="c1"># blinker 事件派发</span>
+    <span class="n">got_request_exception</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1"># 查找注册的 HTTP 状态处理方法, 404 500, 403 之类</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_error_handler</span><span class="p">(</span><span class="n">InternalServerError</span><span class="p">())</span>
+    <span class="c1"># 查找配置文件 app.config 中 PROPAGATE_EXCEPTIONS, 向上抛出异常</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">propagate_exceptions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exc_value</span> <span class="ow">is</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">reraise</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">log_exception</span><span class="p">((</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># 默认的 500</span>
+        <span class="k">return</span> <span class="n">InternalServerError</span><span class="p">()</span>
+    <span class="c1"># 使用我们自己的 500 处理方法</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalize_request</span><span class="p">(</span><span class="n">handler</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">from_error_handler</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+</pre></div>
+
+
+<h4 id="3">3. 结束派发</h4>
+<p>如果我们在 <code>handle_user_exception</code> 不向上抛出异常, 将会运行到 <code>finalize_request()</code></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">finalize_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">from_error_handler</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="c1"># 从 view_func 获得的正常 resepon </span>
+    <span class="c1"># 或者由捕获异常后, 生成的 404, 400, 500 之类的 response 对象</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_response</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 处理 after_request 注册的方法, 和 before_request 相同</span>
+        <span class="c1"># 处理 session 相关, 把 session 发送到客户端</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+        <span class="c1"># blinker 注册的事件</span>
+        <span class="n">request_finished</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="c1"># 从 handle_exception 过来的就是 True</span>
+        <span class="c1"># # 从 handle_user_exception 过来就是 False, 那么就会抛到调用 Flask 应用的程序中</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">from_error_handler</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;Request finalizing failed with an &#39;</span>
+                              <span class="s1">&#39;error while handling an error&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+
+
+<p>返回到 <code>Flask.wsgi_app</code> 中, 然后依设置来决定是否弹出 <code>RequestContext</code></p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">auto_pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+    <span class="c1"># 通过设置 flask._preserve_context 来保留 context</span>
+    <span class="c1"># 出错了, 并且通过配置文件设置了 PRESERVE_CONTEXT_ON_EXCEPTION</span>
+    <span class="c1"># 这个会下次 push 的时候被弹出</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;flask._preserve_context&#39;</span><span class="p">)</span> <span class="ow">or</span> \
+       <span class="p">(</span><span class="n">exc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">preserve_context_on_exception</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preserved</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preserved_exc</span> <span class="o">=</span> <span class="n">exc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 弹出 RequestContext 才会回调 teardown_request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">):</span>
+    <span class="c1"># 非保留情况下, 会每次新创建一个 AppContext 压入 _implicit_app_ctx_stack</span>
+    <span class="n">app_ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_implicit_app_ctx_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">clear_request</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="c1"># 一般情况下 _implicit_app_ctx_stack 只有一个 AppContext, 上面已经弹出</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_implicit_app_ctx_stack</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preserved</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preserved_exc</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="n">_sentinel</span><span class="p">:</span>
+                <span class="n">exc</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># app 级别的 teardown_request</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">do_teardown_request</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;exc_clear&#39;</span><span class="p">):</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exc_clear</span><span class="p">()</span>
+
+            <span class="n">request_close</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">request_close</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">request_close</span><span class="p">()</span>
+            <span class="n">clear_request</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">_request_ctx_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="c1"># get rid of circular dependencies at the end of the request</span>
+        <span class="c1"># so that we don&#39;t require the GC to be active.</span>
+        <span class="k">if</span> <span class="n">clear_request</span><span class="p">:</span>
+            <span class="n">rv</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;werkzeug.request&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># Get rid of the app as well if necessary.</span>
+        <span class="k">if</span> <span class="n">app_ctx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">app_ctx</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">rv</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;Popped wrong request context.  &#39;</span> \
+            <span class="s1">&#39;(</span><span class="si">%r</span><span class="s1"> instead of </span><span class="si">%r</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+<p>如果在不保留 RequestContext 的话, 每次请求都会弹出 ReqeustContext 和 AppContext, 所以这也说明了如果我们在请求处理方法之外使用 RequestContext 或 AppContext 的话, 就会发生 Working outside of request context 这种情况.</p>
+<h4 id="3-request-current_app-g-session">3. <code>request</code>, <code>current_app</code>, <code>g</code>, <code>session</code> 全局代理</h4>
+<p>从由 <code>_app_ctx_stack</code> 获得的,  这两个代理, 特别是 <code>g</code> 代理, 一般我们把一个全局的东西</p>
+<ul>
+<li><code>current_app</code> 指向是当前的 <code>flask.app.Flask</code> 对象</li>
+<li><code>g</code> 指向的是当前的 <code>flask.app.Flask</code> 对象 <code>g</code> 字典, 一般用来</li>
+</ul>
+<p>当使用 <code>with Flask.app_context()</code> 的时候, 在 <code>with</code> 语句内 <code>current_app</code> 便会指向当前的 <code>Flask</code> 对象.  我们也知道在请求到来的时候, <code>RequestContext.push()</code> 也会把 <code>AppContext</code> 压入栈中, 此时 <code>current_app</code> 也是可以使用的. <code>g</code> 对象则是 <code>AppContext</code> 中的一个</p>
+<div class="highlight"><pre><span></span><span class="n">current_app</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">_find_app</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">_partial</span><span class="p">(</span><span class="n">_loopku_app_object</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>从由 <code>_request_ctx_stack</code> 获得的</p>
+<ul>
+<li>
+<p><code>request</code> 指向是当前请求 <code>flask.wrappers.Request</code> 对象</p>
+</li>
+<li>
+<p><code>session</code> 指向是当前的 session, <code>flask.sessions.SecureCookieSession</code> 对象</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># 这两个都是代理对象, 经过 RequestContext 中取得其内部的值</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_lookup_req_object</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">))</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_lookup_req_object</span><span class="p">,</span> <span class="s1">&#39;session&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>在 <code>_lookup_xx_object</code> 中都是调用对应的 <code>_ctx_xx_stack.top</code>, 这里检查了 <code>top</code> 是否存在, 不存在的话抛出 <code>RuntimeError</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LocalProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;代理类的源码, 主要是 __getattr__, __getitem__, __setitem__ 这些对应到内部的</span>
+<span class="sd">       真正的对象</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;__local&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__wrapped__&#39;</span><span class="p">)</span>
+
+    <span class="c1"># self.__local 便是我们传入的查找函数</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_LocalProxy__local&#39;</span><span class="p">,</span> <span class="n">local</span><span class="p">)</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">local</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">local</span><span class="p">,</span> <span class="s1">&#39;__release_local__&#39;</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__wrapped__&#39;</span><span class="p">,</span> <span class="n">local</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_current_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 返回了对应的 _lookup_*_object, 也就是对应的 RequestContext, 或 AppContext</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__local</span><span class="p">,</span> <span class="s1">&#39;__release_local__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__local</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__local</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;no object bound to </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="p">)</span>
+
+    <span class="c1"># 我们在使用 request.args 这样的方法时, 其实就是 </span>
+    <span class="c1"># RequestContext[&#39;request&#39;][name]</span>
+    <span class="c1"># 这样就回到了 _request_ctx_stack.request[name] 了</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;__members__&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_object</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+
+
+<p>所以这也说明了为什么当 outside context, <code>current_app</code>, <code>request</code>, <code>session</code>, <code>g</code> 这些代理都是不可用的, 这些代理都是去 <code>_request_ctx_stack</code> 或 <code>_app_ctx_stack</code> 查找对应的值. 当我们使用 <code>with flaks_app.app_context()</code> 的时候, 会帮我们压入一个 <code>AppContext</code> 来使用, 并帮我们管理上下文. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/flask.html">flask</a>
+      <a href="./tag/python.html">python</a>
+      <a href="./tag/yuan-dai-ma-yue-du.html">源代码阅读</a>
+      <a href="./tag/rtfsc.html">RTFSC</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel\s Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>
