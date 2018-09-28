@@ -88,7 +88,7 @@ sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs
 
 1. 前三个握手包, 用来生成加密的通信, 有自己特定的定义
 2. protobuf 包, 包含一个 protobuf 消息
-3. multi message, (1) 根据 `CMsgMulti.size_unzipped` 是否 **大于 0** 来判断 `CMsgMulti.message_body` 是否启用了  gzip 压缩. (2) 如果是则要先先把 `message_body` 解压, 然后再解读里面的消息
+3. multi message, (1) 根据 `CMsgMulti.size_unzipped` 是否 **大于 0** 来判断 `CMsgMulti.message_body` 是否启用了  gzip 压缩. (2) 如果是则要先先把 `message_body` 解压, 然后再解读里
 
 这三种包都会包含以下三个字段: 
 

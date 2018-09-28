@@ -1,126 +1,98 @@
+
 <!DOCTYPE html>
-<html lang="zh" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="zh">
 <head>
-    <title>Android 系统权限 - Amber time</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
 
 
 
-<link rel="canonical" href="./android-xi-tong-quan-xian.html">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-        <meta name="author" content="ivicel" />
-        <meta name="keywords" content="android,系统权限" />
-        <meta name="description" content="危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP PROCESS_OUTGOING_CALLS SENSORS BODY_SENSORS SMS SEND_SMS RECEIVE_SMS READ_SMS RECEIVE_WAP_PUSH RECEIVE_MMS STORAGE READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE 在 Android 4.4(SDK 19)及以上版本中, 系统会对getExternalFilesDir(String) 和getExternalCacheDir()这两个方法返回的目录自动授予 READ_EXTERNAL_STORAGE …" />
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        <meta property="og:site_name" content="Amber time" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Android 系统权限"/>
-        <meta property="og:url" content="./android-xi-tong-quan-xian.html"/>
-        <meta property="og:description" content="危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP PROCESS_OUTGOING_CALLS SENSORS BODY_SENSORS SMS SEND_SMS RECEIVE_SMS READ_SMS RECEIVE_WAP_PUSH RECEIVE_MMS STORAGE READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE 在 Android 4.4(SDK 19)及以上版本中, 系统会对getExternalFilesDir(String) 和getExternalCacheDir()这两个方法返回的目录自动授予 READ_EXTERNAL_STORAGE …"/>
-        <meta property="article:published_time" content="2018-02-22" />
-            <meta property="article:section" content="Android" />
-            <meta property="article:tag" content="android" />
-            <meta property="article:tag" content="系统权限" />
-            <meta property="article:author" content="ivicel" />
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
+<meta name="author" content="ivicel" />
+<meta name="description" content="危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP PROCESS_OUTGOING_CALLS SENSORS BODY_SENSORS SMS SEND_SMS RECEIVE_SMS READ_SMS RECEIVE_WAP_PUSH RECEIVE_MMS STORAGE READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE 在 Android 4.4(SDK 19)及以上版本中, 系统会对getExternalFilesDir(String) 和getExternalCacheDir()这两个方法返回的目录自动授予 READ_EXTERNAL_STORAGE …" />
+<meta name="keywords" content="android, 系统权限">
 
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="./theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<meta property="og:title" content="Android 系统权限"/>
+<meta property="og:description" content="危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP PROCESS_OUTGOING_CALLS SENSORS BODY_SENSORS SMS SEND_SMS RECEIVE_SMS READ_SMS RECEIVE_WAP_PUSH RECEIVE_MMS STORAGE READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE 在 Android 4.4(SDK 19)及以上版本中, 系统会对getExternalFilesDir(String) 和getExternalCacheDir()这两个方法返回的目录自动授予 READ_EXTERNAL_STORAGE …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./android-xi-tong-quan-xian.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-02-22 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Android"/>
+<meta property="article:tag" content="android"/>
+<meta property="article:tag" content="系统权限"/>
+<meta property="og:image" content="/images/favicon.ico">
 
-    <link href="./theme/css/pygments/emacs.css" rel="stylesheet">
-    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
-        <link href="./theme/css/custom.css" rel="stylesheet">
-
-
-
-
+  <title>Ivicel\s Ambertime &ndash; Android 系统权限</title>
 
 </head>
 <body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="./" class="navbar-brand">
-Amber time            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="./category/android.html">Android</a>
-                        </li>
-                        <li >
-                            <a href="./category/c-language.html">C language</a>
-                        </li>
-                        <li >
-                            <a href="./category/data-structure-algorithms.html">Data structure algorithms</a>
-                        </li>
-                        <li >
-                            <a href="./category/database.html">Database</a>
-                        </li>
-                        <li >
-                            <a href="./category/java.html">Java</a>
-                        </li>
-                        <li >
-                            <a href="./category/javascript.html">Javascript</a>
-                        </li>
-                        <li >
-                            <a href="./category/python.html">Python</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
     </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="./android-xi-tong-quan-xian.html"
-                       rel="bookmark"
-                       title="Permalink to Android 系统权限">
-                        Android 系统权限
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-02-22T00:00:00+08:00"> Thu 22 February 2018</time>
-    </span>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
 
 
 
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="android-xi-tong-quan-xian">Android 系统权限</h1>
+    <p>
+      Posted on Thu 22 February 2018 in <a href="./category/android.html">Android</a>
+
+    </p>
+  </header>
 
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/android.html">android</a>
-        /
-	<a href="./tag/xi-tong-quan-xian.html">系统权限</a>
-        
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h5 id="_1">危险权限</h5>
+  <div>
+    <h5 id="_1">危险权限</h5>
 <table>
 <thead>
 <tr>
@@ -176,77 +148,51 @@ Amber time            </a>
 <li><a href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=zh-cn">Android Permissions , android offical site</a></li>
 <li><a href="https://developer.android.google.cn/reference/android/Manifest.permission.html?hl=zh-cn#READ_EXTERNAL_STORAGE">Android API reference</a></li>
 </ol>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="#"><i class="fa fa-you-can-add-links-in-your-config-file-square fa-lg"></i> You can add links in your config file</a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-another-social-link-square fa-lg"></i> Another social link</a></li>
-              </ul>
-            </li>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/android.html">android</a>
+      <a href="./tag/xi-tong-quan-xian.html">系统权限</a>
+    </p>
+  </div>
 
 
 
 
 
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#" target="_blank">
-                You can modify those links in your config file
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2018 ivicel
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="./theme/js/jquery.min.js"></script>
+</article>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./theme/js/bootstrap.min.js"></script>
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
 
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="./theme/js/respond.min.js"></script>
 
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel\s Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
 
 </body>
 </html>
