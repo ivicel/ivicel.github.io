@@ -76,6 +76,33 @@
 
 <article>
   <header>
+    <h2><a href="../rtfsc-flask-de-yuan-ma-yue-du-san.html#rtfsc-flask-de-yuan-ma-yue-du-san">RTFSC: Flask 的源码阅读(三)</a></h2>
+    <p>
+      Posted on Wed 19 September 2018 in <a href="../category/python.html">Python</a>
+
+          &#8226; Tagged with
+              <a href="../tag/flask.html">flask</a>,              <a href="../tag/python.html">python</a>,              <a href="../tag/yuan-dai-ma-yue-du.html">源代码阅读</a>,              <a href="../tag/rtfsc.html">RTFSC</a>
+    </p>
+  </header>
+  <div>
+      <h4 id="1">1. 路由的实现</h4>
+<p>有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 <code>add_url_rule()</code> 方法, 装饰器是一种简洁明了的方式. </p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_url_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">provide_automatic_options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="c1"># endpoint 默认使用的是函数名</span>
+    <span class="k">if</span> <span class="n">endpoint</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">_endpoint_from_view_func</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">endpoint</span>
+    <span class="c1"># 提供 HTTP 方法</span>
+    <span class="c1"># 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性</span>
+    <span class="c1"># 如果这两个都没提供, 则默认只支持 …</span></pre></div>
+      <br>
+      <a class="btn" href="../rtfsc-flask-de-yuan-ma-yue-du-san.html#rtfsc-flask-de-yuan-ma-yue-du-san">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="../rtfsc-flask-de-yuan-ma-yue-du-er.html#rtfsc-flask-de-yuan-ma-yue-du-er">RTFSC: Flask 的源码阅读(二)</a></h2>
     <p>
       Posted on Tue 18 September 2018 in <a href="../category/python.html">Python</a>
@@ -108,33 +135,6 @@
 <li>回调程序运行后 …</li></ul>
       <br>
       <a class="btn" href="../rtfsc-flask-de-yuan-ma-yue-du-er.html#rtfsc-flask-de-yuan-ma-yue-du-er">Continue reading</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="../rtfsc-flask-de-yuan-ma-yue-du-san.html#rtfsc-flask-de-yuan-ma-yue-du-san">RTFSC: Flask 的源码阅读(三)</a></h2>
-    <p>
-      Posted on Tue 18 September 2018 in <a href="../category/python.html">Python</a>
-
-          &#8226; Tagged with
-              <a href="../tag/flask.html">flask</a>,              <a href="../tag/python.html">python</a>,              <a href="../tag/yuan-dai-ma-yue-du.html">源代码阅读</a>,              <a href="../tag/rtfsc.html">RTFSC</a>
-    </p>
-  </header>
-  <div>
-      <h4 id="1">1. 路由的实现</h4>
-<p>有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 <code>add_url_rule()</code> 方法, 装饰器是一种简洁明了的方式. </p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_url_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">provide_automatic_options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-    <span class="c1"># endpoint 默认使用的是函数名</span>
-    <span class="k">if</span> <span class="n">endpoint</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">_endpoint_from_view_func</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
-    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">endpoint</span>
-    <span class="c1"># 提供 HTTP 方法</span>
-    <span class="c1"># 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性</span>
-    <span class="c1"># 如果这两个都没提供, 则默认只支持 …</span></pre></div>
-      <br>
-      <a class="btn" href="../rtfsc-flask-de-yuan-ma-yue-du-san.html#rtfsc-flask-de-yuan-ma-yue-du-san">Continue reading</a>
   </div>
   <hr />
 </article>
