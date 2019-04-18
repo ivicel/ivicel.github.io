@@ -29,13 +29,152 @@ tags: 二叉树, 树, 堆
 
 ##### 1.3 遍历方式
 
-* **深度优先遍历**, 这种遍历方法, 在使用非递归实现时, 由于先有上层才有下层, 但我们是要先访问下层, 所以是一个**后进先出(LIFO)**的栈结构
-
-  * **先根序遍历**: 根 -> 左 -> 右. 在非递归的方法中, 因为右结点要在后面才访问, 所以总是把根结点入栈, 入栈前先对根调用访问函数, 然后访问下一层, 直到叶子结点, 再弹出栈中根结点来访问右结点, 当栈为空时, 遍历完成
-  * **中根序遍历**: 左 -> 根 -> 右. 只有一点不同的是, 在从栈中弹出时, 才对根调用访问函数, 判断条件依旧是栈为空
-  * **后根序遍历**: 左 -> 右 -> 根. 把根结点入栈直到叶子结点, 考虑最后一层, 访问完左结点, 弹出其父结点, 找到右结点, 访问右结点, 然后再访问父结点. 
+* **深度优先遍历**, 这种遍历方法, 在使用非递归实现时, 由于先有上层才有下层, 但我们是要先访问下层, 所以是一个**后进先出(LIFO)**的栈结构.
 
   > 记忆技巧: 三种方法区别方式都是对根来说的, 对于每一棵树, 都最多只有三个结点, 就是 根, 左结点, 右结点, 对于每一棵子树, 我们都要执行一样的遍历顺序
+
+  * **先根序遍历 Pre-order**: 根 -> 左 -> 右. 在非递归的方法中, 使用一个辅助栈来保存上层的结点信息. 因为要先访问左结点要再访问右结点. 从栈内弹出结点的顺序就是我们要的遍历顺序, 当栈中为空的时候就完成遍历.
+
+    1. **循环体外先把根结点入栈**
+    2. 循环判断栈是否为空, 不为空的话, 弹出栈中结点, 对该节点 node 调用访问函数
+
+    2. 如果 node 有右结点, 则右结点入栈
+
+    3. 如果 node 有左结点, 则左结点入栈. 回到第 2 步
+    4. 一直判断栈中没有节点为止
+
+    ```c
+    void preorder(BinaryTree *tree)
+    {
+        if (tree == NULL || tree->root == NULL) {
+            return;
+        }
+        
+    	Stack *stack = (Stack *)malloc(sizeof(Stack));
+        if (stack == NULL) {
+            return;
+        }
+        stack->push(tree->root);
+        Node *node = NULL;
+        while (!stack->isEmpty()) {
+        	node = stack->pop();
+            process(node);
+            if (node->right != NULL) {
+             	stack->push(node->right);   
+            }
+            
+            if (node->left != NULL) {
+                stack->push(node->left);
+            }
+        }
+        free(stack);
+    }
+    ```
+
+  * **中根序遍历 In-order**: 左 -> 根 -> 右. 依旧还使用一个栈作为辅助, 由于要保存父结点的信息, 所以父结点必须要入栈, 然后再向下访问左结点, 但当我们从栈中 `pop` 出父结点时, 处理完后, 不能再访问其左结点, 避免造成死循环
+
+    1. 设置一个变量 node, node 首先指向树的根结点, 设置一个栈
+    2. 循环判断当 栈不为空, 或者 node 指向不为` NULL` 
+    3. 当 node 不为空, 我们把这个当作一个父结点入栈, 然后把 node 指向 node 的左结点, 回到循环条件.此时, 栈中已经有至少一个结点, 条件成立
+    4. 如果 node 此时指向 `NULL`, 说明 node 往下再没有左子结点
+    5. 处理 node , 然后把 node 指向 node 的右子结点, 回到 循环条件
+    6. 这样通过两个条件先向下查找, 到底后再弹出, 弹出再查找其右结点
+
+    ```c
+    void inorder(BinaryTree *tree)
+    {
+        Stack *stack = (Stack *)malloc(sizeof(Stack));
+        if (stack == NULL) {
+            return;
+        }
+        Node *node = tree->root;
+        while (!stack.isEmpty() || node != NULL) {
+        	if (node != NULL) {
+                stack->push(node);
+                node = node->left;
+            } else {
+                process(node);
+                node = node->right;
+            }
+        }
+        free(stack);
+    }
+    ```
+
+  * **后根序遍历 Post-order**: 左 -> 右 -> 根. 
+
+    * 简单方法, 使用两个栈: 我们使用容易的对 **前序遍历** 稍加修改便可以得到一个 **根 -> 右 -> 左** 访问顺序栈 s1, 然后依次把这个遍历压入另一个栈 s2 中, 当 s1 遍历完成时, 对 s2 进行遍历我们便得到一个 **左 -> 右 -> 根** 的遍历顺序
+
+    ```c
+    void postorder(BinaryTree *tree)
+    {
+     	if (tree == NULL || tree->root == NULL) {
+            return;
+        }
+        
+        Stack *s1 = (Stack *)malloc(sizeof(Stack));
+        Stack *s2 = (Stack *)malloc(sizeof(Stack));
+        if (s1 == NULL || s2 == NULL) {
+            if (s2 == NULL) {
+                free(s1);
+            }
+            return;
+        }
+        
+        
+        Node *node;
+        s1->push(tree->root);
+        while (!s1->isEmpty()) {
+            node = s1->pop();
+            s2->push(node);
+            if (s1->left != NULL) {
+                s2->push(node->left);
+            }
+            if (s1->right != NULL) {
+                s2->push(node->right)
+            }
+        }
+        
+        while (!s2->isEmpty()) {
+            process(s2->pop())
+        }
+    }
+    ```
+
+
+  > 当使用递归方式遍历时, 每次我们都是递归左子树再递归又子树, 所以这两次递归中, 每层函数在栈中都保存有递归节点, 不同的遍历方式只是体现在, 处理访问节点的时机不两路;
+  >
+  > ```c
+  > void preorder(Node *node)
+  > {
+  > 	if (node == NULL) {
+  > 		return;
+  > 	}
+  > 	process(node);
+  > 	preorder(node->left);
+  > 	preorder(node->right);
+  > }
+  > 
+  > void inorder(Node *node)
+  > {
+  >     if (node == NULL) {
+  >         return;
+  > 	}
+  > 	inorder(node->left);
+  > 	process(node);
+  > 	inorder(node->right);
+  > }
+  > 
+  > void postorder(Node *node)
+  > {
+  >     if (node == NULL) {
+  >         return;
+  > 	}
+  > 	postorder(node->left);
+  > 	process(node);
+  > 	postorder(node->right);
+  > }
+  > ```
 
 * **宽度优先遍历**: 把每一层的所有结点都访问完, 再访问下层. 一般我们都从同层的左边结点开始
 
