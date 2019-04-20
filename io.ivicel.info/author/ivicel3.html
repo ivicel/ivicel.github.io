@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="../static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <meta name="author" content="ivicel" />
+    <meta name="description" content="ivicel's thoughts and writings" />
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Ivicel's Ambertime"/>
+<meta property="og:description" content="ivicel's thoughts and writings"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=".."/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; Posts by ivicel:</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="..">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href="..">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">Home</a>
+
+
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="../a-ha-suan-fa-1.html#a-ha-suan-fa-1">啊哈算法1</a></h2>
+    <p>
+      Posted on Sun 22 April 2018 in <a href="../category/data-structure-algorithms.html">Data Structure Algorithms</a>
+
+          &#8226; Tagged with
+              <a href="../tag/suan-fa.html">算法</a>,              <a href="../tag/pai-xu.html">排序</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1">1. 简单桶排序</h3>
+<p>对于要排序的数据, 其有范围在 n &lt;= k &lt;= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据.</p>
+<p>比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个.  对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列.</p>
+<p>对于 N …</p>
+      <br>
+      <a class="btn" href="../a-ha-suan-fa-1.html#a-ha-suan-fa-1">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html#android-dai-ma-values-mu-lu-xia-shuo-ming">Android 代码 values 目录下说明</a></h2>
+    <p>
+      Posted on Sun 22 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/resources.html">resources</a>,              <a href="../tag/androidzi-yuan-wen-jian.html">android资源文件</a>,              <a href="../tag/attrs.html">attrs</a>,              <a href="../tag/style.html">style</a>,              <a href="../tag/styleable.html">styleable</a>
+    </p>
+  </header>
+  <div>
+      <p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
+<h3 id="1-style">1. style 主题文件</h3>
+<p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
+<ol>
+<li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …</strong></li></ol>
+      <br>
+      <a class="btn" href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html#android-dai-ma-values-mu-lu-xia-shuo-ming">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html#android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan">Android View类的构造方法及View的主题属性优先级相关</a></h2>
+    <p>
+      Posted on Sun 22 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/view.html">view</a>,              <a href="../tag/gou-zao-fang-fa.html">构造方法</a>,              <a href="../tag/attrs.html">attrs</a>,              <a href="../tag/declare-styleable.html">declare-styleable</a>,              <a href="../tag/style.html">style</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-layout-view">1. layout 里 view 的属性赋值</h3>
+<p>一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下:</p>
+<ul>
+<li>layout 中对属性直接赋值  </li>
+<li>layout 中覆盖 view 的 style </li>
+<li>构造方法里的 defStyleAttr </li>
+<li>构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定)</li>
+<li>定义/使用的主题里的值 </li>
+</ul>
+<ol>
+<li>在 <strong>layout</strong> 布局文件里对 view 直接赋值</li>
+</ol>
+<p><code>xml
+   &lt;TextView
+    android:textColor="#332211"/&gt;</code></p>
+<ol>
+<li>自定义一个 <code>style</code>, 然后在 <code>layout</code> 里的 <code>view …</code></li></ol>
+      <br>
+      <a class="btn" href="../android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html#android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../asynctaskji-zhi-fen-xi.html#asynctaskji-zhi-fen-xi">AsyncTask机制分析</a></h2>
+    <p>
+      Posted on Tue 10 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/xian-cheng.html">线程</a>,              <a href="../tag/xian-cheng-chi.html">线程池</a>,              <a href="../tag/asynctask.html">AsyncTask</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-asynctask">1. AsyncTask 的使用</h3>
+<p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
+<p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DownloadTask</span> <span class="kd">extends …</span></pre></div>
+      <br>
+      <a class="btn" href="../asynctaskji-zhi-fen-xi.html#asynctaskji-zhi-fen-xi">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Java线程及线程池</a></h2>
+    <p>
+      Posted on Tue 10 April 2018 in <a href="../category/java.html">Java</a>
+
+          &#8226; Tagged with
+              <a href="../tag/xian-cheng.html">线程</a>,              <a href="../tag/xian-cheng-chi.html">线程池</a>,              <a href="../tag/asynctask.html">AsyncTask</a>,              <a href="../tag/handler-thread.html">Handler Thread</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-java">1. Java 线程池</h3>
+<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
+<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
+<ul>
+<li>Executor 接口定义了执行器 Runnable 执行方式</li>
+<li>ExecutorService 定义了线程具体接口</li>
+<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
+<li>AbstractExecutorService 线程池的实现的抽象类</li>
+<li>ThreadPoolExecutor 线程池的具体实现类</li>
+<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
+<li>Executors 线程池的辅助工具类</li>
+</ul>
+<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
+<ul>
+<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
+<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
+<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
+<li><code>newScheduledThreadPool</code> 固定大小 …</li></ul>
+      <br>
+      <a class="btn" href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Android 硬盘缓存 DiskLrucCache</a></h2>
+    <p>
+      Posted on Wed 04 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/huan-cun.html">缓存</a>,              <a href="../tag/ci-pan-huan-cun.html">磁盘缓存</a>,              <a href="../tag/lru.html">lru</a>,              <a href="../tag/cache.html">cache</a>,              <a href="../tag/disk-cache.html">disk cache</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-disklrucache">1. DiskLruCache 的使用</h3>
+<p>DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 <a href="https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/StrictLineReader.java">这里</a> 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 <a href="https://developer.android.com/samples/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.html">这里</a> 找到源码. 另外一个 <a href="https://gist.github.com/ivicel/f98f9ba4420c9d2c5274f151b625f677">GitHub 备份地址</a></p>
+<blockquote>
+<p>Android Developer Sample 里的源码没有有效的初始化 redundantOpCount, 而是为 0. 这导致如果不断退出重进应用, 很难达到封顶的 2000 行, 即使 journal 已经超出 2000 行. </p>
+<p>GitHub 上已经添加</p>
+</blockquote>
+<p>一般来说我们都会把磁盘放到 sdcard 上, 也就是 <code>/sdcard …</code></p>
+      <br>
+      <a class="btn" href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../androidnei-cun-huan-cun-lrucache.html#androidnei-cun-huan-cun-lrucache">Android内存缓存LruCache</a></h2>
+    <p>
+      Posted on Wed 04 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/huan-cun.html">缓存</a>,              <a href="../tag/lrucache.html">lrucache</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-lrucahe">1. LruCahe 的使用</h3>
+<p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小, 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. </p>
+<blockquote>
+<p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
+</blockquote>
+<p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// 获得应用可使用的最大内存, 取 1/8 作为缓存</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">()</span> <span class="o">/</span> <span class="mi">8</span><span class="o">;</span>
+<span class="n">LruCache</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Bitmap</span><span class="o">&gt;</span> <span class="n">bitmapCache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LruCache</span><span class="o">&lt;&gt;(</span><span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="nf">sizeOf</span><span class="o">(</span><span class="n">String …</span></pre></div>
+      <br>
+      <a class="btn" href="../androidnei-cun-huan-cun-lrucache.html#androidnei-cun-huan-cun-lrucache">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html#aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi">AIDL生成的接口及Binder的分析</a></h2>
+    <p>
+      Posted on Sun 01 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/aidl.html">aidl</a>,              <a href="../tag/yuan-ma.html">源码</a>,              <a href="../tag/fen-xi.html">分析</a>
+    </p>
+  </header>
+  <div>
+      <div class="toc">
+<ul>
+<li><a href="#1-android-binder">1. Android 上的 Binder</a><ul>
+<li><a href="#11-binder">1.1 Binder 的构架</a></li>
+<li><a href="#1-2-binder">1-2 Binder 的机制</a></li>
+</ul>
+</li>
+<li><a href="#2-aidl">2. AIDL 文件实现分析</a></li>
+<li><a href="#reference">Reference:</a></li>
+</ul>
+</div>
+<h3 id="1-android-binder">1. Android 上的 Binder</h3>
+<p>在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更<strong>高效</strong>, 也更<strong>安全</strong>, 其他<code>IPC</code>没有严格权限验证机制</p>
+<h4 id="11-binder">1.1 Binder 的构架</h4>
+<p>​        Binder 通信是基于 <strong>C/S 构架</strong>. 多个 …</p>
+      <br>
+      <a class="btn" href="../aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html#aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html#android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi">Android Activity生命周期和启动模式</a></h2>
+    <p>
+      Posted on Sun 01 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/activity.html">activity</a>,              <a href="../tag/android.html">android</a>
+    </p>
+  </header>
+  <div>
+      <div class="toc">
+<ul>
+<li><a href="#1-activity">1. Activity 的生命周期</a></li>
+<li><a href="#2-activity">2. Activity 的启动模式</a></li>
+<li><a href="#3-intent">3. Intent 的过滤规则</a></li>
+<li><a href="#reference">Reference:</a></li>
+</ul>
+</div>
+<h3 id="1-activity">1. Activity 的生命周期</h3>
+<p>一般 <code>Activity</code> 生命周期为 <code>onCreate()</code> -&gt; <code>onStart()</code> -&gt; <code>onResume()</code> -&gt; <code>onPause()</code> -&gt; <code>onStop()</code> -&gt; <code>onDestroy()</code></p>
+<p>官方的生命周期图:</p>
+<p><img alt="Activity Life Cycle" src="../images/activity_lifecycle.png" /></p>
+<p>需要注意的几个点:</p>
+<ol>
+<li>当一个 <code>Activity</code> <strong>A</strong> 启动加一个 <code>Activity</code> <strong>B</strong> 时, 只有 <strong>A</strong> 的 <code>onPause</code> 执行完返回时, <strong>B</strong> 才开始执行<code>onCreate</code> <code>onStart</code>, 直到 <code>onResume</code>显示在前台, <strong>A</strong> 会执行 <code>onStop</code> <code>onDestroy</code>, 所以在 <code>onPause</code>不能执行太 …</li></ol>
+      <br>
+      <a class="btn" href="../android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html#android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../android-dui-xiang-xu-lie-hua-fang-shi.html#android-dui-xiang-xu-lie-hua-fang-shi">Android 对象序列化方式</a></h2>
+    <p>
+      Posted on Sun 01 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/android.html">android</a>,              <a href="../tag/xu-lie-hua.html">序列化</a>,              <a href="../tag/serializable.html">serializable</a>,              <a href="../tag/parceable.html">parceable</a>
+    </p>
+  </header>
+  <div>
+      <p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
+<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
+<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
+<blockquote>
+<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
+</blockquote>
+<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
+<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
+      <br>
+      <a class="btn" href="../android-dui-xiang-xu-lie-hua-fang-shi.html#android-dui-xiang-xu-lie-hua-fang-shi">Continue reading</a>
+  </div>
+</article>
+
+  <div class="pagination">
+    <a class="btn float-left" href="../author/ivicel4.html">
+      <i class="fa fa-angle-left"></i> Older Posts
+    </a>
+    <a class="btn float-right" href="../author/ivicel2.html">
+      Newer Posts <i class="fa fa-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : "..",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>

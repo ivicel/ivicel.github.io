@@ -53,7 +53,7 @@ public String register(@Valid @ModelAttribute("user") User user,
   <input th:name="*{username}" th:value="*{username}">
   <!-- 在这里获到错误消息, 检查 username 字段是否有错误消息, 
 		th:errors 会自动提取对应的 field 中的错误信息 -->
-  <span th:errors="*{username}" th:if="${#field.hasErrors('username')}"></span>
+  <span th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></span>
 </form>
 ```
 

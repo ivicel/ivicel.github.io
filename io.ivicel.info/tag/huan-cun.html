@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="../static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+    <meta name="author" content="ivicel" />
+    <meta name="description" content="ivicel's thoughts and writings" />
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Ivicel's Ambertime"/>
+<meta property="og:description" content="ivicel's thoughts and writings"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=".."/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; Tag 缓存</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="..">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href="..">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="..">Home</a>
+
+
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Android 硬盘缓存 DiskLrucCache</a></h2>
+    <p>
+      Posted on Wed 04 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/huan-cun.html">缓存</a>,              <a href="../tag/ci-pan-huan-cun.html">磁盘缓存</a>,              <a href="../tag/lru.html">lru</a>,              <a href="../tag/cache.html">cache</a>,              <a href="../tag/disk-cache.html">disk cache</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-disklrucache">1. DiskLruCache 的使用</h3>
+<p>DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 <a href="https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/StrictLineReader.java">这里</a> 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 <a href="https://developer.android.com/samples/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.html">这里</a> 找到源码. 另外一个 <a href="https://gist.github.com/ivicel/f98f9ba4420c9d2c5274f151b625f677">GitHub 备份地址</a></p>
+<blockquote>
+<p>Android Developer Sample 里的源码没有有效的初始化 redundantOpCount, 而是为 0. 这导致如果不断退出重进应用, 很难达到封顶的 2000 行, 即使 journal 已经超出 2000 行. </p>
+<p>GitHub 上已经添加</p>
+</blockquote>
+<p>一般来说我们都会把磁盘放到 sdcard 上, 也就是 <code>/sdcard …</code></p>
+      <br>
+      <a class="btn" href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Continue reading</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../androidnei-cun-huan-cun-lrucache.html#androidnei-cun-huan-cun-lrucache">Android内存缓存LruCache</a></h2>
+    <p>
+      Posted on Wed 04 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/huan-cun.html">缓存</a>,              <a href="../tag/lrucache.html">lrucache</a>
+    </p>
+  </header>
+  <div>
+      <h3 id="1-lrucahe">1. LruCahe 的使用</h3>
+<p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小, 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. </p>
+<blockquote>
+<p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
+</blockquote>
+<p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// 获得应用可使用的最大内存, 取 1/8 作为缓存</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">()</span> <span class="o">/</span> <span class="mi">8</span><span class="o">;</span>
+<span class="n">LruCache</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Bitmap</span><span class="o">&gt;</span> <span class="n">bitmapCache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LruCache</span><span class="o">&lt;&gt;(</span><span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="nf">sizeOf</span><span class="o">(</span><span class="n">String …</span></pre></div>
+      <br>
+      <a class="btn" href="../androidnei-cun-huan-cun-lrucache.html#androidnei-cun-huan-cun-lrucache">Continue reading</a>
+  </div>
+</article>
+
+  <div class="pagination">
+  </div>
+
+
+
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : "..",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>

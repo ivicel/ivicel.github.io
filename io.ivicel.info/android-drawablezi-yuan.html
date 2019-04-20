@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. drawable 简述 drawable 在 Android 中是一个抽象的概念, 对应抽象类 android.graphics.drawable.Drawable, 包括了各种形式的图片, 层级样式, 状态样式等. drawable 可以在 res/drawable 中以 xml 来定义. 也可以在 java 中生成. 大概分为以下 10 种. Bitmap File .png(最好), .jpg(次), .gif(尽量不要用)等格式的图片. 对应 BitmapDrawable Nine-Patch File .9.png 图片.对应 NinePatchDrawable Layer List 多层次 drawable …" />
+<meta name="keywords" content="drawable, 资源, 样式">
+
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:title" content="Android Drawable资源"/>
+<meta property="og:description" content="1. drawable 简述 drawable 在 Android 中是一个抽象的概念, 对应抽象类 android.graphics.drawable.Drawable, 包括了各种形式的图片, 层级样式, 状态样式等. drawable 可以在 res/drawable 中以 xml 来定义. 也可以在 java 中生成. 大概分为以下 10 种. Bitmap File .png(最好), .jpg(次), .gif(尽量不要用)等格式的图片. 对应 BitmapDrawable Nine-Patch File .9.png 图片.对应 NinePatchDrawable Layer List 多层次 drawable …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./android-drawablezi-yuan.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-28 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Android"/>
+<meta property="article:tag" content="drawable"/>
+<meta property="article:tag" content="资源"/>
+<meta property="article:tag" content="样式"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; Android Drawable资源</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="android-drawablezi-yuan">Android Drawable资源</h1>
+    <p>
+      Posted on Sat 28 April 2018 in <a href="./category/android.html">Android</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h3 id="1-drawable">1. drawable 简述</h3>
+<p>drawable 在 Android 中是一个抽象的概念, 对应抽象类 <code>android.graphics.drawable.Drawable</code>, 包括了各种形式的图片, 层级样式, 状态样式等. drawable 可以在 <code>res/drawable</code> 中以 <code>xml</code> 来定义. 也可以在 java 中生成. 大概分为以下 10 种.</p>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Bitmap">Bitmap File</a> <code>.png</code>(最好), <code>.jpg</code>(次), <code>.gif</code>(尽量不要用)等格式的图片. 对应 <code>BitmapDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#NinePatch">Nine-Patch File</a> <code>.9.png</code> 图片.对应 <code>NinePatchDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#LayerList">Layer List</a> 多层次 drawable 数组, 按层绘制到屏幕, 下标大的会绘制在上面, 小的绘制在下面. 对应 <code>LayerDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#StateList">State List</a> 状态数组, 比如选中, 未选中, 点击等状态. 对应 <code>StateListDrawable</code></li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#LevelList">Level List</a> 等级 drawable 数组, 数组中每个 Item 都有一个 minLevel, maxLevel, 可以使用 <code>View#setLevel()</code>, <code>ImageView#setImageLevel()</code> 来设置按等级获取图片. 对应 <code>LevelListDrawable</code></li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Transition">Transition Drawable</a> 定义了 drawable 之间过滤的形式, 对应  <code>TransitionDrawable</code></li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Inset">Inset Drawable</a> 定义了一个 drawable 以一个范围差值插入另一个 drawable 中. 比如向一个 view 插入 drawable, 但这个 drawable 比 view 的边界大或小, 可以使用这个来放大或缩小到实际边界. 对应 <code>InsetDrawable</code></li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Clip">Clip Drawable</a> 一个切割其他 drawable 的 drawable. 对应 <code>ClipDrawable</code></li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Scale">Scale Drawable</a> 一个定义了如何放大缩小的 drawable. 对应 <code>ScaleDrawable</code> </li>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource#Shape">Shape Drawable</a> 定义了矩形, 椭圆, 圆, 直线等几何形状, 包含渐变, 颜色的 drawable. 对应 <code>GradientDrawable</code></li>
+<li>Rotate Drawable 定义了图形可旋转的角度, 对应 <code>RotateDrawable</code></li>
+</ol>
+<h3 id="2-bitmapdrawablebitmap">2. BitmapDrawable(bitmap 标签)</h3>
+<p>创建方法一是直接把 <code>.png</code>, <code>.jpg</code>, <code>.gif</code> 图片放在 <code>res/drawable</code> 目录下, 通过 <code>R.drawable.name</code> 访问. 二是通过 xml 来创建, 使用 <code>bitmap</code> 为根结点, 也是放在 drawable 目录下, 通过 xml 创建可以对图片进行一些其他比如变形, 前景等更改</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;bitmap</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:src=</span><span class="s">&quot;@[package:]drawable/drawable_resource&quot;</span>
+    <span class="na">android:antialias=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:dither=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:filter=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:gravity=</span><span class="s">[&quot;top&quot;</span> <span class="err">|</span> <span class="err">&quot;bottom&quot;</span> <span class="err">|</span> <span class="err">&quot;left&quot;</span> <span class="err">|</span> <span class="err">&quot;right&quot;</span> <span class="err">|</span> <span class="err">&quot;center_vertical&quot;</span> <span class="err">|</span>
+                      <span class="err">&quot;fill_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;center_horizontal&quot;</span> <span class="err">|</span> <span class="err">&quot;fill_horizontal&quot;</span> <span class="err">|</span>
+                      <span class="err">&quot;center&quot;</span> <span class="err">|</span> <span class="err">&quot;fill&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_horizontal&quot;]</span>
+    <span class="na">android:mipMap=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:tileMode=</span><span class="s">[&quot;disabled&quot;</span> <span class="err">|</span> <span class="err">&quot;clamp&quot;</span> <span class="err">|</span> <span class="err">&quot;repeat&quot;</span> <span class="err">|</span> <span class="err">&quot;mirror&quot;]</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:src</code> 图片来源, 可以是其他 drawable</li>
+<li><code>android:antialias</code> 是否开启抗锯齿, 一般都开启以便获得更好的显示效果</li>
+<li><code>android:dither</code> 是否开启抖动, 当屏幕与图片的像素配置不同时会用到, 比如屏幕是 RGB565, 图片是 ARGB8888. 一般都不开启</li>
+<li><code>android:filter</code> 是否开启过滤以便在图片缩小或放大时获得更平滑的过滤效果</li>
+<li><code>android:gravity</code> 图片对齐方法</li>
+<li><code>android:mipMap</code> 设置是否可以使用 mipmap，但 API Level 最低要求是 17，即 Android 4.2</li>
+<li><code>android:tileMode</code> 平铺模式. <code>disabled</code> 禁用, <code>clamp</code> 平铺, <code>repeat</code> 重复, <code>mirror</code> 镜像, 以对称翻转铺满.</li>
+<li><code>android:autoMirrored</code> 设置图片是否需要镜像反转，当布局方向是 RTL，即从右到左布局时才有用，API Level 19(Android 4.4) 才添加的属性</li>
+<li><code>android:tintMode</code> 着色模式，也是 API Level 21(Android 5.0) 才添加的属性</li>
+<li><code>android:tileModeX</code>, <code>android:tileModeY</code> 水平, 垂直平铺.</li>
+</ul>
+<h3 id="3-nine-path">3. 点九图片(nine-path 标签)</h3>
+<p><code>nine-patch</code> 图片一般都用工具生成, 其 <strong>左</strong> 和 <strong>上</strong> 边线规定了纵向和橫向拉伸时使用的平铺区域, <strong>右</strong> 和 <strong>下</strong> 边线规定了内容区.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;nine-patch</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:src=</span><span class="s">&quot;@[package:]drawable/drawable_resource&quot;</span>
+    <span class="na">android:dither=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:src</code> 必须是 nine-path 图片</li>
+</ul>
+<p>另外还有 <code>android:dither</code>, <code>android:tint</code>, <code>android:tintMode</code>, <code>android:alpha</code> 图片透明度, 0.0-1.0 之间, <code>android:autoMirrored</code> 属性</p>
+<h3 id="4-layerdrawable-layer-list">4. LayerDrawable (layer-list 标签)</h3>
+<p>layer-list 会把一组设置好的 drawable 按顺序从堆叠起来. 跟 level-list 区别的, layer-list 是一个组全, level-list 是按需选取其中的对应等级的图片.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?&lt;?xml versionxml ver =&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;layer-list</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@[package:]drawable/drawable_resource&quot;</span>
+        <span class="na">android:id=</span><span class="s">&quot;@[+][package:]id/resource_name&quot;</span>
+        <span class="na">android:top=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:right=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:bottom=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:left=</span><span class="s">&quot;dimension&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/layer-list&gt;</span>
+</pre></div>
+
+
+<p><code>android:top</code>, <code>android:right</code>, <code>android:bottom</code>, <code>android:left</code> 是上右下左的偏移量, 注意这个偏移不会超出 view 的大小. 比如当设定这个为背景时, 背景大小 = view大小 - 左偏移量大小.</p>
+<p>所以一般为保证偏移后, 内容区还是显示为居中, 四个方向都作偏移, 然后在显示的另一层里不需要显示出来的作偏移</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;TextView</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+    <span class="na">android:layout_margin=</span><span class="s">&quot;16dp&quot;</span>
+    <span class="na">android:background=</span><span class="s">&quot;@drawable/bg_shadow_corners_rectangle&quot;</span>
+    <span class="na">android:gravity=</span><span class="s">&quot;center&quot;</span>
+    <span class="na">android:padding=</span><span class="s">&quot;16dp&quot;</span>
+    <span class="na">android:text=</span><span class="s">&quot; 带阴影的圆角矩形 &quot;</span> <span class="nt">/&gt;</span>
+
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;layer-list</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- 灰色阴影 --&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:left=</span><span class="s">&quot;2dp&quot;</span>
+        <span class="na">android:top=</span><span class="s">&quot;4dp&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;shape&gt;</span>
+            <span class="nt">&lt;solid</span> <span class="na">android:color=</span><span class="s">&quot;@android:color/darker_gray&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;corners</span> <span class="na">android:radius=</span><span class="s">&quot;10dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/shape&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+    <span class="c">&lt;!-- 白色前景, 左右, 上下偏移保持对称 --&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:left=</span><span class="s">&quot;2dp&quot;</span>
+        <span class="na">android:top=</span><span class="s">&quot;4dp&quot;</span>
+        <span class="na">android:bottom=</span><span class="s">&quot;4dp&quot;</span>
+        <span class="na">android:right=</span><span class="s">&quot;2dp&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;shape&gt;</span>
+            <span class="nt">&lt;solid</span> <span class="na">android:color=</span><span class="s">&quot;#FFFFFF&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;corners</span> <span class="na">android:radius=</span><span class="s">&quot;10dp&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/shape&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/layer-list&gt;</span>
+</pre></div>
+
+
+<p>![layer-list textview示例](../images/layer-list textview示例.png)</p>
+<h3 id="5-statelistdrawableselector">5. StateListDrawable(selector 标签)</h3>
+<p><code>StateListDrawable</code> 表示多个状态联合起来的一个 drawable, 比如点击, focus 等. 状态匹配会按从上到下来匹配, 没匹配到的话就使用最后一个, 匹配到了就结束. 所以一般要把默认状态放在最后, 比如非点击状态在最后, 点击放在前面, 不然无法匹配到点击状态, 因为第一个总是匹配成功.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;selector</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:constantSize=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:dither=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+    <span class="na">android:variablePadding=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@[package:]drawable/drawable_resource&quot;</span>
+        <span class="na">android:state_pressed=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_focused=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_hovered=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_selected=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_checkable=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_checked=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_enabled=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_activated=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span>
+        <span class="na">android:state_window_focused=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/selector&gt;</span>
+</pre></div>
+
+
+<blockquote>
+<p><code>android:state_XXXX</code> 是 item 可设置的状态</p>
+</blockquote>
+<ul>
+<li><code>android:state_pressed</code> 按压</li>
+<li><code>android:state_focused</code> 是否选中</li>
+<li><code>android:state_hovered</code> 鼠标在上面滑动</li>
+<li><code>android:state_selected</code> 选中</li>
+<li><code>android:state_checkable</code> 设置一个勾选是否可以使用</li>
+<li><code>android:state_checked</code> 是否勾选, 用于 CheckBox 和 RadioButton 中是否勾选</li>
+<li><code>android:state_enabled</code> 设置触摸或点击是否可用</li>
+<li><code>android:state_activated</code> 设置是否被激活状态, <code>setActivated()</code> 方法</li>
+<li><code>android:state_window_focused</code> 设置当前窗口是否获得焦点状态. 例如拉下通知栏或弹出对话框时，当前界面就会失去焦点；另外，ListView 的 ListItem 获得焦点时也会触发 true 状态，可以理解为当前窗口就是 ListItem 本身</li>
+</ul>
+<h3 id="6-levellistdrawablelevel-list">6. LevelListDrawable(level-list 标签)</h3>
+<p>当 View 需要显示不同的图片, 比如电池电量图标, level-list 便可以派上用场. level-list 可以管理一组 drawable, 每个 drawable 都可以设置一组 level 范围, 最终会根据 level 值选取对应的 drawable 绘制出来.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;level-list</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@drawable/drawable_resource&quot;</span>
+        <span class="na">android:maxLevel=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:minLevel=</span><span class="s">&quot;integer&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/level-list&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:maxLevel</code> 最大 level</li>
+<li><code>android:minLevel</code> 最小 level</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;level-list</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@drawable/battery_low&quot;</span>
+        <span class="na">android:maxLevel=</span><span class="s">&quot;10&quot;</span>
+        <span class="na">android:minLevel=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@drawable/battery_below_half&quot;</span>
+        <span class="na">android:maxLevel=</span><span class="s">&quot;50&quot;</span>
+        <span class="na">android:minLevel=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@drawable/battery_over_half&quot;</span>
+        <span class="na">android:maxLevel=</span><span class="s">&quot;99&quot;</span>
+        <span class="na">android:minLevel=</span><span class="s">&quot;50&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@drawable/battery_full&quot;</span>
+        <span class="na">android:maxLevel=</span><span class="s">&quot;100&quot;</span>
+        <span class="na">android:minLevel=</span><span class="s">&quot;100&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/level-list&gt;</span>
+</pre></div>
+
+
+<p>使用 <code>Drawable#setLevel(10)</code> 的代码便可以设置 level 为 10. </p>
+<p>level-list 的匹配也是从上至下, 一但有匹配便不会再向下查找. 所以上面的示例也可以把 <code>android:minLevel</code> 省略不写, 比如第一个 item</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;item</span>
+      <span class="na">android:drawable=</span><span class="s">&quot;@drawable/battery_low&quot;</span>
+      <span class="na">android:maxLevel=</span><span class="s">&quot;10&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+
+
+<p>这样 level 10 便直接命中第一个 item 后便不会再向下查找. </p>
+<blockquote>
+<p>level-list 的书写顺序需要注意, 如果把 level 100 写在前面, 并省略了 minLevel, 这样总是会匹配到 level 100 而不会向下查找</p>
+</blockquote>
+<h3 id="7-transitiondrawabletransition">7. TransitionDrawable(transition 标签)</h3>
+<p>transition 继承于 layer-list, 但只能管理两层 drawable. 用于定义这两个 drawable 之间的切换方法, 还可以定义切换时淡入淡出的的动画效果.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;transition</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">&quot;@[package:]drawable/drawable_resource&quot;</span>
+        <span class="na">android:id=</span><span class="s">&quot;@[+][package:]id/resource_name&quot;</span>
+        <span class="na">android:top=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:right=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:bottom=</span><span class="s">&quot;dimension&quot;</span>
+        <span class="na">android:left=</span><span class="s">&quot;dimension&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/transition&gt;</span>
+</pre></div>
+
+
+<p>transition 切换时要主动调动 <code>TransitionDrawable#startTransition()</code> 方法, 从第一个转到第二个 drawable, 调动 <code>TransitionDrawable#reverseTransition()</code> 从第二个转回第一个 drawable</p>
+<h3 id="8-insetdrawableinset">8. InsetDrawable(inset 标签)</h3>
+<p>inset 标签类似于对 drawable 设置 padding, 但 padding 只设置内容区与边框的距离, 而 inset 不仅设置距离还可以设置自己的背景 drawable.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;inset</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/drawable_resource&quot;</span>
+    <span class="na">android:insetTop=</span><span class="s">&quot;dimension&quot;</span>
+    <span class="na">android:insetRight=</span><span class="s">&quot;dimension&quot;</span>
+    <span class="na">android:insetBottom=</span><span class="s">&quot;dimension&quot;</span>
+    <span class="na">android:insetLeft=</span><span class="s">&quot;dimension&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:drawable</code> 背景图片是必须的</li>
+</ul>
+<h3 id="9-clipdrawableclip">9. ClipDrawable(clip 标签)</h3>
+<p>clip 标签可以对 drawable 进行裁剪, 比如在做进度条时, 对进度条进行一定的裁剪, level 的取值范围为 0~10000, 默认为 0, 表示完全裁剪. 10000 表示不裁剪.</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;clip</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/drawable_resource&quot;</span>
+    <span class="na">android:clipOrientation=</span><span class="s">[&quot;horizontal&quot;</span> <span class="err">|</span> <span class="err">&quot;vertical&quot;]</span>
+    <span class="na">android:gravity=</span><span class="s">[&quot;top&quot;</span> <span class="err">|</span> <span class="err">&quot;bottom&quot;</span> <span class="err">|</span> <span class="err">&quot;left&quot;</span> <span class="err">|</span> <span class="err">&quot;right&quot;</span> <span class="err">|</span> <span class="err">&quot;center_vertical&quot;</span> <span class="err">|</span>
+                     <span class="err">&quot;fill_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;center_horizontal&quot;</span> <span class="err">|</span> <span class="err">&quot;fill_horizontal&quot;</span> <span class="err">|</span>
+                     <span class="err">&quot;center&quot;</span> <span class="err">|</span> <span class="err">&quot;fill&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_horizontal&quot;]</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:clipOrientation</code> 表示裁剪方向, 可定义水平 <code>horizontal</code> 裁剪和垂直 <code>vertical</code> 裁剪. 水平裁剪指的是从图片的水平位置, 即左右两开始向中心位置开始裁剪. 垂直即是从上下位置开始</li>
+<li><code>android:gravity</code> 表示以这个位置为中心, 从该中心的左右, 上下开始裁剪</li>
+</ul>
+<p>clip 标签的 level 设置需要使用 <code>Drawable#setLevel()</code> 来设置, 比如 <code>ImageView.getDrawable.setLevel(5000)</code>, level 的数值代表了裁剪百分比 <code>level / 10000</code></p>
+<p>下面是两个不同裁剪中心的设置, 都裁剪  50%. Java 代码都为 <code>ImageView.getDrawable().setLevel(5000)</code></p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="c">&lt;!-- 垂直和水平为中心 --&gt;</span>
+<span class="nt">&lt;clip</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/poly_test2&quot;</span>
+    <span class="na">android:gravity=</span><span class="s">&quot;center&quot;</span>
+    <span class="na">android:clipOrientation=</span><span class="s">&quot;horizontal&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/clip&gt;</span>
+</pre></div>
+
+
+<p><img alt="clip_gravity_center" src="../images/clip_gravity_center.png" /></p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;clip</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/poly_test2&quot;</span>
+    <span class="na">android:gravity=</span><span class="s">&quot;left&quot;</span>
+    <span class="na">android:clipOrientation=</span><span class="s">&quot;horizontal&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/clip&gt;</span>
+</pre></div>
+
+
+<p><img alt="clip_gravity_left" src="../images/clip_gravity_left.png" /></p>
+<h3 id="10-scaledrawablescale">10. ScaleDrawable(scale 标签)</h3>
+<p>scale 标签也是通过设置 level 值来设置缩放, 也是 0~10000</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;scale</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/drawable_resource&quot;</span>
+    <span class="na">android:scaleGravity=</span><span class="s">[&quot;top&quot;</span> <span class="err">|</span> <span class="err">&quot;bottom&quot;</span> <span class="err">|</span> <span class="err">&quot;left&quot;</span> <span class="err">|</span> <span class="err">&quot;right&quot;</span> <span class="err">|</span> <span class="err">&quot;center_vertical&quot;</span> <span class="err">|</span>
+                          <span class="err">&quot;fill_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;center_horizontal&quot;</span> <span class="err">|</span> <span class="err">&quot;fill_horizontal&quot;</span> <span class="err">|</span>
+                          <span class="err">&quot;center&quot;</span> <span class="err">|</span> <span class="err">&quot;fill&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_vertical&quot;</span> <span class="err">|</span> <span class="err">&quot;clip_horizontal&quot;]</span>
+    <span class="na">android:scaleHeight=</span><span class="s">&quot;percentage&quot;</span>
+    <span class="na">android:scaleWidth=</span><span class="s">&quot;percentage&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:scaleGravity</code> 指的是以哪里为中心进行缩放</li>
+<li><code>android:scaleHeight</code>, <code>android:scaleWidth</code> 值都为<strong>百分比</strong>, 分别为高度和宽度从边框处可以缩放的百分比,  也就是图片会被按 <strong>(1 - 百分比)</strong> 缩小. 比如如果在 xml 中设置最多能缩进 50%, <code>android:scaleWidth="50%"</code>, 在 java 代码中设置 level 为 <code>Drawable.setLevel(3000)</code> 缩小为 30% 大小, 也是会被  xml 的设定给限制最小能缩小到 50%</li>
+</ul>
+<h3 id="11-shapedrawableshape">11. ShapeDrawable(shape 标签)</h3>
+<p>shape 标签定义了一些几何形状, 动画过渡等</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;shape</span>
+       <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+       <span class="na">android:shape=</span><span class="s">[&quot;rectangle&quot;</span> <span class="err">|</span> <span class="err">&quot;oval&quot;</span> <span class="err">|</span> <span class="err">&quot;line&quot;</span> <span class="err">|</span> <span class="err">&quot;ring&quot;]</span> <span class="nt">&gt;</span>
+
+    <span class="nt">&lt;corners</span>
+        <span class="na">android:radius=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:topLeftRadius=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:topRightRadius=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:bottomLeftRadius=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:bottomRightRadius=</span><span class="s">&quot;integer&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;gradient</span>
+        <span class="na">android:angle=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:centerX=</span><span class="s">&quot;float&quot;</span>
+        <span class="na">android:centerY=</span><span class="s">&quot;float&quot;</span>
+        <span class="na">andorid:centerColor=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:endColor=</span><span class="s">&quot;color&quot;</span>
+        <span class="na">android:gradientRadius=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:startColor=</span><span class="s">&quot;color&quot;</span>
+        <span class="na">android:type=</span><span class="s">[&quot;linear&quot;</span> <span class="err">|</span> <span class="err">&quot;radial&quot;</span> <span class="err">|</span> <span class="err">&quot;sweep&quot;]</span>
+        <span class="na">android:useLevel=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;padding</span>
+        <span class="na">android:left=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:top=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:right=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:bottom=</span><span class="s">&quot;integer&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;size</span>
+        <span class="na">android:width=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:height=</span><span class="s">&quot;integer&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;solid</span>
+        <span class="na">android:color=</span><span class="s">&quot;color&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;stroke</span>
+        <span class="na">android:width=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:color=</span><span class="s">&quot;color&quot;</span>
+        <span class="na">android:dashWidth=</span><span class="s">&quot;integer&quot;</span>
+        <span class="na">android:dashGap=</span><span class="s">&quot;integer&quot;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/shape&gt;</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p><code>android:shape</code> 可以设置 <code>rectangle</code> 矩形(默认), <code>oval</code> 椭圆, <code>line</code> 线形, <code>ring</code> 环形</p>
+</li>
+<li>
+<p><code>corners</code> 标签用于设置圆角</p>
+</li>
+<li>
+<p><code>android:radius</code> 同时设置四个角, 会被下面的值覆盖</p>
+</li>
+<li><code>android:topLeftRadius</code> 左上</li>
+<li><code>android:topRightRadius</code> 右上</li>
+<li><code>android:bottomLeftRadius</code> 右下</li>
+<li><code>android:bottomRightRadius</code> 左下</li>
+</ul>
+<blockquote>
+<p>只适应用于 rectangle 形状</p>
+</blockquote>
+<ul>
+<li>
+<p><code>gradient</code> 标签用于设置渐变. </p>
+</li>
+<li>
+<p><code>android:angle</code> 渐变角度, 线性渐变时才有用, 必须为 45 度的倍数. 注意 Android 坐标跟数学坐标不同</p>
+</li>
+<li><code>android:centerX</code> 放射渐变时中心点的横坐标</li>
+<li><code>android:centerY</code> 放射渐变时中心点的纵坐标</li>
+<li><code>android:startColor</code> 渐变的初始颜色</li>
+<li><code>andorid:centerColor</code> 渐变的中间颜色</li>
+<li><code>android:endColor</code> 渐变的结束颜色 </li>
+<li><code>android:gradientRadius</code> 放射渐变的渐变半径 </li>
+<li><code>android:type</code> 渐变方式. <code>linear</code> 线性渐变, <code>radial</code> 放射渐变(中心渐变), <code>sweep</code> 扫描渐变, 从钟表 3 点钟方向沿顺时针扫一圈的渐变方式.</li>
+<li>
+<p><code>android:useLeve</code> 是否使用 level 值, 一般不使用</p>
+</li>
+<li>
+<p><code>padding</code> 标签用于设定内容与边界的几个内间距</p>
+</li>
+<li>
+<p><code>size</code> 用与设置图形形状的大小, 矩形的宽高, 椭圆的长宽. 在 <code>ring</code> 中使用时指的是图形的大小, 而不是外边距的大小</p>
+</li>
+</ul>
+<blockquote>
+<p>线形不使用这个值</p>
+</blockquote>
+<ul>
+<li><code>solid</code> 用于设置填充到图形中的颜色</li>
+</ul>
+<blockquote>
+<p><code>line</code> 不使用这个设置</p>
+</blockquote>
+<ul>
+<li>
+<p><code>stroke</code> 用于设置边线的值. 当形状为<code>line</code> 时, 指的是线的设置</p>
+</li>
+<li>
+<p><code>android:color</code> 填充的颜色</p>
+</li>
+<li><code>android:width</code> 线的宽度, 或者说是粗细</li>
+<li><code>android:dashGap</code> 设置虚线和虚线的间隔距离, 也即是中间实线的长度</li>
+<li><code>android:dashWidth</code> 设置虚线的长度</li>
+</ul>
+<blockquote>
+<p>针对形状为 <code>ring</code> 时, 还有 5 个特殊的属性, 写在 shape 标签中</p>
+</blockquote>
+<ul>
+<li><code>android:innerRadius</code> 内圆半径, 覆盖 <code>android:innerRadiusRatio</code> </li>
+<li><code>android:innerRadiusRatio</code> 以环的宽度比率来表示内环的半径，默认为 3，表示内环半径为环的宽度除以 3，该值会被 android:innerRadius 覆盖</li>
+<li><code>android:thickness</code> 圆环的厚度, 即外径 - 内径的大小, 覆盖 <code>android:thicknessRatio</code></li>
+<li><code>android:thicknessRatio</code> 内径占整个 drawable 的比例, 默认为 9, 如果为 n, 则半径 = 宽度 / n</li>
+<li><code>android:useLevel</code> <strong>默认为 true. 只有作为 LevelListDrawable 来使用时才设置为 true , 否则设置为 false, 不然可能导致图形无法显示</strong></li>
+</ul>
+<h3 id="12-rotatedrawablerotate">12. RotateDrawable(rotate 标签)</h3>
+<p>设置旋转, 旋转值也是由 <code>Drawable#setLevel()</code> 来控制. 可旋转的角度在 <code>fromDegress</code> - <code>toDegress</code> 之间, 即旋转 (level / 10000) * ( fromDegress - toDegress) 度</p>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;rotate</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:drawable=</span><span class="s">&quot;@drawable/drawable_resource&quot;</span>
+    <span class="na">android:fromDegress=</span><span class="s">&quot;float&quot;</span>
+    <span class="na">android:toDegress=</span><span class="s">&quot;float&quot;</span>
+    <span class="na">android:privotX=</span><span class="s">&quot;float&quot;</span>
+    <span class="na">android:privotY=</span><span class="s">&quot;float&quot;</span>
+    <span class="na">android:visible=</span><span class="s">[&quot;true&quot;</span> <span class="err">|</span> <span class="err">&quot;false&quot;]</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><code>android:drawable</code> 图片来源, 也可以把图形包含在 rotate 标签之间</li>
+<li><code>android:fromDegress</code> 开始角度</li>
+<li><code>android:toDegress</code> 结束角度</li>
+<li><code>android:privotX</code> 旋转中心横坐标</li>
+<li><code>android:privotY</code> 旋转中心纵坐标</li>
+<li><code>android:visible</code> 是否可见</li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/resources/drawable-resource">https://developer.android.com/guide/topics/resources/drawable-resource</a></li>
+<li><a href="https://keeganlee.me/post/android/20150916">https://keeganlee.me/post/android/20150916</a></li>
+<li><a href="https://keeganlee.me/post/android/20150909">https://keeganlee.me/post/android/20150909</a></li>
+<li><a href="https://keeganlee.me/post/android/20150830">https://keeganlee.me/post/android/20150830</a></li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/drawable.html">drawable</a>
+      <a href="./tag/zi-yuan.html">资源</a>
+      <a href="./tag/yang-shi.html">样式</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>
