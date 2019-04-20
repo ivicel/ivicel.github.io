@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag styleable</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,40 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html#android-dai-ma-values-mu-lu-xia-shuo-ming">Android 代码 values 目录下说明</a></h2>
+    <p>
+      Posted on Sun 22 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/resources.html">resources</a>,              <a href="../tag/androidzi-yuan-wen-jian.html">android资源文件</a>,              <a href="../tag/attrs.html">attrs</a>,              <a href="../tag/style.html">style</a>,              <a href="../tag/styleable.html">styleable</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
+<h3 id="1-style">1. style 主题文件</h3>
+<p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
+<ol>
+<li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr …</strong></li></ol>
+      <br>
+      <a class="btn" href="../android-dai-ma-values-mu-lu-xia-shuo-ming.html#android-dai-ma-values-mu-lu-xia-shuo-ming">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +127,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

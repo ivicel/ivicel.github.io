@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag tips</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,48 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../python-tips.html#python-tips">python tips</a></h2>
+    <p>
+      Posted on Mon 10 September 2018 in <a href="../category/python.html">Python</a>
+
+          &#8226; Tagged with
+              <a href="../tag/tips.html">tips</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c1"># 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6]</span>
+<span class="c1"># 这是因为 a[2] 在增量时是分成两步</span>
+<span class="c1"># 一是把 a[2] 的列表值入栈, 扩展成 [3, 4, 5, 6], 这是成功的</span>
+<span class="c1"># 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError</span>
+</pre></div>
+
+
+<ul>
+<li>不要把可变对象放在元组中</li>
+<li>列表增量赋值不是一个原子, 是分成两步进行的, 其实也可以从 list 没有实现 <code>__iadd__ …</code></li></ul>
+      <br>
+      <a class="btn" href="../python-tips.html#python-tips">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +135,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

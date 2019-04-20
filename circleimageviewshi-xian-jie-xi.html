@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖 civ_fill_color 图片背景填充, 已弃用, 使用 civ_circle_background_color 替代 1.2 流程 CircleImageView 是继承自系统控件 android.widget.ImageView, 而不是 support 里的兼容控件 android.support.v7.widget.AppCompatImageView, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包. CircleImageView …" />
+<meta name="keywords" content="CircleImageView, 源码解析, 实现">
+
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:title" content="CircleImageView实现解析"/>
+<meta property="og:description" content="1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖 civ_fill_color 图片背景填充, 已弃用, 使用 civ_circle_background_color 替代 1.2 流程 CircleImageView 是继承自系统控件 android.widget.ImageView, 而不是 support 里的兼容控件 android.support.v7.widget.AppCompatImageView, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包. CircleImageView …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./circleimageviewshi-xian-jie-xi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-28 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Android"/>
+<meta property="article:tag" content="CircleImageView"/>
+<meta property="article:tag" content="源码解析"/>
+<meta property="article:tag" content="实现"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; CircleImageView实现解析</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="circleimageviewshi-xian-jie-xi">CircleImageView实现解析</h1>
+    <p>
+      Posted on Sat 28 April 2018 in <a href="./category/android.html">Android</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h3 id="1-circleimageview">1. CircleImageView 的实现</h3>
+<h4 id="11">1.1 自定义的属性</h4>
+<p>CircleImageView 一共自定义的 5 个自定义属性</p>
+<ol>
+<li><code>civ_border_width</code> 边框的大小</li>
+<li><code>civ_border_color</code> 边框的颜色</li>
+<li><code>civ_border_overlay</code> 边框覆盖</li>
+<li><code>civ_fill_color</code> 图片背景填充, 已弃用, 使用 <code>civ_circle_background_color</code> 替代</li>
+</ol>
+<h4 id="12">1.2 流程</h4>
+<p>CircleImageView 是继承自系统控件 <code>android.widget.ImageView</code>, 而不是 support 里的兼容控件 <code>android.support.v7.widget.AppCompatImageView</code>, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包.</p>
+<blockquote>
+<p>CircleImageView 里有两个重要的标志位 <code>mReady</code>, <code>mSetupPending</code>. 用来控制解析自定义属性, 和图片来源以及 view 大小的测量. 为什么要使用两个标志位并相互依赖? 这是由于 ImageView 可能通过 xml 和 java 两种方法来设置图片来源, 这两种方法调用的时机也是不同. 另外我们需要确保先要解析我们自定义的值才好计算出边框大小, 颜色等, 还有 view 的大小要到 onMeasure 时才能确定, 所以圆半径大小的要到那时才能确定</p>
+</blockquote>
+<p>我们都知道, xml 的 inflate 使用的是控件里的第二个构造方法, 即 <code>public CircleImageView(Context context, AttributeSet attrs)</code>, 然后这里调用了 <code>public CircleImageView(Context context, AttributeSet attrs, int defStyle)</code>.</p>
+<p>在第三个构造调用了父类 <code>ImageView</code> 里对应的构造方法, 这里要注意的是, 父类里会解析我们所写的 xml 文件, 然后如果我们写了图片文件来源 <code>android:src</code>, 这里就会调用了 <code>ImageView#setDrawable</code> 来设置图片文件来源.</p>
+<p>然后我们看到 CircleImageView 源码里面设置图片的 setXXX 方法都已经被重写了, 都只增加了一行 <code>initializeBitmap()</code> 来初始化图片 mBitmap 来源.</p>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">initializeBitmap</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 通过这个标志可以设定我们是否需要把图片变形为圆形或者不改变</span>
+    <span class="c1">// 如果设定了 onDraw 那就按 ImageView 来绘画</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mDisableCircularTransformation</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mBitmap</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// 获取图片</span>
+        <span class="n">mBitmap</span> <span class="o">=</span> <span class="n">getBitmapFromDrawable</span><span class="o">(</span><span class="n">getDrawable</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="n">setup</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 第一次 mReady 初始为 false, 所以总是直接返回, 回到构造方法里解析自定义属性</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">mReady</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mSetupPending</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 这一步判断也是很重要的, 因为图片的设置可能是在 xml 也可能是在 java 中 setXXX 方法</span>
+    <span class="c1">// 所以当完成调用构造方法后, 再次调用 setup 时并没有测量好 view 的大小, 这里就会直接返回</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">getWidth</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">getHeight</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* .... */</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>来看两种情况:</p>
+<ol>
+<li>通过 xml 设置图片来源. </li>
+</ol>
+<p><code>setImageDrawable()</code> -&gt; <code>initializeBitmap()</code> -&gt; <code>setup()</code>, 遇到 <code>mReady == false</code> 返回 -&gt; 构造方法里解析自定义属性, 然后 <code>init()</code> -&gt; 这时 <code>mSetupPending == true</code>, 再次调用 <code>setup()</code>, 但此时 view 的大小还没测量好, <code>getWidth() == 0</code>, <code>getHeight() == 0</code> 直接返回. </p>
+<p>当 view 测量完成后调用 <code>onSizeChanged()</code> -&gt; 再次 <code>setup</code>, 这时一切就绪可以测量圆的半径大小, 位置等种种</p>
+<ol>
+<li>通过 java 代码来设置图片来源.</li>
+</ol>
+<p>重写 <code>setImageXXXX()</code> 方法, 里面都调用了 <code>initializeBitmap()</code>. 然后跟上面的一样, 只不过这时候 <code>mReady</code> 已经是 <code>true</code>, 因为在 <code>init()</code> 里已经设置了, 并且此时我们已经完成了对 view 的测量, 这样在 <code>setup()</code> 里就直接测量圆的半径等等所需的值</p>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">setScaleType</span><span class="o">(</span><span class="n">SCALE_TYPE</span><span class="o">);</span>
+    <span class="n">mReady</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">LOLLIPOP</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setOutlineProvider</span><span class="o">(</span><span class="k">new</span> <span class="n">OutlineProvider</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="c1">// 如果已经在 xml 设置了图片, 就会直接设置图片的大小等</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mSetupPending</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setup</span><span class="o">();</span>
+        <span class="n">mSetupPending</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>来看如何获得 bitmap.</p>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="n">Bitmap</span> <span class="nf">getBitmapFromDrawable</span><span class="o">(</span><span class="n">Drawable</span> <span class="n">drawable</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">drawable</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 如果是 BitmapDrawable 对象, 直接使用 BitmapDrawable#getBitmap() 获得</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">drawable</span> <span class="k">instanceof</span> <span class="n">BitmapDrawable</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">((</span><span class="n">BitmapDrawable</span><span class="o">)</span> <span class="n">drawable</span><span class="o">).</span><span class="na">getBitmap</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">Bitmap</span> <span class="n">bitmap</span><span class="o">;</span>
+        <span class="c1">// 如果是 ColorDrawable 对象, 因为填充颜色没有所谓的大小, 是根据要填充的 view 来确定大小的. </span>
+        <span class="c1">// 所以给一个初始的大小来生成 bitmap, 到时把这个 bitmap 拉伸便可</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">drawable</span> <span class="k">instanceof</span> <span class="n">ColorDrawable</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">bitmap</span> <span class="o">=</span> <span class="n">Bitmap</span><span class="o">.</span><span class="na">createBitmap</span><span class="o">(</span><span class="n">COLORDRAWABLE_DIMENSION</span><span class="o">,</span> <span class="n">COLORDRAWABLE_DIMENSION</span><span class="o">,</span> <span class="n">BITMAP_CONFIG</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 其余情况下由传入的 drawable 大小来确定生成新的 bitmap</span>
+            <span class="n">bitmap</span> <span class="o">=</span> <span class="n">Bitmap</span><span class="o">.</span><span class="na">createBitmap</span><span class="o">(</span><span class="n">drawable</span><span class="o">.</span><span class="na">getIntrinsicWidth</span><span class="o">(),</span> <span class="n">drawable</span><span class="o">.</span><span class="na">getIntrinsicHeight</span><span class="o">(),</span> <span class="n">BITMAP_CONFIG</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">Canvas</span> <span class="n">canvas</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Canvas</span><span class="o">(</span><span class="n">bitmap</span><span class="o">);</span>
+        <span class="n">drawable</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">canvas</span><span class="o">.</span><span class="na">getWidth</span><span class="o">(),</span> <span class="n">canvas</span><span class="o">.</span><span class="na">getHeight</span><span class="o">());</span>
+        <span class="n">drawable</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">canvas</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">bitmap</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>回过来看最重要的 setup 方法</p>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">mReady</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mSetupPending</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">getWidth</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">getHeight</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 设置为不要变形为圆形时的情况, 会执行这个</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mBitmap</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">invalidate</span><span class="o">();</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 设置着色器</span>
+    <span class="n">mBitmapShader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitmapShader</span><span class="o">(</span><span class="n">mBitmap</span><span class="o">,</span> <span class="n">Shader</span><span class="o">.</span><span class="na">TileMode</span><span class="o">.</span><span class="na">CLAMP</span><span class="o">,</span>
+            <span class="n">Shader</span><span class="o">.</span><span class="na">TileMode</span><span class="o">.</span><span class="na">CLAMP</span><span class="o">);</span>
+    <span class="c1">// 图片画笔, 反锯齿, 着色器</span>
+    <span class="n">mBitmapPaint</span><span class="o">.</span><span class="na">setAntiAlias</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">mBitmapPaint</span><span class="o">.</span><span class="na">setShader</span><span class="o">(</span><span class="n">mBitmapShader</span><span class="o">);</span>
+    <span class="c1">// 边框画笔样式</span>
+    <span class="n">mBorderPaint</span><span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="n">Paint</span><span class="o">.</span><span class="na">Style</span><span class="o">.</span><span class="na">STROKE</span><span class="o">);</span>
+    <span class="n">mBorderPaint</span><span class="o">.</span><span class="na">setAntiAlias</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">mBorderPaint</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">mBorderColor</span><span class="o">);</span>
+    <span class="n">mBorderPaint</span><span class="o">.</span><span class="na">setStrokeWidth</span><span class="o">(</span><span class="n">mBorderWidth</span><span class="o">);</span>
+    <span class="c1">// 背景画笔样式</span>
+    <span class="n">mCircleBackgroundPaint</span><span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="n">Paint</span><span class="o">.</span><span class="na">Style</span><span class="o">.</span><span class="na">FILL</span><span class="o">);</span>
+    <span class="n">mCircleBackgroundPaint</span><span class="o">.</span><span class="na">setAntiAlias</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">mCircleBackgroundPaint</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">mCircleBackgroundColor</span><span class="o">);</span>
+    <span class="c1">// 图片宽高</span>
+    <span class="n">mBitmapHeight</span> <span class="o">=</span> <span class="n">mBitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+    <span class="n">mBitmapWidth</span> <span class="o">=</span> <span class="n">mBitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+    <span class="c1">// 计算圆形的外切矩形大小</span>
+    <span class="n">mBorderRect</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">calculateBounds</span><span class="o">());</span>
+    <span class="c1">// 计算边框的半径, 我们在 xml 中设置的是边框大小 * 2, 这里要除以 2</span>
+    <span class="c1">// 因为在画圆时, Paint#setStrokeWidth 的参数就是圆边框线的两倍</span>
+    <span class="n">mBorderRadius</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">((</span><span class="n">mBorderRect</span><span class="o">.</span><span class="na">height</span><span class="o">()</span> <span class="o">-</span> <span class="n">mBorderWidth</span><span class="o">)</span> <span class="o">/</span> <span class="mf">2.0f</span><span class="o">,</span>
+            <span class="o">(</span><span class="n">mBorderRect</span><span class="o">.</span><span class="na">width</span><span class="o">()</span> <span class="o">-</span> <span class="n">mBorderWidth</span><span class="o">)</span> <span class="o">/</span> <span class="mf">2.0f</span><span class="o">);</span>
+    <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">mBorderRect</span><span class="o">);</span>
+    <span class="c1">// overlay 为 true 时, 向内缩小 1px</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">mBorderOverlay</span> <span class="o">&amp;&amp;</span> <span class="n">mBorderWidth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">inset</span><span class="o">(</span><span class="n">mBorderWidth</span> <span class="o">-</span> <span class="mf">1.0f</span><span class="o">,</span> <span class="n">mBorderWidth</span> <span class="o">-</span> <span class="mf">1.0f</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// 图形圆的半径大小, 可以看到取这个大小时, 边框是画在图像上的</span>
+    <span class="n">mDrawableRadius</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">mDrawableRect</span><span class="o">.</span><span class="na">height</span><span class="o">()</span> <span class="o">/</span> <span class="mf">2.0f</span><span class="o">,</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">width</span><span class="o">()</span> <span class="o">/</span> <span class="mf">2.0f</span><span class="o">);</span>
+    <span class="c1">// 过滤颜色, 只在 java 代码中设置调用</span>
+    <span class="n">applyColorFilter</span><span class="o">();</span>
+    <span class="n">updateShaderMatrix</span><span class="o">();</span>
+    <span class="n">invalidate</span><span class="o">();</span>
+<span class="o">}</span>
+
+ <span class="kd">private</span> <span class="n">RectF</span> <span class="nf">calculateBounds</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 注意先要减去上下左右的 padding 才是 view 真正的内容区大小</span>
+    <span class="kt">int</span> <span class="n">availableWidth</span>  <span class="o">=</span> <span class="n">getWidth</span><span class="o">()</span> <span class="o">-</span> <span class="n">getPaddingLeft</span><span class="o">()</span> <span class="o">-</span> <span class="n">getPaddingRight</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">availableHeight</span> <span class="o">=</span> <span class="n">getHeight</span><span class="o">()</span> <span class="o">-</span> <span class="n">getPaddingTop</span><span class="o">()</span> <span class="o">-</span> <span class="n">getPaddingBottom</span><span class="o">();</span>
+    <span class="c1">// 取长宽里的最小值来作一个内切圆, 该值就是边框圆的直径</span>
+    <span class="kt">int</span> <span class="n">sideLength</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">availableWidth</span><span class="o">,</span> <span class="n">availableHeight</span><span class="o">);</span>
+    <span class="c1">// 以左, 上的 padding 为准来定位圆</span>
+    <span class="c1">// 如果长, 高很大, 那么 paddingRight, paddingBottom 可能不会产生什么影响 </span>
+    <span class="kt">float</span> <span class="n">left</span> <span class="o">=</span> <span class="n">getPaddingLeft</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="n">availableWidth</span> <span class="o">-</span> <span class="n">sideLength</span><span class="o">)</span> <span class="o">/</span> <span class="mf">2f</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">top</span> <span class="o">=</span> <span class="n">getPaddingTop</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="n">availableHeight</span> <span class="o">-</span> <span class="n">sideLength</span><span class="o">)</span> <span class="o">/</span> <span class="mf">2f</span><span class="o">;</span>
+    <span class="c1">// 将在这个矩形内作一个内切圆</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">RectF</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">top</span><span class="o">,</span> <span class="n">left</span> <span class="o">+</span> <span class="n">sideLength</span><span class="o">,</span> <span class="n">top</span> <span class="o">+</span> <span class="n">sideLength</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateShaderMatrix</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kt">float</span> <span class="n">scale</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kt">float</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="n">mShaderMatrix</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="c1">// 我们已经计算好一个矩形, 我们需要知道图片比预定矩形大还是小, 以便作缩放</span>
+    <span class="c1">// 下面是 mDrawableRect.height() / mBitmapHeight &gt; </span>
+    <span class="c1">// mDrawableRect.width() / mBitmapWidth 的变形</span>
+    <span class="c1">// 因为图片有放大或缩小, 缩放中心为原点, 所以图片要进行移动</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mBitmapWidth</span> <span class="o">*</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">height</span><span class="o">()</span> <span class="o">&gt;</span> 
+            <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">width</span><span class="o">()</span> <span class="o">*</span> <span class="n">mBitmapHeight</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 按高进行缩放时, 要在 x 轴平移</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">height</span><span class="o">()</span> <span class="o">/</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">mBitmapHeight</span><span class="o">;</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="o">(</span><span class="n">mDrawableRect</span><span class="o">.</span><span class="na">width</span><span class="o">()</span> <span class="o">-</span> <span class="n">mBitmapWidth</span> <span class="o">*</span> <span class="n">scale</span><span class="o">)</span> <span class="o">*</span> <span class="mf">0.5f</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// 按宽进行缩放时, 要在 y 轴平移</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">width</span><span class="o">()</span> <span class="o">/</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">mBitmapWidth</span><span class="o">;</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="o">(</span><span class="n">mDrawableRect</span><span class="o">.</span><span class="na">height</span><span class="o">()</span> <span class="o">-</span> <span class="n">mBitmapHeight</span> <span class="o">*</span> <span class="n">scale</span><span class="o">)</span> <span class="o">*</span> <span class="mf">0.5f</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">mShaderMatrix</span><span class="o">.</span><span class="na">setScale</span><span class="o">(</span><span class="n">scale</span><span class="o">,</span> <span class="n">scale</span><span class="o">);</span>
+    <span class="n">mShaderMatrix</span><span class="o">.</span><span class="na">postTranslate</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">dx</span> <span class="o">+</span> <span class="mf">0.5f</span><span class="o">)</span> <span class="o">+</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">dy</span> <span class="o">+</span> <span class="mf">0.5f</span><span class="o">)</span> <span class="o">+</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">top</span><span class="o">);</span>
+
+    <span class="n">mBitmapShader</span><span class="o">.</span><span class="na">setLocalMatrix</span><span class="o">(</span><span class="n">mShaderMatrix</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDraw</span><span class="o">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 禁用变形</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mDisableCircularTransformation</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onDraw</span><span class="o">(</span><span class="n">canvas</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 没有获得图片源</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mBitmap</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 有背景颜色</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mCircleBackgroundColor</span> <span class="o">!=</span> <span class="n">Color</span><span class="o">.</span><span class="na">TRANSPARENT</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">canvas</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="n">mDrawableRect</span><span class="o">.</span><span class="na">centerX</span><span class="o">(),</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">centerY</span><span class="o">(),</span> <span class="n">mDrawableRadius</span><span class="o">,</span> <span class="n">mCircleBackgroundPaint</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// 画图片</span>
+    <span class="n">canvas</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="n">mDrawableRect</span><span class="o">.</span><span class="na">centerX</span><span class="o">(),</span> <span class="n">mDrawableRect</span><span class="o">.</span><span class="na">centerY</span><span class="o">(),</span>
+            <span class="n">mDrawableRadius</span><span class="o">,</span> <span class="n">mBitmapPaint</span><span class="o">);</span>
+    <span class="c1">// 画边框</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">mBorderWidth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">canvas</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="n">mBorderRect</span><span class="o">.</span><span class="na">centerX</span><span class="o">(),</span> <span class="n">mBorderRect</span><span class="o">.</span><span class="na">centerY</span><span class="o">(),</span> 
+                <span class="n">mBorderRadius</span><span class="o">,</span> <span class="n">mBorderPaint</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<h3 id="reference">Reference</h3>
+<ol>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html</a></li>
+<li><a href="https://juejin.im/entry/593108c4a22b9d0058c08a2c">https://juejin.im/entry/593108c4a22b9d0058c08a2c</a></li>
+<li><a href="https://github.com/hdodenhof/CircleImageView">https://github.com/hdodenhof/CircleImageView</a></li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/circleimageview.html">CircleImageView</a>
+      <a href="./tag/yuan-ma-jie-xi.html">源码解析</a>
+      <a href="./tag/shi-xian.html">实现</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>

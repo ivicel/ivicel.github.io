@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag parceable</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,43 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../android-dui-xiang-xu-lie-hua-fang-shi.html#android-dui-xiang-xu-lie-hua-fang-shi">Android 对象序列化方式</a></h2>
+    <p>
+      Posted on Sun 01 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/android.html">android</a>,              <a href="../tag/xu-lie-hua.html">序列化</a>,              <a href="../tag/serializable.html">serializable</a>,              <a href="../tag/parceable.html">parceable</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <p><code>Android</code>内序列化对象主要有两种方式, 一是原<code>Java</code>自带的<code>Serializable</code>接口, 二是<code>Android</code>内自有的<code>Parcelable</code>接口</p>
+<h3 id="1-serializable">1. <code>Serializable</code>接口</h3>
+<p><code>Java</code>自带的序列接口使用非常简单, 只要实现<code>Serializable</code>接口即可. <code>Serializable</code>接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. </p>
+<blockquote>
+<p>如果想自定义序列化/反序列化过程, 可以自主实现<code>writeObject()</code>和<code>readObject()</code>. 一般我们都不会这么做的</p>
+</blockquote>
+<p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
+<p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int …</code></p>
+      <br>
+      <a class="btn" href="../android-dui-xiang-xu-lie-hua-fang-shi.html#android-dui-xiang-xu-lie-hua-fang-shi">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +130,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag andorid图片加载</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,37 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html#androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom">Android高效加载图片防止OOM</a></h2>
+    <p>
+      Posted on Thu 22 February 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/andoridtu-pian-jia-zai.html">andorid图片加载</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <p>想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 <code>BitmapFactory.Options</code> 里的 <code>option.inSampleSize</code> 来设置图片的采样率. 图片的<strong>长</strong>和<strong>宽</strong>都会被设置成 <strong>1/<code>option.inSampleSize</code> </strong> 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 <code>(长 * 1/2) * (宽 * 1/2) * 4</code>(ARGB8888), 缩小了 4 倍. 即图片会被设置成 <code>1/option.inSampleSize * 1/option.inSampleSize</code> 大小.</p>
+<p><code>inSampleSize</code> 一般取为 2 的指数 …</p>
+      <br>
+      <a class="btn" href="../androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html#androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +124,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

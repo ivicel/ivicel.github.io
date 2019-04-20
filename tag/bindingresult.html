@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag bindingresult</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,41 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html#spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult">Spring POST 重定向接收错误信息(BindingResult)</a></h2>
+    <p>
+      Posted on Thu 10 January 2019 in <a href="../category/java.html">Java</a>
+
+          &#8226; Tagged with
+              <a href="../tag/spring.html">spring</a>,              <a href="../tag/bindingresult.html">bindingresult</a>,              <a href="../tag/post-zhong-ding-xiang.html">POST 重定向</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <h4 id="1-post">1. POST 请求的错误信息重定向</h4>
+<p>在发送 POST 之后, 如果遇到错误, 我们经常会重定向(GET)回到原页面, 而不是直接返回页面, 这样做是为了避免如果我们点击浏览器刷新按钮时, 会再次发送 POST 请求. 重定向之后, 我们需要获得前面的错误信息.</p>
+<p>使用 <code>@ModelAttribute</code> 注解来修饰 <code>RequestMapping</code> 方法的参数, <code>ModelAttibute</code> 注解实际上是接收请求参数, 添加到 Model 中, 在取出后自动删除.</p>
+<p>需要注意的几点:</p>
+<ol>
+<li>在 GET 处理方法中, 因为我们在渲染的 html/jsp 页面中使用了 <code>User</code> 对象, 所以要检测是重定向过来的, 还是用户新的请求来的. 从 POST 重定向过来的, 我们添加了 user 对象, 所以使用 <code>model.containsAttricute("user …</code></li></ol>
+      <br>
+      <a class="btn" href="../spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html#spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +128,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

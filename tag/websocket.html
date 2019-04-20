@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag websocket</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,50 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html#ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a></h2>
+    <p>
+      Posted on Mon 10 September 2018 in <a href="../category/python.html">Python</a>
+
+          &#8226; Tagged with
+              <a href="../tag/python.html">python</a>,              <a href="../tag/flask.html">flask</a>,              <a href="../tag/websocket.html">websocket</a>,              <a href="../tag/steam.html">steam</a>,              <a href="../tag/steamkey.html">steamkey</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <p><a href="https://github.com/ivicel/steam-key-python">steam-key-python</a> 是 <a href="https://github.com/zyfworks/steam-key">steam-key</a> 的python 移植, 原开发基于 node.js.</p>
+<p>使用到的主要开发包:</p>
+<ul>
+<li><a href="https://github.com/ValvePython/steam">steam</a> 一个用 python 实现的 steamkit</li>
+<li>flask web 框架</li>
+<li>gevent 异步框架</li>
+<li>uwsgi 后端 server</li>
+</ul>
+<h5 id="1-flask-websocket">1. flask 结合 websocket 问题</h5>
+<p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
+<div class="codehilite"><pre><span></span><span class="nf">GET</span> <span class="nn">/websocket</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Connection</span><span class="o">:</span> <span class="l">Upgrade</span>
+<span class="na">Upgrade</span><span class="o">:</span> <span class="l">websocket</span>
+<span class="na">Sec-WebSocket-Version</span><span class="o">:</span> <span class="l">13</span>
+<span class="na">Sec-WebSocket-Key …</span></pre></div>
+      <br>
+      <a class="btn" href="../ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html#ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +137,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

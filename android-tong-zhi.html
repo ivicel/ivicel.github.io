@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. 简介 1.1 通知可出现的地方 1.2 通知基础结构 1.3 通知的兼容性 Andorid 4.1, API level 16 Andorid 4.4, API level 19 Andorid 5.0, API level 21 Andorid 7.0, API level 24 Andorid 8.0, API level 26 2. 创建通知及通知行为(Notification actions) 2.1 基本通知的创建 2.2 …" />
+<meta name="keywords" content="通知, notification">
+
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:title" content="Android 通知"/>
+<meta property="og:description" content="1. 简介 1.1 通知可出现的地方 1.2 通知基础结构 1.3 通知的兼容性 Andorid 4.1, API level 16 Andorid 4.4, API level 19 Andorid 5.0, API level 21 Andorid 7.0, API level 24 Andorid 8.0, API level 26 2. 创建通知及通知行为(Notification actions) 2.1 基本通知的创建 2.2 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./android-tong-zhi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-05-02 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Android"/>
+<meta property="article:tag" content="通知"/>
+<meta property="article:tag" content="notification"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; Android 通知</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="android-tong-zhi">Android 通知</h1>
+    <p>
+      Posted on Wed 02 May 2018 in <a href="./category/android.html">Android</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 简介</a><ul>
+<li><a href="#11">1.1 通知可出现的地方</a></li>
+<li><a href="#12">1.2 通知基础结构</a></li>
+<li><a href="#13">1.3 通知的兼容性</a><ul>
+<li><a href="#andorid-41-api-level-16">Andorid 4.1, API level 16</a></li>
+<li><a href="#andorid-44-api-level-19">Andorid 4.4, API level 19</a></li>
+<li><a href="#andorid-50-api-level-21">Andorid 5.0, API level 21</a></li>
+<li><a href="#andorid-70-api-level-24">Andorid 7.0, API level 24</a></li>
+<li><a href="#andorid-80-api-level-26">Andorid 8.0, API level 26</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-notification-actions">2. 创建通知及通知行为(Notification actions)</a><ul>
+<li><a href="#21">2.1 基本通知的创建</a></li>
+<li><a href="#22-tap-action">2.2 通知的点击行为(tap action)</a></li>
+<li><a href="#23-action-button">2.3 通知的 action button</a></li>
+<li><a href="#24-direct-reply">2.4 direct reply 直接回复按钮</a></li>
+<li><a href="#25">2.5 通知栏进度条</a></li>
+<li><a href="#26">2.6 锁屏通知策略</a></li>
+<li><a href="#27-notification-badge">2.7 Notification badge</a></li>
+</ul>
+</li>
+<li><a href="#3-expandable-notification">3. 可扩展的通知(Expandable notification)</a><ul>
+<li><a href="#31-bigpicturestyle">3.1 BigPictureStyle 大图模式</a></li>
+<li><a href="#32-bigtextstyle">3.2 BigTextStyle 多文本模式</a></li>
+<li><a href="#33-inboxstyle">3.3 InboxStyle</a></li>
+<li><a href="#34-messagingstyle">3.4 MessagingStyle</a></li>
+<li><a href="#35-mediastyle">3.5 MediaStyle</a></li>
+<li><a href="#4">4. 通知分组</a></li>
+</ul>
+</li>
+<li><a href="#5-notification-channel">5. Notification Channel</a><ul>
+<li><a href="#51-channel">5.1 创建 channel 的步骤:</a></li>
+<li><a href="#52-channel">5.2 用户通知 channel 设置</a></li>
+<li><a href="#53-channel">5.3 删除通知 channel</a></li>
+<li><a href="#54-channel">5.4 分组 channel</a></li>
+</ul>
+</li>
+<li><a href="#6-importancepriority">6. 通知的重要性(Importance)和优先级(Priority)</a></li>
+<li><a href="#7-27-system-wide-categorydo-not-disturb-mode">7. 2.7 系统内置的通知分类(system-wide category)和免打扰模式(Do Not Disturb mode)</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</div>
+<h3 id="1">1. 简介</h3>
+<h4 id="11">1.1 通知可出现的地方</h4>
+<ol>
+<li>
+<p>以一个图标出现在 status bar 中, 一般是一个单 alpha 通道的图标, 但有些魔改的系统是可以显示多色图标的</p>
+</li>
+<li>
+<p>notification drawer 模式, 也就是下拉状态栏</p>
+</li>
+<li>
+<p>heads-up notification 模式, 在 Android 5.0(SDK 21) 之后, 如果当前 app 全屏显示, 手机处于解锁状态, 然后通知拥有高优先级(high priority, Android 7.1, SDK 25)并产生铃音/震动, 或通知的 channel 拥有重要重级(high  importance, Android 8.0, SDK 26)的话, 就会弹出一个浮动的通知窗口</p>
+</li>
+<li>
+<p>锁屏状态中. 在 Android 5.0(SDK 21) 之后, 通知可以出现在 lock screen 中. 在 app 中可以单独设置通知的私密性,  用户也可以设置全局系统通知私密性, 这会覆盖 app 的设置</p>
+</li>
+<li>
+<p>在 Android 8.0(SDK 26) 之后, 如果 launcher 支持了未读通知的 badge, 当长按该 app 时会弹出一个通知, 可以像 notification drawer 左右滑掉或者点击, 即使 app 没有支持长按 shortcuts 也是可以弹出的通知的</p>
+</li>
+</ol>
+<p><img alt="notification-badges" src="../images/notification-badges.png" /></p>
+<h4 id="12">1.2 通知基础结构</h4>
+<p><img alt="basic-notification" src="../images/basic-notification.png" /></p>
+<ol>
+<li>Small icon: 通过 <code>setSmallIcon()</code> 来设置, 一般为 app 图标, 这个必须设置</li>
+<li>App name: 系统自动设置</li>
+<li>Time stamp: 通知产生的时间, 可以通过 <code>setWhen()</code> 来设置或使用 <code>setShowWhen(false)</code> 来隐藏, 默认是当前系统时间. </li>
+<li>Large icon: 可选, 右边缩略图(Thumbnail), 通过 <code>setLargeIcon()</code> 来设置</li>
+<li>Title: 可选, 通知的标题, 通过 <code>setContentTitle()</code> 来设置</li>
+<li>Text: 可选, 通知的内容, 单行显示, 超出部分会显示成 <code>…</code>, 通过 <code>setContentText()</code> 来设置</li>
+</ol>
+<h4 id="13">1.3 通知的兼容性</h4>
+<p>由于通知在每个版本中都有不同的改动, 所以我们总是使用 v4 support library 里的兼容版本 <code>NotificationCompat</code> 和 <code>NotificationManagerCompat</code>, 这样我们可以更少写些 API 版本测试条件语句.下面是一些变更总结</p>
+<h5 id="andorid-41-api-level-16">Andorid 4.1, API level 16</h5>
+<ul>
+<li>增加了可扩展的通知, 即是 notification style. <code>BigTextStyle</code>, <code>BigPictureStyle</code>, <code>InboxStyle</code></li>
+<li>可设置通知多个点击按钮</li>
+<li>可单独关闭某个 app 的通知</li>
+</ul>
+<h5 id="andorid-44-api-level-19">Andorid 4.4, API level 19</h5>
+<ul>
+<li>增加了通知监听服务 api, notification listener service</li>
+<li>支持 Wear OS(API 20)</li>
+</ul>
+<h5 id="andorid-50-api-level-21">Andorid 5.0, API level 21</h5>
+<ul>
+<li>增加了锁屏通知(通过 <code>setVisibility()</code> 来设置)和 heads-up 模式</li>
+<li>增加了 Do Not Disturb 防打扰模式</li>
+<li>可以通过 <code>setPriority()</code> 来设置通知的等级, 这会影响通知在不同模式下的弹出状况</li>
+<li>增加了通知的分组功能 <code>setGroup()</code>, 这样不会导致同一个 app 在很短时间内收到多条信息时弹出一排的通知</li>
+<li>增加了新的 <code>MediaStyle</code>, 音乐后台播放时的通知</li>
+</ul>
+<h5 id="andorid-70-api-level-24">Andorid 7.0, API level 24</h5>
+<ul>
+<li>重新设计了通知模版, 重点突出了 hero image 和 avatar</li>
+<li>增加了新的 style: <code>MessagingStyle</code> 像短信息一样的排列, <code>DecoratedCustomViewStyle</code>, <code>DecoratedMediaCustomViewStyle</code> 自定义的 view, 但依旧由系统进行装饰</li>
+<li>现在可以使用和 Wear OS 一样的通知分组功能, API 是一样的</li>
+<li>增加了在通知里直接回复消息的功能, 只能单行, 不能分段</li>
+</ul>
+<h5 id="andorid-80-api-level-26">Andorid 8.0, API level 26</h5>
+<ul>
+<li>增加了通知 channel, 在 app 中要注册 channel, 每个通知都必须放到 channel 中. </li>
+</ul>
+<blockquote>
+<ol>
+<li>Target SDK &lt; 26, 会按 target sdk 来运行</li>
+<li>Target SDK &gt;= 26, 如果运行在 Android 8.0 及以上时, 必须有设置 channel, 否则会打印出 error log. 非 Android 8.0 则按以前的通知行为</li>
+</ol>
+</blockquote>
+<ul>
+<li>用户可以对不同 channel 进行关闭, 打开等操作, 代替了以前只能关闭整个 app 的通知</li>
+<li>现在可以在 launcher 中 app 图标上显示有未读通知了, 需要这个 launcher 支持</li>
+<li>可以在下拉栏中滑动通知来设置<strong>稍后提醒(snooze)</strong></li>
+<li>可以设置通知了背景颜色了</li>
+<li>一些 APIs 从 Notification 移到了 NoitficationChannel 中, 比如设置通知的等级 <code>NotificationCompat.Builder.setPriority()</code>. 如果 target sdk == 21 并且在 8.0 的机器上运行, <code>NotificationCompat.Builder.setPriority()</code> 会被忽略, 只使用 <code>NotificationChannel.setImportance()</code></li>
+</ul>
+<blockquote>
+<p>在 Andorid 8.1, API level 27 之后, 在同一秒内 app 只能发出一次通知铃音. 并且如果在短时间内(一般少于 1 秒)发生多次通知, 系统可能会丢弃其中的一些通知</p>
+</blockquote>
+<h3 id="2-notification-actions">2. 创建通知及通知行为(Notification actions)</h3>
+<h4 id="21">2.1 基本通知的创建</h4>
+<p>以 target sdk 26 来创建新的通知</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CHANNEL_ID</span> <span class="o">=</span> <span class="s">&quot;my_channel_id&quot;</span><span class="o">;</span>
+<span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span>
+        <span class="n">context</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">notification_icon</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="n">textTitle</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">textContent</span><span class="o">)</span>
+        <span class="c1">// 为兼容 8.0 以下系统的优先级</span>
+        <span class="o">.</span><span class="na">setPriority</span><span class="o">(</span><span class="n">NotificationCompat</span><span class="o">.</span><span class="na">PRIORITY_DEFAULT</span><span class="o">);</span>  
+
+<span class="c1">// 兼容 8.0 系统的 channel 设置</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">O</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 传入 channel id, channel name, 和优先级, 运行在 8.0 及以上时会忽略 setPriority</span>
+    <span class="n">NotificationChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationChannel</span><span class="o">(</span><span class="n">CHANNEL_ID</span><span class="o">,</span> <span class="n">channelName</span><span class="o">,</span>
+            <span class="n">NotificationManager</span><span class="o">.</span><span class="na">IMPORTANCE_DEFAULT</span><span class="o">);</span>
+    <span class="n">channel</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="n">description</span><span class="o">);</span>
+    <span class="c1">// 向系统注册这个 channel</span>
+    <span class="n">NotificationManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="o">(</span><span class="n">Notification</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getSystemService</span><span class="o">(</span>
+            <span class="n">Context</span><span class="o">.</span><span class="na">NOTIFICATION_SERVICE</span><span class="o">);</span>
+    <span class="n">manager</span><span class="o">.</span><span class="na">createNotificationChannel</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>在创建完通知后, 可以通过 <code>NotificationManagerCompat.notify()</code> 来显示通知.</p>
+<div class="codehilite"><pre><span></span><span class="n">NotificationMangerCompat</span> <span class="n">notificationManger</span> <span class="o">=</span> <span class="n">NotificationMangerCompat</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="n">notificationManger</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="n">notificationId</span><span class="o">,</span> <span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">());</span>
+</pre></div>
+
+
+<p><code>notificationId</code> 是一个重要的参数, 之后我们通 <code>cancel(notificationId)</code> 来取消特定通知, 或者 <code>cancelAll()</code> 取消所有通知. </p>
+<p>对同一个 <code>notificationId</code> 进行调用 <code>NotificationManagerCompat.notify()</code> 便会更新通知</p>
+<h4 id="22-tap-action">2.2 通知的点击行为(tap action)</h4>
+<p>在下拉通知中, 通过点击通知可以跳转到通过的来源处, 通过 <code>setContentIntent(PendingIntent)</code> 来实现. PendingIntent 可以启动 activity, service, 发送 broadCast. </p>
+<div class="codehilite"><pre><span></span><span class="c1">// 启动一个 activity</span>
+<span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">SourceActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="c1">// 设置一个新栈来跳转, 这样不会影响当前任务栈里的 activity</span>
+<span class="n">intent</span><span class="o">.</span><span class="na">setFlags</span><span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">FLAG_ACTIVITY_NEW_TASK</span> <span class="o">|</span> <span class="n">Intent</span><span class="o">.</span><span class="na">FLAG_ACTIVITY_CLEAR_TASK</span><span class="o">);</span>
+<span class="n">PendingIntent</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getActivity</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">intent</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="na">setContentIntent</span><span class="o">(</span><span class="n">pi</span><span class="o">)</span>
+        <span class="c1">// 设置点击后关闭通知</span>
+        <span class="o">.</span><span class="na">setAutoCancel</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</pre></div>
+
+
+<h4 id="23-action-button">2.3 通知的 action button</h4>
+<p>在 Android 4.1 之后, 通知可设置如下图的 action button, 通过 <code>addAction()</code> 来设置</p>
+<p><img alt="notification-basic-action" src="../images/notification-basic-action.png" /></p>
+<p>比如点击后, 产生一个广播的代码如下. 可以添加多个 action button</p>
+<div class="codehilite"><pre><span></span><span class="n">Intent</span> <span class="n">snoozeIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">MyBroadCastReceiver</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">snoozeIntent</span><span class="o">.</span><span class="na">setAction</span><span class="o">(</span><span class="n">ACTION_SNOOZE</span><span class="o">);</span>
+<span class="n">snoozeIntent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="n">EXTRA_NOTIFICATION_ID</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="n">PendingIntent</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getBroadcast</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">snoozeIntent</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+<span class="c1">// 向通知添加 action button 事件</span>
+<span class="n">builder</span><span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_snooze</span><span class="o">,</span> <span class="n">snoozeString</span><span class="o">,</span> <span class="n">pi</span><span class="o">);</span>
+</pre></div>
+
+
+<h4 id="24-direct-reply">2.4 direct reply 直接回复按钮</h4>
+<p>在 Android 7.0, API level 24 之后添加可以直接在通知栏回复消息的按钮. 点击前和点击后的样式如下图<img alt="reply-button1" src="../images/reply-button.png" /></p>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">KEY_TEXT_REPLY</span> <span class="o">=</span> <span class="s">&quot;key_text_reply&quot;</span><span class="o">;</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">N</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 1. 创建一个 RemoteInput. 传入的 key 值会在发送的 intent 中用来获得消息体</span>
+    <span class="n">RemoteInput</span> <span class="n">remoteInput</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RemoteInput</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">KEY_TEXT_REPLY</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setLabel</span><span class="o">(</span><span class="n">replyLabel</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+    <span class="c1">// 2. 创建一个 PendingIntent 用来产生点击行为</span>
+    <span class="n">PendingIntent</span> <span class="n">replyPendingIntent</span> <span class="o">=</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">getBroadcast</span><span class="o">(</span><span class="n">context</span><span class="o">,</span>
+            <span class="n">conversationRequestCode</span><span class="o">,</span> <span class="n">intent</span><span class="o">,</span> <span class="n">PendingIntent</span><span class="o">.</span><span class="na">FLAG_UPDATE_CURRENT</span><span class="o">);</span>
+
+    <span class="c1">// 3. 使用 addRemoteIput 将 RemoteInput 添加一通知中</span>
+    <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span> <span class="n">action</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span>
+            <span class="n">R</span><span class="o">.</span><span class="na">drawabl</span><span class="o">.</span><span class="na">ic_reply_action</span><span class="o">,</span> <span class="n">labelString</span><span class="o">,</span> <span class="n">replyPendingIntent</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">addRemoteInput</span><span class="o">(</span><span class="n">remoteInput</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+    <span class="c1">// 4. 创建并发出通知</span>
+    <span class="n">Notification</span> <span class="n">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">notification_icon</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="n">title</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">text</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="n">action</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+    <span class="n">NotificationManagerCompat</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">context</span><span class="o">).</span><span class="na">notify</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">notification</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>通过 <code>RemoteInput.getResultsFromIntent()</code> 在 BroadCastReceiver 中获得传过来的 intent 里的消息</p>
+<div class="codehilite"><pre><span></span><span class="c1">// intent 便是传入 broadcast 里的 intent, 使用原先传入的 key 值</span>
+<span class="kd">private</span> <span class="n">CharSequence</span> <span class="nf">getMessageText</span><span class="o">(</span><span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Bundle</span> <span class="n">remoteInput</span> <span class="o">=</span> <span class="n">RemoteInput</span><span class="o">.</span><span class="na">getResultsFromIntent</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">remoteInput</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">remoteInput</span><span class="o">.</span><span class="na">getCharSequence</span><span class="o">(</span><span class="n">KEY_TEXT_REPLY</span><span class="o">);</span>   
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>在用户使用直接回复之后, 我们还要关闭这个通知, 显示已回复等</p>
+<div class="codehilite"><pre><span></span><span class="n">Notification</span> <span class="n">repliedNotification</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">message_replied</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">repliedString</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="c1">// 使用上一个通知的 id, 以便覆盖掉上个通知</span>
+<span class="n">notificationManager</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">repliedNotification</span><span class="o">);</span>
+</pre></div>
+
+
+<h4 id="25">2.5 通知栏进度条</h4>
+<p>通过 <code>NotificationCompat.Builder.setProgress(max, progress, false)</code> 不断更改当前进度 <code>progress</code>, 最大值 <code>max</code> 一般设置为 100 之类. </p>
+<p>当完成之后, 通过设置 <code>max</code> 为 0 来隐藏进度条, <code>Notification.Builder.setProgree(0, 0, false)</code></p>
+<blockquote>
+<p>最后个参数影响进度条是显示确定的百分比样式, 还是显示一个不断滚动的样式</p>
+</blockquote>
+<h4 id="26">2.6 锁屏通知策略</h4>
+<p>我们可以通过 <code>NotificationManger.Builder.setVisibilty()</code> 方法来设置通知在锁屏时的显示策略. </p>
+<ul>
+<li><code>NotificationCompat.VISIBILITY_PUBLIC</code>: 显示通知所有内容</li>
+<li><code>NotificationCompat.VISIBILITY_SECRET</code>: 不显示任何通知内容</li>
+<li><code>NotificationCompat.VISIBILITY_PRIVATE</code>: 显示通知的基础信息, 比如 app 名, 通知标题, 或者像 "你有 3 条新的消息" 之类, 这个消息是可以自定义的, 通过 <code>setPublicVersion()</code> 方法来设置</li>
+</ul>
+<blockquote>
+<p>编码时虽然可以设置锁屏通知策略, 但最终会受到用户的系统设置的影响, 被其覆盖掉</p>
+</blockquote>
+<h4 id="27-notification-badge">2.7 Notification badge</h4>
+<p>在 Android 8.0, API 26 之后, 可以在 launcher app 图标右上角显示有通知, 需要 launcher 支持 shortcuts. 通知点是系统自动加入的, 如果不需要显示可以使用 <code>setBadge(false)</code> 来取消显示. </p>
+<p>长按 app 弹出通知时, 系统会自动计算当前 app 共有几条通知, 数量显示在弹出的窗口右上角, 可以通过 <code>setNumber()</code> 来手动设置自己需要的数字.</p>
+<p>弹出的窗口默认使用的是 large icon, 可以通过 <code>setBadgeIconType(BADGE_ICON_SMALL)</code> 来更改使用 small icon.</p>
+<p>使用 <code>setShortcutId()</code> 来在弹出通知窗口时, 隐藏 shortcut</p>
+<h3 id="3-expandable-notification">3. 可扩展的通知(Expandable notification)</h3>
+<p>基础的通知是只包含一个标题, 一行文字, 一个或多个操作. 系统内置了一些可扩展开来的通知, 可以通过 <code>setStyle()</code> 来设置</p>
+<h4 id="31-bigpicturestyle">3.1 BigPictureStyle 大图模式</h4>
+<p>大图模式常见的是截图时的样式</p>
+<p><img alt="bigpicturestyle" src="../images/bigpicturestyle.png" /></p>
+<div class="codehilite"><pre><span></span><span class="n">Notification</span> <span class="n">noti</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">new_post</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setLargeIcon</span><span class="o">(</span><span class="n">myBitmap</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">BigPictureStyle</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">setBigPicture</span><span class="o">(</span><span class="n">myBitmap</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">bigLargeIcon</span><span class="o">(</span><span class="kc">null</span><span class="o">))</span>        <span class="c1">// 下拉时, 把右边的缩略图设置为 null</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<h4 id="32-bigtextstyle">3.2 BigTextStyle 多文本模式</h4>
+<p><img alt="large-text" src="../images/large-text.png" /></p>
+<div class="codehilite"><pre><span></span><span class="n">builder</span><span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">BigTextStyle</span><span class="o">()</span>
+        <span class="c1">// 设置长文本, 文本换自动换行, 单行的原本还是使用 setContentText </span>
+        <span class="o">.</span><span class="na">bigText</span><span class="o">(</span><span class="n">textString</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<h4 id="33-inboxstyle">3.3 InboxStyle</h4>
+<p>这个模式相当于可以设置多个单行, 超出的文本不会自己换行而是使用 <code>…</code> 来代替</p>
+<div class="codehilite"><pre><span></span><span class="n">builder</span><span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">InboxStyle</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">addLine</span><span class="o">(</span><span class="n">str1</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">addLine</span><span class="o">(</span><span class="n">str2</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">addLine</span><span class="o">(</span><span class="n">str3</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<h4 id="34-messagingstyle">3.4 MessagingStyle</h4>
+<p>像信息 app 一样能设置对话形式的样式<img alt="messaging-style" src="../images/messaging-style.png" /></p>
+<div class="codehilite"><pre><span></span><span class="n">Notification</span> <span class="n">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">new_message</span><span class="o">)</span>     
+        <span class="o">.</span><span class="na">setLargeIcon</span><span class="o">(</span><span class="n">aBitmap</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">Notification</span><span class="o">.</span><span class="na">MessagingStyle</span><span class="o">(</span>
+                <span class="n">resources</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">reply_name</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">addMessage</span><span class="o">(</span><span class="n">text1</span><span class="o">,</span> <span class="n">time1</span><span class="o">,</span> <span class="n">sender1</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">addMessage</span><span class="o">(</span><span class="n">text2</span><span class="o">,</span> <span class="n">time2</span><span class="o">,</span> <span class="n">sender2</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<h4 id="35-mediastyle">3.5 MediaStyle</h4>
+<p>MediaStyle 有两个兼容包, <code>android.support.v4.media.app.NotificationCompat.MediaStyle</code> 和 <code>android.support.v7.app.NotificationCompat.MediaStyle</code>. </p>
+<p>v7 的包是继承了 v4 包的类, 在 API level 26 以上, v7 包类已经弃用, 如果使用 v4 包, 还需要向 build.gradle 中添加 <code>com.andorid.support:support-media-compat:27.1.1</code> 支持库. </p>
+<p>MediaStyle 一般用于音乐播放器, 其界面类似下图</p>
+<p><img alt="media-style" src="../images/media-style.png" /></p>
+<p>MediaStyle 扩展界面最多可以添加 5 个按钮, 按钮的顺序从左到右为添加的顺序. 非扩展界面最多可以显示 3 个按钮. 显示的按从扩展界面添加的顺序中选出序号(0-4). </p>
+<blockquote>
+<p>如果只添加了 4 个按钮, 却在非扩展里选择超出的下标值, 比如 4 则 app crash</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">mipmap</span><span class="o">.</span><span class="na">ic_launcher_round</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setLargeIcon</span><span class="o">(</span><span class="n">bitmap</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="s">&quot;Song&#39;s name&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="s">&quot;Singer&#39;s name&quot;</span><span class="o">)</span>
+        <span class="c1">// 按钮的显示按添加的顺序从左向右排列</span>
+        <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">(</span>
+                <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_thumb_down</span><span class="o">,</span> <span class="s">&quot;Down&quot;</span><span class="o">,</span> <span class="n">actionPendingIntent</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">(</span>
+                <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_play_previous</span><span class="o">,</span> <span class="s">&quot;Previous&quot;</span><span class="o">,</span> <span class="n">actionPendingIntent</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">(</span>
+                <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_pause</span><span class="o">,</span> <span class="s">&quot;Pause&quot;</span><span class="o">,</span> <span class="n">actionPendingIntent</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">(</span>
+                <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_play_next</span><span class="o">,</span> <span class="s">&quot;Next&quot;</span><span class="o">,</span> <span class="n">actionPendingIntent</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">addAction</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Action</span><span class="o">(</span>
+                <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_thumb_up</span><span class="o">,</span> <span class="s">&quot;Up&quot;</span><span class="o">,</span> <span class="n">actionPendingIntent</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">android</span><span class="o">.</span><span class="na">support</span><span class="o">.</span><span class="na">v4</span><span class="o">.</span><span class="na">media</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">NotificationCompat</span><span class="o">.</span><span class="na">MediaStyle</span><span class="o">()</span>
+        <span class="c1">// 设置非扩展界面显示的按钮, 参数为一个整型下标数组</span>
+        <span class="o">.</span><span class="na">setShowActionsInCompactView</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+</pre></div>
+
+
+<h4 id="4">4. 通知分组</h4>
+<p>在 Android 7.0, API 24 之后, 可以对通知按 app 来分组. 如果使用分组策略, 在低于 Android 7.0 的系统会忽略这个功能, 还是一条一条的发出来. 在 7.0 以上, 系统也会自动把一个 app 的 4 个及以上的通知归为一个组</p>
+<p><img alt="notification-group" src="../images/notification-group.png" /></p>
+<p>分组的使用方法是, 对想要分组的通知使用 <code>setGroup(key)</code> 来设置一个 group key, 拥有同一个 group key 的通知会被分到同一个组(这个通知要注意使用不同的 id, 因为这些通知都是独立的). 发送出这个通知后, 我们还要发送一个整理-归类通知, 告诉系统, 把上一个通知分到组里面, 而不是作为一个普通的通知显示出来. </p>
+<div class="codehilite"><pre><span></span><span class="n">String</span> <span class="n">GROUP_KEY_WORK_EMAIL</span> <span class="o">=</span> <span class="s">&quot;com.android.example.WORK_EMAIL&quot;</span><span class="o">;</span>
+<span class="c1">// 发送普通的通知</span>
+<span class="kd">final</span> <span class="n">Notification</span> <span class="n">notification</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">mipmap</span><span class="o">.</span><span class="na">ic_launcher_round</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentText</span><span class="o">(</span><span class="n">text</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setContentTitle</span><span class="o">(</span><span class="n">title</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setAutoCancel</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setGroup</span><span class="o">(</span><span class="n">GROUP_KEY_WORK_EMAIL</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">mNotificationManager</span><span class="o">.</span><span class="na">notify</span><span class="o">(</span><span class="n">getNewNotificationId</span><span class="o">(),</span> <span class="n">notification</span><span class="o">);</span>
+
+<span class="c1">// 当超过两个通知时, 发送一个合并分组通知</span>
+<span class="kd">final</span> <span class="n">Notification</span> <span class="n">summaryNotification</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> 
+            <span class="n">CHANNEL_ID</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setSmallIcon</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_notify_summary_status</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setStyle</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationCompat</span><span class="o">.</span><span class="na">InboStyle</span><span class="o">()</span>
+                  <span class="o">.</span><span class="na">setBigContentTitle</span><span class="o">(</span><span class="n">bigContentTitle</span><span class="o">)</span>
+                  <span class="o">.</span><span class="na">setSummaryText</span><span class="o">(</span><span class="n">summaryText</span><span class="o">))</span>
+        <span class="o">.</span><span class="na">setGroup</span><span class="o">(</span><span class="n">GROUP_KEY_WORK_EMAIL</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setGroupSummary</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<h3 id="5-notification-channel">5. Notification Channel</h3>
+<p>在 Android 8.0, API 26 之后, 增加了通知 channel, 把通知都放在 channel 中, 这样可以单独对 channel 进行设置, 而不用对全局的 app 通知进行设置, 有分类性, 针对性更强. 比如邮件 app 中, 可以关闭该 app 的有新邮件通知, 但可另外设置一个 channel, 在这 channel 中的邮件通知还依然显示.</p>
+<p>如果 <code>targetSdkVersion</code> 为 26 及以上, 那么当运行在 8.0 及以上时系统时, 必须要设置 channel, 否则通知将不能显示, 并将打印出错误 log(可以在开发者选项中设置显示通知 channel 警告, 会弹出一个 toast)</p>
+<p>如果 <code>targetSdkVersion</code> 为 25 及以下, 那么无论运行在哪个系统上, 行为将和 Android 7.1 及以下版本一样</p>
+<p><img alt="channel-settings" src="../images/channel-settings.png" /></p>
+<h4 id="51-channel">5.1 创建 channel 的步骤:</h4>
+<ol>
+<li>由于 <code>NotificationChannel</code> 类没有兼容版本, 只 API 26 及以上存在, 所以需要对 <code>SDK_INT</code> 进行版本检查.</li>
+<li>创建一个 <code>NotificationChannel</code> 对象, 传入一个惟一的 channel id, 一个用户可见的 channel name, 和该 channel 的 importance 等级</li>
+<li>可额外设置 channel 的描述 <code>setDescription()</code>, 这样用户点开通知设置时可见</li>
+<li>使用 <code>NotificationManager#createNotificationChannel()</code> 方法注册该 channel</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">createNotificationChannel</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 兼容检查</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">O</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">NotificationChannenl</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotificationChannel</span><span class="o">(</span><span class="n">CHANNEL_ID</span><span class="o">,</span> 
+                <span class="n">channelName</span><span class="o">,</span> <span class="n">NotificationManager</span><span class="o">.</span><span class="na">IMPORTANCE_DEFAULT</span><span class="o">);</span>
+        <span class="n">channel</span><span class="o">.</span><span class="na">setDescription</span><span class="o">(</span><span class="n">channelDescription</span><span class="o">);</span>
+        <span class="n">NotificationManager</span> <span class="n">manager</span> <span class="o">=</span> <span class="o">(</span><span class="n">NotificationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span>
+                <span class="n">Context</span><span class="o">.</span><span class="na">NOTIFICATION_SERVICE</span><span class="o">);</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">createNotificationChannel</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<h4 id="52-channel">5.2 用户通知 channel 设置</h4>
+<p>一但注册通知 channel 后, 我们在编码时只能更改 channel name 和 channel description, 而其他的设置只能交由用户自己设置更改. 为了能让用户自己作出更改, 需要为用户提供一个 settings ui, 通过 <code>Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS</code> . 下面是启动一个通知设置的示例</p>
+<div class="codehilite"><pre><span></span><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span><span class="na">ACTIOIN_CHANNEL_NOTIFICATION_SETTINGS</span><span class="o">);</span>
+<span class="c1">// 这两个值是必须要值的, 包名和通知 id</span>
+<span class="n">intent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span><span class="na">EXTRA_APP_PACKAGE</span><span class="o">,</span> <span class="n">getPackageName</span><span class="o">());</span>
+<span class="n">intent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="n">Settings</span><span class="o">.</span><span class="na">EXTRA_CHANNEL_ID</span><span class="o">,</span> <span class="n">myNotificationChannel</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+<span class="n">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></div>
+
+
+<h4 id="53-channel">5.3 删除通知 channel</h4>
+<div class="codehilite"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">deleteNotification</span><span class="o">(</span><span class="n">String</span> <span class="n">notificationId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">Build</span><span class="o">.</span><span class="na">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span> <span class="o">&gt;=</span> <span class="n">Build</span><span class="o">.</span><span class="na">VERSION_CODES</span><span class="o">.</span><span class="na">O</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">NotificationManager</span> <span class="n">manger</span> <span class="o">=</span> <span class="o">(</span><span class="n">NotificationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span>
+                <span class="n">Context</span><span class="o">.</span><span class="na">NOTIFICATION_SERVICE</span><span class="o">);</span>
+        <span class="n">manager</span><span class="o">.</span><span class="na">deleteNotificationChannel</span><span class="o">(</span><span class="n">notificatioinId</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<h4 id="54-channel">5.4 分组 channel</h4>
+<p>可以对 channel 进行不同的分组, 这个在多用户 app 上对不同的用户可以设置不同 channel 策略</p>
+<div class="codehilite"><pre><span></span><span class="c1">// 每一个分组都需要一个惟一的 group id</span>
+<span class="n">String</span> <span class="n">groupId</span> <span class="o">=</span> <span class="s">&quot;my_group_id&quot;</span><span class="o">;</span>
+<span class="c1">// 用户可见的 group name</span>
+<span class="n">CharSequence</span> <span class="n">groupName</span> <span class="o">=</span> <span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">group_name</span><span class="o">);</span>
+<span class="n">NotificationManager</span> <span class="n">manger</span> <span class="o">=</span> <span class="o">(</span><span class="n">NotificationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span>
+        <span class="n">Context</span><span class="o">.</span><span class="na">NOTIFICATION_SERVICE</span><span class="o">);</span>
+<span class="n">manager</span><span class="o">.</span><span class="na">createNotificationChannelGroup</span><span class="o">(</span><span class="k">new</span> <span class="n">NotificationChannelGroup</span><span class="o">(</span>
+        <span class="n">groupId</span><span class="o">,</span> <span class="n">groupName</span><span class="o">));</span>
+<span class="c1">// 创建完 channel group 的后, 使用 setGroup 对 channel 进行分组</span>
+<span class="n">channel</span><span class="o">.</span><span class="na">setGroup</span><span class="o">(</span><span class="n">groupId</span><span class="o">);</span>
+</pre></div>
+
+
+<h3 id="6-importancepriority">6. 通知的重要性(Importance)和优先级(Priority)</h3>
+<p>在 Android 8.0 使用通知 channel 后, 通知的优先级 API 被移到了 <code>NotificationChannel</code> 中. 在低于 8.0 的系统里依旧使用 <code>setPriority()</code> 设置优先级, 而 8.0 及以上则忽略该设置, 使用 <code>NotificationChannel#setImportance()</code></p>
+<p>下表是 importance(<code>NotificationManager.IMPORTANCE_*</code>) 和 priority(<code>NotificationMangerCompat.PRIORITY_*</code>) 的对应设置</p>
+<table>
+<thead>
+<tr>
+<th>用户可见通知等级</th>
+<th>Importance(8.0 及以上)</th>
+<th>Priority(7.1 及以下)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Urgent</strong> (紧急通知)<br>响铃并弹出 heads-up 模式</td>
+<td><code>IMPORTANCE_HIGHT</code></td>
+<td><code>RPIORITY_HIGH</code> 或 <br><code>PRIORITY_MAX</code></td>
+</tr>
+<tr>
+<td><strong>High</strong> (高)<br>响铃</td>
+<td><code>IMPORTANCE_DEFAULT</code></td>
+<td><code>PRIORITY_DEFAULT</code></td>
+</tr>
+<tr>
+<td><strong>Medium</strong> (中)<br>不响铃</td>
+<td><code>IMPORTANCE_LOW</code></td>
+<td><code>PRIORITY_LOW</code></td>
+</tr>
+<tr>
+<td><strong>Low</strong> (低)<br>不响铃且不会出现在通知栏</td>
+<td><code>IMPORTANCE_MIN</code></td>
+<td><code>PRIORITY_MIN</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>通知的等级不会影响通知提示出现在非打断用户界面(non-inpterruptive system UI location), 比如 launcher 里 app 右上角的提示(badges/notification dots)</p>
+</blockquote>
+<h3 id="7-27-system-wide-categorydo-not-disturb-mode">7. 2.7 系统内置的通知分类(system-wide category)和免打扰模式(Do Not Disturb mode)</h3>
+<p>Android 系统内置了一些预定义默认的通知分类, 比如 <code>CATEGORY_ALARM</code>, <code>CATEGORY_REMIDER</code>, <code>CATEGORY_EVENT</code> 等等, 使用 <code>NotificationCompat.Builder#setCategory()</code> 来为通知设定一个分类. 内置分类会影响在免打扰模式下的通知行为.</p>
+<p>在 Android 5.0, API 21 之后增加了免打扰模式, 一共有 3 个等级</p>
+<ul>
+<li>全部静音(Total silence): 阻止所有铃音, 震动, 包括闹钟, 音乐, 视频, 游戏等</li>
+<li>闹钟除外(Alarms only): 除闹钟之外, 阻止所有铃音和震动</li>
+<li>设置优先级除外(Priority only): 用户可以根据系统分类来设置不同的免打扰策略</li>
+</ul>
+<p>在 Android 8.0, API 26 及以上, 用户可以通过设置 channel 的影响免打扰模式</p>
+<p><img alt="do-not-disturb-filter-settings" src="../images/do-not-disturb-filter-settings.png" /></p>
+<h3 id="reference">Reference</h3>
+<ol>
+<li><a href="https://developer.android.com/guide/topics/ui/notifiers/notifications">https://developer.android.com/guide/topics/ui/notifiers/notifications</a></li>
+<li><a href="https://juejin.im/entry/5925be652f301e006b3fd6a7">https://juejin.im/entry/5925be652f301e006b3fd6a7</a></li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/tong-zhi.html">通知</a>
+      <a href="./tag/notification.html">notification</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>

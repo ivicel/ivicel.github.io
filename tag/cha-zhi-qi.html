@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag 插值器</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,43 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../android-dong-hua-fen-xi.html#android-dong-hua-fen-xi">Android 动画分析</a></h2>
+    <p>
+      Posted on Tue 01 May 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/animator.html">animator</a>,              <a href="../tag/dong-hua.html">动画</a>,              <a href="../tag/cha-zhi-qi.html">插值器</a>,              <a href="../tag/interpolator.html">interpolator</a>,              <a href="../tag/animation.html">animation</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <p>Android 的动画分为以下两类:</p>
+<ol>
+<li>View 动画
+   * 补间动画(Tween Animation, <code>Animation</code> 类及其子类): 通过对 view 不断的作 rotate, scale, translate 等一系列操作从而达到动画效果, xml 文件放在 <code>res/anim/</code> 目录中
+   * 帧动画(Frame Animation, <code>AnimationDrawable</code> 类): 通过播放一系列预先生成好的图片达到的动画效果, 像电影胶片一样, 因为是不断的更换图片, 容易产生 OOM, xml 文件放在 <code>res/drawable/</code> 目录中</li>
+<li>属性动画(Property Animation): 通过不断的改变 view 的各种属性而达到动画效果,  帧动画存放在 <code>res/animator/</code> 中</li>
+</ol>
+<p>动画的定义可以由 xml 格式来定义, 也可以直接在 …</p>
+      <br>
+      <a class="btn" href="../android-dong-hua-fen-xi.html#android-dong-hua-fen-xi">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +130,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

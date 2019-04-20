@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag Handler Thread</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,53 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Java线程及线程池</a></h2>
+    <p>
+      Posted on Tue 10 April 2018 in <a href="../category/java.html">Java</a>
+
+          &#8226; Tagged with
+              <a href="../tag/xian-cheng.html">线程</a>,              <a href="../tag/xian-cheng-chi.html">线程池</a>,              <a href="../tag/asynctask.html">AsyncTask</a>,              <a href="../tag/handler-thread.html">Handler Thread</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <h3 id="1-java">1. Java 线程池</h3>
+<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
+<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
+<ul>
+<li>Executor 接口定义了执行器 Runnable 执行方式</li>
+<li>ExecutorService 定义了线程具体接口</li>
+<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
+<li>AbstractExecutorService 线程池的实现的抽象类</li>
+<li>ThreadPoolExecutor 线程池的具体实现类</li>
+<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
+<li>Executors 线程池的辅助工具类</li>
+</ul>
+<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
+<ul>
+<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
+<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
+<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
+<li><code>newScheduledThreadPool</code> 固定大小 …</li></ul>
+      <br>
+      <a class="btn" href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +140,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

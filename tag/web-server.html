@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag web server</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,38 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../wsgi-xie-yi.html#wsgi-xie-yi">WSGI 协议</a></h2>
+    <p>
+      Posted on Fri 01 June 2018 in <a href="../category/python.html">Python</a>
+
+          &#8226; Tagged with
+              <a href="../tag/wsgi.html">wsgi</a>,              <a href="../tag/python.html">python</a>,              <a href="../tag/fu-wu-qi.html">服务器</a>,              <a href="../tag/xie-yi.html">协议</a>,              <a href="../tag/web-server.html">web server</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <h4 id="1">1. 简介</h4>
+<p>WSGI(Web Server Gateway Interface) 定义在 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.</p>
+<p>WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种, 这样来看, 上层总是下层的 server, 下层是上层的 client …</p>
+      <br>
+      <a class="btn" href="../wsgi-xie-yi.html#wsgi-xie-yi">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +125,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

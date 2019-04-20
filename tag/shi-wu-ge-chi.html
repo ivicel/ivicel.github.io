@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag 事务隔离</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,45 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../shu-ju-ku-shi-wu-bing-fa-wen-ti-ji-ge-chi-xing-wei.html#shu-ju-ku-shi-wu-bing-fa-wen-ti-ji-ge-chi-xing-wei">数据库事务并发问题及隔离行为</a></h2>
+    <p>
+      Posted on Sat 12 January 2019 in <a href="../category/database.html">Database</a>
+
+          &#8226; Tagged with
+              <a href="../tag/mysql.html">mysql</a>,              <a href="../tag/shi-wu.html">事务</a>,              <a href="../tag/shi-wu-ge-chi.html">事务隔离</a>,              <a href="../tag/shu-ju-ku-bing-fa-wen-ti.html">数据库并发问题</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <h4 id="1">1. 数据库事务知识</h4>
+<h5 id="11-4-acid">1.1 数据库事务的 4 个基本特征: ACID</h5>
+<ol>
+<li>原子性(Atomic): 一个事务是不可分割的整体, 其内的操作要么全部成功, 要么全部失败.</li>
+<li>一致性(Consistency): 事务确保数据库从一个一致状态转变到另一个一致的状态. 一致状态指的是数据库应满足完整性约束. 比如 A+B 有 1000 元, 在 A 转帐到 B 300 后, 事务完成时, A + B 仍是 1000 元, 这保持了一致性</li>
+<li>隔离性(Isolation): 在多并发执行事务时, 事务与事务之间是隔离开执行的.</li>
+<li>持久性(Durability): 已被提交的了事务对数据库的修改被永久保存在数据库中.</li>
+</ol>
+<h5 id="12">1.2 数据库并发产生的问题</h5>
+<p>2 种更新丢失(<strong>第一类更新丢失</strong>, <strong>第二类更新丢失 …</strong></p>
+      <br>
+      <a class="btn" href="../shu-ju-ku-shi-wu-bing-fa-wen-ti-ji-ge-chi-xing-wei.html#shu-ju-ku-shi-wu-bing-fa-wen-ti-ji-ge-chi-xing-wei">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +132,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

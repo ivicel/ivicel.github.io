@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint = _endpoint_from_view_func(view_func) options[&#39;endpoint&#39;] = endpoint # 提供 HTTP 方法 # 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性 # 如果这两个都没提供, 则默认只支持 …" />
+<meta name="keywords" content="flask, python, 源代码阅读, RTFSC">
+
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:title" content="RTFSC: Flask 的源码阅读(三)"/>
+<meta property="og:description" content="1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint = _endpoint_from_view_func(view_func) options[&#39;endpoint&#39;] = endpoint # 提供 HTTP 方法 # 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性 # 如果这两个都没提供, 则默认只支持 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./rtfsc-flask-de-yuan-ma-yue-du-san.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-09-19 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="flask"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="源代码阅读"/>
+<meta property="article:tag" content="RTFSC"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; RTFSC: Flask 的源码阅读(三)</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="rtfsc-flask-de-yuan-ma-yue-du-san">RTFSC: Flask 的源码阅读(三)</h1>
+    <p>
+      Posted on Wed 19 September 2018 in <a href="./category/python.html">Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h4 id="1">1. 路由的实现</h4>
+<p>有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 <code>add_url_rule()</code> 方法, 装饰器是一种简洁明了的方式. </p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">add_url_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">provide_automatic_options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="c1"># endpoint 默认使用的是函数名</span>
+    <span class="k">if</span> <span class="n">endpoint</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">_endpoint_from_view_func</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="n">options</span><span class="p">[</span><span class="s1">&#39;endpoint&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">endpoint</span>
+    <span class="c1"># 提供 HTTP 方法</span>
+    <span class="c1"># 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性</span>
+    <span class="c1"># 如果这两个都没提供, 则默认只支持 GET</span>
+    <span class="n">methods</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;methods&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">methods</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">methods</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">view_func</span><span class="p">,</span> <span class="s1">&#39;methods&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">methods</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Allowed methods have to be iterables of strings, &#39;</span>
+                        <span class="s1">&#39;for example: @app.route(..., methods=[&quot;POST&quot;])&#39;</span><span class="p">)</span>
+    <span class="n">methods</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">)</span>
+
+    <span class="c1"># Methods that should always be added</span>
+    <span class="n">required_methods</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">view_func</span><span class="p">,</span> <span class="s1">&#39;required_methods&#39;</span><span class="p">,</span> <span class="p">()))</span>
+
+    <span class="c1"># provide_automatic_options 为非 None 时不会自动提供 OPTIONS 方法</span>
+    <span class="k">if</span> <span class="n">provide_automatic_options</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">provide_automatic_options</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">view_func</span><span class="p">,</span>
+            <span class="s1">&#39;provide_automatic_options&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">provide_automatic_options</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;OPTIONS&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+            <span class="n">provide_automatic_options</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">required_methods</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;OPTIONS&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">provide_automatic_options</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="c1"># Add the required methods now.</span>
+    <span class="n">methods</span> <span class="o">|=</span> <span class="n">required_methods</span>
+
+    <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_rule_class</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="n">methods</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">rule</span><span class="o">.</span><span class="n">provide_automatic_options</span> <span class="o">=</span> <span class="n">provide_automatic_options</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">view_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">old_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">old_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">old_func</span> <span class="o">!=</span> <span class="n">view_func</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s1">&#39;View function mapping is overwriting an &#39;</span>
+                                 <span class="s1">&#39;existing endpoint function: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">endpoint</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_functions</span><span class="p">[</span><span class="n">endpoint</span><span class="p">]</span> <span class="o">=</span> <span class="n">view_func</span>
+</pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/flask.html">flask</a>
+      <a href="./tag/python.html">python</a>
+      <a href="./tag/yuan-dai-ma-yue-du.html">源代码阅读</a>
+      <a href="./tag/rtfsc.html">RTFSC</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>

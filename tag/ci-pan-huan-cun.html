@@ -10,12 +10,12 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
 
 
 
@@ -41,19 +41,19 @@
 <meta property="og:title" content="Ivicel's Ambertime"/>
 <meta property="og:description" content="ivicel's thoughts and writings"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="."/>
+<meta property="og:url" content=".."/>
 <meta property="og:image" content="/images/favicon.ico">
 
-  <title>Ivicel's Ambertime &ndash; Authors</title>
+  <title>Ivicel's Ambertime &ndash; Tag 磁盘缓存</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
+      <a href="..">
         <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
       </a>
-      <h1><a href=".">Ambertime</a></h1>
+      <h1><a href="..">Ambertime</a></h1>
 
 <p>Make memory in past times</p>
 
@@ -66,22 +66,42 @@
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href="..">Home</a>
 
 
 
     </nav>
 
-<article class="single">
+
+
+<article>
   <header>
-    <h1>Authors</h1>
+    <h2><a href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Android 硬盘缓存 DiskLrucCache</a></h2>
+    <p>
+      Posted on Wed 04 April 2018 in <a href="../category/android.html">Android</a>
+
+          &#8226; Tagged with
+              <a href="../tag/huan-cun.html">缓存</a>,              <a href="../tag/ci-pan-huan-cun.html">磁盘缓存</a>,              <a href="../tag/lru.html">lru</a>,              <a href="../tag/cache.html">cache</a>,              <a href="../tag/disk-cache.html">disk cache</a>
+    </p>
   </header>
   <div>
-    <ul class="list">
-      <li><a href="./author/ivicel.html">ivicel</a> (57)</li>
-    </ul>
+      <h3 id="1-disklrucache">1. DiskLruCache 的使用</h3>
+<p>DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 <a href="https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/StrictLineReader.java">这里</a> 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 <a href="https://developer.android.com/samples/DisplayingBitmaps/src/com.example.android.displayingbitmaps/util/DiskLruCache.html">这里</a> 找到源码. 另外一个 <a href="https://gist.github.com/ivicel/f98f9ba4420c9d2c5274f151b625f677">GitHub 备份地址</a></p>
+<blockquote>
+<p>Android Developer Sample 里的源码没有有效的初始化 redundantOpCount, 而是为 0. 这导致如果不断退出重进应用, 很难达到封顶的 2000 行, 即使 journal 已经超出 2000 行. </p>
+<p>GitHub 上已经添加</p>
+</blockquote>
+<p>一般来说我们都会把磁盘放到 sdcard 上, 也就是 <code>/sdcard …</code></p>
+      <br>
+      <a class="btn" href="../android-ying-pan-huan-cun-disklruccache.html#android-ying-pan-huan-cun-disklruccache">Continue reading</a>
   </div>
 </article>
+
+  <div class="pagination">
+  </div>
+
+
+
 
     <footer>
 <p>
@@ -109,7 +129,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Ivicel's Ambertime ",
-  "url" : ".",
+  "url" : "..",
   "image": "/images/favicon.ico",
   "description": "ivicel's thoughts and writings"
 }

@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+
+
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-113622715-2', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="ivicel" />
+<meta name="description" content="ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。 ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 ROUND_UP，若为负数，舍入行为类似于 ROUND_DOWN。Math.round() 方法就是使用的此模式。 ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 ROUND_DOWN；若为负数，舍入行为类似于 ROUND_UP。 HALF_UP：最近数字舍入 (5 进)。这是我们最经典的四舍五入。 HALF_DOWN：最近数字舍入 (5 舍)。在这里 5 是要舍弃的。 HAIL_EVEN：银行家舍入法。 银行家舍入法: 舍去位小于5时, 直接舍去 舍去位大于5时 …" />
+<meta name="keywords" content="java">
+
+<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<meta property="og:title" content="Java小数舍位情况"/>
+<meta property="og:description" content="ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。 ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 ROUND_UP，若为负数，舍入行为类似于 ROUND_DOWN。Math.round() 方法就是使用的此模式。 ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 ROUND_DOWN；若为负数，舍入行为类似于 ROUND_UP。 HALF_UP：最近数字舍入 (5 进)。这是我们最经典的四舍五入。 HALF_DOWN：最近数字舍入 (5 舍)。在这里 5 是要舍弃的。 HAIL_EVEN：银行家舍入法。 银行家舍入法: 舍去位小于5时, 直接舍去 舍去位大于5时 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./javaxiao-shu-she-wei-qing-kuang.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-02-22 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/ivicel.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="java"/>
+<meta property="og:image" content="/images/favicon.ico">
+
+  <title>Ivicel's Ambertime &ndash; Java小数舍位情况</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
+      </a>
+      <h1><a href=".">Ambertime</a></h1>
+
+<p>Make memory in past times</p>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="javaxiao-shu-she-wei-qing-kuang">Java小数舍位情况</h1>
+    <p>
+      Posted on Thu 22 February 2018 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <ol>
+<li><code>ROUND_UP</code>：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。</li>
+<li><code>ROUND_DOWN</code>：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。</li>
+<li><code>ROUND_CEILING</code>：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 <code>ROUND_UP</code>，若为负数，舍入行为类似于 <code>ROUND_DOWN</code>。<code>Math.round()</code> 方法就是使用的此模式。</li>
+<li><code>ROUND_FLOOR</code>：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 <code>ROUND_DOWN</code>；若为负数，舍入行为类似于 <code>ROUND_UP</code>。</li>
+<li><code>HALF_UP</code>：最近数字舍入 (5 进)。这是我们最经典的四舍五入。</li>
+<li><code>HALF_DOWN</code>：最近数字舍入 (5 舍)。在这里 5 是要舍弃的。</li>
+<li><code>HAIL_EVEN</code>：银行家舍入法。</li>
+</ol>
+<blockquote>
+<p>银行家舍入法:</p>
+<ol>
+<li>
+<p>舍去位小于5时, 直接舍去</p>
+</li>
+<li>
+<p>舍去位大于5时, 直接进1后舍去</p>
+</li>
+<li>
+<p>舍去位等于5时:</p>
+</li>
+</ol>
+<p>1) 舍去位后面有数, 则直接进位1, 然后舍去</p>
+<p>2) 舍去位后面没数. </p>
+<div class="codehilite"><pre><span></span>  1. 如果舍去位前为**偶数**, 则直接舍去不进位
+  2. 如果舍去位前为**奇数**, 则进位后舍去
+</pre></div>
+
+
+<p>举例, 要舍去的位为<strong>粗体</strong>:</p>
+<p>11.55<strong>4</strong>  =&gt;  11.55     // 小于5</p>
+<p>11.55<strong>6</strong>  =&gt;  11.56         // 大于5</p>
+<p>11.55<strong>5</strong>1  =&gt;  11.556   // 舍去位后面有数, 进位</p>
+<p>11.54<strong>5</strong>  =&gt;   11.55        // 舍去位后面没数, 前为偶数, 直接舍去</p>
+<p>11.55<strong>5</strong>  =&gt;   11.56        // 舍去位后面没数, 前为奇数, 直接进位</p>
+</blockquote>
+<p>Reference:</p>
+<ol>
+<li>http://cmsblogs.com/?p=54</li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/java.html">java</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Ivicel's Ambertime ",
+  "url" : ".",
+  "image": "/images/favicon.ico",
+  "description": "ivicel's thoughts and writings"
+}
+</script>
+
+</body>
+</html>
