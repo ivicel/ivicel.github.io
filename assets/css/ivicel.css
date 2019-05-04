@@ -1,0 +1,45 @@
+body {
+    font-size: 1.15em;
+    line-height: 1.7em;
+    font-family: "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
+}
+
+.inner {
+    max-width: 48em;
+}
+
+h1.post-title {
+    font-size: 2.25em;
+}
+
+pre.highlight {
+    font-size: 0.8em;
+}
+
+pre .lines .line {
+    font-size: 1.2em;
+}
+
+.nav-button a,
+.pagination a {
+    height: 2.5em;
+}
+
+.blog-cover {
+    height: 120%;
+}
+
+#wrapper,
+#blog-header,
+#post-header {
+    height: 430px;
+}
+
+#footer {
+    position: relative;
+}
+
+table th,
+table td {
+    line-height: 1.5em;
+}
