@@ -1,46 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Mastering Algroithms with C-3: 集合</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./mastering-algroithms-with-c-3-ji-he.html" rel="canonical" />
+
+    <meta name="description" content="集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义 : 空集 集合相等 子集 集合操作 : 交集 并集 差集 实现集合的一种好的方法是采用链表 . 但每一次插入删除数据都需要遍历集合中的每一个成员 , 时间复杂度 O(n) 由于性能问题...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="算法">
+    <meta name="tags" content="C">
+    <meta name="tags" content="集合">
+    <meta name="tags" content="数据结构">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义: 空集 集合相等 子集 集合操作: 交集 并集 差集 实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n) 由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率 集合的抽象数据类型头文件定义 /* set.h */ #ifndef SET_H #define SET_H #include &lt;stdlib.h&gt; /* 集合元素 */ typedef struct SetElmt_ { void *data; struct SetElmt_ next; }SetElmt; /* 集合结构 */ typedef struct Set_ { /* 集合大小 */ int size; /* 指向集合头结点 */ SetElmt *head; /* 集合尾结点 …" />
-<meta name="keywords" content="算法, C, 集合, 数据结构">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Mastering Algroithms with C-3: 集合"/>
-<meta property="og:description" content="集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义: 空集 集合相等 子集 集合操作: 交集 并集 差集 实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n) 由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率 集合的抽象数据类型头文件定义 /* set.h */ #ifndef SET_H #define SET_H #include &lt;stdlib.h&gt; /* 集合元素 */ typedef struct SetElmt_ { void *data; struct SetElmt_ next; }SetElmt; /* 集合结构 */ typedef struct Set_ { /* 集合大小 */ int size; /* 指向集合头结点 */ SetElmt *head; /* 集合尾结点 …"/>
+<meta property="og:description" content="集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义 : 空集 集合相等 子集 集合操作 : 交集 并集 差集 实现集合的一种好的方法是采用链表 . 但每一次插入删除数据都需要遍历集合中的每一个成员 , 时间复杂度 O(n) 由于性能问题..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./mastering-algroithms-with-c-3-ji-he.html"/>
 <meta property="og:type" content="article"/>
@@ -52,320 +84,345 @@
 <meta property="article:tag" content="C"/>
 <meta property="article:tag" content="集合"/>
 <meta property="article:tag" content="数据结构"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; Mastering Algroithms with C-3: 集合</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Mastering Algroithms with C-3: 集合",
+  "headline": "Mastering Algroithms with C-3: 集合",
+  "datePublished": "2017-03-23 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./mastering-algroithms-with-c-3-ji-he.html",
+  "description": "集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义 : 空集 集合相等 子集 集合操作 : 交集 并集 差集 实现集合的一种好的方法是采用链表 . 但每一次插入删除数据都需要遍历集合中的每一个成员 , 时间复杂度 O(n) 由于性能问题..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Mastering Algroithms with C-3: 集合</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 23 March 2017">Thu 23 March 2017</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="mastering-algroithms-with-c-3-ji-he">Mastering Algroithms with C-3: 集合</h1>
-    <p>
-      Posted on Thu 23 March 2017 in <a href="./category/data-structure-algorithms.html">Data Structure Algorithms</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <p>集合是不同对象的无序聚集</p>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p> 集合是不同对象的无序聚集 </p>
 <ol>
-<li>集合的成员是无序的</li>
-<li>每一个成员只在集合中出现一次</li>
+<li> 集合的成员是无序的 </li>
+<li> 每一个成员只在集合中出现一次 </li>
 </ol>
-<p>集合的定义: </p>
+<p> 集合的定义 : </p>
 <ul>
-<li>空集</li>
-<li>集合相等</li>
-<li>子集</li>
+<li> 空集 </li>
+<li> 集合相等 </li>
+<li> 子集 </li>
 </ul>
-<p>集合操作:</p>
+<p> 集合操作 :</p>
 <ul>
-<li>交集</li>
-<li>并集</li>
-<li>差集</li>
+<li> 交集 </li>
+<li> 并集 </li>
+<li> 差集 </li>
 </ul>
-<p>实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n)</p>
-<p>由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率</p>
-<p>集合的抽象数据类型头文件定义</p>
-<div class="codehilite"><pre><span></span><span class="cm">/* set.h */</span>
-<span class="cp">#ifndef SET_H</span>
-<span class="cp">#define SET_H</span>
+<p> 实现集合的一种好的方法是采用链表 . 但每一次插入删除数据都需要遍历集合中的每一个成员 , 时间复杂度 O(n)</p>
+<p> 由于性能问题 , 顺序查找的方式只适合比较小型的集合数据 , 可以使用哈希等查找技术提高效率 </p>
+<p> 集合的抽象数据类型头文件定义 </p>
+<pre class="highlight"><code class="language-c linenums">/* set.h */
+#ifndef SET_H
+#define SET_H
 
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+#include &lt;stdlib.h&gt;
 
-<span class="cm">/* 集合元素 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="n">SetElmt_</span> <span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">SetElmt</span><span class="p">;</span>
-<span class="cm">/* 集合结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Set_</span> <span class="p">{</span>
-    <span class="cm">/* 集合大小 */</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
-    <span class="cm">/* 指向集合头结点 */</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">head</span><span class="p">;</span>
-    <span class="cm">/* 集合尾结点 */</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">tail</span><span class="p">;</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
-    <span class="cm">/* 判断 key1 是否等于 key2, 相等返回 1, 否则返回 0 */</span>
-    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">);</span>
-<span class="p">}</span><span class="n">Set</span><span class="p">;</span>
+/* 集合元素 */
+typedef struct SetElmt_ {
+    void *data;
+    struct SetElmt_ next;
+}SetElmt;
+/* 集合结构 */
+typedef struct Set_ {
+    /* 集合大小 */
+    int size;
+    /* 指向集合头结点 */
+    SetElmt *head;
+    /* 集合尾结点 */
+    SetElmt *tail;
+    void (*destroy)(void *data);
+    /* 判断 key1 是否等于 key2, 相等返回 1, 否则返回 0 */
+    int (*match)(const void *key1, const void *key2);
+}Set;
 
-<span class="cm">/* 初始化 */</span>
-<span class="kt">void</span> <span class="nf">set_init</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">));</span>
-<span class="cm">/* 销毁 */</span>
-<span class="kt">void</span> <span class="nf">set_destroy</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">);</span>
-<span class="cm">/* 插入结点 */</span>
-<span class="kt">int</span> <span class="nf">set_insert</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
-<span class="cm">/* 删除结点 */</span>
-<span class="kt">int</span> <span class="nf">set_remove</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">);</span>
-<span class="cm">/* 求并集 */</span>
-<span class="kt">int</span> <span class="nf">set_union</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">setu</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">);</span>
-<span class="cm">/* 求交集 */</span>
-<span class="kt">int</span> <span class="nf">set_intersection</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">seti</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">);</span>
-<span class="cm">/* 求差集 */</span>
-<span class="kt">int</span> <span class="nf">set_difference</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">setd</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">);</span>
-<span class="cm">/* 判断是否是集合成员 */</span>
-<span class="kt">int</span> <span class="nf">set_is_member</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">);</span>
-<span class="cm">/* 判断是否是了集 */</span>
-<span class="kt">int</span> <span class="nf">set_is_subset</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">);</span>
-<span class="cm">/* 判断集合是否相等 */</span>
-<span class="kt">int</span> <span class="nf">set_is_equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">);</span>
-<span class="cm">/* 返回集合大小 */</span>
-<span class="cp">#define set_size(set) ((set)-&gt;size)</span>
+/* 初始化 */
+void set_init(Set *set, int (*match)(const void *key1, const void *key2),
+    void (*destroy)(void *data));
+/* 销毁 */
+void set_destroy(Set *set);
+/* 插入结点 */
+int set_insert(Set *set, const void *data);
+/* 删除结点 */
+int set_remove(Set *set, void **data);
+/* 求并集 */
+int set_union(Set *setu, const Set *set1, const Set *set2);
+/* 求交集 */
+int set_intersection(Set *seti, const Set *set1, const Set *set2);
+/* 求差集 */
+int set_difference(Set *setd, const Set *set1, const Set *set2);
+/* 判断是否是集合成员 */
+int set_is_member(const Set *set, const void *data);
+/* 判断是否是了集 */
+int set_is_subset(const Set *set1, const Set *set2);
+/* 判断集合是否相等 */
+int set_is_equal(const Set *set1, const Set *set2);
+/* 返回集合大小 */
+#define set_size(set) ((set)-&gt;size)
 
-<span class="cp">#endif</span>
-</pre></div>
+#endif</code></pre>
 
+<p> 集合抽象数据类型的实现 </p>
+<pre class="highlight"><code class="language-c linenums">/* set.c */
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include "set.h"
 
-<p>集合抽象数据类型的实现</p>
-<div class="codehilite"><pre><span></span><span class="cm">/* set.c */</span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;set.h&quot;</span><span class="cp"></span>
+/* 初始化 */
+void set_init(Set *set, int (*match)(const void *key1, const void *key2),
+    void (*destroy)(void *data));
+{
+    set.size = 0;
+    set.head = NULL;
+    set.tail = NULL;
+    set.match = match;
+    set.destroy = destroy;
+}
 
-<span class="cm">/* 初始化 */</span>
-<span class="kt">void</span> <span class="nf">set_init</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">match</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">key2</span><span class="p">),</span>
-    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">));</span>
-<span class="p">{</span>
-    <span class="n">set</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">set</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">set</span><span class="p">.</span><span class="n">tail</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">set</span><span class="p">.</span><span class="n">match</span> <span class="o">=</span> <span class="n">match</span><span class="p">;</span>
-    <span class="n">set</span><span class="p">.</span><span class="n">destroy</span> <span class="o">=</span> <span class="n">destroy</span><span class="p">;</span>
-<span class="p">}</span>
+/* 销毁 */
+void set_destroy(Set *set)
+{
+    void *data;
+    while (set-&gt;size &gt; 0) {
+        data = set-&gt;head-&gt;data;
+        if (set_remove(set, (void **)&amp;data) == 0 &amp;&amp; set-&gt;destroy != NULL) {
+            set-&gt;destroy(data);
+        }
+    }
+    memset(set, 0, sizeof(Set));
+}
 
-<span class="cm">/* 销毁 */</span>
-<span class="kt">void</span> <span class="n">set_destroy</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">set</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">set</span><span class="o">-&gt;</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set_remove</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">set</span><span class="o">-&gt;</span><span class="n">destroy</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">set</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Set</span><span class="p">));</span>
-<span class="p">}</span>
+/* 插入集合 */
+int set_insert(Set *set, const void *data)
+{
+    /* 重复数据 */
+    if (set_is_member(set, data)) {
+        return 1;
+    }
 
-<span class="cm">/* 插入集合 */</span>
-<span class="kt">int</span> <span class="n">set_insert</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="cm">/* 重复数据 */</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">set_is_member</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    return _insert_into_set(set, data);
+}
 
-    <span class="k">return</span> <span class="n">_insert_into_set</span><span class="p">(</span><span class="n">set</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
-<span class="p">}</span>
+/* 删除元素 */
+int set_remove(Set *set, void **data)
+{
+    SetElmt *member = set-&gt;head, 
+        /* 用以检测 set-&gt;head 就是所查找的结点 */
+        *prev = NUll;
 
-<span class="cm">/* 删除元素 */</span>
-<span class="kt">int</span> <span class="n">set_remove</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span> <span class="o">=</span> <span class="n">set</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">,</span> 
-        <span class="cm">/* 用以检测 set-&gt;head 就是所查找的结点 */</span>
-        <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="n">NUll</span><span class="p">;</span>
+    while (member != NULL) {
+        if (set-&gt;match(member-&gt;data, *data)) {
+            break;
+        }
+        prev = member;
+        member = member-&gt;next;
+    }
+    if (member == NULL) {
+        return -1;
+    }
 
-    <span class="k">while</span> <span class="p">(</span><span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">prev</span> <span class="o">=</span> <span class="n">member</span><span class="p">;</span>
-        <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">member</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    if (prev == NULL) {
+        /* 头结点是查找的结点 */
+        list-&gt;head = member-&gt;next;
+    } else {
+        prev-&gt;next = member-&gt;next;
+    }
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">prev</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="cm">/* 头结点是查找的结点 */</span>
-        <span class="n">list</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-    <span class="p">}</span>
+    list-&gt;tail = prev;
+    *data = (void *)member-&gt;data;
+    free(member);
+    set-&gt;size--;
+    return 0;
+}
 
-    <span class="n">list</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
-    <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-    <span class="n">free</span><span class="p">(</span><span class="n">member</span><span class="p">);</span>
-    <span class="n">set</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">--</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+/* 并集 */
+int set_union(Set *setu, const Set *set1, const Set *set2)
+{
+    SetElmt *member;
 
-<span class="cm">/* 并集 */</span>
-<span class="kt">int</span> <span class="n">set_union</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">setu</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
+    /* set-&gt;destroy 设为 NULL, 避免失败将还有引用的 data 破坏 */
+    set_init(setu, set1-&gt;match, NULL);
+    for (member = set1-&gt;head; member != NULL; member = member-&gt;next) {
+        /* 复制 set1 到 setu 中 , data 的指向是同一个地址 */
+        if (_insert_into_set(setu, member-&gt;data) != 0) {
+            set_destroy(setu);
+            return -1;
+        }
+    }
 
-    <span class="cm">/* set-&gt;destroy 设为 NULL, 避免失败将还有引用的 data 破坏 */</span>
-    <span class="n">set_init</span><span class="p">(</span><span class="n">setu</span><span class="p">,</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="cm">/* 复制 set1 到 setu 中, data 的指向是同一个地址 */</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_insert_into_set</span><span class="p">(</span><span class="n">setu</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">set_destroy</span><span class="p">(</span><span class="n">setu</span><span class="p">);</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    for (member = set2-&gt;head, member != NULL; member = member-&gt;next) {
+        if (set_insert(setu, member-&gt;data) == -1 ) {
+            set_destroy(setu);
+            return -1;
+        }
+    }
+    return 0;
+}
 
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set2</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">,</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set_insert</span><span class="p">(</span><span class="n">setu</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="n">set_destroy</span><span class="p">(</span><span class="n">setu</span><span class="p">);</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+/* 交集 */
+int set_intersection(Set *seti, const Set *set1, const Set *set2)
+{
+    SetElmt *member;
 
-<span class="cm">/* 交集 */</span>
-<span class="kt">int</span> <span class="n">set_intersection</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">seti</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
+    set_init(seti, set-&gt;match, NULL)
+    for (member = set1-&gt;head; member != NULL; member = member-&gt;next) {
+        if (set_is_member(set2, member-&gt;data)) {
+            if (_insert_into_set(seti, member-&gt;data) != 0) {
+                set_destroy(seti);
+                return -1;
+            }
+        }
+    }
+    return 0;
+}
 
-    <span class="n">set_init</span><span class="p">(</span><span class="n">seti</span><span class="p">,</span> <span class="n">set</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set_is_member</span><span class="p">(</span><span class="n">set2</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_insert_into_set</span><span class="p">(</span><span class="n">seti</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">set_destroy</span><span class="p">(</span><span class="n">seti</span><span class="p">);</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+/* 差集 set1 - set2*/
+int set_difference(Set *setd, const Set *set1, const Set *set2)
+{
+    SetElmt *member;
 
-<span class="cm">/* 差集 set1 - set2*/</span>
-<span class="kt">int</span> <span class="n">set_difference</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">setd</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
+    set_init(setd, set1-&gt;match, NULL);
+    for (member = set1-&gt;head; member != NULL; member = member-&gt;next) {
+        if (!set_is_member(set2, member-&gt;data)) {
+            if (_insert_into_set(setd, member-&gt;data) != 0) {
+                set_destroy(setd);
+                return -1;
+            }
+        }
+    }
+    return 0;
+}
 
-    <span class="n">set_init</span><span class="p">(</span><span class="n">setd</span><span class="p">,</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">set_is_member</span><span class="p">(</span><span class="n">set2</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_insert_into_set</span><span class="p">(</span><span class="n">setd</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">set_destroy</span><span class="p">(</span><span class="n">setd</span><span class="p">);</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+/* 检查是否是集合元素 */
+int set_is_member(const Set *set, const void *data)
+{
+    SetElmt *member;
+    for (member = set-&gt;head; member != NULL; member = member-&gt;next) {
+        if (set-&gt;match(member-&gt;data, data)) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
-<span class="cm">/* 检查是否是集合元素 */</span>
-<span class="kt">int</span> <span class="n">set_is_member</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+/* set1 是否是 set2 的子集 */
+int set_is_subset(const Set *set1, const Set *set2)
+{
+    SetElmt *member;
+    if (set1-&gt;size &gt; set2-&gt;size) {
+        return 0;
+    }
+    for (member = set1-&gt;head; member != NULL; member = member-&gt;next) {
+        if (!set_is_member(set2, member-&gt;data)) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
-<span class="cm">/* set1 是否是 set2 的子集*/</span>
-<span class="kt">int</span> <span class="n">set_is_subset</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">set1</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">&gt;</span> <span class="n">set2</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">set1</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">set_is_member</span><span class="p">(</span><span class="n">set2</span><span class="p">,</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+/* 集合相等 */
+int set_is_equal(const Set *set1, const Set *set2)
+{
+    SetElmt *member;
+    if (set1-&gt;size != set2-&gt;size) {
+        return 0;
+    }
+    return set_is_subset(set1, set2);
+}
 
-<span class="cm">/* 集合相等 */</span>
-<span class="kt">int</span> <span class="n">set_is_equal</span><span class="p">(</span><span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Set</span> <span class="o">*</span><span class="n">set2</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">set1</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">!=</span> <span class="n">set2</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">set_is_subset</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">);</span>
-<span class="p">}</span>
+/* 不检查重复的集合元素 , 不要直接在集合外直接调用 */
+int _insert_into_set(Set *set, const void *data)
+{
+    SetElmt *element;
 
-<span class="cm">/* 不检查重复的集合元素, 不要直接在集合外直接调用 */</span>
-<span class="kt">int</span> <span class="n">_insert_into_set</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">set</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">element</span><span class="p">;</span>
+    if ((element = (SetElmt *)malloc(sizeof(SetElmt))) == NULL) {
+        return -1;
+    }
+    element-&gt;data = (void *)data;
+    if (set-&gt;size == 0) {
+        /* 空集 */
+        set-&gt;head = element;
+    } else {
+        set-&gt;tail-&gt;next = element;
+    }
+    set-&gt;tail = element;
+    element-&gt;next = NULL;
+    set-&gt;size++;
+    return 0;
+}</code></pre>
 
-    <span class="k">if</span> <span class="p">((</span><span class="n">element</span> <span class="o">=</span> <span class="p">(</span><span class="n">SetElmt</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">SetElmt</span><span class="p">)))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">element</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="cm">/* 空集 */</span>
-        <span class="n">set</span><span class="o">-&gt;</span><span class="n">head</span> <span class="o">=</span> <span class="n">element</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">set</span><span class="o">-&gt;</span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">element</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">set</span><span class="o">-&gt;</span><span class="n">tail</span> <span class="o">=</span> <span class="n">element</span><span class="p">;</span>
-    <span class="n">element</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="n">set</span><span class="o">-&gt;</span><span class="n">size</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p><strong>集合覆盖</strong></p>
-<p>给定一个集合 S, 集合 P 由集合 S 的子集 A<sub>1</sub> 到 A<sub>n</sub> 组成, 集合 C 由集合 P 中的一个或多个子集组成.
-如果 S 中的每个成员都包含在 C 的至少一个子集中, 则称集合 C 覆盖集合 S
-C 包含的 P 的子集应该越少越好</p>
+<p><strong> 集合覆盖 </strong></p>
+<p> 给定一个集合 S, 集合 P 由集合 S 的子集 A<sub>1</sub> 到 A<sub>n</sub> 组成 , 集合 C 由集合 P 中的一个或多个子集组成 .
+如果 S 中的每个成员都包含在 C 的至少一个子集中 , 则称集合 C 覆盖集合 S
+C 包含的 P 的子集应该越少越好 </p>
 <blockquote>
-<p>以下程序使用一种贪心法算法, 每一次都尝试尽可能的覆盖到更多的成员, 得到不一定是最优解</br>
-给定一个集合, 代表有 12 各技能: S = {a, b, c, d, e, f, g, h, i, j, k, l}</br>
+<p> 以下程序使用一种贪心法算法 , 每一次都尝试尽可能的覆盖到更多的成员 , 得到不一定是最优解 </br>
+给定一个集合 , 代表有 12 各技能 : S = {a, b, c, d, e, f, g, h, i, j, k, l}</br>
 然后一共有 7 名选手 P = {A<sub>1</sub>, A<sub>2</sub>, …, A<sub>7</sub>}</br>
-每一位选手都有不同的技能: </br></p>
+每一位选手都有不同的技能 : </br></p>
 <blockquote>
 <p>A<sub>1</sub> = {a, b, c, d}</br>
 A<sub>2</sub> = {e, f, g, h, i}</br>
@@ -378,132 +435,134 @@ A<sub>7</sub> = {l}</br>
 不过我们的程序给出了的是 C = {A<sub>6</sub>, A<sub>2</sub>, A<sub>1</sub>, A<sub>3</sub>}</br></p>
 </blockquote>
 </blockquote>
-<p><img alt="集合覆盖" src="../images/集合覆盖.png" /></p>
-<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;set.h&quot;</span><span class="cp"></span>
+<p><img alt=" 集合覆盖 " src="../images/ 集合覆盖 .png" /></p>
+<pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+#include "set.h"
 
-<span class="cm">/* 集合 P 元素结点结构 */</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">KSet_</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="p">;</span>
-    <span class="n">Set</span> <span class="n">set</span><span class="p">;</span>
-<span class="p">}</span><span class="n">KSet</span><span class="p">;</span>
+/* 集合 P 元素结点结构 */
+typedef struct KSet_ {
+    void *key;
+    Set set;
+}KSet;
 
-<span class="cm">/* 函数在集合 P 的子集 A&lt;sub&gt;1&lt;/sub&gt;~A&lt;sub&gt;n&lt;/sub&gt; 中挑选出能够覆盖集合 S 的近似最优解 </span>
-<span class="cm"> * @param members: 待覆盖的集合 S</span>
-<span class="cm"> * @param subsets: 集合 P 中的子集</span>
-<span class="cm"> * @param covering: 作为返回的覆盖集合 C</span>
-<span class="cm"> *</span>
-<span class="cm"> * 函数首先初始化 covering, 只要 members 中的还有未覆盖的成员, 且 subsets 中的</span>
-<span class="cm"> * 子集还没有挑选完, 就继续迭代最外层循环</span>
-<span class="cm"> * 在循环中,每次迭代时都在 subsets 中找出能够覆盖到 members 的最大交集</span>
-<span class="cm"> * 然后将这个集合加到覆盖集 covering 中并把它的成员从 members 中移除</span>
-<span class="cm"> */</span>
-<span class="kt">int</span> <span class="nf">cover</span><span class="p">(</span><span class="n">Set</span> <span class="o">*</span><span class="n">members</span><span class="p">,</span> <span class="n">Set</span> <span class="o">*</span><span class="n">subsets</span><span class="p">,</span> <span class="n">Set</span> <span class="o">*</span><span class="n">covering</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">Set</span> <span class="n">intersection</span><span class="p">;</span>
-    <span class="n">KSet</span> <span class="o">*</span><span class="n">subset</span><span class="p">;</span>
-    <span class="n">SetElmt</span> <span class="o">*</span><span class="n">member</span><span class="p">,</span> <span class="o">*</span><span class="n">max_member</span><span class="p">;</span>
-
-    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">max_size</span><span class="p">;</span>
-    <span class="cm">/* 初始化 covering */</span>
-    <span class="n">set_init</span><span class="p">(</span><span class="n">covering</span><span class="p">,</span> <span class="n">subsets</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="n">set_size</span><span class="p">(</span><span class="n">members</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">set_size</span><span class="p">(</span><span class="n">subsets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="cm">/* Find the subset that covers the most members */</span>
-        <span class="n">max_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="cm">/* 循环集合 P 中的元素 */</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="n">subsets</span><span class="o">-&gt;</span><span class="n">head</span><span class="p">;</span> <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-            <span class="cm">/* 求 P 中元素结点和 S 的交集, 如果 P 中有结点中的元素完全不属于 S, 返回错误 */</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">set_intersection</span><span class="p">(</span><span class="o">&amp;</span><span class="n">intersection</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">((</span><span class="n">KSet</span> <span class="o">*</span><span class="p">)</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">,</span>
-                <span class="n">members</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="cm">/* 贪心法, 只保留最大能产生最多交集元素的结点 */</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">set_size</span><span class="p">(</span><span class="o">&amp;</span><span class="n">intersection</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_size</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">max_member</span> <span class="o">=</span> <span class="n">member</span><span class="p">;</span>
-                <span class="n">max_size</span> <span class="o">=</span> <span class="n">set_size</span><span class="p">(</span><span class="o">&amp;</span><span class="n">intersection</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="cm">/* 重置中间集合, 以便循环使用 */</span>
-            <span class="n">set_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">intersection</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="cm">/* 检查查找到子集, 若没有匹配到 P 和 S 任何交集, 返回失败. 因为空集是任何集合的子集 */</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">max_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="cm">/* 将查找到的 P 中的结点加入集合 C 中 */</span>
-        <span class="n">subset</span> <span class="o">=</span> <span class="p">(</span><span class="n">KSet</span> <span class="o">*</span><span class="p">)</span><span class="n">max_member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set_insert</span><span class="p">(</span><span class="n">covering</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="cm">/* 将查找到的 P 集合中的结点里的属于集合 S 中的数据从 集合 S 中删除掉 */</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">member</span> <span class="o">=</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">subset</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-            <span class="n">member</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">member</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">set_remove</span><span class="p">(</span><span class="n">members</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> 
-                <span class="n">members</span><span class="o">-&gt;</span><span class="n">destroy</span> <span class="o">!==</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="p">{</span>
-                <span class="n">members</span><span class="o">-&gt;</span><span class="n">destroy</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="cm">/* 将该次选中的 P 集合中的结点从集合 P 中删除. */</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set_remove</span><span class="p">(</span><span class="n">subsets</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">subset</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="cm">/* 在查找完 P 集合中所有结点, 依然没有覆盖完 S 的所有元素时, 返回失败 */</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">set_size</span><span class="p">(</span><span class="n">members</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/suan-fa.html">算法</a>
-      <a href="./tag/c.html">C</a>
-      <a href="./tag/ji-he.html">集合</a>
-      <a href="./tag/shu-ju-jie-gou.html">数据结构</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
-
-<script type="application/ld+json">
+/* 函数在集合 P 的子集 A&lt;sub&gt;1&lt;/sub&gt;~A&lt;sub&gt;n&lt;/sub&gt; 中挑选出能够覆盖集合 S 的近似最优解 
+ * @param members: 待覆盖的集合 S
+ * @param subsets: 集合 P 中的子集
+ * @param covering: 作为返回的覆盖集合 C
+ *
+ * 函数首先初始化 covering, 只要 members 中的还有未覆盖的成员 , 且 subsets 中的
+ * 子集还没有挑选完 , 就继续迭代最外层循环
+ * 在循环中 , 每次迭代时都在 subsets 中找出能够覆盖到 members 的最大交集
+ * 然后将这个集合加到覆盖集 covering 中并把它的成员从 members 中移除
+ */
+int cover(Set *members, Set *subsets, Set *covering)
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
+    Set intersection;
+    KSet *subset;
+    SetElmt *member, *max_member;
 
+    void *data;
+    int max_size;
+    /* 初始化 covering */
+    set_init(covering, subsets-&gt;match, NULL);
+
+    while (set_size(members) &gt; 0 &amp;&amp; set_size(subsets) &gt; 0) {
+        /* Find the subset that covers the most members */
+        max_size = 0;
+        /* 循环集合 P 中的元素 */
+        for (member = subsets-&gt;head; member != NULL; member = member-&gt;next) {
+            /* 求 P 中元素结点和 S 的交集 , 如果 P 中有结点中的元素完全不属于 S, 返回错误 */
+            if (set_intersection(&amp;intersection, &amp;((KSet *)member-&gt;data)-&gt;set,
+                members) != 0) {
+                return -1;
+            }
+            /* 贪心法 , 只保留最大能产生最多交集元素的结点 */
+            if (set_size(&amp;intersection) &gt; max_size) {
+                max_member = member;
+                max_size = set_size(&amp;intersection);
+            }
+            /* 重置中间集合 , 以便循环使用 */
+            set_destroy(&amp;intersection);
+        }
+        /* 检查查找到子集 , 若没有匹配到 P 和 S 任何交集 , 返回失败 . 因为空集是任何集合的子集 */
+        if (max_size == 0) {
+            return 1;
+        }
+        /* 将查找到的 P 中的结点加入集合 C 中 */
+        subset = (KSet *)max_member-&gt;data;
+        if (set_insert(covering, subset) != 0) {
+            return -1;
+        }
+        /* 将查找到的 P 集合中的结点里的属于集合 S 中的数据从 集合 S 中删除掉 */
+        for (member = (&amp;subset-&gt;set)-&gt;data;
+            member != NULL; member = member-&gt;next) {
+            data = member-&gt;data;
+            if (set_remove(members, (void **)&amp;data) == 0 &amp;&amp; 
+                members-&gt;destroy !== NULL ) {
+                members-&gt;destroy(data);
+            }
+        }
+        /* 将该次选中的 P 集合中的结点从集合 P 中删除 . */
+        if (set_remove(subsets, (void **)&amp;subset) != 0) {
+            return -1;
+        }
+    }
+    /* 在查找完 P 集合中所有结点 , 依然没有覆盖完 S 的所有元素时 , 返回失败 */
+    if (set_size(members) &gt; 0) {
+        return -1;
+    }
+    return 0;
+}</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Mastering Algroithms with C-3: 集合&amp;url=./mastering-algroithms-with-c-3-ji-he.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./mastering-algroithms-with-c-3-ji-he.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./mastering-algroithms-with-c-3-ji-he.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/suan-fa.html">算法</a><a href="./tag/c.html">C</a><a href="./tag/ji-he.html">集合</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

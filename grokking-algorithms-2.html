@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Grokking Algorithms-2</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./grokking-algorithms-2.html" rel="canonical" />
+
+    <meta name="description" content="图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="算法">
+    <meta name="tags" content="Python">
+    <meta name="tags" content="数据结构">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def breadth_first_search(start, item): import queue search_queue = queue.Queue() # 将 start 顶点的邻接点加入到队列中 for element in start[&#39;neighbors&#39;]: if match(element, item): return True else: # 顶点标记为灰, 表示已经入队查找过 element[&#39;mark&#39;] = &#39;gray&#39; search_queue.put …" />
-<meta name="keywords" content="算法, Python, 数据结构">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Grokking Algorithms-2"/>
-<meta property="og:description" content="图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def breadth_first_search(start, item): import queue search_queue = queue.Queue() # 将 start 顶点的邻接点加入到队列中 for element in start[&#39;neighbors&#39;]: if match(element, item): return True else: # 顶点标记为灰, 表示已经入队查找过 element[&#39;mark&#39;] = &#39;gray&#39; search_queue.put …"/>
+<meta property="og:description" content="图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./grokking-algorithms-2.html"/>
 <meta property="og:type" content="article"/>
@@ -51,222 +82,253 @@
 <meta property="article:tag" content="算法"/>
 <meta property="article:tag" content="Python"/>
 <meta property="article:tag" content="数据结构"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; Grokking Algorithms-2</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="grokking-algorithms-2">Grokking Algorithms-2</h1>
-    <p>
-      Posted on Fri 07 April 2017 in <a href="./category/data-structure-algorithms.html">Data Structure Algorithms</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="_1">图</h4>
-<div class="codehilite"><pre><span></span><span class="c1"># 使用散列表来表示图</span>
-<span class="k">class</span> <span class="nc">GraphItem</span><span class="p">:</span>
-
-
-<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
-    <span class="n">item</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="c1"># 向图中加入顶点</span>
-
-    <span class="c1"># 删除顶点</span>
-    <span class="k">def</span> <span class="nf">dl</span>
-</pre></div>
-
-
-<h4 id="_2">广度优先算法</h4>
-<div class="codehilite"><pre><span></span><span class="c1"># 在图 graph 中从 start 到 item 的广度优先算法</span>
-<span class="k">def</span> <span class="nf">breadth_first_search</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">queue</span>
-    <span class="n">search_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
-    <span class="c1"># 将 start 顶点的邻接点加入到队列中</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># 顶点标记为灰, 表示已经入队查找过</span>
-            <span class="n">element</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
-            <span class="n">search_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-    <span class="c1"># 查找队列</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">search_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
-        <span class="c1"># 获得队列中顶点</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">search_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="n">element</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;neighbors&#39;</span><span class="p">]:</span>
-            <span class="c1"># 白色表示还没搜索过的顶点</span>
-            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;white&#39;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="bp">True</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># 顶点标记为灰, 表示已经入队查找过</span>
-                    <span class="n">node</span><span class="p">[</span><span class="s1">&#39;mark&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
-                    <span class="n">search_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-</pre></div>
-
-
-<h4 id="dijkstras-algorithm">加权图和狄克斯特拉算法(Dijkstra's algorithm)</h4>
-<p>边带权重(weight)的图称为加权图</p>
-<p>使用<code>Dijkstra's algorithm</code>算法计算加权图中顶点到顶点之间边之各权重为最大或最小</p>
-<p>狄克斯特拉算法只能计算<strong>有向</strong>, <strong>无循环</strong>, <strong>权重为正</strong>的加权图</p>
-<blockquote>
-<ol>
-<li>
-<p>找出最便宜的节点，即可在最短时间内前往的节点 </p>
-</li>
-<li>
-<p>对于该节点的邻居，检查是否有前往它们的更短路径，如果有，就更新其开销</p>
-</li>
-<li>
-<p>重复这个过程，直到对图中的每个节点都这样做了(先行标注终点, 不对终点的邻接点再做处理)</p>
-</li>
-<li>
-<p>计算最终路径。</p>
-</li>
-</ol>
-</blockquote>
-<div class="codehilite"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;compare&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span>  <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">,</span>
-    <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
-    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
-    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>
-    <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
-    <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
-    <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span>
-    <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="p">{}</span>
-<span class="p">}</span>
-
-
-
-
-<span class="k">def</span> <span class="nf">dikjistra_algorithm</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">start</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span> <span class="ow">or</span> <span class="n">end</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
-    <span class="c1"># 已处理过的顶点, 不再搜索其邻接点</span>
-    <span class="n">processed</span> <span class="o">=</span> <span class="p">[</span><span class="n">end</span><span class="p">]</span>
-    <span class="c1"># 到某个顶点的最小权重需经过的上一顶点</span>
-    <span class="n">parents</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">start</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">]}</span>
-    <span class="c1"># 到某个顶点需要的最小权重</span>
-    <span class="n">costs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-    <span class="c1"># 每次从 costs 里找到最小权重的顶点来搜索其邻接点</span>
-    <span class="k">def</span> <span class="nf">find_lowest_cost_node</span><span class="p">(</span><span class="n">costs</span><span class="p">):</span>
-        <span class="n">lowest_cost</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="n">lowest_cost_node</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">costs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processed</span><span class="p">:</span>
-                <span class="n">lowest_cost</span> <span class="o">=</span> <span class="n">lowest_cost</span> <span class="k">if</span> <span class="n">lowest_cost</span> <span class="k">else</span> <span class="n">costs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-                <span class="n">lowest_cost_node</span> <span class="o">=</span> <span class="n">lowest_cost_node</span> <span class="k">if</span> <span class="n">lowest_cost_node</span> <span class="k">else</span> <span class="n">node</span>
-                <span class="n">cost</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compare&#39;</span><span class="p">)(</span><span class="n">cost</span><span class="p">,</span> <span class="n">lowest_cost</span><span class="p">):</span>
-                    <span class="n">lowest_cost</span> <span class="o">=</span> <span class="n">cost</span>
-                    <span class="n">lowest_cost_node</span> <span class="o">=</span> <span class="n">node</span>
-        <span class="k">return</span> <span class="n">lowest_cost_node</span>
-
-    <span class="n">node</span> <span class="o">=</span> <span class="n">find_lowest_cost_node</span><span class="p">(</span><span class="n">costs</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">cost</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">new_cost</span> <span class="o">=</span> <span class="n">cost</span> <span class="o">+</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">costs</span> <span class="ow">and</span> <span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compare&#39;</span><span class="p">)(</span><span class="n">costs</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">new_cost</span><span class="p">):</span>
-                <span class="k">continue</span>
-            <span class="n">costs</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_cost</span>
-            <span class="n">parents</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
-        <span class="n">processed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">find_lowest_cost_node</span><span class="p">(</span><span class="n">costs</span><span class="p">)</span>
-    <span class="n">route</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">cost</span> <span class="o">=</span> <span class="n">costs</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
-    <span class="k">while</span> <span class="n">end</span> <span class="o">!=</span> <span class="n">start</span><span class="p">:</span>
-        <span class="n">route</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">parents</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
-    <span class="n">route</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;route&#39;</span><span class="p">:</span> <span class="n">route</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;cost&#39;</span><span class="p">:</span> <span class="n">cost</span><span class="p">}</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">dikjistra_algorithm</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;parents: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;route&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;costs: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">])</span>
-</pre></div>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/suan-fa.html">算法</a>
-      <a href="./tag/python.html">Python</a>
-      <a href="./tag/shu-ju-jie-gou.html">数据结构</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Grokking Algorithms-2",
+  "headline": "Grokking Algorithms-2",
+  "datePublished": "2017-04-07 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./grokking-algorithms-2.html",
+  "description": "图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def..."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Grokking Algorithms-2</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Fri 07 April 2017">Fri 07 April 2017</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="_1"> 图 </h4>
+<pre class="highlight"><code class="language-python linenums"># 使用散列表来表示图
+class GraphItem:
+
+
+class Graph:
+    item = {}
+
+    # 向图中加入顶点
+
+    # 删除顶点
+    def dl
+
+</code></pre>
+
+<h4 id="_2"> 广度优先算法 </h4>
+<pre class="highlight"><code class="language-python linenums"># 在图 graph 中从 start 到 item 的广度优先算法
+def breadth_first_search(start, item):
+    import queue
+    search_queue = queue.Queue()
+    # 将 start 顶点的邻接点加入到队列中
+    for element in start['neighbors']:
+        if match(element, item):
+            return True
+        else:
+            # 顶点标记为灰 , 表示已经入队查找过
+            element['mark'] = 'gray'
+            search_queue.put(element)
+    # 查找队列
+    while not search_queue.empty():
+        # 获得队列中顶点
+        element = search_queue.get()
+        element['mark'] = 'black'
+        for node in element['neighbors']:
+            # 白色表示还没搜索过的顶点
+            if node['mark'] == 'white':
+                if match(node, item):
+                    return True
+                else:
+                    # 顶点标记为灰 , 表示已经入队查找过
+                    node['mark'] = 'gray'
+                    search_queue.put(node)</code></pre>
+
+<h4 id="dijkstras-algorithm"> 加权图和狄克斯特拉算法 (Dijkstra's algorithm)</h4>
+<p> 边带权重 (weight) 的图称为加权图 </p>
+<p> 使用 <code>Dijkstra's algorithm</code> 算法计算加权图中顶点到顶点之间边之各权重为最大或最小 </p>
+<p> 狄克斯特拉算法只能计算 <strong> 有向 </strong>, <strong> 无循环 </strong>, <strong> 权重为正 </strong> 的加权图 </p>
+<blockquote>
+<ol>
+<li>
+<p> 找出最便宜的节点，即可在最短时间内前往的节点 </p>
+</li>
+<li>
+<p> 对于该节点的邻居，检查是否有前往它们的更短路径，如果有，就更新其开销 </p>
+</li>
+<li>
+<p> 重复这个过程，直到对图中的每个节点都这样做了 ( 先行标注终点 , 不对终点的邻接点再做处理 )</p>
+</li>
+<li>
+<p> 计算最终路径。</p>
+</li>
+</ol>
+</blockquote>
+<pre class="highlight"><code class="language-python linenums">graph = {
+    'compare': lambda x, y:  x &lt; y,
+    's': {'a': 24, 'b': 10},
+    'a': {'d': 4},
+    'b': {'c': 5, 'e': 8},
+    'c': {'d': 5, 'a': 1},
+    'd': {'f': 4},
+    'e': {'d': 12},
+    'f': {}
+}
+
+
+
+
+def dikjistra_algorithm(graph, start, end):
+    if start not in graph or end not in graph:
+        return None
+    # 已处理过的顶点 , 不再搜索其邻接点
+    processed = [end]
+    # 到某个顶点的最小权重需经过的上一顶点
+    parents = {k: start for k in graph[start]}
+    # 到某个顶点需要的最小权重
+    costs = {key: value for key, value in graph[start].items()}
+    # 每次从 costs 里找到最小权重的顶点来搜索其邻接点
+    def find_lowest_cost_node(costs):
+        lowest_cost = None
+        lowest_cost_node = None
+        for node in costs:
+            if node not in processed:
+                lowest_cost = lowest_cost if lowest_cost else costs[node]
+                lowest_cost_node = lowest_cost_node if lowest_cost_node else node
+                cost = costs[node]
+                if graph.get('compare')(cost, lowest_cost):
+                    lowest_cost = cost
+                    lowest_cost_node = node
+        return lowest_cost_node
+
+    node = find_lowest_cost_node(costs)
+    while node is not None:
+        cost = costs[node]
+        neighbors = graph[node]
+        for n in neighbors.keys():
+            new_cost = cost + neighbors[n]
+            if n in costs and graph.get('compare')(costs[n], new_cost):
+                continue
+            costs[n] = new_cost
+            parents[n] = node
+        processed.append(node)
+        node = find_lowest_cost_node(costs)
+    route = []
+    cost = costs[end]
+    while end != start:
+        route.append(end)
+        end = parents[end]
+    route.append(start)
+    return {'route': route[-1::-1], 'cost': cost}
+
+result = dikjistra_algorithm(graph, 's', 'f')
+print('parents: ', end='')
+print(result['route'])
+print('costs: ', end='')
+print(result['cost'])
+</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Grokking Algorithms-2&amp;url=./grokking-algorithms-2.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./grokking-algorithms-2.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./grokking-algorithms-2.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/suan-fa.html">算法</a><a href="./tag/python.html">Python</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

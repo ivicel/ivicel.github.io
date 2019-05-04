@@ -1,46 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>View 事件体系</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./view-shi-jian-ti-xi.html" rel="canonical" />
+
+    <meta name="description" content="view 坐标和滑动方法 触摸事件 MotionEvent 和 TouchSlop 单指触摸屏幕时 , 一般会产生 MotionEvent.ACTION_DOWN( 手指接触屏幕时 ), MotionEvent.ACTION_MOVE( 手指移动时 ),...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="view事件">
+    <meta name="tags" content="view坐标">
+    <meta name="tags" content="view滑动">
+    <meta name="tags" content="view触摸">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="view坐标和滑动方法 触摸事件MotionEvent和TouchSlop 单指触摸屏幕时, 一般会产生MotionEvent.ACTION_DOWN(手指接触屏幕时), MotionEvent.ACTION_MOVE(手指移动时), MotionEvent.ACTION_UP(手指离开屏幕时). 触摸事件产生时, 可以获取其位置. 获取其相对当前View的位置: 相对左边MotionEvent.getX(), 相对上边MotionEvent.getY() 获取共相对屏幕的位置: 相对屏幕左边MotionEvent.getRawX(), 相对屏幕上边MotionEvent.getRawY() TouchSlop为系统所能识别出的最小的距离, 其值由系统决定. 可以通过ViewConfiguration.getScaledTouchSlop()来获得 ​ 滑动速度追踪VelocityTracker 滑动速度指的是在某一个时间段内的速度. java /* 首先可以在 …" />
-<meta name="keywords" content="view事件, view坐标, view滑动, view触摸">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="View 事件体系"/>
-<meta property="og:description" content="view坐标和滑动方法 触摸事件MotionEvent和TouchSlop 单指触摸屏幕时, 一般会产生MotionEvent.ACTION_DOWN(手指接触屏幕时), MotionEvent.ACTION_MOVE(手指移动时), MotionEvent.ACTION_UP(手指离开屏幕时). 触摸事件产生时, 可以获取其位置. 获取其相对当前View的位置: 相对左边MotionEvent.getX(), 相对上边MotionEvent.getY() 获取共相对屏幕的位置: 相对屏幕左边MotionEvent.getRawX(), 相对屏幕上边MotionEvent.getRawY() TouchSlop为系统所能识别出的最小的距离, 其值由系统决定. 可以通过ViewConfiguration.getScaledTouchSlop()来获得 ​ 滑动速度追踪VelocityTracker 滑动速度指的是在某一个时间段内的速度. java /* 首先可以在 …"/>
+<meta property="og:description" content="view 坐标和滑动方法 触摸事件 MotionEvent 和 TouchSlop 单指触摸屏幕时 , 一般会产生 MotionEvent.ACTION_DOWN( 手指接触屏幕时 ), MotionEvent.ACTION_MOVE( 手指移动时 ),..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./view-shi-jian-ti-xi.html"/>
 <meta property="og:type" content="article"/>
@@ -52,624 +84,638 @@
 <meta property="article:tag" content="view坐标"/>
 <meta property="article:tag" content="view滑动"/>
 <meta property="article:tag" content="view触摸"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; View 事件体系</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "View 事件体系",
+  "headline": "View 事件体系",
+  "datePublished": "2018-02-22 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./view-shi-jian-ti-xi.html",
+  "description": "view 坐标和滑动方法 触摸事件 MotionEvent 和 TouchSlop 单指触摸屏幕时 , 一般会产生 MotionEvent.ACTION_DOWN( 手指接触屏幕时 ), MotionEvent.ACTION_MOVE( 手指移动时 ),..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">View 事件体系</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 22 February 2018">Thu 22 February 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="view-shi-jian-ti-xi">View 事件体系</h1>
-    <p>
-      Posted on Thu 22 February 2018 in <a href="./category/android.html">Android</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h5 id="view"><code>view</code>坐标和滑动方法</h5>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h5 id="view"><code>view</code> 坐标和滑动方法 </h5>
 <ul>
-<li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
+<li> 触摸事件 <code>MotionEvent</code> 和 <code>TouchSlop</code></li>
 </ul>
-<p>单指触摸屏幕时, 一般会产生<code>MotionEvent.ACTION_DOWN</code>(手指接触屏幕时), <code>MotionEvent.ACTION_MOVE</code>(手指移动时), <code>MotionEvent.ACTION_UP</code>(手指离开屏幕时). </p>
-<p>触摸事件产生时, 可以获取其位置.</p>
-<p>获取其相对<strong>当前<code>View</code></strong>的位置: 相对左边<code>MotionEvent.getX()</code>, 相对上边<code>MotionEvent.getY()</code></p>
-<p>获取共相对<strong>屏幕</strong>的位置: 相对屏幕左边<code>MotionEvent.getRawX()</code>, 相对屏幕上边<code>MotionEvent.getRawY()</code></p>
-<p><code>TouchSlop</code>为系统所能识别出的最小的距离, 其值由系统决定. 可以通过<code>ViewConfiguration.getScaledTouchSlop()</code>来获得</p>
+<p> 单指触摸屏幕时 , 一般会产生 <code>MotionEvent.ACTION_DOWN</code>( 手指接触屏幕时 ), <code>MotionEvent.ACTION_MOVE</code>( 手指移动时 ), <code>MotionEvent.ACTION_UP</code>( 手指离开屏幕时 ). </p>
+<p> 触摸事件产生时 , 可以获取其位置 .</p>
+<p> 获取其相对 <strong> 当前 <code>View</code></strong> 的位置 : 相对左边 <code>MotionEvent.getX()</code>, 相对上边 <code>MotionEvent.getY()</code></p>
+<p> 获取共相对 <strong> 屏幕 </strong> 的位置 : 相对屏幕左边 <code>MotionEvent.getRawX()</code>, 相对屏幕上边 <code>MotionEvent.getRawY()</code></p>
+<p><code>TouchSlop</code> 为系统所能识别出的最小的距离 , 其值由系统决定 . 可以通过 <code>ViewConfiguration.getScaledTouchSlop()</code> 来获得 </p>
 <p>​</p>
 <ul>
-<li>滑动速度追踪<code>VelocityTracker</code></li>
+<li> 滑动速度追踪 <code>VelocityTracker</code></li>
 </ul>
-<p>滑动速度指的是在某一个时间段内的速度. </p>
-<p><code>java
-  /* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
-  VelocityTracker vt = VelocityTracker.obtain();
-  vt.addMovement(event);
-  /* 然后必须要先设定时间段以便计算出该时间内的速度, 最后再获取速度, 速度为负时表示向左滑动 */
-  vt.computeCurrentVelocity(1000);          //计算1000ms内的速度
-  int xVelocity = (int)vt.getXVelocity();       //横向速度, 手指向左滑动为负
-  int yVelocity = (int)vt.getYVelocity();       //纵向速度, 手指向上滑动为负
-  /* 回收内存 */
-  vt.clear();
-  vt.recycle();</code></p>
+<p> 滑动速度指的是在某一个时间段内的速度 . </p>
+<pre class="highlight"><code class="language-java linenums">/* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
+VelocityTracker vt = VelocityTracker.obtain();
+vt.addMovement(event);
+/* 然后必须要先设定时间段以便计算出该时间内的速度 , 最后再获取速度 , 速度为负时表示向左滑动 */
+vt.computeCurrentVelocity(1000);          // 计算 1000ms 内的速度
+int xVelocity = (int)vt.getXVelocity();       // 横向速度 , 手指向左滑动为负
+int yVelocity = (int)vt.getYVelocity();       // 纵向速度 , 手指向上滑动为负
+/* 回收内存 */
+vt.clear();
+vt.recycle();</code></pre>
+
 <ul>
-<li>手势检测<code>GestureDetector</code>, 单击, 滑动, 长按, 双击</li>
+<li> 手势检测 <code>GestureDetector</code>, 单击 , 滑动 , 长按 , 双击 </li>
 </ul>
-<p><code>java
-  // 在view 里onTouchEvent中截断事件来进行监听
-  GestureDetector mGestureDetector = new GestureDetector(context);
-  // 设置是否需要长按
-  mGestureDetector.setIsLongpressEnabled(false);
-  return mGestureDetector.onTouchEvent(event);</code></p>
+<pre class="highlight"><code class="language-java linenums">// 在 view 里 onTouchEvent 中截断事件来进行监听
+GestureDetector mGestureDetector = new GestureDetector(context);
+// 设置是否需要长按
+mGestureDetector.setIsLongpressEnabled(false);
+return mGestureDetector.onTouchEvent(event);</code></pre>
+
 <ul>
-<li><code>GestureDetector.OnGestureListener</code>接口<ol>
-<li><code>onDown</code>手指触摸到屏幕时.由一个<code>ACTION_DOWN</code>触发</li>
-<li><code>onShowPress</code>手指触摸到屏但没有松开或者是移动, 一般用来给用户触摸找反馈, 高亮文本.由一个<code>ACTION_DOWN</code>触发.</li>
-<li><code>onSingleTapUp</code>手指(在触摸后)松开, 单击行为. 伴随一个<code>MotionEvent.ACTION_UP</code></li>
-<li><code>onScroll</code>手指触摸屏幕后滚动, 由一个<code>ACTION_DOWN</code>和多个<code>ACTION_MOVE</code>触发</li>
-<li><code>onLongPress</code>触摸后长按</li>
-<li><code>onFling</code>按下屏幕后, 快速滑动后松开. 由一个<code>ACTION_DOWN</code>和多个<code>ACTION_MOVE</code>和一个<code>ACTION_UP</code>触发</li>
+<li><code>GestureDetector.OnGestureListener</code> 接口 <ol>
+<li><code>onDown</code> 手指触摸到屏幕时 . 由一个 <code>ACTION_DOWN</code> 触发 </li>
+<li><code>onShowPress</code> 手指触摸到屏但没有松开或者是移动 , 一般用来给用户触摸找反馈 , 高亮文本 . 由一个 <code>ACTION_DOWN</code> 触发 .</li>
+<li><code>onSingleTapUp</code> 手指 ( 在触摸后 ) 松开 , 单击行为 . 伴随一个 <code>MotionEvent.ACTION_UP</code></li>
+<li><code>onScroll</code> 手指触摸屏幕后滚动 , 由一个 <code>ACTION_DOWN</code> 和多个 <code>ACTION_MOVE</code> 触发 </li>
+<li><code>onLongPress</code> 触摸后长按 </li>
+<li><code>onFling</code> 按下屏幕后 , 快速滑动后松开 . 由一个 <code>ACTION_DOWN</code> 和多个 <code>ACTION_MOVE</code> 和一个 <code>ACTION_UP</code> 触发 </li>
 </ol>
 </li>
 <li>
-<p><code>GestureDetector.OnDoubleTapListener</code>接口</p>
+<p><code>GestureDetector.OnDoubleTapListener</code> 接口 </p>
 <ol>
-<li><code>onDoubleTap</code>双击. 不能和<code>onSingleTapConfirmed</code>共存</li>
-<li><code>onSingleTapConfirmed</code>严格的单击行为. 如果触发了这个, 即使接下快速第二次触击也会被认为是一次单击而不是产生双击行为.</li>
-<li><code>onDoubleTapEvent</code>表示发生了双击行为. 会依次调用<code>ACTION_DOWN</code>, <code>ACTION_MOVE</code>, <code>ACTION_UP</code></li>
+<li><code>onDoubleTap</code> 双击 . 不能和 <code>onSingleTapConfirmed</code> 共存 </li>
+<li><code>onSingleTapConfirmed</code> 严格的单击行为 . 如果触发了这个 , 即使接下快速第二次触击也会被认为是一次单击而不是产生双击行为 .</li>
+<li><code>onDoubleTapEvent</code> 表示发生了双击行为 . 会依次调用 <code>ACTION_DOWN</code>, <code>ACTION_MOVE</code>, <code>ACTION_UP</code></li>
 </ol>
 </li>
 <li>
-<p><code>view</code>的滑动方法. </p>
+<p><code>view</code> 的滑动方法 . </p>
+</li>
+<li>
+<p> 通过 <code>view.scrollTo</code> 和 <code>view.scrollBy</code> 方法滑动 </p>
+<p> 注意这两个方法滚动的 <strong> 并非 <code>view</code> 本身 </strong> 而是 <strong><code>view</code> 的内容 </strong>, 所以要想滑动某个 <code>view</code>, 需要获取到其父 <code>view</code> 然后到父 <code>view</code> 进行滑动 . 即 <code>((View)childView.getParent()).scrollX</code> 如此 .</p>
+<p><code>scrollBy</code> 其中也是调用 <code>scrollTo</code> 来滑动 , 只不过中内部进行了计算 <code>scrollTo(offsetX + mScrollX, offsetY + mScrollY)</code>. 而 <code>scrollTo</code> 在内部调用了 <code>invalidateInternal(left - mScrollX, top - mScrollY, right - mScrollX, bottom - mScrollY, true, false)</code>, 其中 <code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code> 为上次的坐标点 . 所以当传入 <strong> 负数 </strong> 的时候才是向右移动 </p>
+<p><code>mScrollX</code> 和 <code>mScrollY</code> 分别左内容边框到 view 左边框 , 上内容边框到 view 上边框的大小 , 可以通过 <code>view.getScrollX()</code>, <code>view.getScrollY()</code> 获得该值 </p>
+</li>
+<li>
+<p> 通过动画给 <code>view</code> 施加平移效果 </p>
+<p> 这种方法便是通过改变 <code>view</code> 的 <code>translationX</code> 和 <code>translationY</code> 值 . </p>
+<p> 老旧的动画方法并没有真的改变了 <code>view</code> 的位置 , 所以在 <code>view</code>" 移动 " 到新位置时 , 其一些比如单击事件并不能通过点击新位置产生 . 这些可以使用属性动画解决 , 而现在也只使用属性动画 (Property Animator)</p>
+</li>
+<li>
+<p> 通过改变 <code>view</code> 的 <code>LayoutParams</code> 参数使得 <code>view</code> 重新布局 </p>
+<p> 比如发变 <code>view</code> 的 <code>margin</code> 等等 , 或者通其一些关联的 <code>view</code> 做变化 , 以便影响到目标 <code>view</code>. </p>
+<p> 比如在一个垂直的 <code>LinearLayout</code>, 上边是一个高度为 0 的 <code>view</code>, 下面为目标 <code>view</code>, 通过改变上边 <code>view</code> 的高度来使用目标 <code>view</code> 的高度发生变化 </p>
+</li>
+<li>
+<p> 使用 <code>Scroller</code> 类 .</p>
+<p><code>Scroller</code> 类是一个滑动的 <code>Helper</code> 类 , 其本质上是使用 <code>view.scrollTo</code> 方法来滑动 , 但内部有一个可定义 <code>Interpolator</code> 类 , 即插值属性来提供滑动变动曲线 , 使得滑动更加的流畅 .</p>
 </li>
 </ul>
-<ol>
-<li>
-<p>通过<code>view.scrollTo</code>和<code>view.scrollBy</code>方法滑动</p>
-<p>注意这两个方法滚动的<strong>并非<code>view</code>本身</strong>而是<strong><code>view</code>的内容</strong>, 所以要想滑动某个<code>view</code>, 需要获取到其父<code>view</code>然后到父<code>view</code>进行滑动. 即<code>((View)childView.getParent()).scrollX</code>如此.</p>
-<p><code>scrollBy</code>其中也是调用<code>scrollTo</code>来滑动, 只不过中内部进行了计算<code>scrollTo(offsetX + mScrollX, offsetY + mScrollY)</code>. 而<code>scrollTo</code>在内部调用了<code>invalidateInternal(left - mScrollX, top - mScrollY, right - mScrollX, bottom - mScrollY, true, false)</code>, 其中<code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code>为上次的坐标点. 所以当传入<strong>负数</strong>的时候才是向右移动</p>
-<p><code>mScrollX</code>和<code>mScrollY</code>分别左内容边框到view左边框, 上内容边框到view上边框的大小, 可以通过<code>view.getScrollX()</code>, <code>view.getScrollY()</code>获得该值</p>
-</li>
-<li>
-<p>通过动画给<code>view</code>施加平移效果</p>
-<p>这种方法便是通过改变<code>view</code>的<code>translationX</code>和<code>translationY</code>值. </p>
-<p>老旧的动画方法并没有真的改变了<code>view</code>的位置, 所以在<code>view</code>"移动"到新位置时, 其一些比如单击事件并不能通过点击新位置产生. 这些可以使用属性动画解决, 而现在也只使用属性动画(Property Animator)</p>
-</li>
-<li>
-<p>通过改变<code>view</code>的<code>LayoutParams</code>参数使得<code>view</code>重新布局</p>
-<p>比如发变<code>view</code>的<code>margin</code>等等, 或者通其一些关联的<code>view</code>做变化, 以便影响到目标<code>view</code>. </p>
-<p>比如在一个垂直的<code>LinearLayout</code>, 上边是一个高度为0的<code>view</code>, 下面为目标<code>view</code>, 通过改变上边<code>view</code>的高度来使用目标<code>view</code>的高度发生变化</p>
-</li>
-<li>
-<p>使用<code>Scroller</code>类.</p>
-<p><code>Scroller</code>类是一个滑动的<code>Helper</code>类, 其本质上是使用<code>view.scrollTo</code>方法来滑动, 但内部有一个可定义<code>Interpolator</code>类, 即插值属性来提供滑动变动曲线, 使得滑动更加的流畅.</p>
-</li>
-</ol>
-<div class="codehilite"><pre><span></span> <span class="cm">/* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 </span>
-<span class="cm">  * 在自定义 View 的构造方法获取一个 Scroller 实例</span>
-<span class="cm">  * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用</span>
-<span class="cm">  * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动</span>
-<span class="cm">  * 若是没有完成, 则调用 View.scrollTo 来滑动 View 内容的位置, 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成</span>
-<span class="cm">  * 如此的反复回调直到滑动的完成</span>
-<span class="cm">  */</span>
- <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomView</span> <span class="kd">extends</span> <span class="n">View</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Scroller</span> <span class="n">mScroller</span><span class="o">;</span>
+<pre class="highlight"><code class="language-Java linenums"> /* 一般使用 Scroller 类来滚动 View 时 , 都使用在自定义 View 中 
+  * 在自定义 View 的构造方法获取一个 Scroller 实例
+  * 然后重写 View.computeScroll 方法 , 该方法会在重绘 view 时被调用
+  * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
+  * 若是没有完成 , 则调用 View.scrollTo 来滑动 View 内容的位置 , 然后再次调用 View.postInvalidate 方法促使 View 重绘以便再次检查滑动是否完成
+  * 如此的反复回调直到滑动的完成
+  */
+ public class CustomView extends View {
+    private Scroller mScroller;
 
-    <span class="kd">public</span> <span class="nf">CustomView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">defStyleAttr</span><span class="o">)</span> <span class="o">{</span>
-       <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">defStyleAtrr</span><span class="o">);</span>
-       <span class="n">mScroller</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scroller</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
-     <span class="o">}</span>
+    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
+       super(context, attrs, defStyleAtrr);
+       mScroller = new Scroller(context);
+     }
 
-    <span class="cm">/* 提供一个外部使用的滚动方法, 参数为滚动的目标坐标, 同 view.scrollTo */</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">smoothScrollTo</span><span class="o">(</span><span class="kt">int</span> <span class="n">destX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">destY</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">deltaX</span> <span class="o">=</span> <span class="n">destX</span> <span class="o">-</span> <span class="n">getScrollX</span><span class="o">();</span>
-        <span class="kt">int</span> <span class="n">deltaY</span> <span class="o">=</span> <span class="n">destY</span> <span class="o">-</span> <span class="n">getScrollY</span><span class="o">();</span>
-        <span class="cm">/* 该方法并没有产生滑动, 而只是设置了一变量值, 比如初始位置和滑动距离, 滑动时间等 */</span>
-        <span class="n">mScroller</span><span class="o">.</span><span class="na">startScroll</span><span class="o">(</span><span class="n">getScrollX</span><span class="o">(),</span> <span class="n">getScrollY</span><span class="o">(),</span> <span class="n">deltaX</span><span class="o">,</span> <span class="n">deltaY</span><span class="o">);</span>
-        <span class="cm">/* 促使 view 进行重绘 */</span>
-        <span class="n">invalidate</span><span class="o">();</span>
-     <span class="o">}</span>
+    /* 提供一个外部使用的滚动方法 , 参数为滚动的目标坐标 , 同 view.scrollTo */
+    public void smoothScrollTo(int destX, int destY) {
+        int deltaX = destX - getScrollX();
+        int deltaY = destY - getScrollY();
+        /* 该方法并没有产生滑动 , 而只是设置了一变量值 , 比如初始位置和滑动距离 , 滑动时间等 */
+        mScroller.startScroll(getScrollX(), getScrollY(), deltaX, deltaY);
+        /* 促使 view 进行重绘 */
+        invalidate();
+     }
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">smoothScrollBy</span><span class="o">(</span><span class="kt">int</span> <span class="n">deltaX</span><span class="o">,</span> <span class="kt">int</span> <span class="n">deltaY</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">smoothScrollTo</span><span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrX</span><span class="o">()</span> <span class="o">+</span> <span class="n">deltaX</span><span class="o">,</span> <span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrY</span><span class="o">()</span> <span class="o">+</span> <span class="n">deltaY</span><span class="o">);</span>  
-     <span class="o">}</span>
+    public void smoothScrollBy(int deltaX, int deltaY) {
+        smoothScrollTo(mScroller.getCurrX() + deltaX, mScroller.getCurrY() + deltaY);  
+     }
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">computeScroll</span><span class="o">()</span> <span class="o">{</span>
-         <span class="cm">/* view 在绘制的时候会调用该方法</span>
-<span class="cm">          * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置</span>
-<span class="cm">          * 若是没有的话, 返回 true. 然后我们继续滑动 view 的位置 </span>
-<span class="cm">          */</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">computeScrollOffset</span><span class="o">())</span> <span class="o">{</span>
-            <span class="cm">/* 真正的滑动调用, mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置, 而 getFinalX() 则获得最终位置. */</span>
-            <span class="n">scrollTo</span><span class="o">(</span><span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrX</span><span class="o">(),</span> <span class="n">mScroller</span><span class="o">.</span><span class="na">getCurrY</span><span class="o">());</span>
-            <span class="cm">/* 因为滑动可能还没有完成, 所以再次调用一次 view 重绘 */</span>
-            <span class="n">postInvalidate</span><span class="o">();</span>
-         <span class="o">}</span>
-     <span class="o">}</span>
- <span class="o">}</span>
-</pre></div>
+    @Override
+    public void computeScroll() {
+         /* view 在绘制的时候会调用该方法
+          * 此时我们调用 scroller.computeScrollOffset 来确认是否已经滑动到目标位置
+          * 若是没有的话 , 返回 true. 然后我们继续滑动 view 的位置 
+          */
+        if (mScroller.computeScrollOffset()) {
+            /* 真正的滑动调用 , mScroller.getCurrX(), getCurrY() 方法获得的是在设计时间 duration 时计算后的位置 , 而 getFinalX() 则获得最终位置 . */
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            /* 因为滑动可能还没有完成 , 所以再次调用一次 view 重绘 */
+            postInvalidate();
+         }
+     }
+ }</code></pre>
 
+<h5 id="view_1"><code>view</code> 事件的分发体系 </h5>
+<p> 同一事件序列是指手指接触屏幕的那一刻起 , 到手指离开屏幕的进结束 , 这其中产的一系列事件 . 这包括 <code>ACTION_DOWN</code> 和 0 个或多个 <code>ACTION_MOVE</code> 和 <code>ACTION_UP</code> 事件 . </p>
+<p> 在默认不做特殊处理的情况下一个事件序列只能被一个 <code>view</code> 处理 </p>
+<p><code>view</code> 的事件分发首先由 <code>Activity</code> 最先捕获 , 然后一层一层的分发到具体的子 <code>view</code>, 如果中途没有被截断的话 ;</p>
+<p> 子 <code>view</code> 如果没有处理这个事件的话 , 最后再沿路返回到 <code>Activity</code> 中 .</p>
+<p> 首先看 <code>Activity#dispatchTouchEvent</code> 和 <code>PhoneWindow#superDispatchTouchEvent</code> 代码 </p>
+<pre class="highlight"><code class="language-java linenums">// Activity#dispatchTouchEvent
 
-<h5 id="view_1"><code>view</code>事件的分发体系</h5>
-<p>同一事件序列是指手指接触屏幕的那一刻起, 到手指离开屏幕的进结束, 这其中产的一系列事件. 这包括<code>ACTION_DOWN</code>和0个或多个<code>ACTION_MOVE</code>和<code>ACTION_UP</code>事件. </p>
-<p>在默认不做特殊处理的情况下一个事件序列只能被一个<code>view</code>处理</p>
-<p><code>view</code>的事件分发首先由<code>Activity</code>最先捕获, 然后一层一层的分发到具体的子<code>view</code>, 如果中途没有被截断的话;</p>
-<p>子<code>view</code>如果没有处理这个事件的话, 最后再沿路返回到<code>Activity</code>中.</p>
-<p>首先看<code>Activity#dispatchTouchEvent</code>和<code>PhoneWindow#superDispatchTouchEvent</code>代码</p>
-<div class="codehilite"><pre><span></span><span class="c1">// Activity#dispatchTouchEvent</span>
+public boolean dispatchTouchEvent(MotionEvent ev) {
+    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+        /*
+         * onUserInteraction() 是一个空方法 , 可以覆写这个方法来检测用户与手机产生的交互
+         * 对应的还有 onUserLeaveHint() 来检测用户手指离开了屏幕
+         */
+        onUserInteraction(); 
+    }
+    /*
+     * Window 是一个抽象类 , 其只有一个惟一的实现 PhoneWindow. 
+     * PhoneWindow#superDispatchTouchEvent() 方法惟一作用就是把事件继续向下传递到 DecorView
+     *
+     */
+    if (getWindow().superDispatchTouchEvent(ev)) {
+        return true;
+    }
+    return onTouchEvent(ev);
+}
 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">dispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">ev</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">ev</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">)</span> <span class="o">{</span>
-        <span class="cm">/*</span>
-<span class="cm">         * onUserInteraction() 是一个空方法, 可以覆写这个方法来检测用户与手机产生的交互</span>
-<span class="cm">         * 对应的还有 onUserLeaveHint() 来检测用户手指离开了屏幕</span>
-<span class="cm">         */</span>
-        <span class="n">onUserInteraction</span><span class="o">();</span> 
-    <span class="o">}</span>
-    <span class="cm">/*</span>
-<span class="cm">     * Window 是一个抽象类, 其只有一个惟一的实现 PhoneWindow. </span>
-<span class="cm">     * PhoneWindow#superDispatchTouchEvent() 方法惟一作用就是把事件继续向下传递到 DecorView</span>
-<span class="cm">     *</span>
-<span class="cm">     */</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">getWindow</span><span class="o">().</span><span class="na">superDispatchTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">onTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">);</span>
-<span class="o">}</span>
+/******************************************************/
+// DecorView#superDispatchTouchEvent
 
-<span class="cm">/******************************************************/</span>
-<span class="c1">// DecorView#superDispatchTouchEvent</span>
+public boolean superDispatchTouchEvent(MotionEvent ev) {
+    /* mDecor 即 DecorView 类 */
+    return mDecor.superDispatchTouchEvent(ev); 
+}</code></pre>
 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">superDispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">ev</span><span class="o">)</span> <span class="o">{</span>
-    <span class="cm">/* mDecor 即 DecorView 类 */</span>
-    <span class="k">return</span> <span class="n">mDecor</span><span class="o">.</span><span class="na">superDispatchTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">);</span> 
-<span class="o">}</span>
-</pre></div>
+<p><code>DecorView</code> 继承了 <code>FrameLayout</code> 并实现了 <code>RootViewSurfaceTracker</code>, <code>WindowCallbacks</code>. <code>DecorView</code> 即是屏幕的总父 <code>view</code>, 包括了标题栏和内容部分 , 即是 <code>setContentView</code> 的父 <code>view</code>. 其在接收到 <code>view</code> 事件后 , 会继续向下派发 , 由于 <code>FrameLayout</code> 并没覆写这个方法 , 所以最终传到父 <code>ViewGroup</code> 来处理 .   (<del> 这火传的 2333333</del>)</p>
+<pre class="highlight"><code class="language-java linenums">public boolean superDispatchTouchEvent(MotionEvent ev) {
+    return super.dispatchTouchEvent(ev);
+}</code></pre>
 
+<p><code>ViewGroup#dispatchTouchEvent</code>. <code>ViewGroup</code> 会判断是否要向下一层 <code>view</code> 传递事件 , 这样一层一层如此循环 , 最终完成整个事件的分发 .</p>
+<pre class="highlight"><code class="language-java linenums">// ViewGroup#dispatchTouchEvent
 
-<p><code>DecorView</code>继承了<code>FrameLayout</code>并实现了<code>RootViewSurfaceTracker</code>, <code>WindowCallbacks</code>. <code>DecorView</code>即是屏幕的总父<code>view</code>, 包括了标题栏和内容部分, 即是<code>setContentView</code>的父<code>view</code>. 其在接收到<code>view</code>事件后, 会继续向下派发, 由于<code>FrameLayout</code>并没覆写这个方法, 所以最终传到父<code>ViewGroup</code>来处理.   (~~这火传的2333333~~)</p>
-<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">superDispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">ev</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">dispatchTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">);</span>
-<span class="o">}</span>
-</pre></div>
+public boolean dispatchTouchEvent(MotionEvent ev) {
+    /* ..... */
+    /* 省略前面是一些事件的判断 */
+    boolean handled = false;
+    if (onFilterTouchEventForSecurity(ev)) {
+        final int action = ev.getAction();
+        final int actionMasked = action &amp; MotionEvent.ACTION_MASK;
 
+        // Handle an initial down.
+        // ACTION_DOWN 事件时 , 重置所有的标志位
+        if (actionMasked == MotionEvent.ACTION_DOWN) {
+            // Throw away all previous state when starting a new touch gesture. 
+            // The framework may have dropped the up or cancel event for the previous gesture
+            // due to an app switch, ANR, or some other state change.
+            cancelAndClearTouchTargets(ev);
+            resetTouchState();
+        }
 
-<p><code>ViewGroup#dispatchTouchEvent</code>. <code>ViewGroup</code>会判断是否要向下一层<code>view</code>传递事件, 这样一层一层如此循环, 最终完成整个事件的分发.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// ViewGroup#dispatchTouchEvent</span>
+        final boolean intercepted;
+        /* 这里检查 ViewGroup 是否要中断事件向下分发和调用 onIterceptTouchEvent
+         * 当手指刚接触屏幕时为 ACTION_DOWN, 所以条件必然成立 , 也就是说在不设置标志位下 , 
+         * ViewGroup 一定可以中断事件继续分发 . 第二条件是 mFirstTouchTarget 的值 .
+         * 该变量指的是消费事件的 view, ACTION_DOWN 时必为 null, 如果派发成功 , 
+         * 在接下来的 ACTION_MOVE, ACTION_UP 则不会为 null 值
+         *
+         * 接下来则要判断拦截标志位 . FLAG_DISALLOW_INTERCEPT 是由 
+         * ViewGroup#requestDisallowInterceptTouchEvent 方法进行设置的 ,
+         * 这样一来 ViweGroup 就不再拦截到该事件
+         * 但 ACTION_DOWN 为例外 , 因为 ViewGroup 会对该类事件做标志重置 , 所以不管子 View 如何请求
+         * ViewGroup 依然可以拦截到 ACTION_DOWN
+         * 
+         */
+        if (actionMasked == MotionEvent.ACTION_DOWN || mFirstTouchTarget != null) {
+            final boolean disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != 0;
+            if (!disallowIntercept) {
+                intercepted = onInterceptTouchEvent(ev);
+                ev.setActoin(action);
+            } else {
+                intercepted = false;
+            }
+        } else {
+            intercepted = true;
+        }
+    /* ......... */
+    }
+}</code></pre>
 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">dispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">ev</span><span class="o">)</span> <span class="o">{</span>
-    <span class="cm">/* ..... */</span>
-    <span class="cm">/* 省略前面是一些事件的判断 */</span>
-    <span class="kt">boolean</span> <span class="n">handled</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">onFilterTouchEventForSecurity</span><span class="o">(</span><span class="n">ev</span><span class="o">))</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="kt">int</span> <span class="n">action</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
-        <span class="kd">final</span> <span class="kt">int</span> <span class="n">actionMasked</span> <span class="o">=</span> <span class="n">action</span> <span class="o">&amp;</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_MASK</span><span class="o">;</span>
-
-        <span class="c1">// Handle an initial down.</span>
-        <span class="c1">// ACTION_DOWN 事件时, 重置所有的标志位</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// Throw away all previous state when starting a new touch gesture. </span>
-            <span class="c1">// The framework may have dropped the up or cancel event for the previous gesture</span>
-            <span class="c1">// due to an app switch, ANR, or some other state change.</span>
-            <span class="n">cancelAndClearTouchTargets</span><span class="o">(</span><span class="n">ev</span><span class="o">);</span>
-            <span class="n">resetTouchState</span><span class="o">();</span>
-        <span class="o">}</span>
-
-        <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">intercepted</span><span class="o">;</span>
-        <span class="cm">/* 这里检查 ViewGroup 是否要中断事件向下分发和调用 onIterceptTouchEvent</span>
-<span class="cm">         * 当手指刚接触屏幕时为 ACTION_DOWN, 所以条件必然成立, 也就是说在不设置标志位下, </span>
-<span class="cm">         * ViewGroup 一定可以中断事件继续分发. 第二条件是 mFirstTouchTarget 的值.</span>
-<span class="cm">         * 该变量指的是消费事件的 view, ACTION_DOWN时必为null, 如果派发成功, </span>
-<span class="cm">         * 在接下来的 ACTION_MOVE, ACTION_UP 则不会为 null 值</span>
-<span class="cm">         *</span>
-<span class="cm">         * 接下来则要判断拦截标志位. FLAG_DISALLOW_INTERCEPT 是由 </span>
-<span class="cm">         * ViewGroup#requestDisallowInterceptTouchEvent 方法进行设置的,</span>
-<span class="cm">         * 这样一来 ViweGroup 就不再拦截到该事件</span>
-<span class="cm">         * 但 ACTION_DOWN 为例外, 因为 ViewGroup 会对该类事件做标志重置, 所以不管子 View 如何请求</span>
-<span class="cm">         * ViewGroup 依然可以拦截到 ACTION_DOWN</span>
-<span class="cm">         * </span>
-<span class="cm">         */</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span> <span class="o">||</span> <span class="n">mFirstTouchTarget</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">disallowIntercept</span> <span class="o">=</span> <span class="o">(</span><span class="n">mGroupFlags</span> <span class="o">&amp;</span> <span class="n">FLAG_DISALLOW_INTERCEPT</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="k">if</span> <span class="o">(!</span><span class="n">disallowIntercept</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">intercepted</span> <span class="o">=</span> <span class="n">onInterceptTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">);</span>
-                <span class="n">ev</span><span class="o">.</span><span class="na">setActoin</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">intercepted</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">intercepted</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="cm">/* ......... */</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>由以上可以看出, <code>ViewGroup#onInterceptTouchEvent</code>并不是每次都会被调用到</p>
+<p> 由以上可以看出 , <code>ViewGroup#onInterceptTouchEvent</code> 并不是每次都会被调用到 </p>
 <ul>
 <li>
-<p>如果事件是<code>ACTION_DOWN</code>, 则一定会被调用</p>
+<p> 如果事件是 <code>ACTION_DOWN</code>, 则一定会被调用 </p>
 </li>
 <li>
-<p>如果不是<code>ACTION_DOWN</code>, 则要考虑:</p>
+<p> 如果不是 <code>ACTION_DOWN</code>, 则要考虑 :</p>
+</li>
+<li>
+<p> 是否有了接收事件的目标子 <code>view</code>. 没有的话 , 直接设置中断事件派发 , 并且不会调用 <code>onInterceptTouchEvent</code></p>
+</li>
+<li>
+<p> 有了接收事件 <code>view</code>, 则查看子 <code>view</code> 是否请求设置不要中断事件标志 <code>ViewGroup#requestDisallowInterceptTouchEvent</code>.</p>
+<p> 设置后则不调用 ; 没有设置则会调用 <code>onInterceptTouchEvent</code></p>
 </li>
 </ul>
-<ol>
-<li>
-<p>是否有了接收事件的目标子<code>view</code>. 没有的话,直接设置中断事件派发, 并且不会调用<code>onInterceptTouchEvent</code></p>
-</li>
-<li>
-<p>有了接收事件<code>view</code>, 则查看子<code>view</code>是否请求设置不要中断事件标志<code>ViewGroup#requestDisallowInterceptTouchEvent</code>.</p>
-<p>设置后则不调用; 没有设置则会调用<code>onInterceptTouchEvent</code></p>
-</li>
-</ol>
-<p><code>ViewGroup</code>只在<strong>当为鼠标的左键(主按键)的按下事件并且屏幕能滚动时</strong>才会中断事件的派发, 否则默认不中断分发事件 </p>
-<div class="codehilite"><pre><span></span><span class="c1">// ViewGroup#onInterceptTouchEvent</span>
+<p><code>ViewGroup</code> 只在 <strong> 当为鼠标的左键 ( 主按键 ) 的按下事件并且屏幕能滚动时 </strong> 才会中断事件的派发 , 否则默认不中断分发事件 </p>
+<pre class="highlight"><code class="language-java linenums">// ViewGroup#onInterceptTouchEvent
 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onInterceptTouchEvent</span><span class="o">(</span><span class="n">ev</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">ev</span><span class="o">.</span><span class="na">isFromSource</span><span class="o">(</span><span class="n">InputDevice</span><span class="o">.</span><span class="na">SOURCE_MOUSE</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-        <span class="n">ev</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span> <span class="o">&amp;&amp;</span>
-        <span class="n">ev</span><span class="o">.</span><span class="na">isButtonPressed</span><span class="o">(</span><span class="n">MotionEvent</span><span class="o">.</span><span class="na">BUTTON_PRIMARY</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-        <span class="n">isOnScrollbarThumb</span><span class="o">(</span><span class="n">ev</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">ev</span><span class="o">.</span><span class="na">getY</span><span class="o">()))</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
+public boolean onInterceptTouchEvent(ev) {
+    if (ev.isFromSource(InputDevice.SOURCE_MOUSE) &amp;&amp;
+        ev.getAction() == MotionEvent.ACTION_DOWN &amp;&amp;
+        ev.isButtonPressed(MotionEvent.BUTTON_PRIMARY) &amp;&amp;
+        isOnScrollbarThumb(ev.getX(), ev.getY())) {
+        return true;
+    }
+    return false;
+}</code></pre>
 
-
-<p><code>ViewGroup#dispatchTouchEvent</code>中如果没有中断派发时, 查找接收的子<code>view</code>, 如果查找到了, 就调用其<code>dispatchTouchEvent</code>, 没有找到则调用<code>super.dispatchTouchEvent</code>, 其实就是<code>View#dispatchTouchEvent</code></p>
-<p>来看<code>View#dispatchTouchEvent</code>的代码. 由于<code>View</code>作为<code>ViewGroup</code>的父类, 所以该方法作用在于两方面.</p>
+<p><code>ViewGroup#dispatchTouchEvent</code> 中如果没有中断派发时 , 查找接收的子 <code>view</code>, 如果查找到了 , 就调用其 <code>dispatchTouchEvent</code>, 没有找到则调用 <code>super.dispatchTouchEvent</code>, 其实就是 <code>View#dispatchTouchEvent</code></p>
+<p> 来看 <code>View#dispatchTouchEvent</code> 的代码 . 由于 <code>View</code> 作为 <code>ViewGroup</code> 的父类 , 所以该方法作用在于两方面 .</p>
 <ul>
-<li>一是作为子<code>view</code>即像<code>TextView</code>之类时处理从<code>ViewGroup</code>派发下来的事件</li>
-<li>二是作为<code>ViewGroup</code>的父类, 处理<code>ViewGroup#dispatchTouchEvent</code>(实际是在<code>ViewGroup#dispatchTransformedTouchEvent</code>)调用父类的<code>dispatchTouchEvent</code>时</li>
+<li> 一是作为子 <code>view</code> 即像 <code>TextView</code> 之类时处理从 <code>ViewGroup</code> 派发下来的事件 </li>
+<li> 二是作为 <code>ViewGroup</code> 的父类 , 处理 <code>ViewGroup#dispatchTouchEvent</code>( 实际是在 <code>ViewGroup#dispatchTransformedTouchEvent</code>) 调用父类的 <code>dispatchTouchEvent</code> 时 </li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="c1">// View#dispatchTouchEvent</span>
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">dispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">isTargetAccessibilityFocus</span><span class="o">())</span> <span class="o">{</span>
-        <span class="c1">// We don&#39;t have focus or no virtual descendant has it, do not handle the event.</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">isAccessibilityFocusedViewOrHost</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="c1">// We have focus and got the event, then use normal event dispatch.</span>
-        <span class="n">event</span><span class="o">.</span><span class="na">setTargetAccessibilityFocus</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-    <span class="o">}</span>
+<pre class="highlight"><code class="language-java linenums">// View#dispatchTouchEvent
+public boolean dispatchTouchEvent(MotionEvent event) {
+    if (event.isTargetAccessibilityFocus()) {
+        // We don't have focus or no virtual descendant has it, do not handle the event.
+        if (!isAccessibilityFocusedViewOrHost()) {
+            return false;
+        }
+        // We have focus and got the event, then use normal event dispatch.
+        event.setTargetAccessibilityFocus(false);
+    }
 
-    <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    boolean result = false;
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">mInputEventConsistencyVerifier</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">mInputEventConsistencyVerifier</span><span class="o">.</span><span class="na">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
+    if (mInputEventConsistencyVerifier != null) {
+        mInputEventConsistencyVerifier.onTouchEvent(event, 0);
+    }
 
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">actionMasked</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getActionMasked</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Defensive cleanup for new gesture</span>
-        <span class="n">stopNestedScroll</span><span class="o">();</span>
-    <span class="o">}</span>
+    final int actionMasked = event.getActionMasked();
+    if (actionMasked == MotionEvent.ACTION_DOWN) {
+        // Defensive cleanup for new gesture
+        stopNestedScroll();
+    }
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">onFilterTouchEventForSeCurity</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">((</span><span class="n">mViewFlags</span> <span class="o">&amp;</span> <span class="n">ENABLED_MASK</span><span class="o">)</span> <span class="o">==</span> <span class="n">ENABLED</span> <span class="o">&amp;&amp;</span> <span class="n">handleScrollBarDragging</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
-        <span class="o">}</span>
-        <span class="cm">/* </span>
-<span class="cm">         * 这里会检查几个地方</span>
-<span class="cm">         * 如果 view 在 enable (默认) 状态下</span>
-<span class="cm">         * 并且设置了 onTouchListener 回调, 则调用 listener 的 onTouch 方法 </span>
-<span class="cm">         *</span>
-<span class="cm">         * 如果调用了 onTouch 方法, 该方法的返回值会对 View#onTouchEvent 方法产生影响</span>
-<span class="cm">         * onTouch 返回 true 时则不会再调用 View#onTouchEvent </span>
-<span class="cm">         * 反之才会调用, 这样方便在 View 之外中断默认的处理方法, onTouch 方法优先级更高</span>
-<span class="cm">         */</span>
-        <span class="c1">// noinspection SimplifiableIfStatement</span>
-        <span class="n">ListenerInfo</span> <span class="n">li</span> <span class="o">=</span> <span class="n">mListenerInfo</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">li</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">li</span><span class="o">.</span><span class="na">mOnTouchListener</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span>
-            <span class="o">(</span><span class="n">mViewFlags</span> <span class="o">&amp;</span> <span class="n">ENABLED_MASK</span><span class="o">)</span> <span class="o">==</span> <span class="n">ENABLED</span> <span class="o">&amp;&amp;</span>
-            <span class="n">li</span><span class="o">.</span><span class="na">mOnTouchListener</span><span class="o">.</span><span class="na">onTouch</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
-        <span class="o">}</span>
-        <span class="c1">// onTouch(如果调用了) 返回 false 则在这里回调了 View#onTouchEvent 方法</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">result</span> <span class="o">&amp;&amp;</span> <span class="n">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span> 
-    <span class="o">}</span>
+    if (onFilterTouchEventForSeCurity(event)) {
+        if ((mViewFlags &amp; ENABLED_MASK) == ENABLED &amp;&amp; handleScrollBarDragging(event)) {
+            return = true; 
+        }
+        /* 
+         * 这里会检查几个地方
+         * 如果 view 在 enable ( 默认 ) 状态下
+         * 并且设置了 onTouchListener 回调 , 则调用 listener 的 onTouch 方法 
+         *
+         * 如果调用了 onTouch 方法 , 该方法的返回值会对 View#onTouchEvent 方法产生影响
+         * onTouch 返回 true 时则不会再调用 View#onTouchEvent 
+         * 反之才会调用 , 这样方便在 View 之外中断默认的处理方法 , onTouch 方法优先级更高
+         */
+        // noinspection SimplifiableIfStatement
+        ListenerInfo li = mListenerInfo;
+        if (li != null &amp;&amp; li.mOnTouchListener != null &amp;&amp;
+            (mViewFlags &amp; ENABLED_MASK) == ENABLED &amp;&amp;
+            li.mOnTouchListener.onTouch(this, event)) {
+            result = true; 
+        }
+        // onTouch( 如果调用了 ) 返回 false 则在这里回调了 View#onTouchEvent 方法
+        if (!result &amp;&amp; onTouchEvent(event)) {
+            result = true;
+        } 
+    }
 
-    <span class="k">if</span> <span class="o">(!</span><span class="n">result</span> <span class="o">&amp;&amp;</span> <span class="n">mInputEventConsistencyVerifier</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">mInputEventConsistencyVerifier</span><span class="o">.</span><span class="na">onUnhandledEvent</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
+    if (!result &amp;&amp; mInputEventConsistencyVerifier != null) {
+        mInputEventConsistencyVerifier.onUnhandledEvent(event, 0);
+    }
 
-    <span class="c1">// Clean up after nested scrolls if this is the end of a gesture</span>
-    <span class="c1">// alse cancel it if we tried an ACTION_DOWN but we didn&#39;t want the rest</span>
-    <span class="c1">// of the gesture</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span> <span class="o">||</span>
-        <span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTIOIN_CANCEL</span> <span class="o">||</span>
-        <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">result</span><span class="o">))</span> <span class="o">{</span>
-      <span class="n">stopNestedScroll</span><span class="o">();</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
+    // Clean up after nested scrolls if this is the end of a gesture
+    // alse cancel it if we tried an ACTION_DOWN but we didn't want the rest
+    // of the gesture
+    if (actionMasked == MotionEvent.ACTION_UP ||
+        actionMasked == MotionEvent.ACTIOIN_CANCEL ||
+        (actionMasked == MotionEvent.ACTION_DOWN &amp;&amp; !result)) {
+      stopNestedScroll();
+    }
+    return result;
+}</code></pre>
 
+<p> 来看 <code>View#onTouchEvent</code></p>
+<pre class="highlight"><code class="language-java linenums">// View#onTouchEvent
 
-<p>来看 <code>View#onTouchEvent</code></p>
-<div class="codehilite"><pre><span></span><span class="c1">// View#onTouchEvent</span>
+public boolean onTouchEvent(MotionEvent event) {
+    final float x = event.getX();
+    final float y = event.getY();
+    final int viewFlags = mViewFlags;
+    final int action = event.getAction();
 
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
-    <span class="kd">final</span> <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">viewFlags</span> <span class="o">=</span> <span class="n">mViewFlags</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">action</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">();</span>
+    // 检查是否可以单击或者长按或者是长按弹出菜单 ( 类似鼠标右健 )
+    final boolean clickable = ((viewFlags &amp; (CLICKABLE) == CLICKABLE) ||
+        (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE) ||
+        (viewFlags &amp; CONTEXT_CLICKABLE) == CONTEXT_CLICKABLE);
 
-    <span class="c1">// 检查是否可以单击或者长按或者是长按弹出菜单(类似鼠标右健)</span>
-    <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">clickable</span> <span class="o">=</span> <span class="o">((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">CLICKABLE</span><span class="o">)</span> <span class="o">||</span>
-        <span class="o">(</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">LONG_CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">LONG_CLICKABLE</span><span class="o">)</span> <span class="o">||</span>
-        <span class="o">(</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">CONTEXT_CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">CONTEXT_CLICKABLE</span><span class="o">);</span>
+    // 检查 view 是否是 disable 状态 , 但即使 view 是 disable 
+    // 但是可 clickable 状态下也会消费掉该事件 , 只是没任何反应而已
+    if ((viewFlags &amp; ENABLED_MASK) == DISABLED) {
+        if (action == MotionEvent.ACTION_UP &amp;&amp; (mPrivateFlags &amp; PFLAG_PRESSED) != 0) {
+            setPressed(false);
+        }
+        mPrivateFlags3 &amp;= ~PFLAG3_FINGER_DOWN;
+        // A disabled view that is clickable still consume the touch
+        // events, it just doesn't respond to them
+        return clickable;
+    }
+    // 如果使用 setTouchDelegate 代理方法 , 则执行该方法 , 和 setOnTouchListener 一样
+    if (mTouchDelegate != null) {
+        if (mTouchDelegate.onTouchEvent(event)) {
+            return ture;
+        }
+    }
 
-    <span class="c1">// 检查 view 是否是 disable 状态, 但即使 view 是 disable </span>
-    <span class="c1">// 但是可 clickable 状态下也会消费掉该事件, 只是没任何反应而已</span>
-    <span class="k">if</span> <span class="o">((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">ENABLED_MASK</span><span class="o">)</span> <span class="o">==</span> <span class="n">DISABLED</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">action</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">setPressed</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">mPrivateFlags3</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PFLAG3_FINGER_DOWN</span><span class="o">;</span>
-        <span class="c1">// A disabled view that is clickable still consume the touch</span>
-        <span class="c1">// events, it just doesn&#39;t respond to them</span>
-        <span class="k">return</span> <span class="n">clickable</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果使用 setTouchDelegate 代理方法, 则执行该方法, 和 setOnTouchListener 一样</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">mTouchDelegate</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">mTouchDelegate</span><span class="o">.</span><span class="na">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">ture</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+    // TOOLTIP 类似 hover 或者右键鼠标的状态
+    // 在这要注意一些如 ImageView 默认是不可点击的 , 所以直接返回的 false
+    // 然后事件会回退到 ViewGroup 由 ViewGroup 来处理
+    // 但该 view 还是捕获到 ACTION_DOWN 
+    // 这里就要注意一个坑 , 因为事件序列只会由某一个 View/ViewGroup 来处理掉 ,
+    // 所以像 ImageView 这样的不可点击时 , 事件回退来 ViewGroup
+    // 这样一来 , ACTION_DOWN 之后的该序列里的事件就不会再传递到 ImageView 来
+    if (clickable || (viewFlags &amp; TOOLTIP) == TOOLTIP) {
+        switch (action) {
+            case MotionEvent.ACTION_UP:
+                mPrivateFlags3 &amp;= ~PFLAG3_FINGER_DOWN;
+                if ((viewFlags &amp; TOOLTIP) == TOOLTIP) {
+                    handleTooltipUp();
+                }
+                if (!clickable) {
+                    removeTapCallback();
+                    removeLongPressCallback();
+                    mInContextButtonPress = false;
+                    mHasPerformedLongPress = false;
+                    mIgnoreNextUpEvent = false;
+                    break;
+                }
+                boolean prepressed = (mPrivateFlags &amp; PFLAG_PREPRESSED) != 0;
+                if ((mPrivateFlags &amp; PFLAG_PRESSED) != 0 || prepressed) {
+                    // take focus if we don't have it already and we should in
+                    // touch mode.
+                    boolean focusTaken = false;
+                    if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {
+                        focusTaken = requestFocus();
+                    }
 
-    <span class="c1">// TOOLTIP类似 hover 或者右键鼠标的状态</span>
-    <span class="c1">// 在这要注意一些如 ImageView 默认是不可点击的, 所以直接返回的 false</span>
-    <span class="c1">// 然后事件会回退到 ViewGroup 由 ViewGroup 来处理</span>
-    <span class="c1">// 但该 view 还是捕获到 ACTION_DOWN </span>
-    <span class="c1">// 这里就要注意一个坑, 因为事件序列只会由某一个 View/ViewGroup 来处理掉,</span>
-    <span class="c1">// 所以像 ImageView 这样的不可点击时, 事件回退来 ViewGroup</span>
-    <span class="c1">// 这样一来, ACTION_DOWN 之后的该序列里的事件就不会再传递到 ImageView 来</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">clickable</span> <span class="o">||</span> <span class="o">(</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">TOOLTIP</span><span class="o">)</span> <span class="o">==</span> <span class="n">TOOLTIP</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">switch</span> <span class="o">(</span><span class="n">action</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span><span class="o">:</span>
-                <span class="n">mPrivateFlags3</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PFLAG3_FINGER_DOWN</span><span class="o">;</span>
-                <span class="k">if</span> <span class="o">((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">TOOLTIP</span><span class="o">)</span> <span class="o">==</span> <span class="n">TOOLTIP</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">handleTooltipUp</span><span class="o">();</span>
-                <span class="o">}</span>
-                <span class="k">if</span> <span class="o">(!</span><span class="n">clickable</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">removeTapCallback</span><span class="o">();</span>
-                    <span class="n">removeLongPressCallback</span><span class="o">();</span>
-                    <span class="n">mInContextButtonPress</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                    <span class="n">mHasPerformedLongPress</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                    <span class="n">mIgnoreNextUpEvent</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                    <span class="k">break</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="kt">boolean</span> <span class="n">prepressed</span> <span class="o">=</span> <span class="o">(</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PREPRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">;</span>
-                <span class="k">if</span> <span class="o">((</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="c1">// take focus if we don&#39;t have it already and we should in</span>
-                    <span class="c1">// touch mode.</span>
-                    <span class="kt">boolean</span> <span class="n">focusTaken</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">isFocusable</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">isFocusableInTouchMode</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isFocused</span><span class="o">())</span> <span class="o">{</span>
-                        <span class="n">focusTaken</span> <span class="o">=</span> <span class="n">requestFocus</span><span class="o">();</span>
-                    <span class="o">}</span>
+                    if (prepressed) {
+                        // The button is being released before we actually
+                        // showed it as pressed.  Make it show the pressed
+                        // state now (before scheduling the click) to ensure
+                        // the user sees it.
+                        setPressed(true, x, y);
+                    }
 
-                    <span class="k">if</span> <span class="o">(</span><span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// The button is being released before we actually</span>
-                        <span class="c1">// showed it as pressed.  Make it show the pressed</span>
-                        <span class="c1">// state now (before scheduling the click) to ensure</span>
-                        <span class="c1">// the user sees it.</span>
-                        <span class="n">setPressed</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-                    <span class="o">}</span>
+                    if (!mHasPerformedLongPress &amp;&amp; !mIgnoreNextUpEvent) {
+                        // This is a tap, so remove the longpress check
+                        removeLongPressCallback();
 
-                    <span class="k">if</span> <span class="o">(!</span><span class="n">mHasPerformedLongPress</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">mIgnoreNextUpEvent</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// This is a tap, so remove the longpress check</span>
-                        <span class="n">removeLongPressCallback</span><span class="o">();</span>
+                        // Only perform take click actions if we were in the pressed state
+                        if (!focusTaken) {
+                            // Use a Runnable and post this rather than calling
+                            // performClick directly. This lets other visual state
+                            // of the view update before click actions start.
+                            if (mPerformClick == null) {
+                                mPerformClick = new PerformClick();
+                            }
+                            if (!post(mPerformClick)) {
+                                performClick();
+                            }
+                        }
+                    }
 
-                        <span class="c1">// Only perform take click actions if we were in the pressed state</span>
-                        <span class="k">if</span> <span class="o">(!</span><span class="n">focusTaken</span><span class="o">)</span> <span class="o">{</span>
-                            <span class="c1">// Use a Runnable and post this rather than calling</span>
-                            <span class="c1">// performClick directly. This lets other visual state</span>
-                            <span class="c1">// of the view update before click actions start.</span>
-                            <span class="k">if</span> <span class="o">(</span><span class="n">mPerformClick</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                                <span class="n">mPerformClick</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PerformClick</span><span class="o">();</span>
-                            <span class="o">}</span>
-                            <span class="k">if</span> <span class="o">(!</span><span class="n">post</span><span class="o">(</span><span class="n">mPerformClick</span><span class="o">))</span> <span class="o">{</span>
-                                <span class="n">performClick</span><span class="o">();</span>
-                            <span class="o">}</span>
-                        <span class="o">}</span>
-                    <span class="o">}</span>
+                    if (mUnsetPressedState == null) {
+                        mUnsetPressedState = new UnsetPressedState();
+                    }
 
-                    <span class="k">if</span> <span class="o">(</span><span class="n">mUnsetPressedState</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">mUnsetPressedState</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnsetPressedState</span><span class="o">();</span>
-                    <span class="o">}</span>
+                    if (prepressed) {
+                        postDelayed(mUnsetPressedState,
+                                ViewConfiguration.getPressedStateDuration());
+                    } else if (!post(mUnsetPressedState)) {
+                        // If the post failed, unpress right now
+                        mUnsetPressedState.run();
+                    }
 
-                    <span class="k">if</span> <span class="o">(</span><span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">postDelayed</span><span class="o">(</span><span class="n">mUnsetPressedState</span><span class="o">,</span>
-                                <span class="n">ViewConfiguration</span><span class="o">.</span><span class="na">getPressedStateDuration</span><span class="o">());</span>
-                    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">post</span><span class="o">(</span><span class="n">mUnsetPressedState</span><span class="o">))</span> <span class="o">{</span>
-                        <span class="c1">// If the post failed, unpress right now</span>
-                        <span class="n">mUnsetPressedState</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
-                    <span class="o">}</span>
+                    removeTapCallback();
+                }
+                mIgnoreNextUpEvent = false;
+                break;
 
-                    <span class="n">removeTapCallback</span><span class="o">();</span>
-                <span class="o">}</span>
-                <span class="n">mIgnoreNextUpEvent</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="k">break</span><span class="o">;</span>
+            case MotionEvent.ACTION_DOWN:
+                if (event.getSource() == InputDevice.SOURCE_TOUCHSCREEN) {
+                    mPrivateFlags3 |= PFLAG3_FINGER_DOWN;
+                }
+                mHasPerformedLongPress = false;
 
-            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">:</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getSource</span><span class="o">()</span> <span class="o">==</span> <span class="n">InputDevice</span><span class="o">.</span><span class="na">SOURCE_TOUCHSCREEN</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">mPrivateFlags3</span> <span class="o">|=</span> <span class="n">PFLAG3_FINGER_DOWN</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="n">mHasPerformedLongPress</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                if (!clickable) {
+                    checkForLongClick(0, x, y);
+                    break;
+                }
 
-                <span class="k">if</span> <span class="o">(!</span><span class="n">clickable</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">checkForLongClick</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-                    <span class="k">break</span><span class="o">;</span>
-                <span class="o">}</span>
+                if (performButtonActionOnTouchDown(event)) {
+                    break;
+                }
 
-                <span class="k">if</span> <span class="o">(</span><span class="n">performButtonActionOnTouchDown</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
-                    <span class="k">break</span><span class="o">;</span>
-                <span class="o">}</span>
+                // Walk up the hierarchy to determine if we're inside a scrolling container.
+                boolean isInScrollingContainer = isInScrollingContainer();
 
-                <span class="c1">// Walk up the hierarchy to determine if we&#39;re inside a scrolling container.</span>
-                <span class="kt">boolean</span> <span class="n">isInScrollingContainer</span> <span class="o">=</span> <span class="n">isInScrollingContainer</span><span class="o">();</span>
+                // For views inside a scrolling container, delay the pressed feedback for
+                // a short period in case this is a scroll.
+                if (isInScrollingContainer) {
+                    mPrivateFlags |= PFLAG_PREPRESSED;
+                    if (mPendingCheckForTap == null) {
+                        mPendingCheckForTap = new CheckForTap();
+                    }
+                    mPendingCheckForTap.x = event.getX();
+                    mPendingCheckForTap.y = event.getY();
+                    postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());
+                } else {
+                    // Not inside a scrolling container, so show the feedback right away
+                    setPressed(true, x, y);
+                    checkForLongClick(0, x, y);
+                }
+                break;
 
-                <span class="c1">// For views inside a scrolling container, delay the pressed feedback for</span>
-                <span class="c1">// a short period in case this is a scroll.</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">isInScrollingContainer</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">mPrivateFlags</span> <span class="o">|=</span> <span class="n">PFLAG_PREPRESSED</span><span class="o">;</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">mPendingCheckForTap</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">mPendingCheckForTap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CheckForTap</span><span class="o">();</span>
-                    <span class="o">}</span>
-                    <span class="n">mPendingCheckForTap</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
-                    <span class="n">mPendingCheckForTap</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
-                    <span class="n">postDelayed</span><span class="o">(</span><span class="n">mPendingCheckForTap</span><span class="o">,</span> <span class="n">ViewConfiguration</span><span class="o">.</span><span class="na">getTapTimeout</span><span class="o">());</span>
-                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                    <span class="c1">// Not inside a scrolling container, so show the feedback right away</span>
-                    <span class="n">setPressed</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-                    <span class="n">checkForLongClick</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-                <span class="o">}</span>
-                <span class="k">break</span><span class="o">;</span>
+            case MotionEvent.ACTION_CANCEL:
+                if (clickable) {
+                    setPressed(false);
+                }
+                removeTapCallback();
+                removeLongPressCallback();
+                mInContextButtonPress = false;
+                mHasPerformedLongPress = false;
+                mIgnoreNextUpEvent = false;
+                mPrivateFlags3 &amp;= ~PFLAG3_FINGER_DOWN;
+                break;
 
-            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_CANCEL</span><span class="o">:</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">clickable</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">setPressed</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-                <span class="o">}</span>
-                <span class="n">removeTapCallback</span><span class="o">();</span>
-                <span class="n">removeLongPressCallback</span><span class="o">();</span>
-                <span class="n">mInContextButtonPress</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="n">mHasPerformedLongPress</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="n">mIgnoreNextUpEvent</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="n">mPrivateFlags3</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PFLAG3_FINGER_DOWN</span><span class="o">;</span>
-                <span class="k">break</span><span class="o">;</span>
+            case MotionEvent.ACTION_MOVE:
+                if (clickable) {
+                    drawableHotspotChanged(x, y);
+                }
 
-            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_MOVE</span><span class="o">:</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">clickable</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">drawableHotspotChanged</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
-                <span class="o">}</span>
+                // Be lenient about moving outside of buttons
+                if (!pointInView(x, y, mTouchSlop)) {
+                    // Outside button
+                    // Remove any future long press/tap checks
+                    removeTapCallback();
+                    removeLongPressCallback();
+                    if ((mPrivateFlags &amp; PFLAG_PRESSED) != 0) {
+                        setPressed(false);
+                    }
+                    mPrivateFlags3 &amp;= ~PFLAG3_FINGER_DOWN;
+                }
+                break;
+            }
+        return true;
+    }
+    return false;
+}</code></pre>
 
-                <span class="c1">// Be lenient about moving outside of buttons</span>
-                <span class="k">if</span> <span class="o">(!</span><span class="n">pointInView</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">mTouchSlop</span><span class="o">))</span> <span class="o">{</span>
-                    <span class="c1">// Outside button</span>
-                    <span class="c1">// Remove any future long press/tap checks</span>
-                    <span class="n">removeTapCallback</span><span class="o">();</span>
-                    <span class="n">removeLongPressCallback</span><span class="o">();</span>
-                    <span class="k">if</span> <span class="o">((</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">setPressed</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-                    <span class="o">}</span>
-                    <span class="n">mPrivateFlags3</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="n">PFLAG3_FINGER_DOWN</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>事件分发的一些总结:</p>
+<p> 事件分发的一些总结 :</p>
 <ol>
-<li><code>ACTION_DOWN</code> 是一个<strong>特殊</strong>的事件. 如果<code>View</code>只消耗了<code>ACTION_DOWN</code>事件(<strong>返回 true</strong>), 那么序列里接下来的事件全都交给该 <code>View</code> 来消耗.</li>
+<li><code>ACTION_DOWN</code> 是一个 <strong> 特殊 </strong> 的事件 . 如果 <code>View</code> 只消耗了 <code>ACTION_DOWN</code> 事件 (<strong> 返回 true</strong>), 那么序列里接下来的事件全都交给该 <code>View</code> 来消耗 .</li>
 </ol>
-<p>如果<code>View</code>没有消耗掉接下来比如<code>ACTION_MOVE</code>, <code>ACTION_UP</code>之类的事件(<strong>返回<code>false</code></strong>), 那这些事件也不会回退给上一层父<code>ViewGroup</code>, 这些事件便会消失</p>
+<p> 如果 <code>View</code> 没有消耗掉接下来比如 <code>ACTION_MOVE</code>, <code>ACTION_UP</code> 之类的事件 (<strong> 返回 <code>false</code></strong>), 那这些事件也不会回退给上一层父 <code>ViewGroup</code>, 这些事件便会消失 </p>
 <ol>
-<li>如果某个<code>View</code>没有消耗掉<code>ACTION_DOWN</code>事件(返回了<code>false</code>), 那么同一个序列中的其他事件就不会再交给这个<code>View</code>了. 所有的事件包括第一个<code>ACTION_DOWN</code>都会被一层一层回退, 如果一直没有<code>View/ViewGroup</code>消耗掉, 最终会回退到<code>Activity</code>. 但在这一层层中, 我们可以检测到第一次的<code>ACTION_DOWN</code>调用, 然后决定是否要消耗事件序列. 原因同 <strong>1</strong></li>
+<li> 如果某个 <code>View</code> 没有消耗掉 <code>ACTION_DOWN</code> 事件 ( 返回了 <code>false</code>), 那么同一个序列中的其他事件就不会再交给这个 <code>View</code> 了 . 所有的事件包括第一个 <code>ACTION_DOWN</code> 都会被一层一层回退 , 如果一直没有 <code>View/ViewGroup</code> 消耗掉 , 最终会回退到 <code>Activity</code>. 但在这一层层中 , 我们可以检测到第一次的 <code>ACTION_DOWN</code> 调用 , 然后决定是否要消耗事件序列 . 原因同 <strong>1</strong></li>
 </ol>
 <blockquote>
-<p>一种特殊情况的举例: 
-正常情况下, 一个事件序列只能被一个 <code>View</code> 拦截消耗, 但如果最后接收事件的 <code>View</code> 是不可<code>clickable</code>(包括单击, 长按), 那这个 <code>View</code> 只能在 <code>onTouch</code> (如果调用<code>View#setOnTouchListener</code>设置了的话)捕获到, 然后会把这个序列事件(包括 <code>ACTION_DOWN</code>)回退给父 <code>ViewGroup</code>, 这个也证实第 1 点</p>
+<p> 一种特殊情况的举例 : 
+正常情况下 , 一个事件序列只能被一个 <code>View</code> 拦截消耗 , 但如果最后接收事件的 <code>View</code> 是不可 <code>clickable</code>( 包括单击 , 长按 ), 那这个 <code>View</code> 只能在 <code>onTouch</code> ( 如果调用 <code>View#setOnTouchListener</code> 设置了的话 ) 捕获到 , 然后会把这个序列事件 ( 包括 <code>ACTION_DOWN</code>) 回退给父 <code>ViewGroup</code>, 这个也证实第 1 点 </p>
 </blockquote>
 <ol>
-<li><code>View</code> 没有 <code>onInterceptTouchEvent</code> 方法的, 一但有事件传给它, 在没有设置<code>setTouchEventListener</code> 或者该方法里的 <code>onTouch</code> 返回 <code>false</code> 时, 会调用 <code>onTouchEvent</code> 方法</li>
-<li><code>view</code>如果不是<code>clickable</code>的, 默认情况下是不能消耗事件的, 非<code>clickable</code>的<code>view</code>可以设置<code>setTouchEventListener</code>来返回<code>true</code>截断被消耗事件</li>
-<li><code>View</code> 的 <code>enable</code> 属性并不影响 <code>onTouchEvent</code> 的默认返回值(<code>true</code>), 只有<code>clickable</code>才是</li>
-<li><code>onClick</code> 调用发生的前提是 <code>view</code> 是 <code>clickable</code>, 并且在它的<code>View#onTouchEvent</code> 消耗了 <code>ACTION_DOWN</code> 和 <code>ACTION_UP</code> 事件, 如果这其中一个被 <code>setTouchEventListener</code> 拦截消耗了, <code>click</code> 事件不会被调用 </li>
-<li><code>ViewGroup#requestDisallowInterceptTouchEvent</code>可以请求不拦截<code>ACTION_DOWN</code>以外的事件</li>
+<li><code>View</code> 没有 <code>onInterceptTouchEvent</code> 方法的 , 一但有事件传给它 , 在没有设置 <code>setTouchEventListener</code> 或者该方法里的 <code>onTouch</code> 返回 <code>false</code> 时 , 会调用 <code>onTouchEvent</code> 方法 </li>
+<li><code>view</code> 如果不是 <code>clickable</code> 的 , 默认情况下是不能消耗事件的 , 非 <code>clickable</code> 的 <code>view</code> 可以设置 <code>setTouchEventListener</code> 来返回 <code>true</code> 截断被消耗事件 </li>
+<li><code>View</code> 的 <code>enable</code> 属性并不影响 <code>onTouchEvent</code> 的默认返回值 (<code>true</code>), 只有 <code>clickable</code> 才是 </li>
+<li><code>onClick</code> 调用发生的前提是 <code>view</code> 是 <code>clickable</code>, 并且在它的 <code>View#onTouchEvent</code> 消耗了 <code>ACTION_DOWN</code> 和 <code>ACTION_UP</code> 事件 , 如果这其中一个被 <code>setTouchEventListener</code> 拦截消耗了 , <code>click</code> 事件不会被调用 </li>
+<li><code>ViewGroup#requestDisallowInterceptTouchEvent</code> 可以请求不拦截 <code>ACTION_DOWN</code> 以外的事件 </li>
 </ol>
 <p><strong>Reference</strong>:</p>
 <ol>
 <li><a href="http://blog.csdn.net/yanbober/article/details/50419117">http://blog.csdn.net/yanbober/article/details/50419117</a></li>
 <li><a href="https://juejin.im/entry/571a591a2e958a006be9f473">https://juejin.im/entry/571a591a2e958a006be9f473</a></li>
 <li><a href="http://blog.csdn.net/carson_ho/article/details/54136311">http://blog.csdn.net/carson_ho/article/details/54136311</a></li>
-<li>&lt;<Android开发艺术探索>&gt;</li>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
 </ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/viewshi-jian.html">view事件</a>
-      <a href="./tag/viewzuo-biao.html">view坐标</a>
-      <a href="./tag/viewhua-dong.html">view滑动</a>
-      <a href="./tag/viewhong-mo.html">view触摸</a>
-    </p>
-  </div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=View 事件体系&amp;url=./view-shi-jian-ti-xi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./view-shi-jian-ti-xi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./view-shi-jian-ti-xi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/viewshi-jian.html">view事件</a><a href="./tag/viewzuo-biao.html">view坐标</a><a href="./tag/viewhua-dong.html">view滑动</a><a href="./tag/viewhong-mo.html">view触摸</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

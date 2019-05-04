@@ -1,46 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>数据结构(Python描述) 第 7 章 图</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html" rel="canonical" />
+
+    <meta name="description" content="1. 概念 , 性质 , 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合 , E 是顶点的边 , 也是顶点之间的相互直接联系 图分为有向图 , 无向图 . 根据边的关系类型来分 邻接点 : 无向图中 , 相互连接起来的就叫邻接点 ,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="数据结构">
+    <meta name="tags" content="图">
+    <meta name="tags" content="python">
+    <meta name="tags" content="python数据结构">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. 概念, 性质, 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合, E 是顶点的边, 也是顶点之间的相互直接联系 图分为有向图, 无向图. 根据边的关系类型来分 邻接点: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 邻接边 顶点的 度: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有出度和入度之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量 路径长度: 点 a 到点 b …" />
-<meta name="keywords" content="数据结构, 图, python, python数据结构">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="数据结构(Python描述) 第 7 章 图"/>
-<meta property="og:description" content="1. 概念, 性质, 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合, E 是顶点的边, 也是顶点之间的相互直接联系 图分为有向图, 无向图. 根据边的关系类型来分 邻接点: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 邻接边 顶点的 度: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有出度和入度之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量 路径长度: 点 a 到点 b …"/>
+<meta property="og:description" content="1. 概念 , 性质 , 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合 , E 是顶点的边 , 也是顶点之间的相互直接联系 图分为有向图 , 无向图 . 根据边的关系类型来分 邻接点 : 无向图中 , 相互连接起来的就叫邻接点 ,..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html"/>
 <meta property="og:type" content="article"/>
@@ -52,217 +84,253 @@
 <meta property="article:tag" content="图"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="python数据结构"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; 数据结构(Python描述) 第 7 章 图</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu">数据结构(Python描述) 第 7 章 图</h1>
-    <p>
-      Posted on Sun 29 July 2018 in <a href="./category/data-structure-algorithms.html">Data Structure Algorithms</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="1">1. 概念, 性质, 实现</h4>
-<h5 id="11">1.1 定义</h5>
-<p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
-<p>图分为有向图, 无向图. 根据边的关系类型来分</p>
-<ul>
-<li><strong>邻接点</strong>: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 <strong>邻接边</strong></li>
-<li>顶点的 <strong>度</strong>: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有<strong>出度</strong>和<strong>入度</strong>之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量</li>
-<li><strong>路径长度</strong>: 点 a 到点 b 的边的条数总和</li>
-<li><strong>回路</strong>: 起点和终点是相同的路径</li>
-<li><strong>简单回路</strong>: 回路里除起点和终点相同, 其他点都不相同</li>
-<li><strong>简单路径</strong>: 不包含回路的路径</li>
-<li><strong>连通</strong>: 存在一条路径使得顶点 x 可以到达顶点 y, 则叫 x 到 y 是连通的. 注意到, 在有向图中, x -&gt; y 连通, 并不意味 y -&gt; x 也是连通的</li>
-</ul>
-<h4 id="12">1.2 一些图有名字的图</h4>
-<ol>
-<li>
-<p><strong>有根图</strong>: 图中至少存在一个顶点 v, 从顶点 v 能到图中的任意一个顶点, 意思顶点 v 和任意一个点都是连通的(<strong>注意边通不等于邻接</strong>). 这个顶点 v 就叫图的 <strong>根</strong>. <em>"至少"</em> 两个字说明一个有根图中可能存在许多个根</p>
-</li>
-<li>
-<p><strong>完全图</strong>: 任意两个顶点之间都互为邻接点的图. 
-   * n 个顶点的无向完全图有 <code>n * (n - 1) / 2</code> 条边
-   * n 个顶点的有向完全图有 <code>n * (n - 1)</code> 条边</p>
-</li>
-<li>
-<p><strong>连通图</strong>: 连通图指的是对于图中的任意两个顶点x, y, 这两顶点都是连通的. 对于有向图和无向图连通图可以具体些. 在无向图中称为, <strong>连通无向图</strong>, 在有向图中称为, <strong>强连通有向图</strong>.  在强连通的有向图中需要注意的是, 两顶点的连通的路径是有可能不一样的, x -&gt; y 可能是直接的, y -&gt; x 就有可能绕路间接连通. 而对于无向图, 如果不存在回路的话, 路径是固定的. 这从看, 只有完全图一定是连通的, 反过就不一定了</p>
-</li>
-</ol>
-<blockquote>
-<p>强连通指是有向图, 无向图一般叫连通</p>
-</blockquote>
-<ol>
-<li><strong>最小连通图</strong>: 指的是去掉任意一条边, 图不再是连通图</li>
-</ol>
-<ul>
-<li>包含 <code>n</code> 个顶点的最小连通无向图有 <code>n -1</code>条边</li>
-</ul>
-<ol>
-<li><strong>最小根图</strong>: 指的是去掉任意一条边, 图不再是有根图 </li>
-</ol>
-<ul>
-<li>包含 <code>n</code> 个顶点的最小根图恰好包含 <code>n - 1</code> 条边</li>
-</ul>
-<ol>
-<li>
-<p><strong>子图</strong>: 对于图 G=(V, E) 和图 G'=(V', E'), 总是有 <code>V' ⊆ V</code> 而且 <code>E' ⊆ E</code>, G' 便叫做 G 的子图. 所以任意图也是自己的子图</p>
-</li>
-<li>
-<p><strong>连通子图</strong>: 一个图可能不是连通图, 但它的一些子图是连通图, 则叫这些子图为连通子图</p>
-</li>
-<li>
-<p><strong>极大连通子图(连通分量)</strong>: 图 G 中的连通子图 G' 里, 不能再多加一个顶点或去掉任一条边, 否则就会导致子图不能构成连通, 要点是<strong>不能再添加.</strong></p>
-</li>
-</ol>
-<ul>
-<li>这说明是 G' 取出的顶点不一定是最多的. 所以对于连通图来说, 连通分量就是它自己本身, 而对于非连通图来说, 有多种可能. </li>
-<li>而对于有向图来说, 称为<strong>极大强连通子图(强连通分量)</strong>, 一个强连通图并不一定等于其本身</li>
-</ul>
-<ol>
-<li><strong>带权图</strong>: 图中的每条边都有一个权值</li>
-</ol>
-<h5 id="12_1">1.2 图的表现形式</h5>
-<p>一般用两种形式来表现图, 一是邻接矩阵, 二是邻接表</p>
-<ul>
-<li><strong>邻接矩阵</strong>: 一个二维的数组, 图中的每一个元素表示其对应的顶点是否邻接. 如果是一个带权的邻接矩阵图, 一般我们会用一个无穷大来表示其不邻接. 然后可以用 0 来表示自身到自身是邻接的. 邻接矩阵的缺点就是占空间, 但其某个点到某个点是否为邻接是 <code>O(1)</code>, 因为是数组实现</li>
-<li><strong>邻接表</strong>: 用一个数组来记录所有的顶点, 然后这个数组元素里的顶点都有一个指针指向一个自己邻接顶点集合, 这个集合可以用数组或者用链表来实现. 集合中的邻接点不同的位置会导致我们在遍历图时有不同的顺序. 邻接表就是省空间, 而且使用链表实现的邻接集合也是很容易添加新的邻接关系, 但在查找邻接关系所需时间就需要看具体实现</li>
-</ul>
-<h5 id="13-python">1.3 在 Python 中图数据的实现</h5>
-<ul>
-<li>用两个 <code>list</code> 或者两个 <code>tuple</code> 都能很好的实现邻接矩阵</li>
-<li>我们也可以自定义一种 <code>dict</code> 对象, <code>{i: j}</code> 来表示邻接映射关系, 这种实现可以让我们很容易在 <code>O(1)</code> 查找到邻接关系, 但由于内置 <code>dict</code> 是一个顺序储存的 hash 实现, 在大型图上我们需要的容量比图的实际容量大. 还有需要用到一些 python 小技巧, 我们并存储非邻接关系, 而是使用 <code>dict.get</code> 来默认返回一个 <code>None</code> 值, 这样所需空间可以小些</li>
-<li>利用 <code>bytearray</code> 或者内置库 <code>array</code> 来实现, 这两种都是可变类型</li>
-<li>自定义类型来实现邻接表, 比如集合以上方法</li>
-</ul>
-<h5 id="14">1.4 图的遍历算法</h5>
-<p>遍历指的是把图中的顶点都访问过一遍, 我们需要一个集合来记录已经访问过的顶点, 避免在回路中重复访问顶点, 另外一般图可能不是连通图, 我们可能需要重新选择一个起点来遍历图</p>
-<ul>
-<li><strong>深度优先</strong>: 总是先一条路径走到黑, 然后再从邻接点里选一个再走, 直到所有顶点都遍历
-  1. 选择一个顶点 v, 然后把 v 的邻接点都<strong>入栈</strong>, 标记 v 为遍历过
-  2. 从栈中弹出一个邻接点 v<sub>1</sub>, 然后再把这个点的邻接点入栈, 把弹出的顶点标记为遍历过
-  3. 重复上面的事, 每当弹出一个, 都表示遍历, 然后会总是找下层的邻接点
-  4. 循环终止的条件有两个: 一是栈中没有元素, 二是所有点都被标记为遍历过(<strong>如果图不是连通图的话, 就有跟 v 不连通的顶点, 连通图就不用判断这个了</strong>)</li>
-<li><strong>宽度优先</strong>: 总是先访问该顶点所有的邻接点, 再访问下一层
-  1. 选择一个顶点, 然后把 v 的所有邻接点都入队列
-  2. 依次访问队列头的顶点, 然后把该顶点的邻接点都加到队尾中
-  3. 循环上面操作直到队列中没有顶点为止(<strong>在连通图中</strong>)</li>
-</ul>
-<h4 id="2">2. 生成树</h4>
-<h5 id="21">2.1 什么是生成树</h5>
-<p>我们知道 1: 对于<strong>连通无向图/强连通图</strong>, 从任意一个顶点 v 都能到达其他任意顶点; 2: 对于<strong>有根有向图</strong>, 从根都可以到达任意一顶点. </p>
-<p><strong>生成树</strong>: 对于图 G 生成树是具有 G 所有的顶点, 并且边数<strong>最少</strong>的边通子图(因为条件是最少, 所以生成树不存在回路问题), 连通图的生成树可能有多个, 有根有向图只能是从根开始, 所以是一个</p>
-<ul>
-<li>生成树的边数: 如果 n 个顶点的连通图 G  生成树包含恰好 <code>n - 1</code> 条边, 所以在无向图的生成树就是其最小连通子图. 有向图的生成树中所有的边都位于从根到其他顶点的路径上</li>
-<li>包含 n 个顶点, m 个连通分量的无向图 G 的生成树恰好包含 <code>n - m</code> 条边</li>
-</ul>
-<h5 id="22">2.2 生成树构造方法</h5>
-<ul>
-<li>依据图的深度优先算法构造的<strong>尝试优先生成树</strong></li>
-<li>依据图的广度优先算法构造的<strong>广度优先生成树</strong></li>
-</ul>
-<h4 id="3">3. 最小生成树</h4>
-<p>如果图是一个带权图, 那么其不同的生成树, 权值可能就不一样. 最小权值合的生成树便叫<strong>最小生成树</strong></p>
-<p>显然, 最小生成树也可能惟一. 下面是几种构造最小生成树的算法</p>
-<h5 id="31-kruskal">3.1 Kruskal 算法</h5>
-<p>如果图 G = (V, E) 是一个包含 n 个顶点的连通图, 构造最小生成树步骤如下</p>
-<ol>
-<li>初始时我们取 G 的所有的 n 个顶点, 形成一个孤立的图 <code>T = (V, {})</code>. 这样每一个顶点都是自成一个连通分量</li>
-<li>将边集 E 中的按权值递增的顺序排序, 然后每次我们都取最小权值的边, 把这条边的对应关系填到 T 中</li>
-<li>不断重复上边的操作, 直到 T 中所有的顶点都包含在一个连通分量为止, 最后 T 便是一棵最小生成树</li>
-</ol>
-<blockquote>
-<p>用来判断的条件我们可以构造一个集合, 初始时集合中包含所有的顶点, 每次找到一个邻接关系时, 把对应的邻接点都集合中去掉, 当的集合为空时, 便得到了最小生成树. </p>
-<p>而如果邻接边全都遍历过了, 并且集合也不为空, 说明没有得到最小生成树, 原图是不连通的</p>
-</blockquote>
-<h5 id="32-prim">3.2 Prim 算法</h5>
-<p>Prim 算法主要使用了 MST 性质:</p>
-<blockquote>
-<p>设有 <code>G = (V, E)</code> 图, U 是 V 的一个真子集, 当有一对邻接点(也是边) <code>e = (u, v), u ⊆ U, v ⊆ (V -U)</code>, 也就是说, 这两个邻接点, 一个点 u 是在集合 U 中, 另一个点不在集合 U中, 并且点 v 是点 u 所有在集合 (V - U) 中邻接边可能会最小的. 这样的话, 图 G 必定有一棵包括边 e 的最小生成树</p>
-</blockquote>
-<ol>
-<li>从图 G 中选取任一顶点 v<sub>0</sub>, 放到集合 U 中, 这里 <code>U = {v&lt;sub&gt;0&lt;/sub&gt;}</code>, 设一个初始的边集合 <code>E&lt;sub&gt;T&lt;/sub&gt; = {}</code>, 那么有 <code>T = (U, E&lt;sub&gt;T&lt;/sub&gt;)</code> 是一棵树, 初始时只包含一个顶点</li>
-<li>查找所有一个商战在集合 U 里而一个端点在集合 V - U 中的边, 也就是对于一个顶点 v, 找到其所有的邻接点, 并且这些个邻接点还没有和顶点 v 一样, 存在在集合 U 中,  我们找出这些点后, 取其中权值最小的边得到邻接点 v', 把 v' 存放到集合 U 中, 把 v 和 v' 的邻接关系 <code>e = (v, v'), v ⊆ U, v' ⊆ (V -U)</code> 存放到第一步中的 <code>E&lt;sub&gt;T&lt;/sub&gt;</code> 重复上面的步骤直到 <code>U = V</code>, 也即是图 G 中的所有顶点 V 都一一存在于集合 U 中, 这时集合 <code>E&lt;sub&gt;T&lt;/sub&gt;</code> 里有 <code>n - 1</code> 条边, 子图 <code>T = (U, E&lt;sub&gt;T&lt;/sub&gt; )</code> 就是 G 的最小生成树</li>
-</ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/shu-ju-jie-gou.html">数据结构</a>
-      <a href="./tag/tu.html">图</a>
-      <a href="./tag/python.html">python</a>
-      <a href="./tag/pythonshu-ju-jie-gou.html">python数据结构</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "数据结构(Python描述) 第 7 章 图",
+  "headline": "数据结构(Python描述) 第 7 章 图",
+  "datePublished": "2018-07-29 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html",
+  "description": "1. 概念 , 性质 , 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合 , E 是顶点的边 , 也是顶点之间的相互直接联系 图分为有向图 , 无向图 . 根据边的关系类型来分 邻接点 : 无向图中 , 相互连接起来的就叫邻接点 ,..."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">数据结构(Python描述) 第 7 章 图</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Sun 29 July 2018">Sun 29 July 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1">1. 概念 , 性质 , 实现 </h4>
+<h5 id="11">1.1 定义 </h5>
+<p> 图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合 , <code>E</code> 是顶点的边 , 也是顶点之间的相互直接联系 </p>
+<p> 图分为有向图 , 无向图 . 根据边的关系类型来分 </p>
+<ul>
+<li><strong> 邻接点 </strong>: 无向图中 , 相互连接起来的就叫邻接点 , 有向图中 , x 指向 y, y 是 x 的邻接点 . 这个连接的边就叫 <strong> 邻接边 </strong></li>
+<li> 顶点的 <strong> 度 </strong>: 一个顶点有几条邻接边 , 叫做该点的度 . 对于无向图和邻接点是一个意思 . 不过对于有向图就不一样了 . 有 <strong> 出度 </strong> 和 <strong> 入度 </strong> 之分 . 意思是指出去的方向的邻接边数量 , 和指向自己的边的数量 </li>
+<li><strong> 路径长度 </strong>: 点 a 到点 b 的边的条数总和 </li>
+<li><strong> 回路 </strong>: 起点和终点是相同的路径 </li>
+<li><strong> 简单回路 </strong>: 回路里除起点和终点相同 , 其他点都不相同 </li>
+<li><strong> 简单路径 </strong>: 不包含回路的路径 </li>
+<li><strong> 连通 </strong>: 存在一条路径使得顶点 x 可以到达顶点 y, 则叫 x 到 y 是连通的 . 注意到 , 在有向图中 , x -&gt; y 连通 , 并不意味 y -&gt; x 也是连通的 </li>
+</ul>
+<h4 id="12">1.2 一些图有名字的图 </h4>
+<ol>
+<li>
+<p><strong> 有根图 </strong>: 图中至少存在一个顶点 v, 从顶点 v 能到图中的任意一个顶点 , 意思顶点 v 和任意一个点都是连通的 (<strong> 注意边通不等于邻接 </strong>). 这个顶点 v 就叫图的 <strong> 根 </strong>. <em>" 至少 "</em> 两个字说明一个有根图中可能存在许多个根 </p>
+</li>
+<li>
+<p><strong> 完全图 </strong>: 任意两个顶点之间都互为邻接点的图 . </p>
+</li>
+<li>n 个顶点的无向完全图有 <code>n * (n - 1) / 2</code> 条边 </li>
+<li>
+<p>n 个顶点的有向完全图有 <code>n * (n - 1)</code> 条边 </p>
+</li>
+<li>
+<p><strong> 连通图 </strong>: 连通图指的是对于图中的任意两个顶点 x, y, 这两顶点都是连通的 . 对于有向图和无向图连通图可以具体些 . 在无向图中称为 , <strong> 连通无向图 </strong>, 在有向图中称为 , <strong> 强连通有向图 </strong>.  在强连通的有向图中需要注意的是 , 两顶点的连通的路径是有可能不一样的 , x -&gt; y 可能是直接的 , y -&gt; x 就有可能绕路间接连通 . 而对于无向图 , 如果不存在回路的话 , 路径是固定的 . 这从看 , 只有完全图一定是连通的 , 反过就不一定了 </p>
+</li>
+</ol>
+<blockquote>
+<p> 强连通指是有向图 , 无向图一般叫连通 </p>
+</blockquote>
+<ol>
+<li>
+<p><strong> 最小连通图 </strong>: 指的是去掉任意一条边 , 图不再是连通图 </p>
+</li>
+<li>
+<p> 包含 <code>n</code> 个顶点的最小连通无向图有 <code>n -1</code> 条边 </p>
+</li>
+<li>
+<p><strong> 最小根图 </strong>: 指的是去掉任意一条边 , 图不再是有根图 </p>
+</li>
+<li>
+<p> 包含 <code>n</code> 个顶点的最小根图恰好包含 <code>n - 1</code> 条边 </p>
+</li>
+<li>
+<p><strong> 子图 </strong>: 对于图 G=(V, E) 和图 G'=(V', E'), 总是有 <code>V' ⊆ V</code> 而且 <code>E' ⊆ E</code>, G' 便叫做 G 的子图 . 所以任意图也是自己的子图 </p>
+</li>
+<li>
+<p><strong> 连通子图 </strong>: 一个图可能不是连通图 , 但它的一些子图是连通图 , 则叫这些子图为连通子图 </p>
+</li>
+<li>
+<p><strong> 极大连通子图 ( 连通分量 )</strong>: 图 G 中的连通子图 G' 里 , 不能再多加一个顶点或去掉任一条边 , 否则就会导致子图不能构成连通 , 要点是 <strong> 不能再添加 .</strong></p>
+</li>
+<li>
+<p> 这说明是 G' 取出的顶点不一定是最多的 . 所以对于连通图来说 , 连通分量就是它自己本身 , 而对于非连通图来说 , 有多种可能 . </p>
+</li>
+<li>
+<p> 而对于有向图来说 , 称为 <strong> 极大强连通子图 ( 强连通分量 )</strong>, 一个强连通图并不一定等于其本身 </p>
+</li>
+<li>
+<p><strong> 带权图 </strong>: 图中的每条边都有一个权值 </p>
+</li>
+</ol>
+<h5 id="12_1">1.2 图的表现形式 </h5>
+<p> 一般用两种形式来表现图 , 一是邻接矩阵 , 二是邻接表 </p>
+<ul>
+<li><strong> 邻接矩阵 </strong>: 一个二维的数组 , 图中的每一个元素表示其对应的顶点是否邻接 . 如果是一个带权的邻接矩阵图 , 一般我们会用一个无穷大来表示其不邻接 . 然后可以用 0 来表示自身到自身是邻接的 . 邻接矩阵的缺点就是占空间 , 但其某个点到某个点是否为邻接是 <code>O(1)</code>, 因为是数组实现 </li>
+<li><strong> 邻接表 </strong>: 用一个数组来记录所有的顶点 , 然后这个数组元素里的顶点都有一个指针指向一个自己邻接顶点集合 , 这个集合可以用数组或者用链表来实现 . 集合中的邻接点不同的位置会导致我们在遍历图时有不同的顺序 . 邻接表就是省空间 , 而且使用链表实现的邻接集合也是很容易添加新的邻接关系 , 但在查找邻接关系所需时间就需要看具体实现 </li>
+</ul>
+<h5 id="13-python">1.3 在 Python 中图数据的实现 </h5>
+<ul>
+<li> 用两个 <code>list</code> 或者两个 <code>tuple</code> 都能很好的实现邻接矩阵 </li>
+<li> 我们也可以自定义一种 <code>dict</code> 对象 , <code>{i: j}</code> 来表示邻接映射关系 , 这种实现可以让我们很容易在 <code>O(1)</code> 查找到邻接关系 , 但由于内置 <code>dict</code> 是一个顺序储存的 hash 实现 , 在大型图上我们需要的容量比图的实际容量大 . 还有需要用到一些 python 小技巧 , 我们并存储非邻接关系 , 而是使用 <code>dict.get</code> 来默认返回一个 <code>None</code> 值 , 这样所需空间可以小些 </li>
+<li> 利用 <code>bytearray</code> 或者内置库 <code>array</code> 来实现 , 这两种都是可变类型 </li>
+<li> 自定义类型来实现邻接表 , 比如集合以上方法 </li>
+</ul>
+<h5 id="14">1.4 图的遍历算法 </h5>
+<p> 遍历指的是把图中的顶点都访问过一遍 , 我们需要一个集合来记录已经访问过的顶点 , 避免在回路中重复访问顶点 , 另外一般图可能不是连通图 , 我们可能需要重新选择一个起点来遍历图 </p>
+<ul>
+<li><strong> 深度优先 </strong>: 总是先一条路径走到黑 , 然后再从邻接点里选一个再走 , 直到所有顶点都遍历 </li>
+<li> 选择一个顶点 v, 然后把 v 的邻接点都 <strong> 入栈 </strong>, 标记 v 为遍历过 </li>
+<li> 从栈中弹出一个邻接点 v<sub>1</sub>, 然后再把这个点的邻接点入栈 , 把弹出的顶点标记为遍历过 </li>
+<li> 重复上面的事 , 每当弹出一个 , 都表示遍历 , 然后会总是找下层的邻接点 </li>
+<li> 循环终止的条件有两个 : 一是栈中没有元素 , 二是所有点都被标记为遍历过 (<strong> 如果图不是连通图的话 , 就有跟 v 不连通的顶点 , 连通图就不用判断这个了 </strong>)</li>
+<li><strong> 宽度优先 </strong>: 总是先访问该顶点所有的邻接点 , 再访问下一层 </li>
+<li> 选择一个顶点 , 然后把 v 的所有邻接点都入队列 </li>
+<li> 依次访问队列头的顶点 , 然后把该顶点的邻接点都加到队尾中 </li>
+<li> 循环上面操作直到队列中没有顶点为止 (<strong> 在连通图中 </strong>)</li>
+</ul>
+<h4 id="2">2. 生成树 </h4>
+<h5 id="21">2.1 什么是生成树 </h5>
+<p> 我们知道 1: 对于 <strong> 连通无向图 / 强连通图 </strong>, 从任意一个顶点 v 都能到达其他任意顶点 ; 2: 对于 <strong> 有根有向图 </strong>, 从根都可以到达任意一顶点 . </p>
+<p><strong> 生成树 </strong>: 对于图 G 生成树是具有 G 所有的顶点 , 并且边数 <strong> 最少 </strong> 的边通子图 ( 因为条件是最少 , 所以生成树不存在回路问题 ), 连通图的生成树可能有多个 , 有根有向图只能是从根开始 , 所以是一个 </p>
+<ul>
+<li> 生成树的边数 : 如果 n 个顶点的连通图 G  生成树包含恰好 <code>n - 1</code> 条边 , 所以在无向图的生成树就是其最小连通子图 . 有向图的生成树中所有的边都位于从根到其他顶点的路径上 </li>
+<li> 包含 n 个顶点 , m 个连通分量的无向图 G 的生成树恰好包含 <code>n - m</code> 条边 </li>
+</ul>
+<h5 id="22">2.2 生成树构造方法 </h5>
+<ul>
+<li> 依据图的深度优先算法构造的 <strong> 尝试优先生成树 </strong></li>
+<li> 依据图的广度优先算法构造的 <strong> 广度优先生成树 </strong></li>
+</ul>
+<h4 id="3">3. 最小生成树 </h4>
+<p> 如果图是一个带权图 , 那么其不同的生成树 , 权值可能就不一样 . 最小权值合的生成树便叫 <strong> 最小生成树 </strong></p>
+<p> 显然 , 最小生成树也可能惟一 . 下面是几种构造最小生成树的算法 </p>
+<h5 id="31-kruskal">3.1 Kruskal 算法 </h5>
+<p> 如果图 G = (V, E) 是一个包含 n 个顶点的连通图 , 构造最小生成树步骤如下 </p>
+<ol>
+<li> 初始时我们取 G 的所有的 n 个顶点 , 形成一个孤立的图 <code>T = (V, {})</code>. 这样每一个顶点都是自成一个连通分量 </li>
+<li> 将边集 E 中的按权值递增的顺序排序 , 然后每次我们都取最小权值的边 , 把这条边的对应关系填到 T 中 </li>
+<li> 不断重复上边的操作 , 直到 T 中所有的顶点都包含在一个连通分量为止 , 最后 T 便是一棵最小生成树 </li>
+</ol>
+<blockquote>
+<p> 用来判断的条件我们可以构造一个集合 , 初始时集合中包含所有的顶点 , 每次找到一个邻接关系时 , 把对应的邻接点都集合中去掉 , 当的集合为空时 , 便得到了最小生成树 . </p>
+<p> 而如果邻接边全都遍历过了 , 并且集合也不为空 , 说明没有得到最小生成树 , 原图是不连通的 </p>
+</blockquote>
+<h5 id="32-prim">3.2 Prim 算法 </h5>
+<p>Prim 算法主要使用了 MST 性质 :</p>
+<blockquote>
+<p> 设有 <code>G = (V, E)</code> 图 , U 是 V 的一个真子集 , 当有一对邻接点 ( 也是边 ) <code>e = (u, v), u ⊆ U, v ⊆ (V -U)</code>, 也就是说 , 这两个邻接点 , 一个点 u 是在集合 U 中 , 另一个点不在集合 U 中 , 并且点 v 是点 u 所有在集合 (V - U) 中邻接边可能会最小的 . 这样的话 , 图 G 必定有一棵包括边 e 的最小生成树 </p>
+</blockquote>
+<ol>
+<li> 从图 G 中选取任一顶点 v<sub>0</sub>, 放到集合 U 中 , 这里 <code>U = {v&lt;sub&gt;0&lt;/sub&gt;}</code>, 设一个初始的边集合 <code>E&lt;sub&gt;T&lt;/sub&gt; = {}</code>, 那么有 <code>T = (U, E&lt;sub&gt;T&lt;/sub&gt;)</code> 是一棵树 , 初始时只包含一个顶点 </li>
+<li> 查找所有一个商战在集合 U 里而一个端点在集合 V - U 中的边 , 也就是对于一个顶点 v, 找到其所有的邻接点 , 并且这些个邻接点还没有和顶点 v 一样 , 存在在集合 U 中 ,  我们找出这些点后 , 取其中权值最小的边得到邻接点 v', 把 v' 存放到集合 U 中 , 把 v 和 v' 的邻接关系 <code>e = (v, v'), v ⊆ U, v' ⊆ (V -U)</code> 存放到第一步中的 <code>E&lt;sub&gt;T&lt;/sub&gt;</code> 重复上面的步骤直到 <code>U = V</code>, 也即是图 G 中的所有顶点 V 都一一存在于集合 U 中 , 这时集合 <code>E&lt;sub&gt;T&lt;/sub&gt;</code> 里有 <code>n - 1</code> 条边 , 子图 <code>T = (U, E&lt;sub&gt;T&lt;/sub&gt; )</code> 就是 G 的最小生成树 </li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=数据结构(Python描述) 第 7 章 图&amp;url=./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/shu-ju-jie-gou.html">数据结构</a><a href="./tag/tu.html">图</a><a href="./tag/python.html">python</a><a href="./tag/pythonshu-ju-jie-gou.html">python数据结构</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

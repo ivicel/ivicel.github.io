@@ -1,170 +1,167 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Ambertime - Tag AsyncTask</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="../" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+  <link href="../theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="../theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="../static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
 
 
+    <link href="../assets/css/prism.css" type="text/css" rel="stylesheet" />
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <link href="../assets/css/base.css" type="text/css" rel="stylesheet" />
 
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
 
-    <meta name="author" content="ivicel" />
-    <meta name="description" content="ivicel's thoughts and writings" />
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Ivicel's Ambertime"/>
-<meta property="og:description" content="ivicel's thoughts and writings"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content=".."/>
-<meta property="og:image" content="/images/favicon.ico">
+    <link href="../assets/css/base-control.css" type="text/css" rel="stylesheet" />
 
-  <title>Ivicel's Ambertime &ndash; Tag AsyncTask</title>
+
+    <link href="../assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
 </head>
-<body>
-  <aside>
-    <div>
-      <a href="..">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href="..">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="../" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Tag AsyncTask</h1>
+        <span class="blog-description">Posts: 2</span>
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+<div id="index" class="container">
+  <main class="content" role="main">
+    <div class="extra-pagination">
+<nav class="pagination" role="pagination">
+  <div class="inner">
+    <span class="pagination-info">Page 1 / 1</span>
+    <div class="clear"></div>
+  </div>
+</nav>
     </div>
 
+        <article class="post">
+        <div class="inner">
+            <header class="post-header">
+                <h2 class="post-title"><a href="../asynctaskji-zhi-fen-xi.html" rel="bookmark" title="Permalink to AsyncTask机制分析">AsyncTask机制分析</a>
+                </h2>
+                <span class="post-meta">
+                        <a href="../author/ivicel.html">Ivicel</a>
+                     | <time datetime="Tue 10 April 2018">Tue 10 April 2018</time>
+                </span>
+                <div class="clear"></div>
+            </header>
+                <section class="post-excerpt">
+                    <p>
+                        1. AsyncTask 的使用 AsyncTask 为抽象类 , 继承该类至少要重写 doInBackground(Params...params) 方法 . 除了该方法是在 非主程 中执行外 , 其他的如 onPreExecute() onProgressUpdate(Progress...progresses) onPostExecute(Result result) onCancel() 都是在主线程中执行 . AsyncTask 另外可以设置三个类型参数 ,...
+                    </p>
+                </section>
+            </div>
+        </article>
+        <article class="post">
+        <div class="inner">
+            <header class="post-header">
+                <h2 class="post-title"><a href="../javaxian-cheng-ji-xian-cheng-chi.html" rel="bookmark" title="Permalink to Java线程及线程池">Java线程及线程池</a>
+                </h2>
+                <span class="post-meta">
+                        <a href="../author/ivicel.html">Ivicel</a>
+                     | <time datetime="Tue 10 April 2018">Tue 10 April 2018</time>
+                </span>
+                <div class="clear"></div>
+            </header>
+                <section class="post-excerpt">
+                    <p>
+                        1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors...
+                    </p>
+                </section>
+            </div>
+        </article>
 
-  </aside>
-  <main>
-
-    <nav>
-      <a href="..">Home</a>
-
-
-
-    </nav>
-
-
-
-<article>
-  <header>
-    <h2><a href="../asynctaskji-zhi-fen-xi.html#asynctaskji-zhi-fen-xi">AsyncTask机制分析</a></h2>
-    <p>
-      Posted on Tue 10 April 2018 in <a href="../category/android.html">Android</a>
-
-          &#8226; Tagged with
-              <a href="../tag/xian-cheng.html">线程</a>,              <a href="../tag/xian-cheng-chi.html">线程池</a>,              <a href="../tag/asynctask.html">AsyncTask</a>
-    </p>
-  </header>
-  <div>
-      <h3 id="1-asynctask">1. AsyncTask 的使用</h3>
-<p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
-<p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
-<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">DownloadTask</span> <span class="kd">extends …</span></pre></div>
-      <br>
-      <a class="btn" href="../asynctaskji-zhi-fen-xi.html#asynctaskji-zhi-fen-xi">Continue reading</a>
+<nav class="pagination" role="pagination">
+  <div class="inner">
+    <span class="pagination-info">Page 1 / 1</span>
+    <div class="clear"></div>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Java线程及线程池</a></h2>
-    <p>
-      Posted on Tue 10 April 2018 in <a href="../category/java.html">Java</a>
-
-          &#8226; Tagged with
-              <a href="../tag/xian-cheng.html">线程</a>,              <a href="../tag/xian-cheng-chi.html">线程池</a>,              <a href="../tag/asynctask.html">AsyncTask</a>,              <a href="../tag/handler-thread.html">Handler Thread</a>
-    </p>
-  </header>
-  <div>
-      <h3 id="1-java">1. Java 线程池</h3>
-<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
-<p><img alt="java线程池框架" src="../images/java线程池框架.jpg" /></p>
-<ul>
-<li>Executor 接口定义了执行器 Runnable 执行方式</li>
-<li>ExecutorService 定义了线程具体接口</li>
-<li>ScheduledExecutorService 定义了定时执行线程的接口</li>
-<li>AbstractExecutorService 线程池的实现的抽象类</li>
-<li>ThreadPoolExecutor 线程池的具体实现类</li>
-<li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
-<li>Executors 线程池的辅助工具类</li>
-</ul>
-<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
-<ul>
-<li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
-<li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
-<li><code>newSingleThreadExecutor</code> 单一线程的线程池, 请求会被按队列顺序处理</li>
-<li><code>newScheduledThreadPool</code> 固定大小 …</li></ul>
-      <br>
-      <a class="btn" href="../javaxian-cheng-ji-xian-cheng-chi.html#javaxian-cheng-ji-xian-cheng-chi">Continue reading</a>
-  </div>
-</article>
-
-  <div class="pagination">
-  </div>
-
-
-
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
+</nav>
   </main>
+</div>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="../theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : "..",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="../assets/js/prism.js"></script>
 </body>
 </html>

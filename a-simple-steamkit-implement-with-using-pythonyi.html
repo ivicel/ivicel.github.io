@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>A Simple SteamKit implement with using Python(一)</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./a-simple-steamkit-implement-with-using-pythonyi.html" rel="canonical" />
+
+    <meta name="description" content="1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求 , 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="python">
+    <meta name="tags" content="steam">
+    <meta name="tags" content="steamkit">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge 我们随机生生成一个 256 位长度的密钥 session_key, 使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 RSA, padding 为 OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1) 这里可里选择只发送回 session_key(legacy mode), 或者回应质询 session_key + challenge, 发回后者表示在以后的通信中使用每次会生成一个 SHA1-HMAC. 收到服务的 session_key 确认, 结果为 EResult.OK 时 …" />
-<meta name="keywords" content="python, steam, steamkit">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="A Simple SteamKit implement with using Python(一)"/>
-<meta property="og:description" content="1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge 我们随机生生成一个 256 位长度的密钥 session_key, 使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 RSA, padding 为 OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1) 这里可里选择只发送回 session_key(legacy mode), 或者回应质询 session_key + challenge, 发回后者表示在以后的通信中使用每次会生成一个 SHA1-HMAC. 收到服务的 session_key 确认, 结果为 EResult.OK 时 …"/>
+<meta property="og:description" content="1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求 , 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./a-simple-steamkit-implement-with-using-pythonyi.html"/>
 <meta property="og:type" content="article"/>
@@ -51,152 +82,179 @@
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="steam"/>
 <meta property="article:tag" content="steamkit"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; A Simple SteamKit implement with using Python(一)</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "A Simple SteamKit implement with using Python(一)",
+  "headline": "A Simple SteamKit implement with using Python(一)",
+  "datePublished": "2018-07-18 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./a-simple-steamkit-implement-with-using-pythonyi.html",
+  "description": "1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求 , 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">A Simple SteamKit implement with using Python(一)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Wed 18 July 2018">Wed 18 July 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="a-simple-steamkit-implement-with-using-pythonyi">A Simple SteamKit implement with using Python(一)</h1>
-    <p>
-      Posted on Wed 18 July 2018 in <a href="./category/python.html">Python</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="1">1. 连接握手</h4>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1">1. 连接握手 </h4>
 <ol>
 <li>
-<p>与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
+<p> 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求 , 然后服务器会返回一个 <code>CHANNEL_ENCRYPT_REQUEST</code>, 这个消息包会带有一个 16 字节的 质询 <code>challenge</code></p>
 </li>
 <li>
-<p>我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
+<p> 我们随机生生成一个 256 位长度的密钥 <code>session_key</code>,  使用 steam 的公钥对密钥加密后再发回给服务器 , 加密方法为 <code>RSA</code>, padding 为 <code>OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1)</code> </p>
 </li>
 </ol>
 <blockquote>
-<p>这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
+<p> 这里可里选择只发送回 <code>session_key</code>(legacy mode), 或者回应质询 <code>session_key + challenge</code>, 发回后者表示在以后的通信中使用每次会生成一个 <code>SHA1-HMAC</code>. </p>
 </blockquote>
 <ol>
-<li>收到服务的 <code>session_key</code> 确认, 结果为 <code>EResult.OK</code> 时, 连接成功. 以后的通信会基于 <code>session_key</code> 加密</li>
+<li> 收到服务的 <code>session_key</code> 确认 , 结果为 <code>EResult.OK</code> 时 , 连接成功 . 以后的通信会基于 <code>session_key</code> 加密 </li>
 </ol>
 <blockquote>
-<p>如果我们启用了 <code>SHA1-HMAC</code> 消息认证, 那么在 <code>CBC</code> 模式使用的初始向量 <code>iv</code> 会有不同, 不是通过直接随机生成, 而是对明文生成 HMAC 后, 取其前 13 bytes, 再加上随机生成 3 bytes. 下面是发送 <code>HMAC</code> 时的步骤</p>
+<p> 如果我们启用了 <code>SHA1-HMAC</code> 消息认证 , 那么在 <code>CBC</code> 模式使用的初始向量 <code>iv</code> 会有不同 , 不是通过直接随机生成 , 而是对明文生成 HMAC 后 , 取其前 13 bytes, 再加上随机生成 3 bytes. 下面是发送 <code>HMAC</code> 时的步骤 </p>
 <ol>
-<li>随机生成 3 bytes <code>prefix</code>, 把这三个字节加到明文的前面, hash key 是 <code>session_key</code> 的前 16 bytes, 即 <code>hash_key = session_key[:16]</code>. 使用 <code>HMAC(hash_key=session[:16], hash_function=SHA1, message=prefix + need_to_encrypt_text)</code>, 生成的 <code>hmac_msg</code> 后, <code>iv = hmac_msg[:13] + prefix</code></li>
-<li>使用 <code>AES-256-ECB</code>, 加密 <code>iv</code>, 分组长度为 128 bits. 得到 <code>enc_iv</code>, 一共是 16个字节</li>
-<li>使用 <code>AES-256-CBC</code>, 加密 <code>need_to_encrypt_text</code>, 分组长度为 <code>128 bits</code>, 填充模式为 <code>PKCS7</code>.  得到 <code>enc_msg</code></li>
-<li>返回的 <code>enc_iv + env_msg</code> 即是加密完成的的消息体</li>
+<li> 随机生成 3 bytes <code>prefix</code>, 把这三个字节加到明文的前面 , hash key 是 <code>session_key</code> 的前 16 bytes, 即 <code>hash_key = session_key[:16]</code>. 使用 <code>HMAC(hash_key=session[:16], hash_function=SHA1, message=prefix + need_to_encrypt_text)</code>, 生成的 <code>hmac_msg</code> 后 , <code>iv = hmac_msg[:13] + prefix</code></li>
+<li> 使用 <code>AES-256-ECB</code>, 加密 <code>iv</code>, 分组长度为 128 bits. 得到 <code>enc_iv</code>, 一共是 16 个字节 </li>
+<li> 使用 <code>AES-256-CBC</code>, 加密 <code>need_to_encrypt_text</code>, 分组长度为 <code>128 bits</code>, 填充模式为 <code>PKCS7</code>.  得到 <code>enc_msg</code></li>
+<li> 返回的 <code>enc_iv + env_msg</code> 即是加密完成的的消息体 </li>
 </ol>
-<p>如果没有启用 <code>HMAC</code>, 即不发送 <code>challenge</code>, 在第一步中把 <code>iv</code> 换成随机生成的 16 字节即可.</p>
-<p>解密过程就是反向过程, 消息包的前 16 个字节是 <code>env_iv</code>, 剩下的是加密后 message 本体. 使用对应的加密方法进行解密即可</p>
+<p> 如果没有启用 <code>HMAC</code>, 即不发送 <code>challenge</code>, 在第一步中把 <code>iv</code> 换成随机生成的 16 字节即可 .</p>
+<p> 解密过程就是反向过程 , 消息包的前 16 个字节是 <code>env_iv</code>, 剩下的是加密后 message 本体 . 使用对应的加密方法进行解密即可 </p>
 </blockquote>
 <ol>
 <li>
-<p>初始的 CM Server IP 地址和端口 可以在 <code>steam_installed_directory/config/config.vdf</code> 找到, 在通信的过程, 服务器会发回新 CM IP 地址和端口</p>
+<p> 初始的 CM Server IP 地址和端口 可以在 <code>steam_installed_directory/config/config.vdf</code> 找到 , 在通信的过程 , 服务器会发回新 CM IP 地址和端口 </p>
 </li>
 <li>
-<p>steam 客户端保持一个 TCP/UDP 长连接, 用来与 CM Server 通信, 并且要定时发送一个 <strong>"heartbeat"</strong> 用来告诉 CM 不要断开连接</p>
+<p>steam 客户端保持一个 TCP/UDP 长连接 , 用来与 CM Server 通信 , 并且要定时发送一个 <strong>"heartbeat"</strong> 用来告诉 CM 不要断开连接 </p>
 </li>
 <li>
-<p>通信的数据结构主要为 <a href="https://developers.google.com/protocol-buffers/">Protocol Buffer v2</a>, 在 proto 外包了一层 header, header 里指明了是否为 proto buffer</p>
+<p> 通信的数据结构主要为 <a href="https://developers.google.com/protocol-buffers/">Protocol Buffer v2</a>, 在 proto 外包了一层 header, header 里指明了是否为 proto buffer</p>
 </li>
 </ol>
 <h4 id="2-protocol-bufffer">2. 了解 Protocol Bufffer</h4>
-<p>根据 protobuf 的 <a href="https://github.com/google/protobuf">文档</a>, 使用 protobuf 要三步走</p>
+<p> 根据 protobuf 的 <a href="https://github.com/google/protobuf"> 文档 </a>, 使用 protobuf 要三步走 </p>
 <ol>
-<li>定义 <code>.proto</code> 文件原型, steamdb 已经收集好了, 从 <a href="https://github.com/SteamDatabase/SteamTracking">SteamDB github</a> 下载, 另外这些都是定义都依赖 Google 定义的 <code>descriptor.proto</code>, 在 <a href="https://github.com/google/protobuf/blob/master/src/google/protobuf/descriptor.proto">这里</a> 可以下载到这个文件, 打包的编译器也带了这个</li>
+<li> 定义 <code>.proto</code> 文件原型 , steamdb 已经收集好了 , 从 <a href="https://github.com/SteamDatabase/SteamTracking">SteamDB github</a> 下载 , 另外这些都是定义都依赖 Google 定义的 <code>descriptor.proto</code>, 在 <a href="https://github.com/google/protobuf/blob/master/src/google/protobuf/descriptor.proto"> 这里 </a> 可以下载到这个文件 , 打包的编译器也带了这个 </li>
 </ol>
 <blockquote>
-<p>花 <a href="https://space.bilibili.com/423895/">5 分钟</a> 了解一下 protobufs 是如何 <a href="https://developers.google.com/protocol-buffers/docs/proto">定义</a></p>
+<p> 花 <a href="https://space.bilibili.com/423895/">5 分钟 </a> 了解一下 protobufs 是如何 <a href="https://developers.google.com/protocol-buffers/docs/proto"> 定义 </a></p>
 </blockquote>
 <ol>
-<li>使用 <code>protobuf</code> 编译器把 <code>.proto</code> 文件编译成对应语言文件, 编译器在 <a href="https://github.com/google/protobuf/releases">这里</a> 下载, 下载对应系统的版本即可, 带语言标签的是使用特定语言的实现源代码</li>
+<li> 使用 <code>protobuf</code> 编译器把 <code>.proto</code> 文件编译成对应语言文件 , 编译器在 <a href="https://github.com/google/protobuf/releases"> 这里 </a> 下载 , 下载对应系统的版本即可 , 带语言标签的是使用特定语言的实现源代码 </li>
 </ol>
 <blockquote>
-<p>花几分钟读下 <a href="https://developers.google.com/protocol-buffers/docs/pythontutorial">python tutorial</a></p>
+<p> 花几分钟读下 <a href="https://developers.google.com/protocol-buffers/docs/pythontutorial">python tutorial</a></p>
 </blockquote>
 <ol>
-<li>使用 Python protocol buffer API 读写, API 文档在 <a href="https://developers.google.com/protocol-buffers/docs/reference/python/">这里</a></li>
+<li> 使用 Python protocol buffer API 读写 , API 文档在 <a href="https://developers.google.com/protocol-buffers/docs/reference/python/"> 这里 </a></li>
 </ol>
 <h4 id="3-protobuf">3. 编译 protobuf</h4>
-<div class="codehilite"><pre><span></span><span class="c1"># project 目录</span>
-mkdir python-steamkit <span class="o">&amp;&amp;</span> <span class="nb">cd</span> python-steamkit
+<pre class="highlight"><code class="language-shell linenums"># project 目录
+mkdir python-steamkit &amp;&amp; cd python-steamkit
 python3 -m venv venv
-<span class="c1"># 用于加密和 protobuf 的依赖包</span>
+# 用于加密和 protobuf 的依赖包
 pip install cryptography protobuf
 
-<span class="c1"># Protobufs 目录定义主要的通信格式</span>
-<span class="c1"># 其他目录是对应的游戏通信格式</span>
+# Protobufs 目录定义主要的通信格式
+# 其他目录是对应的游戏通信格式
 git clone https://github.com/SteamDatabase/SteamTracking
-<span class="nb">cd</span> SteamTracking/Protobufs
+cd SteamTracking/Protobufs
 mv renderer/rendermessages.proto .
-<span class="c1"># 删掉重复定义</span>
+# 删掉重复定义
 rm -R steamdatagram_auth_messages.proto renderer
-<span class="c1"># 在每个 proto 文件的第一行加上 syntax = &quot;proto2&quot;; 语法定义避免编译警告</span>
-sed -s -i <span class="s1">&#39;1isyntax = &quot;proto2&quot;;&#39;</span> *.proto
-<span class="c1"># optinal 查看来是否所有 .proto 文件都有 proto2 语法定义了, 0 表示成功</span>
-<span class="nb">test</span> <span class="k">$(</span>find . -type f -name <span class="s1">&#39;*.proto&#39;</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="se">\</span>
-    <span class="k">$(</span>grep -E <span class="s1">&#39;^syntax\s?=\s?&quot;proto2&quot;;$&#39;</span> -R . <span class="p">|</span> wc -l<span class="k">)</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
+# 在每个 proto 文件的第一行加上 syntax = "proto2"; 语法定义避免编译警告
+sed -s -i '1isyntax = "proto2";' *.proto
+# optinal 查看来是否所有 .proto 文件都有 proto2 语法定义了 , 0 表示成功
+test $(find . -type f -name '*.proto' | wc -l) -eq \
+    $(grep -E '^syntax\s?=\s?"proto2";$' -R . | wc -l); echo $?
 
-<span class="c1"># 新建目录来存放编译后的 .py 文件</span>
+# 新建目录来存放编译后的 .py 文件
 mkdir protobufs
-<span class="c1"># 如果文件名了带有点号, 比如 a.b.proto, 编译后会生成 a/b_pb.py, 我们不需要独立的目录</span>
-<span class="c1"># 把文件的中点号换成下划线 &quot;_&quot;, 文件内的依赖路径相应的也需要更改</span>
-<span class="k">for</span> n in <span class="sb">`</span>ls<span class="sb">`</span><span class="p">;</span> <span class="k">do</span><span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$n</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/\./_/g; s/_proto$/\.proto/g&#39;</span><span class="k">)</span><span class="p">;</span> mv <span class="nv">$n</span> <span class="nv">$name</span><span class="p">;</span> <span class="k">done</span>
-sed -E -i <span class="s1">&#39;/^import/s/\./_/; /^import/s/_proto/\.proto/&#39;</span> *.proto
+# 如果文件名了带有点号 , 比如 a.b.proto, 编译后会生成 a/b_pb.py, 我们不需要独立的目录
+# 把文件的中点号换成下划线 "_", 文件内的依赖路径相应的也需要更改
+for n in `ls`; do; name=$(echo $n | sed -E 's/\./_/g; s/_proto$/\.proto/g'); mv $n $name; done
+sed -E -i '/^import/s/\./_/; /^import/s/_proto/\.proto/' *.proto
 
-<span class="c1"># 下载的 protoc 编译包里包含了 descriptor.proto, 指定依赖路径即可</span>
-protoc --python_out<span class="o">=</span>./protobufs -I. -I protoc/include *.proto
-<span class="c1"># 将 steam_proto 打包成 python package</span>
+# 下载的 protoc 编译包里包含了 descriptor.proto, 指定依赖路径即可
+protoc --python_out=./protobufs -I. -I protoc/include *.proto
+# 将 steam_proto 打包成 python package
 touch protobufs/__init__.py
 mv protobuf ../../
-sed -E <span class="s1">&#39;/^import\s+&quot;[^\/]*$/s/&quot;(.*)&quot;;$/&quot;steam\/protobufs\/\1&quot;;/&#39;</span> steam/protobufs/*.proto -i
-</pre></div>
+sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs/*.proto -i</code></pre>
 
-
-<h4 id="4">4. 通信消息的格式</h4>
-<p>通信是按 <strong>Little endian</strong> 传输的, 通信包的定义主要有三种情况:</p>
+<h4 id="4">4. 通信消息的格式 </h4>
+<p> 通信是按 <strong>Little endian</strong> 传输的 , 通信包的定义主要有三种情况 :</p>
 <ol>
-<li>前三个握手包, 用来生成加密的通信, 有自己特定的定义</li>
-<li>protobuf 包, 包含一个 protobuf 消息</li>
-<li>multi message, (1) 根据 <code>CMsgMulti.size_unzipped</code> 是否 <strong>大于 0</strong> 来判断 <code>CMsgMulti.message_body</code> 是否启用了  gzip 压缩. (2) 如果是则要先先把 <code>message_body</code> 解压, 然后再解读里</li>
+<li> 前三个握手包 , 用来生成加密的通信 , 有自己特定的定义 </li>
+<li>protobuf 包 , 包含一个 protobuf 消息 </li>
+<li>multi message, (1) 根据 <code>CMsgMulti.size_unzipped</code> 是否 <strong> 大于 0</strong> 来判断 <code>CMsgMulti.message_body</code> 是否启用了  gzip 压缩 . (2) 如果是则要先先把 <code>message_body</code> 解压 , 然后再解读里 </li>
 </ol>
-<p>这三种包都会包含以下三个字段: </p>
+<p> 这三种包都会包含以下三个字段 : </p>
 <ul>
 <li>4 bytes 的 包长度 </li>
-<li>固定的 4 bytes magic number, 为 <code>0x31305456</code></li>
-<li>4 bytes 的 消息类型, 消息的最高位为 protobuf 消息掩码位, <code>0</code> 表示非 protobuf, <code>1</code> 为 protobuf</li>
+<li> 固定的 4 bytes magic number, 为 <code>0x31305456</code></li>
+<li>4 bytes 的 消息类型 , 消息的最高位为 protobuf 消息掩码位 , <code>0</code> 表示非 protobuf, <code>1</code> 为 protobuf</li>
 </ul>
-<div class="codehilite"><pre><span></span>1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
+<pre class="highlight"><code class="linenums">1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
 + + + + + + + + + + + + + + +
 |   4 bytes msg_len         |
 + - - - - - - - - - - - - - +
@@ -282,7 +340,7 @@ III. recv &lt;ChannelEncryptResult&gt;
 |                           |
 + + + + + + + + + + + + + + +
 
-Multi 包含一个或多个 message, 每个结构为, 前 4 个字节为消息长度 + message
+Multi 包含一个或多个 message, 每个结构为 , 前 4 个字节为消息长度 + message
 + - - - - - - - - - - - - - + 
 | 4 bytes message_len       |
 + - - - - - - - - - - - - - +   
@@ -304,70 +362,72 @@ Multi 包含一个或多个 message, 每个结构为, 前 4 个字节为消息�
 + - - - - - - - - - - - - - - - - - - +
 
 需要发送的 protobuf message 包含 message header 和 message body 主体
-1&gt; 如果已经登录的情况下, 把 header 里的 steamid, client_sessionid 改成对应的值
+1&gt; 如果已经登录的情况下 , 把 header 里的 steamid, client_sessionid 改成对应的值
 2&gt; 将这两个序列化生成字节串
-3&gt; 使用 session_key 加密, 根据前面的握手过程, 依需要生成 hash message
-4&gt; 组合成上面的包. 注意的是包的主体消息长度是指加密后的字节数
+3&gt; 使用 session_key 加密 , 根据前面的握手过程 , 依需要生成 hash message
+4&gt; 组合成上面的包 . 注意的是包的主体消息长度是指加密后的字节数
 + - - - - - - - - - - - - - - - - - - +  
 | Protobuf header&lt;CMsgProtoBufHeader&gt; |
 + - - - - - - - - - - - - - - - - - - +  
 | Protobuf message                    |
-+ - - - - - - - - - - - - - - - - - - +  
-</pre></div>
-
++ - - - - - - - - - - - - - - - - - - +  </code></pre>
 
 <h4 id="reference">Reference</h4>
 <ol>
-<li>https://github.com/ValvePython/steam/issues/79</li>
-<li>https://github.com/ValvePython/steam</li>
-<li>https://github.com/SteamRE/SteamKit/issues/555</li>
+<li><a href="https://github.com/ValvePython/steam/issues/79">https://github.com/ValvePython/steam/issues/79</a></li>
+<li><a href="https://github.com/ValvePython/steam">https://github.com/ValvePython/steam</a></li>
+<li><a href="https://github.com/SteamRE/SteamKit/issues/555">https://github.com/SteamRE/SteamKit/issues/555</a></li>
 </ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/python.html">python</a>
-      <a href="./tag/steam.html">steam</a>
-      <a href="./tag/steamkit.html">steamkit</a>
-    </p>
-  </div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=A Simple SteamKit implement with using Python(一)&amp;url=./a-simple-steamkit-implement-with-using-pythonyi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./a-simple-steamkit-implement-with-using-pythonyi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./a-simple-steamkit-implement-with-using-pythonyi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/python.html">python</a><a href="./tag/steam.html">steam</a><a href="./tag/steamkit.html">steamkit</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

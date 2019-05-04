@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Spring POST 重定向接收错误信息(BindingResult)</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html" rel="canonical" />
+
+    <meta name="description" content="1. POST 请求的错误信息重定向 在发送 POST 之后 , 如果遇到错误 , 我们经常会重定向 (GET) 回到原页面 , 而不是直接返回页面 , 这样做是为了避免如果我们点击浏览器刷新按钮时 , 会再次发送 POST 请求 . 重定向之后 ,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="spring">
+    <meta name="tags" content="bindingresult">
+    <meta name="tags" content="POST 重定向">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. POST 请求的错误信息重定向 在发送 POST 之后, 如果遇到错误, 我们经常会重定向(GET)回到原页面, 而不是直接返回页面, 这样做是为了避免如果我们点击浏览器刷新按钮时, 会再次发送 POST 请求. 重定向之后, 我们需要获得前面的错误信息. 使用 @ModelAttribute 注解来修饰 RequestMapping 方法的参数, ModelAttibute 注解实际上是接收请求参数, 添加到 Model 中, 在取出后自动删除. 需要注意的几点: 在 GET 处理方法中, 因为我们在渲染的 html/jsp 页面中使用了 User 对象, 所以要检测是重定向过来的, 还是用户新的请求来的. 从 POST 重定向过来的, 我们添加了 user 对象, 所以使用 model.containsAttricute(&#34;user …" />
-<meta name="keywords" content="spring, bindingresult, POST 重定向">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Spring POST 重定向接收错误信息(BindingResult)"/>
-<meta property="og:description" content="1. POST 请求的错误信息重定向 在发送 POST 之后, 如果遇到错误, 我们经常会重定向(GET)回到原页面, 而不是直接返回页面, 这样做是为了避免如果我们点击浏览器刷新按钮时, 会再次发送 POST 请求. 重定向之后, 我们需要获得前面的错误信息. 使用 @ModelAttribute 注解来修饰 RequestMapping 方法的参数, ModelAttibute 注解实际上是接收请求参数, 添加到 Model 中, 在取出后自动删除. 需要注意的几点: 在 GET 处理方法中, 因为我们在渲染的 html/jsp 页面中使用了 User 对象, 所以要检测是重定向过来的, 还是用户新的请求来的. 从 POST 重定向过来的, 我们添加了 user 对象, 所以使用 model.containsAttricute(&#34;user …"/>
+<meta property="og:description" content="1. POST 请求的错误信息重定向 在发送 POST 之后 , 如果遇到错误 , 我们经常会重定向 (GET) 回到原页面 , 而不是直接返回页面 , 这样做是为了避免如果我们点击浏览器刷新按钮时 , 会再次发送 POST 请求 . 重定向之后 ,..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html"/>
 <meta property="og:type" content="article"/>
@@ -51,146 +82,175 @@
 <meta property="article:tag" content="spring"/>
 <meta property="article:tag" content="bindingresult"/>
 <meta property="article:tag" content="POST 重定向"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; Spring POST 重定向接收错误信息(BindingResult)</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult">Spring POST 重定向接收错误信息(BindingResult)</h1>
-    <p>
-      Posted on Thu 10 January 2019 in <a href="./category/java.html">Java</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="1-post">1. POST 请求的错误信息重定向</h4>
-<p>在发送 POST 之后, 如果遇到错误, 我们经常会重定向(GET)回到原页面, 而不是直接返回页面, 这样做是为了避免如果我们点击浏览器刷新按钮时, 会再次发送 POST 请求. 重定向之后, 我们需要获得前面的错误信息.</p>
-<p>使用 <code>@ModelAttribute</code> 注解来修饰 <code>RequestMapping</code> 方法的参数, <code>ModelAttibute</code> 注解实际上是接收请求参数, 添加到 Model 中, 在取出后自动删除.</p>
-<p>需要注意的几点:</p>
-<ol>
-<li>在 GET 处理方法中, 因为我们在渲染的 html/jsp 页面中使用了 <code>User</code> 对象, 所以要检测是重定向过来的, 还是用户新的请求来的. 从 POST 重定向过来的, 我们添加了 user 对象, 所以使用 <code>model.containsAttricute("user")</code> 来检测. 如果是用户自己的请求, 那么我们生成一个空的 user 对象, 避免渲染页面时出错</li>
-<li>POST 处理方法中, <code>BindingResult</code> 参数一定要跟在 <code>@Valid</code> 之后.</li>
-<li><code>RedirectAttributes.addFlashAttribute()</code> 方法实际是使用了 session, 但会使用后系统自动删除这个属性</li>
-<li><code>BindingResult</code> 类内的错误信息的 key 值是 <code>BindingResult.class.getName() + "." + ModelAttribute修饰的名称</code>. 如 <code>org.springframework.validation.BindingResult.user</code></li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/register&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">register</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 注意检测 user 对象, 不能在参数中添加 User 参数, 这会优先使用从页面请求参数</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">model</span><span class="o">.</span><span class="na">containsAttribute</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="s">&quot;register&quot;</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// BindingResult 只能跟在 @Valid 后面才会起作用</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/register&quot;</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">register</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@ModelAttribute</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">)</span> <span class="n">User</span> <span class="n">user</span><span class="o">,</span>
-                       <span class="n">BindingResult</span> <span class="n">bindingResult</span><span class="o">,</span>
-                       <span class="n">RedirectAttributes</span> <span class="n">ra</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">bindingResult</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
-      <span class="n">ra</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
-      <span class="c1">// user 对象对应的 BindingResult 错误信息, 注意其 key 名</span>
-      <span class="n">ra</span><span class="o">.</span><span class="na">addFlashAttribute</span><span class="o">(</span><span class="s">&quot;org.springframework.validation.BindingResult.user&quot;</span><span class="o">,</span>
-                         <span class="n">bindingResult</span><span class="o">);</span>
-      <span class="k">return</span> <span class="s">&quot;redirect:/register&quot;</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="s">&quot;redirect:/login&quot;</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<h4 id="2-thymeleaf">2. Thymeleaf 中错误信息的使用</h4>
-<p>在 thymeleaf 中使用 <code>#fields</code> 来获得 form 的错误消息. 比如有一个 form, 其提交的是一个 User 对象. </p>
-<div class="codehilite"><pre><span></span><span class="c">&lt;!-- register.html --&gt;</span>
-<span class="p">&lt;</span><span class="nt">form</span> <span class="na">th:object</span><span class="o">=</span><span class="s">&quot;${user}&quot;</span> <span class="na">th:action</span><span class="o">=</span><span class="s">&quot;@{/register}&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">th:name</span><span class="o">=</span><span class="s">&quot;*{username}&quot;</span> <span class="na">th:value</span><span class="o">=</span><span class="s">&quot;*{username}&quot;</span><span class="p">&gt;</span>
-  <span class="c">&lt;!-- 在这里获到错误消息, 检查 username 字段是否有错误消息, </span>
-<span class="c">        th:errors 会自动提取对应的 field 中的错误信息 --&gt;</span>
-  <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:errors</span><span class="o">=</span><span class="s">&quot;*{username}&quot;</span> <span class="na">th:if</span><span class="o">=</span><span class="s">&quot;${#fields.hasErrors(&#39;username&#39;)}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</pre></div>
-
-
-<h4 id="reference">Reference:</h4>
-<ol>
-<li>https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138</li>
-</ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/spring.html">spring</a>
-      <a href="./tag/bindingresult.html">bindingresult</a>
-      <a href="./tag/post-zhong-ding-xiang.html">POST 重定向</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Spring POST 重定向接收错误信息(BindingResult)",
+  "headline": "Spring POST 重定向接收错误信息(BindingResult)",
+  "datePublished": "2019-01-10 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html",
+  "description": "1. POST 请求的错误信息重定向 在发送 POST 之后 , 如果遇到错误 , 我们经常会重定向 (GET) 回到原页面 , 而不是直接返回页面 , 这样做是为了避免如果我们点击浏览器刷新按钮时 , 会再次发送 POST 请求 . 重定向之后 ,..."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Spring POST 重定向接收错误信息(BindingResult)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 10 January 2019">Thu 10 January 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1-post">1. POST 请求的错误信息重定向 </h4>
+<p> 在发送 POST 之后 , 如果遇到错误 , 我们经常会重定向 (GET) 回到原页面 , 而不是直接返回页面 , 这样做是为了避免如果我们点击浏览器刷新按钮时 , 会再次发送 POST 请求 . 重定向之后 , 我们需要获得前面的错误信息 .</p>
+<p> 使用 <code>@ModelAttribute</code> 注解来修饰 <code>RequestMapping</code> 方法的参数 , <code>ModelAttibute</code> 注解实际上是接收请求参数 , 添加到 Model 中 , 在取出后自动删除 .</p>
+<p> 需要注意的几点 :</p>
+<ol>
+<li> 在 GET 处理方法中 , 因为我们在渲染的 html/jsp 页面中使用了 <code>User</code> 对象 , 所以要检测是重定向过来的 , 还是用户新的请求来的 . 从 POST 重定向过来的 , 我们添加了 user 对象 , 所以使用 <code>model.containsAttricute("user")</code> 来检测 . 如果是用户自己的请求 , 那么我们生成一个空的 user 对象 , 避免渲染页面时出错 </li>
+<li>POST 处理方法中 , <code>BindingResult</code> 参数一定要跟在 <code>@Valid</code> 之后 .</li>
+<li><code>RedirectAttributes.addFlashAttribute()</code> 方法实际是使用了 session, 但会使用后系统自动删除这个属性 </li>
+<li><code>BindingResult</code> 类内的错误信息的 key 值是 <code>BindingResult.class.getName() + "." + ModelAttribute 修饰的名称 </code>. 如 <code>org.springframework.validation.BindingResult.user</code></li>
+</ol>
+<pre class="highlight"><code class="language-java linenums">@RequestMapping(value = "/register", method = RequestMethod.GET)
+public String register(Model model) {
+    // 注意检测 user 对象 , 不能在参数中添加 User 参数 , 这会优先使用从页面请求参数
+    if (!model.containsAttribute("user")) {
+        model.addAttribute(new User());
+    }
+    return "register";
+}
+
+// BindingResult 只能跟在 @Valid 后面才会起作用
+@RequestMapping(value = "/register", method = RequestMethod.POST)
+public String register(@Valid @ModelAttribute("user") User user,
+                       BindingResult bindingResult,
+                       RedirectAttributes ra) {
+    if (bindingResult.hasErrors()) {
+      ra.addFlashAttribute("user", user);
+      // user 对象对应的 BindingResult 错误信息 , 注意其 key 名
+      ra.addFlashAttribute("org.springframework.validation.BindingResult.user",
+                         bindingResult);
+      return "redirect:/register";
+    }
+    return "redirect:/login";
+}</code></pre>
+
+<h4 id="2-thymeleaf">2. Thymeleaf 中错误信息的使用 </h4>
+<p> 在 thymeleaf 中使用 <code>#fields</code> 来获得 form 的错误消息 . 比如有一个 form, 其提交的是一个 User 对象 . </p>
+<pre class="highlight"><code class="language-html linenums">&lt;!-- register.html --&gt;
+&lt;form th:object="${user}" th:action="@{/register}"&gt;
+  &lt;input th:name="*{username}" th:value="*{username}"&gt;
+  &lt;!-- 在这里获到错误消息 , 检查 username 字段是否有错误消息 , 
+        th:errors 会自动提取对应的 field 中的错误信息 --&gt;
+  &lt;span th:errors="*{username}" th:if="${#fields.hasErrors('username')}"&gt;&lt;/span&gt;
+&lt;/form&gt;</code></pre>
+
+<h4 id="reference">Reference:</h4>
+<ol>
+<li><a href="https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138">https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138</a></li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Spring POST 重定向接收错误信息(BindingResult)&amp;url=./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/spring.html">spring</a><a href="./tag/bindingresult.html">bindingresult</a><a href="./tag/post-zhong-ding-xiang.html">POST 重定向</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

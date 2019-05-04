@@ -1,46 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>MyBatis Generator XML 配置详解</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./mybatis-generator-xml-pei-zhi-xiang-jie.html" rel="canonical" />
+
+    <meta name="description" content="1. 配置文件 固定的文件头 , 约束和根结点 <?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="mybatis">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. 配置文件 固定的文件头, 约束和根结点 &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt; &lt;!DOCTYPE generatorConfiguration PUBLIC &#34;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&#34;&gt; &lt;generatorConfiguration&gt; &lt;!-- .... --&gt; &lt;/generatorConfiguration&gt; 1.1 properties 标签 用于引入外部的 properties 文件, 只能出现一次或者不使用, 并且如果使用的话要保证其在配置文件的最开始位置 resource 属性, 使用 classpath 来指定资源路径. resource=test/mypackage/my.properties 指的是包 …" />
-<meta name="keywords" content="mybatis">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="MyBatis Generator XML 配置详解"/>
-<meta property="og:description" content="1. 配置文件 固定的文件头, 约束和根结点 &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt; &lt;!DOCTYPE generatorConfiguration PUBLIC &#34;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&#34;&gt; &lt;generatorConfiguration&gt; &lt;!-- .... --&gt; &lt;/generatorConfiguration&gt; 1.1 properties 标签 用于引入外部的 properties 文件, 只能出现一次或者不使用, 并且如果使用的话要保证其在配置文件的最开始位置 resource 属性, 使用 classpath 来指定资源路径. resource=test/mypackage/my.properties 指的是包 …"/>
+<meta property="og:description" content="1. 配置文件 固定的文件头 , 约束和根结点 <?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./mybatis-generator-xml-pei-zhi-xiang-jie.html"/>
 <meta property="og:type" content="article"/>
@@ -49,148 +78,175 @@
 <meta property="article:author" content="./author/ivicel.html">
 <meta property="article:section" content="Java"/>
 <meta property="article:tag" content="mybatis"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; MyBatis Generator XML 配置详解</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "MyBatis Generator XML 配置详解",
+  "headline": "MyBatis Generator XML 配置详解",
+  "datePublished": "2019-01-01 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./mybatis-generator-xml-pei-zhi-xiang-jie.html",
+  "description": "1. 配置文件 固定的文件头 , 约束和根结点 <?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">MyBatis Generator XML 配置详解</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Tue 01 January 2019">Tue 01 January 2019</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1">1. 配置文件 </h4>
+<p> 固定的文件头 , 约束和根结点 </p>
+<pre class="highlight"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;
+&lt;generatorConfiguration&gt;
+    &lt;!-- .... --&gt;
+&lt;/generatorConfiguration&gt;</code></pre>
 
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="mybatis-generator-xml-pei-zhi-xiang-jie">MyBatis Generator XML 配置详解</h1>
-    <p>
-      Posted on Tue 01 January 2019 in <a href="./category/java.html">Java</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="1">1. 配置文件</h4>
-<p>固定的文件头, 约束和根结点</p>
-<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
-<span class="cp">&lt;!DOCTYPE generatorConfiguration</span>
-<span class="cp">    PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span>
-<span class="cp">    &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span>
-<span class="nt">&lt;generatorConfiguration&gt;</span>
-    <span class="c">&lt;!-- .... --&gt;</span>
-<span class="nt">&lt;/generatorConfiguration&gt;</span>
-</pre></div>
-
-
-<h5 id="11-properties">1.1 <code>properties</code> 标签</h5>
-<p>用于引入外部的 <code>properties</code> 文件, 只能出现一次或者不使用, 并且如果使用的话要保证其在配置文件的最开始位置</p>
+<h5 id="11-properties">1.1 <code>properties</code> 标签 </h5>
+<p> 用于引入外部的 <code>properties</code> 文件 , 只能出现一次或者不使用 , 并且如果使用的话要保证其在配置文件的最开始位置 </p>
 <ul>
-<li><code>resource</code> 属性, 使用 <code>classpath</code> 来指定资源路径.  <code>resource=test/mypackage/my.properties</code> 指的是包 <code>test.mypackage</code> 下的 <code>my.properties</code> 文件</li>
-<li><code>url</code> 属性, 使用文件路径, 比如 <code>url=file:///c:/myfolder/my.properties</code></li>
+<li><code>resource</code> 属性 , 使用 <code>classpath</code> 来指定资源路径 .  <code>resource=test/mypackage/my.properties</code> 指的是包 <code>test.mypackage</code> 下的 <code>my.properties</code> 文件 </li>
+<li><code>url</code> 属性 , 使用文件路径 , 比如 <code>url=file:///c:/myfolder/my.properties</code></li>
 </ul>
-<h5 id="12-classpathentry">1.2 <code>classPathEntry</code> 标签</h5>
-<p>使用时位置要放在 <code>properties</code> 标签后面, 并且有 <code>context</code> 标签之前, 用来引入其他 java 的 ZIP/JAR 包, classpath, 或者目录, 可以出现多次</p>
+<h5 id="12-classpathentry">1.2 <code>classPathEntry</code> 标签 </h5>
+<p> 使用时位置要放在 <code>properties</code> 标签后面 , 并且有 <code>context</code> 标签之前 , 用来引入其他 java 的 ZIP/JAR 包 , classpath, 或者目录 , 可以出现多次 </p>
 <ul>
-<li><code>location</code> 属性, 比如用来引用 mysql 包,  <code>location=F:/mysql/mysql-connector.jar</code></li>
+<li><code>location</code> 属性 , 比如用来引用 mysql 包 ,  <code>location=F:/mysql/mysql-connector.jar</code></li>
 </ul>
-<h5 id="13-context">1.3 <code>context</code> 标签</h5>
-<p>用于指定一组生成对象的环境配置, 至少一个或者多个</p>
-<h6 id="131-context">1.3.1  <code>context</code> 标签的属性</h6>
+<h5 id="13-context">1.3 <code>context</code> 标签 </h5>
+<p> 用于指定一组生成对象的环境配置 , 至少一个或者多个 </p>
+<h6 id="131-context">1.3.1  <code>context</code> 标签的属性 </h6>
 <ul>
-<li><code>id</code> 必选, 用来确定标签惟一性</li>
-<li><code>defaultModeType</code>: 用于指定 MBG 如何生成实体类. 
-  1. <code>conditional</code> 默认值, 如果一个表只含有一个字段, 比如只单有一个主键, 那么不会为该表单独生成一个实体类, 而是合并到基类中
-  2. <code>flat</code> 为每张表生成一个单独的实体类, 推荐使用
-  3. <code>hierarchical</code> 如果表有主键则为该表生成一个单独的实体类, 如果表还有 BLOB 字段, 则为表生成一个包含所有 BLOB 字段的单独实体类, 然后为所有其他的字段另外生成一个单独的实体类. MBG 为类之间维护一个继承关系</li>
-<li><code>targetRuntime</code> 用于指定生成代码的运行环境, 可选 
-  1. <code>MyBatis3</code>: 默认值. 
-  2. <code>MyBatis3Simple</code> 选这个时不会生成相应的 Example 方法. 
-  3.  <code>MyBatis3DynamicSql</code> 生成兼容 MyBatis 3.4.2 和 Java 8 及以上版本的对象, 依赖于 MyBatis 动态 SQL</li>
-<li><code>introspectedColumnImpl</code> 该属性可以指定扩展 <code>org.mybatis.generator.api.IntrospectedColumn</code> 类的实现类</li>
+<li><code>id</code> 必选 , 用来确定标签惟一性 </li>
+<li><code>defaultModeType</code>: 用于指定 MBG 如何生成实体类 . </li>
+<li><code>conditional</code> 默认值 , 如果一个表只含有一个字段 , 比如只单有一个主键 , 那么不会为该表单独生成一个实体类 , 而是合并到基类中 </li>
+<li><code>flat</code> 为每张表生成一个单独的实体类 , 推荐使用 </li>
+<li><code>hierarchical</code> 如果表有主键则为该表生成一个单独的实体类 , 如果表还有 BLOB 字段 , 则为表生成一个包含所有 BLOB 字段的单独实体类 , 然后为所有其他的字段另外生成一个单独的实体类 . MBG 为类之间维护一个继承关系 </li>
+<li><code>targetRuntime</code> 用于指定生成代码的运行环境 , 可选 </li>
+<li><code>MyBatis3</code>: 默认值 . </li>
+<li><code>MyBatis3Simple</code> 选这个时不会生成相应的 Example 方法 . </li>
+<li><code>MyBatis3DynamicSql</code> 生成兼容 MyBatis 3.4.2 和 Java 8 及以上版本的对象 , 依赖于 MyBatis 动态 SQL</li>
+<li><code>introspectedColumnImpl</code> 该属性可以指定扩展 <code>org.mybatis.generator.api.IntrospectedColumn</code> 类的实现类 </li>
 </ul>
-<h6 id="132-context">1.3.2 <code>context</code> 标签子标签</h6>
+<h6 id="132-context">1.3.2 <code>context</code> 标签子标签 </h6>
 <ul>
 <li>
-<p><code>property</code> 0 个或多个. </p>
+<p><code>property</code> 0 个或多个 . </p>
 </li>
 <li>
-<p><code>autoDelimitKeywords</code> 根据包 <code>org.mybatis.generator.internal.db.SqlReservedWords</code> 类中自动给关键字添加分隔符</p>
+<p><code>autoDelimitKeywords</code> 根据包 <code>org.mybatis.generator.internal.db.SqlReservedWords</code> 类中自动给关键字添加分隔符 </p>
 </li>
-<li><code>beginningDelimiter</code> 分隔符开始</li>
-<li><code>endingDelimiter</code> 分隔符结束</li>
-<li><code>javaFileEncoding</code> 设置 Java 文件的编码</li>
-<li><code>javaFormatter</code> Java 类名格式方法. 默认为类<code>org.mybatis.generator.api.dom.DefaultJavaFormatter</code>, 自定义类则要实现 <code>org.mybatis.generator.api.JavaFormatter</code></li>
+<li><code>beginningDelimiter</code> 分隔符开始 </li>
+<li><code>endingDelimiter</code> 分隔符结束 </li>
+<li><code>javaFileEncoding</code> 设置 Java 文件的编码 </li>
+<li><code>javaFormatter</code> Java 类名格式方法 . 默认为类 <code>org.mybatis.generator.api.dom.DefaultJavaFormatter</code>, 自定义类则要实现 <code>org.mybatis.generator.api.JavaFormatter</code></li>
 <li>
-<p><code>xmlFormatter</code> XML 文件的名字生成格式</p>
-</li>
-<li>
-<p><code>plugin</code> 0 个或多个, 用来定义扩展插件. 多个插件将按配置顺序来先后执行. </p>
-</li>
-</ul>
-<p><code>org.mybatis.generator.plugins.CachePlugin</code> 是一个缓存插件, 可以生成 SQL XML 映射文件中的 cache 标签, 只有当 targetRuntime 为 MyBatis3 时插件才有效</p>
-<ul>
-<li>
-<p><code>commentGenerator</code> 0 个或多个, 用来配置如何生成注释信息.</p>
+<p><code>xmlFormatter</code> XML 文件的名字生成格式 </p>
 </li>
 <li>
-<p><code>type</code> 属性, 用来指定一个实现了 <code>org.mybatis.generator.api.CommentGenerator</code> 接口的类, 该类用来生成注释信息. 默认值为 <code>DEFAULT</code>, 默认类为 <code>org.mybatis.generator.internal.DefaultCommentGenerator</code></p>
+<p><code>plugin</code> 0 个或多个 , 用来定义扩展插件 . 多个插件将按配置顺序来先后执行 . </p>
 </li>
 </ul>
-<p>三个可选的属性标签, 需要通过 <code>property</code> 标签来指定</p>
+<p><code>org.mybatis.generator.plugins.CachePlugin</code> 是一个缓存插件 , 可以生成 SQL XML 映射文件中的 cache 标签 , 只有当 targetRuntime 为 MyBatis3 时插件才有效 </p>
 <ul>
-<li><code>suppressAllComments</code> 阻止生成注释, 默认为 <code>false</code></li>
-<li><code>suppressDate</code> 阻止生成注释包含时间戳, 默认 <code>false</code></li>
 <li>
-<p><code>addRemarkComments</code> 注释是否添加数据库表的备注信息, 默认 <code>false</code></p>
+<p><code>commentGenerator</code> 0 个或多个 , 用来配置如何生成注释信息 .</p>
 </li>
 <li>
-<p><code>jdbcConnection</code> 1 个. 配置连接数据库方式.</p>
+<p><code>type</code> 属性 , 用来指定一个实现了 <code>org.mybatis.generator.api.CommentGenerator</code> 接口的类 , 该类用来生成注释信息 . 默认值为 <code>DEFAULT</code>, 默认类为 <code>org.mybatis.generator.internal.DefaultCommentGenerator</code></p>
 </li>
-<li>
-<p><code>driverClass</code> 必选属性. JDBC 驱动程序的完全限定类名</p>
-</li>
-<li><code>connectionURL</code> 必选属性, JDBC 的连接 URL</li>
-<li><code>userId</code> 可选属性, 访问数据库的用户名</li>
-<li><code>password</code> 可选属性, 访问数据库的密码</li>
 </ul>
-<p>除 4 个属性外, 还可以添加 property 子标签, 用于连接数据库其他所需要的属性</p>
+<p> 三个可选的属性标签 , 需要通过 <code>property</code> 标签来指定 </p>
+<ul>
+<li><code>suppressAllComments</code> 阻止生成注释 , 默认为 <code>false</code></li>
+<li><code>suppressDate</code> 阻止生成注释包含时间戳 , 默认 <code>false</code></li>
+<li>
+<p><code>addRemarkComments</code> 注释是否添加数据库表的备注信息 , 默认 <code>false</code></p>
+</li>
+<li>
+<p><code>jdbcConnection</code> 1 个 . 配置连接数据库方式 .</p>
+</li>
+<li>
+<p><code>driverClass</code> 必选属性 . JDBC 驱动程序的完全限定类名 </p>
+</li>
+<li><code>connectionURL</code> 必选属性 , JDBC 的连接 URL</li>
+<li><code>userId</code> 可选属性 , 访问数据库的用户名 </li>
+<li><code>password</code> 可选属性 , 访问数据库的密码 </li>
+</ul>
+<p> 除 4 个属性外 , 还可以添加 property 子标签 , 用于连接数据库其他所需要的属性 </p>
 <ul>
 <li>
-<p><code>javaTypeResolver</code> 0 个或 1 个, 用于数据库类型与 Java 类型的映射关系.</p>
+<p><code>javaTypeResolver</code> 0 个或 1 个 , 用于数据库类型与 Java 类型的映射关系 .</p>
 </li>
 <li>
-<p><code>type</code> 可选属性. 用于如何映射类型关系, 自定义的话需要类实现 <code>org.mybatis.generator.api.JavaTypeResolver</code>, 另外还接受一个默认 <code>DEFAULT</code> 值</p>
+<p><code>type</code> 可选属性 . 用于如何映射类型关系 , 自定义的话需要类实现 <code>org.mybatis.generator.api.JavaTypeResolver</code>, 另外还接受一个默认 <code>DEFAULT</code> 值 </p>
 </li>
-<li><code>forceBigDecimals</code> 子标签 <code>property</code> 属性, 默认为 <code>false</code>, 用于设置数据库 <code>DECIMAL</code> 和 <code>NUMERIC</code> 类型强制映射为 Java 的 <code>java.math.BigDecimal</code> 类型, 默认情况下的转换规则为.<ol>
-<li>精度 &gt; 0 或 长度 &gt; 18, 就转换成 <code>java.math.BigDecimal</code></li>
-<li>精度 = 0 并且 10 &lt;= 长度 &lt;= 18, 转成 <code>java.lang.Long</code></li>
-<li>精度 = 0 并且 5 &lt;= 长度 &lt;= 9, 转成 <code>java.lang.Integer</code></li>
-<li>精度 = 0 并且 长度 &lt; 5, 转成 <code>java.lang.Short</code></li>
+<li><code>forceBigDecimals</code> 子标签 <code>property</code> 属性 , 默认为 <code>false</code>, 用于设置数据库 <code>DECIMAL</code> 和 <code>NUMERIC</code> 类型强制映射为 Java 的 <code>java.math.BigDecimal</code> 类型 , 默认情况下的转换规则为 .<ol>
+<li> 精度 &gt; 0 或 长度 &gt; 18, 就转换成 <code>java.math.BigDecimal</code></li>
+<li> 精度 = 0 并且 10 &lt;= 长度 &lt;= 18, 转成 <code>java.lang.Long</code></li>
+<li> 精度 = 0 并且 5 &lt;= 长度 &lt;= 9, 转成 <code>java.lang.Integer</code></li>
+<li> 精度 = 0 并且 长度 &lt; 5, 转成 <code>java.lang.Short</code></li>
 </ol>
 </li>
 <li>
-<p><code>useJSR310Types</code> 设置使用 JSR-310 来为时间和日期(<code>DATE</code>, <code>TIME</code>, <code>TIMESTAMP</code>)转换, 而不是使用 <code>java.util.Date</code> 类. 不管如何设置, 这两个类型转换都是固定的. 1.  JDBC Type <code>TIME_WITH_TIMEZONE</code> ---&gt; <code>java.time.OffsetTime</code>, 2. <code>TIMESTAMP_WITH_TIMEZONE</code> ---&gt; <code>java.time.OffsetDateTime</code>. 当设置为 <code>true</code> 时:</p>
+<p><code>useJSR310Types</code> 设置使用 JSR-310 来为时间和日期 (<code>DATE</code>, <code>TIME</code>, <code>TIMESTAMP</code>) 转换 , 而不是使用 <code>java.util.Date</code> 类 . 不管如何设置 , 这两个类型转换都是固定的 . 1.  JDBC Type <code>TIME_WITH_TIMEZONE</code> ---&gt; <code>java.time.OffsetTime</code>, 2. <code>TIMESTAMP_WITH_TIMEZONE</code> ---&gt; <code>java.time.OffsetDateTime</code>. 当设置为 <code>true</code> 时 :</p>
 <ol>
 <li>JDBC Type: <code>DATE</code> ---&gt; <code>java.time.LocalDate</code></li>
 <li><code>TIME</code> ---&gt; <code>java.time.LocalTime</code></li>
@@ -198,162 +254,166 @@
 </ol>
 </li>
 <li>
-<p><code>javaModelGenerator</code> 1 个. 用来配置如何生成 java 实体类. 两个必选属性:</p>
+<p><code>javaModelGenerator</code> 1 个 . 用来配置如何生成 java 实体类 . 两个必选属性 :</p>
 </li>
 <li>
-<p><code>targetPackage</code> 生成实体类存放的包名</p>
+<p><code>targetPackage</code> 生成实体类存放的包名 </p>
 </li>
-<li><code>targetProject</code> 目标项目的路径, 比如 Maven 中  <code>src/main/java</code></li>
+<li><code>targetProject</code> 目标项目的路径 , 比如 Maven 中  <code>src/main/java</code></li>
 </ul>
-<p>其他支持的 property 子标签属性</p>
+<p> 其他支持的 property 子标签属性 </p>
 <ul>
-<li><code>constructorBased</code> 只对 MyBatis3 有效, 使用构造方法入参, 如果为 <code>false</code> 则使用 setter 方法. 默认 <code>false</code></li>
-<li><code>enableSubPackages</code> 如果为 <code>true</code>, 则会根据 catalog 和 schema 来生成子包, 否则使用 targetPackage 属性, 默认 <code>false</code></li>
-<li><code>immutable</code> 默认 <code>false</code>, 设置生成实体类对象后, 对象不可变, 即不会生成 setter 方法</li>
-<li><code>rootClass</code> 所有实体类的基类, 值是类的完全限定名. 子类不会覆盖和父类中完全匹配的属性. 1. 属性名完全相同. 2. 属性类型相同. 3. 属性有 getter 方法 4. 属性有 setter 方法</li>
+<li><code>constructorBased</code> 只对 MyBatis3 有效 , 使用构造方法入参 , 如果为 <code>false</code> 则使用 setter 方法 . 默认 <code>false</code></li>
+<li><code>enableSubPackages</code> 如果为 <code>true</code>, 则会根据 catalog 和 schema 来生成子包 , 否则使用 targetPackage 属性 , 默认 <code>false</code></li>
+<li><code>immutable</code> 默认 <code>false</code>, 设置生成实体类对象后 , 对象不可变 , 即不会生成 setter 方法 </li>
+<li><code>rootClass</code> 所有实体类的基类 , 值是类的完全限定名 . 子类不会覆盖和父类中完全匹配的属性 . 1. 属性名完全相同 . 2. 属性类型相同 . 3. 属性有 getter 方法 4. 属性有 setter 方法 </li>
 <li>
-<p><code>trimStrings</code> 设置是否要对数据库查询结果进行 trim 操作, 默认 false</p>
+<p><code>trimStrings</code> 设置是否要对数据库查询结果进行 trim 操作 , 默认 false</p>
 </li>
 <li>
-<p><code>sqlMapGenerator</code> 0 个或 1 个, 用于配置生成 Mapper.xml 文件的属性. 当 targetRuntime 设置为 MyBatis3 时, 如果在 <code>javaClientGenerator</code> 中配置指明需要 XML 的配置, 此标签才必须要配置, 不然该标签是可选的</p>
+<p><code>sqlMapGenerator</code> 0 个或 1 个 , 用于配置生成 Mapper.xml 文件的属性 . 当 targetRuntime 设置为 MyBatis3 时 , 如果在 <code>javaClientGenerator</code> 中配置指明需要 XML 的配置 , 此标签才必须要配置 , 不然该标签是可选的 </p>
 </li>
 <li>
-<p><code>targetPackage</code> 生成实体类存放的包名</p>
+<p><code>targetPackage</code> 生成实体类存放的包名 </p>
 </li>
-<li><code>targetProject</code> 目标项目的路径, 比如 Maven 中  <code>src/main/java</code></li>
+<li><code>targetProject</code> 目标项目的路径 , 比如 Maven 中  <code>src/main/java</code></li>
 </ul>
-<p>如果没有配置 <code>javaClientGenerator</code> 标签, 那么按以下规则:</p>
+<p> 如果没有配置 <code>javaClientGenerator</code> 标签 , 那么按以下规则 :</p>
 <ul>
-<li>如果指定了一个 <code>sqlMapGenerator</code>, 那么按这个配置生成</li>
-<li>如果没有指定 <code>sqlMapGenerator</code>, 那么只生成实体类</li>
+<li> 如果指定了一个 <code>sqlMapGenerator</code>, 那么按这个配置生成 </li>
+<li> 如果没有指定 <code>sqlMapGenerator</code>, 那么只生成实体类 </li>
 </ul>
-<p>另外还一个 <code>enableSubPackages</code> 的子 property 标签</p>
-<ul>
-<li><code>javaClientGenerator</code> 0 个或者 1 个. 如果不配置该标签, 则不会生成 Java Mapper 接口. 有 3 个必选属性</li>
-</ul>
-<ol>
-<li><code>type</code> 用于选择 Mapper 接口生成器, 自定义实现需要继承 <code>org.mybatis.generator.codegen.AbstractJavaClientGenerator</code> 类, 根据 targetRuntime 的值可以分成两类.<ul>
-<li>targetRutime 为 <code>MyBatis3</code> 时</li>
-<li>ANNOTATEDMAPPER` 基于注解的 Mapper 接口, 不会有对应的 XML 映射文件</li>
-<li><code>MIXEDMAPPER</code> XML 和注解的混合形式, 上面这种情况中的 SQL Provider 廨方法会被 XML 方式替代</li>
-<li><code>XMLMAPPER</code> 所有的方法都在 XML 中, 接口调用依赖 XML 文件</li>
-<li>targetRuntime 为 <code>MyBatis3Simple</code> 时</li>
-<li><code>ANNOTATEDMAPPER</code> 基于注解的 Mapper 接口</li>
-<li><code>XMLMAPPER</code> 所有的方法都在 XML 中, 接口调用依赖 XML 文件</li>
-</ul>
-</li>
-</ol>
+<p> 另外还一个 <code>enableSubPackages</code> 的子 property 标签 </p>
 <ul>
 <li>
-<p><code>table</code> 1 个或者多个, 用于配置需要通过内省数据库的表, 只有配置过的表, 才会生成对应的 Java 代码.</p>
+<p><code>javaClientGenerator</code> 0 个或者 1 个 . 如果不配置该标签 , 则不会生成 Java Mapper 接口 . 有 3 个必选属性 </p>
 </li>
 <li>
-<p><code>tableName</code> 必选属性, 如果设置为 <code>%</code>, 则匹配所有表</p>
-</li>
-</ul>
-<ol>
-<li>
-<h6 id="_1">其他可选的属性</h6>
+<p><code>type</code> 用于选择 Mapper 接口生成器 , 自定义实现需要继承 <code>org.mybatis.generator.codegen.AbstractJavaClientGenerator</code> 类 , 根据 targetRuntime 的值可以分成两类 .</p>
 <ul>
-<li><code>schema</code> 数据库的 schema, 可以使用 SQL 通配符匹配. 如果设置了该值, 生成的 SQL 的表名会变成如 schema.tableName 形式</li>
-<li><code>catalog</code> 数据库的 catalog, 如果设置了该值, 生成的 SQL 表名会变成 catalog.tableName 形式</li>
-<li><code>alias</code> 如果指定, 这个值会用在生成的 select 查询 SQL 表的别名和列名上, 例如 alias_actualColumnName</li>
-<li><code>domainObjectName</code> 生成对象的基本名称, 如果没有指定则根据表名来生成名称</li>
-<li><code>enableXXX</code> XXX 代表多种 SQL 方法, 用来指定是否生成对应的 XXX 语句</li>
-<li><code>selectByPrimaryKeyQueryId</code> 和 <code>selectByExampleQueryId</code>: 用于 DBA 跟踪工具</li>
-<li><code>modelType</code> 和 context 中的 defaultModelType 含义相同, 覆盖该值 </li>
-<li><code>escapeWildcards</code> 查询列是否对 schema 和表名中 SQL 通配符(<code>_</code> 和 <code>%</code>)进行转义</li>
-<li><code>delimitIdentifiers</code> 是否给标识符增加分隔符, 默认为 false</li>
-<li><code>delimitAllColumns</code> 是否对所有列添加分隔符, 默认为 false</li>
+<li>targetRutime 为 <code>MyBatis3</code> 时 </li>
+<li>ANNOTATEDMAPPER` 基于注解的 Mapper 接口 , 不会有对应的 XML 映射文件 </li>
+<li><code>MIXEDMAPPER</code> XML 和注解的混合形式 , 上面这种情况中的 SQL Provider 廨方法会被 XML 方式替代 </li>
+<li><code>XMLMAPPER</code> 所有的方法都在 XML 中 , 接口调用依赖 XML 文件 </li>
+<li>targetRuntime 为 <code>MyBatis3Simple</code> 时 </li>
+<li><code>ANNOTATEDMAPPER</code> 基于注解的 Mapper 接口 </li>
+<li><code>XMLMAPPER</code> 所有的方法都在 XML 中 , 接口调用依赖 XML 文件 </li>
 </ul>
 </li>
 <li>
-<h6 id="property">其他的 property 子标签属性</h6>
+<p><code>table</code> 1 个或者多个 , 用于配置需要通过内省数据库的表 , 只有配置过的表 , 才会生成对应的 Java 代码 .</p>
+</li>
+<li>
+<p><code>tableName</code> 必选属性 , 如果设置为 <code>%</code>, 则匹配所有表 </p>
+</li>
+<li>
+<h6 id="_1"> 其他可选的属性 </h6>
 <ul>
-<li><code>constructorBased</code> 构造方法, 和 javaModelGenerator 一样</li>
-<li><code>ignoreQualifiersAtRuntime</code> 生成的 SQL 中的表名将不会包含 schema 和 catalog 前缀</li>
-<li><code>immutable</code> 和 javaModelGenerator 中含义相同</li>
-<li><code>modeOnly</code> 用于配置是否只生成实体类, 如果为 <code>true</code>, 就不会有 Mapper 接口, 并覆盖属性中的 enableXXX 方法</li>
-<li><code>rootClass</code>, <code>rootInterface</code> 和 javaModelGenerator 中的属性一样</li>
-<li><code>runtimeCatalog</code> 运行时的 catalog, 当生成表和运行环境表的 catalog 不一样时可以使用该属性进行配置</li>
-<li><code>runtimeSchema</code> 运行时的 schema, 当生成表和运行环境表的 schema 不一样时可以使用该属性进行配置</li>
-<li><code>selectAllOrderByClause</code> 该属性值会追加到 <code>selectAll</code> 方法后的 SQL 中, 直接与 order by 拼接后添加到 SQL 末尾</li>
-<li><code>useActualColumnNames</code> 如果为 true, 那么 MBG 会使用从数据库元数据获取的列名作为生成的实体对象的属性, 否则使用驼峰式名称, 可以通过 columnOverride 标签显式指定, 此时将忽略该属性</li>
-<li><code>userColumnIndexes</code> 如果为 true, MBG 生成 resultMaps 时会使用索引而不是结果中列名的顺序</li>
-<li><code>useCompoundPropertyNames</code> 如果为 true, MBG 生成属性名时会将列名和列备注连接起来</li>
+<li><code>schema</code> 数据库的 schema, 可以使用 SQL 通配符匹配 . 如果设置了该值 , 生成的 SQL 的表名会变成如 schema.tableName 形式 </li>
+<li><code>catalog</code> 数据库的 catalog, 如果设置了该值 , 生成的 SQL 表名会变成 catalog.tableName 形式 </li>
+<li><code>alias</code> 如果指定 , 这个值会用在生成的 select 查询 SQL 表的别名和列名上 , 例如 alias_actualColumnName</li>
+<li><code>domainObjectName</code> 生成对象的基本名称 , 如果没有指定则根据表名来生成名称 </li>
+<li><code>enableXXX</code> XXX 代表多种 SQL 方法 , 用来指定是否生成对应的 XXX 语句 </li>
+<li><code>selectByPrimaryKeyQueryId</code> 和 <code>selectByExampleQueryId</code>: 用于 DBA 跟踪工具 </li>
+<li><code>modelType</code> 和 context 中的 defaultModelType 含义相同 , 覆盖该值 </li>
+<li><code>escapeWildcards</code> 查询列是否对 schema 和表名中 SQL 通配符 (<code>_</code> 和 <code>%</code>) 进行转义 </li>
+<li><code>delimitIdentifiers</code> 是否给标识符增加分隔符 , 默认为 false</li>
+<li><code>delimitAllColumns</code> 是否对所有列添加分隔符 , 默认为 false</li>
 </ul>
 </li>
 <li>
-<p><code>generatedKey</code> 0 个或 1 个, 用来指自动生成主键的属性(identity 字段或者 sequences 序列), 当指定这个标签时, MBG 将在生成 insert 的 SQL 映射文件中插入一个 selectKey 标签, 该标签有以下属性</p>
+<h6 id="property"> 其他的 property 子标签属性 </h6>
 <ul>
-<li><code>column</code> 必选, 生成列的列名</li>
-<li><code>sqlStatement</code> 必选, 返回新值的 SQL 语句, 如果这是一个 identity 语句, 则可以使用一个预定义的特殊值.(<code>Cloudscape</code>, <code>DB2</code>, <code>DB2_MF</code>, <code>Derby</code>, <code>HSQLDB</code>, <code>Informix</code>, <code>MySQL</code>, <code>SQL Server</code>, <code>SYBASE</code>, <code>JDBC</code>)</li>
-<li><code>type</code> 当 type 为 post 并且 identity 为 true 时, 生成的 selectKey 中 order = AFTER; 当 type 为 pre, identity 只能为 false, 生成的 selectKey 中 order = BEFORE. 自动增长的列只有插入到数据库后才能得到 ID, 所以只能是 AFTER, 当使用序列时, 只有先获取序列之后才能插入数据库, 所以是 BEFORE</li>
-<li><code>identity</code> 当设置为 true 时, 该列会被标记为 identity 列, 并且 selectKey 标签会被插入在 insert 后面. 否则 selecteKey 会被插入 insert 之前, 默认 false</li>
+<li><code>constructorBased</code> 构造方法 , 和 javaModelGenerator 一样 </li>
+<li><code>ignoreQualifiersAtRuntime</code> 生成的 SQL 中的表名将不会包含 schema 和 catalog 前缀 </li>
+<li><code>immutable</code> 和 javaModelGenerator 中含义相同 </li>
+<li><code>modeOnly</code> 用于配置是否只生成实体类 , 如果为 <code>true</code>, 就不会有 Mapper 接口 , 并覆盖属性中的 enableXXX 方法 </li>
+<li><code>rootClass</code>, <code>rootInterface</code> 和 javaModelGenerator 中的属性一样 </li>
+<li><code>runtimeCatalog</code> 运行时的 catalog, 当生成表和运行环境表的 catalog 不一样时可以使用该属性进行配置 </li>
+<li><code>runtimeSchema</code> 运行时的 schema, 当生成表和运行环境表的 schema 不一样时可以使用该属性进行配置 </li>
+<li><code>selectAllOrderByClause</code> 该属性值会追加到 <code>selectAll</code> 方法后的 SQL 中 , 直接与 order by 拼接后添加到 SQL 末尾 </li>
+<li><code>useActualColumnNames</code> 如果为 true, 那么 MBG 会使用从数据库元数据获取的列名作为生成的实体对象的属性 , 否则使用驼峰式名称 , 可以通过 columnOverride 标签显式指定 , 此时将忽略该属性 </li>
+<li><code>userColumnIndexes</code> 如果为 true, MBG 生成 resultMaps 时会使用索引而不是结果中列名的顺序 </li>
+<li><code>useCompoundPropertyNames</code> 如果为 true, MBG 生成属性名时会将列名和列备注连接起来 </li>
 </ul>
 </li>
 <li>
-<p><code>columnRenamingRule</code> 0 个或 1 个, 可以使用该标签在生成列之前对列进行重命名. 该标签有一个必选属性 <code>searchString</code>, 可选属性 <code>replaceString</code>. MBG 内部使用 <code>java.util.regex.Matcher.replaceAll</code> 来实现替换功能</p>
-</li>
-<li>
-<p><code>columnOverride</code> 0 个或多个. 该标签用于将某些默认计算的属性值更改为指定的值. 除 column 属性是必选属性</p>
+<p><code>generatedKey</code> 0 个或 1 个 , 用来指自动生成主键的属性 (identity 字段或者 sequences 序列 ), 当指定这个标签时 , MBG 将在生成 insert 的 SQL 映射文件中插入一个 selectKey 标签 , 该标签有以下属性 </p>
 <ul>
-<li><code>column</code> 必选 , 表示要重写的列名</li>
-<li><code>property</code> 要使用的 Java 属性的名称, 如果没有指定, MBG 会根据列名生成</li>
-<li><code>javaType</code> 列的属性值为完全限定的 Java 类型, 如果需要, 可以覆盖 JavaTypeResolver 计算出的类型</li>
-<li><code>jdbcType</code> 列的 JDBC 类型, 如 INTEGER, DECIMAL, NUMERIC, VARCHAR..</li>
-<li><code>typeHandler</code> 根据用户定义的需要用来处理列的类型处理器. 必须是一个继承自 TypeHandler 接口的全限定的类名. 如果没有指定或者是空白, MyBatis 会用默认的类型处理器.</li>
-<li><code>delimitedColumnName</code> 指定是否应在生成的 SQL 的列名称上增加分隔符. 如果列的名称中包含空格, MBG 会自动添加分隔符</li>
+<li><code>column</code> 必选 , 生成列的列名 </li>
+<li><code>sqlStatement</code> 必选 , 返回新值的 SQL 语句 , 如果这是一个 identity 语句 , 则可以使用一个预定义的特殊值 .(<code>Cloudscape</code>, <code>DB2</code>, <code>DB2_MF</code>, <code>Derby</code>, <code>HSQLDB</code>, <code>Informix</code>, <code>MySQL</code>, <code>SQL Server</code>, <code>SYBASE</code>, <code>JDBC</code>)</li>
+<li><code>type</code> 当 type 为 post 并且 identity 为 true 时 , 生成的 selectKey 中 order = AFTER; 当 type 为 pre, identity 只能为 false, 生成的 selectKey 中 order = BEFORE. 自动增长的列只有插入到数据库后才能得到 ID, 所以只能是 AFTER, 当使用序列时 , 只有先获取序列之后才能插入数据库 , 所以是 BEFORE</li>
+<li><code>identity</code> 当设置为 true 时 , 该列会被标记为 identity 列 , 并且 selectKey 标签会被插入在 insert 后面 . 否则 selecteKey 会被插入 insert 之前 , 默认 false</li>
 </ul>
 </li>
 <li>
-<p><code>ignoreColumn</code> 0 个或多个, 用来屏蔽不需要生成的列, column 属性指定表列名, delimitedColumnName 用于表示是否要区别大小写进行列名匹配</p>
+<p><code>columnRenamingRule</code> 0 个或 1 个 , 可以使用该标签在生成列之前对列进行重命名 . 该标签有一个必选属性 <code>searchString</code>, 可选属性 <code>replaceString</code>. MBG 内部使用 <code>java.util.regex.Matcher.replaceAll</code> 来实现替换功能 </p>
 </li>
-</ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/mybatis.html">mybatis</a>
-    </p>
-  </div>
+<li>
+<p><code>columnOverride</code> 0 个或多个 . 该标签用于将某些默认计算的属性值更改为指定的值 . 除 column 属性是必选属性 </p>
+<ul>
+<li><code>column</code> 必选 , 表示要重写的列名 </li>
+<li><code>property</code> 要使用的 Java 属性的名称 , 如果没有指定 , MBG 会根据列名生成 </li>
+<li><code>javaType</code> 列的属性值为完全限定的 Java 类型 , 如果需要 , 可以覆盖 JavaTypeResolver 计算出的类型 </li>
+<li><code>jdbcType</code> 列的 JDBC 类型 , 如 INTEGER, DECIMAL, NUMERIC, VARCHAR..</li>
+<li><code>typeHandler</code> 根据用户定义的需要用来处理列的类型处理器 . 必须是一个继承自 TypeHandler 接口的全限定的类名 . 如果没有指定或者是空白 , MyBatis 会用默认的类型处理器 .</li>
+<li><code>delimitedColumnName</code> 指定是否应在生成的 SQL 的列名称上增加分隔符 . 如果列的名称中包含空格 , MBG 会自动添加分隔符 </li>
+</ul>
+</li>
+<li>
+<p><code>ignoreColumn</code> 0 个或多个 , 用来屏蔽不需要生成的列 , column 属性指定表列名 , delimitedColumnName 用于表示是否要区别大小写进行列名匹配 </p>
+</li>
+</ul>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=MyBatis Generator XML 配置详解&amp;url=./mybatis-generator-xml-pei-zhi-xiang-jie.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./mybatis-generator-xml-pei-zhi-xiang-jie.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./mybatis-generator-xml-pei-zhi-xiang-jie.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/mybatis.html">mybatis</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

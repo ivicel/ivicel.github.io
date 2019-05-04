@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Java中static关键字以及修饰符</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html" rel="canonical" />
+
+    <meta name="description" content="Java 类中的变量会按照定义的先后顺序来进行初始化 , 并且优先于任何方法 ( 包括构造方法 ) 另外 , static 变量会优先于普通变量进行初始化 , static 变量也是按顺序 只有 static 初始化完成 , 普通变量才会初始化 1. static 修饰类...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="java">
+    <meta name="tags" content="静态static">
+    <meta name="tags" content="java修饰符">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="Java类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法) 另外, static变量会优先于普通变量进行初始化, static变量也是按顺序 只有static初始化完成, 普通变量才会初始化 1. static修饰类 // 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用 // 只能使用外部类的 static 变量和方法 public class OutterClass { public OutterClass() {} public static class InnerClass {} } 2. static修饰成员变量 // 修饰类成员变量时, 变量值会在第一次访问类时被赋值, 第一次new, 第一次访问变量 class Bowl { Bowl(int marker) { System.out.println(&#34;Bowl(&#34; + marker + &#34;)&#34;); } void f1 …" />
-<meta name="keywords" content="java, 静态static, java修饰符">
-
-<meta property="og:site_name" content="Ivicel's Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Java中static关键字以及修饰符"/>
-<meta property="og:description" content="Java类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法) 另外, static变量会优先于普通变量进行初始化, static变量也是按顺序 只有static初始化完成, 普通变量才会初始化 1. static修饰类 // 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用 // 只能使用外部类的 static 变量和方法 public class OutterClass { public OutterClass() {} public static class InnerClass {} } 2. static修饰成员变量 // 修饰类成员变量时, 变量值会在第一次访问类时被赋值, 第一次new, 第一次访问变量 class Bowl { Bowl(int marker) { System.out.println(&#34;Bowl(&#34; + marker + &#34;)&#34;); } void f1 …"/>
+<meta property="og:description" content="Java 类中的变量会按照定义的先后顺序来进行初始化 , 并且优先于任何方法 ( 包括构造方法 ) 另外 , static 变量会优先于普通变量进行初始化 , static 变量也是按顺序 只有 static 初始化完成 , 普通变量才会初始化 1. static 修饰类..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html"/>
 <meta property="og:type" content="article"/>
@@ -51,178 +82,201 @@
 <meta property="article:tag" content="java"/>
 <meta property="article:tag" content="静态static"/>
 <meta property="article:tag" content="java修饰符"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel's Ambertime &ndash; Java中static关键字以及修饰符</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Java中static关键字以及修饰符",
+  "headline": "Java中static关键字以及修饰符",
+  "datePublished": "2018-02-22 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html",
+  "description": "Java 类中的变量会按照定义的先后顺序来进行初始化 , 并且优先于任何方法 ( 包括构造方法 ) 另外 , static 变量会优先于普通变量进行初始化 , static 变量也是按顺序 只有 static 初始化完成 , 普通变量才会初始化 1. static 修饰类..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Java中static关键字以及修饰符</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 22 February 2018">Thu 22 February 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu">Java中static关键字以及修饰符</h1>
-    <p>
-      Posted on Thu 22 February 2018 in <a href="./category/java.html">Java</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <blockquote>
-<p><code>Java</code>类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法)</p>
-<p>另外, <code>static</code>变量会优先于普通变量进行初始化, <code>static</code>变量也是按顺序</p>
-<p>只有<code>static</code>初始化完成, 普通变量才会初始化</p>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <blockquote>
+<p><code>Java</code> 类中的变量会按照定义的先后顺序来进行初始化 , 并且优先于任何方法 ( 包括构造方法 )</p>
+<p> 另外 , <code>static</code> 变量会优先于普通变量进行初始化 , <code>static</code> 变量也是按顺序 </p>
+<p> 只有 <code>static</code> 初始化完成 , 普通变量才会初始化 </p>
 </blockquote>
-<h4 id="1-static">1. <code>static</code>修饰类</h4>
-<div class="codehilite"><pre><span></span><span class="c1">// 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用</span>
-<span class="c1">// 只能使用外部类的 static 变量和方法</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutterClass</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="nf">OutterClass</span><span class="o">()</span> <span class="o">{}</span>
+<h4 id="1-static">1. <code>static</code> 修饰类 </h4>
+<pre class="highlight"><code class="language-java linenums">// 修饰内部类时 , 内部类是一个嵌套类 , 不含有指向外部类的引用
+// 只能使用外部类的 static 变量和方法
+public class OutterClass {
+  public OutterClass() {}
 
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{}</span>
-<span class="o">}</span>   
-</pre></div>
+  public static class InnerClass {}
+}   </code></pre>
 
-
-<h4 id="2-static">2. <code>static</code>修饰成员变量</h4>
-<div class="codehilite"><pre><span></span><span class="c1">// 修饰类成员变量时, 变量值会在第一次访问类时被赋值, 第一次new, 第一次访问变量</span>
+<h4 id="2-static">2. <code>static</code> 修饰成员变量 </h4>
+<pre class="highlight"><code class="language-java linenums">// 修饰类成员变量时 , 变量值会在第一次访问类时被赋值 , 第一次 new, 第一次访问变量
 
 
 
-<span class="kd">class</span> <span class="nc">Bowl</span> <span class="o">{</span>
-    <span class="n">Bowl</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Bowl(&quot;</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
+class Bowl {
+    Bowl(int marker) {
+        System.out.println("Bowl(" + marker + ")");
+    }
 
-    <span class="kt">void</span> <span class="nf">f1</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;class Bowl: f1(&quot;</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    void f1(int marker) {
+        System.out.println("class Bowl: f1(" + marker + ")");
+    }
+}
 
-<span class="kd">class</span> <span class="nc">Table</span> <span class="o">{</span>
-    <span class="kd">static</span> <span class="n">Bowl</span> <span class="n">bowl1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bowl</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="n">Table</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Table()&quot;</span><span class="o">);</span>
-        <span class="n">bowl1</span><span class="o">.</span><span class="na">f1</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="o">}</span>
+class Table {
+    static Bowl bowl1 = new Bowl(1);
+    Table() {
+        System.out.println("Table()");
+        bowl1.f1(1);
+    }
 
-    <span class="kt">void</span> <span class="nf">f2</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;class Table: f2(&quot;</span> <span class="o">+</span> <span class="n">marker</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
+    void f2(int marker) {
+        System.out.println("class Table: f2(" + marker + ")");
+    }
 
-    <span class="kd">static</span> <span class="n">Bowl</span> <span class="n">bow2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bowl</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-<span class="o">}</span>
+    static Bowl bow2 = new Bowl(2);
+}
 
-<span class="kd">class</span> <span class="nc">Cupboard</span> <span class="o">{</span>
-    <span class="n">Bowl</span> <span class="n">bowl3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bowl</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-    <span class="kd">static</span> <span class="n">Bowl</span> <span class="n">bowl4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bowl</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
-    <span class="n">Cupboard</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Cupboard()&quot;</span><span class="o">);</span>
-        <span class="n">bowl4</span><span class="o">.</span><span class="na">f1</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-    <span class="o">}</span>
+class Cupboard {
+    Bowl bowl3 = new Bowl(3);
+    static Bowl bowl4 = new Bowl(4);
+    Cupboard() {
+        System.out.println("Cupboard()");
+        bowl4.f1(2);
+    }
 
-    <span class="kt">void</span> <span class="nf">f3</span><span class="o">(</span><span class="kt">int</span> <span class="n">marker</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Cupboard&quot;</span><span class="o">);</span>
-        <span class="n">bowl4</span><span class="o">.</span><span class="na">f1</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-    <span class="o">}</span>
+    void f3(int marker) {
+        System.out.println("Cupboard");
+        bowl4.f1(2);
+    }
 
-    <span class="kd">static</span> <span class="n">Bowl</span> <span class="n">bowl5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bowl</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
-<span class="o">}</span>
+    static Bowl bowl5 = new Bowl(5);
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticTest</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Creating new Cupboard() in main.....first&quot;</span><span class="o">);</span>
-        <span class="k">new</span> <span class="n">Cupboard</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Creating new Cupborad() in main.....second&quot;</span><span class="o">);</span>
-        <span class="k">new</span> <span class="n">Cupboard</span><span class="o">();</span>
-        <span class="n">table</span><span class="o">.</span><span class="na">f2</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-        <span class="n">cupboard</span><span class="o">.</span><span class="na">f3</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="o">}</span>
+public class StaticTest {
+    public static void main(String[] args) {
+        System.out.println("Creating new Cupboard() in main.....first");
+        new Cupboard();
+        System.out.println("Creating new Cupborad() in main.....second");
+        new Cupboard();
+        table.f2(1);
+        cupboard.f3(1);
+    }
 
-    <span class="kd">static</span> <span class="n">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Table</span><span class="o">();</span>
-    <span class="kd">static</span> <span class="n">Cupboard</span> <span class="n">cupboard</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Cupboard</span><span class="o">();</span>
-<span class="o">}</span>
+    static Table table = new Table();
+    static Cupboard cupboard = new Cupboard();
+}
 
-<span class="c1">// 输出</span>
-<span class="cm">/*</span>
-<span class="cm">Bowl(1)</span>
-<span class="cm">Bowl(2)</span>
-<span class="cm">Table()</span>
-<span class="cm">class Bowl: f1(1)</span>
-<span class="cm">Bowl(4)</span>
-<span class="cm">Bowl(5)</span>
-<span class="cm">Bowl(3)</span>
-<span class="cm">Cupboard()</span>
-<span class="cm">class Bowl: f1(2)</span>
-<span class="cm">Creating new Cupboard() in main.....first</span>
-<span class="cm">Bowl(3)</span>
-<span class="cm">Cupboard()</span>
-<span class="cm">class Bowl: f1(2)</span>
-<span class="cm">Creating new Cupborad() in main.....second</span>
-<span class="cm">Bowl(3)</span>
-<span class="cm">Cupboard()</span>
-<span class="cm">class Bowl: f1(2)</span>
-<span class="cm">class Table: f2(1)</span>
-<span class="cm">Cupboard</span>
-<span class="cm">class Bowl: f1(2)</span>
-<span class="cm">*/</span>
-</pre></div>
+// 输出
+/*
+Bowl(1)
+Bowl(2)
+Table()
+class Bowl: f1(1)
+Bowl(4)
+Bowl(5)
+Bowl(3)
+Cupboard()
+class Bowl: f1(2)
+Creating new Cupboard() in main.....first
+Bowl(3)
+Cupboard()
+class Bowl: f1(2)
+Creating new Cupborad() in main.....second
+Bowl(3)
+Cupboard()
+class Bowl: f1(2)
+class Table: f2(1)
+Cupboard
+class Bowl: f1(2)
+*/</code></pre>
 
-
-<p>在程序运行后, 首先会触发类<code>StaticTest</code>的两个<code>static</code>变量的初始化</p>
+<p> 在程序运行后 , 首先会触发类 <code>StaticTest</code> 的两个 <code>static</code> 变量的初始化 </p>
 <p><code>static Table table = new Table()</code></p>
-<p>这句会使类<code>Table</code>中的<code>static</code>变量初始化, 而后在<code>cupboard</code>的初始化中可以看到<code>static</code>的<code>bowl4</code> <code>bowl5</code>会优先非<code>static</code>初始化</p>
+<p> 这句会使类 <code>Table</code> 中的 <code>static</code> 变量初始化 , 而后在 <code>cupboard</code> 的初始化中可以看到 <code>static</code> 的 <code>bowl4</code> <code>bowl5</code> 会优先非 <code>static</code> 初始化 </p>
 <p><code>static Cupboard cupboard = new Cupboard()</code></p>
-<h4 id="3-static">3. <code>static</code>修饰代码块</h4>
-<div class="codehilite"><pre><span></span><span class="c1">// static 在修饰代码块时同修饰成员方法是一样的, 只初始化一次</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticTest</span> <span class="o">{</span>
-    <span class="kd">static</span> <span class="kt">int</span> <span class="n">n</span><span class="o">;</span>
-    <span class="kd">static</span> <span class="kt">int</span> <span class="n">m</span><span class="o">;</span>
+<h4 id="3-static">3. <code>static</code> 修饰代码块 </h4>
+<pre class="highlight"><code class="language-java linenums">// static 在修饰代码块时同修饰成员方法是一样的 , 只初始化一次
+public class StaticTest {
+    static int n;
+    static int m;
 
-    <span class="kd">static</span> <span class="o">{</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="mi">6</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
+    static {
+        n = 5;
+        m = 6;
+    }
+}</code></pre>
 
-
-<h4 id="4-static">4. <code>static</code>修饰类方法</h4>
-<p><code>static</code>修饰的类方法可以使用<code>类名.方法名</code>进行访问, 相当一个全局方法. <code>static</code>方法只能访问<code>static</code>变量和调用 <code>static</code>方法</p>
-<h4 id="5-java">5. <code>Java</code> 修饰类</h4>
+<h4 id="4-static">4. <code>static</code> 修饰类方法 </h4>
+<p><code>static</code> 修饰的类方法可以使用 <code> 类名 . 方法名 </code> 进行访问 , 相当一个全局方法 . <code>static</code> 方法只能访问 <code>static</code> 变量和调用 <code>static</code> 方法 </p>
+<h4 id="5-java">5. <code>Java</code> 修饰类 </h4>
 <table>
 <thead>
 <tr>
-<th>修饰符</th>
-<th>当前类</th>
-<th>同一包内</th>
-<th>子孙类</th>
-<th>其他包</th>
+<th> 修饰符 </th>
+<th> 当前类 </th>
+<th> 同一包内 </th>
+<th> 子孙类 </th>
+<th> 其他包 </th>
 </tr>
 </thead>
 <tbody>
@@ -256,52 +310,56 @@
 </tr>
 </tbody>
 </table>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/java.html">java</a>
-      <a href="./tag/jing-tai-static.html">静态static</a>
-      <a href="./tag/javaxiu-shi-fu.html">java修饰符</a>
-    </p>
-  </div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Java中static关键字以及修饰符&amp;url=./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/java.html">java</a><a href="./tag/jing-tai-static.html">静态static</a><a href="./tag/javaxiu-shi-fu.html">java修饰符</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel's Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>
