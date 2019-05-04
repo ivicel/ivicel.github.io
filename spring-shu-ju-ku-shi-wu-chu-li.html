@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Spring 数据库事务处理">Spring 数据库事务处理</a><ul><li><a class="toc-href" href="#1" title="1. 事务的传播行为">1. 事务的传播行为</a></li><li><a class="toc-href" href="#11-spring" title="1.1 Spring 中七种事务传播行为">1.1 Spring 中七种事务传播行为</a></li><li><a class="toc-href" href="#2" title="2. 传播行为的代码测试">2. 传播行为的代码测试</a><ul><li><a class="toc-href" href="#21-propagation_required" title="2.1 PROPAGATION_REQUIRED 行为">2.1 PROPAGATION_REQUIRED 行为</a></li><li><a class="toc-href" href="#22-propagation_required_new" title="2.2 PROPAGATION_REQUIRED_NEW 行为">2.2 PROPAGATION_REQUIRED_NEW 行为</a></li><li><a class="toc-href" href="#23-propagation_nested" title="2.3 PROPAGATION_NESTED 行为">2.3 PROPAGATION_NESTED 行为</a></li></ul></li><li><a class="toc-href" href="#2-transactional_1" title="2. @Transactional 自调用类中方法失效问题">2. @Transactional 自调用类中方法失效问题</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -166,15 +169,15 @@
 <tbody>
 <tr>
 <td><strong><code>PROPAGATION_REQUIRED</code></strong></td>
-<td>1. 如果当前没有事务 , 则新建一个事务 <br />2. 有的话就则加入到这个事务中 </td>
+<td>1. 如果当前没有事务 , 则新建一个事务 <br/>2. 有的话就则加入到这个事务中 </td>
 </tr>
 <tr>
 <td>PROPAGATION_SUPPORTS</td>
-<td> 有则沿用 , 没有也不新建 <br />1. 如果当前存在事务 , 则沿用当前事务 <br />2. 如果当前没有事务 , 就以非事务方式运行 </td>
+<td> 有则沿用 , 没有也不新建 <br/>1. 如果当前存在事务 , 则沿用当前事务 <br/>2. 如果当前没有事务 , 就以非事务方式运行 </td>
 </tr>
 <tr>
 <td>PROPAGATION_MANDATORY</td>
-<td> 确保必须使用当前事务 <br />1. 如果当前存在 , 使用当前事务 . <br />2. 如果当前没有事务 , 就抛出异常 </td>
+<td> 确保必须使用当前事务 <br/>1. 如果当前存在 , 使用当前事务 . <br/>2. 如果当前没有事务 , 就抛出异常 </td>
 </tr>
 <tr>
 <td><strong><code>PROPAGATION_REQUIRES_NEW</code></strong></td>
@@ -182,15 +185,15 @@
 </tr>
 <tr>
 <td>PROPAGATION_NOT_SUPPORTED</td>
-<td> 确保以非事务运行 <br />1. 当前不存在事务 , 以非事务方式运行 <br />2. 如果当前存在事务则先挂起当前事务 , 以非事务运行 </td>
+<td> 确保以非事务运行 <br/>1. 当前不存在事务 , 以非事务方式运行 <br/>2. 如果当前存在事务则先挂起当前事务 , 以非事务运行 </td>
 </tr>
 <tr>
 <td>PROPAGATION_NEVER</td>
-<td> 确保当前没有事务 <br />1. 以非事务方式运行 <br />2. 如果当前存在事务则抛出异常 </td>
+<td> 确保当前没有事务 <br/>1. 以非事务方式运行 <br/>2. 如果当前存在事务则抛出异常 </td>
 </tr>
 <tr>
 <td><strong><code>PROPAGATION_NESTED</code></strong></td>
-<td>1. 如果当前存在事务 , 是嵌套在事务内运行 <br />2. 如果当前没有事务 , 创建新的事务来运行 , 但与 <code>PROPAGATION_REQUIRED</code> 不同的是 , 内部方法发生的异常不会当前方法的 SQL</td>
+<td>1. 如果当前存在事务 , 是嵌套在事务内运行 <br/>2. 如果当前没有事务 , 创建新的事务来运行 , 但与 <code>PROPAGATION_REQUIRED</code> 不同的是 , 内部方法发生的异常不会当前方法的 SQL</td>
 </tr>
 </tbody>
 </table>
@@ -215,7 +218,6 @@ public Class User2 {
     private String name;
     // getters and setters...
 }</code></pre>
-
 <h5 id="21-propagation_required">2.1 <code>PROPAGATION_REQUIRED</code> 行为 </h5>
 <pre class="highlight"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中 , 传播都为 PROPAGATION_REQUIRED
 public class User1Service {
@@ -238,7 +240,6 @@ public class User2Service {
         throw new RuntimeException(" 手动抛出异常 ");
     }
 }</code></pre>
-
 <ul>
 <li> 在外围非事务的方法中调用 , 各个事务都是相对独立的 , 成功或失败都不互相干扰 </li>
 </ul>
@@ -268,7 +269,6 @@ public void test2(){
     // 所以 user1Service 插入成功 , user2Service 失败
     user2Service.addRequiredWithException(user2);
 }</code></pre>
-
 <ul>
 <li> 在外围调用方法是开启事务时 , 这时的要将被调用方法加入到这个事务当中而不是自己新创建事务 </li>
 </ul>
@@ -323,7 +323,6 @@ public void test2(){
 
     }
 }</code></pre>
-
 <h5 id="22-propagation_required_new">2.2 <code>PROPAGATION_REQUIRED_NEW</code> 行为 </h5>
 <pre class="highlight"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中
 public class User1Service {
@@ -352,7 +351,6 @@ public class User2Service {
         throw new RuntimeException(" 手动抛出异常 ");
     }
 }</code></pre>
-
 <ul>
 <li> 外围调用方法没有添加事务 </li>
 </ul>
@@ -381,7 +379,6 @@ public void test2() {
     // 内部方法二自己抛出异常 , 自回滚自己的事务
     user2Service.addRequiresNewWithException(user2);
 }</code></pre>
-
 <ul>
 <li> 外围调用方法是在事务中 </li>
 </ul>
@@ -439,7 +436,6 @@ public void test3() {
     } catch (Exception e) {
     }
 }</code></pre>
-
 <h5 id="23-propagation_nested">2.3 <code>PROPAGATION_NESTED</code> 行为 </h5>
 <p> 该行为在外围开启事务时 , 内部方法嵌套在外围事务中运行 , 外围事务的回溯导致内部方法也一起回滚 ; 而内部方法的事务则可以自己单独回滚 , 不用影响到外围的事务 </p>
 <blockquote>
@@ -464,7 +460,6 @@ public class User2Service {
         throw new RuntimeException(" 抛出异常 ");
     }  
 }</code></pre>
-
 <ul>
 <li> 外围方法没有开启事务 </li>
 </ul>
@@ -495,7 +490,6 @@ public void test2() {
     // 创建新事务 , 自己回滚事务 , 插入失败
     user2Service.addNestedWithException(user2);
 }</code></pre>
-
 <ul>
 <li> 外围方法开启事务 </li>
 </ul>
@@ -544,8 +538,7 @@ public void test2() {
         user2Service.addNestedWithException(user2);
     } catch(Exception e) {}
 }</code></pre>
-
-<h4 id="2-transactional">2. <code>@Transactional</code> 自调用类中方法失效问题 </h4>
+<h4 id="2-transactional_1">2. <code>@Transactional</code> 自调用类中方法失效问题 </h4>
 <p>Spring 的事务处理是基于 AOP, 通过动态代理生成一个类的代理对象 , 而当我们在类的方法中再调用同一个类的事务方法 , 其实际还是在同一个事务中 , 是类自身的调用 , 而不是代理调用 , 这样就还是在同一次 AOP 中 .</p>
 <pre class="highlight"><code class="language-java linenums">@Service("userService")
 public class UserServiceImple implements IUserService {
@@ -563,7 +556,6 @@ public class UserServiceImple implements IUserService {
             userMapper.insert(user); 
     }
 }</code></pre>
-
 <p> 也可以通过手动每次获取类的代理对象 , 来手动调用类的方法 </p>
 <pre class="highlight"><code class="language-java linenums">@Service("userService")
 public class UserServiceImple implements IUserService, ApplicationContextAware {

@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android Contnet Provider内容提供器">Android Contnet Provider内容提供器</a><ul><li><a class="toc-href" href="#1-content-provider" title="1. Content Provider 的优势:">1. Content Provider 的优势:</a></li><li><a class="toc-href" href="#2-content-uri" title="2. Content URI 的写法:">2. Content URI 的写法:</a><ul><li><a class="toc-href" href="#mime" title="MIME的写法">MIME的写法</a></li><li><a class="toc-href" href="#androidmanifestxml" title="在AndroidManifest.xml中写法">在AndroidManifest.xml中写法</a></li><li><a class="toc-href" href="#content-provider" title="创建一个自定义的Content Provider">创建一个自定义的Content Provider</a></li><li><a class="toc-href" href="#contentresolver-content-provider" title="除了使用ContentResolver外, 其他几种访问Content Provider方法">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li><li><a class="toc-href" href="#contract-classses" title="Contract Classses">Contract Classses</a></li></ul></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -193,7 +196,7 @@
 <p><code>Uri singleUri = ContentUris.withAppendedId(MyProvider.CONTENT_URI, id)</code></p>
 </blockquote>
 <h4 id="mime"><code>MIME</code> 的写法 </h4>
-<hr />
+<hr/>
 <blockquote>
 <ol>
 <li> 必须以 <code>vnd</code> 开头 </li>
@@ -206,7 +209,7 @@
 <p><code>ContentResolver.CURSOR_ITEM_BASE_TYPE = "vnd.android.cursor.item"</code></p>
 <p><code>ContentResolver.CURSOR_DIR_BASE_TYPE = "vnd.android.cursor.dir"</code></p>
 <h4 id="androidmanifestxml"> 在 <code>AndroidManifest.xml</code> 中写法 </h4>
-<hr />
+<hr/>
 <p> 当非同一个程序中需要使用 <code>Content Provider</code> 时 , 必须要在 <code>AndroidManifest.xml</code> 声明使用权限 . 比如读写用户字典 :<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
 <p> 然而如果在同一程序中 , 无论是否声明自定义权限 , 原程序都有其读写的权限 </p>
 <pre class="highlight"><code class="linenums">&lt;provider 
@@ -240,9 +243,8 @@
           android:exported="false"/&gt;
 
 </code></pre>
-
 <h4 id="content-provider"> 创建一个自定义的 <code>Content Provider</code></h4>
-<hr />
+<hr/>
 <ol>
 <li> 自定义一个类继承 <code>ContentProvider</code>, 实现 <code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code> 方法 </li>
 <li> 使用 <code>UriMatcher</code> 类快速生成或者匹配 <code>uri</code></li>
@@ -332,9 +334,8 @@ public class MyProvider extends ContentProvider {
     }
 }
 </code></pre>
-
 <h4 id="contentresolver-content-provider"> 除了使用 <code>ContentResolver</code> 外 , 其他几种访问 <code>Content Provider</code> 方法 </h4>
-<hr />
+<hr/>
 <ul>
 <li><code>Batch access</code></li>
 </ul>
@@ -359,7 +360,7 @@ public class MyProvider extends ContentProvider {
 </blockquote>
 <p> 又例如 , 即使没有声明 <code>Manifest.permission.READ_CONTACTS</code>, 也可以使用一个 <code>Intent.ACTION_PICK</code> 来挑选个联系人加上 <code>ContactsContrac.RawContacts.CONTENT_ITEM_TYPE</code> 这个 <code>uri</code> 来获取一个联系人信息 . 由于这些操作是在前台 <code>UI</code> 上执行的 , 用户可以看到并且选择联系人是自己操作的 , 相当用户同意授予了其读取联系人的权限 </p>
 <h4 id="contract-classses"><code>Contract Classses</code></h4>
-<hr />
+<hr/>
 <p> 所谓 <code>Contract Classes</code> 是一些定义了一些 <code>constants</code>, <code>content URIs</code>, <code>column names</code>, <code>intent actions</code></p>
 <p> 例如 <code>UserDictionary.Words.CONTENT_URI</code>, <code>UserDictionary.Words</code>, <code>ContactsContract</code></p>
             </section>

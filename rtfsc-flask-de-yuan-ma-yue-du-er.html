@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="RTFSC: Flask 的源码阅读(二)">RTFSC: Flask 的源码阅读(二)</a><ul><li><a class="toc-href" href="#1" title="1. 路由派发">1. 路由派发</a></li><li><a class="toc-href" href="#2" title="2. 请求异常处理">2. 请求异常处理</a></li><li><a class="toc-href" href="#3" title="3. 结束派发">3. 结束派发</a></li><li><a class="toc-href" href="#3-request-current_app-g-session" title="3. request, current_app, g, session 全局代理">3. request, current_app, g, session 全局代理</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -171,7 +174,6 @@
     except Exception as e:
         rv = self.handle_user_exception(e)
     return self.finalize_request(rv)</code></pre>
-
 <ul>
 <li> 回调程序运行后 , 第一次有 request 到达时的注册方法 </li>
 </ul>
@@ -188,7 +190,6 @@
     for func in self.before_first_request_funcs:
         func()
     self._got_first_request = True</code></pre>
-
 <ul>
 <li>
 <p> 如果我们安装了 <code>blinker</code> , 这是一个同步的事件派发器 , flask 为我们注册了一些事件 , 像 <code>request-started</code>, <code>request-finished</code>, 以便我们在可以在程序外监听 , 如果我们没有安装 <code>blinker</code>, 不会触发这些事件 . 事件在 <code>flask.signals</code> 中 </p>
@@ -232,7 +233,6 @@ def raise_routing_exception(self, request):
     from .debughelpers import FormDataRoutingRedirect
     raise FormDataRoutingRedirect(request)
 </code></pre>
-
 <h4 id="2">2. 请求异常处理 </h4>
 <p> 如果在请求处理是发生异常 , 会抛到 <code>full_dispatch_request()</code> 中 , 在 <code>handle_user_exception()</code> 中处理 </p>
 <pre class="highlight"><code class="language-python linenums">def handle_user_exception(self, e):
@@ -285,7 +285,6 @@ def raise_routing_exception(self, request):
         return InternalServerError()
     # 使用我们自己的 500 处理方法
     return self.finalize_request(handler(e), from_error_handler=True)   </code></pre>
-
 <h4 id="3">3. 结束派发 </h4>
 <p> 如果我们在 <code>handle_user_exception</code> 不向上抛出异常 , 将会运行到 <code>finalize_request()</code></p>
 <pre class="highlight"><code class="language-python linenums">def finalize_request(self, rv, from_error_handler=False):
@@ -306,7 +305,6 @@ def raise_routing_exception(self, request):
         self.logger.exception('Request finalizing failed with an '
                               'error while handling an error')
     return response</code></pre>
-
 <p> 返回到 <code>Flask.wsgi_app</code> 中 , 然后依设置来决定是否弹出 <code>RequestContext</code></p>
 <pre class="highlight"><code class="language-python linenums">def auto_pop(self, exc):
     # 通过设置 flask._preserve_context 来保留 context
@@ -356,7 +354,6 @@ def pop(self, exc=_sentinel):
         assert rv is self, 'Popped wrong request context.  ' \
             '(%r instead of %r)' % (rv, self)
 </code></pre>
-
 <p> 如果在不保留 RequestContext 的话 , 每次请求都会弹出 ReqeustContext 和 AppContext, 所以这也说明了如果我们在请求处理方法之外使用 RequestContext 或 AppContext 的话 , 就会发生 Working outside of request context 这种情况 .</p>
 <h4 id="3-request-current_app-g-session">3. <code>request</code>, <code>current_app</code>, <code>g</code>, <code>session</code> 全局代理 </h4>
 <p> 从由 <code>_app_ctx_stack</code> 获得的 ,  这两个代理 , 特别是 <code>g</code> 代理 , 一般我们把一个全局的东西 </p>
@@ -367,7 +364,6 @@ def pop(self, exc=_sentinel):
 <p> 当使用 <code>with Flask.app_context()</code> 的时候 , 在 <code>with</code> 语句内 <code>current_app</code> 便会指向当前的 <code>Flask</code> 对象 .  我们也知道在请求到来的时候 , <code>RequestContext.push()</code> 也会把 <code>AppContext</code> 压入栈中 , 此时 <code>current_app</code> 也是可以使用的 . <code>g</code> 对象则是 <code>AppContext</code> 中的一个 </p>
 <pre class="highlight"><code class="language-python linenums">current_app = LocalProxy(_find_app)
 g = LocalProxy(_partial(_loopku_app_object, 'g'))</code></pre>
-
 <p> 从由 <code>_request_ctx_stack</code> 获得的 </p>
 <ul>
 <li>
@@ -380,7 +376,6 @@ g = LocalProxy(_partial(_loopku_app_object, 'g'))</code></pre>
 <pre class="highlight"><code class="language-python linenums"># 这两个都是代理对象 , 经过 RequestContext 中取得其内部的值
 request = LocalProxy(partial(_lookup_req_object, 'request'))
 session = LocalProxy(partial(_lookup_req_object, 'session'))</code></pre>
-
 <p> 在 <code>_lookup_xx_object</code> 中都是调用对应的 <code>_ctx_xx_stack.top</code>, 这里检查了 <code>top</code> 是否存在 , 不存在的话抛出 <code>RuntimeError</code></p>
 <pre class="highlight"><code class="language-python linenums">class LocalProxy(object):
     """ 代理类的源码 , 主要是 __getattr__, __getitem__, __setitem__ 这些对应到内部的
@@ -414,7 +409,6 @@ session = LocalProxy(partial(_lookup_req_object, 'session'))</code></pre>
 
     def __setitem__(self, key, value):
         self._get_current_object()[key] = value</code></pre>
-
 <p> 所以这也说明了为什么当 outside context, <code>current_app</code>, <code>request</code>, <code>session</code>, <code>g</code> 这些代理都是不可用的 , 这些代理都是去 <code>_request_ctx_stack</code> 或 <code>_app_ctx_stack</code> 查找对应的值 . 当我们使用 <code>with flaks_app.app_context()</code> 的时候 , 会帮我们压入一个 <code>AppContext</code> 来使用 , 并帮我们管理上下文 . </p>
             </section>
 

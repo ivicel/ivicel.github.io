@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="View 事件体系">View 事件体系</a><ul><li><a class="toc-href" href="#view" title="view坐标和滑动方法">view坐标和滑动方法</a></li><li><a class="toc-href" href="#view_1" title="view事件的分发体系">view事件的分发体系</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -179,7 +182,6 @@ int yVelocity = (int)vt.getYVelocity();       // 纵向速度 , 手指向上滑�
 /* 回收内存 */
 vt.clear();
 vt.recycle();</code></pre>
-
 <ul>
 <li> 手势检测 <code>GestureDetector</code>, 单击 , 滑动 , 长按 , 双击 </li>
 </ul>
@@ -188,7 +190,6 @@ GestureDetector mGestureDetector = new GestureDetector(context);
 // 设置是否需要长按
 mGestureDetector.setIsLongpressEnabled(false);
 return mGestureDetector.onTouchEvent(event);</code></pre>
-
 <ul>
 <li><code>GestureDetector.OnGestureListener</code> 接口 <ol>
 <li><code>onDown</code> 手指触摸到屏幕时 . 由一个 <code>ACTION_DOWN</code> 触发 </li>
@@ -274,7 +275,6 @@ return mGestureDetector.onTouchEvent(event);</code></pre>
          }
      }
  }</code></pre>
-
 <h5 id="view_1"><code>view</code> 事件的分发体系 </h5>
 <p> 同一事件序列是指手指接触屏幕的那一刻起 , 到手指离开屏幕的进结束 , 这其中产的一系列事件 . 这包括 <code>ACTION_DOWN</code> 和 0 个或多个 <code>ACTION_MOVE</code> 和 <code>ACTION_UP</code> 事件 . </p>
 <p> 在默认不做特殊处理的情况下一个事件序列只能被一个 <code>view</code> 处理 </p>
@@ -309,12 +309,10 @@ public boolean superDispatchTouchEvent(MotionEvent ev) {
     /* mDecor 即 DecorView 类 */
     return mDecor.superDispatchTouchEvent(ev); 
 }</code></pre>
-
 <p><code>DecorView</code> 继承了 <code>FrameLayout</code> 并实现了 <code>RootViewSurfaceTracker</code>, <code>WindowCallbacks</code>. <code>DecorView</code> 即是屏幕的总父 <code>view</code>, 包括了标题栏和内容部分 , 即是 <code>setContentView</code> 的父 <code>view</code>. 其在接收到 <code>view</code> 事件后 , 会继续向下派发 , 由于 <code>FrameLayout</code> 并没覆写这个方法 , 所以最终传到父 <code>ViewGroup</code> 来处理 .   (<del> 这火传的 2333333</del>)</p>
 <pre class="highlight"><code class="language-java linenums">public boolean superDispatchTouchEvent(MotionEvent ev) {
     return super.dispatchTouchEvent(ev);
 }</code></pre>
-
 <p><code>ViewGroup#dispatchTouchEvent</code>. <code>ViewGroup</code> 会判断是否要向下一层 <code>view</code> 传递事件 , 这样一层一层如此循环 , 最终完成整个事件的分发 .</p>
 <pre class="highlight"><code class="language-java linenums">// ViewGroup#dispatchTouchEvent
 
@@ -364,7 +362,6 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
     /* ......... */
     }
 }</code></pre>
-
 <p> 由以上可以看出 , <code>ViewGroup#onInterceptTouchEvent</code> 并不是每次都会被调用到 </p>
 <ul>
 <li>
@@ -393,7 +390,6 @@ public boolean onInterceptTouchEvent(ev) {
     }
     return false;
 }</code></pre>
-
 <p><code>ViewGroup#dispatchTouchEvent</code> 中如果没有中断派发时 , 查找接收的子 <code>view</code>, 如果查找到了 , 就调用其 <code>dispatchTouchEvent</code>, 没有找到则调用 <code>super.dispatchTouchEvent</code>, 其实就是 <code>View#dispatchTouchEvent</code></p>
 <p> 来看 <code>View#dispatchTouchEvent</code> 的代码 . 由于 <code>View</code> 作为 <code>ViewGroup</code> 的父类 , 所以该方法作用在于两方面 .</p>
 <ul>
@@ -463,7 +459,6 @@ public boolean dispatchTouchEvent(MotionEvent event) {
     }
     return result;
 }</code></pre>
-
 <p> 来看 <code>View#onTouchEvent</code></p>
 <pre class="highlight"><code class="language-java linenums">// View#onTouchEvent
 
@@ -639,7 +634,6 @@ public boolean onTouchEvent(MotionEvent event) {
     }
     return false;
 }</code></pre>
-
 <p> 事件分发的一些总结 :</p>
 <ol>
 <li><code>ACTION_DOWN</code> 是一个 <strong> 特殊 </strong> 的事件 . 如果 <code>View</code> 只消耗了 <code>ACTION_DOWN</code> 事件 (<strong> 返回 true</strong>), 那么序列里接下来的事件全都交给该 <code>View</code> 来消耗 .</li>
@@ -664,7 +658,7 @@ public boolean onTouchEvent(MotionEvent event) {
 <li><a href="http://blog.csdn.net/yanbober/article/details/50419117">http://blog.csdn.net/yanbober/article/details/50419117</a></li>
 <li><a href="https://juejin.im/entry/571a591a2e958a006be9f473">https://juejin.im/entry/571a591a2e958a006be9f473</a></li>
 <li><a href="http://blog.csdn.net/carson_ho/article/details/54136311">http://blog.csdn.net/carson_ho/article/details/54136311</a></li>
-<li>&lt;<Android 开发艺术探索 >&gt;</li>
+<li>&lt;<android 开发艺术探索 >&gt;</android 开发艺术探索 ></li>
 </ol>
             </section>
 

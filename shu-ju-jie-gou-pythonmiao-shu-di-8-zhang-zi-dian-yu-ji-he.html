@@ -156,6 +156,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="数据结构(Python描述) 第 8 章 字典与集合">数据结构(Python描述) 第 8 章 字典与集合</a><ul><li><a class="toc-href" href="#1" title="1. 字典的线性表实现">1. 字典的线性表实现</a></li><li><a class="toc-href" href="#2" title="2. 基于散列表的实现">2. 基于散列表的实现</a><ul><li><a class="toc-href" href="#21" title="2.1 简述">2.1 简述</a></li><li><a class="toc-href" href="#22" title="2.2 冲突问题">2.2 冲突问题</a></li><li><a class="toc-href" href="#23" title="2.3 散列函数">2.3 散列函数</a></li><li><a class="toc-href" href="#24" title="2.4 冲突的解决">2.4 冲突的解决</a></li></ul></li><li><a class="toc-href" href="#3_1" title="3. 集合">3. 集合</a><ul><li><a class="toc-href" href="#31" title="3.1 简单线性表实现">3.1 简单线性表实现</a></li><li><a class="toc-href" href="#32" title="3.2 散列表实现">3.2 散列表实现</a></li></ul></li><li><a class="toc-href" href="#4-python-dict-set_1" title="4. Python 中的 dict 和 set">4. Python 中的 dict 和 set</a></li><li><a class="toc-href" href="#5" title="5. 二叉排序树">5. 二叉排序树</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -227,7 +230,7 @@
 <li><strong> 溢出区方法 </strong>: 设置一个溢出存储区 , 一般是一个线性表 . 当发生冲突时 , 就把这个冲突的后来者放入来溢出存储区中 . 然后在查找的时候 , 查找到的是原先的冲突项 , 如果槽是空说明值不存在 . 如果是非空 , 对比其中的数值标志 , 不相同的话 , 说明先前有过冲突 , 再去溢出区查找 , 直到找到或者找不到 . 使用这种方法 , 当溢出区增大时 , 散列表性能会线性下降 </li>
 <li><strong> 桶散列 </strong>:  我们假定散列中都有自己一个指针指向一个链表 , 当发生冲突时 , 我们就把新来的 key 加到指针指向的链表中 , 这样我们在查找时 , 如果链表长度不是 1, 那么按顺序遍历链表即可 .</li>
 </ul>
-<h4 id="3">3. 集合 </h4>
+<h4 id="3_1">3. 集合 </h4>
 <h5 id="31">3.1 简单线性表实现 </h5>
 <p> 使用线性表 , 也就是数组 , 链表之类的来实现集合 , 简单 , 快捷 , 这两种实现性能一致的 </p>
 <ul>
@@ -239,7 +242,7 @@
 <p> 如果我们让线性表总是保持其有序 , 这样在查找的时候使用二分查找可以使用之降到 <code>O(logN)</code></p>
 <h5 id="32">3.2 散列表实现 </h5>
 <p> 我们可以使用散列表来实现集合 , 这样查找操作就变成了 <code>O(1)</code>. 在交集 , 并集 , 差集操作中 , 只要 <code>O(m + n)</code></p>
-<h4 id="4-python-dict-set">4. Python 中的 dict 和 set</h4>
+<h4 id="4-python-dict-set_1">4. Python 中的 dict 和 set</h4>
 <p> 在 CPython 中这两者都是使用散列方法实现的 </p>
 <ul>
 <li>dict 类型的 key 是一个不可变对象 , 不可变对象都实现了 hashable 方法 . 值可以是任意对象 </li>

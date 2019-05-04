@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="RTFSC: Flask 的源码阅读(一)">RTFSC: Flask 的源码阅读(一)</a><ul><li><a class="toc-href" href="#1-wsgi" title="1. 从 WSGI 开始">1. 从 WSGI 开始</a></li><li><a class="toc-href" href="#2" title="2. 请求上下文都初看">2. 请求上下文都初看</a></li><li><a class="toc-href" href="#3-requestcontext-appcontext" title="3. 所以什么是上下文: RequestContext, AppContext">3. 所以什么是上下文: RequestContext, AppContext</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -170,11 +173,9 @@ def index():
 
 if __name__ == '__main__':
     app.run()</code></pre>
-
 <p> 在 <code>run()</code> 方法中可以看到调用了 <code>werkzeug.serving.run_simple()</code> 来运行 , 传入的的 <code>WSGI</code> 应用就是 <code>self</code> 也就是 <code>Flask</code> 对象 . 根据 <code>WSGI</code> 协议 , 其必定是一个 <code>callable_appliaction(environ, start_response)</code>. 所以下来查看类对象的 <code>__call__()</code> 方法 . 可以看到真正的 <code>WSGI</code> 定义是 <code>Flask.wsgi_app()</code> 方法 . </p>
 <p> 代码文档也说明了这样定义的原因 , 就是方便我们使用时做 <code>Middleware</code>, 只要 </p>
 <pre class="highlight"><code class="language-python linenums">app.wsgi_app = MyMiddleware(app.wsgi_app)</code></pre>
-
 <p> 这样我们依旧还能使用 <code>Flask</code> 来方便的处理各种 HTTP 请求 .</p>
 <pre class="highlight"><code class="language-python linenums">def wsgi_app(self, environ, start_response):
     # 生成请求上下文
@@ -203,7 +204,6 @@ if __name__ == '__main__':
             error = None
         # 请求完毕时 , 将请求出栈
         ctx.auto_pop(error)</code></pre>
-
 <h4 id="2">2. 请求上下文都初看 </h4>
 <p> 在进入到 WSGI 之后 , 根据传入的环境变量 <code>environ</code> 生成一个请求上下文对象 <code>RequestContext</code>, 调用对象的 <code>push</code> 方法 .</p>
 <p> 根据类的文档 , 上下文把当前请求相当的东西都压入栈 ,  然后在请求完毕的时候把这些都出栈 . 这个栈指的就是 <code>flask.global._request_ctx_stack</code>, 并且在弹出栈时 , 调用所有在 <code>flask.Flask.teardown_request</code> 的注册方法 .</p>
@@ -229,7 +229,6 @@ if __name__ == '__main__':
         # self.request.view_args 保存了匹配的 query_args
         # 匹配失败的话 , self.request.routing_exception 保存了异常对象
         self.match_request()</code></pre>
-
 <h4 id="3-requestcontext-appcontext">3. 所以什么是上下文 : RequestContext, AppContext</h4>
 <p>flask 中实现了两个全局的上下文栈 , <code>flask.globals</code> 文件内 </p>
 <p>1) 请求上下文 <code>_request_ctx_stack</code>, 用来保存每一次 <code>HTTP Request</code> 的大部分信息 , 每次请求开始时都会压入栈中 , 在请求结束时被弹出栈 . </p>
@@ -245,11 +244,9 @@ except ImportError:
         from thread import get_ident
     except ImportError:
         from _thread import get_ident</code></pre>
-
 <p> 两个上下文都是一个栈 , 都定义在 <code>flask.globals</code></p>
 <pre class="highlight"><code class="language-python linenums">_request_ctx_stack = LocalStack()
 _app_ctx_stack = LocalStack()</code></pre>
-
 <p> 栈的实现在 <code>werkzeug.local</code> 中 </p>
 <pre class="highlight"><code class="language-python linenums">class Local(object):
     """
@@ -348,7 +345,6 @@ class LocalStack(object):
         except (AttributeError, IndexError):
             return None
 </code></pre>
-
 <p> 上下文其实是很简单的结构 , 关键是怎么使用 , 回过来 , 我们知道 , 请求到来时 , 使用环境变量生成了一个请求上下文 , 然后调用了对象的 <code>RequestContext.push()</code> 方法 </p>
 <pre class="highlight"><code class="language-python linenums">class RequestContext(object):
     def push(self):
@@ -383,7 +379,6 @@ class LocalStack(object):
             if self.session is None:
                 self.session = session_interface.make_null_session(self.app)
 </code></pre>
-
 <p> 这样我们就清楚了 , <code>_request_ctx_stack</code> 为我们保存了每一次的请求对象 , 而且这个 <code>RequestContext</code> 对象还有对应指 <code>WSGI</code> 应用上下文 , 存在对应的 <code>_app_ct_stack</code> 相同的线程标识符里的字典 . 另外还有从客户端发过来的对应 <code>session</code> 信息 , 这样回应一个请求的信息都具备完了 .</p>
 <h4 id="reference">Reference:</h4>
 <ol>

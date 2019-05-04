@@ -144,6 +144,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Python类内置魔术方法">Python类内置魔术方法</a><ul><li><a class="toc-href" href="#_1" title="内置类特殊属性">内置类特殊属性</a></li><li><a class="toc-href" href="#__slots__" title="__slots__ 的特殊性">__slots__ 的特殊性</a></li><li><a class="toc-href" href="#_2" title="对象方法">对象方法</a></li><li><a class="toc-href" href="#selfx" title="访问控制 self.x">访问控制 self.x</a></li><li><a class="toc-href" href="#selfx_1" title="自定义序列 self[x]">自定义序列 self[x]</a></li><li><a class="toc-href" href="#_3" title="描述符对象">描述符对象</a><ul><li><a class="toc-href" href="#_4" title="对象属性访问原理">对象属性访问原理</a></li><li><a class="toc-href" href="#descriptor" title="描述符(descriptor)举例">描述符(descriptor)举例</a></li></ul></li><li><a class="toc-href" href="#_6" title="比较操作符">比较操作符</a></li><li><a class="toc-href" href="#_7" title="数值操作符">数值操作符</a></li><li><a class="toc-href" href="#_8" title="类的表示">类的表示</a></li><li><a class="toc-href" href="#_9" title="反射">反射</a></li><li><a class="toc-href" href="#_10" title="抽象基类">抽象基类</a></li><li><a class="toc-href" href="#_11" title="可调用的对象">可调用的对象</a></li><li><a class="toc-href" href="#_12" title="上下文管理器">上下文管理器</a></li><li><a class="toc-href" href="#_13" title="拷贝">拷贝</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -164,7 +167,6 @@ class.mro()
 
 class.__subclasses__()
 </code></pre>
-
 <p> 自定义类都有一个 <code>namespace</code>，即一个字典对象来存储类的属性。<code>C.x</code> 即表示 <code>C.__dict__['x']</code>，当类 <code>C</code> 中不存在属性 <code>x</code>，会依据继承顺序 <a href="https://www.python.org/download/releases/2.3/mro/"><code>MRO</code></a> 表来查找该属性。</p>
 <p> 如若查找完基类后，依然找不到属性，才会调相应用 <code>C.__getattribute__()</code>、<code>C.__getattr__()</code></p>
 <pre class="highlight"><code class="language-python linenums">class A(object):
@@ -189,7 +191,6 @@ class B(A):
 a = B() 
 print(a.x)          # 'A', a.__getattr__() 并不会调用
 </code></pre>
-
 <h3 id="__slots__"><code>__slots__</code> 的特殊性 </h3>
 <blockquote>
 <p> 类变量 <code>__slots__</code> 可赋值 string, iterable，字符 list</p>
@@ -204,13 +205,12 @@ print(a.x)          # 'A', a.__getattr__() 并不会调用
 
 a = A()
 a.m()   # a.m.__func__(a.m.__self__)</code></pre>
-
 <h3 id="selfx"> 访问控制 <code>self.x</code></h3>
 <pre class="highlight"><code class="language-python linenums">__getattr__(self, name)
 
 __getattribute__(self, name)
 
-# Attribute assignments and deletions update the instance’s dictionary, never a class’s dictionary.
+# Attribute assignments and deletions update the instance&rsquo;s dictionary, never a class&rsquo;s dictionary.
 # If the class has a __setattr__() or __delattr__() method, 
 # this is called instead of updating the instance dictionary directly.
 # 删除对象的属性或者对对象属性赋值，是直接对实例 __dict__ 的操作
@@ -219,7 +219,6 @@ __setattr__(self, name, value)
 
 __delattr__(self, name)
 </code></pre>
-
 <p> 基类 <code>object</code> 中并没有 <code>__getattr__()</code> 方法，所以，只有当自定义类的自定义了 <code>__getattr__()</code> 方法，才有可能访问该方法 </p>
 <p> 访问属性 <code>self.x</code> 时，首先会隐式调用 <code>__getattribute__()</code> 方法，只有在 <code>__getattribute__()</code> 中显示调用或者 <code>raise</code> 出 <code>AttributeError</code> 时，才会调用 <code>__getattr__()</code></p>
 <blockquote>
@@ -272,7 +271,6 @@ class A(object):
 a = A()
 print(a.b)
 </code></pre>
-
 <h3 id="selfx_1"> 自定义序列 self[x]</h3>
 <pre class="highlight"><code class="language-python linenums">__len__(self)                       # len() 方法
 
@@ -287,7 +285,6 @@ __reversed__(self)                  # reversed() 方法
 __contains__(self, item)            # in 和 not in 测试
 
 __missing__(self, key)              # self[key] 不存在时 </code></pre>
-
 <p> 当类没有定义 <code>__getitem__()</code> 时，<code>self['x']</code> 会产生 <strong><code>Type Error</code>:object is not subscriptable</strong>, 定义 <code>__getitem__()</code> 后，类变成一个 <strong>subscriptor</strong>，<code>self['x']</code> 隐式调用 <code>__getitem__()</code>。一般在普通的如 <code>list</code> 中，<code>x</code> 不存在或错误会产生 <code>KeyError</code>，超出范围则产生 <code>IndexError</code></p>
 <h3 id="_3"> 描述符对象 </h3>
 <pre class="highlight"><code class="language-python linenums">__get__(self, instance, owner)
@@ -298,14 +295,13 @@ __delete__(self, instance, owner)
 
 # 生成描述符实例时调用
 __set_name__(self, owner, name)</code></pre>
-
 <blockquote>
 <p> 当一个类实现 <code>__get__()</code> <code>__set__()</code> <code>__delete__()</code> 中一个方法，称为 <strong> 描述符类 </strong>(<code>decriptor class</code>)</p>
 </blockquote>
 <p> 定义 <code>__set__()</code> and/or <code>__delete__()</code>，称为 <strong> 数据描述符 </strong>(<code>data descriptor</code>); 没有定义其中一个的称为 <strong> 非数据描述符 </strong>(<code>non-data descriptor</code>)</p>
 <p> 通常 <code>data descriptor</code> 都定义 <code>__set__()</code> 和 <code>__get__()</code>，<code>non-data descriptor</code> 只定义 <code>__get__()</code></p>
 <blockquote>
-<p>The following methods only apply when an instance of the class containing the method (a so-called descriptor class) appears in an owner class (the descriptor must be in either the owner’s class dictionary or in the class dictionary for one of its parents). In the examples below, “the attribute” refers to the attribute whose name is the key of the property in the owner class’ <code>__dict__</code>.</p>
+<p>The following methods only apply when an instance of the class containing the method (a so-called descriptor class) appears in an owner class (the descriptor must be in either the owner&rsquo;s class dictionary or in the class dictionary for one of its parents). In the examples below, &ldquo;the attribute&rdquo; refers to the attribute whose name is the key of the property in the owner class&rsquo; <code>__dict__</code>.</p>
 <p> 只有描述符类的实例 <code>instance</code> 是 <code>owner_class</code> 中或 <code>owner_class</code> 的某一个父类中 <code>__dict__</code> 中属性的实例，描述符方法才会调用 </p>
 </blockquote>
 <p> 描述符调用 <code>a.x</code> 和 <code>A.x</code></p>
@@ -349,7 +345,6 @@ class C(B):
 c = C()
 print(c.x)
 </code></pre>
-
 <h4 id="_4"> 对象属性访问原理 </h4>
 <ul>
 <li> 访问顺序：</li>
@@ -414,7 +409,6 @@ a = A()
 # 非资料描述符优先 __getattr__ 
 a.x         #=&gt; type(a).__dict__['x'].__get__(a, type(a))
 </code></pre>
-
 <h4 id="descriptor"> 描述符 (descriptor) 举例 </h4>
 <blockquote>
 <p> 内置 property 的实现 </p>
@@ -449,7 +443,6 @@ class A(object):
     def say_hello(self, value):
         print('say hello again')
         self._x = value</code></pre>
-
 <blockquote>
 <p><code>classmethod</code> 和 <code>staticmethod</code> 的简单实现 </p>
 </blockquote>
@@ -469,9 +462,8 @@ class StaticMethod(object):
     def __get__(self, instance, cls):
         return self._f
 </code></pre>
-
-<hr />
-<h3 id="_5"> 比较操作符 </h3>
+<hr/>
+<h3 id="_6"> 比较操作符 </h3>
 <pre class="highlight"><code class="language-Python linenums">__eq__(self, other)     # ==
 
 __ne__(self, other)     # !=
@@ -484,8 +476,7 @@ __le__(self, other)     # &lt;=
 
 __ge__(self, other)     # &gt;=
 </code></pre>
-
-<h3 id="_6"> 数值操作符 </h3>
+<h3 id="_7"> 数值操作符 </h3>
 <p>.1 一元操作符 </p>
 <pre class="highlight"><code class="language-python linenums">__post__(self)          # 取正 +some_object
 
@@ -503,7 +494,6 @@ __ceil__(self)          # math.ceil() 函数，向上取整
 
 __trunc__(self)         # math.trunc() 函数，距离 0 最返的整数
 </code></pre>
-
 <p>.2 算数操作符 </p>
 <pre class="highlight"><code class="language-python linenums">__add__(self, other)
 
@@ -531,7 +521,6 @@ __or__(self, other)
 
 __xor__(self, other)
 </code></pre>
-
 <p>.3 反射算数运算符 </p>
 <pre class="highlight"><code class="language-python linenums">__radd__(self, o)
 
@@ -557,7 +546,6 @@ __ror__(self, o)
 
 __rxor__(self, o)
 </code></pre>
-
 <p>.4 增强赋值运算符 </p>
 <pre class="highlight"><code class="language-python linenums">__iadd__(self, o)
 
@@ -581,7 +569,6 @@ __iand__(self, o)
 
 __ixor__(self, o)
 </code></pre>
-
 <p>.5 类型转换操作符 </p>
 <pre class="highlight"><code class="language-python linenums">__int__(self)
 
@@ -599,8 +586,7 @@ __index__(self)
 
 __trunc__(self)
 </code></pre>
-
-<h3 id="_7"> 类的表示 </h3>
+<h3 id="_8"> 类的表示 </h3>
 <pre class="highlight"><code class="language-python linenums">__str__(self)
 
 __repr__(self)
@@ -611,18 +597,15 @@ __hash__(self)
 
 __dir__(self)
 </code></pre>
-
-<h3 id="_8"> 反射 </h3>
+<h3 id="_9"> 反射 </h3>
 <pre class="highlight"><code class="language-python linenums"># isinstance(instance, class) 方法
 __instancecheck__(self, instance)       
 
 # issubclass(subclass, class) 方法
 __subclasscheck__(self, subclass)       </code></pre>
-
-<h3 id="_9"> 抽象基类 </h3>
+<h3 id="_10"> 抽象基类 </h3>
 <pre class="highlight"><code class="language-python linenums"></code></pre>
-
-<h3 id="_10"> 可调用的对象 </h3>
+<h3 id="_11"> 可调用的对象 </h3>
 <pre class="highlight"><code class="language-python linenums">__call__(self, [args...])
 
 class A():
@@ -631,8 +614,7 @@ class A():
 
 a = A()
 a()     # 调用 A.__call__()</code></pre>
-
-<h3 id="_11"> 上下文管理器 </h3>
+<h3 id="_12"> 上下文管理器 </h3>
 <pre class="highlight"><code class="language-python linenums"># 使用 with 声明时调用，返回值即为 as 后的东西
 __enter__(self)
 
@@ -643,8 +625,7 @@ __exit__(self, exceptiop_type, exception_value, traceback)
 # 跟 async with 使用 , 异步上下文 , 除了必须返回一个 awaitable, 其他与上相同
 __aenter__(self)
 __aexit__(self, exec_type, exec_value, traceback)</code></pre>
-
-<h3 id="_12"> 拷贝 </h3>
+<h3 id="_13"> 拷贝 </h3>
 <pre class="highlight"><code class="language-python linenums">__copy__(self)
 
 __deepcopy__(self, memodict=)</code></pre>

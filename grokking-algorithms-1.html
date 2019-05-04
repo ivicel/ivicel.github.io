@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Grokking Algorithms-1">Grokking Algorithms-1</a><ul><li><a class="toc-href" href="#binary-search" title="binary search 二分法查找">binary search 二分法查找</a></li><li><a class="toc-href" href="#big-o-notation-o" title="Big O notation 大 O 表示法">Big O notation 大 O 表示法</a></li><li><a class="toc-href" href="#selection-sort" title="selection sort 选择排序">selection sort 选择排序</a></li><li><a class="toc-href" href="#divide-conquer" title="divide &amp; conquer 分而治之">divide &amp; conquer 分而治之</a></li><li><a class="toc-href" href="#_1" title="快速排序法">快速排序法</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -176,7 +179,6 @@ def binary_search(num_list, item):
         else:
             return mid
     return None</code></pre>
-
 <h4 id="big-o-notation-o">Big O notation 大 O 表示法 </h4>
 <blockquote>
 <ol>
@@ -217,12 +219,11 @@ def bubble_sort(arr):
         for y in range(x + 1, length):
             if arr[x] &gt; arr[y]:
                 arr[x], arr[y] = arr[y], arr[x]</code></pre>
-
 <h4 id="divide-conquer">divide &amp; conquer 分而治之 </h4>
 <p> 在 1680m X 640m 的土地上如何划出最多均匀方块 </p>
 <blockquote>
-<p> 以 640 为基准 , 可以划出两个 640 * 640 的方块 , 这样剩下的便是 640 * 400 的土地 <br />
-再以 400 为基准 , 可以划出一个 400 * 400 的方块 , 这样剩下的便是一个 400 * 240 的土地 <br />
+<p> 以 640 为基准 , 可以划出两个 640 * 640 的方块 , 这样剩下的便是 640 * 400 的土地 <br/>
+再以 400 为基准 , 可以划出一个 400 * 400 的方块 , 这样剩下的便是一个 400 * 240 的土地 <br/>
 这样不断为一条较小边为基准画方块 , 最后便可以得到最后一个 80 * 80 大小的方块 , 这个长度便是最佳长度 </p>
 </blockquote>
 <p> 将问题范围不断缩小后 , 求出最简单问题的解 , 然后用这个解去求原始问题的解 , 递归使用这种思想 </p>
@@ -231,7 +232,6 @@ def fb(n):
     if n == 1:
         return 1
     return n * fb(n - 1)</code></pre>
-
 <h4 id="_1"> 快速排序法 </h4>
 <p> 快速排序法使用的便是一种分而治之的方 </p>
 <p> 每次从数组中选出一个数 (base), 把小于该数的放在左边数组 , 大于的放在右边数组 </p>

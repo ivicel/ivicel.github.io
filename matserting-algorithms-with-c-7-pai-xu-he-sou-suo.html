@@ -154,6 +154,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-7: 排序和搜索">Matserting Algorithms with C-7: 排序和搜索</a><ul><li><a class="toc-href" href="#insertion-sort" title="插入排序(选择排序, 冒泡排序Insertion Sort)">插入排序(选择排序, 冒泡排序Insertion Sort)</a></li><li><a class="toc-href" href="#quick-sort" title="快速排序(Quick sort)">快速排序(Quick sort)</a></li><li><a class="toc-href" href="#_1" title="快速排序的例子: 目录列表">快速排序的例子: 目录列表</a></li><li><a class="toc-href" href="#merge-sort" title="归并排序(Merge Sort)">归并排序(Merge Sort)</a></li><li><a class="toc-href" href="#counting-sort" title="计数排序(Counting Sort)">计数排序(Counting Sort)</a></li><li><a class="toc-href" href="#binary-search" title="二分查找(Binary Search)">二分查找(Binary Search)</a></li><li><a class="toc-href" href="#_2" title="二分查找示例: 拼写检查器">二分查找示例: 拼写检查器</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -200,7 +203,6 @@ iint issort(void *data, int size, int esize, int (*compare)(const void *key1,
     free(key);
     return 0;
 }</code></pre>
-
 <h4 id="quick-sort"> 快速排序 (Quick sort)</h4>
 <ol>
 <li> 每次选择一个数据 , 然后所有的数据和这个数对比 , 小的放在左边 , 大的放在右边 </li>
@@ -296,7 +298,6 @@ int qksort(void *data, int size, int esize, int i, int k,
     }
     return 0;
 }</code></pre>
-
 <h4 id="_1"> 快速排序的例子 : 目录列表 </h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdi.h&gt;
 #include &lt;stdlib.h&gt;
@@ -354,7 +355,6 @@ int directls(const char *path, Directory **dir)
     return count;
 }
 </code></pre>
-
 <h4 id="merge-sort"> 归并排序 (Merge Sort)</h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -438,7 +438,6 @@ int mgsort(void *data, int size, int esize, int i, int k,
 
     return 0;
 }</code></pre>
-
 <pre class="highlight"><code class="language-c linenums">/* 一种排序数组的方法 , 每次会使用新的内存来保存左右值 , 写回原数组后再释放 */
 int merge_sort(void *data, int size, int esize,
     int (*compare)(const void *key1, const void *key2))
@@ -501,7 +500,6 @@ int merge_sort(void *data, int size, int esize,
     }
     return 0;
 }</code></pre>
-
 <h4 id="counting-sort"> 计数排序 (Counting Sort)</h4>
 <p> 计数排序只能用于整型或者那些可以用整型来表示的数据集合 , 通过计算一个集合中元素出现的次数来确定集合如何排列 </p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
@@ -601,7 +599,6 @@ int rxsort(int *data, int size, int p, int k)
 }
 
 </code></pre>
-
 <h4 id="binary-search"> 二分查找 (Binary Search)</h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -634,7 +631,6 @@ int bisearch(void *sorted, void *target, int size, int esize,
     }
     return -1;
 }</code></pre>
-
 <h4 id="_2"> 二分查找示例 : 拼写检查器 </h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;

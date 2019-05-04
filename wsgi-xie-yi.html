@@ -154,6 +154,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="WSGI 协议">WSGI 协议</a><ul><li><a class="toc-href" href="#1" title="1. 简介">1. 简介</a></li><li><a class="toc-href" href="#2-client" title="2. Client 端">2. Client 端</a></li><li><a class="toc-href" href="#3-environ" title="3. environ 参数">3. environ 参数</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -168,11 +171,10 @@
     response_headers = [('Content-Type', 'text/plain')]
     start_response(status, response_headers)
     return [b'hello, world']</code></pre>
-
 <ul>
 <li><code>environ</code> 是一个 CGI-style  环境变量字典 , 由 server 端来传递过 , client 可以修改这个字典 </li>
 <li><code>start_response</code> 是 一个 server 端的一个回调方法 , 用来设置返回的 http headers. 其方法定义为 <code>def start_response(status, response_headers, exec_info=None)</code>
-  <code>status</code> 和 <code>response_headers</code> 是必须的 , <code>status</code> 表示返回的状态码 (string 类型 ), 比如 <code>"200 OK"</code>; <code>response_headers</code> 表示其他的头部信息 , 使用一个列表表示 , 列表中每一个都是一个 tuple<code>(header_name, header_value)</code>, 比如 <code>[('Content-Type', 'text/html'), ('Content-Length', 30)]</code>. <code>exec_info</code> 是可选的 , boolean 值 , 用来控制当发生错误时 , 向浏览器发送错误消息 </li>
+<code>status</code> 和 <code>response_headers</code> 是必须的 , <code>status</code> 表示返回的状态码 (string 类型 ), 比如 <code>"200 OK"</code>; <code>response_headers</code> 表示其他的头部信息 , 使用一个列表表示 , 列表中每一个都是一个 tuple<code>(header_name, header_value)</code>, 比如 <code>[('Content-Type', 'text/html'), ('Content-Length', 30)]</code>. <code>exec_info</code> 是可选的 , boolean 值 , 用来控制当发生错误时 , 向浏览器发送错误消息 </li>
 <li>client 要返回一个一 <code>iterable</code> 并且对于 python 3, <code>iterable</code> 内必须是 <code>bytes</code> 类型 , 因为写入 socket 的是按字节写入的 . 对于 python 2 来说便是 str 类型 ( 在 python 2 中是 str 是字节类型 ). 通常我们会返回一个 list, 包含 bytes. 比如 <code>[b'Hello, world']</code></li>
 </ul>
 <h4 id="3-environ">3. <code>environ</code> 参数 </h4>
@@ -180,7 +182,7 @@
 <p> 以下这些 key 是必须包含的 , 如果 server 没有从浏览器中获取到对应的值 , 则其值会是 empty string</p>
 <ul>
 <li><code>REQUEST_METHOD</code>  请求方法 , 如 <code>GET</code>, <code>POST</code> 等 </li>
-<li><code>SCRIPT_NAME</code>  The initial portion of the request URL's"path" that corresponds to the application object, so that the application knows its virtual "location". This <strong>may</strong> be an empty string, if the application corresponds to the "root" of the server.</li>
+<li><code>SCRIPT_NAME</code>  The initial portion of the request URL's"path" that corresponds to the application object, so that the application knows its virtual "location". This&nbsp;<strong>may</strong>&nbsp;be an empty string, if the application corresponds to the "root" of the server.</li>
 <li><code>PATH_INFO</code> 请求路径 </li>
 <li><code>QUERY_STRING</code> 查询键值对 , 跟着 <code>?</code> 后的部分 </li>
 <li><code>CONTENT-TYPE</code> 对应头部中的 <code>Content-Type</code> 值 , 可为空 </li>

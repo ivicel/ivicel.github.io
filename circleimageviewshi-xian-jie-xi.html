@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="CircleImageView实现解析">CircleImageView实现解析</a><ul><li><a class="toc-href" href="#1-circleimageview" title="1. CircleImageView 的实现">1. CircleImageView 的实现</a><ul><li><a class="toc-href" href="#11" title="1.1 自定义的属性">1.1 自定义的属性</a></li><li><a class="toc-href" href="#12" title="1.2 流程">1.2 流程</a></li></ul></li><li><a class="toc-href" href="#reference_1" title="Reference">Reference</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -196,7 +199,6 @@ private void setup() {
 
     /* .... */
 }</code></pre>
-
 <p> 来看两种情况 :</p>
 <ol>
 <li> 通过 xml 设置图片来源 . </li>
@@ -220,7 +222,6 @@ private void setup() {
         mSetupPending = false;
     }
 }</code></pre>
-
 <p> 来看如何获得 bitmap.</p>
 <pre class="highlight"><code class="language-java linenums">private Bitmap getBitmapFromDrawable(Drawable drawable) {
     if (drawable == null) {
@@ -250,7 +251,6 @@ private void setup() {
         return null;
     }
 }</code></pre>
-
 <p> 回过来看最重要的 setup 方法 </p>
 <pre class="highlight"><code class="language-java linenums">private void setup() {
     if (!mReady) {
@@ -366,8 +366,7 @@ protected void onDraw(Canvas canvas) {
                 mBorderRadius, mBorderPaint);
     }
 }</code></pre>
-
-<h3 id="reference">Reference</h3>
+<h3 id="reference_1">Reference</h3>
 <ol>
 <li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html</a></li>
 <li><a href="https://juejin.im/entry/593108c4a22b9d0058c08a2c">https://juejin.im/entry/593108c4a22b9d0058c08a2c</a></li>

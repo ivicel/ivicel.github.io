@@ -154,6 +154,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a><ul><li><a class="toc-href" href="#1-flask-websocket" title="1. flask 结合 websocket 问题">1. flask 结合 websocket 问题</a></li><li><a class="toc-href" href="#2-flask-gevent" title="2. flask 和 gevent 问题">2. flask 和 gevent 问题</a></li><li><a class="toc-href" href="#3" title="3. 代码实现">3. 代码实现</a></li><li><a class="toc-href" href="#reference_1" title="Reference">Reference</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -172,7 +175,6 @@ Connection: Upgrade
 Upgrade: websocket
 Sec-WebSocket-Version: 13
 Sec-WebSocket-Key: KSk4Wty1NJInqzWMBbQqCQ==</code></pre>
-
 <p> 当我们收到这个请求时 , 返回一个 response 来确定升级到 </p>
 <pre class="highlight"><code class="linenums">HTTP/1.1 101 Switching Protocols
 Server: nginx/1.15.3
@@ -180,7 +182,6 @@ Date: Thu, 13 Sep 2018 05:56:14 GMT
 Connection: upgrade
 Upgrade: websocket
 Sec-WebSocket-Accept: B1HnOTYR2fZO2PT0y6LImuBQtzQ=</code></pre>
-
 <p> 要让 flask 支持 websocket, 就要做到两点 .</p>
 <ol>
 <li> 获得原始的 TCP 连接 , 而我们的 WSGI 程序获得的是只要环境变量和一个回调函数 , 如 <code>def application(environ, start_response)</code>. 这样的话 , 我们可以在最底层的 <code>middleware</code> 里把 socket 连接放到 environ 变量中 , 比如 <code>environ['socket']</code>, 这样无论我们在哪一个中间件里都可以处理到最原始的连接 . </li>
@@ -195,7 +196,6 @@ uwsgi.websocket_send(msg)
 uwsgi.websocket_send_binary(msg) (added in 1.9.21 to support binary messages)
 uwsgi.websocket_recv_nb()
 uwsgi.websocket_send_from_sharedarea(id, pos) </code></pre>
-
 <h5 id="2-flask-gevent">2. flask 和 gevent 问题 </h5>
 <p>Flask 是同步执行的 , 我们主要的请求都在 websocket 中 , 所以我们只在每一个 websocket upgrade request 中 patch 所有的 socket 即可 . </p>
 <h5 id="3">3. 代码实现 </h5>
@@ -205,7 +205,6 @@ uwsgi.websocket_send_from_sharedarea(id, pos) </code></pre>
                      | else
                      |
               Flask Application</code></pre>
-
 <p> 查看 flask 的源码可以看到在类 Flask 的最终实现 wsgi 协议的是方法 <code>wsgi_app()</code>, 并且源码里也说明了最好的中间件实现方式 . </p>
 <pre class="highlight"><code class="language-python linenums"># 简化实现说明
 from flask import Flask
@@ -229,7 +228,6 @@ def websocket_connect(ws):
         print('receive message: {!r}'.format(msg))
         ws.send(msg)
 </code></pre>
-
 <p> 主要类的实现 , <code>Websocket</code> 类实现了一个 WGSI 协议 , 接收从 uWSGI 的回调 , 然后将请求放到 <code>WebsocketMiddleware</code> 中判断是否为 websocket, 不是的话发送到 flask application 来处理 </p>
 <pre class="highlight"><code class="language-python linenums">import uwsgi
 import gevent
@@ -336,9 +334,8 @@ class WebSocketMiddleware(object):
             elif handler.ready():
                 listening.kill()
                 return ''</code></pre>
-
 <p> 完整代码在 : <a href="https://github.com/ivicel/steam-key-python">https://github.com/ivicel/steam-key-python</a></p>
-<h4 id="reference">Reference</h4>
+<h4 id="reference_1">Reference</h4>
 <ol>
 <li>
 <p><a href="https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html">https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html</a></p>

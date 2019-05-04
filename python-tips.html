@@ -146,6 +146,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="python tips">python tips</a><ul><li><a class="toc-href" href="#python" title="Python 代码会在何时运行">Python 代码会在何时运行</a><ul><li><a class="toc-href" href="#1" title="1. 代码作用模块导入时">1. 代码作用模块导入时</a></li><li><a class="toc-href" href="#2" title="2. 从命令行中运行">2. 从命令行中运行</a></li></ul></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -156,7 +159,6 @@ a[2] += [5, 6]
 # 这是因为 a[2] 在增量时是分成两步
 # 一是把 a[2] 的列表值入栈 , 扩展成 [3, 4, 5, 6], 这是成功的
 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError</code></pre>
-
 <ul>
 <li> 不要把可变对象放在元组中 </li>
 <li> 列表增量赋值不是一个原子 , 是分成两步进行的 , 其实也可以从 list 没有实现 <code>__iadd__()</code> 可以看出 . 因为自增会调用该方法 , 如果没有实现该方法 , 便才会调用 <code>__add__()</code> , 然后把结果赋值给原对象 </li>
@@ -190,7 +192,6 @@ class A(object):
 
     class B(object):
         print('initial B...')</code></pre>
-
 <ul>
 <li><strong> 类的元类 </strong>
   类的元类会被调用来初始化类 , 比如 </li>
@@ -212,7 +213,6 @@ class A(type):
 
 class B(metaclass=A):
     def __init__</code></pre>
-
 <blockquote>
 <p> 只有继承了 <strong>type</strong> 的才能作为 <strong> 元类 </strong>, 元类的 <code>__new__</code>, <code>__init__</code> 参数是固定的 </p>
 </blockquote>
@@ -226,7 +226,6 @@ class B(metaclass=A):
 class ClassThree():
   def m(self):
       pass</code></pre>
-
 <h5 id="2">2. 从命令行中运行 </h5>
 <p> 跟导入时相同 , 但会执行 <code>__name__ == '__main__':</code> 中的语句 </p>
             </section>

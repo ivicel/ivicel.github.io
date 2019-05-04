@@ -204,7 +204,6 @@ int stack_pop(Stack *stack, void **data);
 #define stack_size(stack) ((stack)-&gt;size)
 
 #endif</code></pre>
-
 <p> 栈的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* stack.c */
 #include &lt;stdlib.h&gt;
@@ -259,7 +258,6 @@ int stack_push(Stack *stack, const void *data)
     stack-&gt;size++;
     return 0;
 }</code></pre>
-
 <p> 队列其实就是一个链表结构 , 但只提供了先进先出的接口
 队列头文件定义 </p>
 <pre class="highlight"><code class="language-c linenums">/* queue.h */
@@ -299,7 +297,6 @@ int queue_dequeue(Queue *queue, void **data);
 
 
 #endif</code></pre>
-
 <p> 队列抽象数据类型的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* queue.h */
 #include &lt;stdlib.h&gt;

@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android 中自定义ViewPager, 添加页面指示器">Android 中自定义ViewPager, 添加页面指示器</a><ul><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -166,7 +169,6 @@
 <p><em>i.</em> 在 <strong> 向右 </strong> 滑动时 , <code>position</code> 的值为当前页面的值 , 如果滑动成功 ( 即滑动到右一页面 ), <code>OnPageScrolled</code> 会被再一次调用 , 此时 <code>position</code> 的值为滑动成功后的页面 <code>position+1</code>, 如果滑动失败 , <code>position</code> 依然不变 </p>
 <pre class="highlight"><code class="linenums"> 从 `0` 滑动 `1` 时 , 滑动时 `position` 是 `0`, 滑动成功后 `OnPageScrolled` 会再被调用一次且 `position` 会变成 `1`, 滑动失败 `position` 依然为 `0`, 这跟向左滑动有区别 , 需要注意
 </code></pre>
-
 <p><em>ii.</em> 在 <strong> 向左 </strong> 滑动时 , <code>position</code> 的值为滑动的目标页面 , 滑动成功后 , 不会再次调用 <code>OnPageScrolled</code>. 如果滑动失败 , 最后一次会再次调用 <code>OnPageScrolled</code>, 此时 <code>position</code> 为原先页面 .</p>
 <p>​     从 <code>1</code> 滑动到 <code>0</code> 时 , <code>position</code> 的值为 <code>0</code>, 成功滑动到页面 <code>1</code> 后也不会再次调用该方法 , 这个有区别于向右滑动 . 然而如果滑动失败 , 则会再一次调用该方法 , 此时 <code>position</code> 的值为 <code>1</code></p>
 </blockquote>

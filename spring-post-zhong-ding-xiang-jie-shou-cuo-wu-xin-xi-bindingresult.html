@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Spring POST 重定向接收错误信息(BindingResult)">Spring POST 重定向接收错误信息(BindingResult)</a><ul><li><a class="toc-href" href="#1-post" title="1. POST 请求的错误信息重定向">1. POST 请求的错误信息重定向</a></li><li><a class="toc-href" href="#2-thymeleaf" title="2. Thymeleaf 中错误信息的使用">2. Thymeleaf 中错误信息的使用</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -186,7 +189,6 @@ public String register(@Valid @ModelAttribute("user") User user,
     }
     return "redirect:/login";
 }</code></pre>
-
 <h4 id="2-thymeleaf">2. Thymeleaf 中错误信息的使用 </h4>
 <p> 在 thymeleaf 中使用 <code>#fields</code> 来获得 form 的错误消息 . 比如有一个 form, 其提交的是一个 User 对象 . </p>
 <pre class="highlight"><code class="language-html linenums">&lt;!-- register.html --&gt;
@@ -196,7 +198,6 @@ public String register(@Valid @ModelAttribute("user") User user,
         th:errors 会自动提取对应的 field 中的错误信息 --&gt;
   &lt;span th:errors="*{username}" th:if="${#fields.hasErrors('username')}"&gt;&lt;/span&gt;
 &lt;/form&gt;</code></pre>
-
 <h4 id="reference">Reference:</h4>
 <ol>
 <li><a href="https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138">https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138</a></li>

@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android IPC机制">Android IPC机制</a><ul><li><a class="toc-href" href="#1" title="1. 开启多进程的方法">1. 开启多进程的方法</a></li><li><a class="toc-href" href="#2-android-ipc" title="2. Android 中 IPC 的几种方式">2. Android 中 IPC 的几种方式</a><ul><li><a class="toc-href" href="#bundle" title="使用 Bundle">使用 Bundle</a></li><li><a class="toc-href" href="#_1" title="使用共享文件">使用共享文件</a></li><li><a class="toc-href" href="#aidl" title="使用 AIDL 通信">使用 AIDL 通信</a></li><li><a class="toc-href" href="#messenger" title="使用 Messenger">使用 Messenger</a></li></ul></li><li><a class="toc-href" href="#reference_1" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -216,7 +219,7 @@
 <blockquote>
 <p><code>Messenger</code> 类是 <code>final</code> 的 , 不可能通过继承 <code>Messenger</code> 来重写传送数据方式 </p>
 </blockquote>
-<p><img alt="Messenger 机制 " src="../images/Messenger 机制 .jpeg" /></p>
+<p><img alt="Messenger 机制 " src="../images/Messenger 机制 .jpeg"/></p>
 <pre class="highlight"><code class="language-java linenums">// server 
 public MessengerService extends Service {
     private static final String TAG = "MessengerService";
@@ -290,8 +293,7 @@ public MessengerActivity extends AppCompatActivity {
         unbindService(connection);
     }
 }</code></pre>
-
-<p> 在 &lt;<Android 开发艺术探索 >&gt; 中提到 :</p>
+<p> 在 &lt;<android 开发艺术探索 >&gt; 中提到 :</android 开发艺术探索 ></p>
 <blockquote>
 <p>Message 中的另一个字段 object 在同一个进程中是很实用的，但是在进程间通信的时候，在 Android 2.2 以前 object 字段不支持跨进程传输，即便是 2.2 以后，也仅仅是 <strong> 系统 </strong> 提供的实现了 Parcelable 接口的对象才能通过它来传输。这就意味着我们自定义的 Parcelable 对象是无法通过 object 字段来传输的 </p>
 </blockquote>
@@ -305,9 +307,9 @@ public MessengerActivity extends AppCompatActivity {
 <li>Build tool 27.0.2</li>
 </ul>
 <p><code>MessengerService</code> 使用设置 <code>android:process=":remote"</code> 单独一个进程后 , 会发生 <code>java.lang.ClassNotFoundException</code>, 猜测是因为找到不 <code>ClassLoader</code></p>
-<h4 id="reference">Reference:</h4>
+<h4 id="reference_1">Reference:</h4>
 <ol>
-<li>&lt;<Android 开发艺术探索 >&gt;</li>
+<li>&lt;<android 开发艺术探索 >&gt;</android 开发艺术探索 ></li>
 </ol>
             </section>
 

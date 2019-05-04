@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android 对象序列化方式">Android 对象序列化方式</a><ul><li><a class="toc-href" href="#1-serializable" title="1. Serializable接口">1. Serializable接口</a></li><li><a class="toc-href" href="#2-parcelable" title="2. Parcelable接口">2. Parcelable接口</a><ul><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -178,18 +181,17 @@
     // getter and setter
     // .....
 }</code></pre>
-
 <h3 id="2-parcelable">2. <code>Parcelable</code> 接口 </h3>
 <p> 由 <code>Parcelable</code> 序列化的类可以自由在 <code>Binder</code> 中进行传输 . 但实现的过程会比 <code>Serializable</code> 麻烦些 . 但是 <code>Serializable</code> 在序列化和反序列化时需要大量的 <code>I/O</code> 操作 , 效率会比较低 . 在 <code>Android</code> 中推荐使用 <code>Parcelable</code>, 其在内存中序列化后可以立马发送到网络中 , 或者保存到设备上 . 如果数据较小也可以使用 <code>Serializable</code> 来实现 , 其优点是方便简单 </p>
 <p> 可 <code>Parcelable</code> 类里内的变量需要是基本类型或者是可序列化的对象 . <code>Intent</code>, <code>Bundle</code>, <code>Bitmap</code> 都实现了 <code>Parcelable</code> 接口 . <code>List</code>, <code>Map</code> 如果其内的每个元素是可序列化的话 , 那么这两个也是可序列化的 .</p>
 <p> 实现 <code>Parcelable</code> 要实现几个方法和变量 :</p>
 <ol>
 <li><code>writeToParcel(Parcel out, int flag)</code> 方法的实现表示类是如何创建序列化对象和数组的 . <strong> 注意这个实现是的顺序 , 当反序列化时也需要按这个顺序来写 </strong>
-   <code>flags</code> 的值一般为 <code>0</code> 或 <code>1</code>( 即 <code>PARCELABLE_WRITE_RETURN_VALUE</code>), 当为 <code>1</code> 时表示当前对象需要作为返回值返回 , 不能立即释放资源 . <strong> 通常一般这个值都为 <code>0</code></strong></li>
+<code>flags</code> 的值一般为 <code>0</code> 或 <code>1</code>( 即 <code>PARCELABLE_WRITE_RETURN_VALUE</code>), 当为 <code>1</code> 时表示当前对象需要作为返回值返回 , 不能立即释放资源 . <strong> 通常一般这个值都为 <code>0</code></strong></li>
 <li><code>describeContents()</code> 方法的返回值一般为 <code>0</code>, 当序列化内容含有 <strong> 文件描述符 </strong> 时 , 返回 <code>1</code>( 即 <code>CONTENTS_FILE_DESCRIPTOR</code>)</li>
 <li> 定义一个 <code>static final</code> 的常量 <code>CREATOR</code> 来实现反序列化操作 . 这个常量实现了 <code>Parcelable.Creator</code> 接口 .
    <code>T createFromParcel(Parcel in)</code> 方法表明如何反序列化一个类 . <strong> 反序列化的顺序要和序列化时一样 </strong>
-   <code>T[] newArray(int size)</code> 方法表明如何反序列化出一个类的对象数组 </li>
+<code>T[] newArray(int size)</code> 方法表明如何反序列化出一个类的对象数组 </li>
 </ol>
 <pre class="highlight"><code class="language-java linenums">public class User implements Parcelable {
     private int id;
@@ -243,10 +245,9 @@
         }
     }
 }</code></pre>
-
 <h5 id="reference">Reference:</h5>
 <ol>
-<li>&lt;<Android 开发艺术探索 >&gt;</li>
+<li>&lt;<android 开发艺术探索 ="">&gt;</android></li>
 <li><a href="https://developer.android.com/reference/android/os/Parcelable.html">https://developer.android.com/reference/android/os/Parcelable.html</a></li>
 </ol>
             </section>

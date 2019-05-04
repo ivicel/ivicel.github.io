@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="A Simple SteamKit implement with using Python(一)">A Simple SteamKit implement with using Python(一)</a><ul><li><a class="toc-href" href="#1" title="1. 连接握手">1. 连接握手</a></li><li><a class="toc-href" href="#2-protocol-bufffer" title="2. 了解 Protocol Bufffer">2. 了解 Protocol Bufffer</a></li><li><a class="toc-href" href="#3-protobuf" title="3. 编译 protobuf">3. 编译 protobuf</a></li><li><a class="toc-href" href="#4" title="4. 通信消息的格式">4. 通信消息的格式</a></li><li><a class="toc-href" href="#reference" title="Reference">Reference</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -240,7 +243,6 @@ protoc --python_out=./protobufs -I. -I protoc/include *.proto
 touch protobufs/__init__.py
 mv protobuf ../../
 sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs/*.proto -i</code></pre>
-
 <h4 id="4">4. 通信消息的格式 </h4>
 <p> 通信是按 <strong>Little endian</strong> 传输的 , 通信包的定义主要有三种情况 :</p>
 <ol>
@@ -371,7 +373,6 @@ Multi 包含一个或多个 message, 每个结构为 , 前 4 个字节为消息�
 + - - - - - - - - - - - - - - - - - - +  
 | Protobuf message                    |
 + - - - - - - - - - - - - - - - - - - +  </code></pre>
-
 <h4 id="reference">Reference</h4>
 <ol>
 <li><a href="https://github.com/ValvePython/steam/issues/79">https://github.com/ValvePython/steam/issues/79</a></li>

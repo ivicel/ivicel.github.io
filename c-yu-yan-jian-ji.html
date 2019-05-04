@@ -146,6 +146,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="C 语言简记">C 语言简记</a><ul><li><a class="toc-href" href="#1" title="1. 注释">1. 注释</a></li><li><a class="toc-href" href="#2" title="2. 关键字、保留字">2. 关键字、保留字</a></li><li><a class="toc-href" href="#3" title="3. 数据类型">3. 数据类型</a></li><li><a class="toc-href" href="#4" title="4. 标识符，变量">4. 标识符，变量</a></li><li><a class="toc-href" href="#5" title="5. 常量">5. 常量</a></li><li><a class="toc-href" href="#6-c" title="6. C存储类">6. C存储类</a></li><li><a class="toc-href" href="#7" title="7. 运算符">7. 运算符</a></li><li><a class="toc-href" href="#8" title="8. 语句">8. 语句</a></li><li><a class="toc-href" href="#9" title="9. 函数">9. 函数</a></li><li><a class="toc-href" href="#10" title="10. 数组">10. 数组</a></li><li><a class="toc-href" href="#11" title="11. 指针">11. 指针</a></li><li><a class="toc-href" href="#12" title="12. 结构体">12. 结构体</a></li><li><a class="toc-href" href="#13" title="13. 共用体">13. 共用体</a></li><li><a class="toc-href" href="#14" title="14. 位域">14. 位域</a></li><li><a class="toc-href" href="#15-typedef" title="15. typedef">15. typedef</a></li><li><a class="toc-href" href="#16" title="**16. 标准输入、输出、错误输出">**16. 标准输入、输出、错误输出</a></li><li><a class="toc-href" href="#17" title="17.预处理器">17.预处理器</a></li><li><a class="toc-href" href="#18" title="18. 类型转换">18. 类型转换</a></li><li><a class="toc-href" href="#19" title="19. 可变参数">19. 可变参数</a></li><li><a class="toc-href" href="#20" title="20. 内存管理">20. 内存管理</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -156,14 +159,12 @@ int main(int argc, char **argv)
 {
     printf("Hello C!!!\n");
 }</code></pre>
-
 <h4 id="1"><strong>1. 注释 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 
  *
  * 注释不能嵌套 
  *  
  */</code></pre>
-
 <h4 id="2"><strong>2. 关键字、保留字 </strong></h4>
 <table>
 <thead>
@@ -221,24 +222,24 @@ int main(int argc, char **argv)
 </tbody>
 </table>
 <h4 id="3"><strong>3. 数据类型 </strong></h4>
-<p> 整型 <br />
- - (<code>signed</code> 或 <code>unsinged</code>)<br />
- - <code>char</code><br />
- - <code>int</code> <br />
- - <code>short</code> <br />
- - <code>long</code>  </p>
-<p> 浮点型 <br />
- - <code>float</code><br />
- - <code>double</code><br />
- - <code>long double</code>  </p>
+<p> 整型 <br/>
+ - (<code>signed</code> 或 <code>unsinged</code>)<br/>
+ - <code>char</code><br/>
+ - <code>int</code> <br/>
+ - <code>short</code> <br/>
+ - <code>long</code> </p>
+<p> 浮点型 <br/>
+ - <code>float</code><br/>
+ - <code>double</code><br/>
+ - <code>long double</code> </p>
 <p> 数据在系统中占据的内存大小，与系统类型有关 </p>
-<p><img alt=" 存储大小 " src="../images/ 存储大小 .jpg" /></p>
+<p><img alt=" 存储大小 " src="../images/ 存储大小 .jpg"/></p>
 <p><code>void</code> 类型 </p>
-<p> 作为函数返回值 : <code>void func(int status)</code><br />
-作函数参数 : <code>int rand(void)</code><br />
+<p> 作为函数返回值 : <code>void func(int status)</code><br/>
+作函数参数 : <code>int rand(void)</code><br/>
 作可变指针 : <code>void *malloc(size_t size)</code></p>
 <h4 id="4"><strong>4. 标识符，变量 </strong></h4>
-<p> 以 <code>A-Z</code> 或 <code>a-z</code> 或 <code>_</code> 开头，加上数字 <br />
+<p> 以 <code>A-Z</code> 或 <code>a-z</code> 或 <code>_</code> 开头，加上数字 <br/>
 <code>extern</code> 关键字声明而不定义，在别的文件定义该变量 </p>
 <ol>
 <li> 在函数或块内部的 <strong> 局部变量 </strong></li>
@@ -267,18 +268,16 @@ void func(int a)
 {
     /* do something */
 }</code></pre>
-
 <h4 id="5"><strong>5. 常量 </strong></h4>
-<p> 整数常量：十进制、十六进制 ( 前缀 <code>0x</code> 或 <code>0X</code>)、八进制 ( 前缀 <code>0</code>)，可以带上后缀 <code>U</code> <code>u</code>( 表示 <code>unsigned</code>), <code>L</code> <code>l</code>( 表示 <code>long</code>)<br />
-浮点常量：<code>e</code> 或 <code>E</code> 的指数 <code>1.3</code><br />
-字符常量：<code>'x'</code>, <code>'y'</code>, 转义字符 <br />
+<p> 整数常量：十进制、十六进制 ( 前缀 <code>0x</code> 或 <code>0X</code>)、八进制 ( 前缀 <code>0</code>)，可以带上后缀 <code>U</code> <code>u</code>( 表示 <code>unsigned</code>), <code>L</code> <code>l</code>( 表示 <code>long</code>)<br/>
+浮点常量：<code>e</code> 或 <code>E</code> 的指数 <code>1.3</code><br/>
+字符常量：<code>'x'</code>, <code>'y'</code>, 转义字符 <br/>
 字符串常量：<code>"hello"</code></p>
 <p> 定义常量：</p>
 <pre class="highlight"><code class="language-c linenums">/* 1. define 预处理器 */ 
 #define LENGTH 10
 /* 2. const 关键字 */
 const int LEN = 10</code></pre>
-
 <h4 id="6-c"><strong>6. C 存储类 </strong></h4>
 <ol>
 <li><code>auto</code>: 局部变量默认类型，只能在局部变量使用  </li>
@@ -289,11 +288,11 @@ const int LEN = 10</code></pre>
 <li><code>extern</code>: 全局变量在所有程序文件可见，对于无法初始化的变量，会把变量名指向一个之前定义过的存储位置。</li>
 </ol>
 <h4 id="7"><strong>7. 运算符 </strong></h4>
-<p> 算术运算符 : <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, 前 / 后缀 <code>++</code>, 前 / 后缀 <code>--</code><br />
-关系运算符 : <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code><br />
-逻辑运算符 : <code>&amp;&amp;</code>, <code>||</code>, <code>!</code><br />
-位运算符 : <code>|</code>, <code>&amp;</code>, <code>^</code>, <code>~</code>( 取反 ), <code>&lt;&lt;</code>( 左移 ), <code>&gt;&gt;</code>( 右移 )<br />
-赋值运算符 : <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>|=</code><br />
+<p> 算术运算符 : <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, 前 / 后缀 <code>++</code>, 前 / 后缀 <code>--</code><br/>
+关系运算符 : <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code><br/>
+逻辑运算符 : <code>&amp;&amp;</code>, <code>||</code>, <code>!</code><br/>
+位运算符 : <code>|</code>, <code>&amp;</code>, <code>^</code>, <code>~</code>( 取反 ), <code>&lt;&lt;</code>( 左移 ), <code>&gt;&gt;</code>( 右移 )<br/>
+赋值运算符 : <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>|=</code><br/>
 其他运算符 : <code>sizeof</code>, <code>&amp;</code>( 返回变量地址 ), <code>*</code>( 指向一个变量 ), <code>?:</code></p>
 <h4 id="8"><strong>8. 语句 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 判断 */
@@ -333,7 +332,6 @@ for (int i = 0; i &lt; 10; i++) {
 /* continue 语句 */
 /* goto 语句 */
 </code></pre>
-
 <h4 id="9"><strong>9. 函数 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 传值 */
 int func1(int a, int b)
@@ -348,7 +346,6 @@ int func2(int *a, int *b)
     /* do something */
     return a;
 }</code></pre>
-
 <h4 id="10"><strong>10. 数组 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">double balance[10];
 int a[5] = {1, 2, 3, 4, 5};
@@ -360,7 +357,6 @@ int val[3][2] = {
     {2, 3},
     {4, 5}
 }</code></pre>
-
 <h4 id="11"><strong>11. 指针 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 指针的大小跟系统有关，64 位中为 8 个字节 */
 int a = 5;
@@ -378,7 +374,6 @@ p[0] = &amp;a;
 int a = 5;
 int *p = &amp;a;
 int **ptr = &amp;p;</code></pre>
-
 <h4 id="12"><strong>12. 结构体 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 定义 */
 struct Books {
@@ -392,7 +387,6 @@ struct Books *book_ptr;
 /* 访问 */
 b1-&gt;title;
 b1-&gt;book_id;</code></pre>
-
 <h4 id="13"><strong>13. 共用体 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 大小是占内存最大的成员的大小 */
 union Data {
@@ -458,7 +452,6 @@ int main()
 data.i = 10
 data.j = 2.300000
 data.a = C Programming</code></pre>
-
 <h4 id="14"><strong>14. 位域 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
 /* 因为不能跨字节，所以位域最大为 8 位，大于 8 位产生不可预计影响 */
@@ -487,7 +480,6 @@ struct {
  */
 bs.a;
 bs-&gt;b;</code></pre>
-
 <h4 id="15-typedef"><strong>15. typedef</strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* typedef 来定义别名 */
 typedef unsigned char BYTE;
@@ -503,7 +495,6 @@ Book b1;
  * #define 不仅可以为类型定义别名，也能为数值定义别名，比如可以定义 1 为 ONE
  * typedef 是由编译器执行解释的，#define 语句是由预编译器进行处理的
  */</code></pre>
-
 <h4 id="16">**16. 标准输入、输出、错误输出 </h4>
 <p><code>stdin</code> <code>stdout</code> <code>stderr</code>
 读或输出字符：<code>getchar()</code> <code>putchar()</code>
@@ -529,7 +520,6 @@ char *fgets(char *buf, int n, FILE *fp);
 /* 读写二进制 */
 size_t fread(void *ptr, size_t size, size_t numbers, FILE *fp);
 size_t fwrite(const void *ptr, size_t size, size_t numbers, FILE *fp);</code></pre>
-
 <h4 id="17"><strong>17. 预处理器 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/*
  * #define   定义宏
@@ -580,7 +570,6 @@ int main(void)
 /* 输出 */
 token34 = 40
 </code></pre>
-
 <p> 预定义的宏
 <code>__DATE__</code> 以 "MMM DD YYYY" 表示的日期
 <code>__TIME__</code> 以 "HH:MM:SS" 表示的时间
@@ -588,7 +577,7 @@ token34 = 40
 <code>__LINE__</code> 当前行号
 <code>__STDC__</code> 当以 ANSI 标准编译时，定义为 1</p>
 <h4 id="18"><strong>18. 类型转换 </strong></h4>
-<p><img alt=" 强制类型转换 " src="../images/ 强制类型转换 .png" /></p>
+<p><img alt=" 强制类型转换 " src="../images/ 强制类型转换 .png"/></p>
 <h4 id="19"><strong>19. 可变参数 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">/* 可变参数定义在 stdarg.h 头文件中
  * 函数的第一个参数总是 int，表示参数的个数，后面跟省略号
@@ -618,7 +607,6 @@ int main()
     printf("average is: %f\n", i);
     return 0;
 }</code></pre>
-
 <h4 id="20"><strong>20. 内存管理 </strong></h4>
 <pre class="highlight"><code class="language-c linenums">void *calloc(int num, int size);
 void *malloc(int num);

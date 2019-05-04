@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Grokking Algorithms-2">Grokking Algorithms-2</a><ul><li><a class="toc-href" href="#_1" title="图">图</a></li><li><a class="toc-href" href="#_2" title="广度优先算法">广度优先算法</a></li><li><a algorithm)'="" class="toc-href" href="#dijkstras-algorithm" s="" title="加权图和狄克斯特拉算法(Dijkstra">加权图和狄克斯特拉算法(Dijkstra's algorithm)</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -167,7 +170,6 @@ class Graph:
     def dl
 
 </code></pre>
-
 <h4 id="_2"> 广度优先算法 </h4>
 <pre class="highlight"><code class="language-python linenums"># 在图 graph 中从 start 到 item 的广度优先算法
 def breadth_first_search(start, item):
@@ -195,7 +197,6 @@ def breadth_first_search(start, item):
                     # 顶点标记为灰 , 表示已经入队查找过
                     node['mark'] = 'gray'
                     search_queue.put(node)</code></pre>
-
 <h4 id="dijkstras-algorithm"> 加权图和狄克斯特拉算法 (Dijkstra's algorithm)</h4>
 <p> 边带权重 (weight) 的图称为加权图 </p>
 <p> 使用 <code>Dijkstra's algorithm</code> 算法计算加权图中顶点到顶点之间边之各权重为最大或最小 </p>

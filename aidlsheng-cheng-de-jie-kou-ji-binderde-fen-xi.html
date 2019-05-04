@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="AIDL生成的接口及Binder的分析">AIDL生成的接口及Binder的分析</a><ul><li><a class="toc-href" href="#1-android-binder" title="1. Android 上的 Binder">1. Android 上的 Binder</a><ul><li><a class="toc-href" href="#11-binder" title="1.1 Binder 的构架">1.1 Binder 的构架</a></li><li><a class="toc-href" href="#1-2-binder" title="1-2 Binder 的机制">1-2 Binder 的机制</a></li></ul></li><li><a class="toc-href" href="#2-aidl_1" title="2. AIDL 文件实现分析">2. AIDL 文件实现分析</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -168,7 +171,7 @@
 <p> 在原 Linux 上已经有各种 IPC , 管道 , 信号 , 信号量 ,  Socket, 共享内存 , 互斥锁 . 但 Binder 能在 Android 这个特定的平台上会比其他更 <strong> 高效 </strong>, 也更 <strong> 安全 </strong>, 其他 <code>IPC</code> 没有严格权限验证机制 </p>
 <h4 id="11-binder">1.1 Binder 的构架 </h4>
 <p>​        Binder 通信是基于 <strong>C/S 构架 </strong>. 多个 C 端可以同步连接 S 端 , 所以 S 端需要 <strong> 同步 </strong> 设置 </p>
-<p><img alt="binder 架构 " src="../images/binder 架构 .jpg" /></p>
+<p><img alt="binder 架构 " src="../images/binder 架构 .jpg"/></p>
 <h4 id="1-2-binder">1-2 Binder 的机制 </h4>
 <ul>
 <li> 服务端向内核注册服务 , 内核生成 <code>binder_proc</code> 的数据结构信息 </li>
@@ -176,7 +179,7 @@
 </ul>
 <p><code>WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE)</code>
 * 这些都是在 native 和内核层帮助我们转换完成 </p>
-<p><img alt="binder 机制 " src="../images/binder 机制 .jpg" /></p>
+<p><img alt="binder 机制 " src="../images/binder 机制 .jpg"/></p>
 <p><code>Java</code> 层的 <code>Binder</code> 主要与几个类 (<code>Binder</code>, <code>BinderProxy</code>, <code>Stub</code>) 和接口 (<code>IBinder</code>, <code>IInterface)</code> 有关 </p>
 <ul>
 <li><code>IBinder</code> 接口代表了 <strong> 一种跨进程传输的能力 </strong>, 只能类实现了这个接口 , 表示能将该类对象进行跨进程传递 . 这是由 <code>Android</code> 底层来实现支持的 . 系统会对传输的数据 ( 即 <code>IBinder</code> 对象 ) 进行本地和代理间的转换 .</li>
@@ -184,7 +187,7 @@
 <li><code>Binder</code> 类是内部对 <code>IBinder</code> 的实现 , 代表 <strong> 本地的对象 </strong>.<code>BinderProxy</code> 是 <code>Binder</code> 的内部类 , 代表着 <strong> 远程进程 </strong> 的 <code>Binder</code> 对象的本地代理 </li>
 <li> 在 <code>AIDL</code> 中 , 系统会给生成一个静态的内部类 <code>Stub</code>. 继承了 <code>Binder</code> 同时实现了 <code>IInterface</code> 接口 . 这说明这是一个本地的 <code>Binder</code>, 并且可以作为远程 <code>Server</code> 来给 <code>Client</code> 传递数据的能力 . 其内部真正使用 <strong> 策略模式 </strong> 来交给 <code>Stub.Proxy</code> 处理数据的交换 </li>
 </ul>
-<h3 id="2-aidl">2. AIDL 文件实现分析 </h3>
+<h3 id="2-aidl_1">2. AIDL 文件实现分析 </h3>
 <p> 在系统自动生成的 <code>BookManager.java</code> 中 , 主要结构 :</p>
 <ul>
 <li><code>BookManager</code> 扩展 <code>andorid.os.IInterface</code> 接口 </li>
@@ -314,9 +317,8 @@
     public int getBookCount() throws RemoteException;
     // ......
 }</code></pre>
-
 <p><code>AIDL</code> 的工作机制 </p>
-<p><img alt="AIDL 里的 Binder 工作流程 " src="../images/aidl_binder 工作机制 .jpeg" /></p>
+<p><img alt="AIDL 里的 Binder 工作流程 " src="../images/aidl_binder 工作机制 .jpeg"/></p>
 <p> 代码地址 : <a href="https://github.com/ivicel/dev-android-samples/tree/master/AIDL-Demo">GitHub</a></p>
 <h3 id="reference">Reference:</h3>
 <ol>

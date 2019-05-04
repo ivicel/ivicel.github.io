@@ -148,6 +148,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Anroid FileProvider的使用">Anroid FileProvider的使用</a><ul><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -176,7 +179,6 @@
         ...
     &lt;/application&gt;
 &lt;/manifest&gt;</code></pre>
-
 <ol>
 <li><code>res/xml/filepaths</code> 写法 </li>
 </ol>
@@ -187,7 +189,6 @@
   &lt;external-cache-path path="...." name="..."/&gt;
   &lt;external-path path="..." name="...."/&gt;
 &lt;/paths&gt;</code></pre>
-
 <ul>
 <li><code>file-path</code> 为 <code>Context.getFilesDir()</code> 代表的目录 , 内部 (<strong>internal</strong>) 存储目录 <code>files/</code>. 可能有两个位置 , <code>/data/data/package_name/files</code> 下 , 或者 <code>/data/user/../package_name/files</code> 下 </li>
 <li><code>cache-path</code> 为 <code>Context.getCacheDir()</code> 代表的内部目录 <code>cache/</code></li>
@@ -214,7 +215,6 @@ File imagePath = new File(context.getFilesPath(), "images");
 File newFile = new File(imagePath, "default_image.jpg");
 Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprovider",
      newFile);</code></pre>
-
 <p><code>authorities</code> 参数要和 <code>meta-data</code> 中写的一样 , 不然会找不到共享目录 , 抛出错误 . <code>getUriForFile</code> 会在设定好的 <code>xml</code> 文件中从上逐行进行匹配 , 若匹配不到任何一行 , 抛出 <code>IllegalArgumentException</code></p>
 <ol>
 <li>
@@ -232,7 +232,6 @@ for (ResolveInfo resolveActivity : resolveActivities) {
     grantUriPermission(resolveActivity.activityInfo.packageName, uri,
          Intent.FLAG_GRANT_WRITE_PERMISSION);
 }</code></pre>
-
 <p>​</p>
 <h5 id="reference">Reference:</h5>
 <ol>

@@ -146,6 +146,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android高效加载图片防止OOM">Android高效加载图片防止OOM</a><ul><li><a class="toc-href" href="#reference" title="Reference">Reference</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -157,7 +160,7 @@
 <li> 获得图片的长和宽 , 分别为所期望的长和宽进行对比 , 取其中 <strong> 比值大 </strong> 的数 </li>
 <li><code>BitmapFactory.Options.inJustDecodeBounds</code> 设置成 <code>false</code>, 重新解析出所需图片 </li>
 </ol>
-<p>&lt;<Android 开发权威指南 >&gt; 依据想需要的大小生成 <code>bitmap</code>, 其取的值是较大值 , 然后向下取整 . 这样能获得更小的分辨率 , 占用的内存更小 </p>
+<p>&lt;<android 开发权威指南 >&gt; 依据想需要的大小生成 <code>bitmap</code>, 其取的值是较大值 , 然后向下取整 . 这样能获得更小的分辨率 , 占用的内存更小 </android 开发权威指南 ></p>
 <pre class="highlight"><code class="language-java linenums">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
     BitmapFactory.Options options = new BitmapFactory.Options();
     /* 设置为 true 后 , 在 decode 时不会真的加载图片而是获取图片信息 */
@@ -176,7 +179,6 @@
     options.inSampleSize = inSampleSize;
     return BitmapFactory.decodeFile(imagePath, options);
 }</code></pre>
-
 <p>Android Develper 官网的示例 , 其严格的按 2 的倍数来取值 </p>
 <pre class="highlight"><code class="language-java linenums">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
     BitmapFactory.Options options = new BitmapFactory.Options();
@@ -197,11 +199,10 @@
     otpions.inSampleSize = inSampleSize;
     return BitmapFactory.decodeFile(imagePath, options);
 }</code></pre>
-
 <h3 id="reference">Reference</h3>
 <ol>
-<li>&lt;<Android 开发艺术 >&gt;</li>
-<li>&lt;<Android 开发权威指南 >&gt;</li>
+<li>&lt;<android 开发艺术 >&gt;</android 开发艺术 ></li>
+<li>&lt;<android 开发权威指南 >&gt;</android 开发权威指南 ></li>
 <li><a href="https://developer.android.com/topic/performance/graphics/load-bitmap.html">https://developer.android.com/topic/performance/graphics/load-bitmap.html</a></li>
 </ol>
             </section>

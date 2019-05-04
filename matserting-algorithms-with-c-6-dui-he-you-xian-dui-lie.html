@@ -152,6 +152,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-6: 堆和优先队列">Matserting Algorithms with C-6: 堆和优先队列</a><ul><li><a class="toc-href" href="#heap" title="堆 (Heap)">堆 (Heap)</a></li><li><a class="toc-href" href="#priority-queues" title="优先队列(Priority Queues)">优先队列(Priority Queues)</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -161,9 +164,9 @@
 <p> 堆的实现通常存储在一个连续的数组中 , 从根结点为 <code>0</code> 位置 , 任意结点 <code>i</code> 其父结点的的位置是 <code>int((i-2)/2)</code>, 舍弃掉小数部分 </p>
 <p> 堆是左平衡的树 , 随着结点的增加 , 树会逐级从左至右增长 .</p>
 <p> 向堆中插入节点 </p>
-<p><img alt=" 向堆中插入结点 " src="../images/ 向堆中插入结点 .png" /></p>
+<p><img alt=" 向堆中插入结点 " src="../images/ 向堆中插入结点 .png"/></p>
 <p> 删除堆顶点 </p>
-<p><img alt=" 删除堆顶点 " src="../images/ 删除堆顶点 .png" /></p>
+<p><img alt=" 删除堆顶点 " src="../images/ 删除堆顶点 .png"/></p>
 <pre class="highlight"><code class="language-c linenums">/* heap.h */
 #ifndef HEAP_H
 #define HEAP_H
@@ -188,7 +191,6 @@ int heap_extract(Heap *heap, void **data);
 #define heap_size(heap) ((heap)-&gt;size)
 
 #endif</code></pre>
-
 <p> 堆的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* heap.c */
 #include &lt;stdlib.h&gt;
@@ -320,7 +322,6 @@ int heap_extract(Heap *heap, void **)
     }
     return 0;
 }</code></pre>
-
 <h3 id="priority-queues"> 优先队列 (Priority Queues)</h3>
 <p> 优先队列将数据按照数据的优先级顺序排列 , 这样可以最快定位到优先级最高的元素 . 例如在服务器做负载均衡时 , 最空闲的服务器优先级最高 , 这样可以更好的处理请求服务 </p>
 <p> 优先队列的实现 </p>
@@ -341,7 +342,6 @@ typedef Heap PQueue;
 #define pqueue_size heap_size
 
 #endif </code></pre>
-
 <p> 优先队列的示例 : 包裹分拣 </p>
 <pre class="highlight"><code class="language-c linenums">/* parels.c */
 #include &lt;stdlib.h&gt;

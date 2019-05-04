@@ -152,11 +152,14 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-7: 图">Matserting Algorithms with C-7: 图</a><ul><li><a class="toc-href" href="#graphs" title="图(Graphs)">图(Graphs)</a><ul><li><a class="toc-href" href="#breadth-first-search" title="广度优先算法(breadth-first search)">广度优先算法(breadth-first search)</a></li><li><a class="toc-href" href="#depth-first-search" title="深度优先算法(depth-first search)">深度优先算法(depth-first search)</a></li></ul></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
                 <h3 id="graphs"> 图 (Graphs)</h3>
-<p><img alt=" 图 " src="../images/ 图 .png" /></p>
+<p><img alt=" 图 " src="../images/ 图 .png"/></p>
 <p> 图由 <strong> 顶点 </strong>(vertices) 和 <strong> 边 </strong>(edges) 组成 , 图的边分为 <strong> 有向 </strong> 和 <strong> 无向 </strong></p>
 <p> 图表示为 <code>G=(V, E)</code>, V 代表顶点的集合 , E 和 V 是一种二元关系 </p>
 <blockquote>
@@ -177,7 +180,7 @@
 <p> 如果图中的每个顶点都能通过某条路径到达其他顶点 , 对于无向图则称为 <strong> 连通 </strong>, 对有向图称为 <strong> 强连通 </strong>. 如果只有图中部分是连通的 , 无向图中称为 <strong> 连通分支 </strong>, 有向图中称为 <strong> 强连通分支 </strong>. 如果移除某个结点 , 使得图或分支推动连通性 , 则称该顶点为 <strong> 关结点 </strong>. 如果移除某条边使得图失去连通性 , 则称该边为 <strong> 桥 </strong></p>
 <p> 计算机中通常使用 <strong> 邻接链表 </strong>(adjacency-list representation) 来表示图 . 邻接表按照链表的方式组织 , 链表中的每个结构都包含两个成员 : 一个顶点和与该顶点邻接的顶点所组成的一个邻接表 </p>
 <p> 有向图中 , 邻接表的顶点总数同总的边数相等 ; 无向图中 , 邻接表的顶点总数是边的两倍 </p>
-<p><img alt=" 邻接表 " src="../images/ 邻接表 .png" /></p>
+<p><img alt=" 邻接表 " src="../images/ 邻接表 .png"/></p>
 <ul>
 <li><strong> 搜索方法 </strong></li>
 </ul>
@@ -191,7 +194,7 @@
 <li> 直到队列中没有任何顶点时 , 完成搜索 </li>
 </ol>
 </blockquote>
-<p><img alt=" 图广度优先算法 " src="../images/ 图广度优先算法 .png" /></p>
+<p><img alt=" 图广度优先算法 " src="../images/ 图广度优先算法 .png"/></p>
 <h4 id="depth-first-search"> 深度优先算法 (depth-first search)</h4>
 <p> 在访问某个顶点后 , 递归地访问此顶点的所有未访问过的相邻顶点 , 尽可能深的持续探索直到无法继续为止 </p>
 <blockquote>
@@ -204,7 +207,7 @@
 <li> 当栈中所有顶点都出栈后 , 如果图中还有白色顶点 , 则选择其中的任意一个作为起始点 , 从第 2 步骤开始 , 直至图中所有的顶点都被涂成黑色 </li>
 </ol>
 </blockquote>
-<p><img alt=" 图广度优先算法 " src="../images/ 图广度优先算法 .png" /></p>
+<p><img alt=" 图广度优先算法 " src="../images/ 图广度优先算法 .png"/></p>
 <p> 图抽象数据类型头文件 </p>
 <pre class="highlight"><code class="language-c linenums">/* graph.h */
 #ifndef GRAPH_H
@@ -259,7 +262,6 @@ int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2);
 #define graph_ecount(graph) ((graph)-&gt;ecount)
 
 #endif</code></pre>
-
 <p> 图的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* graph.c */
 #include &lt;stdlib.h&gt;
@@ -472,9 +474,8 @@ int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2)
     }
     return set_is_memember(&amp;((AdjList *)list_data(element))-&gt;adjacent, data2);
 }</code></pre>
-
 <p> 图的应用 : 计算网络跳数 (Counting Network Hops)</p>
-<p><img alt=" 网络跳数 " src="https://ivicel.github.io/images/ 网络跳数 .png" /></p>
+<p><img alt=" 网络跳数 " src="https://ivicel.github.io/images/ 网络跳数 .png"/></p>
 <p> 使用广度优先算法 , 对于某个顶点的的邻接点 , 其邻接点的跳数都等于该顶点跳数加上 1</p>
 <pre class="highlight"><code class="language-c linenums">/* bfs.c */
 #include &lt;string.h&gt;
@@ -575,7 +576,6 @@ int bfs(Graph *graph, BfsVertex *start, List *hops)
     }
     return 0;
 }</code></pre>
-
 <p> 图的应用 : 拓扑排序 (Topological Sorting)</p>
 <pre class="highlight"><code class="language-c linenums">/* dfs.c */
 #include &lt;stdlib.h&gt;

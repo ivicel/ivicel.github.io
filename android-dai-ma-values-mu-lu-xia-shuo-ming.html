@@ -154,6 +154,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android 代码 values 目录下说明">Android 代码 values 目录下说明</a><ul><li><a class="toc-href" href="#1-style" title="1. style 主题文件">1. style 主题文件</a></li><li><a class="toc-href" href="#2" title="2. 其他资源文件">2. 其他资源文件</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -181,7 +184,6 @@
 &lt;style name="BlueTextStyle"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_blue_light&lt;/item&gt;
 &lt;/style&gt;</code></pre>
-
 <ol>
 <li> 使用 attr 的原因是为自定义 view 添加属性 , 另外是方便更改属性的值 . 有两种定义方式 . </li>
 </ol>
@@ -189,7 +191,6 @@
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;attr name="one" format="reference"/&gt;
 &lt;/resources&gt;</code></pre>
-
 <p> 一种是在外面包一层 <code>declare-styleable</code> 标签 . </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;!-- 引用整组为 R.styleable.MyAttrs, 单个为 R.styleable.MyAttrs_other_one --&gt;
 &lt;resources&gt;
@@ -200,7 +201,6 @@
         &lt;attr name="one"/&gt;
  &lt;/declare-styleable&gt;
 &lt;/resources&gt;</code></pre>
-
 <p> 使用 <code>declare-styleable</code> 主要有两点 </p>
 <ul>
 <li> 它提供了一个数组的引用 <code>R.styleable.[styleable-name]</code> 引用 ( 组里成员引用为 <code>R.styleable.[styleable-name]_[attr-name]</code> 注意组名和成员名是用下划线 _ 连接 ) 由于在使用 <code>Theme#obtainStyledAttributes()</code> 的参数 , 如果我们直接引用 <code>R.attr.one</code> 也是要组成一个数组的 </li>
@@ -217,7 +217,6 @@
 
 &lt;TextView
   app:my_bg="@drawable/bg"/&gt;</code></pre>
-
 </li>
 <li>
 <p><code>color</code> 颜色值 .</p>
@@ -248,7 +247,6 @@
         &lt;enum name="vertical" value="1" /&gt; 
     &lt;/attr&gt;
 &lt;/declare-styleable&gt;</code></pre>
-
 </li>
 <li>
 <p><code>flag</code> 标志位 , 使用时通过 <code>|</code> 竖线来设置单个或多个值 , 如 <code>stateOne | stateTwo</code> 这样 </p>
@@ -260,7 +258,6 @@
 &lt;/declare-styleable&gt;
 
 </code></pre>
-
 </li>
 <li>
 <p> 混合类型 , 比如支持 <code>string|reference</code> 这种 , 使用 <code>|</code> 竖线分隔开 </p>
@@ -287,7 +284,6 @@
     &lt;dimen name="textview_height"&gt;25dp&lt;/dimen&gt;
     &lt;dimen name="font_size"&gt;16sp&lt;/dimen&gt;
 &lt;/resources&gt;</code></pre>
-
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Id">ID</a> 独一无二的 ID 值 . 一般我们会在 layout 文件中直接用 <code>@+id/id_name</code> 来建立 , 不过 , 当我们有许多地方需要用到这个 id 时 , 单独建立文件 <code>values/ids.xml</code> 来设置这个 id, 然后在需要的地方引用就可 . 特别是 <code>ConstraintLayout</code> 这个需要前后引用 id 来设定 view 的位置时 , 就减少了工作量 , 不必总使用 <code>@+id/id_name</code> 来保证 id 一定存在了 .  通过 <code>R.id.[name]</code>, <code>@id/[name]</code>  来引用 . 存放在 <code>values/ids.xml</code></li>
 </ol>
@@ -297,14 +293,12 @@
 
 &lt;!-- layout 中引用 --&gt;
 &lt;Button android:id="@id/button_ok"/&gt;</code></pre>
-
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Integer">Integer</a> 整数值 , 通过 <code>R.integer.[name]</code>, <code>@integer/[name]</code> 来引用 . 存放在 <code>values/integers.xml</code></li>
 </ol>
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;integer name="max_speed"&gt;75&lt;/integer&gt;
 &lt;/resources&gt;</code></pre>
-
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#IntegerArray">Integer Array</a> 整型数值 , 通赤 <code>R.array.[name]</code> 来引用 . 使用 java 来解析 . <code>getResources().getInArray(R.array.bits)</code>. 存放在 <code>values/integers.xml</code></li>
 </ol>
@@ -316,7 +310,6 @@
         &lt;item&gt;32&lt;/item&gt;
     &lt;/integer-array&gt;
 &lt;/resources&gt;</code></pre>
-
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#TypedArray">Typed Array</a> 混合型数组 , 可以引用其他的资源 , 数组里可以是引用同一类型的值 , 也可以是不同的类型 , 当引用不同类型时 , 在解析的时候就有注意判断类型值 . 使用 <code>R.array.[name]</code> 引用 , 然后有 Java 代码中使用 <code>obtainTypedArray()</code> 来解析具体的值 . 存放在 <code>values/arrays.xml</code></li>
 </ol>
@@ -327,11 +320,9 @@
         &lt;item&gt;@drawable/logout&lt;/item&gt;
     &lt;/array&gt;
 &lt;/resources&gt;</code></pre>
-
 <p>java 解析代码示例 </p>
 <pre class="highlight"><code class="language-java linenums">TypedArray icons = getResources().obtainTypedArray(R.array.icons);
 Drawable drawable = icons.getDrawable(0);</code></pre>
-
 <ol>
 <li>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String</a> 字符串 . 使用 <code>R.string.[name]</code>, <code>@string/[name]</code> 引用 . 存放在 <code>values/strings.xml</code></p>
@@ -348,7 +339,6 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         &lt;item&gt;Mars&lt;/item&gt;
     &lt;/string-array&gt;
 &lt;/resources&gt;</code></pre>
-
 <ol>
 <li>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Plurals</a> 英文中的单复数形式 </p>
@@ -359,7 +349,6 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         &lt;item quantity="other"&gt;Znaleziono %d piosenek.&lt;/item&gt;
     &lt;/plurals&gt;
 &lt;/resources&gt;</code></pre>
-
 <p>​</p>
 </li>
 </ol>

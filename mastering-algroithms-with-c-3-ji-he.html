@@ -224,7 +224,6 @@ int set_is_equal(const Set *set1, const Set *set2);
 #define set_size(set) ((set)-&gt;size)
 
 #endif</code></pre>
-
 <p> 集合抽象数据类型的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* set.c */
 #include &lt;stdlib.h&gt;
@@ -413,29 +412,28 @@ int _insert_into_set(Set *set, const void *data)
     set-&gt;size++;
     return 0;
 }</code></pre>
-
 <p><strong> 集合覆盖 </strong></p>
 <p> 给定一个集合 S, 集合 P 由集合 S 的子集 A<sub>1</sub> 到 A<sub>n</sub> 组成 , 集合 C 由集合 P 中的一个或多个子集组成 .
 如果 S 中的每个成员都包含在 C 的至少一个子集中 , 则称集合 C 覆盖集合 S
 C 包含的 P 的子集应该越少越好 </p>
 <blockquote>
-<p> 以下程序使用一种贪心法算法 , 每一次都尝试尽可能的覆盖到更多的成员 , 得到不一定是最优解 </br>
-给定一个集合 , 代表有 12 各技能 : S = {a, b, c, d, e, f, g, h, i, j, k, l}</br>
-然后一共有 7 名选手 P = {A<sub>1</sub>, A<sub>2</sub>, …, A<sub>7</sub>}</br>
-每一位选手都有不同的技能 : </br></p>
+<p> 以下程序使用一种贪心法算法 , 每一次都尝试尽可能的覆盖到更多的成员 , 得到不一定是最优解 </p></blockquote>
+给定一个集合 , 代表有 12 各技能 : S = {a, b, c, d, e, f, g, h, i, j, k, l}
+然后一共有 7 名选手 P = {A<sub>1</sub>, A<sub>2</sub>, &hellip;, A<sub>7</sub>}
+每一位选手都有不同的技能 : 
 <blockquote>
-<p>A<sub>1</sub> = {a, b, c, d}</br>
-A<sub>2</sub> = {e, f, g, h, i}</br>
-A<sub>3</sub> = {j, k, l}</br>
-A<sub>4</sub> = {a, e}</br>
-A<sub>5</sub> = {b, f, g}</br>
-A<sub>6</sub> = {c, d, g, h, k, l}</br>
-A<sub>7</sub> = {l}</br>
-最优解的集合覆盖是 C = {A<sub>1</sub> , A<sub>2</sub> , A<sub>3</sub>}</br>
-不过我们的程序给出了的是 C = {A<sub>6</sub>, A<sub>2</sub>, A<sub>1</sub>, A<sub>3</sub>}</br></p>
-</blockquote>
-</blockquote>
-<p><img alt=" 集合覆盖 " src="../images/ 集合覆盖 .png" /></p>
+<p>A<sub>1</sub> = {a, b, c, d}</p></blockquote>
+A<sub>2</sub> = {e, f, g, h, i}
+A<sub>3</sub> = {j, k, l}
+A<sub>4</sub> = {a, e}
+A<sub>5</sub> = {b, f, g}
+A<sub>6</sub> = {c, d, g, h, k, l}
+A<sub>7</sub> = {l}
+最优解的集合覆盖是 C = {A<sub>1</sub> , A<sub>2</sub> , A<sub>3</sub>}
+不过我们的程序给出了的是 C = {A<sub>6</sub>, A<sub>2</sub>, A<sub>1</sub>, A<sub>3</sub>}
+
+
+<p><img alt=" 集合覆盖 " src="../images/ 集合覆盖 .png"/></p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include "set.h"
 

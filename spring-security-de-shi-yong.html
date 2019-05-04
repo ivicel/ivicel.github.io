@@ -148,6 +148,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Spring Security 的使用">Spring Security 的使用</a><ul><li><a class="toc-href" href="#1-spring-security" title="1. Spring Security 的开启方式">1. Spring Security 的开启方式</a></li><li><a class="toc-href" href="#2" title="2. 验证用户(用户名, 密码, 角色...)">2. 验证用户(用户名, 密码, 角色...)</a><ul><li><a class="toc-href" href="#21" title="2.1 使用内存签名">2.1 使用内存签名</a></li><li><a class="toc-href" href="#22" title="2.2 使用数据库定义用户认证服务">2.2 使用数据库定义用户认证服务</a></li></ul></li><li><a class="toc-href" href="#3-url_1" title="3. 限制请求(对 url 的配置)">3. 限制请求(对 url 的配置)</a></li><li><a class="toc-href" href="#31" title="3.1. 自定义登录页面">3.1. 自定义登录页面</a></li><li><a class="toc-href" href="#5-csrf" title="5. 防止跨站请求伪造(CSRF)">5. 防止跨站请求伪造(CSRF)</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -188,7 +191,6 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         .psssword("123456")
         .roles("USER");
 }</code></pre>
-
 <p><code>withUser()</code> 方法返回的是一个用户详情构造器 <code>UserDetailsBuilder</code>, 其还有以下的常用的方法 </p>
 <ul>
 <li><code>accountExpired(boolean)</code> 账号是否过期 </li>
@@ -215,7 +217,6 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
                                     " u.id = ur.user_id AND r.id = ur.role_id AND " +
                                     " u.user_name = ?");
 }</code></pre>
-
 <p> 如果需要实现自己的查询处理 , 那么可以使用 <code>AuthenticationManagerBuilder#userDetailsService()</code> 方法 , 其参数是实现了 <code>UserDetailsService</code> 接口的类 , 只有一个方法 <code>loadUserByUsername</code>, 该方法返回 <code>UserDetails</code> 对象 , 需要自己实现该接口 </p>
 <pre class="highlight"><code class="language-java linenums">// 用户模型
 public class User implements UserDetails {
@@ -264,8 +265,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordEncoder(new BCryptPasswordEncoder());
     }
 }</code></pre>
-
-<h4 id="3-url">3. 限制请求 ( 对 url 的配置 )</h4>
+<h4 id="3-url_1">3. 限制请求 ( 对 url 的配置 )</h4>
 <p> 限制请求主要是对不同的路径 (url) 实现不同的策略 , 通过这能够实现对不同角色赋予不同权限 .</p>
 <pre class="highlight"><code class="language-java linenums">@Override
 protected void configure(HttpSecurity http) throws Exception {
@@ -283,7 +283,6 @@ protected void configure(HttpSecurity http) throws Exception {
         // 开启 HTTP 基础验证
         .and().httpBasic();
 }</code></pre>
-
 <ul>
 <li><code>access(String)</code> 参数为 SpEL, 返回 true 则允许访问 </li>
 <li><code>anonymous()</code> 允许匿名访问 </li>
@@ -322,7 +321,6 @@ protected void configure(HttpSecurity http) throws Exception {
         // 登出后跳转页面
         .logoutSuccessUrl("/welcome");
 }</code></pre>
-
 <h4 id="5-csrf">5. 防止跨站请求伪造 (CSRF)</h4>
 <p> 添加 Spring Security 后 , 会自动添加 CSRF 认证 , 可以使用 <code>HttpSecurity#csrf().disable()</code> 来关闭 . Spring Security 会生成一个 <code>_csrf</code> 变量 , 可以在页面模版中使用这个变量 </p>
 <pre class="highlight"><code class="language-html linenums">&lt;input type=hidden id="${_csrf.parameterName}" name="${_csrf.parameterName}" 

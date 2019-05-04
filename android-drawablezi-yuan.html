@@ -150,6 +150,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android Drawable资源">Android Drawable资源</a><ul><li><a class="toc-href" href="#1-drawable" title="1. drawable 简述">1. drawable 简述</a></li><li><a class="toc-href" href="#2-bitmapdrawablebitmap" title="2. BitmapDrawable(bitmap 标签)">2. BitmapDrawable(bitmap 标签)</a></li><li><a class="toc-href" href="#3-nine-path" title="3. 点九图片(nine-path 标签)">3. 点九图片(nine-path 标签)</a></li><li><a class="toc-href" href="#4-layerdrawable-layer-list" title="4. LayerDrawable (layer-list 标签)">4. LayerDrawable (layer-list 标签)</a></li><li><a class="toc-href" href="#5-statelistdrawableselector" title="5. StateListDrawable(selector 标签)">5. StateListDrawable(selector 标签)</a></li><li><a class="toc-href" href="#6-levellistdrawablelevel-list" title="6. LevelListDrawable(level-list 标签)">6. LevelListDrawable(level-list 标签)</a></li><li><a class="toc-href" href="#7-transitiondrawabletransition" title="7. TransitionDrawable(transition 标签)">7. TransitionDrawable(transition 标签)</a></li><li><a class="toc-href" href="#8-insetdrawableinset" title="8. InsetDrawable(inset 标签)">8. InsetDrawable(inset 标签)</a></li><li><a class="toc-href" href="#9-clipdrawableclip" title="9. ClipDrawable(clip 标签)">9. ClipDrawable(clip 标签)</a></li><li><a class="toc-href" href="#10-scaledrawablescale" title="10. ScaleDrawable(scale 标签)">10. ScaleDrawable(scale 标签)</a></li><li><a class="toc-href" href="#11-shapedrawableshape" title="11. ShapeDrawable(shape 标签)">11. ShapeDrawable(shape 标签)</a></li><li><a class="toc-href" href="#12-rotatedrawablerotate" title="12. RotateDrawable(rotate 标签)">12. RotateDrawable(rotate 标签)</a></li><li><a class="toc-href" href="#reference" title="Reference">Reference</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -182,7 +185,6 @@
                       "center" | "fill" | "clip_vertical" | "clip_horizontal"]
     android:mipMap=["true" | "false"]
     android:tileMode=["disabled" | "clamp" | "repeat" | "mirror"] /&gt;</code></pre>
-
 <ul>
 <li><code>android:src</code> 图片来源 , 可以是其他 drawable</li>
 <li><code>android:antialias</code> 是否开启抗锯齿 , 一般都开启以便获得更好的显示效果 </li>
@@ -202,7 +204,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@[package:]drawable/drawable_resource"
     android:dither=["true" | "false"] /&gt;</code></pre>
-
 <ul>
 <li><code>android:src</code> 必须是 nine-path 图片 </li>
 </ul>
@@ -220,7 +221,6 @@
         android:bottom="dimension"
         android:left="dimension" /&gt;
 &lt;/layer-list&gt;</code></pre>
-
 <p><code>android:top</code>, <code>android:right</code>, <code>android:bottom</code>, <code>android:left</code> 是上右下左的偏移量 , 注意这个偏移不会超出 view 的大小 . 比如当设定这个为背景时 , 背景大小 = view 大小 - 左偏移量大小 .</p>
 <p> 所以一般为保证偏移后 , 内容区还是显示为居中 , 四个方向都作偏移 , 然后在显示的另一层里不需要显示出来的作偏移 </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;TextView
@@ -255,8 +255,7 @@
         &lt;/shape&gt;
     &lt;/item&gt;
 &lt;/layer-list&gt;</code></pre>
-
-<p><img alt="layer-list textview 示例 " src="../images/layer-list textview 示例 .png" /></p>
+<p><img alt="layer-list textview 示例 " src="../images/layer-list textview 示例 .png"/></p>
 <h3 id="5-statelistdrawableselector">5. StateListDrawable(selector 标签 )</h3>
 <p><code>StateListDrawable</code> 表示多个状态联合起来的一个 drawable, 比如点击 , focus 等 . 状态匹配会按从上到下来匹配 , 没匹配到的话就使用最后一个 , 匹配到了就结束 . 所以一般要把默认状态放在最后 , 比如非点击状态在最后 , 点击放在前面 , 不然无法匹配到点击状态 , 因为第一个总是匹配成功 .</p>
 <pre class="highlight"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -276,7 +275,6 @@
         android:state_activated=["true" | "false"]
         android:state_window_focused=["true" | "false"] /&gt;
 &lt;/selector&gt;</code></pre>
-
 <blockquote>
 <p><code>android:state_XXXX</code> 是 item 可设置的状态 </p>
 </blockquote>
@@ -301,7 +299,6 @@
         android:maxLevel="integer"
         android:minLevel="integer" /&gt;
 &lt;/level-list&gt;</code></pre>
-
 <ul>
 <li><code>android:maxLevel</code> 最大 level</li>
 <li><code>android:minLevel</code> 最小 level</li>
@@ -325,13 +322,11 @@
         android:maxLevel="100"
         android:minLevel="100" /&gt;
 &lt;/level-list&gt;</code></pre>
-
 <p> 使用 <code>Drawable#setLevel(10)</code> 的代码便可以设置 level 为 10. </p>
 <p>level-list 的匹配也是从上至下 , 一但有匹配便不会再向下查找 . 所以上面的示例也可以把 <code>android:minLevel</code> 省略不写 , 比如第一个 item</p>
 <pre class="highlight"><code class="language-xml linenums">&lt;item
       android:drawable="@drawable/battery_low"
       android:maxLevel="10"/&gt;</code></pre>
-
 <p> 这样 level 10 便直接命中第一个 item 后便不会再向下查找 . </p>
 <blockquote>
 <p>level-list 的书写顺序需要注意 , 如果把 level 100 写在前面 , 并省略了 minLevel, 这样总是会匹配到 level 100 而不会向下查找 </p>
@@ -349,7 +344,6 @@
         android:bottom="dimension"
         android:left="dimension" /&gt;
 &lt;/transition&gt;</code></pre>
-
 <p>transition 切换时要主动调动 <code>TransitionDrawable#startTransition()</code> 方法 , 从第一个转到第二个 drawable, 调动 <code>TransitionDrawable#reverseTransition()</code> 从第二个转回第一个 drawable</p>
 <h3 id="8-insetdrawableinset">8. InsetDrawable(inset 标签 )</h3>
 <p>inset 标签类似于对 drawable 设置 padding, 但 padding 只设置内容区与边框的距离 , 而 inset 不仅设置距离还可以设置自己的背景 drawable.</p>
@@ -361,7 +355,6 @@
     android:insetRight="dimension"
     android:insetBottom="dimension"
     android:insetLeft="dimension" /&gt;</code></pre>
-
 <ul>
 <li><code>android:drawable</code> 背景图片是必须的 </li>
 </ul>
@@ -375,7 +368,6 @@
     android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
                      "fill_vertical" | "center_horizontal" | "fill_horizontal" |
                      "center" | "fill" | "clip_vertical" | "clip_horizontal"] /&gt;</code></pre>
-
 <ul>
 <li><code>android:clipOrientation</code> 表示裁剪方向 , 可定义水平 <code>horizontal</code> 裁剪和垂直 <code>vertical</code> 裁剪 . 水平裁剪指的是从图片的水平位置 , 即左右两开始向中心位置开始裁剪 . 垂直即是从上下位置开始 </li>
 <li><code>android:gravity</code> 表示以这个位置为中心 , 从该中心的左右 , 上下开始裁剪 </li>
@@ -389,16 +381,14 @@
     android:gravity="center"
     android:clipOrientation="horizontal"&gt;
 &lt;/clip&gt;</code></pre>
-
-<p><img alt="clip_gravity_center" src="../images/clip_gravity_center.png" /></p>
+<p><img alt="clip_gravity_center" src="../images/clip_gravity_center.png"/></p>
 <pre class="highlight"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;clip xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/poly_test2"
     android:gravity="left"
     android:clipOrientation="horizontal"&gt;
 &lt;/clip&gt;</code></pre>
-
-<p><img alt="clip_gravity_left" src="../images/clip_gravity_left.png" /></p>
+<p><img alt="clip_gravity_left" src="../images/clip_gravity_left.png"/></p>
 <h3 id="10-scaledrawablescale">10. ScaleDrawable(scale 标签 )</h3>
 <p>scale 标签也是通过设置 level 值来设置缩放 , 也是 0~10000</p>
 <pre class="highlight"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -410,7 +400,6 @@
                           "center" | "fill" | "clip_vertical" | "clip_horizontal"]
     android:scaleHeight="percentage"
     android:scaleWidth="percentage" /&gt;</code></pre>
-
 <ul>
 <li><code>android:scaleGravity</code> 指的是以哪里为中心进行缩放 </li>
 <li><code>android:scaleHeight</code>, <code>android:scaleWidth</code> 值都为 <strong> 百分比 </strong>, 分别为高度和宽度从边框处可以缩放的百分比 ,  也就是图片会被按 <strong>(1 - 百分比 )</strong> 缩小 . 比如如果在 xml 中设置最多能缩进 50%, <code>android:scaleWidth="50%"</code>, 在 java 代码中设置 level 为 <code>Drawable.setLevel(3000)</code> 缩小为 30% 大小 , 也是会被  xml 的设定给限制最小能缩小到 50%</li>
@@ -460,7 +449,6 @@
         android:dashGap="integer" /&gt;
 
 &lt;/shape&gt;</code></pre>
-
 <ul>
 <li>
 <p><code>android:shape</code> 可以设置 <code>rectangle</code> 矩形 ( 默认 ), <code>oval</code> 椭圆 , <code>line</code> 线形 , <code>ring</code> 环形 </p>
@@ -544,7 +532,6 @@
     android:privotX="float"
     android:privotY="float"
     android:visible=["true" | "false"] /&gt;</code></pre>
-
 <ul>
 <li><code>android:drawable</code> 图片来源 , 也可以把图形包含在 rotate 标签之间 </li>
 <li><code>android:fromDegress</code> 开始角度 </li>

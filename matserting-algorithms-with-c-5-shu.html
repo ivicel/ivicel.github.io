@@ -152,16 +152,19 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-5: 树">Matserting Algorithms with C-5: 树</a><ul><li><a class="toc-href" href="#binary-tree" title="二叉树(Binary tree)">二叉树(Binary tree)</a></li><li><a class="toc-href" href="#_1" title="二叉搜索树">二叉搜索树</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
                 <h3 id="binary-tree"> 二叉树 (Binary tree)</h3>
-<p><img alt=" 二叉树 " src="../images/ 二叉树 .png" /></p>
+<p><img alt=" 二叉树 " src="../images/ 二叉树 .png"/></p>
 <p><strong> 先序遍历 </strong>: 根结点 -&gt; 左子结点 -&gt; 右子结点 </p>
 <p><strong> 中序遍历 </strong>: 左子结点 -&gt; 根结点 -&gt; 右子结点 </p>
 <p><strong> 后序遍历 </strong>: 左子结点 -&gt; 右子结点 -&gt; 根结占 </p>
 <p><strong> 层级遍历 </strong>: 树根结点 -&gt; 下层左结点 -&gt; 该层右结点 ( 广度优先方法 )</p>
-<p><img alt=" 树的遍历方法 " src="../images/ 树的遍历方法 .png" /></p>
+<p><img alt=" 树的遍历方法 " src="../images/ 树的遍历方法 .png"/></p>
 <blockquote>
 <p> 树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的 </p>
 </blockquote>
@@ -212,7 +215,6 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data);
 #define bitree_right(node) ((ndoe)-&gt;right)
 
 #endif</code></pre>
-
 <p> 二叉树的实现 </p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -358,7 +360,6 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
     right-&gt;size = 0;
     return 0;
 }</code></pre>
-
 <p> 遍历二叉树的实现 </p>
 <pre class="highlight"><code class="language-c linenums">#include "list.h"
 #include "bitree.h"
@@ -434,7 +435,6 @@ int postorder(const BiTreeNode *node, List *list)
     }
     return 0;
 }</code></pre>
-
 <h3 id="_1"> 二叉搜索树 </h3>
 <p> 二叉搜索树中 , 左结点总比根小 , 右结点总比根大 </p>
 <p> 在二叉搜索树中查询一个结点 , 从根结点开始 , 当遇到一个比目标结点值大的结点时 , 顺着该结点的左结点查找 ; 如果遇到的结点小于目标结点时 , 则顺着该结点的右子树查找 , 一直查到叶子结点 </p>
@@ -446,20 +446,20 @@ int postorder(const BiTreeNode *node, List *list)
 <li>-1 表示右倾斜 (rigth-heavy)</li>
 <li>0 表示平衡 (left-heavy)</li>
 </ul>
-<p><img alt="AVL 树 " src="../images/AVL 树 .png" /></p>
-<p> 向 AVL 树中插入一个结点时 , 必须计算因为执行了插入操作对平衡因子带来的改 ; 其次 , 如果任何平衡因子为变为了 ±2, 就必须从这个结点开始往下重新平衡这棵树 , 重新平衡的过程称为旋转 </p>
+<p><img alt="AVL 树 " src="../images/AVL 树 .png"/></p>
+<p> 向 AVL 树中插入一个结点时 , 必须计算因为执行了插入操作对平衡因子带来的改 ; 其次 , 如果任何平衡因子为变为了 &plusmn;2, 就必须从这个结点开始往下重新平衡这棵树 , 重新平衡的过程称为旋转 </p>
 <p><strong>LL(left-left) 旋转 </strong></p>
 <p> 当 x 位于 A 的左子树下的左子树上 , 执行 LL 旋转 . 设 left 为 A 的左子树 , 将 A 的左指针指向 left 的右结点 , left 的右指针指向 A, 将原来指向 A 的指针改为指向 left, 旋转后 , A 和 left 的平衡因子都改为 0</p>
-<p><img alt="LL 旋转 " src="../images/LL 旋转 .png" /></p>
+<p><img alt="LL 旋转 " src="../images/LL 旋转 .png"/></p>
 <p><strong>LR(left-right) 旋转 </strong></p>
 <p> 当 x 位于 A 的左子树下的右子树上时 , 执行 LR 旋转 . 设 left 是 A 的左子结点 , A 的子孙结点 grandchild 为 left 的右子结点 . 要执行 LR 旋转 , 将 left 的右子结点指向 grandchild 的左子结点 , grandchild 的左子结点指向 left, A 的左子结点指向 grandchild 的右子结点 , 再将 grandchild 的右子结点指向 A, 最后将原来指向 A 的指针指向 grandchild</p>
-<p><img alt="LR 旋转 " src="../images/LR 旋转 .png" /></p>
+<p><img alt="LR 旋转 " src="../images/LR 旋转 .png"/></p>
 <p> 执行 LR 旋转后 , 调整结点的平衡因子取决于旋转前 grandchild 结点的原平衡因子值 </p>
 <p> 下方的图展示了 3 种需要考虑到的情况 </p>
 <p> 如果 grandchild 结点的原始平衡因子为 +1, 就将 A 的平衡因子设置为 -1, 将 left 结点的平衡因子设置为 0</p>
 <p> 如果 grandchild 结点的原始平衡因子为 0, 就将 A 和 left 结点的平衡因为都设置为 0</p>
 <p> 如果 grandchild 结点的原始平衡因子为 -1, 就将 A 的平衡因子设置为 0, 将 left 的平衡因为设置为 +1</p>
-<p><img alt="LR 旋转后更新 " src="../images/LR 旋转后更新 .png" /></p>
+<p><img alt="LR 旋转后更新 " src="../images/LR 旋转后更新 .png"/></p>
 <p><strong>RR(right-right) 旋转 </strong></p>
 <p> 当 x 位于 A 的右子树下的右子树上时 , 执行 RL 旋转 . RR 旋转与 LL 旋转是对称关系 . 设 A 的右结点为 right, 要执行 RR 旋转 , 将 A 的右指针指向 right 的左子结点 , right 的左指针指向 A, 原来指向 A 的指针修改为指向 right</p>
 <p><strong>RL(right-left) 旋转 </strong></p>
@@ -499,7 +499,6 @@ int bistree_lookup(BisTree *tree, void **data);
 #define bistree_size(tree) ((tree)-&gt;size)
 
 #endif</code></pre>
-
 <p> 二叉搜索树实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* bistree.c */
 #include &lt;stdlib.h&gt;

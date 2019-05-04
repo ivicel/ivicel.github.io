@@ -148,6 +148,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="View绘制流程">View绘制流程</a><ul><li><a class="toc-href" href="#view" title="二. View的工作流程">二. View的工作流程</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -183,11 +186,10 @@
            }
            return measureSpec;
        }</code></pre>
-
 <ol>
 <li> 普通子 <code>view</code> 的大小要受到父 <code>ViewGroup</code> 的 <code>MeasureSpec.getMode</code> 的值 (<code>UNSPECIFIED</code>, <code>EXACTLY</code>, <code>AT_MOST</code>) 影响 . 子 <code>view</code> 的大小指子 <code>view</code> 的 <strong> 内容 + 左右 <code>margin</code>+ 左右 <code>padding</code> 值 </strong></li>
 </ol>
-<p><img alt=" 子 view 的 MeasureSpec" src="../images/ 子 view 的 MeasureSpec.png" /></p>
+<p><img alt=" 子 view 的 MeasureSpec" src="../images/ 子 view 的 MeasureSpec.png"/></p>
 <p> 子 <code>view</code> 的测量要从父 <code>ViewGroup</code> 开始 , 在 <code>ViewGroup#measureChildWithMargins</code> 中 , 如果这个 <code>view</code> 支持 <code>margin</code>, <code>padding</code> 的话 </p>
 <pre class="highlight"><code class="language-java linenums">// ViewGroup#measureChildWithMargins
 
@@ -281,7 +283,6 @@ public static int getChildMeasureSpec(int spec, int padding, int childDimension)
         //noinspection ResourceType
         return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
     }</code></pre>
-
 <ul>
 <li>
 <h4 id="view"> 二 . <code>View</code> 的工作流程 </h4>
@@ -340,7 +341,6 @@ protected int getSuggestedMinimumHeight() {
     return (mBackground == null) ? mMinHeight : 
             max(mMinHeight, mBackground.getMinimumHeight());
 }</code></pre>
-
 <p> 一般自定义 <code>view</code> 多使用 <code>AT_MOST</code>, <code>EXACTLY</code> 来指定大小 </p>
 <p> 这样其 <code>specWidth</code>, <code>specHeight</code> 就决定其宽 / 高度的大小 . 所以当我们直接继承 <code>View</code> 来自定义 <code>view</code> 时 , 如果设置 <code>view</code> 的宽 / 高为 <code>wrap_content</code> 时 , 结合上表中的值 , 可以知道如果我们不测量该 <code>view</code> 内容的大小 , 其最终的大小为父 <code>ViewGroup</code> 的大小 , 和设置 <code>match_parent</code> 一样 . 可以使用以下的方法解决 </p>
 <pre class="highlight"><code class="language-java linenums">// 重写该 view 的 onMeasure, 测量内容大小
@@ -361,7 +361,6 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         lp.height == ViewGroup.LayoutParams.WRAP_CONTENT) ? mHeight : heightMeasureSize;
     setMeasuredDimension(width, height)
 }</code></pre>
-
 <ol>
 <li><code>ViewGroup</code> 的 <code>measure</code> 过程 . 对于 <code>ViewGroup</code> 来说 , 除了要测量自己的大小外 , 还有递归的测量各个子元素的大小 . 由于不同的布局其测量方法定义不同 , 所以 <code>ViewGroup</code> 没有默认的 <code>onMeasure</code> 方法 , 而是需要具体的继承类来实现该方法 . <code>onMeasure</code> 中调用 <code>measureChildren</code> 或是 <code>measureChildWithMargins</code> 来测量子类 </li>
 </ol>
@@ -392,7 +391,6 @@ protected void measureChild(View child, int parentWidthMeasureSpec,
 
     child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
 }</code></pre>
-
 <p><code>layout</code> 过程 . 当 <code>ViewGroup</code> 的位置确定后 , 其会调用 <code>layout</code>, 并在其中调用 <code>onLayout</code> 来遍历子 <code>view</code> 的 <code>layout</code> 方法来确定子 <code>view</code> 的位置 . 子 <code>view</code> 的 <code>layout</code> 会调用自己的 <code>onLayout</code> 方法 . <code>ViewGroup</code> 没有默认实现 <code>onLayout</code>, 交给具体的布局来实现 , 以方法实现不同的布局 </p>
 <pre class="highlight"><code class="language-java linenums">// ViewGroup#layout
 @Override
@@ -456,7 +454,6 @@ public void layout(int l, int t, int r, int b) {
         notifyEnterOrExitForAutoFillIfNeeded(true);
     }
 }</code></pre>
-
 <p>​   绘制过程 <code>draw</code>. 绘制过程主要分为 1. 绘制背景 <code>background.draw(canvas)</code>, 2. 绘制自己 <code>onDraw</code>, 3. 绘制 <code>children</code>.<code>dispatchDraw</code> 方法 , 4. 绘制装饰 <code>onDrawScrollBars</code>. 主要调用 <code>View#draw</code> 方法 </p>
 <p>​   在 <code>View</code> 中有一个 <code>View#setWillNotDraw</code> 方法 , 设置 <code>true</code> 表示不绘制该 <code>view</code>. 默认为 <code>false</code>. 当继承 <code>ViewGroup</code> 时 , 需要手动设置为 <code>false</code> 关闭该标志位以便通过 <code>onDraw</code> 来绘制 <code>view</code></p>
             </section>

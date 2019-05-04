@@ -154,6 +154,9 @@
 
     <!-- Post content -->
     <main class="content" role="main">
+<div class="col-lg-3 hidden-xs hidden-sm">
+    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android View类的构造方法及View的主题属性优先级相关">Android View类的构造方法及View的主题属性优先级相关</a><ul><li><a class="toc-href" href="#1-layout-view" title="1. layout 里 view 的属性赋值">1. layout 里 view 的属性赋值</a></li><li><a class="toc-href" href="#2" title="2. 构造方法介绍">2. 构造方法介绍</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
+</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -173,7 +176,6 @@
 </ul>
 <pre class="highlight"><code class="language-xml linenums">&lt;TextView
  android:textColor="#332211"/&gt;</code></pre>
-
 <ol>
 <li> 自定义一个 <code>style</code>, 然后在 <code>layout</code> 里的 <code>view</code> 使用 <code>style</code> 属性来覆盖 . </li>
 </ol>
@@ -196,7 +198,6 @@
      android:src="@drawable/welcome.png"/&gt;
 &lt;/LinearLayout&gt;
 </code></pre>
-
 <ol>
 <li>Default Style Attribute (defStyleAttr)</li>
 </ol>
@@ -204,7 +205,6 @@
 <pre class="highlight"><code class="language-java linenums">public TextView(Context context, @Nullable AttributeSet attrs) {
     this(context, attrs, com.android.internal.R.attr.textViewStyle);
 }</code></pre>
-
 <p><code>com.android.internal.R.attr.textViewStyle</code> 是一个 frameworks 层定义的 <a href="https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/attrs.xml">attr</a>. </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;!-- These are the standard attributes that make up a complete theme. --&gt;
@@ -215,7 +215,6 @@
         &lt;!-- .... --&gt;
  &lt;declare-styleable&gt;
 &lt;/resources&gt;</code></pre>
-
 <p> 可以看到这个 attr 类型是一个引用 , 所以当我们这样定义一个 style item 时 </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_green_dark&lt;/item&gt;
@@ -228,7 +227,6 @@
 &lt;style name="BlueTextStyle"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_blue_light&lt;/item&gt;
 &lt;/style&gt;</code></pre>
-
 <ol>
 <li>Default Style Resource (defStyleRes)</li>
 </ol>
@@ -257,7 +255,6 @@
 &lt;!-- 在 activity 配置里引用 , 这会覆盖掉全局 application 里的设置 --&gt;
 &lt;activity
  android:theme="@style/AppTheme"/&gt;</code></pre>
-
 <h3 id="2">2. 构造方法介绍 </h3>
 <p> 以 SDK 27 中的 <code>ImageView</code> 为例 , 一共有 4 个构造方法 , 如下 </p>
 <pre class="highlight"><code class="language-java linenums">public ImageView(Context context) {
@@ -278,7 +275,6 @@ public ImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr
     super(context, attrs, defStyleAttr, defStyleRes);
     /* .... */
 }</code></pre>
-
 <p> 构造方法最多有 4 个参数 , 简单意思如下 :</p>
 <ul>
 <li><code>context</code> 每个构造方法都有 , 用来 inflate, 获取各种参数值等 . 如果我们从 Java 代码中直接创建一个新的 view, 一般都是使用只有 context 的参数的构造方法 </li>
@@ -297,7 +293,6 @@ TypedArray obtainStyledAttributes(AttributeSet set, int[] attrs, int defStyleAtt
 TypedArray obtainStyledAttributes(int[] attrs)
 // 从指定的资源文件查找
 TypedArray obtainStyledAttributes(int resId, int[] attrs)</code></pre>
-
 <h3 id="reference">Reference:</h3>
 <ol>
 <li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0806/4575.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0806/4575.html</a></li>
