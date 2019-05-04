@@ -1,46 +1,76 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Android内存缓存LruCache</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./androidnei-cun-huan-cun-lrucache.html" rel="canonical" />
+
+    <meta name="description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ....">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="缓存">
+    <meta name="tags" content="lrucache">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小, 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. 传入的内存最大值的单位要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1. // 获得应用可使用的最大内存, 取 1/8 作为缓存 final int maxSize = Runtime.getRuntime().maxMemory() / 8; LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) { @Override protected int sizeOf(String …" />
-<meta name="keywords" content="缓存, lrucache">
-
-<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Android内存缓存LruCache"/>
-<meta property="og:description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小, 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. 传入的内存最大值的单位要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1. // 获得应用可使用的最大内存, 取 1/8 作为缓存 final int maxSize = Runtime.getRuntime().maxMemory() / 8; LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) { @Override protected int sizeOf(String …"/>
+<meta property="og:description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ...."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./androidnei-cun-huan-cun-lrucache.html"/>
 <meta property="og:type" content="article"/>
@@ -50,310 +80,332 @@
 <meta property="article:section" content="Android"/>
 <meta property="article:tag" content="缓存"/>
 <meta property="article:tag" content="lrucache"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel\s Ambertime &ndash; Android内存缓存LruCache</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="androidnei-cun-huan-cun-lrucache">Android内存缓存LruCache</h1>
-    <p>
-      Posted on Wed 04 April 2018 in <a href="./category/android.html">Android</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h3 id="1-lrucahe">1. LruCahe 的使用</h3>
-<p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小, 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. </p>
-<blockquote>
-<p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
-</blockquote>
-<p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
-<div class="highlight"><pre><span></span><span class="c1">// 获得应用可使用的最大内存, 取 1/8 作为缓存</span>
-<span class="kd">final</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">()</span> <span class="o">/</span> <span class="mi">8</span><span class="o">;</span>
-<span class="n">LruCache</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Bitmap</span><span class="o">&gt;</span> <span class="n">bitmapCache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LruCache</span><span class="o">&lt;&gt;(</span><span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">int</span> <span class="nf">sizeOf</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">Bitmap</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 图片缓存, 返回每个 bitmap 的大小</span>
-        <span class="c1">// sdk 19 之后不再使用 Bitmap#getByteCount</span>
-        <span class="c1">// Bitmap#getAllocationByteCount 可能会比 getByteCount 返回的值大</span>
-        <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="na">getAllocationByteCount</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">};</span>
-</pre></div>
-
-
-<p>在获得 <code>LruCache</code> 对象之后, 便可以对其进行读, 写, 删除</p>
-<div class="highlight"><pre><span></span><span class="n">Bitmap</span> <span class="n">bitmap</span> <span class="o">=</span> <span class="n">bitmapCache</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-<span class="c1">// 如果缓存中已经存在, 那么旧的会被返回, 不存在则返回 null</span>
-<span class="n">Bitmap</span> <span class="n">prevBitmap</span> <span class="o">=</span> <span class="n">bitmapCache</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">bitmap</span><span class="o">);</span>
-<span class="c1">// 删除缓存</span>
-<span class="n">Btimap</span> <span class="n">bitmap</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-
-<span class="c1">// 一般图片都是从网络上下载下来, 所以使用图片的 url 来作为 key 值是最好了</span>
-<span class="c1">// 但 url 会有特殊的字符不能作为 key, 常用的方法是将 url 转为其 md5 值</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">urlToMD5</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">key</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">MessageDigest</span> <span class="n">md</span> <span class="o">=</span> <span class="n">MessageDigest</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;MD5&quot;</span><span class="o">);</span>
-        <span class="n">md</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">bytesToHexString</span><span class="o">(</span><span class="n">md</span><span class="o">.</span><span class="na">digest</span><span class="o">());</span>
-    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchAlgorithmException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">bytesToHexString</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 将 byte 数组转为 16 进制字符</span>
-    <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">hex</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toHexString</span><span class="o">(</span><span class="mh">0xFF</span> <span class="o">&amp;&amp;</span> <span class="n">input</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">hex</span><span class="o">.</span><span class="na">lenght</span><span class="o">()</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// 只有一位时在前面补 0</span>
-            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;0&quot;</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">hex</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>另外还可以重写 <code>entryRemove()</code> 方法, 这个方法会在<strong>元素被删除</strong>(内存不足时, remove 操作时), <strong>元素被替换</strong>(put 操作时)被调用, 默认的实现是一个空实现, 并且这个调用不是 <code>synchronization</code></p>
-<div class="highlight"><pre><span></span><span class="c1">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false</span>
-<span class="c1">// @param key 元素的 key</span>
-<span class="c1">// @param oldValue 元素的旧值</span>
-<span class="c1">// @param newValue 元素是被替换时的新值, 被删除时该值为 null</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">entryRemoved</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">evicted</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">oldValue</span><span class="o">,</span> <span class="n">V</span> <span class="n">newValue</span><span class="o">);</span>
-</pre></div>
-
-
-<h3 id="2">2. 源码解析</h3>
-<p>由于需要不断重新排序, <code>LruCache</code> 内部使用了一个 <code>LinkHashMap</code> 数据结构来存储实际内容. 这是一个<strong>双向链表</strong> 实现的 <strong>HashMap</strong>. <code>LinkHashMap</code>可以设置成<strong>基于插入顺序优先</strong>, 或者<strong>基于访问顺序优先</strong>, 把优先的元素放在链表<strong>末端</strong>, 这样链表头结点总是表示<strong>最后插入</strong>/<strong>最少访问</strong>的元素, 可以把头结点从链接中删除</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LruCache</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">LruCache</span><span class="o">(</span><span class="kt">int</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;maxSize &lt;= 0&quot;</span><span class="o">);</span>   
-        <span class="o">}</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">maxSize</span> <span class="o">=</span> <span class="n">maxSize</span><span class="o">;</span>
-        <span class="c1">// 第一个参数为初始容量, 第二个为 map 的负载因子, 第三个为是否基于访问顺序</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkHashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;(</span><span class="mi">0</span><span class="o">,</span> <span class="mf">0.75f</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>在每次 <code>put</code>, <code>get</code> 之后, 都要使用 <code>trimToSize()</code> 来确保使用的内存容量是在规定的范围内</p>
-<div class="highlight"><pre><span></span><span class="c1">// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">trimToSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 不断循环的删除头结点, 直到使用的内存小于 maxSize</span>
-    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
-        <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
-        <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// size 为当前使用的缓存容量</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">size</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">))</span> <span class="o">{</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="n">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> 
-                    <span class="s">&quot;.sizeOf() is reporting inconsistent results!&quot;</span><span class="o">);</span>
-            <span class="o">}</span>
-
-            <span class="c1">// 当现使用的容量 &lt;= 最大容量时退出循环</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="n">maxSize</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="c1">// LinkHashMap#eldest() 方法是 Android 实现 LinkHashMap 时添加的方法</span>
-            <span class="c1">// 其简单的返回了链表头结点</span>
-            <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">toEvict</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">eldest</span><span class="o">();</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">toEvict</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">break</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="c1">// 删除头结点, 并把现使用的内存容量减小</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">toEvict</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">toEvict</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
-            <span class="n">map</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-            <span class="c1">// safeSizeOf 只是对 sizeOf 的再次封装, 其只是返回 sizeOf 并确保该值不能 &lt; 0</span>
-            <span class="n">size</span> <span class="o">-=</span> <span class="n">safeSizeOf</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-            <span class="c1">// 记录收回的元素数量</span>
-            <span class="n">evictionCount</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="c1">// 调用</span>
-        <span class="n">entryRemoved</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p><code>LruCache#put()</code>, <code>LruCache#get()</code>方法的实现</p>
-<div class="highlight"><pre><span></span><span class="c1">// LruCache#put()</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">(</span><span class="s">&quot;key == null || value == null&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 如果添加进去的新的元素已经在内存中的话, 更新之后, 再减去旧的元素的大小</span>
-    <span class="n">V</span> <span class="n">previous</span><span class="o">;</span>
-    <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">putCount</span><span class="o">++;</span>
-        <span class="n">size</span> <span class="o">+=</span> <span class="n">safeSizeOf</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-        <span class="n">previous</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">size</span> <span class="o">-=</span> <span class="n">safeSizeOf</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">previous</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">previous</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">entryRemoved</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">previous</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="c1">// 保证内存大小不超过设定</span>
-    <span class="n">trimToSize</span><span class="o">(</span><span class="n">maxSize</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">previous</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// LruCache#get()</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="n">V</span> <span class="nf">get</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">(</span><span class="s">&quot;key == null&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="n">V</span> <span class="n">mapValue</span><span class="o">;</span>
-    <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 查找链表中的元素, 如果找到了就返回该值</span>
-        <span class="n">mapValue</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">mapValue</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">hitCount</span><span class="o">++;</span>
-            <span class="k">return</span> <span class="n">mapValue</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="n">missCount</span><span class="o">++;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 如果对应值不存在的话, 调用 create() 方法尝试新建一个</span>
-    <span class="c1">// create() 方法非线程安全, 可能会在调用的时候, 其他的线程又对该 key 进行操作</span>
-    <span class="cm">/*</span>
-<span class="cm">     * Attemp to create a value. This may take a long time, and the map</span>
-<span class="cm">     * may be different when create() returns. If a conflicting value was</span>
-<span class="cm">     * added to the map while create() was working, we leave that value in</span>
-<span class="cm">     * the map and release the created value</span>
-<span class="cm">     */</span>
-    <span class="n">V</span> <span class="n">createdValue</span> <span class="o">=</span> <span class="n">create</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">createValue</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 如果重写了 create() 并返回非 null</span>
-    <span class="c1">// 之后我们要重新查看下缓存之中是不是有了该 key</span>
-    <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">createCount</span><span class="o">++;</span>
-        <span class="n">mapValue</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">createdValue</span><span class="o">);;</span>
-        <span class="c1">// 如果有了该 key 的值, 不要对其做更改</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">mapValue</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// There was a conflict so undo that last put</span>
-            <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">mapValue</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">size</span> <span class="o">+=</span> <span class="n">safeSizeOf</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">createdValue</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">mapValue</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">entryRemoved</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">createdValue</span><span class="o">,</span> <span class="n">mapValue</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">mapValue</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="n">trimeToSize</span><span class="o">(</span><span class="n">maxSize</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">createdValue</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1">// LruCache#create(), 默认返回 null</span>
-<span class="kd">protected</span> <span class="n">V</span> <span class="nf">create</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<h3 id="reference">Reference:</h3>
-<ol>
-<li>&lt;<Android开发艺术探索>&gt;</li>
-<li><a href="https://blog.csdn.net/shakespeare001/article/details/51695358">https://blog.csdn.net/shakespeare001/article/details/51695358</a></li>
-</ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/huan-cun.html">缓存</a>
-      <a href="./tag/lrucache.html">lrucache</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel\s Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Android内存缓存LruCache",
+  "headline": "Android内存缓存LruCache",
+  "datePublished": "2018-04-04 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./androidnei-cun-huan-cun-lrucache.html",
+  "description": "1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ...."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Android内存缓存LruCache</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Wed 04 April 2018">Wed 04 April 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3 id="1-lrucahe">1. LruCahe 的使用 </h3>
+<p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小 , 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 . </p>
+<blockquote>
+<p> 传入的内存最大值的 <strong> 单位 </strong> 要和 <code>sizeOf()</code> 返回的单位一致即可 </p>
+</blockquote>
+<p> 另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法 , 该方法返回值表示了每个元素的大小 , 以便确定缓存是否需要删除旧的元素 . 这个方法的默认实现是返回 1.</p>
+<pre class="highlight"><code class="language-java linenums">// 获得应用可使用的最大内存 , 取 1/8 作为缓存
+final int maxSize = Runtime.getRuntime().maxMemory() / 8;
+LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
+    @Override
+    protected int sizeOf(String key, Bitmap value) {
+        // 图片缓存 , 返回每个 bitmap 的大小
+        // sdk 19 之后不再使用 Bitmap#getByteCount
+        // Bitmap#getAllocationByteCount 可能会比 getByteCount 返回的值大
+        return value.getAllocationByteCount();
+    }
+};</code></pre>
+
+<p> 在获得 <code>LruCache</code> 对象之后 , 便可以对其进行读 , 写 , 删除 </p>
+<pre class="highlight"><code class="language-java linenums">Bitmap bitmap = bitmapCache.get(key);
+// 如果缓存中已经存在 , 那么旧的会被返回 , 不存在则返回 null
+Bitmap prevBitmap = bitmapCache.put(key, bitmap);
+// 删除缓存
+Btimap bitmap = bitmap.remove(key);
+
+// 一般图片都是从网络上下载下来 , 所以使用图片的 url 来作为 key 值是最好了
+// 但 url 会有特殊的字符不能作为 key, 常用的方法是将 url 转为其 md5 值
+public String urlToMD5(String url) {
+    String key;
+    try {
+        final MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(url.getBytes());
+        key = bytesToHexString(md.digest());
+    } catch (NoSuchAlgorithmException e) {
+        key = String.valueOf(url.hashCode());
+    }
+    return key;
+}
+
+public String bytesToHexString(byte[] input) {
+    // 将 byte 数组转为 16 进制字符
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i &lt; input.length; i++) {
+        String hex = Integer.toHexString(0xFF &amp;&amp; input[i]);
+        if (hex.lenght() == 1) {
+            // 只有一位时在前面补 0
+            sb.append("0");
+        }
+        sb.append(hex);
+    }
+
+    return sb.toString();
+}</code></pre>
+
+<p> 另外还可以重写 <code>entryRemove()</code> 方法 , 这个方法会在 <strong> 元素被删除 </strong>( 内存不足时 , remove 操作时 ), <strong> 元素被替换 </strong>(put 操作时 ) 被调用 , 默认的实现是一个空实现 , 并且这个调用不是 <code>synchronization</code></p>
+<pre class="highlight"><code class="language-java linenums">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
+// @param key 元素的 key
+// @param oldValue 元素的旧值
+// @param newValue 元素是被替换时的新值 , 被删除时该值为 null
+protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</code></pre>
+
+<h3 id="2">2. 源码解析 </h3>
+<p> 由于需要不断重新排序 , <code>LruCache</code> 内部使用了一个 <code>LinkHashMap</code> 数据结构来存储实际内容 . 这是一个 <strong> 双向链表 </strong> 实现的 <strong>HashMap</strong>. <code>LinkHashMap</code> 可以设置成 <strong> 基于插入顺序优先 </strong>, 或者 <strong> 基于访问顺序优先 </strong>, 把优先的元素放在链表 <strong> 末端 </strong>, 这样链表头结点总是表示 <strong> 最后插入 </strong>/<strong> 最少访问 </strong> 的元素 , 可以把头结点从链接中删除 </p>
+<pre class="highlight"><code class="language-Java linenums">public class LruCache&lt;K, V&gt; {
+    public LruCache(int maxSize) {
+        if (maxSize) {
+            throw new IllegalArgumentException("maxSize &lt;= 0");   
+        }
+        this.maxSize = maxSize;
+        // 第一个参数为初始容量 , 第二个为 map 的负载因子 , 第三个为是否基于访问顺序
+        this.map = new LinkHashMap&lt;K, V&gt;(0, 0.75f, true);
+    }
+}</code></pre>
+
+<p> 在每次 <code>put</code>, <code>get</code> 之后 , 都要使用 <code>trimToSize()</code> 来确保使用的内存容量是在规定的范围内 </p>
+<pre class="highlight"><code class="language-java linenums">// 传的参数是最大内存容量 , 如果大于这个数 , 就把头结点从链表中删除
+public void trimToSize(int maxSize) {
+    // 不断循环的删除头结点 , 直到使用的内存小于 maxSize
+    while (true) {
+        K key;
+        V value;
+        synchronized (this) {
+            // size 为当前使用的缓存容量
+            if (size &lt; 0 || (map.isEmpty() &amp;&amp; size != 0)) {
+                throw new IllegalStateException(getClass().getName() + 
+                    ".sizeOf() is reporting inconsistent results!");
+            }
+
+            // 当现使用的容量 &lt;= 最大容量时退出循环
+            if (size &lt;= maxSize) {
+                break;
+            }
+
+            // LinkHashMap#eldest() 方法是 Android 实现 LinkHashMap 时添加的方法
+            // 其简单的返回了链表头结点
+            Map.Entry&lt;K, V&gt; toEvict = map.eldest();
+            if (toEvict == null) {
+                break;
+            }
+
+            // 删除头结点 , 并把现使用的内存容量减小
+            key = toEvict.getKey();
+            value = toEvict.getValue();
+            map.remove(key);
+            // safeSizeOf 只是对 sizeOf 的再次封装 , 其只是返回 sizeOf 并确保该值不能 &lt; 0
+            size -= safeSizeOf(key, value);
+            // 记录收回的元素数量
+            evictionCount++;
+        }
+
+        // 调用
+        entryRemoved(true, key, value, null);
+    }
+}</code></pre>
+
+<p><code>LruCache#put()</code>, <code>LruCache#get()</code> 方法的实现 </p>
+<pre class="highlight"><code class="language-java linenums">// LruCache#put()
+public final V put(K key, V value) {
+    if (key == null || value == null) {
+        throw new NullPointerException("key == null || value == null");
+    }
+
+    // 如果添加进去的新的元素已经在内存中的话 , 更新之后 , 再减去旧的元素的大小
+    V previous;
+    synchronized (this) {
+        putCount++;
+        size += safeSizeOf(key, value);
+        previous = map.put(key, value);
+        if (previous != null) {
+            size -= safeSizeOf(key, previous);
+        }
+    }
+
+    if (previous != null) {
+        entryRemoved(false, key, previous, value);
+    }
+    // 保证内存大小不超过设定
+    trimToSize(maxSize);
+
+    return previous;
+}
+
+// LruCache#get()
+public final V get(K key) {
+    if (key == null) {
+        throw new NullPointerException("key == null");
+    }
+
+    V mapValue;
+    synchronized (this) {
+        // 查找链表中的元素 , 如果找到了就返回该值
+        mapValue = map.get(key);
+        if (mapValue != null) {
+            hitCount++;
+            return mapValue;
+        }
+        missCount++;
+    }
+
+    // 如果对应值不存在的话 , 调用 create() 方法尝试新建一个
+    // create() 方法非线程安全 , 可能会在调用的时候 , 其他的线程又对该 key 进行操作
+    /*
+     * Attemp to create a value. This may take a long time, and the map
+     * may be different when create() returns. If a conflicting value was
+     * added to the map while create() was working, we leave that value in
+     * the map and release the created value
+     */
+    V createdValue = create();
+    if (createValue == null) {
+        return null;
+    }
+
+    // 如果重写了 create() 并返回非 null
+    // 之后我们要重新查看下缓存之中是不是有了该 key
+    synchronized (this) {
+        createCount++;
+        mapValue = map.put(key, createdValue);;
+        // 如果有了该 key 的值 , 不要对其做更改
+        if (mapValue != null) {
+            // There was a conflict so undo that last put
+            map.put(mapValue);
+        } else {
+            size += safeSizeOf(key, createdValue);
+        }
+    }
+
+    if (mapValue != null) {
+        entryRemoved(false, key, createdValue, mapValue);
+        return mapValue;
+    } else {
+        trimeToSize(maxSize);
+        return createdValue;
+    }
+}
+
+// LruCache#create(), 默认返回 null
+protected V create(K key) {
+    return null;
+}</code></pre>
+
+<h3 id="reference">Reference:</h3>
+<ol>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
+<li><a href="https://blog.csdn.net/shakespeare001/article/details/51695358">https://blog.csdn.net/shakespeare001/article/details/51695358</a></li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Android内存缓存LruCache&amp;url=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/huan-cun.html">缓存</a><a href="./tag/lrucache.html">lrucache</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

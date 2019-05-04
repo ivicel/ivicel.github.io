@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Ertitle: python 类的属性</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="../" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+  <link href="../theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="../theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="../theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="../static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="../assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="../assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="../drafts/ertitle-python-lei-de-shu-xing.html" rel="canonical" />
+
+    <meta name="description" content="1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x....">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="python">
+    <meta name="tags" content="python 类">
+    <meta name="tags" content="属性">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. 下划线问题 单下划线 _ 开头, 约定的类内部&#39;私有&#39; 属性, 也可能在类外部调用, 但尽量不调用 仅以双下划线 __ 开头, 那么会在属性前加上下划线和类名, 也就是比如类 class A 中有, __x, 那么实际外部访问时为 _A__x. 由此可知, 当是类方法 def __a(self) 那么这个方法不会被子类覆写, 因为覆写 __a() 实际上是 _A__a() 方法 双下划线 __ 开头并以双下划线 __ 结束, 即 __x__ 这样, 这种变量不会隐性的在前面加上_类名. 而是保持本来的变量名, 从 __init__ 的系统内置也可以看也, 这是不变的 …" />
-<meta name="keywords" content="python, python 类, 属性">
-
-<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Ertitle: python 类的属性"/>
-<meta property="og:description" content="1. 下划线问题 单下划线 _ 开头, 约定的类内部&#39;私有&#39; 属性, 也可能在类外部调用, 但尽量不调用 仅以双下划线 __ 开头, 那么会在属性前加上下划线和类名, 也就是比如类 class A 中有, __x, 那么实际外部访问时为 _A__x. 由此可知, 当是类方法 def __a(self) 那么这个方法不会被子类覆写, 因为覆写 __a() 实际上是 _A__a() 方法 双下划线 __ 开头并以双下划线 __ 结束, 即 __x__ 这样, 这种变量不会隐性的在前面加上_类名. 而是保持本来的变量名, 从 __init__ 的系统内置也可以看也, 这是不变的 …"/>
+<meta property="og:description" content="1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x...."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="../drafts/ertitle-python-lei-de-shu-xing.html"/>
 <meta property="og:type" content="article"/>
@@ -51,106 +82,139 @@
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="python 类"/>
 <meta property="article:tag" content="属性"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="../theme/images/post-bg.jpg">
 
-  <title>Ivicel\s Ambertime &ndash; Ertitle: python 类的属性</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href="..">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href="..">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href="..">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="ertitle-python-lei-de-shu-xing">Ertitle: python 类的属性</h1>
-    <p>
-      Posted on Tue 18 September 2018 in <a href="../category/python.html">Python</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <h4 id="1">1. 下划线问题</h4>
-<ul>
-<li>单下划线 <code>_</code> 开头, 约定的类内部<em>'私有'</em> 属性, 也可能在类外部调用, 但尽量不调用</li>
-<li>仅以双下划线 <code>__</code> 开头, 那么会在属性前加上<strong>下划线和类名</strong>, 也就是比如类 <code>class A</code> 中有, <code>__x</code>, 那么实际外部访问时为 <code>_A__x</code>. 由此可知, 当是类方法 <code>def __a(self)</code> 那么这个方法不会被子类覆写, 因为覆写 <code>__a()</code> 实际上是 <code>_A__a()</code> 方法</li>
-<li>双下划线 <code>__</code> 开头并以双下划线 <code>__</code> 结束, 即 <code>__x__</code> 这样, 这种变量不会<strong>隐性</strong>的在前面加上<code>_类名</code>. 而是保持本来的变量名, 从 <code>__init__</code> 的系统内置也可以看也, 这是不变的, 所以我们可以在子类覆写这些方法</li>
-</ul>
-<h4 id="2">2. 属性访问问题</h4>
-<ul>
-<li>如果已经在类 <code>__slots__</code>, <code>__dict__</code> 中定义的变量属性, 访问的时候会直接从这些地方查找</li>
-<li>向父类的 <code>__dict__</code> 查找</li>
-<li>新式类会调用 <code>__getattribute__</code> 方法. 因为父类 <code>object</code> 没有 <code>__getattr__</code>, 所以当我们覆盖 <code>__getattribute__</code> 时, 看需要自己手动调用 <code>__getattr__</code>. 默认下没有覆盖 <code>__getattribute__</code> 时, 如果覆盖了 <code>__getattr__</code> , 则会调用这个方法</li>
-</ul>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="../tag/python.html">python</a>
-      <a href="../tag/python-lei.html">python 类</a>
-      <a href="../tag/shu-xing.html">属性</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel\s Ambertime ",
-  "url" : "..",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Ertitle: python 类的属性",
+  "headline": "Ertitle: python 类的属性",
+  "datePublished": "2018-09-18 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "../author/ivicel.html"
+  },
+  "image": "../theme/images/post-bg.jpg",
+  "url": "../drafts/ertitle-python-lei-de-shu-xing.html",
+  "description": "1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x...."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="../" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Ertitle: python 类的属性</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="../author/ivicel.html">Ivicel</a>
+            | <time datetime="Tue 18 September 2018">Tue 18 September 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1">1. 下划线问题 </h4>
+<ul>
+<li> 单下划线 <code>_</code> 开头 , 约定的类内部 <em>' 私有 '</em> 属性 , 也可能在类外部调用 , 但尽量不调用 </li>
+<li> 仅以双下划线 <code>__</code> 开头 , 那么会在属性前加上 <strong> 下划线和类名 </strong>, 也就是比如类 <code>class A</code> 中有 , <code>__x</code>, 那么实际外部访问时为 <code>_A__x</code>. 由此可知 , 当是类方法 <code>def __a(self)</code> 那么这个方法不会被子类覆写 , 因为覆写 <code>__a()</code> 实际上是 <code>_A__a()</code> 方法 </li>
+<li> 双下划线 <code>__</code> 开头并以双下划线 <code>__</code> 结束 , 即 <code>__x__</code> 这样 , 这种变量不会 <strong> 隐性 </strong> 的在前面加上 <code>_ 类名 </code>. 而是保持本来的变量名 , 从 <code>__init__</code> 的系统内置也可以看也 , 这是不变的 , 所以我们可以在子类覆写这些方法 </li>
+</ul>
+<h4 id="2">2. 属性访问问题 </h4>
+<ul>
+<li> 如果已经在类 <code>__slots__</code>, <code>__dict__</code> 中定义的变量属性 , 访问的时候会直接从这些地方查找 </li>
+<li> 向父类的 <code>__dict__</code> 查找 </li>
+<li> 新式类会调用 <code>__getattribute__</code> 方法 . 因为父类 <code>object</code> 没有 <code>__getattr__</code>, 所以当我们覆盖 <code>__getattribute__</code> 时 , 看需要自己手动调用 <code>__getattr__</code>. 默认下没有覆盖 <code>__getattribute__</code> 时 , 如果覆盖了 <code>__getattr__</code> , 则会调用这个方法 </li>
+</ul>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Ertitle: python 类的属性&amp;url=../drafts/ertitle-python-lei-de-shu-xing.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=../drafts/ertitle-python-lei-de-shu-xing.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=../drafts/ertitle-python-lei-de-shu-xing.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="../tag/python.html">python</a><a href="../tag/python-lei.html">python 类</a><a href="../tag/shu-xing.html">属性</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="../theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="../assets/js/prism.js"></script>
 </body>
 </html>

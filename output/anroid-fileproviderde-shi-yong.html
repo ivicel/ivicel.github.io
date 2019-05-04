@@ -1,46 +1,76 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Anroid FileProvider的使用</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./anroid-fileproviderde-shi-yong.html" rel="canonical" />
+
+    <meta name="description" content="FileProvider 是在 v4 support library 里的 , 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在 manifest 中指定分享的文件 , 具体的分享目录路径在...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="android">
+    <meta name="tags" content="fileprovider">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="FileProvider 是在 v4 support library 里的, 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在manifest中指定分享的文件, 具体的分享目录路径在res/xml/filepaths中指定, android:authorities为指定的认证, 自行定义, 一般为 package name + fileprovider, 其他为固定写法 &lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34; package=&#34;com.example.myapp&#34;&gt; &lt;application ...&gt; &lt;provider android:name …" />
-<meta name="keywords" content="android, fileprovider">
-
-<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Anroid FileProvider的使用"/>
-<meta property="og:description" content="FileProvider 是在 v4 support library 里的, 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在manifest中指定分享的文件, 具体的分享目录路径在res/xml/filepaths中指定, android:authorities为指定的认证, 自行定义, 一般为 package name + fileprovider, 其他为固定写法 &lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34; package=&#34;com.example.myapp&#34;&gt; &lt;application ...&gt; &lt;provider android:name …"/>
+<meta property="og:description" content="FileProvider 是在 v4 support library 里的 , 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在 manifest 中指定分享的文件 , 具体的分享目录路径在..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./anroid-fileproviderde-shi-yong.html"/>
 <meta property="og:type" content="article"/>
@@ -50,181 +80,215 @@
 <meta property="article:section" content="Android"/>
 <meta property="article:tag" content="android"/>
 <meta property="article:tag" content="fileprovider"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel\s Ambertime &ndash; Anroid FileProvider的使用</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Anroid FileProvider的使用",
+  "headline": "Anroid FileProvider的使用",
+  "datePublished": "2018-02-22 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./anroid-fileproviderde-shi-yong.html",
+  "description": "FileProvider 是在 v4 support library 里的 , 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在 manifest 中指定分享的文件 , 具体的分享目录路径在..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Anroid FileProvider的使用</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 22 February 2018">Thu 22 February 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="anroid-fileproviderde-shi-yong">Anroid FileProvider的使用</h1>
-    <p>
-      Posted on Thu 22 February 2018 in <a href="./category/android.html">Android</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <blockquote>
-<p><code>FileProvider</code> 是在 <code>v4 support library</code> 里的, 使用之前要添加 <code>v4 support library</code> </p>
-<p>默认 <code>v7 support</code> 继承了 <code>v4</code></p>
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <blockquote>
+<p><code>FileProvider</code> 是在 <code>v4 support library</code> 里的 , 使用之前要添加 <code>v4 support library</code> </p>
+<p> 默认 <code>v7 support</code> 继承了 <code>v4</code></p>
 </blockquote>
 <ol>
-<li>在<code>manifest</code>中指定分享的文件, 具体的分享目录路径在<code>res/xml/filepaths</code>中指定, <code>android:authorities</code>为指定的认证, 自行定义, 一般为 <code>package name</code> + <code>fileprovider</code>, 其他为固定写法</li>
+<li> 在 <code>manifest</code> 中指定分享的文件 , 具体的分享目录路径在 <code>res/xml/filepaths</code> 中指定 , <code>android:authorities</code> 为指定的认证 , 自行定义 , 一般为 <code>package name</code> + <code>fileprovider</code>, 其他为固定写法 </li>
 </ol>
-<div class="highlight"><pre><span></span><span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-    <span class="na">package=</span><span class="s">&quot;com.example.myapp&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;application</span>
-        <span class="err">...</span><span class="nt">&gt;</span>
+<pre class="highlight"><code class="language-xml linenums">&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myapp"&gt;
+      &lt;application
+        ...&gt;
 
-        <span class="nt">&lt;provider</span>
-            <span class="na">android:name=</span><span class="s">&quot;android.support.v4.content.FileProvider&quot;</span>
-            <span class="na">android:authorities=</span><span class="s">&quot;com.example.myapp.fileprovider&quot;</span>
-            <span class="na">android:grantUriPermissions=</span><span class="s">&quot;true&quot;</span>
-            <span class="na">android:exported=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;meta-data</span>
-                <span class="na">android:name=</span><span class="s">&quot;android.support.FILE_PROVIDER_PATHS&quot;</span>
-                <span class="na">android:resource=</span><span class="s">&quot;@xml/filepaths&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/provider&gt;</span>
+        &lt;provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.myapp.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false"&gt;
+            &lt;meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"/&gt;
+        &lt;/provider&gt;
 
         ...
-    <span class="nt">&lt;/application&gt;</span>
-<span class="nt">&lt;/manifest&gt;</span>
-</pre></div>
-
+    &lt;/application&gt;
+&lt;/manifest&gt;</code></pre>
 
 <ol>
-<li><code>res/xml/filepaths</code>写法</li>
+<li><code>res/xml/filepaths</code> 写法 </li>
 </ol>
-<p><code>xml
-   &lt;paths&gt;
-     &lt;files-path path="images" name="my-images"/&gt;
-     &lt;cache-path path="..." name="..."/&gt;
-     &lt;external-files-path path="...." name="..."/&gt;
-     &lt;external-cache-path path="...." name="..."/&gt;
-     &lt;external-path path="..." name="...."/&gt;
-   &lt;/paths&gt;</code></p>
+<pre class="highlight"><code class="language-xml linenums">&lt;paths&gt;
+  &lt;files-path path="images" name="my-images"/&gt;
+  &lt;cache-path path="..." name="..."/&gt;
+  &lt;external-files-path path="...." name="..."/&gt;
+  &lt;external-cache-path path="...." name="..."/&gt;
+  &lt;external-path path="..." name="...."/&gt;
+&lt;/paths&gt;</code></pre>
+
 <ul>
-<li><code>file-path</code>为<code>Context.getFilesDir()</code>代表的目录, 内部(<strong>internal</strong>)存储目录<code>files/</code>.可能有两个位置, <code>/data/data/package_name/files</code>下, 或者<code>/data/user/../package_name/files</code>下</li>
-<li><code>cache-path</code>为<code>Context.getCacheDir()</code>代表的内部目录 <code>cache/</code></li>
-<li><code>external-files-path</code>为外部存储目录<code>Context#getExternalFilesDir(String)</code> 和<code>Context.getExternalFilesDir(null)</code>这个目录一般在外部存储中的<code>Android/data/package_name/files</code>中</li>
-<li><code>external-cache-path</code>为外部缓存目录<code>Android/data/package_name/cache</code>中, 由<code>Context.getExternalCacheDir()</code>获得</li>
-<li><code>external-path</code>为外部存储的根目录<code>Context.getExternalStorageDirectory()</code></li>
+<li><code>file-path</code> 为 <code>Context.getFilesDir()</code> 代表的目录 , 内部 (<strong>internal</strong>) 存储目录 <code>files/</code>. 可能有两个位置 , <code>/data/data/package_name/files</code> 下 , 或者 <code>/data/user/../package_name/files</code> 下 </li>
+<li><code>cache-path</code> 为 <code>Context.getCacheDir()</code> 代表的内部目录 <code>cache/</code></li>
+<li><code>external-files-path</code> 为外部存储目录 <code>Context#getExternalFilesDir(String)</code> 和 <code>Context.getExternalFilesDir(null)</code> 这个目录一般在外部存储中的 <code>Android/data/package_name/files</code> 中 </li>
+<li><code>external-cache-path</code> 为外部缓存目录 <code>Android/data/package_name/cache</code> 中 , 由 <code>Context.getExternalCacheDir()</code> 获得 </li>
+<li><code>external-path</code> 为外部存储的根目录 <code>Context.getExternalStorageDirectory()</code></li>
 </ul>
 <blockquote>
-<p>如果使用外部目录, 因为存在 <code>SDCard</code>可插拔的原因, 最好使用<code>Environment.getExternalStorageState()</code>来检测当前外部存储状态, 返回<code>Environment.MEDIA_MOUNTED</code>表示存储可用.</p>
+<p> 如果使用外部目录 , 因为存在 <code>SDCard</code> 可插拔的原因 , 最好使用 <code>Environment.getExternalStorageState()</code> 来检测当前外部存储状态 , 返回 <code>Environment.MEDIA_MOUNTED</code> 表示存储可用 .</p>
 </blockquote>
 <p><code>path="path"</code></p>
 <blockquote>
-<p>代表是指定目录下的子目录, 或者当前目录(使用<code>.</code>表示共享当前目录)</p>
+<p> 代表是指定目录下的子目录 , 或者当前目录 ( 使用 <code>.</code> 表示共享当前目录 )</p>
 </blockquote>
 <p><code>name="name"</code></p>
 <blockquote>
-<p>代表将共享的目录名称(<code>path</code>)在生成<code>content://uri</code>时替换成这个值</p>
+<p> 代表将共享的目录名称 (<code>path</code>) 在生成 <code>content://uri</code> 时替换成这个值 </p>
 </blockquote>
 <ol>
-<li>使用<code>FileProvider.getUriForFile(Context, String, File)</code>方法来获取共享的文件<code>uri</code>路径</li>
+<li> 使用 <code>FileProvider.getUriForFile(Context, String, File)</code> 方法来获取共享的文件 <code>uri</code> 路径 </li>
 </ol>
-<p><code>java
-   /* 生成 content://com.example.myapp.fileprovider/my_images/default_image.jpg */
-   File imagePath = new File(context.getFilesPath(), "images");
-   File newFile = new File(imagePath, "default_image.jpg");
-   Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprovider",
-        newFile);</code></p>
-<p><code>authorities</code>参数要和<code>meta-data</code>中写的一样, 不然会找不到共享目录, 抛出错误. <code>getUriForFile</code>会在设定好的<code>xml</code>文件中从上逐行进行匹配, 若匹配不到任何一行, 抛出<code>IllegalArgumentException</code></p>
+<pre class="highlight"><code class="language-java linenums">/* 生成 content://com.example.myapp.fileprovider/my_images/default_image.jpg */
+File imagePath = new File(context.getFilesPath(), "images");
+File newFile = new File(imagePath, "default_image.jpg");
+Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprovider",
+     newFile);</code></pre>
+
+<p><code>authorities</code> 参数要和 <code>meta-data</code> 中写的一样 , 不然会找不到共享目录 , 抛出错误 . <code>getUriForFile</code> 会在设定好的 <code>xml</code> 文件中从上逐行进行匹配 , 若匹配不到任何一行 , 抛出 <code>IllegalArgumentException</code></p>
 <ol>
-<li>给<code>uri</code>授予权限, 为了兼容<strong>Kitkat</strong>(SDK 19)及以下的Android版本, 一定要对<code>uri</code>授予读写权限. 在<code>Kitkat</code>以上的版本会自动授予权限.</li>
+<li>
+<p> 给 <code>uri</code> 授予权限 , 为了兼容 <strong>Kitkat</strong>(SDK 19) 及以下的 Android 版本 , 一定要对 <code>uri</code> 授予读写权限 . 在 <code>Kitkat</code> 以上的版本会自动授予权限 .</p>
+</li>
+<li>
+<p> 使用 <code>Context.grantUriPermissioin(package, Uri, mode_flags)</code> 来授权 , 比如 <code>Intent.FLAG_GRANT_READ_URI_PERMISSIOIN</code> 和 <code>Intent.FLAG_GRANT_WRITE_URI_PERMISSION</code> 标志位 , 在适当的时候使用 <code>Context.revokeUriPermission(Uri, mode_flags)</code> 来去掉授予的权限 </p>
+</li>
+<li> 或者使用 <code>Intent.setData()</code> 把 <code>uri</code> 放到 <code>intent</code> 中后 , 使用 <code>Intent.setFlags()</code> 来设置权限标志位 , 建议使用这种授权方式 , 这样就不用手动来取消授权了 </li>
 </ol>
-<ul>
-<li>使用<code>Context.grantUriPermissioin(package, Uri, mode_flags)</code>来授权, 比如<code>Intent.FLAG_GRANT_READ_URI_PERMISSIOIN</code>和<code>Intent.FLAG_GRANT_WRITE_URI_PERMISSION</code>标志位, 在适当的时候使用<code>Context.revokeUriPermission(Uri, mode_flags)</code>来去掉授予的权限</li>
-<li>或者使用<code>Intent.setData()</code>把<code>uri</code>放到<code>intent</code>中后, 使用<code>Intent.setFlags()</code>来设置权限标志位, 建议使用这种授权方式, 这样就不用手动来取消授权了</li>
-</ul>
-<p><code>java
-   List&lt;ResolveInfo&gt; resolveActivities = getPackageManager().queryInetntActivities(
-        imageCapture, PackageManager.MATCH_DEFAULT_ONLY);
-   /* 为每个activity授权 */
-   for (ResolveInfo resolveActivity : resolveActivities) {
-       grantUriPermission(resolveActivity.activityInfo.packageName, uri,
-            Intent.FLAG_GRANT_WRITE_PERMISSION);
-   }</code></p>
+<pre class="highlight"><code class="language-java linenums">List&lt;ResolveInfo&gt; resolveActivities = getPackageManager().queryInetntActivities(
+     imageCapture, PackageManager.MATCH_DEFAULT_ONLY);
+/* 为每个 activity 授权 */
+for (ResolveInfo resolveActivity : resolveActivities) {
+    grantUriPermission(resolveActivity.activityInfo.packageName, uri,
+         Intent.FLAG_GRANT_WRITE_PERMISSION);
+}</code></pre>
+
 <p>​</p>
 <h5 id="reference">Reference:</h5>
 <ol>
 <li><a href="https://developer.android.google.cn/reference/android/support/v4/content/FileProvider.html?hl=zh-cn#getUriForFile(android.content.Context, java.lang.String, java.io.File)">Android Developer FileProvider</a></li>
 <li><a href="https://developer.android.google.cn/training/secure-file-sharing">Android Tranning Share a File</a></li>
 </ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/android.html">android</a>
-      <a href="./tag/fileprovider.html">fileprovider</a>
-    </p>
-  </div>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Anroid FileProvider的使用&amp;url=./anroid-fileproviderde-shi-yong.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./anroid-fileproviderde-shi-yong.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./anroid-fileproviderde-shi-yong.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/android.html">android</a><a href="./tag/fileprovider.html">fileprovider</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel\s Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

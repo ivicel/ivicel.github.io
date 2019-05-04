@@ -1,39 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
 AUTHOR = 'ivicel'
-SITENAME = 'Ivicel\'s Ambertime'
-SITEURL = 'https://ivicel.info'
-SITETITLE = 'Ambertime'
-SITESUBTITLE = 'Make memory in past times'
-SITEDESCRIPTION = 'ivicel\'s thoughts and writings'
-SITELOGO = '/images/favicon.ico'
-FAVICON = '/images/favicon.ico'
-
-ROBOTS = 'index, follow'
-
-CC_LICENSE = {
-    'name': 'Creative Commons Attribution-ShareAlike',
-    'version': '4.0',
-    'slug': 'by-sa'
-}
-
-COPYRIGHT_YEAR = 2018
-
-STATIC_PATHS = ['images', 'extra']
-
-EXTRA_PATH_METADATA = {
-    'extra/custom.css': {
-        'path': 'static/custom.css'
-    },
-}
-
-CUSTOM_CSS = 'static/custom.css'
-MAIN_MENU = True
-
-DISQUS_SITENAME = ''
-GOOGLE_ANALYTICS = 'UA-113622715-2'
+SITENAME = 'Ambertime'
+SITEURL = ''
 
 PATH = 'content'
 
@@ -47,38 +18,59 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-CACHE_CONTENT = False
 
 # Blogroll
-# LINKS = (('Pelican', 'http://getpelican.com/'),
-#         ('Python.org', 'http://python.org/'),
-#         ('Jinja2', 'http://jinja.pocoo.org/'),
-#         ('You can modify those links in your config file', '#'),)
-#
-# Social widget
-# SOCIAL = (('You can add links in your config file', '#'),
-#          ('Another social link', '#'),)
+LINKS = (('Pelican', 'http://getpelican.com/'),
+         ('Python.org', 'http://python.org/'),
+         ('Jinja2', 'http://jinja.pocoo.org/'),
+         ('You can modify those links in your config file', '#'),)
 
-DEFAULT_PAGINATION = 10
+# Social widget
+SOCIAL = (('You can add links in your config file', '#'),
+          ('Another social link', '#'),)
+
+DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
-THEME = 'flex'
 
-PLUGIN_PATHS = ['/Users/ivicel/Documents/ivicel-blog/plugins']
-PLUGINS = ['i18n_subsites']
+THEME = 'attila'
+
+STATIC_PATHS = ['assets']
+
+HOME_COVER = '/assets/images/header.jpg'
+# COLOR_SCHEME_CSS = 'monokai.css'
+CSS_OVERRIDE = ['assets/css/prism.css', 'assets/css/base.css', 'assets/css/base-control.css',
+                'assets/css/github.css', 'assets/css/codemirror.css', 'assets/css/ivicel.css']
+JS_OVERRIDE = ['assets/js/prism.js']
+
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['i18n_subsites', 'pelican-toc', 'sitemap', 'cjk-auto-spacing']
+JINJA_ENVIRONMENT = {
+    'extensions': ['jinja2.ext.i18n'],
+}
+JINJA_FILTERS = {'max': max}
 PYGMENTS_STYLE = 'manni'
-JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
 MARKDOWN = {
     "extensions": [
-        'codehilite',
-        'extra',
-        'toc',
-        'def_list',
-        'sane_lists',
-        'headerid',
-        'attr_list',
+        # 'codehilite',
         'tables',
         'toc',
-    ]
+        'pymdownx.magiclink',
+        # 'pymdownx.betterem',
+        'pymdownx.tilde',
+        'pymdownx.emoji',
+        'pymdownx.tasklist',
+        'pymdownx.extra'
+        # 'pymdownx.superfences',
+    ],
+    'extension_configs': {
+        'pymdownx.highlight': {
+            'linenums': True,
+            'use_pygments': False,
+            'linenums_style': 'inline',
+            'css_class': 'highlight'
+        }
+    },
+
 }

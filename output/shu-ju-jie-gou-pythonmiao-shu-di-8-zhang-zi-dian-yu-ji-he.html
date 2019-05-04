@@ -1,46 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>数据结构(Python描述) 第 8 章 字典与集合</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html" rel="canonical" />
+
+    <meta name="description" content="字典是一种支持基于关键码的数据存储与检索的数据结构 , 也称就查找表 , 映射 , 关联表等 . 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题 , 每次添加新的 key 都是在末尾添加 , 这样都是 O(1), 而在查找方面 ,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="数据结构">
+    <meta name="tags" content="字典">
+    <meta name="tags" content="哈希表">
+    <meta name="tags" content="散列">
+    <meta name="tags" content="python">
+    <meta name="tags" content="python数据结构">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等. 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 O(1), 而在查找方面, 需要遍历所有的值, 所以是 O(n), 删除操作也是一样需要 O(n). 基于这种表的字典: 数据结构和算法简单, 检索方便 检索效率低, 当表很大时, 检索很耗时 删除操作也很耗时, 删除后还需要移动后面的数据 依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是 O(logN), 而在删除或者添加数据时, 为保证数组总是有序, 我们可能需要移动整个数组, 所以最差是 O(n). 这种实现方法也不适合经常添加, 删除数据, 而如果一次生成, 多次查找 …" />
-<meta name="keywords" content="数据结构, 字典, 哈希表, 散列, python, python数据结构">
-
-<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="数据结构(Python描述) 第 8 章 字典与集合"/>
-<meta property="og:description" content="字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等. 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 O(1), 而在查找方面, 需要遍历所有的值, 所以是 O(n), 删除操作也是一样需要 O(n). 基于这种表的字典: 数据结构和算法简单, 检索方便 检索效率低, 当表很大时, 检索很耗时 删除操作也很耗时, 删除后还需要移动后面的数据 依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是 O(logN), 而在删除或者添加数据时, 为保证数组总是有序, 我们可能需要移动整个数组, 所以最差是 O(n). 这种实现方法也不适合经常添加, 删除数据, 而如果一次生成, 多次查找 …"/>
+<meta property="og:description" content="字典是一种支持基于关键码的数据存储与检索的数据结构 , 也称就查找表 , 映射 , 关联表等 . 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题 , 每次添加新的 key 都是在末尾添加 , 这样都是 O(1), 而在查找方面 ,..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html"/>
 <meta property="og:type" content="article"/>
@@ -54,195 +88,225 @@
 <meta property="article:tag" content="散列"/>
 <meta property="article:tag" content="python"/>
 <meta property="article:tag" content="python数据结构"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel\s Ambertime &ndash; 数据结构(Python描述) 第 8 章 字典与集合</title>
-
-</head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
-
-<p>Make memory in past times</p>
-
-      <ul class="social">
-      </ul>
-    </div>
-
-
-  </aside>
-  <main>
-
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he">数据结构(Python描述) 第 8 章 字典与集合</h1>
-    <p>
-      Posted on Sun 29 July 2018 in <a href="./category/data-structure-algorithms.html">Data Structure Algorithms</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <p>字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等.</p>
-<h4 id="1">1. 字典的线性表实现</h4>
-<ul>
-<li>使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 <code>O(1)</code>, 而在查找方面, 需要遍历所有的值, 所以是 <code>O(n)</code>, 删除操作也是一样需要 O(n). 基于这种表的字典: </li>
-<li>数据结构和算法简单, 检索方便</li>
-<li>检索效率低, 当表很大时, 检索很耗时</li>
-<li>删除操作也很耗时, 删除后还需要移动后面的数据</li>
-<li>依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是 <code>O(logN)</code>, 而在删除或者添加数据时, 为保证数组总是有序, 我们可能需要移动整个数组, 所以最差是 <code>O(n)</code>. 这种实现方法也不适合经常添加, 删除数据, 而如果一次生成, 多次查找, 效率就很高了</li>
-</ul>
-<p>不管我们是使用数组或者链表来实现线性表, 其表现是一样的</p>
-<ul>
-<li>在非有序实现中, 在表头插入时依旧是 O(1), 删除操作依旧顺序扫描整个表, 为 O(n)</li>
-<li>在有序实现中, 查找和插入都是 O(n). 因为链表都是得从表头开始查找</li>
-</ul>
-<h4 id="2">2. 基于散列表的实现</h4>
-<h5 id="21">2.1 简述</h5>
-<p>如果我们数据在计算机存储方式是连续的, 那么我们只要知道一个数据的下标, 那么我们查找数据时总是 O(1), 而如果这个下标正好是我们的 key 值的话, 那么这个字典的查找就很快了.</p>
-<p>基于这种想法, 带来的问题有:</p>
-<ul>
-<li>数据的 key 的不一定是整数</li>
-<li>即使 key 是整数, 可能也是很大的整数, 比如 18 位的身份证号就可能有 10<sup>18</sup> 个数(不考虑非法数值情况)</li>
-</ul>
-<p>解决问题的方法是, 定义一个函数 h(key), 函数参数为 key 值, 然后我们总是能得到一个较小的整数值. 这个函数称之为 hash 函数, 或者散列函数</p>
-<h5 id="22">2.2 冲突问题</h5>
-<p>一般来说, key 的值是不确定性的, 可能会很大. 这就决定了, 如果我们在设计 hash 函数时产生的下标范围过小时, 在大量的 hash(key) 计算后, 总有可能得到相同的下标值. 比如我们采用 <code>mod 100</code> 来计算下标, 如果 key 的范围是 10000 甚至以上, 总会有相同的下标产生. 这时我们就称之为产生了冲突.</p>
-<p>如果冲突过多, 会导致哈希表查找效率下降. 但如果要完全无冲突, 就得使用一个很大的表. 我们需要一个负载因子系数来衡量这种情况.</p>
-<p><code>负载因子 𝜶 = 散列表中实际数据大小 n / 散列表的存储大小 m</code></p>
-<p>一般我们都会取 0.70, 0.75 左右的值, 也就是说, 表中数据存储的了 70% 左右就考虑扩容</p>
-<h5 id="23">2.3 散列函数</h5>
-<p>散列函数的设计优劣会影响散列表的性能, 在设计散列函数时, 应当考虑以下几点</p>
-<ul>
-<li>函数的值要在设计的散列表下标范围内, 如果总是超出, 我们只能扩大散列表, 不然这下标是无意义的</li>
-<li>函数的值最好能均匀的分布在散列表中, 这说明更不容易产生的冲突</li>
-<li>函数的计算方式要简单快速. 这很明显, 如果 hash 比查找的时间长的多, 还不如直接查找来的快</li>
-</ul>
-<p>如果我们知道 key 的范围或者一些相似的特征集合, 就能设计出最适合的散列函数, 甚至还可能不出现冲突. 不过只对特定的值, 一般我们面对的 key 值都是变化多端的</p>
-<ol>
-<li><strong>数字分析法</strong></li>
-</ol>
-<p>在给定的关键集合中, 分析出一些数字出现的频率, 从中选出分布情况较好的若干数字作为散列函数的值. 从这需要我们事先知道会出现的值的范围, 否则不能使用. </p>
-<p>比如给出若干 000125672, 000125873, 000125776, 000125472, 000125379, 000125672 这些个数字, 可以统计出个位和百位的集合像, 62, 73, 76, 42, 39, 62 是不太重复的, 这样我们就可以取 100 内作为下标的散列表</p>
-<ol>
-<li><strong>折叠法</strong>
-   将较长的关键码切分为几段, 通过某种运算将它们合并, 比如加法, 二进制运算等.</li>
-</ol>
-<p>比如有 1456268793, 分成 1 + 456 + 268 + 793 = 1518, 去掉进位后为 518, 这样就把 10 位数散列到了 [0, 999] 区间内</p>
-<ol>
-<li><strong>中平方法</strong>
-   先求出关键码的平方, 然后取出中间的几位作为散列值</li>
-</ol>
-<p>比如有 1456268793, 平方后是 2120718797465676849, 从中取出连续的三位数作为散列值, 比如万位开始的 768</p>
-<ol>
-<li>
-<p><strong>除余法</strong>
-   关键码是整数时, 用关键码除以散列表的大小 m, 得到的余数即是对应的下标<code>(key mod m)</code>. 由于计算机是二进制运算, 所以我们常取 m 的大小为 2<sup>n</sup>. </p>
-</li>
-<li>
-<p><strong>基数转换法</strong>
-   把数转换成其他进制数, 然后再使用除余法</p>
-</li>
-</ol>
-<h5 id="24">2.4 冲突的解决</h5>
-<ul>
-<li><strong>开地址法</strong>: 开地址法最主要的思想就是, 当冲突发生时, 就在散列表中的下一个为空的地方来放. 
-  查找下一个空槽的方法也有多种, 像线性查找, 就是按顺序一个一个查找过去, 直到找到一个为空的槽. 这导致了当我们的散列表冲突比较多时, 查找会越来越长, 并且数据会比较集中在一个地方. 还有一种方法, 就是隔几个槽来放置而不是挨着放, 比如产生冲突时, 隔 3 个查找位置, 这样能稍微使数值平均分布些</li>
-<li><strong>溢出区方法</strong>: 设置一个溢出存储区, 一般是一个线性表. 当发生冲突时, 就把这个冲突的后来者放入来溢出存储区中. 然后在查找的时候, 查找到的是原先的冲突项, 如果槽是空说明值不存在. 如果是非空, 对比其中的数值标志, 不相同的话, 说明先前有过冲突, 再去溢出区查找, 直到找到或者找不到. 使用这种方法, 当溢出区增大时, 散列表性能会线性下降</li>
-<li><strong>桶散列</strong>:  我们假定散列中都有自己一个指针指向一个链表, 当发生冲突时, 我们就把新来的 key 加到指针指向的链表中, 这样我们在查找时, 如果链表长度不是 1, 那么按顺序遍历链表即可.</li>
-</ul>
-<h4 id="3">3. 集合</h4>
-<h5 id="31">3.1 简单线性表实现</h5>
-<p>使用线性表, 也就是数组, 链表之类的来实现集合, 简单, 快捷, 这两种实现性能一致的</p>
-<ul>
-<li><code>in</code>  操作: 因为要遍历整个表, 所以是 <code>O(n)</code></li>
-<li><code>add</code> 操作: 因为首先要判断添加的值是否在集合中, 所以是 <code>O(n)</code>, 虽然添加那步只是 <code>O(1)</code></li>
-<li><code>remove</code>: 总是先要 <code>in</code> 操作</li>
-<li>交集, 并集, 差集这样操作会导致 <code>O(n&lt;sup&gt;2&lt;/sup&gt;)</code>, 因为总是要遍历两个集合所有元素</li>
-</ul>
-<p>如果我们让线性表总是保持其有序, 这样在查找的时候使用二分查找可以使用之降到 <code>O(logN)</code></p>
-<h5 id="32">3.2 散列表实现</h5>
-<p>我们可以使用散列表来实现集合, 这样查找操作就变成了 <code>O(1)</code>. 在交集, 并集, 差集操作中, 只要 <code>O(m + n)</code></p>
-<h4 id="4-python-dict-set">4. Python 中的 dict 和 set</h4>
-<p>在 CPython 中这两者都是使用散列方法实现的</p>
-<ul>
-<li>dict 类型的 key 是一个不可变对象, 不可变对象都实现了 hashable 方法. 值可以是任意对象</li>
-<li>创建空或者很小的字典时, 初始容量为 8</li>
-<li>当负载因为超过 2/3 时自动扩大表的容量, 如果容量不大, 按 4 倍来扩大. 当容量超过 50000 时, 按 2 倍扩大</li>
-</ul>
-<h4 id="5">5. 二叉排序树</h4>
-<ul>
-<li>二叉排序树的左子树上的值总是小于(有需要的话也可以等于根)</li>
-<li>二叉排序树的右子树上的值总是大于(有需要的话也可以等于根)</li>
-<li>根结点左边的总是结右边的值小, 也就是说结点的左右子树是有大小关系的, 跟堆使用的不一样, 堆使用的二叉树不要求左右再边的关系</li>
-<li>二叉排序树不一定是满二叉树, 由于值大小的分布不确定性造成的</li>
-</ul>
-<p>根据二叉排序树的几个性质:</p>
-<ol>
-<li>我们使用<strong>中序遍历</strong>(左-根-右)便能得到一个升序的序列</li>
-</ol>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/shu-ju-jie-gou.html">数据结构</a>
-      <a href="./tag/zi-dian.html">字典</a>
-      <a href="./tag/ha-xi-biao.html">哈希表</a>
-      <a href="./tag/san-lie.html">散列</a>
-      <a href="./tag/python.html">python</a>
-      <a href="./tag/pythonshu-ju-jie-gou.html">python数据结构</a>
-    </p>
-  </div>
-
-
-
-
-
-</article>
-
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
-
-
-
+<!-- Twitter Card -->
 
 <script type="application/ld+json">
 {
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel\s Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "数据结构(Python描述) 第 8 章 字典与集合",
+  "headline": "数据结构(Python描述) 第 8 章 字典与集合",
+  "datePublished": "2018-07-29 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html",
+  "description": "字典是一种支持基于关键码的数据存储与检索的数据结构 , 也称就查找表 , 映射 , 关联表等 . 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题 , 每次添加新的 key 都是在末尾添加 , 这样都是 O(1), 而在查找方面 ,..."
 }
 </script>
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
 
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">数据结构(Python描述) 第 8 章 字典与集合</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Sun 29 July 2018">Sun 29 July 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p> 字典是一种支持基于关键码的数据存储与检索的数据结构 , 也称就查找表 , 映射 , 关联表等 .</p>
+<h4 id="1">1. 字典的线性表实现 </h4>
+<ul>
+<li> 使用一个数组来保存字典的 key, 如果我们不考虑重复问题 , 每次添加新的 key 都是在末尾添加 , 这样都是 <code>O(1)</code>, 而在查找方面 , 需要遍历所有的值 , 所以是 <code>O(n)</code>, 删除操作也是一样需要 O(n). 基于这种表的字典 : </li>
+<li> 数据结构和算法简单 , 检索方便 </li>
+<li> 检索效率低 , 当表很大时 , 检索很耗时 </li>
+<li> 删除操作也很耗时 , 删除后还需要移动后面的数据 </li>
+<li> 依旧使用的一个数组来实现 . 不过我们会保持数组 (key) 处于一个有序的状态 . 这样检索和删除时 , 使用二分查找 , 查找效率是 <code>O(logN)</code>, 而在删除或者添加数据时 , 为保证数组总是有序 , 我们可能需要移动整个数组 , 所以最差是 <code>O(n)</code>. 这种实现方法也不适合经常添加 , 删除数据 , 而如果一次生成 , 多次查找 , 效率就很高了 </li>
+</ul>
+<p> 不管我们是使用数组或者链表来实现线性表 , 其表现是一样的 </p>
+<ul>
+<li> 在非有序实现中 , 在表头插入时依旧是 O(1), 删除操作依旧顺序扫描整个表 , 为 O(n)</li>
+<li> 在有序实现中 , 查找和插入都是 O(n). 因为链表都是得从表头开始查找 </li>
+</ul>
+<h4 id="2">2. 基于散列表的实现 </h4>
+<h5 id="21">2.1 简述 </h5>
+<p> 如果我们数据在计算机存储方式是连续的 , 那么我们只要知道一个数据的下标 , 那么我们查找数据时总是 O(1), 而如果这个下标正好是我们的 key 值的话 , 那么这个字典的查找就很快了 .</p>
+<p> 基于这种想法 , 带来的问题有 :</p>
+<ul>
+<li> 数据的 key 的不一定是整数 </li>
+<li> 即使 key 是整数 , 可能也是很大的整数 , 比如 18 位的身份证号就可能有 10<sup>18</sup> 个数 ( 不考虑非法数值情况 )</li>
+</ul>
+<p> 解决问题的方法是 , 定义一个函数 h(key), 函数参数为 key 值 , 然后我们总是能得到一个较小的整数值 . 这个函数称之为 hash 函数 , 或者散列函数 </p>
+<h5 id="22">2.2 冲突问题 </h5>
+<p> 一般来说 , key 的值是不确定性的 , 可能会很大 . 这就决定了 , 如果我们在设计 hash 函数时产生的下标范围过小时 , 在大量的 hash(key) 计算后 , 总有可能得到相同的下标值 . 比如我们采用 <code>mod 100</code> 来计算下标 , 如果 key 的范围是 10000 甚至以上 , 总会有相同的下标产生 . 这时我们就称之为产生了冲突 .</p>
+<p> 如果冲突过多 , 会导致哈希表查找效率下降 . 但如果要完全无冲突 , 就得使用一个很大的表 . 我们需要一个负载因子系数来衡量这种情况 .</p>
+<p><code> 负载因子 𝜶 = 散列表中实际数据大小 n / 散列表的存储大小 m</code></p>
+<p> 一般我们都会取 0.70, 0.75 左右的值 , 也就是说 , 表中数据存储的了 70% 左右就考虑扩容 </p>
+<h5 id="23">2.3 散列函数 </h5>
+<p> 散列函数的设计优劣会影响散列表的性能 , 在设计散列函数时 , 应当考虑以下几点 </p>
+<ul>
+<li> 函数的值要在设计的散列表下标范围内 , 如果总是超出 , 我们只能扩大散列表 , 不然这下标是无意义的 </li>
+<li> 函数的值最好能均匀的分布在散列表中 , 这说明更不容易产生的冲突 </li>
+<li> 函数的计算方式要简单快速 . 这很明显 , 如果 hash 比查找的时间长的多 , 还不如直接查找来的快 </li>
+</ul>
+<p> 如果我们知道 key 的范围或者一些相似的特征集合 , 就能设计出最适合的散列函数 , 甚至还可能不出现冲突 . 不过只对特定的值 , 一般我们面对的 key 值都是变化多端的 </p>
+<ol>
+<li><strong> 数字分析法 </strong></li>
+</ol>
+<p> 在给定的关键集合中 , 分析出一些数字出现的频率 , 从中选出分布情况较好的若干数字作为散列函数的值 . 从这需要我们事先知道会出现的值的范围 , 否则不能使用 . </p>
+<p> 比如给出若干 000125672, 000125873, 000125776, 000125472, 000125379, 000125672 这些个数字 , 可以统计出个位和百位的集合像 , 62, 73, 76, 42, 39, 62 是不太重复的 , 这样我们就可以取 100 内作为下标的散列表 </p>
+<ol>
+<li><strong> 折叠法 </strong>
+   将较长的关键码切分为几段 , 通过某种运算将它们合并 , 比如加法 , 二进制运算等 .</li>
+</ol>
+<p> 比如有 1456268793, 分成 1 + 456 + 268 + 793 = 1518, 去掉进位后为 518, 这样就把 10 位数散列到了 [0, 999] 区间内 </p>
+<ol>
+<li><strong> 中平方法 </strong>
+   先求出关键码的平方 , 然后取出中间的几位作为散列值 </li>
+</ol>
+<p> 比如有 1456268793, 平方后是 2120718797465676849, 从中取出连续的三位数作为散列值 , 比如万位开始的 768</p>
+<ol>
+<li>
+<p><strong> 除余法 </strong>
+   关键码是整数时 , 用关键码除以散列表的大小 m, 得到的余数即是对应的下标 <code>(key mod m)</code>. 由于计算机是二进制运算 , 所以我们常取 m 的大小为 2<sup>n</sup>. </p>
+</li>
+<li>
+<p><strong> 基数转换法 </strong>
+   把数转换成其他进制数 , 然后再使用除余法 </p>
+</li>
+</ol>
+<h5 id="24">2.4 冲突的解决 </h5>
+<ul>
+<li><strong> 开地址法 </strong>: 开地址法最主要的思想就是 , 当冲突发生时 , 就在散列表中的下一个为空的地方来放 . 
+  查找下一个空槽的方法也有多种 , 像线性查找 , 就是按顺序一个一个查找过去 , 直到找到一个为空的槽 . 这导致了当我们的散列表冲突比较多时 , 查找会越来越长 , 并且数据会比较集中在一个地方 . 还有一种方法 , 就是隔几个槽来放置而不是挨着放 , 比如产生冲突时 , 隔 3 个查找位置 , 这样能稍微使数值平均分布些 </li>
+<li><strong> 溢出区方法 </strong>: 设置一个溢出存储区 , 一般是一个线性表 . 当发生冲突时 , 就把这个冲突的后来者放入来溢出存储区中 . 然后在查找的时候 , 查找到的是原先的冲突项 , 如果槽是空说明值不存在 . 如果是非空 , 对比其中的数值标志 , 不相同的话 , 说明先前有过冲突 , 再去溢出区查找 , 直到找到或者找不到 . 使用这种方法 , 当溢出区增大时 , 散列表性能会线性下降 </li>
+<li><strong> 桶散列 </strong>:  我们假定散列中都有自己一个指针指向一个链表 , 当发生冲突时 , 我们就把新来的 key 加到指针指向的链表中 , 这样我们在查找时 , 如果链表长度不是 1, 那么按顺序遍历链表即可 .</li>
+</ul>
+<h4 id="3">3. 集合 </h4>
+<h5 id="31">3.1 简单线性表实现 </h5>
+<p> 使用线性表 , 也就是数组 , 链表之类的来实现集合 , 简单 , 快捷 , 这两种实现性能一致的 </p>
+<ul>
+<li><code>in</code>  操作 : 因为要遍历整个表 , 所以是 <code>O(n)</code></li>
+<li><code>add</code> 操作 : 因为首先要判断添加的值是否在集合中 , 所以是 <code>O(n)</code>, 虽然添加那步只是 <code>O(1)</code></li>
+<li><code>remove</code>: 总是先要 <code>in</code> 操作 </li>
+<li> 交集 , 并集 , 差集这样操作会导致 <code>O(n&lt;sup&gt;2&lt;/sup&gt;)</code>, 因为总是要遍历两个集合所有元素 </li>
+</ul>
+<p> 如果我们让线性表总是保持其有序 , 这样在查找的时候使用二分查找可以使用之降到 <code>O(logN)</code></p>
+<h5 id="32">3.2 散列表实现 </h5>
+<p> 我们可以使用散列表来实现集合 , 这样查找操作就变成了 <code>O(1)</code>. 在交集 , 并集 , 差集操作中 , 只要 <code>O(m + n)</code></p>
+<h4 id="4-python-dict-set">4. Python 中的 dict 和 set</h4>
+<p> 在 CPython 中这两者都是使用散列方法实现的 </p>
+<ul>
+<li>dict 类型的 key 是一个不可变对象 , 不可变对象都实现了 hashable 方法 . 值可以是任意对象 </li>
+<li> 创建空或者很小的字典时 , 初始容量为 8</li>
+<li> 当负载因为超过 2/3 时自动扩大表的容量 , 如果容量不大 , 按 4 倍来扩大 . 当容量超过 50000 时 , 按 2 倍扩大 </li>
+</ul>
+<h4 id="5">5. 二叉排序树 </h4>
+<ul>
+<li> 二叉排序树的左子树上的值总是小于 ( 有需要的话也可以等于根 )</li>
+<li> 二叉排序树的右子树上的值总是大于 ( 有需要的话也可以等于根 )</li>
+<li> 根结点左边的总是结右边的值小 , 也就是说结点的左右子树是有大小关系的 , 跟堆使用的不一样 , 堆使用的二叉树不要求左右再边的关系 </li>
+<li> 二叉排序树不一定是满二叉树 , 由于值大小的分布不确定性造成的 </li>
+</ul>
+<p> 根据二叉排序树的几个性质 :</p>
+<ol>
+<li> 我们使用 <strong> 中序遍历 </strong>( 左 - 根 - 右 ) 便能得到一个升序的序列 </li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=数据结构(Python描述) 第 8 章 字典与集合&amp;url=./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/shu-ju-jie-gou.html">数据结构</a><a href="./tag/zi-dian.html">字典</a><a href="./tag/ha-xi-biao.html">哈希表</a><a href="./tag/san-lie.html">散列</a><a href="./tag/python.html">python</a><a href="./tag/pythonshu-ju-jie-gou.html">python数据结构</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="./theme/js/script.js"></script>
+
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>

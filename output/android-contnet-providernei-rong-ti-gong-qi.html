@@ -1,46 +1,77 @@
-
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Android Contnet Provider内容提供器</title>
+
+
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index, follow" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="./" rel="canonical" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Feed -->
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/manni.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+  <!-- Code highlight color scheme -->
+      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
 
-    <link href="./static/custom.css" rel="stylesheet">
+    <!-- CSS specified by the user -->
+
+
+    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+
+
+    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <link href="./android-contnet-providernei-rong-ti-gong-qi.html" rel="canonical" />
+
+    <meta name="description" content="1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="android">
+    <meta name="tags" content="content provider">
+    <meta name="tags" content="内容提供器">
 
 
 
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-113622715-2', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
-
-<meta name="author" content="ivicel" />
-<meta name="description" content="1. Content Provider 的优势: 2. Content URI 的写法: MIME的写法 在AndroidManifest.xml中写法 创建一个自定义的Content Provider 除了使用ContentResolver外, 其他几种访问Content Provider方法 Contract Classses 1. Content Provider 的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 2. Content URI 的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名 …" />
-<meta name="keywords" content="android, content provider, 内容提供器">
-
-<meta property="og:site_name" content="Ivicel\s Ambertime"/>
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Android Contnet Provider内容提供器"/>
-<meta property="og:description" content="1. Content Provider 的优势: 2. Content URI 的写法: MIME的写法 在AndroidManifest.xml中写法 创建一个自定义的Content Provider 除了使用ContentResolver外, 其他几种访问Content Provider方法 Contract Classses 1. Content Provider 的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 2. Content URI 的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名 …"/>
+<meta property="og:description" content="1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./android-contnet-providernei-rong-ti-gong-qi.html"/>
 <meta property="og:type" content="article"/>
@@ -51,303 +82,336 @@
 <meta property="article:tag" content="android"/>
 <meta property="article:tag" content="content provider"/>
 <meta property="article:tag" content="内容提供器"/>
-<meta property="og:image" content="/images/favicon.ico">
+<meta property="og:image" content="./theme/images/post-bg.jpg">
 
-  <title>Ivicel\s Ambertime &ndash; Android Contnet Provider内容提供器</title>
+<!-- Twitter Card -->
 
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Android Contnet Provider内容提供器",
+  "headline": "Android Contnet Provider内容提供器",
+  "datePublished": "2018-02-22 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "./author/ivicel.html"
+  },
+  "image": "./theme/images/post-bg.jpg",
+  "url": "./android-contnet-providernei-rong-ti-gong-qi.html",
+  "description": "1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,..."
+}
+</script>
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="/images/favicon.ico" alt="Ambertime" title="Ambertime">
-      </a>
-      <h1><a href=".">Ambertime</a></h1>
+<!-- TODO : Body class -->
+<body class="home-template">
 
-<p>Make memory in past times</p>
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
 
-      <ul class="social">
-      </ul>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
     </div>
 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Android Contnet Provider内容提供器</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="./author/ivicel.html">Ivicel</a>
+            | <time datetime="Thu 22 February 2018">Thu 22 February 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
 
-  </aside>
-  <main>
+  <section id="wrapper">
+    <a class="hidden-close"></a>
 
-    <nav>
-      <a href=".">Home</a>
-
-
-
-    </nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="android-contnet-providernei-rong-ti-gong-qi">Android Contnet Provider内容提供器</h1>
-    <p>
-      Posted on Thu 22 February 2018 in <a href="./category/android.html">Android</a>
-
-    </p>
-  </header>
-
-
-  <div>
-    <div class="toc">
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <div class="toc">
 <ul>
-<li><a href="#1-content-provider">1. Content Provider 的优势:</a></li>
-<li><a href="#2-content-uri">2. Content URI 的写法:</a><ul>
-<li><a href="#mime">MIME的写法</a></li>
-<li><a href="#androidmanifestxml">在AndroidManifest.xml中写法</a></li>
-<li><a href="#content-provider">创建一个自定义的Content Provider</a></li>
-<li><a href="#contentresolver-content-provider">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li>
+<li><a href="#1-content-provider">1. Content Provider 的优势 :</a></li>
+<li><a href="#2-content-uri">2. Content URI 的写法 :</a><ul>
+<li><a href="#mime">MIME 的写法 </a></li>
+<li><a href="#androidmanifestxml"> 在 AndroidManifest.xml 中写法 </a></li>
+<li><a href="#content-provider"> 创建一个自定义的 Content Provider</a></li>
+<li><a href="#contentresolver-content-provider"> 除了使用 ContentResolver 外 , 其他几种访问 Content Provider 方法 </a></li>
 <li><a href="#contract-classses">Contract Classses</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h3 id="1-content-provider">1. Content Provider 的优势:</h3>
+<h3 id="1-content-provider">1. Content Provider 的优势 :</h3>
 <ol>
-<li>可以用来提供进程间的通信</li>
-<li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
-<li>提供了一个<code>权限</code>限制</li>
+<li> 可以用来提供进程间的通信 </li>
+<li> 提供一个统一的接口 , 屏蔽了底层的具体实现 . 底层可以使用数据库如 <code>SQLite</code>, 文件 , 或者从网络中获取 </li>
+<li> 提供了一个 <code> 权限 </code> 限制 </li>
 </ol>
-<h3 id="2-content-uri">2. Content URI 的写法:</h3>
+<h3 id="2-content-uri">2. Content URI 的写法 :</h3>
 <blockquote>
-<p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
+<p><code>content://</code> + <code>AUTHORITY</code> + <code>/ 表名 </code></p>
 <p><code>content://com.example.myapp.provider/table1</code></p>
-<p><code>AUTHORITY</code>一般默认写成<code>包名.provider</code>, <code>包名.provider类名</code>, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突</p>
-<p>后面跟表名, 或者还可以跟修饰符<code>*</code>, <code>#</code>, </p>
+<p><code>AUTHORITY</code> 一般默认写成 <code> 包名 .provider</code>, <code> 包名 .provider 类名 </code>, 一般用包名在前修饰 , 以免在需要共享给别的程度时产生冲突 </p>
+<p> 后面跟表名 , 或者还可以跟修饰符 <code>*</code>, <code>#</code>, </p>
 </blockquote>
-<p>书写规则</p>
-<p><code>*</code>表示匹配任意长度任意字符</p>
+<p> 书写规则 </p>
+<p><code>*</code> 表示匹配任意长度任意字符 </p>
 <blockquote>
-<p><code>content://com.example.myapp.provider/*</code> 查询所有表中所有数据</p>
+<p><code>content://com.example.myapp.provider/*</code> 查询所有表中所有数据 </p>
 </blockquote>
-<p><code>#</code>表示匹配任意长度的数字</p>
+<p><code>#</code> 表示匹配任意长度的数字 </p>
 <blockquote>
 <p><code>content://com.example.myapp.provider/table1/#</code> </p>
-<p>查询<code>table1</code>中的某一行, 如果提供了这类<code>MIME_TYPE</code>的话, 可以使用</p>
-<p><code>content://com.example.myapp.provider/table/3</code>访问表<code>table</code>的第<code>3</code>行数据</p>
-<p>此时可以使用类<code>ContentUris</code>添加一个<code>id</code>, 类<code>Uri#withAppendedPath</code>也是一样, 只不过接收的是一个<code>String</code>类型</p>
+<p> 查询 <code>table1</code> 中的某一行 , 如果提供了这类 <code>MIME_TYPE</code> 的话 , 可以使用 </p>
+<p><code>content://com.example.myapp.provider/table/3</code> 访问表 <code>table</code> 的第 <code>3</code> 行数据 </p>
+<p> 此时可以使用类 <code>ContentUris</code> 添加一个 <code>id</code>, 类 <code>Uri#withAppendedPath</code> 也是一样 , 只不过接收的是一个 <code>String</code> 类型 </p>
 <p><code>Uri singleUri = ContentUris.withAppendedId(MyProvider.CONTENT_URI, id)</code></p>
 </blockquote>
-<h4 id="mime"><code>MIME</code>的写法</h4>
+<h4 id="mime"><code>MIME</code> 的写法 </h4>
 <hr />
 <blockquote>
 <ol>
-<li>必须以<code>vnd</code>开头</li>
-<li>如果以内容URI结尾的, 后面接<code>android.cursor.item/</code>; 如果以目录URI结尾的, 后面接<code>android.cursor.dir/</code></li>
-<li>最后接上<code>vnd.&lt;authority&gt;.&lt;path&gt;</code> </li>
+<li> 必须以 <code>vnd</code> 开头 </li>
+<li> 如果以内容 URI 结尾的 , 后面接 <code>android.cursor.item/</code>; 如果以目录 URI 结尾的 , 后面接 <code>android.cursor.dir/</code></li>
+<li> 最后接上 <code>vnd.&lt;authority&gt;.&lt;path&gt;</code> </li>
 </ol>
 </blockquote>
-<p>例如: <code>vnd.android.cursor.dir/vnd.com.example.myapp.provider/table1</code></p>
-<p><code>ContentResolver</code>类中有两个预定义的<code>vendor</code></p>
+<p> 例如 : <code>vnd.android.cursor.dir/vnd.com.example.myapp.provider/table1</code></p>
+<p><code>ContentResolver</code> 类中有两个预定义的 <code>vendor</code></p>
 <p><code>ContentResolver.CURSOR_ITEM_BASE_TYPE = "vnd.android.cursor.item"</code></p>
 <p><code>ContentResolver.CURSOR_DIR_BASE_TYPE = "vnd.android.cursor.dir"</code></p>
-<h4 id="androidmanifestxml">在<code>AndroidManifest.xml</code>中写法</h4>
+<h4 id="androidmanifestxml"> 在 <code>AndroidManifest.xml</code> 中写法 </h4>
 <hr />
-<p>当非同一个程序中需要使用<code>Content Provider</code>时, 必须要在<code>AndroidManifest.xml</code>声明使用权限. 比如读写用户字典:<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
-<p>然而如果在同一程序中, 无论是否声明自定义权限, 原程序都有其读写的权限</p>
-<div class="highlight"><pre><span></span>&lt;provider 
-          android:authorities=&quot;list&quot; // 要和类中定义的认证名完全一样
-          android:directBootAware=[&quot;true&quot; | &quot;false&quot;] // unlock deivce之前进行启动privoder
-          andorid:enabled=[&quot;true&quot; | &quot;false&quot;] // 启用
-          android:exported=[&quot;true&quot; | &quot;false&quot;] // 外部是否可访问到
-          android:grantUriPermissions=[&quot;true&quot; | &quot;false&quot;] // 可授予特定的uri临时权限. 如果true, 则可以授予权限给任意uri. false则只能授予权限给特定uri. 默认false
-// 特定的uri权限在&lt;grant-uri-permission&gt;中声明
-          android:icon=&quot;drawable resource&quot; // 设置一个调用时的图标, 默认是application icon
-          android:initOrder=&quot;integer&quot; // 同一进程中的content provider初始顺序, 默认是从大的数字先初始
-          android:label=&quot;string resource&quot; // 默认使用application label
-          android:multiprocess=[&quot;true&quot; | &quot;false&quot;] // 在程序使用多进程情况下, true表示各进程生成各自的content provider object. false表示共用. 默认false
-          android:name=&quot;string&quot; // provider的名称. 一般取作 package.UserDictionaryProvider, 后面是provider的用处
-          android:permission=&quot;string&quot; // 设置一个读写权限名
-          android:readPermission=&quot;string&quot; // 读权限, 覆盖掉 android:permission 如果有
-          android:wirtePermission=&quot;string&quot; // 写权限, 覆盖掉 android:permission 如果有
-          andorid:process=&quot;string&quot; // 进程的名称. 用来表示需要哪个进程来运行这个content provider                           // 一般情况下所有的 application components 都运行在同一进程下                         // components 都有自己的 process 属性来表示需要运行在不同的进程当中                    // 如果以一个分号(:)开头的进程名, 表示运行在一个程序私有新进程中                         // 如果直接以名字, 则表示运行在一个全局共享可访问的进程中
-          android:syncable=[&quot;true&quot; | &quot;false&quot;]&gt; // 表示 content provider 底层数据是否是 synchronized
+<p> 当非同一个程序中需要使用 <code>Content Provider</code> 时 , 必须要在 <code>AndroidManifest.xml</code> 声明使用权限 . 比如读写用户字典 :<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
+<p> 然而如果在同一程序中 , 无论是否声明自定义权限 , 原程序都有其读写的权限 </p>
+<pre class="highlight"><code class="linenums">&lt;provider 
+          android:authorities="list" // 要和类中定义的认证名完全一样
+          android:directBootAware=["true" | "false"] // unlock deivce 之前进行启动 privoder
+          andorid:enabled=["true" | "false"] // 启用
+          android:exported=["true" | "false"] // 外部是否可访问到
+          android:grantUriPermissions=["true" | "false"] // 可授予特定的 uri 临时权限 . 如果 true, 则可以授予权限给任意 uri. false 则只能授予权限给特定 uri. 默认 false
+// 特定的 uri 权限在 &lt;grant-uri-permission&gt; 中声明
+          android:icon="drawable resource" // 设置一个调用时的图标 , 默认是 application icon
+          android:initOrder="integer" // 同一进程中的 content provider 初始顺序 , 默认是从大的数字先初始
+          android:label="string resource" // 默认使用 application label
+          android:multiprocess=["true" | "false"] // 在程序使用多进程情况下 , true 表示各进程生成各自的 content provider object. false 表示共用 . 默认 false
+          android:name="string" // provider 的名称 . 一般取作 package.UserDictionaryProvider, 后面是 provider 的用处
+          android:permission="string" // 设置一个读写权限名
+          android:readPermission="string" // 读权限 , 覆盖掉 android:permission 如果有
+          android:wirtePermission="string" // 写权限 , 覆盖掉 android:permission 如果有
+          andorid:process="string" // 进程的名称 . 用来表示需要哪个进程来运行这个 content provider                           // 一般情况下所有的 application components 都运行在同一进程下                         // components 都有自己的 process 属性来表示需要运行在不同的进程当中                    // 如果以一个分号 (:) 开头的进程名 , 表示运行在一个程序私有新进程中                         // 如果直接以名字 , 则表示运行在一个全局共享可访问的进程中
+          android:syncable=["true" | "false"]&gt; // 表示 content provider 底层数据是否是 synchronized
 
-  // 在&lt;provider&gt;标签中还能包含&lt;meta-data&gt;, &lt;grant-uri-permission&gt;, &lt;path-permission&gt;标签
-  // path-level permission中定义的权限会覆盖掉 application-level 中&lt;permission&gt;定义和provider-level 中的权限
-  // 而 grant-uri-permission是对临时uri的权限, 不受这三个level的影响
-  // 总体下说, 下层的权限覆盖总是对上层权限更加的精确把控, 需要精确分层时使用
+  // 在 &lt;provider&gt; 标签中还能包含 &lt;meta-data&gt;, &lt;grant-uri-permission&gt;, &lt;path-permission&gt; 标签
+  // path-level permission 中定义的权限会覆盖掉 application-level 中 &lt;permission&gt; 定义和 provider-level 中的权限
+  // 而 grant-uri-permission 是对临时 uri 的权限 , 不受这三个 level 的影响
+  // 总体下说 , 下层的权限覆盖总是对上层权限更加的精确把控 , 需要精确分层时使用
 
 &lt;/provider&gt;
 
-&lt;provider android:name=&quot;.MyProvider&quot;
-          android:authorities=&quot;com.example.myapp.MyProvider&quot;
-          android:enable=&quot;true&quot;
-          android:exported=&quot;false&quot;/&gt;
-</pre></div>
+&lt;provider android:name=".MyProvider"
+          android:authorities="com.example.myapp.MyProvider"
+          android:enable="true"
+          android:exported="false"/&gt;
 
+</code></pre>
 
-<h4 id="content-provider">创建一个自定义的<code>Content Provider</code></h4>
+<h4 id="content-provider"> 创建一个自定义的 <code>Content Provider</code></h4>
 <hr />
 <ol>
-<li>自定义一个类继承<code>ContentProvider</code>, 实现<code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code>方法</li>
-<li>使用<code>UriMatcher</code>类快速生成或者匹配<code>uri</code></li>
+<li> 自定义一个类继承 <code>ContentProvider</code>, 实现 <code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code> 方法 </li>
+<li> 使用 <code>UriMatcher</code> 类快速生成或者匹配 <code>uri</code></li>
 </ol>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyProvider</span> <span class="kd">extends</span> <span class="n">ContentProvider</span> <span class="o">{</span>
+<pre class="highlight"><code class="language-java linenums">
+public class MyProvider extends ContentProvider {
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">AUTHORITY</span> <span class="o">=</span> <span class="s">&quot;com.example.myapp.MyProvider&quot;</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">UriMatcher</span> <span class="n">sUriMatcher</span><span class="o">;</span>
+    public static final String AUTHORITY = "com.example.myapp.MyProvider";
+    private static UriMatcher sUriMatcher;
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SEARCH_WORDS</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">GET_WORD_DEFINITION</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SEARCH_SUGGEST</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+    private static final int SEARCH_WORDS = 0;
+    private static final int GET_WORD_DEFINITION = 1;
+    private static final int SEARCH_SUGGEST = 2;
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WORD_MIME_TYPE</span> <span class="o">=</span> 
-        <span class="n">ContentResolver</span><span class="o">.</span><span class="na">CURSOR_DIR_BASE_TYPE</span> <span class="o">+</span> 
-        <span class="s">&quot;/vnd.com.example.myapp.dictionary&quot;</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">DEFINITION_MIME_TYPE</span> <span class="o">=</span> 
-        <span class="n">ContentResolver</span><span class="o">.</span><span class="na">CURSOR_ITEM_BASE_TYPE</span> <span class="o">+</span>
-        <span class="s">&quot;/vnd.com.example.myapp.dictionary&quot;</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SEARCH_SUGGEST_MIME_TYPE</span> <span class="o">=</span> 
-        <span class="n">ContentResolver</span><span class="o">.</span><span class="na">CURSOR_DIR_BASE_TYPE</span> <span class="o">+</span>
-        <span class="s">&quot;vnd.com.example.myapp.search_suggest&quot;</span><span class="o">;</span>
+    public static final String WORD_MIME_TYPE = 
+        ContentResolver.CURSOR_DIR_BASE_TYPE + 
+        "/vnd.com.example.myapp.dictionary";
+    public static final String DEFINITION_MIME_TYPE = 
+        ContentResolver.CURSOR_ITEM_BASE_TYPE +
+        "/vnd.com.example.myapp.dictionary";
+    public static final String SEARCH_SUGGEST_MIME_TYPE = 
+        ContentResolver.CURSOR_DIR_BASE_TYPE +
+        "vnd.com.example.myapp.search_suggest";
 
-    <span class="c1">// 生成匹配的对应 uri 的 mime type</span>
-    <span class="kd">static</span> <span class="o">{</span>
-        <span class="n">sUriMatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UriMatcher</span><span class="o">(</span><span class="n">UriMatcher</span><span class="o">.</span><span class="na">NO_MATCH</span><span class="o">);</span>
-        <span class="c1">// search words</span>
-        <span class="n">sUriMatcher</span><span class="o">.</span><span class="na">addURI</span><span class="o">(</span><span class="n">AUTHORITY</span><span class="o">,</span> <span class="s">&quot;dictionary&quot;</span><span class="o">,</span> <span class="n">SEARCH_WORDS</span><span class="o">);</span>
-        <span class="n">sUriMatcher</span><span class="o">.</span><span class="na">addURI</span><span class="o">(</span><span class="n">AUTHORITY</span><span class="o">,</span> <span class="s">&quot;dictionary/#&quot;</span><span class="o">,</span> <span class="n">GET_WORD_DEFINITION</span><span class="o">);</span>
-        <span class="n">sUriMatcher</span><span class="o">.</span><span class="na">addURI</span><span class="o">(</span><span class="n">AUTHORITY</span><span class="o">,</span> <span class="s">&quot;search_suggest&quot;</span><span class="o">,</span> <span class="n">SEARCH_SUGGEST</span><span class="o">);</span>
-    <span class="o">}</span>
+    // 生成匹配的对应 uri 的 mime type
+    static {
+        sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        // search words
+        sUriMatcher.addURI(AUTHORITY, "dictionary", SEARCH_WORDS);
+        sUriMatcher.addURI(AUTHORITY, "dictionary/#", GET_WORD_DEFINITION);
+        sUriMatcher.addURI(AUTHORITY, "search_suggest", SEARCH_SUGGEST);
+    }
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
-        <span class="c1">// 在第一次调用ContentResolver访问时会调用该方法</span>
-        <span class="c1">// 返回true表示创建成功</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
+    @Override
+    public boolean onCreate() {
+        // 在第一次调用 ContentResolver 访问时会调用该方法
+        // 返回 true 表示创建成功
+        return true;
+    }
 
-    <span class="nd">@Nullable</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Cursor</span> <span class="nf">query</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Uri</span> <span class="n">uri</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="n">String</span><span class="o">[]</span> <span class="n">projection</span><span class="o">,</span>
-            <span class="nd">@Nullable</span> <span class="n">String</span> <span class="n">selection</span><span class="o">,</span>
-            <span class="nd">@Nullable</span> <span class="n">String</span><span class="o">[]</span> <span class="n">selectionArgs</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="n">String</span> <span class="n">sortOrder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
+    @Nullable
+    @Override
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+        return null;
+    }
 
-    <span class="nd">@Nullable</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getType</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Uri</span> <span class="n">uri</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">switch</span> <span class="o">(</span><span class="n">sUriMatcher</span><span class="o">.</span><span class="na">match</span><span class="o">(</span><span class="n">uri</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">case</span> <span class="n">SEARCH_WORDS</span><span class="o">:</span>   
-                <span class="k">return</span> <span class="n">WORD_MIME_TYPE</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">GET_WORD</span><span class="o">:</span>
-                <span class="k">return</span> <span class="n">DEFINITION_MIME_TYPE</span><span class="o">;</span>
-            <span class="k">case</span> <span class="n">SEARCH_SUGGEST</span><span class="o">:</span>
-                <span class="k">return</span> <span class="n">SEARCH_SUGGEST_MIME_TYPE</span><span class="o">;</span>
-            <span class="k">default</span><span class="o">:</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Unknown URL: &quot;</span> <span class="o">+</span> <span class="n">uri</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+    @Nullable
+    @Override
+    public String getType(@NonNull Uri uri) {
+        switch (sUriMatcher.match(uri)) {
+            case SEARCH_WORDS:   
+                return WORD_MIME_TYPE;
+            case GET_WORD:
+                return DEFINITION_MIME_TYPE;
+            case SEARCH_SUGGEST:
+                return SEARCH_SUGGEST_MIME_TYPE;
+            default:
+                throw new IllegalArgumentException("Unknown URL: " + uri);
+        }
+    }
 
-    <span class="nd">@Nullable</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Uri</span> <span class="nf">insert</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Uri</span> <span class="n">uri</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="n">ContentValues</span> <span class="n">values</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// insert to database/file</span>
-        <span class="c1">// return new rows uri</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
+    @Nullable
+    @Override
+    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        // insert to database/file
+        // return new rows uri
+        return null;
+    }
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Uri</span> <span class="n">uri</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="n">String</span> <span class="n">selection</span><span class="o">,</span>
-            <span class="nd">@Nullable</span> <span class="n">String</span><span class="o">[]</span> <span class="n">selectionArgs</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// delete datas</span>
-        <span class="c1">// return how many rows were deleted</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="o">}</span>
+    @Override
+    public int delete(@NonNull Uri uri, @Nullable String selection,
+            @Nullable String[] selectionArgs) {
+        // delete datas
+        // return how many rows were deleted
+        return 0;
+    }
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">Uri</span> <span class="n">uri</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="n">ContentValues</span> <span class="n">values</span><span class="o">,</span>
-            <span class="nd">@Nullable</span> <span class="n">String</span> <span class="n">selection</span><span class="o">,</span>
-            <span class="nd">@Nullable</span> <span class="n">String</span><span class="o">[]</span> <span class="n">selectionArgs</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// update something</span>
-        <span class="c1">// return how many </span>
-        <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
+    @Override
+    public int update(@NonNull Uri uri, @Nullable ContentValues values,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs) {
+        // update something
+        // return how many 
+        return 0;
+    }
+}
+</code></pre>
 
-
-<h4 id="contentresolver-content-provider">除了使用<code>ContentResolver</code>外, 其他几种访问<code>Content Provider</code>方法</h4>
+<h4 id="contentresolver-content-provider"> 除了使用 <code>ContentResolver</code> 外 , 其他几种访问 <code>Content Provider</code> 方法 </h4>
 <hr />
 <ul>
 <li><code>Batch access</code></li>
 </ul>
-<p>提供了一种批量处理方法, 首先生成一个<code>ArrayList&lt;ContentProviderOperation&gt;</code>数组, 向数组中添加所需操作, 然后使用<code>ContentResolver.applyBatch(ArrayList)</code>来调用这个批处理事件. 这会使<code>ContentResolver</code>调用<code>ContentProvider#applyBatch</code>方法, 可以在自定义<code>ContentProvider</code>时覆写这个方法, 其原始方法只是调用了<code>ContentProviderOperation#apply()</code>方法</p>
-<p>在<strong>Google Sample</strong>中 [Contact Manager][!https://android.googlesource.com/platform/development/+/master/samples/ContactManager/] 示例中文件 [<code>ContacAdder.java</code>][!https://android.googlesource.com/platform/development/+/master/samples/ContactManager/src/com/example/android/contactmanager/ContactAdder.java] 演示批处理的用法</p>
+<p> 提供了一种批量处理方法 , 首先生成一个 <code>ArrayList&lt;ContentProviderOperation&gt;</code> 数组 , 向数组中添加所需操作 , 然后使用 <code>ContentResolver.applyBatch(ArrayList)</code> 来调用这个批处理事件 . 这会使 <code>ContentResolver</code> 调用 <code>ContentProvider#applyBatch</code> 方法 , 可以在自定义 <code>ContentProvider</code> 时覆写这个方法 , 其原始方法只是调用了 <code>ContentProviderOperation#apply()</code> 方法 </p>
+<p> 在 <strong>Google Sample</strong> 中 [Contact Manager][!<a href="https://android.googlesource.com/platform/development/+/master/samples/ContactManager/">https://android.googlesource.com/platform/development/+/master/samples/ContactManager/</a>] 示例中文件 [<code>ContacAdder.java</code>][!<a href="https://android.googlesource.com/platform/development/+/master/samples/ContactManager/src/com/example/android/contactmanager/ContactAdder.java">https://android.googlesource.com/platform/development/+/master/samples/ContactManager/src/com/example/android/contactmanager/ContactAdder.java</a>] 演示批处理的用法 </p>
 <ul>
 <li><code>Loader</code></li>
 </ul>
-<p>因为 <code>SimpleCursorAdapter</code>的弃用, 现在使用<code>Loader</code>来异步加载数据, 其能根据 <code>Activity</code> <code>Fragment</code> 的生命周期来控制数据获取周期, 以免造成<strong>ANR</strong>, 或者是重复加载数据</p>
+<p> 因为 <code>SimpleCursorAdapter</code> 的弃用 , 现在使用 <code>Loader</code> 来异步加载数据 , 其能根据 <code>Activity</code> <code>Fragment</code> 的生命周期来控制数据获取周期 , 以免造成 <strong>ANR</strong>, 或者是重复加载数据 </p>
 <ul>
 <li><code>Data access via intents</code></li>
 </ul>
-<p>使用<code>Intent</code>可以间接的访问到你没有获得权限的<code>Content Provier</code>.</p>
+<p> 使用 <code>Intent</code> 可以间接的访问到你没有获得权限的 <code>Content Provier</code>.</p>
 <blockquote>
-<p>需要在<code>AndroidManifest.xml</code>中的<code>&lt;provider&gt;</code>提供<code>android:grantUriPermission="true"</code></p>
-<p>或者<code>&lt;grant-uri-permission&gt;</code>中提供的可授权许可</p>
+<p> 需要在 <code>AndroidManifest.xml</code> 中的 <code>&lt;provider&gt;</code> 提供 <code>android:grantUriPermission="true"</code></p>
+<p> 或者 <code>&lt;grant-uri-permission&gt;</code> 中提供的可授权许可 </p>
 </blockquote>
-<p>比如在<code>MyApp</code>中提供调用相机程序的拍照功能 , 在<code>MyApp</code>中自定义一个<code>FileProvider</code>来提供路径地址来存储获得的照片(<code>Internal Storage</code>或<code>External Storage</code>), 然而由于访问程序私有路径是非法的, 需要获得相应的授权. </p>
-<p>此时我们就可以在调用相应的<code>Intent</code>时, 使用<code>Context#grantUriPermission()</code>加上<code>Content.FLAG_GRANT_READ_URI_PERMISSION</code>或是<code>Content.FLAG_GRANT_WRITE_URI_PERMISSION</code>授予该<code>uri</code>(仅仅是针对该<strong>URI</strong>, 并不是整个<code>Content Provider</code>)临时权限, 在调用的<code>Intent</code>返回结束, 为保证安全, 调用 <code>Context#revokeUriPermission()</code>来取消掉这个权限.</p>
+<p> 比如在 <code>MyApp</code> 中提供调用相机程序的拍照功能 , 在 <code>MyApp</code> 中自定义一个 <code>FileProvider</code> 来提供路径地址来存储获得的照片 (<code>Internal Storage</code> 或 <code>External Storage</code>), 然而由于访问程序私有路径是非法的 , 需要获得相应的授权 . </p>
+<p> 此时我们就可以在调用相应的 <code>Intent</code> 时 , 使用 <code>Context#grantUriPermission()</code> 加上 <code>Content.FLAG_GRANT_READ_URI_PERMISSION</code> 或是 <code>Content.FLAG_GRANT_WRITE_URI_PERMISSION</code> 授予该 <code>uri</code>( 仅仅是针对该 <strong>URI</strong>, 并不是整个 <code>Content Provider</code>) 临时权限 , 在调用的 <code>Intent</code> 返回结束 , 为保证安全 , 调用 <code>Context#revokeUriPermission()</code> 来取消掉这个权限 .</p>
 <blockquote>
-<p>Tips: <code>FileProvider</code>在4.4以上会自动授权</p>
+<p>Tips: <code>FileProvider</code> 在 4.4 以上会自动授权 </p>
 </blockquote>
-<p>又例如, 即使没有声明<code>Manifest.permission.READ_CONTACTS</code>, 也可以使用一个<code>Intent.ACTION_PICK</code>来挑选个联系人加上<code>ContactsContrac.RawContacts.CONTENT_ITEM_TYPE</code>这个<code>uri</code>来获取一个联系人信息. 由于这些操作是在前台<code>UI</code>上执行的, 用户可以看到并且选择联系人是自己操作的, 相当用户同意授予了其读取联系人的权限</p>
+<p> 又例如 , 即使没有声明 <code>Manifest.permission.READ_CONTACTS</code>, 也可以使用一个 <code>Intent.ACTION_PICK</code> 来挑选个联系人加上 <code>ContactsContrac.RawContacts.CONTENT_ITEM_TYPE</code> 这个 <code>uri</code> 来获取一个联系人信息 . 由于这些操作是在前台 <code>UI</code> 上执行的 , 用户可以看到并且选择联系人是自己操作的 , 相当用户同意授予了其读取联系人的权限 </p>
 <h4 id="contract-classses"><code>Contract Classses</code></h4>
 <hr />
-<p>所谓<code>Contract Classes</code>是一些定义了一些<code>constants</code>, <code>content URIs</code>, <code>column names</code>, <code>intent actions</code></p>
-<p>例如<code>UserDictionary.Words.CONTENT_URI</code>, <code>UserDictionary.Words</code>, <code>ContactsContract</code></p>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/android.html">android</a>
-      <a href="./tag/content-provider.html">content provider</a>
-      <a href="./tag/nei-rong-ti-gong-qi.html">内容提供器</a>
-    </p>
-  </div>
+<p> 所谓 <code>Contract Classes</code> 是一些定义了一些 <code>constants</code>, <code>content URIs</code>, <code>column names</code>, <code>intent actions</code></p>
+<p> 例如 <code>UserDictionary.Words.CONTENT_URI</code>, <code>UserDictionary.Words</code>, <code>ContactsContract</code></p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Android Contnet Provider内容提供器&amp;url=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="./tag/android.html">android</a><a href="./tag/content-provider.html">content provider</a><a href="./tag/nei-rong-ti-gong-qi.html">内容提供器</a>                </aside>
+
+                <div class="clear"></div>
 
 
+                </section>
 
 
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
 
-</article>
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
 
-    <footer>
-<p>
-  &copy;  2018 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
-  <a rel="license"
-     href="http://creativecommons.org/licenses/by-sa/4.0/"
-     target="_blank">
-    <img alt="Creative Commons License"
-         title="Creative Commons License"
-         style="border-width:0"
-           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
-         width="80"
-         height="15"/>
-  </a>
-</p>    </footer>
-  </main>
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
 
 
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
 
+  <script type="text/javascript" src="./theme/js/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Ivicel\s Ambertime ",
-  "url" : ".",
-  "image": "/images/favicon.ico",
-  "description": "ivicel's thoughts and writings"
-}
-</script>
-
+    <!-- Script specified by the user -->
+    <script type="text/javascript"  src="./assets/js/prism.js"></script>
 </body>
 </html>
