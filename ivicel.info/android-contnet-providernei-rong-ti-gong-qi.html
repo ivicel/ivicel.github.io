@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android Contnet Provider内容提供器</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android Contnet Provider内容提供器        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./android-contnet-providernei-rong-ti-gong-qi.html" rel="canonical" />
+  <link href="/android-contnet-providernei-rong-ti-gong-qi.html" rel="canonical" />
 
     <meta name="description" content="1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,...">
 
@@ -73,16 +86,16 @@
 <meta property="og:title" content="Android Contnet Provider内容提供器"/>
 <meta property="og:description" content="1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./android-contnet-providernei-rong-ti-gong-qi.html"/>
+<meta property="og:url" content="/android-contnet-providernei-rong-ti-gong-qi.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-02-22 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="android"/>
 <meta property="article:tag" content="content provider"/>
 <meta property="article:tag" content="内容提供器"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -97,28 +110,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./android-contnet-providernei-rong-ti-gong-qi.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/android-contnet-providernei-rong-ti-gong-qi.html",
   "description": "1. Content Provider 的优势 : 2. Content URI 的写法 : MIME 的写法 在 AndroidManifest.xml 中写法 创建一个自定义的 Content Provider 除了使用 ContentResolver 外 ,..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -129,7 +142,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -138,21 +151,18 @@
         <h1 class="post-title">Android Contnet Provider内容提供器</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Thu 22 February 2018">Thu 22 February 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android Contnet Provider内容提供器">Android Contnet Provider内容提供器</a><ul><li><a class="toc-href" href="#1-content-provider" title="1. Content Provider 的优势:">1. Content Provider 的优势:</a></li><li><a class="toc-href" href="#2-content-uri" title="2. Content URI 的写法:">2. Content URI 的写法:</a><ul><li><a class="toc-href" href="#mime" title="MIME的写法">MIME的写法</a></li><li><a class="toc-href" href="#androidmanifestxml" title="在AndroidManifest.xml中写法">在AndroidManifest.xml中写法</a></li><li><a class="toc-href" href="#content-provider" title="创建一个自定义的Content Provider">创建一个自定义的Content Provider</a></li><li><a class="toc-href" href="#contentresolver-content-provider" title="除了使用ContentResolver外, 其他几种访问Content Provider方法">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li><li><a class="toc-href" href="#contract-classses" title="Contract Classses">Contract Classses</a></li></ul></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -196,7 +206,7 @@
 <p><code>Uri singleUri = ContentUris.withAppendedId(MyProvider.CONTENT_URI, id)</code></p>
 </blockquote>
 <h4 id="mime"><code>MIME</code> 的写法 </h4>
-<hr/>
+<hr />
 <blockquote>
 <ol>
 <li> 必须以 <code>vnd</code> 开头 </li>
@@ -209,7 +219,7 @@
 <p><code>ContentResolver.CURSOR_ITEM_BASE_TYPE = "vnd.android.cursor.item"</code></p>
 <p><code>ContentResolver.CURSOR_DIR_BASE_TYPE = "vnd.android.cursor.dir"</code></p>
 <h4 id="androidmanifestxml"> 在 <code>AndroidManifest.xml</code> 中写法 </h4>
-<hr/>
+<hr />
 <p> 当非同一个程序中需要使用 <code>Content Provider</code> 时 , 必须要在 <code>AndroidManifest.xml</code> 声明使用权限 . 比如读写用户字典 :<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
 <p> 然而如果在同一程序中 , 无论是否声明自定义权限 , 原程序都有其读写的权限 </p>
 <pre class="highlight"><code class="linenums">&lt;provider 
@@ -243,8 +253,9 @@
           android:exported="false"/&gt;
 
 </code></pre>
+
 <h4 id="content-provider"> 创建一个自定义的 <code>Content Provider</code></h4>
-<hr/>
+<hr />
 <ol>
 <li> 自定义一个类继承 <code>ContentProvider</code>, 实现 <code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code> 方法 </li>
 <li> 使用 <code>UriMatcher</code> 类快速生成或者匹配 <code>uri</code></li>
@@ -334,8 +345,9 @@ public class MyProvider extends ContentProvider {
     }
 }
 </code></pre>
+
 <h4 id="contentresolver-content-provider"> 除了使用 <code>ContentResolver</code> 外 , 其他几种访问 <code>Content Provider</code> 方法 </h4>
-<hr/>
+<hr />
 <ul>
 <li><code>Batch access</code></li>
 </ul>
@@ -360,27 +372,27 @@ public class MyProvider extends ContentProvider {
 </blockquote>
 <p> 又例如 , 即使没有声明 <code>Manifest.permission.READ_CONTACTS</code>, 也可以使用一个 <code>Intent.ACTION_PICK</code> 来挑选个联系人加上 <code>ContactsContrac.RawContacts.CONTENT_ITEM_TYPE</code> 这个 <code>uri</code> 来获取一个联系人信息 . 由于这些操作是在前台 <code>UI</code> 上执行的 , 用户可以看到并且选择联系人是自己操作的 , 相当用户同意授予了其读取联系人的权限 </p>
 <h4 id="contract-classses"><code>Contract Classses</code></h4>
-<hr/>
+<hr />
 <p> 所谓 <code>Contract Classes</code> 是一些定义了一些 <code>constants</code>, <code>content URIs</code>, <code>column names</code>, <code>intent actions</code></p>
 <p> 例如 <code>UserDictionary.Words.CONTENT_URI</code>, <code>UserDictionary.Words</code>, <code>ContactsContract</code></p>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android Contnet Provider内容提供器&amp;url=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android Contnet Provider内容提供器&amp;url=/android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/android-contnet-providernei-rong-ti-gong-qi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/android.html">android</a><a href="./tag/content-provider.html">content provider</a><a href="./tag/nei-rong-ti-gong-qi.html">内容提供器</a>                </aside>
+<a href="/tag/android.html">android</a><a href="/tag/content-provider.html">content provider</a><a href="/tag/nei-rong-ti-gong-qi.html">内容提供器</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -395,24 +407,40 @@ public class MyProvider extends ContentProvider {
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

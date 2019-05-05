@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android View类的构造方法及View的主题属性优先级相关</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android View类的构造方法及View的主题属性优先级相关        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" rel="canonical" />
+  <link href="/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" rel="canonical" />
 
     <meta name="description" content="1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值 , 优先级从高到低如下 : layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr...">
 
@@ -75,18 +88,18 @@
 <meta property="og:title" content="Android View类的构造方法及View的主题属性优先级相关"/>
 <meta property="og:description" content="1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值 , 优先级从高到低如下 : layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html"/>
+<meta property="og:url" content="/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-22 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="view"/>
 <meta property="article:tag" content="构造方法"/>
 <meta property="article:tag" content="attrs"/>
 <meta property="article:tag" content="declare-styleable"/>
 <meta property="article:tag" content="style"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -101,28 +114,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html",
   "description": "1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值 , 优先级从高到低如下 : layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -133,7 +146,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -142,21 +155,18 @@
         <h1 class="post-title">Android View类的构造方法及View的主题属性优先级相关</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sun 22 April 2018">Sun 22 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android View类的构造方法及View的主题属性优先级相关">Android View类的构造方法及View的主题属性优先级相关</a><ul><li><a class="toc-href" href="#1-layout-view" title="1. layout 里 view 的属性赋值">1. layout 里 view 的属性赋值</a></li><li><a class="toc-href" href="#2" title="2. 构造方法介绍">2. 构造方法介绍</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -176,6 +186,7 @@
 </ul>
 <pre class="highlight"><code class="language-xml linenums">&lt;TextView
  android:textColor="#332211"/&gt;</code></pre>
+
 <ol>
 <li> 自定义一个 <code>style</code>, 然后在 <code>layout</code> 里的 <code>view</code> 使用 <code>style</code> 属性来覆盖 . </li>
 </ol>
@@ -198,6 +209,7 @@
      android:src="@drawable/welcome.png"/&gt;
 &lt;/LinearLayout&gt;
 </code></pre>
+
 <ol>
 <li>Default Style Attribute (defStyleAttr)</li>
 </ol>
@@ -205,6 +217,7 @@
 <pre class="highlight"><code class="language-java linenums">public TextView(Context context, @Nullable AttributeSet attrs) {
     this(context, attrs, com.android.internal.R.attr.textViewStyle);
 }</code></pre>
+
 <p><code>com.android.internal.R.attr.textViewStyle</code> 是一个 frameworks 层定义的 <a href="https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/attrs.xml">attr</a>. </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;!-- These are the standard attributes that make up a complete theme. --&gt;
@@ -215,6 +228,7 @@
         &lt;!-- .... --&gt;
  &lt;declare-styleable&gt;
 &lt;/resources&gt;</code></pre>
+
 <p> 可以看到这个 attr 类型是一个引用 , 所以当我们这样定义一个 style item 时 </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_green_dark&lt;/item&gt;
@@ -227,6 +241,7 @@
 &lt;style name="BlueTextStyle"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_blue_light&lt;/item&gt;
 &lt;/style&gt;</code></pre>
+
 <ol>
 <li>Default Style Resource (defStyleRes)</li>
 </ol>
@@ -255,6 +270,7 @@
 &lt;!-- 在 activity 配置里引用 , 这会覆盖掉全局 application 里的设置 --&gt;
 &lt;activity
  android:theme="@style/AppTheme"/&gt;</code></pre>
+
 <h3 id="2">2. 构造方法介绍 </h3>
 <p> 以 SDK 27 中的 <code>ImageView</code> 为例 , 一共有 4 个构造方法 , 如下 </p>
 <pre class="highlight"><code class="language-java linenums">public ImageView(Context context) {
@@ -275,6 +291,7 @@ public ImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr
     super(context, attrs, defStyleAttr, defStyleRes);
     /* .... */
 }</code></pre>
+
 <p> 构造方法最多有 4 个参数 , 简单意思如下 :</p>
 <ul>
 <li><code>context</code> 每个构造方法都有 , 用来 inflate, 获取各种参数值等 . 如果我们从 Java 代码中直接创建一个新的 view, 一般都是使用只有 context 的参数的构造方法 </li>
@@ -293,6 +310,7 @@ TypedArray obtainStyledAttributes(AttributeSet set, int[] attrs, int defStyleAtt
 TypedArray obtainStyledAttributes(int[] attrs)
 // 从指定的资源文件查找
 TypedArray obtainStyledAttributes(int resId, int[] attrs)</code></pre>
+
 <h3 id="reference">Reference:</h3>
 <ol>
 <li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0806/4575.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0806/4575.html</a></li>
@@ -302,20 +320,20 @@ TypedArray obtainStyledAttributes(int resId, int[] attrs)</code></pre>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android View类的构造方法及View的主题属性优先级相关&amp;url=./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android View类的构造方法及View的主题属性优先级相关&amp;url=/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/view.html">view</a><a href="./tag/gou-zao-fang-fa.html">构造方法</a><a href="./tag/attrs.html">attrs</a><a href="./tag/declare-styleable.html">declare-styleable</a><a href="./tag/style.html">style</a>                </aside>
+<a href="/tag/view.html">view</a><a href="/tag/gou-zao-fang-fa.html">构造方法</a><a href="/tag/attrs.html">attrs</a><a href="/tag/declare-styleable.html">declare-styleable</a><a href="/tag/style.html">style</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -330,24 +348,40 @@ TypedArray obtainStyledAttributes(int resId, int[] attrs)</code></pre>
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

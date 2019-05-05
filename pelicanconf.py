@@ -32,25 +32,53 @@ SOCIAL = (('You can add links in your config file', '#'),
 DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+# RELATIVE_URLS = True
 
 THEME = 'attila'
 
-STATIC_PATHS = ['assets']
+# ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
+# ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
+# PAGE_URL = 'pages/{slug}/'
+# PAGE_SAVE_AS = 'pages/{slug}/index.html'
+# YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
+# MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 
-HOME_COVER = '/assets/images/header.jpg'
+AUTHORS_BIO = {
+    "zutrinken": {
+        "name": "Zutrinken",
+        "cover": "https://casper.ghost.org/v1.0.0/images/team.jpg",
+        "image": "assets/images/avatar.png",
+        "website": "http://blog.arulraj.net",
+        "linkedin": "unavailable",
+        "github": "arulrajnet",
+        "location": "Chennai",
+        "bio": "This is the place for a small biography with max 200 characters. Well, now 100 are left. Cool, hugh?"
+    }
+}
+
+STATIC_PATHS = ['assets', 'images']
+
+USE_FOLDER_AS_CATEGORY = False
+
+HOME_COVER = 'assets/images/header.jpg'
 # COLOR_SCHEME_CSS = 'monokai.css'
 CSS_OVERRIDE = ['assets/css/prism.css', 'assets/css/base.css', 'assets/css/base-control.css',
                 'assets/css/github.css', 'assets/css/codemirror.css', 'assets/css/ivicel.css']
 JS_OVERRIDE = ['assets/js/prism.js']
 
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['i18n_subsites', 'pelican-toc', 'sitemap', 'cjk-auto-spacing']
+PLUGINS = [
+    'i18n_subsites',
+    # 'pelican-toc',
+    'sitemap',
+    'cjk-auto-spacing'
+]
+
 JINJA_ENVIRONMENT = {
     'extensions': ['jinja2.ext.i18n'],
 }
 JINJA_FILTERS = {'max': max}
-PYGMENTS_STYLE = 'manni'
+
 MARKDOWN = {
     "extensions": [
         # 'codehilite',

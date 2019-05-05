@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>在Android中使用AIDL进行IPC</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+在Android中使用AIDL进行IPC        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./zai-androidzhong-shi-yong-aidljin-xing-ipc.html" rel="canonical" />
+  <link href="/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" rel="canonical" />
 
     <meta name="description" content="AIDL 基本介绍 AIDL 全称 Android Interface Define Language, 后缀名是 .aidl. 其支持以下几个数据类型 基本数据类型 int, float, long, double, byte , short, boolean,...">
 
@@ -73,16 +86,16 @@
 <meta property="og:title" content="在Android中使用AIDL进行IPC"/>
 <meta property="og:description" content="AIDL 基本介绍 AIDL 全称 Android Interface Define Language, 后缀名是 .aidl. 其支持以下几个数据类型 基本数据类型 int, float, long, double, byte , short, boolean,..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./zai-androidzhong-shi-yong-aidljin-xing-ipc.html"/>
+<meta property="og:url" content="/zai-androidzhong-shi-yong-aidljin-xing-ipc.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-01 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="aidl"/>
 <meta property="article:tag" content="ipc"/>
 <meta property="article:tag" content="进程间通信"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -97,28 +110,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./zai-androidzhong-shi-yong-aidljin-xing-ipc.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/zai-androidzhong-shi-yong-aidljin-xing-ipc.html",
   "description": "AIDL 基本介绍 AIDL 全称 Android Interface Define Language, 后缀名是 .aidl. 其支持以下几个数据类型 基本数据类型 int, float, long, double, byte , short, boolean,..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -129,7 +142,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -138,21 +151,18 @@
         <h1 class="post-title">在Android中使用AIDL进行IPC</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sun 01 April 2018">Sun 01 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="在Android中使用AIDL进行IPC">在Android中使用AIDL进行IPC</a><ul><li><a class="toc-href" href="#aidl" title="AIDL基本介绍">AIDL基本介绍</a></li><li><a class="toc-href" href="#aidl_1" title="AIDL简单使用示例">AIDL简单使用示例</a></li><li><a class="toc-href" href="#aidlin-out-inout" title="AIDL方法参数in, out, inout意义">AIDL方法参数in, out, inout意义</a></li><li><a class="toc-href" href="#reference_1" title="Reference:">Reference:</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -161,7 +171,7 @@
 <ul>
 <li> 基本数据类型 <code>int</code>, <code>float</code>, <code>long</code>, <code>double</code>, <code>byte</code> , <code>short</code>, <code>boolean</code>, <code>char</code></li>
 <li><code>String</code> 类型和 <code>CharSequence</code> 类型 </li>
-<li><code>List</code> 类型 ,  并其内 <strong> 元素 </strong> 可以是 <strong> 泛型 </strong>. 但元素一定是可 <code>Parcelable</code> 类型或是其他 <code>AIDL</code> 支持的类型 . 可选择将 <code>List</code> 用作 &ldquo; 通用 &rdquo; 类（例如，<code>List&lt;String&gt;</code>）。另一端实际接收的具体类始终是 <code>ArrayList</code>，但生成的方法使用的是 <code>List</code> 接口。</li>
+<li><code>List</code> 类型 ,  并其内 <strong> 元素 </strong> 可以是 <strong> 泛型 </strong>. 但元素一定是可 <code>Parcelable</code> 类型或是其他 <code>AIDL</code> 支持的类型 . 可选择将 <code>List</code> 用作 “ 通用 ” 类（例如，<code>List&lt;String&gt;</code>）。另一端实际接收的具体类始终是 <code>ArrayList</code>，但生成的方法使用的是 <code>List</code> 接口。</li>
 <li><code>Map</code> 类型 . 并其内元素不能是泛型 , 元素一定 <code>AIDL</code> 支持的类型 , 或者可 <code>Parcelable</code> 或者其他 <code>AIDL</code> 接口 . 不支持通用 <code>Map</code>（如 <code>Map&lt;String,Integer&gt;</code> 形式的 Map）。 另一端实际接收的具体类始终是 <code>HashMap</code>，但生成的方法使用的是 <code>Map</code> 接口。</li>
 </ul>
 <p> 一般有两种 <code>.aidl</code> 文件 . 一种是定义可 <code>Parcelable</code> 的数据结构 . 一种是定义方法接口 . 数据结构需要由我们自己来实现 , 一般也会写在包内 . 而接口方法由系统生成固定的接口 , 然后在需要的地方再实现具体的业务逻辑 , 实现该接口即可 </p>
@@ -174,6 +184,7 @@ package info.ivicel.github.aidldemo;
 
 // 注意是小写
 parcelable Book;</code></pre>
+
 <pre class="highlight"><code class="language-aidl linenums">package info.ivicel.github.aidldemo;
 
 // 非基本数据类型需要导入
@@ -186,6 +197,7 @@ interface BookManager {
     Book addBookOut(out Book book);
     Book addBookInout(inout Book book);
 }</code></pre>
+
 <p> 再定义 <code>Book.aidl</code> 的实现 <code>Book.java</code>. 需要注意的两点 : 
 一是如果把 <code>Book.java</code> 定义在 <code>aidl</code> 包中 , 一定要向 <code>build.gradle</code> 添加查找 <code>java</code> 文件的路径 .</p>
 <pre class="highlight"><code class="language-gradle linenums">android {
@@ -197,6 +209,7 @@ interface BookManager {
     }
     // .....
 }</code></pre>
+
 <p> 二是默认的 <code>Parcelable</code> 接口并不要求实现 <code>readFromParcel</code> 方法 , 但在 <code>AIDL</code> 中 , <code>tag</code> 标签的 <code>out</code>,<code>inout</code> 需要其来实现写入流 , 如果不实现这个方法 , 则只能为 <code>in</code></p>
 <pre class="highlight"><code class="language-java linenums">package info.ivicel.github.aidldemo;
 
@@ -250,6 +263,7 @@ public class Book implements Parcelable {
         name = dest.readString();
     }
 }</code></pre>
+
 <p> 以上三个文件 <code>Book.aidl</code>, <code>Book.java</code>, <code>BookManager.aidl</code> 在 <code>client</code> 和 <code>server</code> 端都必须有一份 .</p>
 <p> 在 <code>rebuild</code>, 或是 <code>clean</code> 之后 , 会在应用目录 <code>build/source/aidl</code> 下生成同名接口的 <code>java</code> 文件 . 我们只要在 <code>server</code> 端根据具体的业务逻辑实现该接口中的方法即可 . 然后使用 <code>Service</code> 来监听来自 <code>client</code> 的请求 . 在 <code>client</code> 端来调用接口中的方法与 <code>server</code> 端进行通信 </p>
 <p> 在 <code>Server</code> 端实现一个 <code>Service</code></p>
@@ -322,6 +336,7 @@ public class AIDLService extends Service {
     }
 }
 </code></pre>
+
 <p> 然后在 <code>Manifest.xml</code> 中定义 <code>Service</code>, 如果 <code>Client</code> 是另一个程序的话 , 需要定义一个隐式的 <code>Intent-filter</code> 来通知 <code>Service</code> 接收什么连接 </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;!-- exported=true 表示能让非同应用的进程访问 --&gt;
 &lt;!-- 为了安全最好还是定义一个 permission, 让拥有权限的应用访问 --&gt;
@@ -336,6 +351,7 @@ public class AIDLService extends Service {
         &lt;category android:category="android.intent.category.DEFAULT"/&gt;
     &lt;/intent-filter&gt;
 &lt;/service&gt;</code></pre>
+
 <p> 在 <code>Client</code> 端 , 我们可以通过 <code>bindService()</code> 来获得 <code>BookManager</code> 的引用 </p>
 <pre class="highlight"><code class="language-java linenums">// client 
 // MainActivity.java 
@@ -383,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }</code></pre>
+
 <h5 id="aidlin-out-inout"><code>AIDL</code> 方法参数 <code>in</code>, <code>out</code>, <code>inout</code> 意义 </h5>
 <p> 这三个参数表示的是数据的流向 , 都是从 <code>client</code> 来看 <code>server</code>.</p>
 <ul>
@@ -478,6 +495,7 @@ private static final BookManager.Stub bookManager = new BookManager.Stub {
         return book;
     }
 }</code></pre>
+
 <p><code>server</code> 端打印的结果 :</p>
 <blockquote>
 <p>OnServer: addBookIn: Book{name='new_book_in', price=20}
@@ -505,32 +523,32 @@ OnClient: addBookInOut return from server: Book{name='new_book_inout_by_server',
 OnClient: after addBookInOut client book = Book{name='new_book_inout_by_server', price=32}</p>
 </blockquote>
 <p> 代码地址 : <a href="https://github.com/ivicel/dev-android-samples/tree/master/AIDL-Demo">GitHub</a></p>
-<h4 id="reference_1">Reference:</h4>
+<h4 id="reference">Reference:</h4>
 <ol>
 <li><a href="https://blog.csdn.net/luoyanglizi/article/details/51980630">https://blog.csdn.net/luoyanglizi/article/details/51980630</a></li>
 <li><a href="https://blog.csdn.net/luoyanglizi/article/details/51958091">https://blog.csdn.net/luoyanglizi/article/details/51958091</a></li>
 <li><a href="https://blog.csdn.net/luoyanglizi/article/details/52029091">https://blog.csdn.net/luoyanglizi/article/details/52029091</a></li>
-<li>&lt;<android 开发艺术探索 ="">&gt;</android></li>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
 <li><a href="https://developer.android.com/guide/components/aidl.html?hl=zh-cn">https://developer.android.com/guide/components/aidl.html?hl=zh-cn</a></li>
 </ol>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=在Android中使用AIDL进行IPC&amp;url=./zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=在Android中使用AIDL进行IPC&amp;url=/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/aidl.html">aidl</a><a href="./tag/ipc.html">ipc</a><a href="./tag/jin-cheng-jian-tong-xin.html">进程间通信</a>                </aside>
+<a href="/tag/aidl.html">aidl</a><a href="/tag/ipc.html">ipc</a><a href="/tag/jin-cheng-jian-tong-xin.html">进程间通信</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -545,24 +563,40 @@ OnClient: after addBookInOut client book = Book{name='new_book_inout_by_server',
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>SQL 简单速记</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+SQL 简单速记        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./sql-jian-dan-su-ji.html" rel="canonical" />
+  <link href="/sql-jian-dan-su-ji.html" rel="canonical" />
 
     <meta name="description" content="1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*...">
 
@@ -70,13 +83,13 @@
 <meta property="og:title" content="SQL 简单速记"/>
 <meta property="og:description" content="1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./sql-jian-dan-su-ji.html"/>
+<meta property="og:url" content="/sql-jian-dan-su-ji.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-03-20 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Database"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -91,28 +104,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./sql-jian-dan-su-ji.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/sql-jian-dan-su-ji.html",
   "description": "1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -123,7 +136,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -132,21 +145,18 @@
         <h1 class="post-title">SQL 简单速记</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Mon 20 March 2017">Mon 20 March 2017</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="SQL 简单速记">SQL 简单速记</a><ul><li><a class="toc-href" href="#1" title="1. 检索数据">1. 检索数据</a></li><li><a class="toc-href" href="#2" title="2. 排序">2. 排序</a></li><li><a class="toc-href" href="#3" title="3. 过滤数据">3. 过滤数据</a></li><li><a class="toc-href" href="#4" title="4. 高级过滤">4. 高级过滤</a></li><li><a class="toc-href" href="#5" title="5. 通配符过滤">5. 通配符过滤</a></li><li><a class="toc-href" href="#6" title="6. 创建字段">6. 创建字段</a></li><li><a class="toc-href" href="#7" title="7. 数据处理函数">7. 数据处理函数</a></li><li><a class="toc-href" href="#8" title="8. 分组">8. 分组</a></li><li><a class="toc-href" href="#9" title="9. 子查询">9. 子查询</a></li><li><a class="toc-href" href="#10" title="10. 联结">10. 联结</a></li><li><a class="toc-href" href="#11" title="11. 组合查询">11. 组合查询</a></li><li><a class="toc-href" href="#12" title="12. 数据插入">12. 数据插入</a></li><li><a class="toc-href" href="#13" title="13. 更新数据">13. 更新数据</a></li><li><a class="toc-href" href="#14" title="14. 创建表">14. 创建表</a></li><li><a class="toc-href" href="#15" title="15. 视图">15. 视图</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -165,6 +175,7 @@ SELECT prod_id FROM Products LIMIT 5;
 /* 注释 */
 /*... 多行注释 */
 --- 单行注释 </code></pre>
+
 <h3 id="2"><strong>2. 排序 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* 排序条件不一定出现在选择结果中 */
 
@@ -176,10 +187,12 @@ SELECT prod_id, prod_name FROM Products ORDER BY prod_id, prod_name;
 SELECT prod_id, prod_name FROM Products ORDER BY 1, 2;
 /* 降序，默认升序 ASC */
 SELECT prod_id FROM Products ORDER BY prod_name DESC;</code></pre>
+
 <h3 id="3"><strong>3. 过滤数据 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* WHREE 子句 */
 SELECT * FROM Products WHERE prod_id &lt; 5;
 </code></pre>
+
 <table>
 <thead>
 <tr>
@@ -213,11 +226,11 @@ SELECT * FROM Products WHERE prod_id &lt; 5;
 <td> 不小于 </td>
 </tr>
 <tr>
-<td>&gt;</td>
+<td>></td>
 <td> 大于 </td>
 </tr>
 <tr>
-<td>&gt;=</td>
+<td>>=</td>
 <td> 大于等于 </td>
 </tr>
 <tr>
@@ -254,6 +267,7 @@ ORDER BY prod_name;
 SELECT prod_name, prod_id 
 FROM Products
 WHERE NOT prod_id = 5;</code></pre>
+
 <h3 id="5"><strong>5. 通配符过滤 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* % 任意字符出现任意次 , 匹配多个字符 */
 SELECT prod_name, prod_id
@@ -271,6 +285,7 @@ FROM Products
 WHERE prod_name LIKE '[JM]%';
 
 </code></pre>
+
 <h3 id="6"><strong>6. 创建字段 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">SELECT vend_name + ' (' + vend_country + ')'
 FROM Vendors
@@ -289,6 +304,7 @@ ORDER BY vend_name;
 SELECT prod_id, quantity, item_price, quantity * item_price AS expanded_price
 FROM OrderItems
 WHERE order_num = 2008;</code></pre>
+
 <h3 id="7"><strong>7. 数据处理函数 </strong></h3>
 <p> 各个数据库函数的名称可能不同 </p>
 <table>
@@ -305,15 +321,15 @@ WHERE order_num = 2008;</code></pre>
 </tr>
 <tr>
 <td> 数据类型转换 </td>
-<td>Access 和 Oracle 使用多个函数，每种类型的转换有一个函数；DB2 和 PostgreSQL 使用 CAST()；MariaDB、MySQL 和 SQL Server 使用 CONVERT()&rdquo;</td>
+<td>Access 和 Oracle 使用多个函数，每种类型的转换有一个函数；DB2 和 PostgreSQL 使用 CAST()；MariaDB、MySQL 和 SQL Server 使用 CONVERT()”</td>
 </tr>
 <tr>
-<td>&ldquo; 取当前日期 </td>
-<td>Access 使用 NOW()；DB2 和 PostgreSQL 使用 CURRENT_DATE；MariaDB 和 MySQL 使用 CURDATE()；Oracle 使用 SYSDATE；SQL Server 使用 GETDATE()；SQLite 使用 DATE()&rdquo;</td>
+<td>“ 取当前日期 </td>
+<td>Access 使用 NOW()；DB2 和 PostgreSQL 使用 CURRENT_DATE；MariaDB 和 MySQL 使用 CURDATE()；Oracle 使用 SYSDATE；SQL Server 使用 GETDATE()；SQLite 使用 DATE()”</td>
 </tr>
 <tr>
 <td> 取当前日期 </td>
-<td>Access 使用 NOW()；DB2 和 PostgreSQL 使用 CURRENT_DATE；MariaDB 和 MySQL 使用 CURDATE()；Oracle 使用 SYSDATE；SQL Server 使用 GETDATE()；SQLite 使用 DATE()&rdquo;</td>
+<td>Access 使用 NOW()；DB2 和 PostgreSQL 使用 CURRENT_DATE；MariaDB 和 MySQL 使用 CURDATE()；Oracle 使用 SYSDATE；SQL Server 使用 GETDATE()；SQLite 使用 DATE()”</td>
 </tr>
 </tbody>
 </table>
@@ -358,7 +374,7 @@ WHERE order_num = 2008;</code></pre>
 </tr>
 <tr>
 <td>UPPER()（Access 使用 UCASE()）</td>
-<td> 将字符串转换为大写 &rdquo;</td>
+<td> 将字符串转换为大写 ”</td>
 </tr>
 </tbody>
 </table>
@@ -391,13 +407,14 @@ WHERE order_num = 2008;</code></pre>
 </tr>
 <tr>
 <td>SUM()</td>
-<td> 返回某列值之和 &rdquo;</td>
+<td> 返回某列值之和 ”</td>
 </tr>
 </tbody>
 </table>
 <pre class="highlight"><code class="language-sql linenums">SELECT AVG(DISTINCT prod_price) AS avg_price
 FROM Products
 WHERE vend_id 'DLL01';</code></pre>
+
 <h3 id="8"><strong>8. 分组 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* GROUP BY 组合条件必须出现在选择结果中 */
 SELECT vend_id, COUNT(*) AS num_prods
@@ -416,6 +433,7 @@ FROM OrderItems
 GROUP BY order_num
 HAVING COUNT(*) &gt;= 3
 ORDER BY items, order_num;</code></pre>
+
 <h3 id="9"><strong>9. 子查询 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">SELECT cust_name, cust_contact
 FROM Customers
@@ -429,6 +447,7 @@ SELECT cust_name, cust_state, (
     SELECT COUNT(*) FROM Orders WHERE cust_id = cust_id) AS orders
 FROM Customers 
 ORDER BY cust_name;</code></pre>
+
 <h3 id="10"><strong>10. 联结 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* 使用联结时一定要有限定条件 WHERE， LIKE 等 */
 
@@ -464,6 +483,7 @@ SELECT c1.cust_id, c1.cust_name, c1.cust_contact
 FROM Customers AS c1, Customers AS c2
 WHERE c1.cust_name = c2.cust_name
 AND c2.cust_contact = 'Jim Jones'; </code></pre>
+
 <h3 id="11"><strong>11. 组合查询 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">SELECT cust_name, cust_contact, cust_email
 FROM Customers
@@ -481,7 +501,7 @@ WHERE cust_state IN ('IL','IN','MI')
 UNION
 SELECT cust_name, cust_contact, cust_email
 FROM Customers
-WHERE cust_name = 'Fun4All';&rdquo;
+WHERE cust_name = 'Fun4All';”
 
 /* UNION 默认去掉重复的行，使用 ALL 包含所有行 */
 SELECT cust_name, cust_contact, cust_email 
@@ -491,6 +511,7 @@ UNION ALL
 SELECT cust_name, cust_contact, cust_email 
 FROM Customers 
 WHERE cust_name = 'Fun4All';</code></pre>
+
 <h3 id="12"><strong>12. 数据插入 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* 必须与库中顺序对齐 */
 INSERT INTO Customers
@@ -545,12 +566,14 @@ FROM CustNew;
 
 /* 从一个表复制到另一个表 */
 SELECT * INTO CustCopy FROM Customers;</code></pre>
+
 <h3 id="13"><strong>13. 更新数据 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* 更新数据时不要忘记限制条件，否则会更新整个表的所有行 */
 UPDATE Customers SET cust_email = 'kil@there.com' WHERE cust_id = '100005';
 
 /* 删除行 */
 DELETE FROM Customers WHERE cust_id = '100005';</code></pre>
+
 <h3 id="14"><strong>14. 创建表 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">CREATE TABLE Products
 (
@@ -580,6 +603,7 @@ DROP COLUMN vend_phone;
 
 /* 删除表 */
 DROP TABLE CustCopy;</code></pre>
+
 <h3 id="15"><strong>15. 视图 </strong></h3>
 <pre class="highlight"><code class="language-sql linenums">/* 虚拟的表 */
 CREATE VIEW ProductCustomers AS
@@ -591,13 +615,13 @@ AND OrderItems.order_num = Orders.order_num;</code></pre>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=SQL 简单速记&amp;url=./sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=SQL 简单速记&amp;url=/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
@@ -617,24 +641,40 @@ AND OrderItems.order_num = Orders.order_num;</code></pre>
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>
