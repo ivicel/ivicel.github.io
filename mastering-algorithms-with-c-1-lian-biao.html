@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Mastering Algorithms with C-1: 链表</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Mastering Algorithms with C-1: 链表        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./mastering-algorithms-with-c-1-lian-biao.html" rel="canonical" />
+  <link href="/mastering-algorithms-with-c-1-lian-biao.html" rel="canonical" />
 
     <meta name="description" content="函数的实现在判断元素结点是否为头结点或尾结点时 , 并未使用 list->head list->tail 指针 而是判断该结点是否存在前一结点 element->prev 或后一结点 element->next 是否为空 这样从而导致在向指定结点前面或后面插入元素时 ,...">
 
@@ -74,17 +87,17 @@
 <meta property="og:title" content="Mastering Algorithms with C-1: 链表"/>
 <meta property="og:description" content="函数的实现在判断元素结点是否为头结点或尾结点时 , 并未使用 list->head list->tail 指针 而是判断该结点是否存在前一结点 element->prev 或后一结点 element->next 是否为空 这样从而导致在向指定结点前面或后面插入元素时 ,..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./mastering-algorithms-with-c-1-lian-biao.html"/>
+<meta property="og:url" content="/mastering-algorithms-with-c-1-lian-biao.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-03-21 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Data Structure Algorithms"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="算法"/>
 <meta property="article:tag" content="数据结构"/>
 <meta property="article:tag" content="C"/>
 <meta property="article:tag" content="链表"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -99,28 +112,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./mastering-algorithms-with-c-1-lian-biao.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/mastering-algorithms-with-c-1-lian-biao.html",
   "description": "函数的实现在判断元素结点是否为头结点或尾结点时 , 并未使用 list->head list->tail 指针 而是判断该结点是否存在前一结点 element->prev 或后一结点 element->next 是否为空 这样从而导致在向指定结点前面或后面插入元素时 ,..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -131,7 +144,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -140,27 +153,24 @@
         <h1 class="post-title">Mastering Algorithms with C-1: 链表</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Tue 21 March 2017">Tue 21 March 2017</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Mastering Algorithms with C-1: 链表">Mastering Algorithms with C-1: 链表</a><ul><li><a class="toc-href" href="#linked-list" title="单链表(Linked List)">单链表(Linked List)</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
                 <blockquote>
-<p> 函数的实现在判断元素结点是否为头结点或尾结点时 , 并未使用 <code>list-&gt;head</code> <code>list-&gt;tail</code> 指针 <br/>
-而是判断该结点是否存在前一结点 <code>element-&gt;prev</code> 或后一结点 <code>element-&gt;next</code> 是否为空 <br/>
+<p> 函数的实现在判断元素结点是否为头结点或尾结点时 , 并未使用 <code>list-&gt;head</code> <code>list-&gt;tail</code> 指针 <br>
+而是判断该结点是否存在前一结点 <code>element-&gt;prev</code> 或后一结点 <code>element-&gt;next</code> 是否为空 <br>
 这样从而导致在向指定结点前面或后面插入元素时 , 不能过早将 <code>element-prev</code> <code>element-&gt;next</code> 指向新结点 <code>new_element</code> 以避免判断头尾结点失败 </p>
 </blockquote>
 <h4 id="linked-list"><strong> 单链表 </strong>(Linked List)</h4>
@@ -226,8 +236,9 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 
 #endif
 </code></pre>
+
 <p> 元素插入链表 </p>
-<p><img alt=" 元素插入链表 " src="../images/ 元素插入链表 .png"/></p>
+<p><img alt=" 元素插入链表 " src="../images/ 元素插入链表 .png" /></p>
 <p> 函数实现 </p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -323,6 +334,7 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
     list-&gt;size--;
     return 0;
 }</code></pre>
+
 <p> 单链表应用：页帧管理 (Frame Management)</p>
 <ul>
 <li> 使用链表管理一个页表 (page table)，链表大小预设为页表的大小 </li>
@@ -332,7 +344,7 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
 <li> 如果有可用的页表，<code>alloc_frame</code> 返回其页表号码，并释放其 <code>data</code> 指向的内存以便令程序可能使用 </li>
 <li> 释放页表时，重新为页表元素数据申请一个内存，如果没有可用内存，释放失败 </li>
 </ul>
-<p><img alt=" 页帧映射 " src="https://ivicel.github.io/images/ 页表映射 .png"/></p>
+<p><img alt=" 页帧映射 " src="https://ivicel.github.io/images/ 页表映射 .png" /></p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include "list.h"
 
@@ -374,10 +386,11 @@ int free_frame(List *frames, int frame_number)
     }
     return 0;
 }</code></pre>
+
 <ul>
 <li><strong> 双向链表 </strong>(Doubly-Linked List)</li>
 </ul>
-<p><img alt=" 双向链表 " src="https://ivicel.github.io./images/ 双向链表 .png"/></p>
+<p><img alt=" 双向链表 " src="https://ivicel.github.io./images/ 双向链表 .png" /></p>
 <p> 头文件
 <pre class="highlight"><code class="language-c linenums">/* dlist.h */
 #ifndef DLIST_H
@@ -573,10 +586,11 @@ int dlist_remove(DList *list, DListElmt *element, void **data)
     dlist-&gt;size--;
     return 0;
 }</code></pre>
+
 <ul>
 <li><strong> 循环链表 </strong>(Circular Lists)</li>
 </ul>
-<p><img alt=" 循环链表 " src="../images/ 循环链表 .png"/></p>
+<p><img alt=" 循环链表 " src="../images/ 循环链表 .png" /></p>
 <p><pre class="highlight"><code class="language-c linenums">/* clist.h */
 #ifndef CLIST_H
 #define CLIST_H
@@ -697,20 +711,20 @@ int clist_rem_next(CList *list, CListElmt *element, void **data)
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Mastering Algorithms with C-1: 链表&amp;url=./mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Mastering Algorithms with C-1: 链表&amp;url=/mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/mastering-algorithms-with-c-1-lian-biao.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/suan-fa.html">算法</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a><a href="./tag/c.html">C</a><a href="./tag/lian-biao.html">链表</a>                </aside>
+<a href="/tag/suan-fa.html">算法</a><a href="/tag/shu-ju-jie-gou.html">数据结构</a><a href="/tag/c.html">C</a><a href="/tag/lian-biao.html">链表</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -725,24 +739,40 @@ int clist_rem_next(CList *list, CListElmt *element, void **data)
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

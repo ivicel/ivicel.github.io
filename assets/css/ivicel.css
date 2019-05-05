@@ -1,6 +1,6 @@
 body {
-    font-size: 1.15em;
-    line-height: 1.7em;
+    font-size: 1em;
+    line-height: 1.5em;
     font-family: "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
 }
 
@@ -13,7 +13,7 @@ h1.post-title {
 }
 
 pre.highlight {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 pre .lines .line {

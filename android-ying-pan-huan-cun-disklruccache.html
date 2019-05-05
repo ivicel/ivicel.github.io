@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android 硬盘缓存 DiskLrucCache</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android 硬盘缓存 DiskLrucCache        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./android-ying-pan-huan-cun-disklruccache.html" rel="canonical" />
+  <link href="/android-ying-pan-huan-cun-disklruccache.html" rel="canonical" />
 
     <meta name="description" content="1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码 , 只是官方推荐的一种实现方式 , 可以在 这里 找到源码 , 这个源码使用了其他几个自定义类里的方法 , 比如读行 , 出错打印 . Android Developer...">
 
@@ -75,18 +88,18 @@
 <meta property="og:title" content="Android 硬盘缓存 DiskLrucCache"/>
 <meta property="og:description" content="1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码 , 只是官方推荐的一种实现方式 , 可以在 这里 找到源码 , 这个源码使用了其他几个自定义类里的方法 , 比如读行 , 出错打印 . Android Developer..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./android-ying-pan-huan-cun-disklruccache.html"/>
+<meta property="og:url" content="/android-ying-pan-huan-cun-disklruccache.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-04 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="缓存"/>
 <meta property="article:tag" content="磁盘缓存"/>
 <meta property="article:tag" content="lru"/>
 <meta property="article:tag" content="cache"/>
 <meta property="article:tag" content="disk cache"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -101,28 +114,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./android-ying-pan-huan-cun-disklruccache.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/android-ying-pan-huan-cun-disklruccache.html",
   "description": "1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码 , 只是官方推荐的一种实现方式 , 可以在 这里 找到源码 , 这个源码使用了其他几个自定义类里的方法 , 比如读行 , 出错打印 . Android Developer..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -133,7 +146,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -142,21 +155,18 @@
         <h1 class="post-title">Android 硬盘缓存 DiskLrucCache</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Wed 04 April 2018">Wed 04 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android 硬盘缓存 DiskLrucCache">Android 硬盘缓存 DiskLrucCache</a><ul><li><a class="toc-href" href="#1-disklrucache" title="1. DiskLruCache 的使用">1. DiskLruCache 的使用</a></li><li><a class="toc-href" href="#2-disklrucache" title="2. DiskLruCache 源码解析">2. DiskLruCache 源码解析</a><ul><li><a class="toc-href" href="#21" title="2.1 头部">2.1 头部</a></li><li><a class="toc-href" href="#22-entry" title="2.2 缓存文件的内部摘要类 Entry">2.2 缓存文件的内部摘要类 Entry</a></li><li><a class="toc-href" href="#23" title="2.3 打开缓存">2.3 打开缓存</a></li><li><a class="toc-href" href="#24" title="2.4 写入缓存">2.4 写入缓存</a></li><li><a class="toc-href" href="#25" title="2.5 读取缓存">2.5 读取缓存</a></li><li><a class="toc-href" href="#26" title="2.6 删除缓存">2.6 删除缓存</a></li></ul></li><li><a class="toc-href" href="#reference_1" title="Reference">Reference</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -180,6 +190,7 @@
     }
     return new File(cacheFile, dirName);
 }</code></pre>
+
 <blockquote>
 <p>DiskLruCache 的缓存目录里不要跟别的缓存相互混合 , 以免导致缓存出错 </p>
 </blockquote>
@@ -193,6 +204,7 @@ public static open(File directory, int appVersion, int valueCount, long maxSize)
 // 80M 缓存
 DiskLruCache lruCache = DiskLruCache.open(getCacheDirectoryFile(context, "images",
         1, 1, 80 * 1024 * 1024);</code></pre>
+
 <p> 向缓存中写入数据 , 由 <code>DiskLruCache.Editor</code> 类负责 . 使用 <code>DiskLruCache#edit()</code> 方法获得一个 <code>DiskLruCache.Editor</code> 对象 , 便可以打开文件输入和输出流来进行读写 . 这里的 <code>newInputStream()</code> 只能读到最后一次 <code>commit</code></p>
 <pre class="highlight"><code class="language-java linenums">// 由 key 值获得 Editor 对象 , key 值一般也使用 url 的 MD5 值
 DiskLruCache.Editor editor = lruCache.edit(key);
@@ -205,6 +217,7 @@ if (bitmap.compress(Bitmap.CompressFormat.PNG, 50, out)) {
 } else {
     editor.abort();
 }</code></pre>
+
 <p> 通过 <code>DiskLruCache#get()</code> 方法可以得到一个 <code>DiskLruCache.Snapshot</code> 对象 , 通过这个对象可以得到缓存文件的输入流 </p>
 <pre class="highlight"><code class="language-java linenums">// 根据 key 找到对应的缓存文件
 DiskLruCache.Snapshot snapShot = lruCache.get(key);
@@ -213,6 +226,7 @@ InputStream in = snapShot.getInputStream(0);
 FileDescriptor fd = in.getFD();
 // 根据需要的宽高进行压缩
 bitmap = loadSpecifyImage(fd, destWidth, destHeight);</code></pre>
+
 <h3 id="2-disklrucache">2. DiskLruCache 源码解析 </h3>
 <h4 id="21">2.1 头部 </h4>
 <p>DiskLruCache 的缓存记录最主要是对其日志文件 journal 进行操作 , 一但 journal 文件遭到破坏 , 缓存被会被重建 . 其格式说明如下 :</p>
@@ -228,6 +242,7 @@ REMOVE 335c4c6028171cfddfbaae1a9c313c52
 DIRTY 1ab96a171faeeee38496d8b330771a7a
 CLEAN 1ab96a171faeeee38496d8b330771a7a 1600 234
 READ 1ab96a171faeeee38496d8b330771a7a</code></pre>
+
 </blockquote>
 <ul>
 <li> 头部 , 每一次打开 (<code>DiskLruCache#open</code>) 时都会验证头部是否相符 , 如果存在 <strong>journal</strong> 但不相符的 , 缓存被清空然后重建 . 不存在 <strong>journal</strong> 的 , 重建缓存 :</li>
@@ -236,7 +251,7 @@ READ 1ab96a171faeeee38496d8b330771a7a</code></pre>
 <li> 第三行是传入的 App 版本号 (<code>APP_VERSION</code>), 当应用版本号变动时缓存被清空 . 要想在应用变更时不清空缓存传入一个 <strong> 固定值 </strong> 便可 </li>
 <li> 第四行是 <code>valueCount</code>, 代表的是一个 <code>Node</code> 结点对应的是几个数据节点 . 上面的是 <strong> 两 </strong> 个 </li>
 <li> 第五行是一个空行分隔行 </li>
-<li> 主体记录 , 格式为 <code>status key value[0].length&hellip;.value[N - 1].length</code>, 每列值以 <strong> 空格 </strong> 分隔 </li>
+<li> 主体记录 , 格式为 <code>status key value[0].length….value[N - 1].length</code>, 每列值以 <strong> 空格 </strong> 分隔 </li>
 <li><code>status</code> 的值有 :<ul>
 <li><code>DIRTRY</code> 脏数据 , 代表对这条数据进行操作 , 每一行 <code>DIRTY</code> 后都应该跟着一条 <code>CLEAN</code> 或者 <code>REMOVE</code>, 代表对数据的操作结束 . 如果没有则这条数据为无效数据 , 将被删除 </li>
 <li><code>CLEAN</code> 代表这条数据已经写入到磁盘中 , 可以进行读写 </li>
@@ -272,6 +287,7 @@ private final class Entry {
         return new File(directory, key + "." + i + ".tmp");
     }
 }</code></pre>
+
 <h4 id="23">2.3 打开缓存 </h4>
 <p>DiskLruCache 的构造方法是 <code>private</code> 的 , 通过静态方法 <code>DiskLruCache#open()</code> 来创建一个缓存对象 . 构造方法只是简单的保存了一些属性值 . 而 <code>open()</code> 方法里对 journal 文件进行了判断和验证 </p>
 <p> 创建缓存方法 </p>
@@ -308,6 +324,7 @@ public static DiskLruCache open(File directory, int appVersion, int valueCount,
     cache.rebuildJournal();
     return cache;
 }</code></pre>
+
 <p><code>open()</code> 里即使传入的目录不存在 , DiskLruCache 也是会帮我们重建一个缓存目录的 . </p>
 <pre class="highlight"><code class="language-java linenums">// DiskLruCache#rebuildJournal()
 private synchronized void rebuildJournal() throws IOException {
@@ -332,6 +349,7 @@ private synchronized void rebuildJournal() throws IOException {
     journalFileTmp.renameTo(journalFile);
     journalWriter = new BufferedWriter(new FileWriter(journalFile, true), IO_BUFFER_SIZE);
 }</code></pre>
+
 <p><code>readJournal()</code>, <code>readJournalLine()</code>, <code>processJournal()</code> 这三个方法是重要的操作 journal 文件的方法 . <code>readJournal()</code> 处理好正确的头部匹配 , 然后调用  <code>readJournalLine()</code> 来读取每一行主体内容 . 处理的步骤为 : 
 1. 每读到一个 REMOVE 就删除 <code>lruEntries</code> 里对应 key 的 entry
 2. 如果这一行不为 REMOVE, 并且其不在 <code>lruEntries</code> 里 , 就将为其创建一个 entry 加入到链表中
@@ -423,6 +441,7 @@ private void processJournal() throws IOException {
         }
     }
 }</code></pre>
+
 <h4 id="24">2.4 写入缓存 </h4>
 <p> 在将日志记录读到 <code>lruEntries</code> 后 , 便可以进行读写操作 . 写操作是获得一个 <code>DiskLruCache#Editor</code> 对象 .</p>
 <pre class="highlight"><code class="language-java linenums">private synchronized Editor edit(String key, long expectedSequenceNumber) throws IOException {
@@ -453,6 +472,7 @@ private void processJournal() throws IOException {
     journalWriter.flush();
     return editor;
 }</code></pre>
+
 <p> 在拿到 <code>Editor</code> 对象之后 , 便可以获得输出流 , 将图片之类写到磁盘作缓存 . </p>
 <pre class="highlight"><code class="language-java linenums">public final class Editor {
     private final Entry entry;
@@ -473,6 +493,7 @@ private void processJournal() throws IOException {
 
     /* ... */
 }</code></pre>
+
 <p> 调用 <code>DiskLruCache.Editor#commit()</code> 时会调用 <code>DiskLruCache#completeEdit()</code> 完成最终编辑 </p>
 <pre class="highlight"><code class="language-java linenums">private synchronized void completeEdit(Editor editor, boolean success) 
         throws IOException {
@@ -524,6 +545,7 @@ private void processJournal() throws IOException {
             executorService.submit(cleanupCallable);
         }
     }</code></pre>
+
 <h4 id="25">2.5 读取缓存 </h4>
 <p> 通过 <code>DiskLruCache#get()</code> 获得一个 <code>Snapshot</code> 缓存对象 . 该对象主要是 <code>InputStream</code> 的再封装 </p>
 <pre class="highlight"><code class="language-java linenums">// DiskLruCache#get
@@ -550,6 +572,7 @@ public synchronized Snapshot  (String key) throws IOException {
 
     return new Snapshot(key, entry.sequenceNumber, ins);
 }</code></pre>
+
 <h4 id="26">2.6 删除缓存 </h4>
 <p> 每次读 , 写 , 删除缓存后 , 都要再次判断操作记录或者缓存大小已经超出设置的值 . 删除操作主要是由一个 </p>
 <pre class="highlight"><code class="language-java linenums">// 调用 remove
@@ -609,9 +632,10 @@ private void trimToSize() throws IOException {
         remove(toEvict.getKey());
     }
 }</code></pre>
-<h3 id="reference_1">Reference</h3>
+
+<h3 id="reference">Reference</h3>
 <ol>
-<li>&lt;<android 开发艺术探索 >&gt;</android 开发艺术探索 ></li>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
 <li><a href="https://blog.csdn.net/shakespeare001/article/details/51695358">https://blog.csdn.net/shakespeare001/article/details/51695358</a></li>
 <li><a href="https://www.jianshu.com/p/b282140acc20">https://www.jianshu.com/p/b282140acc20</a></li>
 <li><a href="http://nirvanawoody.com/2016/05/05/Android-DiskLruCache">http://nirvanawoody.com/2016/05/05/Android-DiskLruCache</a></li>
@@ -620,20 +644,20 @@ private void trimToSize() throws IOException {
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android 硬盘缓存 DiskLrucCache&amp;url=./android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android 硬盘缓存 DiskLrucCache&amp;url=/android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/android-ying-pan-huan-cun-disklruccache.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/huan-cun.html">缓存</a><a href="./tag/ci-pan-huan-cun.html">磁盘缓存</a><a href="./tag/lru.html">lru</a><a href="./tag/cache.html">cache</a><a href="./tag/disk-cache.html">disk cache</a>                </aside>
+<a href="/tag/huan-cun.html">缓存</a><a href="/tag/ci-pan-huan-cun.html">磁盘缓存</a><a href="/tag/lru.html">lru</a><a href="/tag/cache.html">cache</a><a href="/tag/disk-cache.html">disk cache</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -648,24 +672,40 @@ private void trimToSize() throws IOException {
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

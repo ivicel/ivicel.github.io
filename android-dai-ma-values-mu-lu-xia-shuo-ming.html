@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android 代码 values 目录下说明</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android 代码 values 目录下说明        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./android-dai-ma-values-mu-lu-xia-shuo-ming.html" rel="canonical" />
+  <link href="/android-dai-ma-values-mu-lu-xia-shuo-ming.html" rel="canonical" />
 
     <meta name="description" content="对于 Android 源代码目录下 values/* 文件 , 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值 , 这样的便可以通过 R.[type].[name] 来引用到 ....">
 
@@ -75,18 +88,18 @@
 <meta property="og:title" content="Android 代码 values 目录下说明"/>
 <meta property="og:description" content="对于 Android 源代码目录下 values/* 文件 , 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值 , 这样的便可以通过 R.[type].[name] 来引用到 ...."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./android-dai-ma-values-mu-lu-xia-shuo-ming.html"/>
+<meta property="og:url" content="/android-dai-ma-values-mu-lu-xia-shuo-ming.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-22 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="resources"/>
 <meta property="article:tag" content="android资源文件"/>
 <meta property="article:tag" content="attrs"/>
 <meta property="article:tag" content="style"/>
 <meta property="article:tag" content="styleable"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -101,28 +114,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./android-dai-ma-values-mu-lu-xia-shuo-ming.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/android-dai-ma-values-mu-lu-xia-shuo-ming.html",
   "description": "对于 Android 源代码目录下 values/* 文件 , 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值 , 这样的便可以通过 R.[type].[name] 来引用到 ...."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -133,7 +146,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -142,21 +155,18 @@
         <h1 class="post-title">Android 代码 values 目录下说明</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sun 22 April 2018">Sun 22 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android 代码 values 目录下说明">Android 代码 values 目录下说明</a><ul><li><a class="toc-href" href="#1-style" title="1. style 主题文件">1. style 主题文件</a></li><li><a class="toc-href" href="#2" title="2. 其他资源文件">2. 其他资源文件</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -184,6 +194,7 @@
 &lt;style name="BlueTextStyle"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_blue_light&lt;/item&gt;
 &lt;/style&gt;</code></pre>
+
 <ol>
 <li> 使用 attr 的原因是为自定义 view 添加属性 , 另外是方便更改属性的值 . 有两种定义方式 . </li>
 </ol>
@@ -191,6 +202,7 @@
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;attr name="one" format="reference"/&gt;
 &lt;/resources&gt;</code></pre>
+
 <p> 一种是在外面包一层 <code>declare-styleable</code> 标签 . </p>
 <pre class="highlight"><code class="language-xml linenums">&lt;!-- 引用整组为 R.styleable.MyAttrs, 单个为 R.styleable.MyAttrs_other_one --&gt;
 &lt;resources&gt;
@@ -201,6 +213,7 @@
         &lt;attr name="one"/&gt;
  &lt;/declare-styleable&gt;
 &lt;/resources&gt;</code></pre>
+
 <p> 使用 <code>declare-styleable</code> 主要有两点 </p>
 <ul>
 <li> 它提供了一个数组的引用 <code>R.styleable.[styleable-name]</code> 引用 ( 组里成员引用为 <code>R.styleable.[styleable-name]_[attr-name]</code> 注意组名和成员名是用下划线 _ 连接 ) 由于在使用 <code>Theme#obtainStyledAttributes()</code> 的参数 , 如果我们直接引用 <code>R.attr.one</code> 也是要组成一个数组的 </li>
@@ -217,6 +230,7 @@
 
 &lt;TextView
   app:my_bg="@drawable/bg"/&gt;</code></pre>
+
 </li>
 <li>
 <p><code>color</code> 颜色值 .</p>
@@ -247,6 +261,7 @@
         &lt;enum name="vertical" value="1" /&gt; 
     &lt;/attr&gt;
 &lt;/declare-styleable&gt;</code></pre>
+
 </li>
 <li>
 <p><code>flag</code> 标志位 , 使用时通过 <code>|</code> 竖线来设置单个或多个值 , 如 <code>stateOne | stateTwo</code> 这样 </p>
@@ -258,6 +273,7 @@
 &lt;/declare-styleable&gt;
 
 </code></pre>
+
 </li>
 <li>
 <p> 混合类型 , 比如支持 <code>string|reference</code> 这种 , 使用 <code>|</code> 竖线分隔开 </p>
@@ -284,6 +300,7 @@
     &lt;dimen name="textview_height"&gt;25dp&lt;/dimen&gt;
     &lt;dimen name="font_size"&gt;16sp&lt;/dimen&gt;
 &lt;/resources&gt;</code></pre>
+
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Id">ID</a> 独一无二的 ID 值 . 一般我们会在 layout 文件中直接用 <code>@+id/id_name</code> 来建立 , 不过 , 当我们有许多地方需要用到这个 id 时 , 单独建立文件 <code>values/ids.xml</code> 来设置这个 id, 然后在需要的地方引用就可 . 特别是 <code>ConstraintLayout</code> 这个需要前后引用 id 来设定 view 的位置时 , 就减少了工作量 , 不必总使用 <code>@+id/id_name</code> 来保证 id 一定存在了 .  通过 <code>R.id.[name]</code>, <code>@id/[name]</code>  来引用 . 存放在 <code>values/ids.xml</code></li>
 </ol>
@@ -293,12 +310,14 @@
 
 &lt;!-- layout 中引用 --&gt;
 &lt;Button android:id="@id/button_ok"/&gt;</code></pre>
+
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Integer">Integer</a> 整数值 , 通过 <code>R.integer.[name]</code>, <code>@integer/[name]</code> 来引用 . 存放在 <code>values/integers.xml</code></li>
 </ol>
 <pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
     &lt;integer name="max_speed"&gt;75&lt;/integer&gt;
 &lt;/resources&gt;</code></pre>
+
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#IntegerArray">Integer Array</a> 整型数值 , 通赤 <code>R.array.[name]</code> 来引用 . 使用 java 来解析 . <code>getResources().getInArray(R.array.bits)</code>. 存放在 <code>values/integers.xml</code></li>
 </ol>
@@ -310,6 +329,7 @@
         &lt;item&gt;32&lt;/item&gt;
     &lt;/integer-array&gt;
 &lt;/resources&gt;</code></pre>
+
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#TypedArray">Typed Array</a> 混合型数组 , 可以引用其他的资源 , 数组里可以是引用同一类型的值 , 也可以是不同的类型 , 当引用不同类型时 , 在解析的时候就有注意判断类型值 . 使用 <code>R.array.[name]</code> 引用 , 然后有 Java 代码中使用 <code>obtainTypedArray()</code> 来解析具体的值 . 存放在 <code>values/arrays.xml</code></li>
 </ol>
@@ -320,9 +340,11 @@
         &lt;item&gt;@drawable/logout&lt;/item&gt;
     &lt;/array&gt;
 &lt;/resources&gt;</code></pre>
+
 <p>java 解析代码示例 </p>
 <pre class="highlight"><code class="language-java linenums">TypedArray icons = getResources().obtainTypedArray(R.array.icons);
 Drawable drawable = icons.getDrawable(0);</code></pre>
+
 <ol>
 <li>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String</a> 字符串 . 使用 <code>R.string.[name]</code>, <code>@string/[name]</code> 引用 . 存放在 <code>values/strings.xml</code></p>
@@ -339,6 +361,7 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         &lt;item&gt;Mars&lt;/item&gt;
     &lt;/string-array&gt;
 &lt;/resources&gt;</code></pre>
+
 <ol>
 <li>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Plurals</a> 英文中的单复数形式 </p>
@@ -349,6 +372,7 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         &lt;item quantity="other"&gt;Znaleziono %d piosenek.&lt;/item&gt;
     &lt;/plurals&gt;
 &lt;/resources&gt;</code></pre>
+
 <p>​</p>
 </li>
 </ol>
@@ -356,20 +380,20 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android 代码 values 目录下说明&amp;url=./android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android 代码 values 目录下说明&amp;url=/android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/android-dai-ma-values-mu-lu-xia-shuo-ming.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/resources.html">resources</a><a href="./tag/androidzi-yuan-wen-jian.html">android资源文件</a><a href="./tag/attrs.html">attrs</a><a href="./tag/style.html">style</a><a href="./tag/styleable.html">styleable</a>                </aside>
+<a href="/tag/resources.html">resources</a><a href="/tag/androidzi-yuan-wen-jian.html">android资源文件</a><a href="/tag/attrs.html">attrs</a><a href="/tag/style.html">style</a><a href="/tag/styleable.html">styleable</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -384,24 +408,40 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

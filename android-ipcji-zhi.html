@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android IPC机制</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android IPC机制        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./android-ipcji-zhi.html" rel="canonical" />
+  <link href="/android-ipcji-zhi.html" rel="canonical" />
 
     <meta name="description" content="1. 开启多进程的方法 Android 应用启动时会自动创建一个新的进程 , 其进程名默认为 包名 , 为四大组件 (Activity , Service, ContentProvider, BroadcastReceiver) 启动一个新的进程 , 最简单的是在...">
 
@@ -73,16 +86,16 @@
 <meta property="og:title" content="Android IPC机制"/>
 <meta property="og:description" content="1. 开启多进程的方法 Android 应用启动时会自动创建一个新的进程 , 其进程名默认为 包名 , 为四大组件 (Activity , Service, ContentProvider, BroadcastReceiver) 启动一个新的进程 , 最简单的是在..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./android-ipcji-zhi.html"/>
+<meta property="og:url" content="/android-ipcji-zhi.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-01 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="IPC"/>
 <meta property="article:tag" content="Android"/>
 <meta property="article:tag" content="进程间通信"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -97,28 +110,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./android-ipcji-zhi.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/android-ipcji-zhi.html",
   "description": "1. 开启多进程的方法 Android 应用启动时会自动创建一个新的进程 , 其进程名默认为 包名 , 为四大组件 (Activity , Service, ContentProvider, BroadcastReceiver) 启动一个新的进程 , 最简单的是在..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -129,7 +142,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -138,21 +151,18 @@
         <h1 class="post-title">Android IPC机制</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sun 01 April 2018">Sun 01 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android IPC机制">Android IPC机制</a><ul><li><a class="toc-href" href="#1" title="1. 开启多进程的方法">1. 开启多进程的方法</a></li><li><a class="toc-href" href="#2-android-ipc" title="2. Android 中 IPC 的几种方式">2. Android 中 IPC 的几种方式</a><ul><li><a class="toc-href" href="#bundle" title="使用 Bundle">使用 Bundle</a></li><li><a class="toc-href" href="#_1" title="使用共享文件">使用共享文件</a></li><li><a class="toc-href" href="#aidl" title="使用 AIDL 通信">使用 AIDL 通信</a></li><li><a class="toc-href" href="#messenger" title="使用 Messenger">使用 Messenger</a></li></ul></li><li><a class="toc-href" href="#reference_1" title="Reference:">Reference:</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -219,7 +229,7 @@
 <blockquote>
 <p><code>Messenger</code> 类是 <code>final</code> 的 , 不可能通过继承 <code>Messenger</code> 来重写传送数据方式 </p>
 </blockquote>
-<p><img alt="Messenger 机制 " src="../images/Messenger 机制 .jpeg"/></p>
+<p><img alt="Messenger 机制 " src="../images/Messenger 机制 .jpeg" /></p>
 <pre class="highlight"><code class="language-java linenums">// server 
 public MessengerService extends Service {
     private static final String TAG = "MessengerService";
@@ -293,7 +303,8 @@ public MessengerActivity extends AppCompatActivity {
         unbindService(connection);
     }
 }</code></pre>
-<p> 在 &lt;<android 开发艺术探索 >&gt; 中提到 :</android 开发艺术探索 ></p>
+
+<p> 在 &lt;<Android 开发艺术探索 >&gt; 中提到 :</p>
 <blockquote>
 <p>Message 中的另一个字段 object 在同一个进程中是很实用的，但是在进程间通信的时候，在 Android 2.2 以前 object 字段不支持跨进程传输，即便是 2.2 以后，也仅仅是 <strong> 系统 </strong> 提供的实现了 Parcelable 接口的对象才能通过它来传输。这就意味着我们自定义的 Parcelable 对象是无法通过 object 字段来传输的 </p>
 </blockquote>
@@ -307,28 +318,28 @@ public MessengerActivity extends AppCompatActivity {
 <li>Build tool 27.0.2</li>
 </ul>
 <p><code>MessengerService</code> 使用设置 <code>android:process=":remote"</code> 单独一个进程后 , 会发生 <code>java.lang.ClassNotFoundException</code>, 猜测是因为找到不 <code>ClassLoader</code></p>
-<h4 id="reference_1">Reference:</h4>
+<h4 id="reference">Reference:</h4>
 <ol>
-<li>&lt;<android 开发艺术探索 >&gt;</android 开发艺术探索 ></li>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
 </ol>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android IPC机制&amp;url=./android-ipcji-zhi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android IPC机制&amp;url=/android-ipcji-zhi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./android-ipcji-zhi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/android-ipcji-zhi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./android-ipcji-zhi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/android-ipcji-zhi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/ipc.html">IPC</a><a href="./tag/android.html">Android</a><a href="./tag/jin-cheng-jian-tong-xin.html">进程间通信</a>                </aside>
+<a href="/tag/ipc.html">IPC</a><a href="/tag/android.html">Android</a><a href="/tag/jin-cheng-jian-tong-xin.html">进程间通信</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -343,24 +354,40 @@ public MessengerActivity extends AppCompatActivity {
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

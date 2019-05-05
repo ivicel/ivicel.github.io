@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Matserting Algorithms with C-7: 排序和搜索</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Matserting Algorithms with C-7: 排序和搜索        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" rel="canonical" />
+  <link href="/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" rel="canonical" />
 
     <meta name="description" content="插入排序 ( 选择排序 , 冒泡排序 Insertion Sort) 插入排序每次从数组里选出一个元素 , 和新数组里的元素一一进行对比 , 然后将新元素排到比它最大 / 小的元素的左或右边 , 时间复杂度为 O(n2) /* issort.c */ #include...">
 
@@ -75,18 +88,18 @@
 <meta property="og:title" content="Matserting Algorithms with C-7: 排序和搜索"/>
 <meta property="og:description" content="插入排序 ( 选择排序 , 冒泡排序 Insertion Sort) 插入排序每次从数组里选出一个元素 , 和新数组里的元素一一进行对比 , 然后将新元素排到比它最大 / 小的元素的左或右边 , 时间复杂度为 O(n2) /* issort.c */ #include..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html"/>
+<meta property="og:url" content="/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-04-02 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Data Structure Algorithms"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="算法"/>
 <meta property="article:tag" content="C"/>
 <meta property="article:tag" content="数据结构"/>
 <meta property="article:tag" content="排序"/>
 <meta property="article:tag" content="搜索"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -101,28 +114,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html",
   "description": "插入排序 ( 选择排序 , 冒泡排序 Insertion Sort) 插入排序每次从数组里选出一个元素 , 和新数组里的元素一一进行对比 , 然后将新元素排到比它最大 / 小的元素的左或右边 , 时间复杂度为 O(n2) /* issort.c */ #include..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -133,7 +146,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -142,21 +155,18 @@
         <h1 class="post-title">Matserting Algorithms with C-7: 排序和搜索</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sun 02 April 2017">Sun 02 April 2017</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-7: 排序和搜索">Matserting Algorithms with C-7: 排序和搜索</a><ul><li><a class="toc-href" href="#insertion-sort" title="插入排序(选择排序, 冒泡排序Insertion Sort)">插入排序(选择排序, 冒泡排序Insertion Sort)</a></li><li><a class="toc-href" href="#quick-sort" title="快速排序(Quick sort)">快速排序(Quick sort)</a></li><li><a class="toc-href" href="#_1" title="快速排序的例子: 目录列表">快速排序的例子: 目录列表</a></li><li><a class="toc-href" href="#merge-sort" title="归并排序(Merge Sort)">归并排序(Merge Sort)</a></li><li><a class="toc-href" href="#counting-sort" title="计数排序(Counting Sort)">计数排序(Counting Sort)</a></li><li><a class="toc-href" href="#binary-search" title="二分查找(Binary Search)">二分查找(Binary Search)</a></li><li><a class="toc-href" href="#_2" title="二分查找示例: 拼写检查器">二分查找示例: 拼写检查器</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -203,6 +213,7 @@ iint issort(void *data, int size, int esize, int (*compare)(const void *key1,
     free(key);
     return 0;
 }</code></pre>
+
 <h4 id="quick-sort"> 快速排序 (Quick sort)</h4>
 <ol>
 <li> 每次选择一个数据 , 然后所有的数据和这个数对比 , 小的放在左边 , 大的放在右边 </li>
@@ -298,6 +309,7 @@ int qksort(void *data, int size, int esize, int i, int k,
     }
     return 0;
 }</code></pre>
+
 <h4 id="_1"> 快速排序的例子 : 目录列表 </h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdi.h&gt;
 #include &lt;stdlib.h&gt;
@@ -355,6 +367,7 @@ int directls(const char *path, Directory **dir)
     return count;
 }
 </code></pre>
+
 <h4 id="merge-sort"> 归并排序 (Merge Sort)</h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -438,6 +451,7 @@ int mgsort(void *data, int size, int esize, int i, int k,
 
     return 0;
 }</code></pre>
+
 <pre class="highlight"><code class="language-c linenums">/* 一种排序数组的方法 , 每次会使用新的内存来保存左右值 , 写回原数组后再释放 */
 int merge_sort(void *data, int size, int esize,
     int (*compare)(const void *key1, const void *key2))
@@ -500,6 +514,7 @@ int merge_sort(void *data, int size, int esize,
     }
     return 0;
 }</code></pre>
+
 <h4 id="counting-sort"> 计数排序 (Counting Sort)</h4>
 <p> 计数排序只能用于整型或者那些可以用整型来表示的数据集合 , 通过计算一个集合中元素出现的次数来确定集合如何排列 </p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
@@ -599,6 +614,7 @@ int rxsort(int *data, int size, int p, int k)
 }
 
 </code></pre>
+
 <h4 id="binary-search"> 二分查找 (Binary Search)</h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -631,6 +647,7 @@ int bisearch(void *sorted, void *target, int size, int esize,
     }
     return -1;
 }</code></pre>
+
 <h4 id="_2"> 二分查找示例 : 拼写检查器 </h4>
 <pre class="highlight"><code class="language-c linenums">#include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
@@ -669,20 +686,20 @@ int spell(char (*dictionary)[SPELL_SIZE], int size, const char *word)
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-7: 排序和搜索&amp;url=./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-7: 排序和搜索&amp;url=/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/suan-fa.html">算法</a><a href="./tag/c.html">C</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a><a href="./tag/pai-xu.html">排序</a><a href="./tag/sou-suo.html">搜索</a>                </aside>
+<a href="/tag/suan-fa.html">算法</a><a href="/tag/c.html">C</a><a href="/tag/shu-ju-jie-gou.html">数据结构</a><a href="/tag/pai-xu.html">排序</a><a href="/tag/sou-suo.html">搜索</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -697,24 +714,40 @@ int spell(char (*dictionary)[SPELL_SIZE], int size, const char *word)
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Android内存缓存LruCache</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Android内存缓存LruCache        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./androidnei-cun-huan-cun-lrucache.html" rel="canonical" />
+  <link href="/androidnei-cun-huan-cun-lrucache.html" rel="canonical" />
 
     <meta name="description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ....">
 
@@ -72,15 +85,15 @@
 <meta property="og:title" content="Android内存缓存LruCache"/>
 <meta property="og:description" content="1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ...."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./androidnei-cun-huan-cun-lrucache.html"/>
+<meta property="og:url" content="/androidnei-cun-huan-cun-lrucache.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2018-04-04 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Android"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="缓存"/>
 <meta property="article:tag" content="lrucache"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -95,28 +108,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./androidnei-cun-huan-cun-lrucache.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/androidnei-cun-huan-cun-lrucache.html",
   "description": "1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 ...."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -127,7 +140,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -136,21 +149,18 @@
         <h1 class="post-title">Android内存缓存LruCache</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Wed 04 April 2018">Wed 04 April 2018</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Android内存缓存LruCache">Android内存缓存LruCache</a><ul><li><a class="toc-href" href="#1-lrucahe" title="1. LruCahe 的使用">1. LruCahe 的使用</a></li><li><a class="toc-href" href="#2" title="2. 源码解析">2. 源码解析</a></li><li><a class="toc-href" href="#reference" title="Reference:">Reference:</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -171,6 +181,7 @@ LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
         return value.getAllocationByteCount();
     }
 };</code></pre>
+
 <p> 在获得 <code>LruCache</code> 对象之后 , 便可以对其进行读 , 写 , 删除 </p>
 <pre class="highlight"><code class="language-java linenums">Bitmap bitmap = bitmapCache.get(key);
 // 如果缓存中已经存在 , 那么旧的会被返回 , 不存在则返回 null
@@ -206,12 +217,14 @@ public String bytesToHexString(byte[] input) {
 
     return sb.toString();
 }</code></pre>
+
 <p> 另外还可以重写 <code>entryRemove()</code> 方法 , 这个方法会在 <strong> 元素被删除 </strong>( 内存不足时 , remove 操作时 ), <strong> 元素被替换 </strong>(put 操作时 ) 被调用 , 默认的实现是一个空实现 , 并且这个调用不是 <code>synchronization</code></p>
 <pre class="highlight"><code class="language-java linenums">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
 // @param key 元素的 key
 // @param oldValue 元素的旧值
 // @param newValue 元素是被替换时的新值 , 被删除时该值为 null
 protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</code></pre>
+
 <h3 id="2">2. 源码解析 </h3>
 <p> 由于需要不断重新排序 , <code>LruCache</code> 内部使用了一个 <code>LinkHashMap</code> 数据结构来存储实际内容 . 这是一个 <strong> 双向链表 </strong> 实现的 <strong>HashMap</strong>. <code>LinkHashMap</code> 可以设置成 <strong> 基于插入顺序优先 </strong>, 或者 <strong> 基于访问顺序优先 </strong>, 把优先的元素放在链表 <strong> 末端 </strong>, 这样链表头结点总是表示 <strong> 最后插入 </strong>/<strong> 最少访问 </strong> 的元素 , 可以把头结点从链接中删除 </p>
 <pre class="highlight"><code class="language-Java linenums">public class LruCache&lt;K, V&gt; {
@@ -224,6 +237,7 @@ protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</co
         this.map = new LinkHashMap&lt;K, V&gt;(0, 0.75f, true);
     }
 }</code></pre>
+
 <p> 在每次 <code>put</code>, <code>get</code> 之后 , 都要使用 <code>trimToSize()</code> 来确保使用的内存容量是在规定的范围内 </p>
 <pre class="highlight"><code class="language-java linenums">// 传的参数是最大内存容量 , 如果大于这个数 , 就把头结点从链表中删除
 public void trimToSize(int maxSize) {
@@ -264,6 +278,7 @@ public void trimToSize(int maxSize) {
         entryRemoved(true, key, value, null);
     }
 }</code></pre>
+
 <p><code>LruCache#put()</code>, <code>LruCache#get()</code> 方法的实现 </p>
 <pre class="highlight"><code class="language-java linenums">// LruCache#put()
 public final V put(K key, V value) {
@@ -348,29 +363,30 @@ public final V get(K key) {
 protected V create(K key) {
     return null;
 }</code></pre>
+
 <h3 id="reference">Reference:</h3>
 <ol>
-<li>&lt;<android 开发艺术探索 >&gt;</android 开发艺术探索 ></li>
+<li>&lt;<Android 开发艺术探索 >&gt;</li>
 <li><a href="https://blog.csdn.net/shakespeare001/article/details/51695358">https://blog.csdn.net/shakespeare001/article/details/51695358</a></li>
 </ol>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Android内存缓存LruCache&amp;url=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Android内存缓存LruCache&amp;url=/androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/androidnei-cun-huan-cun-lrucache.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/huan-cun.html">缓存</a><a href="./tag/lrucache.html">lrucache</a>                </aside>
+<a href="/tag/huan-cun.html">缓存</a><a href="/tag/lrucache.html">lrucache</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -385,24 +401,40 @@ protected V create(K key) {
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

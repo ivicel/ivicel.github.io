@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Matserting Algorithms with C-6: 堆和优先队列</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Matserting Algorithms with C-6: 堆和优先队列        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" rel="canonical" />
+  <link href="/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" rel="canonical" />
 
     <meta name="description" content="堆 (Heap) 堆是一棵二叉树 , 子结点存储的值比父结点的值大称为最小值堆 , 子结点存储的值比父结点小称为最大值堆 堆是有序的排列 , 父子结点存在大小关系 , 兄弟结点不存在直接的关系 , 堆是快速取得最大 / 小值的数据结构 堆的实现通常存储在一个连续的数组中...">
 
@@ -74,17 +87,17 @@
 <meta property="og:title" content="Matserting Algorithms with C-6: 堆和优先队列"/>
 <meta property="og:description" content="堆 (Heap) 堆是一棵二叉树 , 子结点存储的值比父结点的值大称为最小值堆 , 子结点存储的值比父结点小称为最大值堆 堆是有序的排列 , 父子结点存在大小关系 , 兄弟结点不存在直接的关系 , 堆是快速取得最大 / 小值的数据结构 堆的实现通常存储在一个连续的数组中..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html"/>
+<meta property="og:url" content="/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-04-01 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Data Structure Algorithms"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="算法"/>
 <meta property="article:tag" content="C"/>
 <meta property="article:tag" content="集合"/>
 <meta property="article:tag" content="数据结构"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -99,28 +112,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html",
   "description": "堆 (Heap) 堆是一棵二叉树 , 子结点存储的值比父结点的值大称为最小值堆 , 子结点存储的值比父结点小称为最大值堆 堆是有序的排列 , 父子结点存在大小关系 , 兄弟结点不存在直接的关系 , 堆是快速取得最大 / 小值的数据结构 堆的实现通常存储在一个连续的数组中..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -131,7 +144,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -140,21 +153,18 @@
         <h1 class="post-title">Matserting Algorithms with C-6: 堆和优先队列</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Sat 01 April 2017">Sat 01 April 2017</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-6: 堆和优先队列">Matserting Algorithms with C-6: 堆和优先队列</a><ul><li><a class="toc-href" href="#heap" title="堆 (Heap)">堆 (Heap)</a></li><li><a class="toc-href" href="#priority-queues" title="优先队列(Priority Queues)">优先队列(Priority Queues)</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
@@ -164,9 +174,9 @@
 <p> 堆的实现通常存储在一个连续的数组中 , 从根结点为 <code>0</code> 位置 , 任意结点 <code>i</code> 其父结点的的位置是 <code>int((i-2)/2)</code>, 舍弃掉小数部分 </p>
 <p> 堆是左平衡的树 , 随着结点的增加 , 树会逐级从左至右增长 .</p>
 <p> 向堆中插入节点 </p>
-<p><img alt=" 向堆中插入结点 " src="../images/ 向堆中插入结点 .png"/></p>
+<p><img alt=" 向堆中插入结点 " src="../images/ 向堆中插入结点 .png" /></p>
 <p> 删除堆顶点 </p>
-<p><img alt=" 删除堆顶点 " src="../images/ 删除堆顶点 .png"/></p>
+<p><img alt=" 删除堆顶点 " src="../images/ 删除堆顶点 .png" /></p>
 <pre class="highlight"><code class="language-c linenums">/* heap.h */
 #ifndef HEAP_H
 #define HEAP_H
@@ -191,6 +201,7 @@ int heap_extract(Heap *heap, void **data);
 #define heap_size(heap) ((heap)-&gt;size)
 
 #endif</code></pre>
+
 <p> 堆的实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* heap.c */
 #include &lt;stdlib.h&gt;
@@ -322,6 +333,7 @@ int heap_extract(Heap *heap, void **)
     }
     return 0;
 }</code></pre>
+
 <h3 id="priority-queues"> 优先队列 (Priority Queues)</h3>
 <p> 优先队列将数据按照数据的优先级顺序排列 , 这样可以最快定位到优先级最高的元素 . 例如在服务器做负载均衡时 , 最空闲的服务器优先级最高 , 这样可以更好的处理请求服务 </p>
 <p> 优先队列的实现 </p>
@@ -342,6 +354,7 @@ typedef Heap PQueue;
 #define pqueue_size heap_size
 
 #endif </code></pre>
+
 <p> 优先队列的示例 : 包裹分拣 </p>
 <pre class="highlight"><code class="language-c linenums">/* parels.c */
 #include &lt;stdlib.h&gt;
@@ -384,20 +397,20 @@ int put_parcel(PQueue *parcels, const Parcel *parcel)
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-6: 堆和优先队列&amp;url=./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-6: 堆和优先队列&amp;url=/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/suan-fa.html">算法</a><a href="./tag/c.html">C</a><a href="./tag/ji-he.html">集合</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
+<a href="/tag/suan-fa.html">算法</a><a href="/tag/c.html">C</a><a href="/tag/ji-he.html">集合</a><a href="/tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -412,24 +425,40 @@ int put_parcel(PQueue *parcels, const Parcel *parcel)
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>

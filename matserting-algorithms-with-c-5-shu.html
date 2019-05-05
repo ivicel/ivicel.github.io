@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-
-<head>
-    <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-  <title>Matserting Algorithms with C-5: 树</title>
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="origin" />
-  <meta name="generator" content="Pelican" />
-  <link href="./" rel="canonical" />
-
-  <!-- Feed -->
-
-  <link href="./theme/css/style.css" type="text/css" rel="stylesheet" />
-
-  <!-- Code highlight color scheme -->
-      <link href="./theme/css/code_blocks/github.css" rel="stylesheet">
-
-    <!-- CSS specified by the user -->
+        <title>
+Matserting Algorithms with C-5: 树        </title>
 
 
-    <link href="./assets/css/prism.css" type="text/css" rel="stylesheet" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 
-    <link href="./assets/css/base.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/base-control.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/github.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-
-
-    <link href="./assets/css/ivicel.css" type="text/css" rel="stylesheet" />
-
-  <!-- Custom fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <link href="./matserting-algorithms-with-c-5-shu.html" rel="canonical" />
+  <link href="/matserting-algorithms-with-c-5-shu.html" rel="canonical" />
 
     <meta name="description" content="二叉树 (Binary tree) 先序遍历 : 根结点 -> 左子结点 -> 右子结点 中序遍历 : 左子结点 -> 根结点 -> 右子结点 后序遍历 : 左子结点 -> 右子结点 -> 根结占 层级遍历 : 树根结点 -> 下层左结点 -> 该层右结点 (...">
 
@@ -74,17 +87,17 @@
 <meta property="og:title" content="Matserting Algorithms with C-5: 树"/>
 <meta property="og:description" content="二叉树 (Binary tree) 先序遍历 : 根结点 -> 左子结点 -> 右子结点 中序遍历 : 左子结点 -> 根结点 -> 右子结点 后序遍历 : 左子结点 -> 右子结点 -> 根结占 层级遍历 : 树根结点 -> 下层左结点 -> 该层右结点 (..."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./matserting-algorithms-with-c-5-shu.html"/>
+<meta property="og:url" content="/matserting-algorithms-with-c-5-shu.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-03-27 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/ivicel.html">
-<meta property="article:section" content="Data Structure Algorithms"/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
 <meta property="article:tag" content="算法"/>
 <meta property="article:tag" content="C"/>
 <meta property="article:tag" content="集合"/>
 <meta property="article:tag" content="数据结构"/>
-<meta property="og:image" content="./theme/images/post-bg.jpg">
+<meta property="og:image" content="/theme/images/post-bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -99,28 +112,28 @@
   "author": {
     "@type": "Person",
     "name": "ivicel",
-    "url": "./author/ivicel.html"
+    "url": "/author/ivicel.html"
   },
-  "image": "./theme/images/post-bg.jpg",
-  "url": "./matserting-algorithms-with-c-5-shu.html",
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/matserting-algorithms-with-c-5-shu.html",
   "description": "二叉树 (Binary tree) 先序遍历 : 根结点 -> 左子结点 -> 右子结点 中序遍历 : 左子结点 -> 根结点 -> 右子结点 后序遍历 : 左子结点 -> 右子结点 -> 根结占 层级遍历 : 树根结点 -> 下层左结点 -> 该层右结点 (..."
 }
-</script>
-</head>
-<!-- TODO : Body class -->
-<body class="home-template">
-
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
 <nav id="menu">
   <a class="close-button">Close</a>
   <div class="nav-wrapper">
     <p class="nav-label">Menu</p>
     <ul>
 
+              <li role="presentation"><a href="/pages/about.html">About</a></li>
+              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
+              <li role="presentation"><a href="/pages/category.html">Category</a></li>
 
     </ul>
   </div>
-</nav>
-    <!-- Progressbar -->
+</nav>     <!-- Progressbar -->
     <div class="progress-container">
         <span class="progress-bar"></span>
     </div>
@@ -131,7 +144,7 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="./" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
@@ -140,31 +153,28 @@
         <h1 class="post-title">Matserting Algorithms with C-5: 树</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="./author/ivicel.html">Ivicel</a>
+                <a href="/author/ivicel.html">Ivicel</a>
             | <time datetime="Mon 27 March 2017">Mon 27 March 2017</time>
         </span>
         <!-- TODO : Modified check -->
       </div>
     </header>
 
-  <section id="wrapper">
-    <a class="hidden-close"></a>
+        <section id="wrapper">
+            <a class="hidden-close"></a>
 
     <!-- Post content -->
     <main class="content" role="main">
-<div class="col-lg-3 hidden-xs hidden-sm">
-    <div id="toc"><ul><li><a class="toc-href" href="#" title="Matserting Algorithms with C-5: 树">Matserting Algorithms with C-5: 树</a><ul><li><a class="toc-href" href="#binary-tree" title="二叉树(Binary tree)">二叉树(Binary tree)</a></li><li><a class="toc-href" href="#_1" title="二叉搜索树">二叉搜索树</a></li></ul></li></ul></div>
-</div>
         <article class="post">
         <div class="inner">
             <section class="post-content">
                 <h3 id="binary-tree"> 二叉树 (Binary tree)</h3>
-<p><img alt=" 二叉树 " src="../images/ 二叉树 .png"/></p>
+<p><img alt=" 二叉树 " src="../images/ 二叉树 .png" /></p>
 <p><strong> 先序遍历 </strong>: 根结点 -&gt; 左子结点 -&gt; 右子结点 </p>
 <p><strong> 中序遍历 </strong>: 左子结点 -&gt; 根结点 -&gt; 右子结点 </p>
 <p><strong> 后序遍历 </strong>: 左子结点 -&gt; 右子结点 -&gt; 根结占 </p>
 <p><strong> 层级遍历 </strong>: 树根结点 -&gt; 下层左结点 -&gt; 该层右结点 ( 广度优先方法 )</p>
-<p><img alt=" 树的遍历方法 " src="../images/ 树的遍历方法 .png"/></p>
+<p><img alt=" 树的遍历方法 " src="../images/ 树的遍历方法 .png" /></p>
 <blockquote>
 <p> 树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的 </p>
 </blockquote>
@@ -215,6 +225,7 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data);
 #define bitree_right(node) ((ndoe)-&gt;right)
 
 #endif</code></pre>
+
 <p> 二叉树的实现 </p>
 <pre class="highlight"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
@@ -360,6 +371,7 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
     right-&gt;size = 0;
     return 0;
 }</code></pre>
+
 <p> 遍历二叉树的实现 </p>
 <pre class="highlight"><code class="language-c linenums">#include "list.h"
 #include "bitree.h"
@@ -435,6 +447,7 @@ int postorder(const BiTreeNode *node, List *list)
     }
     return 0;
 }</code></pre>
+
 <h3 id="_1"> 二叉搜索树 </h3>
 <p> 二叉搜索树中 , 左结点总比根小 , 右结点总比根大 </p>
 <p> 在二叉搜索树中查询一个结点 , 从根结点开始 , 当遇到一个比目标结点值大的结点时 , 顺着该结点的左结点查找 ; 如果遇到的结点小于目标结点时 , 则顺着该结点的右子树查找 , 一直查到叶子结点 </p>
@@ -446,20 +459,20 @@ int postorder(const BiTreeNode *node, List *list)
 <li>-1 表示右倾斜 (rigth-heavy)</li>
 <li>0 表示平衡 (left-heavy)</li>
 </ul>
-<p><img alt="AVL 树 " src="../images/AVL 树 .png"/></p>
-<p> 向 AVL 树中插入一个结点时 , 必须计算因为执行了插入操作对平衡因子带来的改 ; 其次 , 如果任何平衡因子为变为了 &plusmn;2, 就必须从这个结点开始往下重新平衡这棵树 , 重新平衡的过程称为旋转 </p>
+<p><img alt="AVL 树 " src="../images/AVL 树 .png" /></p>
+<p> 向 AVL 树中插入一个结点时 , 必须计算因为执行了插入操作对平衡因子带来的改 ; 其次 , 如果任何平衡因子为变为了 ±2, 就必须从这个结点开始往下重新平衡这棵树 , 重新平衡的过程称为旋转 </p>
 <p><strong>LL(left-left) 旋转 </strong></p>
 <p> 当 x 位于 A 的左子树下的左子树上 , 执行 LL 旋转 . 设 left 为 A 的左子树 , 将 A 的左指针指向 left 的右结点 , left 的右指针指向 A, 将原来指向 A 的指针改为指向 left, 旋转后 , A 和 left 的平衡因子都改为 0</p>
-<p><img alt="LL 旋转 " src="../images/LL 旋转 .png"/></p>
+<p><img alt="LL 旋转 " src="../images/LL 旋转 .png" /></p>
 <p><strong>LR(left-right) 旋转 </strong></p>
 <p> 当 x 位于 A 的左子树下的右子树上时 , 执行 LR 旋转 . 设 left 是 A 的左子结点 , A 的子孙结点 grandchild 为 left 的右子结点 . 要执行 LR 旋转 , 将 left 的右子结点指向 grandchild 的左子结点 , grandchild 的左子结点指向 left, A 的左子结点指向 grandchild 的右子结点 , 再将 grandchild 的右子结点指向 A, 最后将原来指向 A 的指针指向 grandchild</p>
-<p><img alt="LR 旋转 " src="../images/LR 旋转 .png"/></p>
+<p><img alt="LR 旋转 " src="../images/LR 旋转 .png" /></p>
 <p> 执行 LR 旋转后 , 调整结点的平衡因子取决于旋转前 grandchild 结点的原平衡因子值 </p>
 <p> 下方的图展示了 3 种需要考虑到的情况 </p>
 <p> 如果 grandchild 结点的原始平衡因子为 +1, 就将 A 的平衡因子设置为 -1, 将 left 结点的平衡因子设置为 0</p>
 <p> 如果 grandchild 结点的原始平衡因子为 0, 就将 A 和 left 结点的平衡因为都设置为 0</p>
 <p> 如果 grandchild 结点的原始平衡因子为 -1, 就将 A 的平衡因子设置为 0, 将 left 的平衡因为设置为 +1</p>
-<p><img alt="LR 旋转后更新 " src="../images/LR 旋转后更新 .png"/></p>
+<p><img alt="LR 旋转后更新 " src="../images/LR 旋转后更新 .png" /></p>
 <p><strong>RR(right-right) 旋转 </strong></p>
 <p> 当 x 位于 A 的右子树下的右子树上时 , 执行 RL 旋转 . RR 旋转与 LL 旋转是对称关系 . 设 A 的右结点为 right, 要执行 RR 旋转 , 将 A 的右指针指向 right 的左子结点 , right 的左指针指向 A, 原来指向 A 的指针修改为指向 right</p>
 <p><strong>RL(right-left) 旋转 </strong></p>
@@ -499,6 +512,7 @@ int bistree_lookup(BisTree *tree, void **data);
 #define bistree_size(tree) ((tree)-&gt;size)
 
 #endif</code></pre>
+
 <p> 二叉搜索树实现 </p>
 <pre class="highlight"><code class="language-c linenums">/* bistree.c */
 #include &lt;stdlib.h&gt;
@@ -865,20 +879,20 @@ int bistree_lookup(BisTree *tree, void **data)
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-5: 树&amp;url=./matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-5: 树&amp;url=/matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=./matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=./matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/matserting-algorithms-with-c-5-shu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
                 <aside class="post-tags">
-<a href="./tag/suan-fa.html">算法</a><a href="./tag/c.html">C</a><a href="./tag/ji-he.html">集合</a><a href="./tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
+<a href="/tag/suan-fa.html">算法</a><a href="/tag/c.html">C</a><a href="/tag/ji-he.html">集合</a><a href="/tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
 
                 <div class="clear"></div>
 
@@ -893,24 +907,40 @@ int bistree_lookup(BisTree *tree, void **data)
             </div>
         </article>
     </main>
-      <!-- TODO : Body class -->
-    <div id="body-class" style="display: none;" class=""></div>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
 
-    <footer id="footer">
-      <div class="inner">
-        <section class="credits">
-
-
-          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
-          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
         </section>
-      </div>
-    </footer>
-  </section>
 
-  <script type="text/javascript" src="./theme/js/script.js"></script>
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
 
-    <!-- Script specified by the user -->
-    <script type="text/javascript"  src="./assets/js/prism.js"></script>
-</body>
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+       </body>
 </html>
