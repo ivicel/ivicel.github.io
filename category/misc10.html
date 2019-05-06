@@ -1,64 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="google-site-verification"
+            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+  
         <title>
-Ambertime - Articles in the misc category        </title>
+Ambertime - misc category        </title>
 
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="/assets/pwa/manifest.json" />
 
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="referrer" content="origin" />
-        <meta name="generator" content="Pelican" />
-        <link
-            rel="icon"
-            type="image/png"
-            href="/assets/images/favicon.png"
-        />
-        <link href="/" rel="canonical" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
 
-        <!-- Feed -->
-         
-        <link
-            href="/theme/css/style.css"
-            type="text/css"
-            rel="stylesheet"
-        />
+        <!-- Canonical URL -->
+        <link rel="canonical" href="" />
 
-        <!-- Code highlight color scheme -->
-        <link
-            href="/theme/css/code_blocks/github.css"
-            rel="stylesheet"
-        />
-         <!-- CSS specified by the user -->
-  
-        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
- 
-        <!-- Custom fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
-            rel="stylesheet"
-            type="text/css"
-        />
-        <link
-            href="https://fonts.googleapis.com/css?family=Lato"
-            rel="stylesheet"
-            type="text/css"
-        />
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
+        <link rel="stylesheet" href="/assets/css/ivicel.css" />
+        <!-- Custom Fonts -->
+        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+        <!-- Hux change font-awesome CDN to qiniu -->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,197 +41,448 @@ Ambertime - Articles in the misc category        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <!-- ga & ba script hoook -->
+        <script></script>
     </head>
-    <!-- TODO : Body class -->
-    <body class="home-template">
-<nav id="menu">
-  <a class="close-button">Close</a>
-  <div class="nav-wrapper">
-    <p class="nav-label">Menu</p>
-    <ul>
 
-              <li role="presentation"><a href="/pages/about/">About</a></li>
-              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
-              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
-    </ul>
-  </div>
-</nav>     <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" >
-      <div class="inner">
-        <nav id="navigation">
-            <span id="home-button" class="nav-button">
-                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
-            </span>
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
-          </span>
-        </nav>
-        <h1 class="post-title">Category misc</h1>
-        <span class="blog-description">Posts: 57</span>
-      </div>
-    </header>
+    <!-- hack iOS CSS :active style -->
+    <body ontouchstart="">
+<!-- Navigation -->
+<!-- <nav class="navbar navbar-default navbar-custom navbar-fixed-top invert"> -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ambertime</a>
+        </div>
 
-        <section id="wrapper">
-            <a class="hidden-close"></a>
-
-<div id="index" class="container">
-  <main class="content" role="main">
-    <div class="extra-pagination">
-<nav class="pagination" role="pagination">
-  <div class="inner">
-    <a class="pagination-next" href="/category/misc9.html"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
-    <span class="pagination-info">Page 10 / 12</span>
-    <a class="pagination-prev" href="/category/misc11.html"><span class="pagination-label">Older Posts</span> <i class="ic ic-arrow-right"></i></a>
-    <div class="clear"></div>
-  </div>
-</nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="pages/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="pages/archives/">Archives</a>
+                    </li>
+                    <li>
+                        <a href="pages/category/">Category</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2017/04/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-7: 排序和搜索">Matserting Algorithms with C-7: 排序和搜索</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sun 02 April 2017">Sun 02 April 2017</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include <stdlib.h> #include <string.h> /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2017/04/matserting-algorithms-with-c-7-tu.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-7: 图">Matserting Algorithms with C-7: 图</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sun 02 April 2017">Sun 02 April 2017</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)} 无向图: V={1, 2, 3 …
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2017/04/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-6: 堆和优先队列">Matserting Algorithms with C-6: 堆和优先队列</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sat 01 April 2017">Sat 01 April 2017</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        堆 (Heap) 堆是一棵二叉树, 子结点存储的值比父结点的值大称为最小值堆, 子结点存储的值比父结点小称为最大值堆 堆是有序的排列, 父子结点存在大小关系, 兄弟结点不存在直接的关系, 堆是快速取得最大/小值的数据结构 堆的实现通常存储在一个连续的数组中, 从根结点为0位置, 任意结点i其父结点的的位置是int((i-2)/2), 舍弃掉小数部分 堆是左平衡的树, 随着结点的增加, 树会逐级从左至右增长. 向堆中插入节点 删除堆顶点 /* heap.h */ #ifndef...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2017/03/matserting-algorithms-with-c-5-shu.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-5: 树">Matserting Algorithms with C-5: 树</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Mon 27 March 2017">Mon 27 March 2017</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        二叉树(Binary tree) 先序遍历: 根结点->左子结点->右子结点 中序遍历: 左子结点->根结点->右子结点 后序遍历: 左子结点->右子结点->根结占 层级遍历: 树根结点->下层左结点->该层右结点 (广度优先方法) 树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的 二叉的接口定义 /* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */ /* bitree.h */ #ifndef BITREE_H...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2017/03/mastering-algroithms-with-c-4-ha-xi-biao.html" rel="bookmark" title="Permalink to Mastering Algroithms with C-4: 哈希表">Mastering Algroithms with C-4: 哈希表</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Fri 24 March 2017">Fri 24 March 2017</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        哈希表通过一种最有效的检索方法--散列来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的. 所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突 链式哈希表(Chained Hash Table) 链式哈希表从根本上来说是由一组链表构成,...
-                    </p>
-                </section>
-            </div>
-        </article>
-
-<nav class="pagination" role="pagination">
-  <div class="inner">
-    <a class="pagination-next" href="/category/misc9.html"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
-    <span class="pagination-info">Page 10 / 12</span>
-    <a class="pagination-prev" href="/category/misc11.html"><span class="pagination-label">Older Posts</span> <i class="ic ic-arrow-right"></i></a>
-    <div class="clear"></div>
-  </div>
+    <!-- /.container -->
 </nav>
-  </main>
-</div>
-            <!-- TODO : Body class -->
-            <div
-                id="body-class"
-                style="display: none;"
-                class=""
-            ></div>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
 
-            <footer id="footer">
-                <div class="inner">
-                    <section class="credits">
-      
-                        <span class="credits-theme">Theme
-                        <a
-                            href="https://github.com/arulrajnet/attila"
-                            rel="nofollow"
-                            >Attila</a
-                        ></span>
-                        <span class="credits-software">Published with
-                        <a
-                            href="https://github.com/getpelican/pelican"
-                            rel="nofollow"
-                            >Pelican</a
-                        ></span>
-                    </section>
-                </div>
-            </footer>
-        </section>
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
 
-        <script
-            type="text/javascript"
-            src="/theme/js/script.js"
-        ></script>
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
 
-        <!-- Script specified by the user -->
-           <script type="text/javascript" src="/assets/js/prism.js"></script>
-      <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script> 
+        
+<!-- Page Header -->
+
+<header class="intro-header" style="background-image: url('/assets/images/header.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>Ambertime</h1>
+          <span class="subheading">ivicel's thoughts and writings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
+            col-xs-12 postlist-container">
+    <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-7: 排序和搜索
+            </h2>
+            <div class="post-content-preview">
+                    插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include <stdlib.h> #include <string.h> /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void *data, int size, int esize, int (*compare)(const void...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 02 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-7-tu.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-7: 图
+            </h2>
+            <div class="post-content-preview">
+                    图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)} 无向图: V={1, 2, 3 …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 02 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-6: 堆和优先队列
+            </h2>
+            <div class="post-content-preview">
+                    堆 (Heap) 堆是一棵二叉树, 子结点存储的值比父结点的值大称为最小值堆, 子结点存储的值比父结点小称为最大值堆 堆是有序的排列, 父子结点存在大小关系, 兄弟结点不存在直接的关系, 堆是快速取得最大/小值的数据结构 堆的实现通常存储在一个连续的数组中, 从根结点为0位置, 任意结点i其父结点的的位置是int((i-2)/2), 舍弃掉小数部分 堆是左平衡的树, 随着结点的增加, 树会逐级从左至右增长. 向堆中插入节点 删除堆顶点 /* heap.h */ #ifndef HEAP_H #define HEAP_H /* 堆的数据结构 */ typedef struct Heap_...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sat 01 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/03/matserting-algorithms-with-c-5-shu.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-5: 树
+            </h2>
+            <div class="post-content-preview">
+                    二叉树(Binary tree) 先序遍历: 根结点->左子结点->右子结点 中序遍历: 左子结点->根结点->右子结点 后序遍历: 左子结点->右子结点->根结占 层级遍历: 树根结点->下层左结点->该层右结点 (广度优先方法) 树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的 二叉的接口定义 /* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */ /* bitree.h */ #ifndef BITREE_H #define BITREE_H #include <stdlib.h> /* 节点结构 */...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Mon 27 March 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/03/mastering-algroithms-with-c-4-ha-xi-biao.html">
+            <h2 class="post-title">
+                Mastering Algroithms with C-4: 哈希表
+            </h2>
+            <div class="post-content-preview">
+                    哈希表通过一种最有效的检索方法--散列来查找元素, 一个哈希表通过一个哈希函数, 在所有可能的键与槽位之间建立一张映射表. 理想的状态就是把不同键生成的哈希值互不相同, 但这会使得哈希表里的条目变得巨大, 而且条目中可能绝大多数是无用的. 所以, 通常哈希函数把一些不同的键映射到表中相同的槽位上, 这就会产生冲突, 一个好的哈希函数要最大限度的地减少冲突 链式哈希表(Chained Hash Table) 链式哈希表从根本上来说是由一组链表构成, 每个链表可以看成一个"桶(bucket)" 链式哈希表在插入元素时, 将其键传入一个哈希函数h(k),...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Fri 24 March 2017
+        </p>
+    </div>
+    <hr>
+        </div>
+        <!-- Sidebar Container -->
+        <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12
+            sidebar-container">
+            <!-- Featured Tags -->
+<section>
+    <hr class="hidden-sm hidden-xs">
+
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+            <a href="/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
+                title="数据结构" rel="数据结构">数据结构</a>
+            <a href="/tag/%E7%AE%97%E6%B3%95"
+                title="算法" rel="算法">算法</a>
+            <a href="/tag/python"
+                title="python" rel="python">python</a>
+            <a href="/tag/android"
+                title="android" rel="android">android</a>
+            <a href="/tag/C"
+                title="C" rel="C">C</a>
+            <a href="/tag/flask"
+                title="flask" rel="flask">flask</a>
+            <a href="/tag/%E9%9B%86%E5%90%88"
+                title="集合" rel="集合">集合</a>
+            <a href="/tag/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB"
+                title="源代码阅读" rel="源代码阅读">源代码阅读</a>
+            <a href="/tag/RTFSC"
+                title="RTFSC" rel="RTFSC">RTFSC</a>
+            <a href="/tag/spring"
+                title="spring" rel="spring">spring</a>
+            <a href="/tag/steam"
+                title="steam" rel="steam">steam</a>
+            <a href="/tag/%E5%9B%BE"
+                title="图" rel="图">图</a>
+            <a href="/tag/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
+                title="python数据结构" rel="python数据结构">python数据结构</a>
+            <a href="/tag/interpolator"
+                title="interpolator" rel="interpolator">interpolator</a>
+            <a href="/tag/view"
+                title="view" rel="view">view</a>
+            <a href="/tag/%E6%8E%92%E5%BA%8F"
+                title="排序" rel="排序">排序</a>
+            <a href="/tag/attrs"
+                title="attrs" rel="attrs">attrs</a>
+            <a href="/tag/style"
+                title="style" rel="style">style</a>
+            <a href="/tag/%E7%BA%BF%E7%A8%8B"
+                title="线程" rel="线程">线程</a>
+            <a href="/tag/%E7%BA%BF%E7%A8%8B%E6%B1%A0"
+                title="线程池" rel="线程池">线程池</a>
+            <a href="/tag/AsyncTask"
+                title="AsyncTask" rel="AsyncTask">AsyncTask</a>
+            <a href="/tag/%E7%BC%93%E5%AD%98"
+                title="缓存" rel="缓存">缓存</a>
+            <a href="/tag/aidl"
+                title="aidl" rel="aidl">aidl</a>
+            <a href="/tag/IPC"
+                title="IPC" rel="IPC">IPC</a>
+            <a href="/tag/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"
+                title="进程间通信" rel="进程间通信">进程间通信</a>
+            <a href="/tag/java"
+                title="java" rel="java">java</a>
+            <a href="/tag/mysql"
+                title="mysql" rel="mysql">mysql</a>
+            <a href="/tag/%E4%BA%8B%E5%8A%A1"
+                title="事务" rel="事务">事务</a>
+            <a href="/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
+                title="事务隔离" rel="事务隔离">事务隔离</a>
+            <a href="/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
+                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
+    </div>
+</section>
+            <!-- Short About -->
+<section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about">ABOUT ME</a></h5>
+  <div class="short-about">
+    <img src="/assets/images/avatar.png" />
+
+    <p>只要偶尔深夜想起有你, 会有一丝微微的酒意</p>
+    <!-- SNS Link -->
+<ul class="list-inline">
+  <li>
+    <a target="_blank" href="https://github.com/ivicel">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+</ul>
+  </div>
+</section>
+            <!-- Friends Blog -->
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  <li><a href="http://getpelican.com/">Pelican</a></li>
+  <li><a href="http://python.org/">Python.org</a></li>
+  <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+  <li><a href="#">You can modify those links in your config file</a></li>
+</ul>
+        </div>
+    </div>
+<!-- Pager -->
+<ul class="pager">
+    <li class="previous">
+        <a href="/category/misc9.html">&larr; Newer Posts</a>
+    </li>
+
+    <li class="next">
+        <a href="/category/misc11.html">Older Posts &rarr;</a>
+    </li>
+</ul></div>
+
+ 
+        
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Ambertime 2019                    <br>
+                    Powered by <a href="">Ambertime</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer> 
+        
+    
+        <!-- jQuery -->
+        <script src="/theme/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+        <script src="/theme/js/bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/hux-blog.min.js"></script>
+
+        <!-- Service Worker -->
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document,
+                    t = "script",
+                    o = d.createElement(t),
+                    s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener(
+                        "load",
+                        function(e) {
+                            c(null, e);
+                        },
+                        false
+                    );
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+        <!--
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
     </script>
-     </body>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+        <!--fastClick.js -->
+        <script>
+            async(
+                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
+                function() {
+                    var $nav = document.querySelector("nav");
+                    if ($nav) FastClick.attach($nav);
+                }
+            );
+        </script>
+
+        <!-- Google Analytics -->
+        <script>
+            // dynamic User by Hux
+            var _gaId = "UA-113622715-2";
+            var _gaDomain = "";
+
+            // Originial
+            (function(i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(
+                window,
+                document,
+                "script",
+                "//www.google-analytics.com/analytics.js",
+                "ga"
+            );
+
+            ga("create", _gaId, _gaDomain);
+            ga("send", "pageview");
+        </script>
+
+        <!-- Add support for Mathjax by Voleking-->
+    <!-- If you want to see formulars well in post preview, Maybe you should add this.-->
+    <!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+        equationNumbers: {
+            autoNumber: "AMS"
+        }
+        },
+        tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+        }
+    });
+    </script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
 </html>

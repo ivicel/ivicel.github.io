@@ -1,64 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-            <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="google-site-verification"
+            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+  
         <title>
 Ambertime        </title>
 
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="/assets/pwa/manifest.json" />
 
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="referrer" content="origin" />
-        <meta name="generator" content="Pelican" />
-        <link
-            rel="icon"
-            type="image/png"
-            href="/assets/images/favicon.png"
-        />
-        <link href="/" rel="canonical" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
 
-        <!-- Feed -->
-         
-        <link
-            href="/theme/css/style.css"
-            type="text/css"
-            rel="stylesheet"
-        />
+        <!-- Canonical URL -->
+        <link rel="canonical" href="" />
 
-        <!-- Code highlight color scheme -->
-        <link
-            href="/theme/css/code_blocks/github.css"
-            rel="stylesheet"
-        />
-         <!-- CSS specified by the user -->
-  
-        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
- 
-        <!-- Custom fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
-            rel="stylesheet"
-            type="text/css"
-        />
-        <link
-            href="https://fonts.googleapis.com/css?family=Lato"
-            rel="stylesheet"
-            type="text/css"
-        />
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
+        <link rel="stylesheet" href="/assets/css/ivicel.css" />
+        <!-- Custom Fonts -->
+        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+        <!-- Hux change font-awesome CDN to qiniu -->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,220 +42,447 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <!-- ga & ba script hoook -->
+        <script></script>
+    </head>
 
 
+    <!-- hack iOS CSS :active style -->
+    <body ontouchstart="">
+<!-- Navigation -->
+<!-- <nav class="navbar navbar-default navbar-custom navbar-fixed-top invert"> -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ambertime</a>
+        </div>
 
-<!-- Open Graph -->
-<meta property="og:site_name" content="Ambertime"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Ambertime"/>
-<meta property="og:description" content="Make memory in past times"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/"/>
-<meta property="og:image" content="/theme/images/home-bg.jpg">
-
-<!-- Twitter Card -->
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Website",
-  "name": " Ambertime ",
-  "url" : "/",
-  "image": "/theme/images/home-bg.jpg",
-  "description": "Make memory in past times"
-}
-</script>    </head>
-    <!-- TODO : Body class -->
-    <body class="home-template">
-<nav id="menu">
-  <a class="close-button">Close</a>
-  <div class="nav-wrapper">
-    <p class="nav-label">Menu</p>
-    <ul>
-
-              <li role="presentation"><a href="/pages/about/">About</a></li>
-              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
-              <li role="presentation"><a href="/pages/category/">Category</a></li>
-
-    </ul>
-  </div>
-</nav>     <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" class="has-cover">
-      <div class="inner">
-        <nav id="navigation">
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
-          </span>
-        </nav>
-        <h1 class="blog-name"><a href="/">Ambertime</a></h1>
-        <span class="blog-description">Make memory in past times</span>
-
-          <div class="blog-cover cover" style="background-image: url('/assets/images/header.jpg')">
-      </div>
-    </header>
-
-
-        <section id="wrapper">
-            <a class="hidden-close"></a>
-
-<div id="index" class="container">
-  <main class="content" role="main">
-    <div class="extra-pagination">
-<nav class="pagination" role="pagination">
-  <div class="inner">
-    <a class="pagination-next" href="/index4.html"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
-    <span class="pagination-info">Page 5 / 12</span>
-    <a class="pagination-prev" href="/index6.html"><span class="pagination-label">Older Posts</span> <i class="ic ic-arrow-right"></i></a>
-    <div class="clear"></div>
-  </div>
-</nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="pages/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="pages/archives/">Archives</a>
+                    </li>
+                    <li>
+                        <a href="pages/category/">Category</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2018/04/a-ha-suan-fa-1.html" rel="bookmark" title="Permalink to 啊哈算法1">啊哈算法1</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sun 22 April 2018">Sun 22 April 2018</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        1. 简单桶排序 对于要排序的数据, 其有范围在 n <= k <= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据. 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个. 对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2018/04/android-dai-ma-values-mu-lu-xia-shuo-ming.html" rel="bookmark" title="Permalink to Android 代码 values 目录下说明">Android 代码 values 目录下说明</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sun 22 April 2018">Sun 22 April 2018</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        对于 Android 源代码目录下 values/* 文件, 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值, 这样的便可以通过 R.[type].[name] 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 values/* 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型: 1. style 主题文件 主题文件一般有两种, 一个是...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2018/04/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" rel="bookmark" title="Permalink to Android View类的构造方法及View的主题属性优先级相关">Android View类的构造方法及View的主题属性优先级相关</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Sun 22 April 2018">Sun 22 April 2018</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下: layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr 构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定) 定义/使用的主题里的值 在 layout 布局文件里对 view 直接赋值...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2018/04/asynctaskji-zhi-fen-xi.html" rel="bookmark" title="Permalink to AsyncTask机制分析">AsyncTask机制分析</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Tue 10 April 2018">Tue 10 April 2018</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute() onProgressUpdate(Progress...progresses) onPostExecute(Result result) onCancel() 都是在主线程中执行. AsyncTask 另外可以设置三个类型参数,...
-                    </p>
-                </section>
-            </div>
-        </article>
-        <article class="post">
-        <div class="inner">
-            <header class="post-header">
-                <h2 class="post-title"><a href="/2018/04/java-xian-cheng-ji-xian-cheng-chi.html" rel="bookmark" title="Permalink to Java 线程及线程池">Java 线程及线程池</a>
-                </h2>
-                <span class="post-meta">
-                        <a href="/author/ivicel.html">Ivicel</a>
-                     | <time datetime="Tue 10 April 2018">Tue 10 April 2018</time>
-                </span>
-                <div class="clear"></div>
-            </header>
-                <section class="post-excerpt">
-                    <p>
-                        1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors...
-                    </p>
-                </section>
-            </div>
-        </article>
-
-<nav class="pagination" role="pagination">
-  <div class="inner">
-    <a class="pagination-next" href="/index4.html"><i class="ic ic-arrow-left"></i> <span class="pagination-label">Newer Posts</span></a>
-    <span class="pagination-info">Page 5 / 12</span>
-    <a class="pagination-prev" href="/index6.html"><span class="pagination-label">Older Posts</span> <i class="ic ic-arrow-right"></i></a>
-    <div class="clear"></div>
-  </div>
+    <!-- /.container -->
 </nav>
-  </main>
-</div>
-            <!-- TODO : Body class -->
-            <div
-                id="body-class"
-                style="display: none;"
-                class=""
-            ></div>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
 
-            <footer id="footer">
-                <div class="inner">
-                    <section class="credits">
-      
-                        <span class="credits-theme">Theme
-                        <a
-                            href="https://github.com/arulrajnet/attila"
-                            rel="nofollow"
-                            >Attila</a
-                        ></span>
-                        <span class="credits-software">Published with
-                        <a
-                            href="https://github.com/getpelican/pelican"
-                            rel="nofollow"
-                            >Pelican</a
-                        ></span>
-                    </section>
-                </div>
-            </footer>
-        </section>
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
 
-        <script
-            type="text/javascript"
-            src="/theme/js/script.js"
-        ></script>
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
 
-        <!-- Script specified by the user -->
-           <script type="text/javascript" src="/assets/js/prism.js"></script>
-      <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script> 
+        
+<!-- Page Header -->
+
+<header class="intro-header" style="background-image: url('/assets/images/header.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>Ambertime</h1>
+          <span class="subheading">ivicel's thoughts and writings</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
+            col-xs-12 postlist-container">
+    <div class="post-preview">
+        <a href="2018/04/a-ha-suan-fa-1.html">
+            <h2 class="post-title">
+                啊哈算法1
+            </h2>
+            <div class="post-content-preview">
+                    1. 简单桶排序 对于要排序的数据, 其有范围在 n <= k <= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据. 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个. 对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100 个桶个分别有几个数据可得出排序后的序列. 对于 N …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 22 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/android-dai-ma-values-mu-lu-xia-shuo-ming.html">
+            <h2 class="post-title">
+                Android 代码 values 目录下说明
+            </h2>
+            <div class="post-content-preview">
+                    对于 Android 源代码目录下 values/* 文件, 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值, 这样的便可以通过 R.[type].[name] 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 values/* 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型: 1. style 主题文件 主题文件一般有两种, 一个是 style, 一个是属性 attr style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 22 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html">
+            <h2 class="post-title">
+                Android View类的构造方法及View的主题属性优先级相关
+            </h2>
+            <div class="post-content-preview">
+                    1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下: layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr 构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定) 定义/使用的主题里的值 在 layout 布局文件里对 view 直接赋值 <TextView android:textColor="#332211"/> 自定义一个 style, 然后在...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 22 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/asynctaskji-zhi-fen-xi.html">
+            <h2 class="post-title">
+                AsyncTask机制分析
+            </h2>
+            <div class="post-content-preview">
+                    1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute() onProgressUpdate(Progress...progresses) onPostExecute(Result result) onCancel() 都是在主线程中执行. AsyncTask 另外可以设置三个类型参数, AsyncTask<Params, Progress, Result> . 分别指传入...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 10 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/java-xian-cheng-ji-xian-cheng-chi.html">
+            <h2 class="post-title">
+                Java 线程及线程池
+            </h2>
+            <div class="post-content-preview">
+                    1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 10 April 2018
+        </p>
+    </div>
+    <hr>
+        </div>
+        <!-- Sidebar Container -->
+        <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12
+            sidebar-container">
+            <!-- Featured Tags -->
+<section>
+    <hr class="hidden-sm hidden-xs">
+
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+            <a href="/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
+                title="数据结构" rel="数据结构">数据结构</a>
+            <a href="/tag/%E7%AE%97%E6%B3%95"
+                title="算法" rel="算法">算法</a>
+            <a href="/tag/python"
+                title="python" rel="python">python</a>
+            <a href="/tag/android"
+                title="android" rel="android">android</a>
+            <a href="/tag/C"
+                title="C" rel="C">C</a>
+            <a href="/tag/flask"
+                title="flask" rel="flask">flask</a>
+            <a href="/tag/%E9%9B%86%E5%90%88"
+                title="集合" rel="集合">集合</a>
+            <a href="/tag/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB"
+                title="源代码阅读" rel="源代码阅读">源代码阅读</a>
+            <a href="/tag/RTFSC"
+                title="RTFSC" rel="RTFSC">RTFSC</a>
+            <a href="/tag/spring"
+                title="spring" rel="spring">spring</a>
+            <a href="/tag/steam"
+                title="steam" rel="steam">steam</a>
+            <a href="/tag/%E5%9B%BE"
+                title="图" rel="图">图</a>
+            <a href="/tag/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
+                title="python数据结构" rel="python数据结构">python数据结构</a>
+            <a href="/tag/interpolator"
+                title="interpolator" rel="interpolator">interpolator</a>
+            <a href="/tag/view"
+                title="view" rel="view">view</a>
+            <a href="/tag/%E6%8E%92%E5%BA%8F"
+                title="排序" rel="排序">排序</a>
+            <a href="/tag/attrs"
+                title="attrs" rel="attrs">attrs</a>
+            <a href="/tag/style"
+                title="style" rel="style">style</a>
+            <a href="/tag/%E7%BA%BF%E7%A8%8B"
+                title="线程" rel="线程">线程</a>
+            <a href="/tag/%E7%BA%BF%E7%A8%8B%E6%B1%A0"
+                title="线程池" rel="线程池">线程池</a>
+            <a href="/tag/AsyncTask"
+                title="AsyncTask" rel="AsyncTask">AsyncTask</a>
+            <a href="/tag/%E7%BC%93%E5%AD%98"
+                title="缓存" rel="缓存">缓存</a>
+            <a href="/tag/aidl"
+                title="aidl" rel="aidl">aidl</a>
+            <a href="/tag/IPC"
+                title="IPC" rel="IPC">IPC</a>
+            <a href="/tag/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"
+                title="进程间通信" rel="进程间通信">进程间通信</a>
+            <a href="/tag/java"
+                title="java" rel="java">java</a>
+            <a href="/tag/mysql"
+                title="mysql" rel="mysql">mysql</a>
+            <a href="/tag/%E4%BA%8B%E5%8A%A1"
+                title="事务" rel="事务">事务</a>
+            <a href="/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
+                title="事务隔离" rel="事务隔离">事务隔离</a>
+            <a href="/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
+                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
+    </div>
+</section>
+            <!-- Short About -->
+<section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about">ABOUT ME</a></h5>
+  <div class="short-about">
+    <img src="/assets/images/avatar.png" />
+
+    <p>只要偶尔深夜想起有你, 会有一丝微微的酒意</p>
+    <!-- SNS Link -->
+<ul class="list-inline">
+  <li>
+    <a target="_blank" href="https://github.com/ivicel">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+</ul>
+  </div>
+</section>
+            <!-- Friends Blog -->
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  <li><a href="http://getpelican.com/">Pelican</a></li>
+  <li><a href="http://python.org/">Python.org</a></li>
+  <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+  <li><a href="#">You can modify those links in your config file</a></li>
+</ul>
+        </div>
+    </div>
+<!-- Pager -->
+<ul class="pager">
+    <li class="previous">
+        <a href="/index4.html">&larr; Newer Posts</a>
+    </li>
+
+    <li class="next">
+        <a href="/index6.html">Older Posts &rarr;</a>
+    </li>
+</ul></div>
+
+ 
+        
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Ambertime 2019                    <br>
+                    Powered by <a href="">Ambertime</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer> 
+        
+    
+        <!-- jQuery -->
+        <script src="/theme/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+        <script src="/theme/js/bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/hux-blog.min.js"></script>
+
+        <!-- Service Worker -->
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document,
+                    t = "script",
+                    o = d.createElement(t),
+                    s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener(
+                        "load",
+                        function(e) {
+                            c(null, e);
+                        },
+                        false
+                    );
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+        <!--
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
     </script>
-     </body>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+        <!--fastClick.js -->
+        <script>
+            async(
+                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
+                function() {
+                    var $nav = document.querySelector("nav");
+                    if ($nav) FastClick.attach($nav);
+                }
+            );
+        </script>
+
+        <!-- Google Analytics -->
+        <script>
+            // dynamic User by Hux
+            var _gaId = "UA-113622715-2";
+            var _gaDomain = "";
+
+            // Originial
+            (function(i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(
+                window,
+                document,
+                "script",
+                "//www.google-analytics.com/analytics.js",
+                "ga"
+            );
+
+            ga("create", _gaId, _gaDomain);
+            ga("send", "pageview");
+        </script>
+
+        <!-- Add support for Mathjax by Voleking-->
+    <!-- If you want to see formulars well in post preview, Maybe you should add this.-->
+    <!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+        equationNumbers: {
+            autoNumber: "AMS"
+        }
+        },
+        tex2jax: {
+        inlineMath: [ ['$','$'] ],
+        displayMath: [ ['$$','$$'] ],
+        processEscapes: true,
+        }
+    });
+    </script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
 </html>

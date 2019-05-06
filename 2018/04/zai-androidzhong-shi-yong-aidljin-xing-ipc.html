@@ -1,64 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
     <head>
-          <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="google-site-verification"
+            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+  
         <title>
-在Android中使用AIDL进行IPC        </title>
+Ambertime        </title>
 
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="/assets/pwa/manifest.json" />
 
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="referrer" content="origin" />
-        <meta name="generator" content="Pelican" />
-        <link
-            rel="icon"
-            type="image/png"
-            href="/assets/images/favicon.png"
-        />
-        <link href="/" rel="canonical" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
 
-        <!-- Feed -->
-         
-        <link
-            href="/theme/css/style.css"
-            type="text/css"
-            rel="stylesheet"
-        />
+        <!-- Canonical URL -->
+        <link rel="canonical" href="" />
 
-        <!-- Code highlight color scheme -->
-        <link
-            href="/theme/css/code_blocks/github.css"
-            rel="stylesheet"
-        />
-         <!-- CSS specified by the user -->
-  
-        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
-  
-        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
- 
-        <!-- Custom fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
-            rel="stylesheet"
-            type="text/css"
-        />
-        <link
-            href="https://fonts.googleapis.com/css?family=Lato"
-            rel="stylesheet"
-            type="text/css"
-        />
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
+        <link rel="stylesheet" href="/assets/css/ivicel.css" />
+        <!-- Custom Fonts -->
+        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+        <!-- Hux change font-awesome CDN to qiniu -->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,105 +42,143 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-
-  <link href="/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" rel="canonical" />
-
-    <meta name="description" content="AIDL基本介绍 AIDL全称Android Interface Define Language, 后缀名是.aidl. 其支持以下几个数据类型 基本数据类型int, float, long, double, byte , short, boolean, char...">
-
-    <meta name="author" content="ivicel">
-
-    <meta name="tags" content="aidl">
-    <meta name="tags" content="ipc">
-    <meta name="tags" content="进程间通信">
+        <!-- ga & ba script hoook -->
+        <script></script>
+    </head>
 
 
+    <!-- hack iOS CSS :active style -->
+    <body ontouchstart="">
+<!-- Navigation -->
+<!-- <nav class="navbar navbar-default navbar-custom navbar-fixed-top invert"> -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ambertime</a>
+        </div>
 
-
-<!-- Open Graph -->
-<meta property="og:site_name" content="Ambertime"/>
-<meta property="og:title" content="在Android中使用AIDL进行IPC"/>
-<meta property="og:description" content="AIDL基本介绍 AIDL全称Android Interface Define Language, 后缀名是.aidl. 其支持以下几个数据类型 基本数据类型int, float, long, double, byte , short, boolean, char..."/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2018-04-01 00:00:00+08:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/ivicel.html">
-<meta property="article:section" content="misc"/>
-<meta property="article:tag" content="aidl"/>
-<meta property="article:tag" content="ipc"/>
-<meta property="article:tag" content="进程间通信"/>
-<meta property="og:image" content="/theme/images/post-bg.jpg">
-
-<!-- Twitter Card -->
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "name": "在Android中使用AIDL进行IPC",
-  "headline": "在Android中使用AIDL进行IPC",
-  "datePublished": "2018-04-01 00:00:00+08:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "ivicel",
-    "url": "/author/ivicel.html"
-  },
-  "image": "/theme/images/post-bg.jpg",
-  "url": "/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html",
-  "description": "AIDL基本介绍 AIDL全称Android Interface Define Language, 后缀名是.aidl. 其支持以下几个数据类型 基本数据类型int, float, long, double, byte , short, boolean, char..."
-}
-</script>    </head>
-    <!-- TODO : Body class -->
-    <body class="home-template">
-<nav id="menu">
-  <a class="close-button">Close</a>
-  <div class="nav-wrapper">
-    <p class="nav-label">Menu</p>
-    <ul>
-
-              <li role="presentation"><a href="/pages/about/">About</a></li>
-              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
-              <li role="presentation"><a href="/pages/category/">Category</a></li>
-
-    </ul>
-  </div>
-</nav>     <!-- Progressbar -->
-    <div class="progress-container">
-        <span class="progress-bar"></span>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="pages/about/">About</a>
+                    </li>
+                    <li>
+                        <a href="pages/archives/">Archives</a>
+                    </li>
+                    <li>
+                        <a href="pages/category/">Category</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
 
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" >
-      <div class="inner">
-        <nav id="navigation">
-            <span id="home-button" class="nav-button">
-                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
-            </span>
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
-          </span>
-        </nav>
-        <h1 class="post-title">在Android中使用AIDL进行IPC</h1>
-        <!-- TODO : Proper class for headline -->
-        <span class="post-meta">
-                <a href="/author/ivicel.html">Ivicel</a>
-            | <time datetime="Sun 01 April 2018">Sun 01 April 2018</time>
-        </span>
-        <!-- TODO : Modified check -->
-      </div>
-    </header>
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
 
-        <section id="wrapper">
-            <a class="hidden-close"></a>
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
 
-    <!-- Post content -->
-    <main class="content" role="main">
-        <article class="post">
-        <div class="inner">
-            <section class="post-content">
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script> 
+        
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        <a class="tag" href="#" title="aidl">aidl</a>
+                        <a class="tag" href="#" title="ipc">ipc</a>
+                        <a class="tag" href="#" title="进程间通信">进程间通信</a>
+                    </div>
+                    <h1>在Android中使用AIDL进行IPC</h1>
+                    <span class="meta">Posted by ivicel on 2018-04-01</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <h5 id="aidl"><code>AIDL</code>基本介绍</h5>
 <p><code>AIDL</code>全称<code>Android Interface Define Language</code>, 后缀名是<code>.aidl</code>. 其支持以下几个数据类型</p>
 <ul>
@@ -531,80 +544,297 @@ OnClient: after addBookInOut client book = Book{name='new_book_inout_by_server',
 <li>&lt;<Android 开发艺术探索>&gt;</li>
 <li><a href="https://developer.android.com/guide/components/aidl.html?hl=zh-cn">https://developer.android.com/guide/components/aidl.html?hl=zh-cn</a></li>
 </ol>
-            </section>
 
-            <section class="post-info">
-                <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=在Android中使用AIDL进行IPC&amp;url=/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
-                    </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
-                    </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=/2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
-                    </a>
-                    <div class="clear"></div>
-                </div>
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                </ul>
+                <hr style="visibility: hidden;">
 
-                <aside class="post-tags">
-<a href="/tag/aidl.html">aidl</a><a href="/tag/ipc.html">ipc</a><a href="/tag/jin-cheng-jian-tong-xin.html">进程间通信</a>                </aside>
-
-                <div class="clear"></div>
+            </div>  
+        </div>
+    </div>
+</article>
 
 
-                </section>
+        <!-- jQuery -->
+        <script src="/theme/js/jquery.min.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+        <script src="/theme/js/bootstrap.min.js"></script>
 
-                <aside class="post-nav">
-                    <div class="clear"></div>
-                </aside>
+        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/hux-blog.min.js"></script>
 
-            </div>
-        </article>
-    </main>
-            <!-- TODO : Body class -->
-            <div
-                id="body-class"
-                style="display: none;"
-                class=""
-            ></div>
+        <!-- Service Worker -->
 
-            <footer id="footer">
-                <div class="inner">
-                    <section class="credits">
-      
-                        <span class="credits-theme">Theme
-                        <a
-                            href="https://github.com/arulrajnet/attila"
-                            rel="nofollow"
-                            >Attila</a
-                        ></span>
-                        <span class="credits-software">Published with
-                        <a
-                            href="https://github.com/getpelican/pelican"
-                            rel="nofollow"
-                            >Pelican</a
-                        ></span>
-                    </section>
-                </div>
-            </footer>
-        </section>
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document,
+                    t = "script",
+                    o = d.createElement(t),
+                    s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener(
+                        "load",
+                        function(e) {
+                            c(null, e);
+                        },
+                        false
+                    );
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
 
-        <script
-            type="text/javascript"
-            src="/theme/js/script.js"
-        ></script>
+        <!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
 
-        <!-- Script specified by the user -->
-           <script type="text/javascript" src="/assets/js/prism.js"></script>
-      <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+        <!--
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
     </script>
-     </body>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+        <!--fastClick.js -->
+        <script>
+            async(
+                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
+                function() {
+                    var $nav = document.querySelector("nav");
+                    if ($nav) FastClick.attach($nav);
+                }
+            );
+        </script>
+
+        <!-- Google Analytics -->
+        <script>
+            // dynamic User by Hux
+            var _gaId = "UA-113622715-2";
+            var _gaDomain = "";
+
+            // Originial
+            (function(i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(
+                window,
+                document,
+                "script",
+                "//www.google-analytics.com/analytics.js",
+                "ga"
+            );
+
+            ga("create", _gaId, _gaDomain);
+            ga("send", "pageview");
+        </script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+ 
+        
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Ambertime 2019                    <br>
+                    Powered by <a href="">Ambertime</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer> 
+        
+
+        <!-- jQuery -->
+        <script src="/theme/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+        <script src="/theme/js/bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/hux-blog.min.js"></script>
+
+        <!-- Service Worker -->
+
+        <!-- async load function -->
+        <script>
+            function async(u, c) {
+                var d = document,
+                    t = "script",
+                    o = d.createElement(t),
+                    s = d.getElementsByTagName(t)[0];
+                o.src = u;
+                if (c) {
+                    o.addEventListener(
+                        "load",
+                        function(e) {
+                            c(null, e);
+                        },
+                        false
+                    );
+                }
+                s.parentNode.insertBefore(o, s);
+            }
+        </script>
+
+        <!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+        <!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+        <!--fastClick.js -->
+        <script>
+            async(
+                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
+                function() {
+                    var $nav = document.querySelector("nav");
+                    if ($nav) FastClick.attach($nav);
+                }
+            );
+        </script>
+
+        <!-- Google Analytics -->
+        <script>
+            // dynamic User by Hux
+            var _gaId = "UA-113622715-2";
+            var _gaDomain = "";
+
+            // Originial
+            (function(i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(
+                window,
+                document,
+                "script",
+                "//www.google-analytics.com/analytics.js",
+                "ga"
+            );
+
+            ga("create", _gaId, _gaDomain);
+            ga("send", "pageview");
+        </script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+    </body>
 </html>
