@@ -1,0 +1,37 @@
+{{ tag }}
+<div class="mini-post-list js-result d-none">
+    {% set current_date = "" %}
+    {% set flag = False %}
+    {% set first = True %}
+    {% for article in articles | sort(reverse=True, attribute="date") %}
+        
+    <section>
+        {% if current_date != (article.date | strftime("%Y")) %}
+        {% set current_date = article.date | strftime("%Y") %}
+        {% set flag = True %}
+        {% if flag and first %}<hr>{% endif %}
+            {% set first = True %}
+            <span class="fa listing-seperator">
+                <span class="tag-text">{{ current_date }}</span>
+            </span>
+        {% else %}
+            {% set first = False %}
+        {% endif %}
+            
+        <div class="post-preview item" data-tags="{{ tag }}">
+            <a href="{{ SITEURL }}/{{ article.url }}">
+                <h2 class="post-title">
+                    {{ article.title }}
+                </h2>
+                {% if article.subtitle %}
+                <h3 class="post-subtitle">
+                    {{ article.subtitle }}
+                </h3>
+                {% endif %}
+            </a>
+        </div>
+        
+        {% endfor %}
+    </section>
+</div>
+		

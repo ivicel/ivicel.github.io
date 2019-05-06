@@ -70,7 +70,7 @@ Python 3 socketserver 包解析        </title>
 
   <link href="/drafts/python-3-socketserver-bao-jie-xi.html" rel="canonical" />
 
-    <meta name="description" content="socketserver 包实现了简单的 socket 通信任务 . 一共有 4 种基础通信服务 : TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的...">
+    <meta name="description" content="socketserver 包实现了简单的 socket 通信任务. 一共有 4 种基础通信服务: TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的....">
 
     <meta name="author" content="ivicel">
 
@@ -84,7 +84,7 @@ Python 3 socketserver 包解析        </title>
 <!-- Open Graph -->
 <meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Python 3 socketserver 包解析"/>
-<meta property="og:description" content="socketserver 包实现了简单的 socket 通信任务 . 一共有 4 种基础通信服务 : TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的..."/>
+<meta property="og:description" content="socketserver 包实现了简单的 socket 通信任务. 一共有 4 种基础通信服务: TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的...."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="/drafts/python-3-socketserver-bao-jie-xi.html"/>
 <meta property="og:type" content="article"/>
@@ -114,7 +114,7 @@ Python 3 socketserver 包解析        </title>
   },
   "image": "/theme/images/post-bg.jpg",
   "url": "/drafts/python-3-socketserver-bao-jie-xi.html",
-  "description": "socketserver 包实现了简单的 socket 通信任务 . 一共有 4 种基础通信服务 : TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的..."
+  "description": "socketserver 包实现了简单的 socket 通信任务. 一共有 4 种基础通信服务: TCPServer, UDPServer, UnixStreamServer, UnixDatagramServer. 基于 tcp/udp, unix stream 的...."
 }
 </script>    </head>
     <!-- TODO : Body class -->
@@ -125,9 +125,9 @@ Python 3 socketserver 包解析        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -166,9 +166,9 @@ Python 3 socketserver 包解析        </title>
         <article class="post">
         <div class="inner">
             <section class="post-content">
-                <p><code>socketserver</code> 包实现了简单的 <code>socket</code> 通信任务 . 一共有 4 种基础通信服务 : <code>TCPServer</code>, <code>UDPServer</code>, <code>UnixStreamServer</code>, <code>UnixDatagramServer</code>. 基于 tcp/udp, unix stream 的 . 这 4 种是同步的 , 另外有基于进程和线程服务混合类可用来实现异步 ( 多线程 / 多进程 ) 服务器 , <code>ForkingMixIn</code> 只能用于支持 POSIX 系统 , <code>ThreadingMixIn</code> 可用于线程服务器 . </p>
-<p> 包内实现了基础的异步 ( 多线程 / 多进程 ) 服务器示例 <code>ForkingTCPServer</code>, <code>ForkingUDPServer</code>, <code>ThreadingTCPServer</code>, <code>ThreadingUDPServer</code>. 要注意 , 如果实现自己的异步服务器 , 继承顺序要先继承 mixin 类再继承 server 类 , mixin 类中覆盖了 如 <code>class ForkingTCPServer(ForkingMixIn, TCPServer)</code></p>
-<p> 主要类的基本继承 :</p>
+                <p><code>socketserver</code> 包实现了简单的 <code>socket</code> 通信任务. 一共有 4 种基础通信服务: <code>TCPServer</code>, <code>UDPServer</code>, <code>UnixStreamServer</code>, <code>UnixDatagramServer</code>. 基于 tcp/udp, unix stream 的. 这 4 种是同步的, 另外有基于进程和线程服务混合类可用来实现异步(多线程/多进程)服务器, <code>ForkingMixIn</code> 只能用于支持 POSIX 系统, <code>ThreadingMixIn</code> 可用于线程服务器. </p>
+<p>包内实现了基础的异步(多线程/多进程)服务器示例 <code>ForkingTCPServer</code>, <code>ForkingUDPServer</code>, <code>ThreadingTCPServer</code>, <code>ThreadingUDPServer</code>. 要注意, 如果实现自己的异步服务器, 继承顺序要先继承 mixin 类再继承 server 类, mixin 类中覆盖了 如 <code>class ForkingTCPServer(ForkingMixIn, TCPServer)</code></p>
+<p>主要类的基本继承:</p>
 <pre class="highlight"><code class="linenums">+------------+
 | BaseServer |
 +------------+
@@ -183,7 +183,7 @@ Python 3 socketserver 包解析        </title>
 | UDPServer |-------&gt;| UnixDatagramServer |
 +-----------+        +--------------------+</code></pre>
 
-<h3 id="1-baseserver">1. <code>BaseServer</code> 解析 </h3>
+<h3 id="1-baseserver">1. <code>BaseServer</code> 解析</h3>
             </section>
 
             <section class="post-info">
@@ -251,5 +251,13 @@ Python 3 socketserver 包解析        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

@@ -75,9 +75,9 @@ Ambertime - Tag andorid图片加载        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag andorid图片加载        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html" rel="bookmark" title="Permalink to Android高效加载图片防止OOM">Android高效加载图片防止OOM</a>
+                <h2 class="post-title"><a href="/2018/02/androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html" rel="bookmark" title="Permalink to Android高效加载图片防止OOM">Android高效加载图片防止OOM</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag andorid图片加载        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小 . 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率 . 图片的 长 和 宽 都会被设置成 *1/option.inSampleSize * 大小 . 即当为 1 时 , 为原始大小 ; 当为 2 时 , 图片为 ( 长 * 1/2) * ( 宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍 . 即图片会被设置成...
+                        想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 *1/option.inSampleSize * 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize *...
                     </p>
                 </section>
             </div>
@@ -174,5 +174,13 @@ Ambertime - Tag andorid图片加载        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

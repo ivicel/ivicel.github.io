@@ -1,0 +1,25 @@
+{% for article in articles_page.object_list %}
+    <div class="post-preview">
+        <a href="{{ article.url or SITEURL }}">
+            <h2 class="post-title">
+                {{ article.title }}
+            </h2>
+            {% if article.subtitle %}
+            <h3 class="post-subtitle">
+                {{ article.subtitle }}
+            </h3>
+            {% endif %}
+            <div class="post-content-preview">
+                {% if article.has_summary %}
+                    {{ article.summary }}
+                {% elif article.summary %}
+                    {{ article.summary | striptags | truncate(300) }}
+                {% endif %}
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by {% if article.author %}{{ article.author }}{% else %}{{ AUTHOR }}{% endif %} on {{ article.locale_date }}
+        </p>
+    </div>
+    <hr>
+    {% endfor %}

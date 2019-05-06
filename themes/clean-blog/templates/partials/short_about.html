@@ -1,0 +1,15 @@
+<section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="{{ SITEURL }}/about">ABOUT ME</a></h5>
+  <div class="short-about">
+    {% if SIDEBAR_AVATAR %}
+    <img src="{{ SIDEBAR_AVATAR }}" />
+    {% endif %}
+
+    {% if SIDEBAR_ABOUT_DESCRIPTION %}
+    <p>{{ SIDEBAR_ABOUT_DESCRIPTION }}</p>
+    {% endif %}
+    <!-- SNS Link -->
+    {% include "partials/sns_links.html" %}
+  </div>
+</section>

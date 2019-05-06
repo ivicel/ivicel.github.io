@@ -2,11 +2,16 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+from functools import partial
+
+PATH = 'content'
 AUTHOR = 'ivicel'
 SITENAME = 'Ambertime'
 SITEURL = ''
-
-PATH = 'content'
+SITESUBTITLE = 'Make memory in past times'
+SITEDESCRIPTION = "ivicel's thoughts and writings"
+SIDEBAR_ABOUT_DESCRIPTION = '只要偶尔深夜想起有你, 会有一丝微微的酒意'
+SIDEBAR_AVATAR = '/assets/images/avatar.png'
 
 TIMEZONE = 'Asia/Shanghai'
 
@@ -26,39 +31,31 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIALS = {
+    'github': 'https://github.com/ivicel'
+}
 
 DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
-THEME = 'attila'
+THEME = 'clean-blog'
 
-# ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
-# ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
-# PAGE_URL = 'pages/{slug}/'
-# PAGE_SAVE_AS = 'pages/{slug}/index.html'
-# YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
-# MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
+ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
+ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
+MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 
-AUTHORS_BIO = {
-    "zutrinken": {
-        "name": "Zutrinken",
-        "cover": "https://casper.ghost.org/v1.0.0/images/team.jpg",
-        "image": "assets/images/avatar.png",
-        "website": "http://blog.arulraj.net",
-        "linkedin": "unavailable",
-        "github": "arulrajnet",
-        "location": "Chennai",
-        "bio": "This is the place for a small biography with max 200 characters. Well, now 100 are left. Cool, hugh?"
-    }
-}
-
-STATIC_PATHS = ['assets', 'images']
+STATIC_PATHS = ['assets']
 
 USE_FOLDER_AS_CATEGORY = False
+
+GOOGLE_ANALYTICS = 'UA-113622715-2'
+
+COPYRIGHT_YEAR = 2019
 
 HOME_COVER = 'assets/images/header.jpg'
 # COLOR_SCHEME_CSS = 'monokai.css'
@@ -70,14 +67,19 @@ PLUGIN_PATHS = ['plugins']
 PLUGINS = [
     'i18n_subsites',
     # 'pelican-toc',
-    'sitemap',
-    'cjk-auto-spacing'
+    # 'sitemap',
+    # 'cjk-auto-spacing'
 ]
 
 JINJA_ENVIRONMENT = {
-    'extensions': ['jinja2.ext.i18n'],
+    'extensions': [
+        'jinja2.ext.i18n',
+        'jinja2.ext.loopcontrols'
+    ]
 }
-JINJA_FILTERS = {'max': max}
+JINJA_FILTERS = {
+    'sort_by_article_count': partial(sorted, key=lambda t: len(t[1]), reverse=True)
+}
 
 MARKDOWN = {
     "extensions": [

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+AsyncTask机制分析        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2018/04/asynctaskji-zhi-fen-xi.html" rel="canonical" />
+
+    <meta name="description" content="1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute()...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="线程">
+    <meta name="tags" content="线程池">
+    <meta name="tags" content="AsyncTask">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="AsyncTask机制分析"/>
+<meta property="og:description" content="1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute()..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2018/04/asynctaskji-zhi-fen-xi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-10 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="线程"/>
+<meta property="article:tag" content="线程池"/>
+<meta property="article:tag" content="AsyncTask"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "AsyncTask机制分析",
+  "headline": "AsyncTask机制分析",
+  "datePublished": "2018-04-10 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2018/04/asynctaskji-zhi-fen-xi.html",
+  "description": "1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute()..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">AsyncTask机制分析</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Tue 10 April 2018">Tue 10 April 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3 id="1-asynctask">1. AsyncTask 的使用</h3>
+<p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
+<p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
+<pre class="highlight"><code class="language-java linenums">public static DownloadTask extends AsyncTask&lt;String, Integer, Long&gt; {
+    @Override
+    protected Long doInBackground(String...urls) {
+        int i = 0;
+        for (String url : urls) {
+            Log.d(TAG, "get url: " + url);
+            i++;
+            publishProgress(i);
+        }
+        return i;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer...progress) {
+        for (Integer p : progress) {
+            Log.d(TAG, "get progress: " + p);
+        }
+    }
+
+    @Override
+    protected void onPostExecute(Long result) {
+        Log.d(TAG, "get result: " + result);    
+    }
+}
+
+DownloadTask&lt;String, Integer, Long&gt; task = new DownloadTask&lt;&gt;();
+task.execute(urls);</code></pre>
+
+<ul>
+<li>在 <strong>SDK 17(JellyBean_MR1)</strong> 之后新建对象和 <code>execute()</code> 方法不必在主线程中调用了, 因为 sHandler 这个静态变量已经在内部使用 Looper.getMainLooper 来初始化了. <a href="https://android.googlesource.com/platform/frameworks/base/+/jb-mr1-release/core/java/android/os/AsyncTask.java">查看源码</a></li>
+<li>不要在重写时直接调用 <code>onXXXX</code> 方法</li>
+<li>一个 AsyncTask 对象只能执行一次 <code>execute/executeOnExecutor</code></li>
+<li><code>AsyncTask#execute()</code> 默认是串行执行, 可以使用 <code>AsyncTask#executOnExecutor()</code> 来并行执行任务.</li>
+</ul>
+<h3 id="2-sdk-27">2. 源码分析(基于 SDK 27)</h3>
+<p>当我们创建一个新的 AsyncTask 对象时, 都会走到 <code>AsyncTask(Looper callbackLooper)</code> 这个构造方法. 如果没传入 null 或者 main looper 时, 就会默认使用主线程的 looper</p>
+<h4 id="21">2.1 构造方法</h4>
+<pre class="highlight"><code class="language-java linenums">public AsyncTask(Looper callbackLooper) {
+    // 使用自定义 handler 或者使用默认的 handler, 默认 handler 在主线程中执行
+    mHandler = callbackLooper == null || callbackLooper == Looper.getMainLooper()
+            ? getMainHandler()
+            : new Handler(callbackLooper);
+    // 初始化执行参数和返回结果
+    /* .... */
+}</code></pre>
+
+<h4 id="22">2.2 执行方法</h4>
+<p><code>AsyncTask#execute</code> 其实也是调用了 <code>AsyncTask#executeOnExecutor</code>, 其传入了一个内部实现的串行 <code>Executor</code>. </p>
+<pre class="highlight"><code class="language-java linenums">// AsyncTask#executeOnExecutor
+public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
+            Params... params) {
+        // 判断当前状态, 运行中或已完成的将抛出错误. 这也证明了前面说的每个对象只能调用一次执行
+        if (mStatus != Status.PENDING) {
+            switch (mStatus) {
+                case RUNNING:
+                    throw new IllegalStateException("Cannot execute task:"
+                            + " the task is already running.");
+                case FINISHED:
+                    throw new IllegalStateException("Cannot execute task:"
+                            + " the task has already been executed "
+                            + "(a task can be executed only once)");
+            }
+        }
+        // 设置运行状态, 调用执行任务前的准备方法, 传入参数, 使用线程池执行任务
+        mStatus = Status.RUNNING;
+        onPreExecute();
+        mWorker.mParams = params;
+        // 这会调用 Runnable 里的 run() 方法
+        exec.execute(mFuture);
+
+        return this;
+    }</code></pre>
+
+<p>一分为二. 在调用 <code>Executor#execute(Runnable)</code> 之后, 将根据之前不同的默认的 <code>Executor</code> 来执行任务. 一个是串行, 一个是并行. </p>
+<p>串行的内部实现</p>
+<pre class="highlight"><code class="language-java linenums">public static final Executor SERIAL_EXECUTOR = new SerialExecutor();
+private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
+
+// AsyncTask#SerialExecutor
+private static class SerialExecutor implements Executor {
+        // 非线程安全的数组实现的双端队列
+        final ArrayDeque&lt;Runnable&gt; mTasks = new ArrayDeque&lt;Runnable&gt;();
+        Runnable mActive;
+        // 执行任务时, 把任务添加到队列中, 从队列里依次取出来执行
+        public synchronized void execute(final Runnable r) {
+            mTasks.offer(new Runnable() {
+                public void run() {
+                    try {
+                        r.run();
+                    } finally {
+                        scheduleNext();
+                    }
+                }
+            });
+            if (mActive == null) {
+                scheduleNext();
+            }
+        }
+
+        protected synchronized void scheduleNext() {
+            if ((mActive = mTasks.poll()) != null) {
+                // 在这是里使用的是已经创建好的线程池来执行任务, 避免过多创建新线程
+                // 减小不必要的消耗. 由于 mTask 取出来的 Runnable 执行方法里, 
+                // 我们又递归的调用了 scheduleNext, 所以会按顺序执行下去
+                THREAD_POOL_EXECUTOR.execute(mActive);
+            }
+        }
+    }</code></pre>
+
+<p>并行的内部实现. </p>
+<pre class="highlight"><code class="language-java linenums">public static final Executor THREAD_POOL_EXECUTOR;
+static {
+    // 核心线程 2-4, 最大线程数为 CPU 核心数 + 1, 30s 的超时时间(设置了核心线程也会超时)
+    // 有界的等待队列, 最大值为 128, 创建线程的工厂方法重写了以 AsyncTask + number 的线程名
+    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+            CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
+            sPoolWorkQueue, sThreadFactory);
+    threadPoolExecutor.allowCoreThreadTimeOut(true);
+    THREAD_POOL_EXECUTOR = threadPoolExecutor;
+}</code></pre>
+
+<p>由于 <code>Executor</code> 具体执行的是在构造方法里初始化的 <code>FutureTask#run()</code>方法, 其中我们传入了一个 <code>Runnable</code> 作为参数, 该参数的 run 方法会在这里会被调用. 回过来看构造方法里的</p>
+<pre class="highlight"><code class="language-java linenums">public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
+            Params... params) {
+    /* ... */
+
+    mWorker = new WorkerRunnable&lt;Params, Result&gt;() {
+            public Result call() throws Exception {
+                // 原子状态, 调用中
+                mTaskInvoked.set(true);
+                Result result = null;
+                try {
+                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                    // 调用定义的方法, 返回结果
+                    result = doInBackground(mParams);
+                    Binder.flushPendingCommands();
+                } catch (Throwable tr) {
+                    // 取消
+                    mCancelled.set(true);
+                    throw tr;
+                } finally {
+                    // 这会调用之前定义好的 handler 通 message 传送到 onPostExecute 中
+                    // result 会被再包一层 AsyncTaskResult 类中, 类中包含 AsyncTask 对象和
+                    // result 对象
+                    // AsyncTaskResult 可以接收一个结果数组, 但默认 handler 实现只取一个结果
+                    postResult(result);
+                }
+                return result;
+            }
+        };
+        // FutureTask#run 执行时会调用 Callable 里的 call 方法
+        // call 方法的返回值会作为 FutureTask 的调用结果, 通过 Future#get 方法获得
+        mFuture = new FutureTask&lt;Result&gt;(mWorker) {
+            // 在设置 Future#set 返回值后, 会调用该方法
+            @Override
+            protected void done() {
+                try {
+                    // 再次检测运行的结果是否给返回回调
+                    postResultIfNotInvoked(get());
+                } catch (InterruptedException e) {
+                    android.util.Log.w(LOG_TAG, e);
+                } catch (ExecutionException e) {
+                    throw new RuntimeException("An error occurred while " +
+                        " executing doInBackground()", e.getCause());
+                } catch (CancellationException e) {
+                    postResultIfNotInvoked(null);
+                }
+            }
+        };
+}</code></pre>
+
+<p>关于 AsyncTask 不能执行时间太长(几分钟)的任务, 原因官方并没有解释说明. 在 StackOverflow 上的一个<a href="https://stackoverflow.com/questions/12797550/android-asynctask-for-long-running-operations?noredirect=1&amp;lq=1">回答</a>,  最高票的答案说明了两点原因:</p>
+<ul>
+<li>没有和 Activity 的生命周期同步</li>
+<li>易产生内存泄漏</li>
+</ul>
+<p>第一点, <code>doInBackground</code> 是在非主线程中执行, 之后会在主线程中调用  <code>onPostExecute</code> 更新 UI. 但可能原先的 Activity 可能已经被 destroy, 或者重建, AsyncTask 中原 Activity 引用已经不是原来的指向, 这可能引发 Exception. 第二点, 我们很容易在 Activity 中创建一个 AsyncTask 的 inner class, 这使 AsyncTask 中有一个指向 Activity 的引用, 当手机转向等引起的 Activity 重建, 由于 AsyncTask 持有 outer class 的引用, 导致 Activity 不能释放内存</p>
+<h3 id="reference">Reference:</h3>
+<ol>
+<li>&lt;<Android开发艺术探索>&gt;</li>
+<li><a href="https://android.googlesource.com/platform/frameworks/base/+/oreo-release/core/java/android/os/AsyncTask.java">AsyncTask 源代码</a></li>
+<li><a href="https://stackoverflow.com/questions/12797550/android-asynctask-for-long-running-operations?noredirect=1&amp;lq=1">https://stackoverflow.com/questions/12797550/android-asynctask-for-long-running-operations?noredirect=1&amp;lq=1</a></li>
+<li><a href="https://blog.csdn.net/Gaugamela/article/details/55188752">https://blog.csdn.net/Gaugamela/article/details/55188752</a></li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=AsyncTask机制分析&amp;url=/2018/04/asynctaskji-zhi-fen-xi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/asynctaskji-zhi-fen-xi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2018/04/asynctaskji-zhi-fen-xi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/xian-cheng.html">线程</a><a href="/tag/xian-cheng-chi.html">线程池</a><a href="/tag/asynctask.html">AsyncTask</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>

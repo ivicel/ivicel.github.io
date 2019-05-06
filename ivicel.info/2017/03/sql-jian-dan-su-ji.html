@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+SQL 简单速记        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2017/03/sql-jian-dan-su-ji.html" rel="canonical" />
+
+    <meta name="description" content="1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*...">
+
+    <meta name="author" content="ivicel">
+
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="SQL 简单速记"/>
+<meta property="og:description" content="1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2017/03/sql-jian-dan-su-ji.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-03-20 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "SQL 简单速记",
+  "headline": "SQL 简单速记",
+  "datePublished": "2017-03-20 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2017/03/sql-jian-dan-su-ji.html",
+  "description": "1. 检索数据 /* 单个列 */ SELECT prod_name FROM Product; /* 多个列 */ SELECT prod_id, prod_name FROM Products; /* 所有列 */ SELECT * FROM Products; /*..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">SQL 简单速记</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Mon 20 March 2017">Mon 20 March 2017</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3 id="1"><strong>1. 检索数据</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 单个列 */
+SELECT prod_name FROM Product;
+/* 多个列 */
+SELECT prod_id, prod_name FROM Products;
+/* 所有列 */
+SELECT * FROM Products;
+/* 检索不同值 */
+SELECT DISTINCT vend_id FROM Products;
+/* 条件限制 */
+SELECT prod_id FROM Products WHERE prod_id = 5;
+SELECT prod_id FROM Products LIMIT 5;
+/* 注释 */
+/*...多行注释*/
+--- 单行注释</code></pre>
+
+<h3 id="2"><strong>2. 排序</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 排序条件不一定出现在选择结果中 */
+
+/* 排序单个列 */
+SELECT * FROM  Products ORDER BY prod_id;
+/* 多个列排序 */
+SELECT prod_id, prod_name FROM Products ORDER BY prod_id, prod_name;
+/* 按位置排序，即选择结果中的位置，prod_id,prod_name */
+SELECT prod_id, prod_name FROM Products ORDER BY 1, 2;
+/* 降序，默认升序 ASC */
+SELECT prod_id FROM Products ORDER BY prod_name DESC;</code></pre>
+
+<h3 id="3"><strong>3. 过滤数据</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* WHREE子句 */
+SELECT * FROM Products WHERE prod_id &lt; 5;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>!</td>
+<td>不小于</td>
+</tr>
+<tr>
+<td>></td>
+<td>大于</td>
+</tr>
+<tr>
+<td>>=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>!&gt;</td>
+<td>不大于</td>
+</tr>
+<tr>
+<td>BETWEEN</td>
+<td>在指定值之间</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>为NULL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4"><strong>4. 高级过滤</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* AND、OR */
+SELECT prod_id, prod_name FROM Products WHERE prod_id = 5 AND prod_name = 'hello';
+SELECT prod_id, prod_name FROM Products WHERE prod_id = 5 OR prod_name = 'hello';
+
+SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id = 'DLL01' OR vend_id = 'BRS01'
+AND prod_price &gt;= 10;
+
+/* IN */
+SELECT prod_name, prod_id
+FROM Products
+WHERE vend_id IN ('DLL01', 'BRS01')
+ORDER BY prod_name;
+
+/* NOT */
+SELECT prod_name, prod_id 
+FROM Products
+WHERE NOT prod_id = 5;</code></pre>
+
+<h3 id="5"><strong>5. 通配符过滤</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* % 任意字符出现任意次, 匹配多个字符*/
+SELECT prod_name, prod_id
+FROM Products
+WHERE prod_name LIKE 'fish%';
+
+/* _ 匹配单个字符 */
+SELECT prod_name, prod_id
+FROM Products
+WHERE prod_name LIKE 'fish_';
+
+/* [] 匹配方括号内指定字符 */
+SELECT prod_name, prod_id
+FROM Products
+WHERE prod_name LIKE '[JM]%';
+
+</code></pre>
+
+<h3 id="6"><strong>6. 创建字段</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">SELECT vend_name + ' (' + vend_country + ')'
+FROM Vendors
+ORDER BY vend_name;
+/* 或者, 具体依赖于具体的数据库 */
+SELECT vend_name || ' (' || vend_country || ')'
+FROM Vendors
+ORDER BY vend_name;
+
+/* AS 别名 */
+SELECT vend_name + ' (' + vend_country + ')' AS vend_title
+FROM Vendors
+ORDER BY vend_name;
+
+/* 算术计算 "+, -, *, \" */
+SELECT prod_id, quantity, item_price, quantity * item_price AS expanded_price
+FROM OrderItems
+WHERE order_num = 2008;</code></pre>
+
+<h3 id="7"><strong>7. 数据处理函数</strong></h3>
+<p>各个数据库函数的名称可能不同</p>
+<table>
+<thead>
+<tr>
+<th>函　　数</th>
+<th>语　　法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提取字符串的组成部分</td>
+<td>Access使用MID()；DB2、Oracle、PostgreSQL和SQLite使用SUBSTR()；MySQL和SQL Server使用SUBSTRING()</td>
+</tr>
+<tr>
+<td>数据类型转换</td>
+<td>Access和Oracle使用多个函数，每种类型的转换有一个函数；DB2和PostgreSQL使用CAST()；MariaDB、MySQL和SQL Server使用CONVERT()”</td>
+</tr>
+<tr>
+<td>“取当前日期</td>
+<td>Access使用NOW()；DB2和PostgreSQL使用CURRENT_DATE；MariaDB和MySQL使用CURDATE()；Oracle使用SYSDATE；SQL Server使用GETDATE()；SQLite使用DATE()”</td>
+</tr>
+<tr>
+<td>取当前日期</td>
+<td>Access使用NOW()；DB2和PostgreSQL使用CURRENT_DATE；MariaDB和MySQL使用CURDATE()；Oracle使用SYSDATE；SQL Server使用GETDATE()；SQLite使用DATE()”</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>文本处理函数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>函　　数</th>
+<th>说　　明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEFT()（或使用子字符串函数）</td>
+<td>返回字符串左边的字符</td>
+</tr>
+<tr>
+<td>LENGTH()（也使用DATALENGTH()或LEN()）</td>
+<td>返回字符串的长度</td>
+</tr>
+<tr>
+<td>LOWER()（Access使用LCASE()）</td>
+<td>将字符串转换为小写</td>
+</tr>
+<tr>
+<td>LTRIM()</td>
+<td>去掉字符串左边的空格</td>
+</tr>
+<tr>
+<td>RIGHT()</td>
+<td>（或使用子字符串函数）  返回字符串右边的字符</td>
+</tr>
+<tr>
+<td>RTRIM()</td>
+<td>去掉字符串右边的空格</td>
+</tr>
+<tr>
+<td>SOUNDEX()</td>
+<td>返回字符串的SOUNDEX值</td>
+</tr>
+<tr>
+<td>UPPER()（Access使用UCASE()）</td>
+<td>将字符串转换为大写”</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>聚集函数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>函　　数</th>
+<th>说　　明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AVG()</td>
+<td>返回某列的平均值</td>
+</tr>
+<tr>
+<td>COUNT()</td>
+<td>返回某列的行数</td>
+</tr>
+<tr>
+<td>MAX()</td>
+<td>返回某列的最大值</td>
+</tr>
+<tr>
+<td>MIN()</td>
+<td>返回某列的最小值</td>
+</tr>
+<tr>
+<td>SUM()</td>
+<td>返回某列值之和”</td>
+</tr>
+</tbody>
+</table>
+<pre class="highlight"><code class="language-sql linenums">SELECT AVG(DISTINCT prod_price) AS avg_price
+FROM Products
+WHERE vend_id 'DLL01';</code></pre>
+
+<h3 id="8"><strong>8. 分组</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* GROUP BY 组合条件必须出现在选择结果中*/
+SELECT vend_id, COUNT(*) AS num_prods
+FROM Products
+GROUP BY vend_id;
+
+/* HAVING 与 GROUP BY 一同使用来过滤分组*/
+SELECT vend_id, COUNT(*) AS num_prods
+FROM Products
+GROUP BY vend_id
+HAVING COUNT(*) &gt;= 2;
+
+/* 分组后排序 */
+SELECT order_num, COUNT(*) AS items
+FROM OrderItems
+GROUP BY order_num
+HAVING COUNT(*) &gt;= 3
+ORDER BY items, order_num;</code></pre>
+
+<h3 id="9"><strong>9. 子查询</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">SELECT cust_name, cust_contact
+FROM Customers
+WHERE cust_id IN (
+    SELECT cust_id FROM Order WHERE order_num IN (
+        SELECT order_num FROM OrderItems WHERE prod_id = 'RGA001'
+    )
+);
+
+SELECT cust_name, cust_state, (
+    SELECT COUNT(*) FROM Orders WHERE cust_id = cust_id) AS orders
+FROM Customers 
+ORDER BY cust_name;</code></pre>
+
+<h3 id="10"><strong>10. 联结</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 使用联结时一定要有限定条件 WHERE， LIKE等 */
+
+/* 多表查询 */
+SELECT vend_name, prod_name, prod_price
+FROM Vendors, Products
+WHERE Vendors.vend_id = Products.vend_id;
+
+/* 内联结 */
+SELECT vend_name, prod_name, prod_price
+FROM Vendors INNER JOIN Products
+ON Vendors.vend_id = Products.vend_id;
+
+/* 左外联结 */
+SELECT Customers.cust_id, Orders.order_num
+FROM Customers LEFT OUTER JOIN Orders
+ON Customers.cust_id = Orders.cust_id; 
+
+/* 右外联结 */
+SELECT Customers.cust_id, Orders.order_num
+FROM Customers RIGHT OUTER JOIN Orders
+ON Orders.cust_id = Customers.cust_id;
+
+
+/* 表自联结 */
+SELECT cust_id, cust_name, cust_contact
+FROM Customers
+WHERE cust_name = (
+    SELECT cust_name FROM Customers WHERE cust_contact = 'Jim Jones'
+);
+
+SELECT c1.cust_id, c1.cust_name, c1.cust_contact
+FROM Customers AS c1, Customers AS c2
+WHERE c1.cust_name = c2.cust_name
+AND c2.cust_contact = 'Jim Jones'; </code></pre>
+
+<h3 id="11"><strong>11. 组合查询</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_state IN ('IL','IN','MI');
+
+SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_name = 'Fun4All';
+
+
+/* 以上两条使用 UNION 来查询*/
+SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_state IN ('IL','IN','MI')
+UNION
+SELECT cust_name, cust_contact, cust_email
+FROM Customers
+WHERE cust_name = 'Fun4All';”
+
+/* UNION默认去掉重复的行，使用ALL包含所有行*/
+SELECT cust_name, cust_contact, cust_email 
+FROM Customers 
+WHERE cust_state IN ('IL','IN','MI') 
+UNION ALL
+SELECT cust_name, cust_contact, cust_email 
+FROM Customers 
+WHERE cust_name = 'Fun4All';</code></pre>
+
+<h3 id="12"><strong>12. 数据插入</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 必须与库中顺序对齐 */
+INSERT INTO Customers
+VALUES('1000000006',
+       'Toy Land',
+       '123 Any Street',
+       'New York',
+       'NY',
+       '11111',
+       'USA',
+       NULL,
+       NULL);
+
+/* 插入部分数据 */
+INSERT INTO Customers(
+    cust_name,
+    cust_address,
+    cust_city,
+    cust_state,
+    cust_zip,
+    cust_country
+)
+VALUES(
+    'Toy Land',
+    '123 Any Street',
+    'New York',
+    'NY',
+    '11111',
+    'USA'
+);
+
+/* 使用检出行插入数据 */
+INSERT INTO Customers(cust_id,
+                      cust_contact,
+                      cust_email,
+                      cust_name,
+                      cust_address,
+                      cust_city,
+                      cust_state,
+                      cust_zip,
+                      cust_country)
+SELECT cust_id,
+       cust_contact,
+       cust_email,
+       cust_name,
+       cust_address,
+       cust_city,
+       cust_state,
+       cust_zip,
+       cust_country
+FROM CustNew;
+
+/* 从一个表复制到另一个表 */
+SELECT * INTO CustCopy FROM Customers;</code></pre>
+
+<h3 id="13"><strong>13. 更新数据</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 更新数据时不要忘记限制条件，否则会更新整个表的所有行 */
+UPDATE Customers SET cust_email = 'kil@there.com' WHERE cust_id = '100005';
+
+/* 删除行 */
+DELETE FROM Customers WHERE cust_id = '100005';</code></pre>
+
+<h3 id="14"><strong>14. 创建表</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">CREATE TABLE Products
+(
+    prod_id     CHAR(10)        NOT NULL,
+    vend_id     CHAR(10)        NOT NULL,
+    prod_name   CHAR(254)       NOT NULL,
+    prod_price  DECIMA(8, 2)    NOT NULL,
+    prod_desc   VARCHAR(1000)   NULL
+);
+
+
+CREATE TABLE OrderItems
+(
+    order_num      INTEGER          NOT NULL,
+    order_item     INTEGER          NOT NULL,
+    prod_id        CHAR(10)         NOT NULL,
+    quantity       INTEGER          NOT NULL      DEFAULT 1,
+    item_price     DECIMAL(8,2)     NOT NULL
+);
+
+/* 更新表结构 */
+ALTER TABLE Vendors
+ADD vend_phone CHAR(128);
+
+ALTER TABLE Vendors
+DROP COLUMN vend_phone;
+
+/* 删除表 */
+DROP TABLE CustCopy;</code></pre>
+
+<h3 id="15"><strong>15. 视图</strong></h3>
+<pre class="highlight"><code class="language-sql linenums">/* 虚拟的表 */
+CREATE VIEW ProductCustomers AS
+SELECT cust_name, cust_contact, prod_id
+FROM Customers, Orders, OrderItems
+WHERE Customers.cust_id = Orders.cust_id
+AND OrderItems.order_num = Orders.order_num;</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=SQL 简单速记&amp;url=/2017/03/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/03/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2017/03/sql-jian-dan-su-ji.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('{{ SITEURL }}/{% if ARCHIVE_COVER %}{{ ARCHIVE_COVER }}{% else %}{{ HOME_COVER }}{% endif %}');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+			<div class="post-heading">
+				<h1>Archive</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<!-- Tags (as filter) -->
+			<div id='tag_cloud' class="tags tags-sup js-tags">
+				<a class="tag-button--all" data-encode="">
+					Show All
+					<sup>{{ tags | length }}</sup>
+				</a>
+
+				{% for tag, articles in tags | sort_by_article_count %}
+				<a data-sort="{{ articles | length }}"
+					data-encode="{{ SITEURL }}/tag/{{ tag | urlencode }}"
+					class="tag-button"
+					title="{{ tag }}" rel="{{ articles | length }}">
+					{{ tag }}
+					<sup>{{ articles | length }}</sup>
+				</a>
+				{% endfor %}
+			</div>
+
+			<iframe src="{{ SITEURL }}/{{ TAG_URL }}/">
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
+	<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/archive.js "></script>
+{% endblock %}

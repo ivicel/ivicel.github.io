@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+CircleImageView实现解析        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2018/04/circleimageviewshi-xian-jie-xi.html" rel="canonical" />
+
+    <meta name="description" content="1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="CircleImageView">
+    <meta name="tags" content="源码解析">
+    <meta name="tags" content="实现">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="CircleImageView实现解析"/>
+<meta property="og:description" content="1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2018/04/circleimageviewshi-xian-jie-xi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-04-28 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="CircleImageView"/>
+<meta property="article:tag" content="源码解析"/>
+<meta property="article:tag" content="实现"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "CircleImageView实现解析",
+  "headline": "CircleImageView实现解析",
+  "datePublished": "2018-04-28 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2018/04/circleimageviewshi-xian-jie-xi.html",
+  "description": "1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">CircleImageView实现解析</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Sat 28 April 2018">Sat 28 April 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3 id="1-circleimageview">1. CircleImageView 的实现</h3>
+<h4 id="11">1.1 自定义的属性</h4>
+<p>CircleImageView 一共自定义的 5 个自定义属性</p>
+<ol>
+<li><code>civ_border_width</code> 边框的大小</li>
+<li><code>civ_border_color</code> 边框的颜色</li>
+<li><code>civ_border_overlay</code> 边框覆盖</li>
+<li><code>civ_fill_color</code> 图片背景填充, 已弃用, 使用 <code>civ_circle_background_color</code> 替代</li>
+</ol>
+<h4 id="12">1.2 流程</h4>
+<p>CircleImageView 是继承自系统控件 <code>android.widget.ImageView</code>, 而不是 support 里的兼容控件 <code>android.support.v7.widget.AppCompatImageView</code>, 作者的理由是为了使用控件更加简洁, 这样不必在包内依赖 android support v7 包, 减小包的大小. 如果有版本兼容问题的话, 我们可以自己按需求改成继承自 v7 包.</p>
+<blockquote>
+<p>CircleImageView 里有两个重要的标志位 <code>mReady</code>, <code>mSetupPending</code>. 用来控制解析自定义属性, 和图片来源以及 view 大小的测量. 为什么要使用两个标志位并相互依赖? 这是由于 ImageView 可能通过 xml 和 java 两种方法来设置图片来源, 这两种方法调用的时机也是不同. 另外我们需要确保先要解析我们自定义的值才好计算出边框大小, 颜色等, 还有 view 的大小要到 onMeasure 时才能确定, 所以圆半径大小的要到那时才能确定</p>
+</blockquote>
+<p>我们都知道, xml 的 inflate 使用的是控件里的第二个构造方法, 即 <code>public CircleImageView(Context context, AttributeSet attrs)</code>, 然后这里调用了 <code>public CircleImageView(Context context, AttributeSet attrs, int defStyle)</code>.</p>
+<p>在第三个构造调用了父类 <code>ImageView</code> 里对应的构造方法, 这里要注意的是, 父类里会解析我们所写的 xml 文件, 然后如果我们写了图片文件来源 <code>android:src</code>, 这里就会调用了 <code>ImageView#setDrawable</code> 来设置图片文件来源.</p>
+<p>然后我们看到 CircleImageView 源码里面设置图片的 setXXX 方法都已经被重写了, 都只增加了一行 <code>initializeBitmap()</code> 来初始化图片 mBitmap 来源.</p>
+<pre class="highlight"><code class="language-java linenums">private void initializeBitmap() {
+    // 通过这个标志可以设定我们是否需要把图片变形为圆形或者不改变
+    // 如果设定了 onDraw 那就按 ImageView 来绘画
+    if (mDisableCircularTransformation) {
+        mBitmap = null;
+    } else {
+        // 获取图片
+        mBitmap = getBitmapFromDrawable(getDrawable());
+    }
+    setup();
+}
+
+private void setup() {
+    // 第一次 mReady 初始为 false, 所以总是直接返回, 回到构造方法里解析自定义属性
+    if (!mReady) {
+        mSetupPending = true;
+        return;
+    }
+    // 这一步判断也是很重要的, 因为图片的设置可能是在 xml 也可能是在 java 中 setXXX 方法
+    // 所以当完成调用构造方法后, 再次调用 setup 时并没有测量好 view 的大小, 这里就会直接返回
+    if (getWidth() == 0 &amp;&amp; getHeight() == 0) {
+        return;
+    }
+
+    /* .... */
+}</code></pre>
+
+<p>来看两种情况:</p>
+<ol>
+<li>通过 xml 设置图片来源. </li>
+</ol>
+<p><code>setImageDrawable()</code> -&gt; <code>initializeBitmap()</code> -&gt; <code>setup()</code>, 遇到 <code>mReady == false</code> 返回 -&gt; 构造方法里解析自定义属性, 然后 <code>init()</code> -&gt; 这时 <code>mSetupPending == true</code>, 再次调用 <code>setup()</code>, 但此时 view 的大小还没测量好, <code>getWidth() == 0</code>, <code>getHeight() == 0</code> 直接返回. </p>
+<p>当 view 测量完成后调用 <code>onSizeChanged()</code> -&gt; 再次 <code>setup</code>, 这时一切就绪可以测量圆的半径大小, 位置等种种</p>
+<ol>
+<li>通过 java 代码来设置图片来源.</li>
+</ol>
+<p>重写 <code>setImageXXXX()</code> 方法, 里面都调用了 <code>initializeBitmap()</code>. 然后跟上面的一样, 只不过这时候 <code>mReady</code> 已经是 <code>true</code>, 因为在 <code>init()</code> 里已经设置了, 并且此时我们已经完成了对 view 的测量, 这样在 <code>setup()</code> 里就直接测量圆的半径等等所需的值</p>
+<pre class="highlight"><code class="language-java linenums">private void init() {
+    super.setScaleType(SCALE_TYPE);
+    mReady = true;
+
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) {
+        setOutlineProvider(new OutlineProvider());
+    }
+    // 如果已经在 xml 设置了图片, 就会直接设置图片的大小等
+    if (mSetupPending) {
+        setup();
+        mSetupPending = false;
+    }
+}</code></pre>
+
+<p>来看如何获得 bitmap.</p>
+<pre class="highlight"><code class="language-java linenums">private Bitmap getBitmapFromDrawable(Drawable drawable) {
+    if (drawable == null) {
+        return null;
+    }
+    // 如果是 BitmapDrawable 对象, 直接使用 BitmapDrawable#getBitmap() 获得
+    if (drawable instanceof BitmapDrawable) {
+        return ((BitmapDrawable) drawable).getBitmap();
+    }
+
+    try {
+        Bitmap bitmap;
+        // 如果是 ColorDrawable 对象, 因为填充颜色没有所谓的大小, 是根据要填充的 view 来确定大小的. 
+        // 所以给一个初始的大小来生成 bitmap, 到时把这个 bitmap 拉伸便可
+        if (drawable instanceof ColorDrawable) {
+            bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
+        } else {
+            // 其余情况下由传入的 drawable 大小来确定生成新的 bitmap
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+        }
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}</code></pre>
+
+<p>回过来看最重要的 setup 方法</p>
+<pre class="highlight"><code class="language-java linenums">private void setup() {
+    if (!mReady) {
+        mSetupPending = true;
+        return;
+    }
+
+    if (getWidth() == 0 &amp;&amp; getHeight() == 0) {
+        return;
+    }
+    // 设置为不要变形为圆形时的情况, 会执行这个
+    if (mBitmap == null) {
+        invalidate();
+        return;
+    }
+    // 设置着色器
+    mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP,
+            Shader.TileMode.CLAMP);
+    // 图片画笔, 反锯齿, 着色器
+    mBitmapPaint.setAntiAlias(true);
+    mBitmapPaint.setShader(mBitmapShader);
+    // 边框画笔样式
+    mBorderPaint.setStyle(Paint.Style.STROKE);
+    mBorderPaint.setAntiAlias(true);
+    mBorderPaint.setColor(mBorderColor);
+    mBorderPaint.setStrokeWidth(mBorderWidth);
+    // 背景画笔样式
+    mCircleBackgroundPaint.setStyle(Paint.Style.FILL);
+    mCircleBackgroundPaint.setAntiAlias(true);
+    mCircleBackgroundPaint.setColor(mCircleBackgroundColor);
+    // 图片宽高
+    mBitmapHeight = mBitmap.getHeight();
+    mBitmapWidth = mBitmap.getWidth();
+    // 计算圆形的外切矩形大小
+    mBorderRect.set(calculateBounds());
+    // 计算边框的半径, 我们在 xml 中设置的是边框大小 * 2, 这里要除以 2
+    // 因为在画圆时, Paint#setStrokeWidth 的参数就是圆边框线的两倍
+    mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2.0f,
+            (mBorderRect.width() - mBorderWidth) / 2.0f);
+    mDrawableRect.set(mBorderRect);
+    // overlay 为 true 时, 向内缩小 1px
+    if (!mBorderOverlay &amp;&amp; mBorderWidth &gt; 0) {
+        mDrawableRect.inset(mBorderWidth - 1.0f, mBorderWidth - 1.0f);
+    }
+    // 图形圆的半径大小, 可以看到取这个大小时, 边框是画在图像上的
+    mDrawableRadius = Math.min(mDrawableRect.height() / 2.0f, mDrawableRect.width() / 2.0f);
+    // 过滤颜色, 只在 java 代码中设置调用
+    applyColorFilter();
+    updateShaderMatrix();
+    invalidate();
+}
+
+ private RectF calculateBounds() {
+    // 注意先要减去上下左右的 padding 才是 view 真正的内容区大小
+    int availableWidth  = getWidth() - getPaddingLeft() - getPaddingRight();
+    int availableHeight = getHeight() - getPaddingTop() - getPaddingBottom();
+    // 取长宽里的最小值来作一个内切圆, 该值就是边框圆的直径
+    int sideLength = Math.min(availableWidth, availableHeight);
+    // 以左, 上的 padding 为准来定位圆
+    // 如果长, 高很大, 那么 paddingRight, paddingBottom 可能不会产生什么影响 
+    float left = getPaddingLeft() + (availableWidth - sideLength) / 2f;
+    float top = getPaddingTop() + (availableHeight - sideLength) / 2f;
+    // 将在这个矩形内作一个内切圆
+    return new RectF(left, top, left + sideLength, top + sideLength);
+}
+
+private void updateShaderMatrix() {
+    float scale;
+    float dx = 0;
+    float dy = 0;
+    mShaderMatrix.set(null);
+    // 我们已经计算好一个矩形, 我们需要知道图片比预定矩形大还是小, 以便作缩放
+    // 下面是 mDrawableRect.height() / mBitmapHeight &gt; 
+    // mDrawableRect.width() / mBitmapWidth 的变形
+    // 因为图片有放大或缩小, 缩放中心为原点, 所以图片要进行移动
+    if (mBitmapWidth * mDrawableRect.height() &gt; 
+            mDrawableRect.width() * mBitmapHeight) {
+        // 按高进行缩放时, 要在 x 轴平移
+        scale = mDrawableRect.height() / (float) mBitmapHeight;
+        dx = (mDrawableRect.width() - mBitmapWidth * scale) * 0.5f;
+    } else {
+        // 按宽进行缩放时, 要在 y 轴平移
+        scale = mDrawableRect.width() / (float) mBitmapWidth;
+        dy = (mDrawableRect.height() - mBitmapHeight * scale) * 0.5f;
+    }
+
+    mShaderMatrix.setScale(scale, scale);
+    mShaderMatrix.postTranslate((int) (dx + 0.5f) + mDrawableRect.left, (int) (dy + 0.5f) + mDrawableRect.top);
+
+    mBitmapShader.setLocalMatrix(mShaderMatrix);
+}
+
+protected void onDraw(Canvas canvas) {
+    // 禁用变形
+    if (mDisableCircularTransformation) {
+        super.onDraw(canvas);
+        return;
+    }
+    // 没有获得图片源
+    if (mBitmap == null) {
+        return;
+    }
+    // 有背景颜色
+    if (mCircleBackgroundColor != Color.TRANSPARENT) {
+        canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mCircleBackgroundPaint);
+    }
+    // 画图片
+    canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(),
+            mDrawableRadius, mBitmapPaint);
+    // 画边框
+    if (mBorderWidth &gt; 0) {
+        canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), 
+                mBorderRadius, mBorderPaint);
+    }
+}</code></pre>
+
+<h3 id="reference">Reference</h3>
+<ol>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0806/3268.html</a></li>
+<li><a href="https://juejin.im/entry/593108c4a22b9d0058c08a2c">https://juejin.im/entry/593108c4a22b9d0058c08a2c</a></li>
+<li><a href="https://github.com/hdodenhof/CircleImageView">https://github.com/hdodenhof/CircleImageView</a></li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=CircleImageView实现解析&amp;url=/2018/04/circleimageviewshi-xian-jie-xi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/circleimageviewshi-xian-jie-xi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2018/04/circleimageviewshi-xian-jie-xi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/circleimageview.html">CircleImageView</a><a href="/tag/yuan-ma-jie-xi.html">源码解析</a><a href="/tag/shi-xian.html">实现</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>

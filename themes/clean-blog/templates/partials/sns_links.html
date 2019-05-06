@@ -1,0 +1,74 @@
+{% if SOCIALS %}
+<ul class="list-inline">
+  {#% if site.RSS %}
+  <li>
+    <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %#}
+  {% if SOCIALS.twitter %}
+  <li>
+    <a href="{{ SOCIALS.twitter }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if SOCIALS.zhihu %}
+  <li>
+    <a target="_blank" href="{{ SOCIALS.zhihu }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa  fa-stack-1x fa-inverse">知</i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if SOCIALS.weibo %}
+  <li>
+    <a target="_blank" href="{{ SOCIALS.weibo }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if SOCIALS.facebook %}
+  <li>
+    <a target="_blank" href="{{ SOCIALS.facebook }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if SOCIALS.github %}
+  <li>
+    <a target="_blank" href="{{ SOCIALS.github }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+  {% if SOCIALS.linkedin %}
+  <li>
+    <a target="_blank" href="{{ SOCIALS.linkedin }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+{% endif %}

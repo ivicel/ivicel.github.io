@@ -70,7 +70,7 @@ Ertitle: python 类的属性        </title>
 
   <link href="/drafts/ertitle-python-lei-de-shu-xing.html" rel="canonical" />
 
-    <meta name="description" content="1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x....">
+    <meta name="description" content="1. 下划线问题 单下划线 _ 开头, 约定的类内部'私有' 属性, 也可能在类外部调用, 但尽量不调用 仅以双下划线 __ 开头, 那么会在属性前加上下划线和类名, 也就是比如类 class A 中有, __x, 那么实际外部访问时为 _A__x. 由此可知,...">
 
     <meta name="author" content="ivicel">
 
@@ -84,7 +84,7 @@ Ertitle: python 类的属性        </title>
 <!-- Open Graph -->
 <meta property="og:site_name" content="Ambertime"/>
 <meta property="og:title" content="Ertitle: python 类的属性"/>
-<meta property="og:description" content="1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x...."/>
+<meta property="og:description" content="1. 下划线问题 单下划线 _ 开头, 约定的类内部'私有' 属性, 也可能在类外部调用, 但尽量不调用 仅以双下划线 __ 开头, 那么会在属性前加上下划线和类名, 也就是比如类 class A 中有, __x, 那么实际外部访问时为 _A__x. 由此可知,..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="/drafts/ertitle-python-lei-de-shu-xing.html"/>
 <meta property="og:type" content="article"/>
@@ -114,7 +114,7 @@ Ertitle: python 类的属性        </title>
   },
   "image": "/theme/images/post-bg.jpg",
   "url": "/drafts/ertitle-python-lei-de-shu-xing.html",
-  "description": "1. 下划线问题 单下划线 _ 开头 , 约定的类内部 ' 私有 ' 属性 , 也可能在类外部调用 , 但尽量不调用 仅以双下划线 __ 开头 , 那么会在属性前加上 下划线和类名 , 也就是比如类 class A 中有 , __x, 那么实际外部访问时为 _A__x...."
+  "description": "1. 下划线问题 单下划线 _ 开头, 约定的类内部'私有' 属性, 也可能在类外部调用, 但尽量不调用 仅以双下划线 __ 开头, 那么会在属性前加上下划线和类名, 也就是比如类 class A 中有, __x, 那么实际外部访问时为 _A__x. 由此可知,..."
 }
 </script>    </head>
     <!-- TODO : Body class -->
@@ -125,9 +125,9 @@ Ertitle: python 类的属性        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -166,17 +166,17 @@ Ertitle: python 类的属性        </title>
         <article class="post">
         <div class="inner">
             <section class="post-content">
-                <h4 id="1">1. 下划线问题 </h4>
+                <h4 id="1">1. 下划线问题</h4>
 <ul>
-<li> 单下划线 <code>_</code> 开头 , 约定的类内部 <em>' 私有 '</em> 属性 , 也可能在类外部调用 , 但尽量不调用 </li>
-<li> 仅以双下划线 <code>__</code> 开头 , 那么会在属性前加上 <strong> 下划线和类名 </strong>, 也就是比如类 <code>class A</code> 中有 , <code>__x</code>, 那么实际外部访问时为 <code>_A__x</code>. 由此可知 , 当是类方法 <code>def __a(self)</code> 那么这个方法不会被子类覆写 , 因为覆写 <code>__a()</code> 实际上是 <code>_A__a()</code> 方法 </li>
-<li> 双下划线 <code>__</code> 开头并以双下划线 <code>__</code> 结束 , 即 <code>__x__</code> 这样 , 这种变量不会 <strong> 隐性 </strong> 的在前面加上 <code>_ 类名 </code>. 而是保持本来的变量名 , 从 <code>__init__</code> 的系统内置也可以看也 , 这是不变的 , 所以我们可以在子类覆写这些方法 </li>
+<li>单下划线 <code>_</code> 开头, 约定的类内部<em>'私有'</em> 属性, 也可能在类外部调用, 但尽量不调用</li>
+<li>仅以双下划线 <code>__</code> 开头, 那么会在属性前加上<strong>下划线和类名</strong>, 也就是比如类 <code>class A</code> 中有, <code>__x</code>, 那么实际外部访问时为 <code>_A__x</code>. 由此可知, 当是类方法 <code>def __a(self)</code> 那么这个方法不会被子类覆写, 因为覆写 <code>__a()</code> 实际上是 <code>_A__a()</code> 方法</li>
+<li>双下划线 <code>__</code> 开头并以双下划线 <code>__</code> 结束, 即 <code>__x__</code> 这样, 这种变量不会<strong>隐性</strong>的在前面加上<code>_类名</code>. 而是保持本来的变量名, 从 <code>__init__</code> 的系统内置也可以看也, 这是不变的, 所以我们可以在子类覆写这些方法</li>
 </ul>
-<h4 id="2">2. 属性访问问题 </h4>
+<h4 id="2">2. 属性访问问题</h4>
 <ul>
-<li> 如果已经在类 <code>__slots__</code>, <code>__dict__</code> 中定义的变量属性 , 访问的时候会直接从这些地方查找 </li>
-<li> 向父类的 <code>__dict__</code> 查找 </li>
-<li> 新式类会调用 <code>__getattribute__</code> 方法 . 因为父类 <code>object</code> 没有 <code>__getattr__</code>, 所以当我们覆盖 <code>__getattribute__</code> 时 , 看需要自己手动调用 <code>__getattr__</code>. 默认下没有覆盖 <code>__getattribute__</code> 时 , 如果覆盖了 <code>__getattr__</code> , 则会调用这个方法 </li>
+<li>如果已经在类 <code>__slots__</code>, <code>__dict__</code> 中定义的变量属性, 访问的时候会直接从这些地方查找</li>
+<li>向父类的 <code>__dict__</code> 查找</li>
+<li>新式类会调用 <code>__getattribute__</code> 方法. 因为父类 <code>object</code> 没有 <code>__getattr__</code>, 所以当我们覆盖 <code>__getattribute__</code> 时, 看需要自己手动调用 <code>__getattr__</code>. 默认下没有覆盖 <code>__getattribute__</code> 时, 如果覆盖了 <code>__getattr__</code> , 则会调用这个方法</li>
 </ul>
             </section>
 
@@ -245,5 +245,13 @@ Ertitle: python 类的属性        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

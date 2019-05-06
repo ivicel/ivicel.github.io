@@ -75,9 +75,9 @@ Ambertime - Tag view        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag view        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-view-de-zuo-biao-xi.html" rel="bookmark" title="Permalink to Android View 的坐标系">Android View 的坐标系</a>
+                <h2 class="post-title"><a href="/2018/04/android-view-de-zuo-biao-xi.html" rel="bookmark" title="Permalink to Android View 的坐标系">Android View 的坐标系</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag view        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        屏幕的坐标原点为屏幕的左上角 , 往右为 正向 x 轴 , 往下为 正向 y 轴 . 坐标参数顺序一般为 左 , 上 , 右 , 下 子 view 可以获取其相对于父 ViewGroup 的坐标 . 这个要跟点击事件 MotionEvent 的坐标获取方法区别开来 view 由于是一个框模型 , 所以当确定左上点和右下点的位置 , 我们便可以确定一个 view 的大小和位置 . 左上点坐标为 (View.getLeft(), View.getTop()), 右下点坐标...
+                        屏幕的坐标原点为屏幕的左上角, 往右为正向x轴, 往下为正向y轴. 坐标参数顺序一般为左, 上, 右, 下 子view可以获取其相对于父ViewGroup的坐标. 这个要跟点击事件MotionEvent的坐标获取方法区别开来 view由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个view的大小和位置. 左上点坐标为 (View.getLeft(), View.getTop()), 右下点坐标 (View.getRight(), View.getBottom())...
                     </p>
                 </section>
             </div>
@@ -133,7 +133,7 @@ Ambertime - Tag view        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" rel="bookmark" title="Permalink to Android View类的构造方法及View的主题属性优先级相关">Android View类的构造方法及View的主题属性优先级相关</a>
+                <h2 class="post-title"><a href="/2018/04/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html" rel="bookmark" title="Permalink to Android View类的构造方法及View的主题属性优先级相关">Android View类的构造方法及View的主题属性优先级相关</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -143,7 +143,7 @@ Ambertime - Tag view        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值 , 优先级从高到低如下 : layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr 构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到 ( 比如没设定 ) 定义 / 使用的主题里的值 在 layout 布局文件里对 view 直接赋值...
+                        1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下: layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr 构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定) 定义/使用的主题里的值 在 layout 布局文件里对 view 直接赋值...
                     </p>
                 </section>
             </div>
@@ -192,5 +192,13 @@ Ambertime - Tag view        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

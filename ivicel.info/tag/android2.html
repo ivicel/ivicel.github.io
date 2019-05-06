@@ -75,9 +75,9 @@ Ambertime - Tag android        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -116,7 +116,7 @@ Ambertime - Tag android        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html" rel="bookmark" title="Permalink to Android 中自定义ViewPager, 添加页面指示器">Android 中自定义ViewPager, 添加页面指示器</a>
+                <h2 class="post-title"><a href="/2018/02/android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html" rel="bookmark" title="Permalink to Android 中自定义ViewPager, 添加页面指示器">Android 中自定义ViewPager, 添加页面指示器</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -126,7 +126,7 @@ Ambertime - Tag android        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        在页面滑动时会回调 ViewPager.OnPageChangeListener 接口里的方法 . 用 ViewPage.addOnPageChangeListener 添加和 ViewPage.removeOnPageChangeListener 删除监听回调方法 . 如果不想实现所有方法 , ViewPager 内有个空的类 SimpleOnPageChangeListener 实现了这个接口 , 继承这个类便可 . 注意可以多次调用 addOnPageChangeListener...
+                        在页面滑动时会回调ViewPager.OnPageChangeListener接口里的方法. 用ViewPage.addOnPageChangeListener添加和ViewPage.removeOnPageChangeListener删除监听回调方法. 如果不想实现所有方法, ViewPager内有个空的类SimpleOnPageChangeListener实现了这个接口, 继承这个类便可. 注意可以多次调用addOnPageChangeListener方法添加多个回调,...
                     </p>
                 </section>
             </div>
@@ -134,7 +134,7 @@ Ambertime - Tag android        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/anroid-fileproviderde-shi-yong.html" rel="bookmark" title="Permalink to Anroid FileProvider的使用">Anroid FileProvider的使用</a>
+                <h2 class="post-title"><a href="/2018/02/anroid-fileproviderde-shi-yong.html" rel="bookmark" title="Permalink to Anroid FileProvider的使用">Anroid FileProvider的使用</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -144,7 +144,7 @@ Ambertime - Tag android        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        FileProvider 是在 v4 support library 里的 , 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在 manifest 中指定分享的文件 , 具体的分享目录路径在 res/xml/filepaths 中指定 , android:authorities 为指定的认证 , 自行定义 , 一般为 package name + fileprovider, 其他为固定写法 <manifest...
+                        FileProvider 是在 v4 support library 里的, 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在manifest中指定分享的文件, 具体的分享目录路径在res/xml/filepaths中指定, android:authorities为指定的认证, 自行定义, 一般为 package name + fileprovider, 其他为固定写法 <manifest...
                     </p>
                 </section>
             </div>
@@ -152,7 +152,7 @@ Ambertime - Tag android        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/interpolatorzhi.html" rel="bookmark" title="Permalink to Interpolator值">Interpolator值</a>
+                <h2 class="post-title"><a href="/2018/02/interpolatorzhi.html" rel="bookmark" title="Permalink to Interpolator值">Interpolator值</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -170,7 +170,7 @@ Ambertime - Tag android        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/viewhui-zhi-liu-cheng.html" rel="bookmark" title="Permalink to View绘制流程">View绘制流程</a>
+                <h2 class="post-title"><a href="/2018/02/viewhui-zhi-liu-cheng.html" rel="bookmark" title="Permalink to View绘制流程">View绘制流程</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -180,7 +180,7 @@ Ambertime - Tag android        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        一 . view 的 MeasureSpec 测量取值 对于 DecorView 其大小要求要 ViewRootImpl 中测量 如果要求 MACTH_PARENT, 就设置为窗口的大小 windowSize, 模式为精确 EXACTLY 如果要求为内容大小 WRAP_CONTENT, 就设置为窗口大小 windowSize, 模式为至多 AT_MOST, 表示不能超过子 view 这个大小 默认设置为要求的大小 rootDimension, 模式为精确 EXACTLY //...
+                        一. view的MeasureSpec测量取值 对于DecorView其大小要求要ViewRootImpl中测量 如果要求MACTH_PARENT,就设置为窗口的大小windowSize, 模式为精确EXACTLY 如果要求为内容大小WRAP_CONTENT, 就设置为窗口大小windowSize, 模式为至多AT_MOST, 表示不能超过子view这个大小 默认设置为要求的大小rootDimension, 模式为精确EXACTLY //...
                     </p>
                 </section>
             </div>
@@ -230,5 +230,13 @@ Ambertime - Tag android        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

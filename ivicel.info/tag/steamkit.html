@@ -75,9 +75,9 @@ Ambertime - Tag steamkit        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag steamkit        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/a-simple-steamkit-implement-with-using-pythonyi.html" rel="bookmark" title="Permalink to A Simple SteamKit implement with using Python(一)">A Simple SteamKit implement with using Python(一)</a>
+                <h2 class="post-title"><a href="/2018/07/a-simple-steamkit-implement-with-using-pythonyi.html" rel="bookmark" title="Permalink to A Simple SteamKit implement with using Python(一)">A Simple SteamKit implement with using Python(一)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag steamkit        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求 , 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge 我们随机生生成一个 256 位长度的密钥 session_key, 使用 steam 的公钥对密钥加密后再发回给服务器 , 加密方法为 RSA, padding 为 OAEP(mgf=MGF1(algorithm=SHA1),...
+                        1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge 我们随机生生成一个 256 位长度的密钥 session_key, 使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 RSA, padding 为 OAEP(mgf=MGF1(algorithm=SHA1),...
                     </p>
                 </section>
             </div>
@@ -174,5 +174,13 @@ Ambertime - Tag steamkit        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

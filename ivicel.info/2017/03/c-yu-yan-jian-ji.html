@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+C 语言简记        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2017/03/c-yu-yan-jian-ji.html" rel="canonical" />
+
+    <meta name="description" content="First C program #include <stdio.h> int main(int argc, char **argv) { printf("Hello C!!!\n"); } 1. 注释 /* * * 注释不能嵌套 * */ 2. 关键字、保留字 auto...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="C">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="C 语言简记"/>
+<meta property="og:description" content="First C program #include <stdio.h> int main(int argc, char **argv) { printf("Hello C!!!\n"); } 1. 注释 /* * * 注释不能嵌套 * */ 2. 关键字、保留字 auto..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2017/03/c-yu-yan-jian-ji.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-03-20 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="C"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "C 语言简记",
+  "headline": "C 语言简记",
+  "datePublished": "2017-03-20 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2017/03/c-yu-yan-jian-ji.html",
+  "description": "First C program #include <stdio.h> int main(int argc, char **argv) { printf("Hello C!!!\n"); } 1. 注释 /* * * 注释不能嵌套 * */ 2. 关键字、保留字 auto..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">C 语言简记</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Mon 20 March 2017">Mon 20 March 2017</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>First C program</p>
+<pre class="highlight"><code class="language-c linenums">#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv)
+{
+    printf("Hello C!!!\n");
+}</code></pre>
+
+<h4 id="1"><strong>1. 注释</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 
+ *
+ * 注释不能嵌套 
+ *  
+ */</code></pre>
+
+<h4 id="2"><strong>2. 关键字、保留字</strong></h4>
+<table>
+<thead>
+<tr>
+<th><code>auto</code></th>
+<th><code>else</code></th>
+<th><code>long</code></th>
+<th><code>switch</code></th>
+<th><code>break</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enum</code></td>
+<td><code>register</code></td>
+<td><code>typedef</code></td>
+<td><code>case</code></td>
+<td><code>extern</code></td>
+</tr>
+<tr>
+<td><code>union</code></td>
+<td><code>char</code></td>
+<td><code>float</code></td>
+<td><code>short</code></td>
+<td><code>unsigned</code></td>
+</tr>
+<tr>
+<td><code>const</code></td>
+<td><code>for</code></td>
+<td><code>signed</code></td>
+<td><code>void</code></td>
+<td><code>continue</code></td>
+</tr>
+<tr>
+<td><code>goto</code></td>
+<td><code>sizeof</code></td>
+<td><code>volatile</code></td>
+<td><code>default</code></td>
+<td><code>if</code></td>
+</tr>
+<tr>
+<td><code>static</code></td>
+<td><code>while</code></td>
+<td><code>do</code></td>
+<td><code>struct</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>_Packed</code></td>
+<td><code>double</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="3"><strong>3. 数据类型</strong></h4>
+<p>整型<br />
+ - (<code>signed</code>或<code>unsinged</code>)<br />
+ - <code>char</code><br />
+ - <code>int</code> <br />
+ - <code>short</code> <br />
+ - <code>long</code>  </p>
+<p>浮点型<br />
+ - <code>float</code><br />
+ - <code>double</code><br />
+ - <code>long double</code>  </p>
+<p>数据在系统中占据的内存大小，与系统类型有关</p>
+<p><img alt="存储大小" src="../images/存储大小.jpg" /></p>
+<p><code>void</code>类型</p>
+<p>作为函数返回值: <code>void func(int status)</code><br />
+作函数参数: <code>int rand(void)</code><br />
+作可变指针: <code>void *malloc(size_t size)</code></p>
+<h4 id="4"><strong>4. 标识符，变量</strong></h4>
+<p>以<code>A-Z</code>或<code>a-z</code>或<code>_</code>开头，加上数字<br />
+<code>extern</code>关键字声明而不定义，在别的文件定义该变量</p>
+<ol>
+<li>在函数或块内部的<strong>局部变量</strong></li>
+<li>在所有函数外部的<strong>全局变量</strong></li>
+<li>在函数中定义的<strong>形式参数</strong></li>
+</ol>
+<pre class="highlight"><code class="language-c linenums">#include &lt;stdio.h&gt;
+
+/* 全局变量 */
+/* 不手动初始化时，默认值被系统初始化为:
+ * int =&gt; 0
+ * char =&gt; '\0'
+ * float =&gt; 0
+ * double =&gt; 0
+ * pointer =&gt; NULL
+ */
+int a;
+int main(void)
+{
+    /* 局部变量 */
+    int b;
+
+}
+/* 形式变量 */
+void func(int a)
+{
+    /* do something */
+}</code></pre>
+
+<h4 id="5"><strong>5. 常量</strong></h4>
+<p>整数常量：十进制、十六进制(前缀<code>0x</code>或<code>0X</code>)、八进制(前缀<code>0</code>)，可以带上后缀<code>U</code> <code>u</code>(表示<code>unsigned</code>), <code>L</code> <code>l</code>(表示<code>long</code>)<br />
+浮点常量：<code>e</code>或<code>E</code>的指数 <code>1.3</code><br />
+字符常量：<code>'x'</code>, <code>'y'</code>, 转义字符<br />
+字符串常量：<code>"hello"</code></p>
+<p>定义常量：</p>
+<pre class="highlight"><code class="language-c linenums">/* 1. define预处理器 */ 
+#define LENGTH 10
+/* 2. const关键字 */
+const int LEN = 10</code></pre>
+
+<h4 id="6-c"><strong>6. C存储类</strong></h4>
+<ol>
+<li><code>auto</code>: 局部变量默认类型，只能在局部变量使用  </li>
+<li><code>register</code>: 存储在寄存器中，不能对其使用<code>&amp;</code>运算符</li>
+<li><code>static</code>: 静态变量  </li>
+<li>修饰局部变量时，变量退出函数时不会被销毁  </li>
+<li>修饰全局时该变量只能在当前文件使用</li>
+<li><code>extern</code>: 全局变量在所有程序文件可见，对于无法初始化的变量，会把变量名指向一个之前定义过的存储位置。</li>
+</ol>
+<h4 id="7"><strong>7. 运算符</strong></h4>
+<p>算术运算符: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, 前/后缀<code>++</code>, 前/后缀<code>--</code><br />
+关系运算符: <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code><br />
+逻辑运算符: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code><br />
+位运算符: <code>|</code>, <code>&amp;</code>, <code>^</code>, <code>~</code>(取反), <code>&lt;&lt;</code>(左移), <code>&gt;&gt;</code>(右移)<br />
+赋值运算符: <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>|=</code><br />
+其他运算符: <code>sizeof</code>, <code>&amp;</code>(返回变量地址), <code>*</code>(指向一个变量), <code>?:</code></p>
+<h4 id="8"><strong>8. 语句</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 判断 */
+if (a == b) {
+    printf("yes\n");
+} esle {
+    print("no\n");
+}
+
+if (c == d) {
+    /*..*/
+} else if (e == f) {
+    /*..*/
+}
+
+switch (a) {
+    case 0:
+        /*..*/
+        break;
+    default:
+        /*..*/
+}
+
+/* 循环 */
+while (a != 0) {
+    /* do something */
+}
+
+do {
+    /* do something */
+} while (a != 0)
+
+for (int i = 0; i &lt; 10; i++) {
+    /* do something */
+}
+
+/* continue 语句 */
+/* goto 语句 */
+</code></pre>
+
+<h4 id="9"><strong>9. 函数</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 传值 */
+int func1(int a, int b)
+{
+    /* do something */
+    return a;
+}
+
+/* 引用 */
+int func2(int *a, int *b)
+{
+    /* do something */
+    return a;
+}</code></pre>
+
+<h4 id="10"><strong>10. 数组</strong></h4>
+<pre class="highlight"><code class="language-c linenums">double balance[10];
+int a[5] = {1, 2, 3, 4, 5};
+char b[6] = "hello";    /* 最后一位存储'\0' */
+int c[] = {1, 2, 3, 4}; /* 忽略数组大小时，数组大小初始化为元素个数 */
+/* 多维数组 */
+int val[3][2] = {
+    {0, 1},
+    {2, 3},
+    {4, 5}
+}</code></pre>
+
+<h4 id="11"><strong>11. 指针</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 指针的大小跟系统有关，64位中为8个字节 */
+int a = 5;
+int *p1 = &amp;a;    /* p是a的地址，*p是a的值 */
+int *p2 = NULL;  /* 空指针 */
+/* 指针运算, 其实是内存的运算，指针的类型决定其运算增加或减少几个字节 */
+p++;
+p--;
+p1 &gt; p2;
+/* 指针数组 */
+int a = 5;
+int *p[3];
+p[0] = &amp;a;
+/* 指向指针的指针 */
+int a = 5;
+int *p = &amp;a;
+int **ptr = &amp;p;</code></pre>
+
+<h4 id="12"><strong>12. 结构体</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 定义 */
+struct Books {
+    char title[50];
+    int book_id;
+};
+
+/* 声明 */
+struct Books b1;
+struct Books *book_ptr;
+/* 访问 */
+b1-&gt;title;
+b1-&gt;book_id;</code></pre>
+
+<h4 id="13"><strong>13. 共用体</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 大小是占内存最大的成员的大小 */
+union Data {
+    int i;
+    float f;
+    char str[20];
+}data;
+/* 访问 */
+data.i;
+data.f;
+
+/*********************************/
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    union Data {
+        int i;
+        float j;
+        char a[20];
+    }data;
+
+    data.i = 10;
+    data.j = 2.3;
+    /* 最的出赋值覆盖了前面的值 */
+    strcpy(data.a, "C Programming");
+    printf("data.i = %d\n", data.i);
+    printf("data.j = %f\n", data.j);
+    printf("data.a = %s\n", data.a);
+
+    return 0;
+}
+
+/* 输出 */
+data.i = 1917853763
+data.j = 4122360580327794860452759994368.000000
+data.a = C Programming
+
+/**************************************/
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    union Data {
+        int i;
+        float j;
+        char a[20];
+    } data;
+
+    data.i = 10;
+    printf("data.i = %d\n", data.i);
+    data.j = 2.3;
+    printf("data.j = %f\n", data.j);
+    strcpy(data.a, "C Programming");
+    printf("data.a = %s\n", data.a);
+
+    return 0;
+}
+
+/* 输出正常 */
+data.i = 10
+data.j = 2.300000
+data.a = C Programming</code></pre>
+
+<h4 id="14"><strong>14. 位域</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
+/* 因为不能跨字节，所以位域最大为8位，大于8位产生不可预计影响 */
+/* 无名位域即空域，只能用来作占位符，不能被使用 */
+
+/* 位域使用struct声明 
+ * struct {
+ *     type [member_name] : width;
+ * };
+ * type可以是有符号或无符号整型，准定了如何解释位域
+ */
+struct {
+    /* 只占4个字节，并且只有两bit被使用 */
+    unsigned int width:1;       
+    unsigned int length:1;
+}status;
+
+struct {
+    unsigned a:4;
+    unsigned :4;    /* 空域 */
+    usigned b:4;    /* 从下一个字节开始存储 */
+    usigned c:4;
+}bs;
+/* 位域调用，赋值大小应当小于位数能表示的最大数
+ * 超过这个数时编译器会产警告 
+ */
+bs.a;
+bs-&gt;b;</code></pre>
+
+<h4 id="15-typedef"><strong>15. typedef</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* typedef 来定义别名 */
+typedef unsigned char BYTE;
+BYTE b1, b2;
+
+typedef struct Books {
+    char title[50];
+    int book_id;
+} Book;
+Book b1;
+/* typedef vs define
+ * typedef 仅限于为类型定义符号名称
+ * #define 不仅可以为类型定义别名，也能为数值定义别名，比如可以定义 1 为 ONE
+ * typedef 是由编译器执行解释的，#define 语句是由预编译器进行处理的
+ */</code></pre>
+
+<h4 id="16">**16. 标准输入、输出、错误输出</h4>
+<p><code>stdin</code> <code>stdout</code> <code>stderr</code>
+读或输出字符：<code>getchar()</code> <code>putchar()</code>
+读或输出一行：<code>gets()</code> <code>puts()</code>
+格式化输入输出：<code>scanf()</code> <code>printf()</code></p>
+<pre class="highlight"><code class="language-c linenums">/* 文件读写 */
+FILE *fopen(const char *filename, const char *mode);
+/* 模式:
+ * r 只读，文件不存在程序出错
+ * w 只写，文件不存在则创建，存在截为0
+ * a 增加写入，文件不存在则创建
+ * r+ 读写，文件不存在程序出错，存在截为0
+ * w+ 读写，文件不存在则创建，存在截为0
+ * a+ 读写增加，文件不存在则创建
+ * b 二进制模式
+ */
+int fputc(int c, FILE *fp);
+int fputs(const char *str, FILE *fp);
+
+int fgetc(FILE *fp);
+char *fgets(char *buf, int n, FILE *fp);
+
+/* 读写二进制 */
+size_t fread(void *ptr, size_t size, size_t numbers, FILE *fp);
+size_t fwrite(const void *ptr, size_t size, size_t numbers, FILE *fp);</code></pre>
+
+<h4 id="17"><strong>17.预处理器</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/*
+ * #define   定义宏
+ * #include  包含一个源代码文件
+ * #ifdef    如果宏已经定义，返回真
+ * #ifndef   如果宏未定义，返回真
+ * #if       如果条件为真，则编译下方代码
+ * #else
+ * #elif
+ * #endif    结束一个#if语句
+ * #error    当遇到标准错误时，输出错误消息
+ * #pragma   使用标准化方法，向编译器发布特殊命令到编译器中
+ */
+
+#define MAX_ARRAY_LENGTH 20
+
+#include &lt;stdio.h&gt;
+#include "myheader.h"
+
+#undef FILE_SIZE
+#define FILE_SIZE 42
+
+#ifndef MESSAGE
+   #define MESSAGE "You wish"
+#endif
+
+#ifdef DEBUG
+    /* do something */
+#else
+    /* doing... */
+#endif
+
+/* # 号的使用使用传入宏的变量转为字符串
+ * ## 号使两个参数合并
+ */
+#include &lt;stdio.h&gt;
+
+#define tokenpaster(n) printf ("token" #n " = %d", token##n)
+
+int main(void)
+{
+   int token34 = 40;
+
+   tokenpaster(34);
+   return 0;
+}
+
+/* 输出 */
+token34 = 40
+</code></pre>
+
+<p>预定义的宏
+<code>__DATE__</code> 以"MMM DD YYYY"表示的日期
+<code>__TIME__</code> 以"HH:MM:SS"表示的时间
+<code>__FILE__</code> 当前文件名
+<code>__LINE__</code> 当前行号
+<code>__STDC__</code> 当以ANSI标准编译时，定义为1</p>
+<h4 id="18"><strong>18. 类型转换</strong></h4>
+<p><img alt="强制类型转换" src="../images/强制类型转换.png" /></p>
+<h4 id="19"><strong>19. 可变参数</strong></h4>
+<pre class="highlight"><code class="language-c linenums">/* 可变参数定义在 stdarg.h 头文件中
+ * 函数的第一个参数总是int，表示参数的个数，后面跟省略号
+ * 使用int参数和va_start宏初始化va_list变量为参数列表
+ * 使用va_arg宏和va_list变量来访问参数列表中的每一项
+ * 使用va_end来清理赋予va_list变量的内存
+ */
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+
+double average(int num, ...)
+{
+    double sum = 0.0;
+    va_list valist;
+    va_start(valist, num);
+    for (int i = 0; i &lt; num; i++) {
+        sum += va_arg(valist, int);
+    }
+    va_end(valist);
+    return sum / num;
+}
+
+int main()
+{
+    double i = average(5, 1, 2, 3, 4, 5);
+    printf("average is: %f\n", i);
+    return 0;
+}</code></pre>
+
+<h4 id="20"><strong>20. 内存管理</strong></h4>
+<pre class="highlight"><code class="language-c linenums">void *calloc(int num, int size);
+void *malloc(int num);
+void realloc(void *address, int newsize);
+void free(void *address);</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=C 语言简记&amp;url=/2017/03/c-yu-yan-jian-ji.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/03/c-yu-yan-jian-ji.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2017/03/c-yu-yan-jian-ji.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/c.html">C</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>
