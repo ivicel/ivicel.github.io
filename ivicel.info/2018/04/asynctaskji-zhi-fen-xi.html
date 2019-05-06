@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -174,15 +170,15 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h3 id="1-asynctask">1. AsyncTask 的使用</h3>
+                <h3>1. AsyncTask 的使用</h3>
 <p>AsyncTask 为抽象类, 继承该类至少要重写 <code>doInBackground(Params...params)</code> 方法. 除了该方法是在<strong>非主程</strong>中执行外, 其他的如 <code>onPreExecute()</code> <code>onProgressUpdate(Progress...progresses)</code> <code>onPostExecute(Result result)</code> <code>onCancel()</code> 都是在主线程中执行. </p>
 <p>AsyncTask 另外可以设置三个类型参数, <code>AsyncTask&lt;Params, Progress, Result&gt;</code> . 分别指传入  <code>doInBackground(Param…params)</code>  的参数数组, <code>onProgressUpdate(Progress…progress)</code> 进度更新参数,  从 <code>doInBackground()</code> 返回结果, 可在 <code>onPostExecute(Result result)</code> 中接收到该结果.</p>
-<pre class="highlight"><code class="language-java linenums">public static DownloadTask extends AsyncTask&lt;String, Integer, Long&gt; {
+<pre class="highlight line-numbers"><code class="language-java linenums">public static DownloadTask extends AsyncTask&lt;String, Integer, Long&gt; {
     @Override
     protected Long doInBackground(String...urls) {
         int i = 0;
@@ -216,10 +212,10 @@ task.execute(urls);</code></pre>
 <li>一个 AsyncTask 对象只能执行一次 <code>execute/executeOnExecutor</code></li>
 <li><code>AsyncTask#execute()</code> 默认是串行执行, 可以使用 <code>AsyncTask#executOnExecutor()</code> 来并行执行任务.</li>
 </ul>
-<h3 id="2-sdk-27">2. 源码分析(基于 SDK 27)</h3>
+<h3>2. 源码分析(基于 SDK 27)</h3>
 <p>当我们创建一个新的 AsyncTask 对象时, 都会走到 <code>AsyncTask(Looper callbackLooper)</code> 这个构造方法. 如果没传入 null 或者 main looper 时, 就会默认使用主线程的 looper</p>
-<h4 id="21">2.1 构造方法</h4>
-<pre class="highlight"><code class="language-java linenums">public AsyncTask(Looper callbackLooper) {
+<h4>2.1 构造方法</h4>
+<pre class="highlight line-numbers"><code class="language-java linenums">public AsyncTask(Looper callbackLooper) {
     // 使用自定义 handler 或者使用默认的 handler, 默认 handler 在主线程中执行
     mHandler = callbackLooper == null || callbackLooper == Looper.getMainLooper()
             ? getMainHandler()
@@ -228,9 +224,9 @@ task.execute(urls);</code></pre>
     /* .... */
 }</code></pre>
 
-<h4 id="22">2.2 执行方法</h4>
+<h4>2.2 执行方法</h4>
 <p><code>AsyncTask#execute</code> 其实也是调用了 <code>AsyncTask#executeOnExecutor</code>, 其传入了一个内部实现的串行 <code>Executor</code>. </p>
-<pre class="highlight"><code class="language-java linenums">// AsyncTask#executeOnExecutor
+<pre class="highlight line-numbers"><code class="language-java linenums">// AsyncTask#executeOnExecutor
 public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
             Params... params) {
         // 判断当前状态, 运行中或已完成的将抛出错误. 这也证明了前面说的每个对象只能调用一次执行
@@ -257,7 +253,7 @@ public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executo
 
 <p>一分为二. 在调用 <code>Executor#execute(Runnable)</code> 之后, 将根据之前不同的默认的 <code>Executor</code> 来执行任务. 一个是串行, 一个是并行. </p>
 <p>串行的内部实现</p>
-<pre class="highlight"><code class="language-java linenums">public static final Executor SERIAL_EXECUTOR = new SerialExecutor();
+<pre class="highlight line-numbers"><code class="language-java linenums">public static final Executor SERIAL_EXECUTOR = new SerialExecutor();
 private static volatile Executor sDefaultExecutor = SERIAL_EXECUTOR;
 
 // AsyncTask#SerialExecutor
@@ -292,7 +288,7 @@ private static class SerialExecutor implements Executor {
     }</code></pre>
 
 <p>并行的内部实现. </p>
-<pre class="highlight"><code class="language-java linenums">public static final Executor THREAD_POOL_EXECUTOR;
+<pre class="highlight line-numbers"><code class="language-java linenums">public static final Executor THREAD_POOL_EXECUTOR;
 static {
     // 核心线程 2-4, 最大线程数为 CPU 核心数 + 1, 30s 的超时时间(设置了核心线程也会超时)
     // 有界的等待队列, 最大值为 128, 创建线程的工厂方法重写了以 AsyncTask + number 的线程名
@@ -304,7 +300,7 @@ static {
 }</code></pre>
 
 <p>由于 <code>Executor</code> 具体执行的是在构造方法里初始化的 <code>FutureTask#run()</code>方法, 其中我们传入了一个 <code>Runnable</code> 作为参数, 该参数的 run 方法会在这里会被调用. 回过来看构造方法里的</p>
-<pre class="highlight"><code class="language-java linenums">public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
+<pre class="highlight line-numbers"><code class="language-java linenums">public final AsyncTask&lt;Params, Progress, Result&gt; executeOnExecutor(Executor exec,
             Params... params) {
     /* ... */
 
@@ -359,7 +355,7 @@ static {
 <li>易产生内存泄漏</li>
 </ul>
 <p>第一点, <code>doInBackground</code> 是在非主线程中执行, 之后会在主线程中调用  <code>onPostExecute</code> 更新 UI. 但可能原先的 Activity 可能已经被 destroy, 或者重建, AsyncTask 中原 Activity 引用已经不是原来的指向, 这可能引发 Exception. 第二点, 我们很容易在 Activity 中创建一个 AsyncTask 的 inner class, 这使 AsyncTask 中有一个指向 Activity 的引用, 当手机转向等引起的 Activity 重建, 由于 AsyncTask 持有 outer class 的引用, 导致 Activity 不能释放内存</p>
-<h3 id="reference">Reference:</h3>
+<h3>Reference:</h3>
 <ol>
 <li>&lt;<Android开发艺术探索>&gt;</li>
 <li><a href="https://android.googlesource.com/platform/frameworks/base/+/oreo-release/core/java/android/os/AsyncTask.java">AsyncTask 源代码</a></li>
@@ -374,76 +370,20 @@ static {
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -473,39 +413,7 @@ static {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -517,85 +425,30 @@ static {
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -625,38 +478,6 @@ static {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

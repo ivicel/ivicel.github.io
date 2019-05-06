@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -172,27 +168,27 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <p>First C program</p>
-<pre class="highlight"><code class="language-c linenums">#include &lt;stdio.h&gt;
+<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdio.h&gt;
 
 int main(int argc, char **argv)
 {
     printf("Hello C!!!\n");
 }</code></pre>
 
-<h4 id="1"><strong>1. 注释</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 
+<h4><strong>1. 注释</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 
  *
  * 注释不能嵌套 
  *  
  */</code></pre>
 
-<h4 id="2"><strong>2. 关键字、保留字</strong></h4>
+<h4><strong>2. 关键字、保留字</strong></h4>
 <table>
 <thead>
 <tr>
@@ -248,7 +244,7 @@ int main(int argc, char **argv)
 </tr>
 </tbody>
 </table>
-<h4 id="3"><strong>3. 数据类型</strong></h4>
+<h4><strong>3. 数据类型</strong></h4>
 <p>整型<br />
  - (<code>signed</code>或<code>unsinged</code>)<br />
  - <code>char</code><br />
@@ -265,7 +261,7 @@ int main(int argc, char **argv)
 <p>作为函数返回值: <code>void func(int status)</code><br />
 作函数参数: <code>int rand(void)</code><br />
 作可变指针: <code>void *malloc(size_t size)</code></p>
-<h4 id="4"><strong>4. 标识符，变量</strong></h4>
+<h4><strong>4. 标识符，变量</strong></h4>
 <p>以<code>A-Z</code>或<code>a-z</code>或<code>_</code>开头，加上数字<br />
 <code>extern</code>关键字声明而不定义，在别的文件定义该变量</p>
 <ol>
@@ -273,7 +269,7 @@ int main(int argc, char **argv)
 <li>在所有函数外部的<strong>全局变量</strong></li>
 <li>在函数中定义的<strong>形式参数</strong></li>
 </ol>
-<pre class="highlight"><code class="language-c linenums">#include &lt;stdio.h&gt;
+<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdio.h&gt;
 
 /* 全局变量 */
 /* 不手动初始化时，默认值被系统初始化为:
@@ -296,18 +292,18 @@ void func(int a)
     /* do something */
 }</code></pre>
 
-<h4 id="5"><strong>5. 常量</strong></h4>
+<h4><strong>5. 常量</strong></h4>
 <p>整数常量：十进制、十六进制(前缀<code>0x</code>或<code>0X</code>)、八进制(前缀<code>0</code>)，可以带上后缀<code>U</code> <code>u</code>(表示<code>unsigned</code>), <code>L</code> <code>l</code>(表示<code>long</code>)<br />
 浮点常量：<code>e</code>或<code>E</code>的指数 <code>1.3</code><br />
 字符常量：<code>'x'</code>, <code>'y'</code>, 转义字符<br />
 字符串常量：<code>"hello"</code></p>
 <p>定义常量：</p>
-<pre class="highlight"><code class="language-c linenums">/* 1. define预处理器 */ 
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 1. define预处理器 */ 
 #define LENGTH 10
 /* 2. const关键字 */
 const int LEN = 10</code></pre>
 
-<h4 id="6-c"><strong>6. C存储类</strong></h4>
+<h4><strong>6. C存储类</strong></h4>
 <ol>
 <li><code>auto</code>: 局部变量默认类型，只能在局部变量使用  </li>
 <li><code>register</code>: 存储在寄存器中，不能对其使用<code>&amp;</code>运算符</li>
@@ -316,15 +312,15 @@ const int LEN = 10</code></pre>
 <li>修饰全局时该变量只能在当前文件使用</li>
 <li><code>extern</code>: 全局变量在所有程序文件可见，对于无法初始化的变量，会把变量名指向一个之前定义过的存储位置。</li>
 </ol>
-<h4 id="7"><strong>7. 运算符</strong></h4>
+<h4><strong>7. 运算符</strong></h4>
 <p>算术运算符: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, 前/后缀<code>++</code>, 前/后缀<code>--</code><br />
 关系运算符: <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code><br />
 逻辑运算符: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code><br />
 位运算符: <code>|</code>, <code>&amp;</code>, <code>^</code>, <code>~</code>(取反), <code>&lt;&lt;</code>(左移), <code>&gt;&gt;</code>(右移)<br />
 赋值运算符: <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>|=</code><br />
 其他运算符: <code>sizeof</code>, <code>&amp;</code>(返回变量地址), <code>*</code>(指向一个变量), <code>?:</code></p>
-<h4 id="8"><strong>8. 语句</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 判断 */
+<h4><strong>8. 语句</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 判断 */
 if (a == b) {
     printf("yes\n");
 } esle {
@@ -362,8 +358,8 @@ for (int i = 0; i &lt; 10; i++) {
 /* goto 语句 */
 </code></pre>
 
-<h4 id="9"><strong>9. 函数</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 传值 */
+<h4><strong>9. 函数</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 传值 */
 int func1(int a, int b)
 {
     /* do something */
@@ -377,8 +373,8 @@ int func2(int *a, int *b)
     return a;
 }</code></pre>
 
-<h4 id="10"><strong>10. 数组</strong></h4>
-<pre class="highlight"><code class="language-c linenums">double balance[10];
+<h4><strong>10. 数组</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">double balance[10];
 int a[5] = {1, 2, 3, 4, 5};
 char b[6] = "hello";    /* 最后一位存储'\0' */
 int c[] = {1, 2, 3, 4}; /* 忽略数组大小时，数组大小初始化为元素个数 */
@@ -389,8 +385,8 @@ int val[3][2] = {
     {4, 5}
 }</code></pre>
 
-<h4 id="11"><strong>11. 指针</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 指针的大小跟系统有关，64位中为8个字节 */
+<h4><strong>11. 指针</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 指针的大小跟系统有关，64位中为8个字节 */
 int a = 5;
 int *p1 = &amp;a;    /* p是a的地址，*p是a的值 */
 int *p2 = NULL;  /* 空指针 */
@@ -407,8 +403,8 @@ int a = 5;
 int *p = &amp;a;
 int **ptr = &amp;p;</code></pre>
 
-<h4 id="12"><strong>12. 结构体</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 定义 */
+<h4><strong>12. 结构体</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 定义 */
 struct Books {
     char title[50];
     int book_id;
@@ -421,8 +417,8 @@ struct Books *book_ptr;
 b1-&gt;title;
 b1-&gt;book_id;</code></pre>
 
-<h4 id="13"><strong>13. 共用体</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 大小是占内存最大的成员的大小 */
+<h4><strong>13. 共用体</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 大小是占内存最大的成员的大小 */
 union Data {
     int i;
     float f;
@@ -487,8 +483,8 @@ data.i = 10
 data.j = 2.300000
 data.a = C Programming</code></pre>
 
-<h4 id="14"><strong>14. 位域</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
+<h4><strong>14. 位域</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
 /* 因为不能跨字节，所以位域最大为8位，大于8位产生不可预计影响 */
 /* 无名位域即空域，只能用来作占位符，不能被使用 */
 
@@ -516,8 +512,8 @@ struct {
 bs.a;
 bs-&gt;b;</code></pre>
 
-<h4 id="15-typedef"><strong>15. typedef</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* typedef 来定义别名 */
+<h4><strong>15. typedef</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* typedef 来定义别名 */
 typedef unsigned char BYTE;
 BYTE b1, b2;
 
@@ -532,12 +528,12 @@ Book b1;
  * typedef 是由编译器执行解释的，#define 语句是由预编译器进行处理的
  */</code></pre>
 
-<h4 id="16">**16. 标准输入、输出、错误输出</h4>
+<h4>**16. 标准输入、输出、错误输出</h4>
 <p><code>stdin</code> <code>stdout</code> <code>stderr</code>
 读或输出字符：<code>getchar()</code> <code>putchar()</code>
 读或输出一行：<code>gets()</code> <code>puts()</code>
 格式化输入输出：<code>scanf()</code> <code>printf()</code></p>
-<pre class="highlight"><code class="language-c linenums">/* 文件读写 */
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 文件读写 */
 FILE *fopen(const char *filename, const char *mode);
 /* 模式:
  * r 只读，文件不存在程序出错
@@ -558,8 +554,8 @@ char *fgets(char *buf, int n, FILE *fp);
 size_t fread(void *ptr, size_t size, size_t numbers, FILE *fp);
 size_t fwrite(const void *ptr, size_t size, size_t numbers, FILE *fp);</code></pre>
 
-<h4 id="17"><strong>17.预处理器</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/*
+<h4><strong>17.预处理器</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/*
  * #define   定义宏
  * #include  包含一个源代码文件
  * #ifdef    如果宏已经定义，返回真
@@ -615,10 +611,10 @@ token34 = 40
 <code>__FILE__</code> 当前文件名
 <code>__LINE__</code> 当前行号
 <code>__STDC__</code> 当以ANSI标准编译时，定义为1</p>
-<h4 id="18"><strong>18. 类型转换</strong></h4>
+<h4><strong>18. 类型转换</strong></h4>
 <p><img alt="强制类型转换" src="../images/强制类型转换.png" /></p>
-<h4 id="19"><strong>19. 可变参数</strong></h4>
-<pre class="highlight"><code class="language-c linenums">/* 可变参数定义在 stdarg.h 头文件中
+<h4><strong>19. 可变参数</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">/* 可变参数定义在 stdarg.h 头文件中
  * 函数的第一个参数总是int，表示参数的个数，后面跟省略号
  * 使用int参数和va_start宏初始化va_list变量为参数列表
  * 使用va_arg宏和va_list变量来访问参数列表中的每一项
@@ -647,8 +643,8 @@ int main()
     return 0;
 }</code></pre>
 
-<h4 id="20"><strong>20. 内存管理</strong></h4>
-<pre class="highlight"><code class="language-c linenums">void *calloc(int num, int size);
+<h4><strong>20. 内存管理</strong></h4>
+<pre class="highlight line-numbers"><code class="language-c linenums">void *calloc(int num, int size);
 void *malloc(int num);
 void realloc(void *address, int newsize);
 void free(void *address);</code></pre>
@@ -660,76 +656,20 @@ void free(void *address);</code></pre>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -759,39 +699,7 @@ void free(void *address);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -803,85 +711,30 @@ void free(void *address);</code></pre>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -911,38 +764,6 @@ void free(void *address);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

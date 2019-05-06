@@ -19,8 +19,10 @@
     <div class="header-mask"></div>
     <div class="container">
         <div class="row">
-			<div class="post-heading">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
 				<h1>Archive</h1>
+				</div>
             </div>
         </div>
     </div>
@@ -57,5 +59,15 @@
 
 {% block scripts %}
 	{{ super() }}
+
+	<!-- jquery.tagcloud.js -->
+	<script src="{{ SITEURL}}/{{ THEME_STATIC_DIR }}/js/jquery.tagcloud.js"></script>
+	<script>
+        $.fn.tagcloud.defaults = {
+            //size: {start: 1, end: 1, unit: 'em'},
+            color: {start: '#bbbbee', end: '#2f93b4'},
+        };
+        $('#tag_cloud a').tagcloud();
+	</script>
 	<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/archive.js "></script>
 {% endblock %}

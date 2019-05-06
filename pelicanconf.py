@@ -44,10 +44,15 @@ THEME = 'clean-blog'
 
 ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
-PAGE_URL = 'pages/{slug}/'
-PAGE_SAVE_AS = 'pages/{slug}/index.html'
+PAGE_URL = '{slug}'
+PAGE_SAVE_AS = '{slug}.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
+
+MENUITEMS = [
+    ('archives', '/archives'),
+    ('about', '/about')
+]
 
 STATIC_PATHS = ['assets']
 
@@ -67,7 +72,7 @@ PLUGIN_PATHS = ['plugins']
 PLUGINS = [
     'i18n_subsites',
     # 'pelican-toc',
-    # 'sitemap',
+    'sitemap',
     # 'cjk-auto-spacing'
 ]
 
@@ -83,23 +88,22 @@ JINJA_FILTERS = {
 
 MARKDOWN = {
     "extensions": [
-        # 'codehilite',
-        'tables',
-        'toc',
+        'codehilite',
+        'markdown.extensions.tables',
         'pymdownx.magiclink',
-        # 'pymdownx.betterem',
+        'pymdownx.betterem',
         'pymdownx.tilde',
         'pymdownx.emoji',
         'pymdownx.tasklist',
-        'pymdownx.extra'
-        # 'pymdownx.superfences',
+        'pymdownx.superfences',
+        'pymdownx.highlight',
+        # 'pymdownx.inlinehilite'
     ],
     'extension_configs': {
         'pymdownx.highlight': {
             'linenums': True,
-            'use_pygments': False,
-            'linenums_style': 'inline',
-            'css_class': 'highlight'
+            'css_class': 'highlight line-numbers',
+            'use_pygments': False
         }
     },
 

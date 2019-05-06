@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% block head %}
     <head>
+        {% block head %}
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
         {% if SITE_DESCRIPTION %}
         <meta name="description" content="{{ SITE_DESCRIPTION }}" />
         {% endif %} {% if SITE_KEYWORD %}
@@ -34,20 +28,15 @@
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ SITEURL }}/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="{{ url }}" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="{{ SITEURL }}/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/prism.css" />
+        <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,12 +44,10 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <!-- ga & ba script hoook -->
-        <script></script>
+        
+        {% endblock %}
     </head>
 
-    {% endblock %}
 
     <!-- hack iOS CSS :active style -->
     <body ontouchstart="">
@@ -71,78 +58,18 @@
         {% include 'partials/footer.html' %} 
         
         {% block scripts %}
-
-        <!-- jQuery -->
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/prism.js"></script>
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-        {% if SERVICE_WORKER %}
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/snackbar.js"></script>
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/sw-registration.js"></script>
-        {% endif %}
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         {% if GOOGLE_ANALYTICS %}
         <script>
-            // dynamic User by Hux
             var _gaId = "{{ GOOGLE_ANALYTICS }}";
             var _gaDomain = "{{ SITEURL }}";
 

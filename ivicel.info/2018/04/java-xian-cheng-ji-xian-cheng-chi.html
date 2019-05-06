@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('//assets/images/java线程池框架.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('//assets/images/java线程池框架.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -175,13 +171,13 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h3 id="1-java">1. Java 线程池</h3>
-<h4 id="11-java">1.1 java 线程池框架的主要类和接口</h4>
+                <h3>1. Java 线程池</h3>
+<h4>1.1 java 线程池框架的主要类和接口</h4>
 <p><img alt="java线程池框架" src="../../assets/images/java线程池框架.jpg" /></p>
 <ul>
 <li>Executor 接口定义了执行器 Runnable 执行方式</li>
@@ -192,7 +188,7 @@ Ambertime        </title>
 <li>ScheduledThreadPoolExecutor 定时线程池的实现类</li>
 <li>Executors 线程池的辅助工具类</li>
 </ul>
-<h4 id="12-executors">1.2 Executors 辅助类主要几种线程池模型</h4>
+<h4>1.2 Executors 辅助类主要几种线程池模型</h4>
 <ul>
 <li><code>newCachedThreadPool</code> 可缓存的无界线程池, 当一个新请求到来时, 如果没有缓存线程则新建一条线程来处理. 如果有则用缓存线程. 处理完成后, 空闲线程会被缓存, 如果超时前没有被用来处理请求, 则该线程会被回收. 这个模型的线程池是 <code>Integer.MAX_VALUE</code> 可以看作是无限大小的</li>
 <li><code>newFixedThreadPool</code> 固定大小的线程池, 对于没有线程处理的请求会在 <code>LinkedBlockingQueue</code> 中等待处理</li>
@@ -240,9 +236,9 @@ Ambertime        </title>
 </tr>
 </tbody>
 </table>
-<h4 id="13-threadpoolexecutor">1.3 ThreadPoolExecutor 类</h4>
+<h4>1.3 ThreadPoolExecutor 类</h4>
 <p>构造方法</p>
-<pre class="highlight"><code class="language-java linenums">public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize,
+<pre class="highlight line-numbers"><code class="language-java linenums">public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize,
         long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue,
         ThreadFactory threadFactory, RejectedExecutionHandle rejectedHandler);</code></pre>
 
@@ -261,14 +257,14 @@ Ambertime        </title>
 <li>threadFactory: 线程工厂, 有默认的工厂方法 <code>DefaultThreadFactory</code> 类. 用来新创建线程</li>
 <li>rejectedHandler: 线程饱和策略, 默认为 <code>ThreadPoolExecutor.AbortPolicy</code>. 当请求无法加入到请求队列时, 请求被拒绝时的处理方法</li>
 </ul>
-<h4 id="14">1.4 线程池执行策略</h4>
+<h4>1.4 线程池执行策略</h4>
 <ol>
 <li>当新的请求到来时, 判断是否大于 coreSize, 大于则加入请求队列, 小于则直接新创建线程来处理</li>
 <li>判断空闲线程. 当线程池中的数量 &lt; maximum 时, 创建新的线程来处理队列中的任务</li>
 <li>判断能否加入到队列中, 不能则直接使用拒绝请求设置的策略, 能则等待空闲线程</li>
 <li>当无法创建新线程时, 不能加入到队列中的任务将被拒绝执行</li>
 </ol>
-<h3 id="reference">Reference:</h3>
+<h3>Reference:</h3>
 <ol>
 <li><a href="http://gityuan.com/2016/01/16/thread-pool/">http://gityuan.com/2016/01/16/thread-pool</a></li>
 </ol>
@@ -280,76 +276,20 @@ Ambertime        </title>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -379,39 +319,7 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -423,85 +331,30 @@ Ambertime        </title>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -531,38 +384,6 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

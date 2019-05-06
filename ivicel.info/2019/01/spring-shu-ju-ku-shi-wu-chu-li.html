@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -174,14 +170,14 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h4 id="1">1. 事务的传播行为</h4>
+                <h4>1. 事务的传播行为</h4>
 <p>事务的传播行为是 Spring 对数据库事务添加的特定功能, 指的是当方法 A 调用另一个方法 B 时, B 事务中所采取的不同策略的行为, 比如新建事务, 挂起事务等. 事务的传播注解修饰的是方法 B 自己, 当被别的方法调用时才起的作用, 而不是方法内起作用</p>
-<h4 id="11-spring">1.1 Spring 中七种事务传播行为</h4>
+<h4>1.1 Spring 中七种事务传播行为</h4>
 <table>
 <thead>
 <tr>
@@ -223,12 +219,12 @@ Ambertime        </title>
 <blockquote>
 <p>加<strong>黑体</strong>的三个是常用的</p>
 </blockquote>
-<h4 id="2">2. 传播行为的代码测试</h4>
+<h4>2. 传播行为的代码测试</h4>
 <p>在数据库中有两张表 <code>t_user1</code> 和 <code>t_user2</code>, 以及对应 POJO, 简单的 Service 操作</p>
 <blockquote>
 <p>下方所有的 <code>test*()</code> 方法都应该在不在 <code>User1Service</code> 或 <code>User2Service</code> 类内, 避免产生类内自调用</p>
 </blockquote>
-<pre class="highlight"><code class="language-java linenums">// 表 t_user1 对应的 POJO
+<pre class="highlight line-numbers"><code class="language-java linenums">// 表 t_user1 对应的 POJO
 public Class User1 {
         private Long id;
     private String name;
@@ -242,8 +238,8 @@ public Class User2 {
     // getters and setters...
 }</code></pre>
 
-<h5 id="21-propagation_required">2.1 <code>PROPAGATION_REQUIRED</code> 行为</h5>
-<pre class="highlight"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中, 传播都为 PROPAGATION_REQUIRED
+<h5>2.1 <code>PROPAGATION_REQUIRED</code> 行为</h5>
+<pre class="highlight line-numbers"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中, 传播都为 PROPAGATION_REQUIRED
 public class User1Service {
         @Transactional(propagation = Propagation.REQUIRED)
     public void addRequired(User1 user1) {
@@ -268,7 +264,7 @@ public class User2Service {
 <ul>
 <li>在外围非事务的方法中调用, 各个事务都是相对独立的, 成功或失败都不互相干扰</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 测试一
+<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一
 public void test1(){
     User1 user1 = new User1();
     user1.setName("张三");
@@ -298,7 +294,7 @@ public void test2(){
 <ul>
 <li>在外围调用方法是开启事务时, 这时的要将被调用方法加入到这个事务当中而不是自己新创建事务</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 三个测试都开启了事务
+<pre class="highlight line-numbers"><code class="language-java linenums">// 三个测试都开启了事务
 
 // 测试一
 @Transactional
@@ -350,8 +346,8 @@ public void test2(){
     }
 }</code></pre>
 
-<h5 id="22-propagation_required_new">2.2 <code>PROPAGATION_REQUIRED_NEW</code> 行为</h5>
-<pre class="highlight"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中
+<h5>2.2 <code>PROPAGATION_REQUIRED_NEW</code> 行为</h5>
+<pre class="highlight line-numbers"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中
 public class User1Service {
         @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void addRequiresNew(User1 user1) {
@@ -382,7 +378,7 @@ public class User2Service {
 <ul>
 <li>外围调用方法没有添加事务</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 测试一
+<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一
 public void test1() {
     User1 user1 = new User1();
     user1.setName("张三");
@@ -411,7 +407,7 @@ public void test2() {
 <ul>
 <li>外围调用方法是在事务中</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 测试一, 测试外围事务的异常对内部方法的影响
+<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 测试外围事务的异常对内部方法的影响
 @Transactional
 public void test1() {
     User1 user1 = new User1();
@@ -466,12 +462,12 @@ public void test3() {
     }
 }</code></pre>
 
-<h5 id="23-propagation_nested">2.3 <code>PROPAGATION_NESTED</code> 行为</h5>
+<h5>2.3 <code>PROPAGATION_NESTED</code> 行为</h5>
 <p>该行为在外围开启事务时, 内部方法嵌套在外围事务中运行, 外围事务的回溯导致内部方法也一起回滚; 而内部方法的事务则可以自己单独回滚, 不用影响到外围的事务</p>
 <blockquote>
 <p><code>PROPAGATION_NESTED</code> 事务嵌套行为需要数据库中的<strong>保存点(save point)</strong>, Hibernate 并不支持这个功能, 会抛出: <code>JpaDialect does not support savepoints - check your JPA provider's capabilities</code> 异常</p>
 </blockquote>
-<pre class="highlight"><code class="language-java linenums">public class User1Service {
+<pre class="highlight line-numbers"><code class="language-java linenums">public class User1Service {
         @Transactional(propagation = Propagation.NESTED)
     public void addNested(User1 user1) {
         user1Mapper.insert(user1);
@@ -494,7 +490,7 @@ public class User2Service {
 <ul>
 <li>外围方法没有开启事务</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 测试一, 外围方法抛出异常
+<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 外围方法抛出异常
 public void test1() {
     User1 user1 = new User1();
     user1.setName("张三");
@@ -525,7 +521,7 @@ public void test2() {
 <ul>
 <li>外围方法开启事务</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 测试一, 外围方法抛出异常
+<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 外围方法抛出异常
 @Transactional
 public void test1() {
     User1 user1 = new User1();
@@ -571,9 +567,9 @@ public void test2() {
     } catch(Exception e) {}
 }</code></pre>
 
-<h4 id="2-transactional">2. <code>@Transactional</code> 自调用类中方法失效问题</h4>
+<h4>2. <code>@Transactional</code> 自调用类中方法失效问题</h4>
 <p>Spring 的事务处理是基于 AOP, 通过动态代理生成一个类的代理对象, 而当我们在类的方法中再调用同一个类的事务方法, 其实际还是在同一个事务中, 是类自身的调用, 而不是代理调用, 这样就还是在同一次 AOP 中.</p>
-<pre class="highlight"><code class="language-java linenums">@Service("userService")
+<pre class="highlight line-numbers"><code class="language-java linenums">@Service("userService")
 public class UserServiceImple implements IUserService {
         @Override
     @Transactional
@@ -591,7 +587,7 @@ public class UserServiceImple implements IUserService {
 }</code></pre>
 
 <p>也可以通过手动每次获取类的代理对象, 来手动调用类的方法</p>
-<pre class="highlight"><code class="language-java linenums">@Service("userService")
+<pre class="highlight line-numbers"><code class="language-java linenums">@Service("userService")
 public class UserServiceImple implements IUserService, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -627,76 +623,20 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -726,39 +666,7 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -770,85 +678,30 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -878,38 +731,6 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

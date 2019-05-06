@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -176,8 +172,8 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
@@ -189,16 +185,16 @@ Ambertime        </title>
 <li>gevent 异步框架</li>
 <li>uwsgi 后端 server</li>
 </ul>
-<h5 id="1-flask-websocket">1. flask 结合 websocket 问题</h5>
+<h5>1. flask 结合 websocket 问题</h5>
 <p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
-<pre class="highlight"><code class="linenums">GET /websocket HTTP/1.1
+<pre class="highlight line-numbers"><code class="linenums">GET /websocket HTTP/1.1
 Connection: Upgrade
 Upgrade: websocket
 Sec-WebSocket-Version: 13
 Sec-WebSocket-Key: KSk4Wty1NJInqzWMBbQqCQ==</code></pre>
 
 <p>当我们收到这个请求时, 返回一个 response 来确定升级到</p>
-<pre class="highlight"><code class="linenums">HTTP/1.1 101 Switching Protocols
+<pre class="highlight line-numbers"><code class="linenums">HTTP/1.1 101 Switching Protocols
 Server: nginx/1.15.3
 Date: Thu, 13 Sep 2018 05:56:14 GMT
 Connection: upgrade
@@ -211,7 +207,7 @@ Sec-WebSocket-Accept: B1HnOTYR2fZO2PT0y6LImuBQtzQ=</code></pre>
 <li>在获得到 TCP 连接后, 由于 Websocket 是基于 message 而不是基于 stream 的, 我们还需要实现 websocket 协议, 接管请求到 <code>/websocket</code> 的连接, 比如 ping/pong, send/receive</li>
 </ol>
 <p>以上两点 uWSGI 已经帮我们实现好, 在 <a href="https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html">uWSGI 文档</a>中提到了当使用 <code>--http-socket</code> 参数来运行的 wsgi 应用时, 只要我们检查 <code>environ['HTTP_SEC_WEBSOCKET_KEY']</code> 变量, 这是升级到 websocket 里的请求, 便可知道该连接之后想升级到 websocket. uWSGI 已经帮我们把实现了 websocket 协议, 我们只要使用以下几个接口即可</p>
-<pre class="highlight"><code class="language-python linenums"># 确定发回 Connection upgrade
+<pre class="highlight line-numbers"><code class="language-python linenums"># 确定发回 Connection upgrade
 uwsgi.websocket_handshake([key, origin, proto])
 
 uwsgi.websocket_recv()
@@ -220,18 +216,18 @@ uwsgi.websocket_send_binary(msg) (added in 1.9.21 to support binary messages)
 uwsgi.websocket_recv_nb()
 uwsgi.websocket_send_from_sharedarea(id, pos) </code></pre>
 
-<h5 id="2-flask-gevent">2. flask 和 gevent 问题</h5>
+<h5>2. flask 和 gevent 问题</h5>
 <p>Flask 是同步执行的, 我们主要的请求都在 websocket 中, 所以我们只在每一个 websocket upgrade request 中 patch 所有的 socket 即可. </p>
-<h5 id="3">3. 代码实现</h5>
+<h5>3. 代码实现</h5>
 <p>前面说到, 因为要检测 <code>environ</code> 的值, 我们可以使用一个中间件 <code>WebsocketMiddleware</code>, 这样当我们生成 <code>ws = Websocket(app)</code>, 然后使用 <code>@ws.route('/ws')</code> 时便说明, url <code>/ws</code> 使用 websocket 连接.</p>
-<pre class="highlight"><code class="linenums">uWSGI ------ Websocket Middleware ---if is websocket---&gt; Websocket Application 
+<pre class="highlight line-numbers"><code class="linenums">uWSGI ------ Websocket Middleware ---if is websocket---&gt; Websocket Application 
                      |
                      | else
                      |
               Flask Application</code></pre>
 
 <p>查看 flask 的源码可以看到在类 Flask 的最终实现 wsgi 协议的是方法 <code>wsgi_app()</code>, 并且源码里也说明了最好的中间件实现方式. </p>
-<pre class="highlight"><code class="language-python linenums"># 简化实现说明
+<pre class="highlight line-numbers"><code class="language-python linenums"># 简化实现说明
 from flask import Flask
 from .websocket import Websocket
 
@@ -255,7 +251,7 @@ def websocket_connect(ws):
 </code></pre>
 
 <p>主要类的实现, <code>Websocket</code> 类实现了一个 WGSI 协议, 接收从 uWSGI 的回调, 然后将请求放到 <code>WebsocketMiddleware</code> 中判断是否为 websocket, 不是的话发送到 flask application 来处理</p>
-<pre class="highlight"><code class="language-python linenums">import uwsgi
+<pre class="highlight line-numbers"><code class="language-python linenums">import uwsgi
 import gevent
 from gevent.queue import Empty, Queue
 from gevent.event import Event
@@ -362,7 +358,7 @@ class WebSocketMiddleware(object):
                 return ''</code></pre>
 
 <p>完整代码在: <a href="https://github.com/ivicel/steam-key-python">https://github.com/ivicel/steam-key-python</a></p>
-<h4 id="reference">Reference</h4>
+<h4>Reference</h4>
 <ol>
 <li>
 <p><a href="https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html">https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html</a></p>
@@ -379,76 +375,20 @@ class WebSocketMiddleware(object):
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -478,39 +418,7 @@ class WebSocketMiddleware(object):
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -522,85 +430,30 @@ class WebSocketMiddleware(object):
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -630,38 +483,6 @@ class WebSocketMiddleware(object):
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

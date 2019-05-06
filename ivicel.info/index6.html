@@ -3,14 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,7 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <!-- ga & ba script hoook -->
-        <script></script>
+        
     </head>
 
 
@@ -71,15 +58,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -195,7 +179,7 @@ Ambertime        </title>
                 AIDL生成的接口及Binder的分析
             </h2>
             <div class="post-content-preview">
-                    1. Android 上的 Binder 1.1 Binder 的构架 1-2 Binder 的机制 2. AIDL 文件实现分析 Reference: 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 …
+                    [TOC] 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成 …
             </div>
         </a>
         <p class="post-meta">
@@ -209,7 +193,7 @@ Ambertime        </title>
                 Android Activity生命周期和启动模式
             </h2>
             <div class="post-content-preview">
-                    1. Activity 的生命周期 2. Activity 的启动模式 3. Intent 的过滤规则 Reference: 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图: 需要注意的几个点: 当一个 Activity A 启动加一个 Activity B 时, 只有 A 的 onPause 执行完返回时, B 才开始执行onCreate onStart, 直到...
+                    [TOC] 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图: 需要注意的几个点: 当一个 Activity A 启动加一个 Activity B 时, 只有 A 的 onPause 执行完返回时, B 才开始执行onCreate onStart, 直到 onResume显示在前台, A 会执行 onStop onDestroy, 所以在 onPause不能执行太耗时的操作, 以便让另一个...
             </div>
         </a>
         <p class="post-meta">
@@ -357,85 +341,30 @@ Ambertime        </title>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-    
-        <!-- jQuery -->
-        <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+            <script src="/theme/js/jquery.min.js"></script>
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -482,7 +411,7 @@ Ambertime        </title>
     });
     </script>
     <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+            src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
     </body>
 </html>

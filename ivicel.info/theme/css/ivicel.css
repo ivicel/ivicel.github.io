@@ -1,0 +1,13 @@
+@media only screen and (min-width: 900px) {
+    .intro-header {
+        height: 550px
+    }
+}
+
+article {
+    overflow: visible;
+}
+
+pre.highlight {
+    font-size: 0.95em;
+}

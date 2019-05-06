@@ -23,13 +23,13 @@
                     <li>
                         <a href="{{ SITEURL }}/">Home</a>
                     </li>
-                    {% for page in pages %}
-                    {% if page.title %}
-                    <li>
-                        <a href="{{ page.url }}">{{ page.title }}</a>
-                    </li>
+                    {% if MENUITEMS %}
+                        {% for title, url in MENUITEMS %}
+                        <li>
+                            <a href="{{ SITEURL }}{{ url }}">{{ title | upper }}</a>
+                        </li>
+                        {% endfor %}
                     {% endif %}
-                    {% endfor %}
                 </ul>
             </div>
         </div>

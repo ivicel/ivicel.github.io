@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -173,18 +169,18 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h3 id="1-lrucahe">1. LruCahe 的使用</h3>
+                <h3>1. LruCahe 的使用</h3>
 <p><code>LruCache</code> 类的构造方法为 <code>public LruCache(int maxSize)</code>, 其需要传入一个缓存大小, 单位为 <strong>byte</strong>, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. </p>
 <blockquote>
 <p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
 </blockquote>
 <p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
-<pre class="highlight"><code class="language-java linenums">// 获得应用可使用的最大内存, 取 1/8 作为缓存
+<pre class="highlight line-numbers"><code class="language-java linenums">// 获得应用可使用的最大内存, 取 1/8 作为缓存
 final int maxSize = Runtime.getRuntime().maxMemory() / 8;
 LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
     @Override
@@ -197,7 +193,7 @@ LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
 };</code></pre>
 
 <p>在获得 <code>LruCache</code> 对象之后, 便可以对其进行读, 写, 删除</p>
-<pre class="highlight"><code class="language-java linenums">Bitmap bitmap = bitmapCache.get(key);
+<pre class="highlight line-numbers"><code class="language-java linenums">Bitmap bitmap = bitmapCache.get(key);
 // 如果缓存中已经存在, 那么旧的会被返回, 不存在则返回 null
 Bitmap prevBitmap = bitmapCache.put(key, bitmap);
 // 删除缓存
@@ -233,15 +229,15 @@ public String bytesToHexString(byte[] input) {
 }</code></pre>
 
 <p>另外还可以重写 <code>entryRemove()</code> 方法, 这个方法会在<strong>元素被删除</strong>(内存不足时, remove 操作时), <strong>元素被替换</strong>(put 操作时)被调用, 默认的实现是一个空实现, 并且这个调用不是 <code>synchronization</code></p>
-<pre class="highlight"><code class="language-java linenums">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
+<pre class="highlight line-numbers"><code class="language-java linenums">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
 // @param key 元素的 key
 // @param oldValue 元素的旧值
 // @param newValue 元素是被替换时的新值, 被删除时该值为 null
 protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</code></pre>
 
-<h3 id="2">2. 源码解析</h3>
+<h3>2. 源码解析</h3>
 <p>由于需要不断重新排序, <code>LruCache</code> 内部使用了一个 <code>LinkHashMap</code> 数据结构来存储实际内容. 这是一个<strong>双向链表</strong> 实现的 <strong>HashMap</strong>. <code>LinkHashMap</code>可以设置成<strong>基于插入顺序优先</strong>, 或者<strong>基于访问顺序优先</strong>, 把优先的元素放在链表<strong>末端</strong>, 这样链表头结点总是表示<strong>最后插入</strong>/<strong>最少访问</strong>的元素, 可以把头结点从链接中删除</p>
-<pre class="highlight"><code class="language-Java linenums">public class LruCache&lt;K, V&gt; {
+<pre class="highlight line-numbers"><code class="language-Java linenums">public class LruCache&lt;K, V&gt; {
     public LruCache(int maxSize) {
         if (maxSize) {
             throw new IllegalArgumentException("maxSize &lt;= 0");   
@@ -253,7 +249,7 @@ protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</co
 }</code></pre>
 
 <p>在每次 <code>put</code>, <code>get</code> 之后, 都要使用 <code>trimToSize()</code> 来确保使用的内存容量是在规定的范围内</p>
-<pre class="highlight"><code class="language-java linenums">// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除
+<pre class="highlight line-numbers"><code class="language-java linenums">// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除
 public void trimToSize(int maxSize) {
     // 不断循环的删除头结点, 直到使用的内存小于 maxSize
     while (true) {
@@ -294,7 +290,7 @@ public void trimToSize(int maxSize) {
 }</code></pre>
 
 <p><code>LruCache#put()</code>, <code>LruCache#get()</code>方法的实现</p>
-<pre class="highlight"><code class="language-java linenums">// LruCache#put()
+<pre class="highlight line-numbers"><code class="language-java linenums">// LruCache#put()
 public final V put(K key, V value) {
     if (key == null || value == null) {
         throw new NullPointerException("key == null || value == null");
@@ -378,7 +374,7 @@ protected V create(K key) {
     return null;
 }</code></pre>
 
-<h3 id="reference">Reference:</h3>
+<h3>Reference:</h3>
 <ol>
 <li>&lt;<Android开发艺术探索>&gt;</li>
 <li><a href="https://blog.csdn.net/shakespeare001/article/details/51695358">https://blog.csdn.net/shakespeare001/article/details/51695358</a></li>
@@ -391,76 +387,20 @@ protected V create(K key) {
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -490,39 +430,7 @@ protected V create(K key) {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -534,85 +442,30 @@ protected V create(K key) {
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -642,38 +495,6 @@ protected V create(K key) {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

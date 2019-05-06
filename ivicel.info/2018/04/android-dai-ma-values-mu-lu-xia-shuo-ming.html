@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -176,18 +172,18 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <p>对于 Android 源代码目录下 <code>values/*</code> 文件, 其所有的 xml 文件根标签都是 <code>resource</code>. aapt 会把这个目录下的文件全部 build  出 java 可引用的整型数值, 这样的便可以通过 <code>R.[type].[name]</code> 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 <code>values/*</code> 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型:</p>
-<h3 id="1-style">1. style 主题文件</h3>
+<h3>1. style 主题文件</h3>
 <p>主题文件一般有两种, 一个是 <code>style</code>, 一个是属性 <code>attr</code></p>
 <ol>
 <li>style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个 view 来继承. 或者也可以自己单独写而不继承. <strong>style 标签里 item 的 name 值需要已经是有定义过了的, 可以是系统预先定义好的, 或者是自己再使用 attr 定义的.</strong> 使用 <code>R.style.[name]</code> 来引用. 在 xml 文件中使用 <code>style=@style/[name]</code> . 一般放在 <code>values/styles.xml</code></li>
 </ol>
-<pre class="highlight"><code class="language-xml linenums">&lt;!-- 自定义主题并继承 support 包里的主题 
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;!-- 自定义主题并继承 support 包里的主题 
  继承的主题可以在 3 个地方使用, 全局 application, 单个 activity, 某个 view  
  --&gt;
 &lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
@@ -210,12 +206,12 @@ Ambertime        </title>
 <li>使用 attr 的原因是为自定义 view 添加属性, 另外是方便更改属性的值. 有两种定义方式. </li>
 </ol>
 <p>一种是直接在 <code>resources</code> 下定义</p>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;attr name="one" format="reference"/&gt;
 &lt;/resources&gt;</code></pre>
 
 <p>一种是在外面包一层 <code>declare-styleable</code> 标签. </p>
-<pre class="highlight"><code class="language-xml linenums">&lt;!-- 引用整组为 R.styleable.MyAttrs, 单个为 R.styleable.MyAttrs_other_one --&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;!-- 引用整组为 R.styleable.MyAttrs, 单个为 R.styleable.MyAttrs_other_one --&gt;
 &lt;resources&gt;
     &lt;declare-styleable name="MyAttrs"&gt;
         &lt;!-- 这个是 attr 的定义 --&gt;
@@ -237,7 +233,7 @@ Ambertime        </title>
 <ol>
 <li>
 <p><code>reference</code> 引用. 某个资源 ID.</p>
-<pre class="highlight"><code class="language-xml linenums">&lt;attr name="my_bg" format="reference"/&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;attr name="my_bg" format="reference"/&gt;
 
 &lt;TextView
   app:my_bg="@drawable/bg"/&gt;</code></pre>
@@ -266,7 +262,7 @@ Ambertime        </title>
 </li>
 <li>
 <p><code>enum</code> 枚举类型. 使用时只能取一个惟一值. </p>
-<pre class="highlight"><code class="language-xml linenums">&lt;declare-styleable name="MyDirection"&gt; 
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;declare-styleable name="MyDirection"&gt; 
     &lt;attr name="orientation"&gt; 
         &lt;enum name="horizontal" value="0" /&gt; 
         &lt;enum name="vertical" value="1" /&gt; 
@@ -276,7 +272,7 @@ Ambertime        </title>
 </li>
 <li>
 <p><code>flag</code> 标志位, 使用时通过 <code>|</code> 竖线来设置单个或多个值, 如 <code>stateOne | stateTwo</code> 这样</p>
-<pre class="highlight"><code class="language-xml linenums">&lt;declare-styleable name="MyState"&gt; 
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;declare-styleable name="MyState"&gt; 
     &lt;attr name="windowSoftInputMode"&gt; 
         &lt;flag name="stateOne" value="0x01" /&gt; 
         &lt;flag name="stateTwo" value="0x10" /&gt; 
@@ -290,16 +286,16 @@ Ambertime        </title>
 <p>混合类型, 比如支持 <code>string|reference</code> 这种, 使用 <code>|</code> 竖线分隔开</p>
 </li>
 </ol>
-<h3 id="2">2. 其他资源文件</h3>
+<h3>2. 其他资源文件</h3>
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Bool">Bool</a> 布尔型, 只有(true/false)两个值</li>
 </ol>
 <p>使用 <code>R.bool.[name]</code>, <code>@bool/[name]</code> 来引用. 一般存放在 <code>values/bools.xml</code>. </p>
-<p><pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<p><pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;bool name="screen_small"&gt;true&lt;/bool&gt;
 &lt;/resources&gt;</code></pre>
 2. <a href="https://developer.android.com/guide/topics/resources/more-resources.html#Color">Color</a> 颜色, 一个 16 进制的值(#<em>RGB</em>, #<em>ARGB</em>, #<em>RRGGBB</em>, #<em>AARRGGBB</em>). 跟 <code>res/colors</code> 下的区别是, 这里的值一般只存储单一的颜色值. 使用 <code>R.color.[name]</code>, <code>@color/[name]</code> 来引用, 存放在 <code>values/colors.xml</code></p>
-<p><pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<p><pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
    &lt;color name="opaque_red"&gt;#f00&lt;/color&gt;
    &lt;color name="translucent_red"&gt;#80ff0000&lt;/color&gt;
 &lt;/resources&gt;</code></pre>
@@ -307,7 +303,7 @@ Ambertime        </title>
 <blockquote>
 <p>注意: Android 只有以上几种 dpi 比值, 当设备 dpi 和上设定的不完全相等时, 会取近似值. 比如 165 取得 160</p>
 </blockquote>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;dimen name="textview_height"&gt;25dp&lt;/dimen&gt;
     &lt;dimen name="font_size"&gt;16sp&lt;/dimen&gt;
 &lt;/resources&gt;</code></pre>
@@ -315,7 +311,7 @@ Ambertime        </title>
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Id">ID</a> 独一无二的 ID 值. 一般我们会在 layout 文件中直接用 <code>@+id/id_name</code> 来建立, 不过, 当我们有许多地方需要用到这个 id 时, 单独建立文件 <code>values/ids.xml</code> 来设置这个 id, 然后在需要的地方引用就可. 特别是 <code>ConstraintLayout</code> 这个需要前后引用 id 来设定 view 的位置时, 就减少了工作量, 不必总使用 <code>@+id/id_name</code> 来保证 id 一定存在了.  通过 <code>R.id.[name]</code>, <code>@id/[name]</code>  来引用. 存放在 <code>values/ids.xml</code></li>
 </ol>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;item type="id" name="button_ok" /&gt;
 &lt;/resources&gt;
 
@@ -325,14 +321,14 @@ Ambertime        </title>
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#Integer">Integer</a> 整数值, 通过 <code>R.integer.[name]</code>, <code>@integer/[name]</code> 来引用. 存放在 <code>values/integers.xml</code></li>
 </ol>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;integer name="max_speed"&gt;75&lt;/integer&gt;
 &lt;/resources&gt;</code></pre>
 
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#IntegerArray">Integer Array</a> 整型数值, 通赤 <code>R.array.[name]</code> 来引用. 使用 java 来解析. <code>getResources().getInArray(R.array.bits)</code>. 存放在 <code>values/integers.xml</code></li>
 </ol>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;integer-array name="bits"&gt;
         &lt;item&gt;4&lt;/item&gt;
         &lt;item&gt;8&lt;/item&gt;
@@ -344,7 +340,7 @@ Ambertime        </title>
 <ol>
 <li><a href="https://developer.android.com/guide/topics/resources/more-resources.html#TypedArray">Typed Array</a> 混合型数组, 可以引用其他的资源, 数组里可以是引用同一类型的值, 也可以是不同的类型, 当引用不同类型时, 在解析的时候就有注意判断类型值. 使用 <code>R.array.[name]</code> 引用, 然后有 Java 代码中使用 <code>obtainTypedArray()</code> 来解析具体的值. 存放在 <code>values/arrays.xml</code></li>
 </ol>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;array name="icons"&gt;
         &lt;item&gt;@drawable/home&lt;/item&gt;
         &lt;item&gt;@drawable/settings&lt;/item&gt;
@@ -353,7 +349,7 @@ Ambertime        </title>
 &lt;/resources&gt;</code></pre>
 
 <p>java 解析代码示例</p>
-<pre class="highlight"><code class="language-java linenums">TypedArray icons = getResources().obtainTypedArray(R.array.icons);
+<pre class="highlight line-numbers"><code class="language-java linenums">TypedArray icons = getResources().obtainTypedArray(R.array.icons);
 Drawable drawable = icons.getDrawable(0);</code></pre>
 
 <ol>
@@ -364,7 +360,7 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Array</a> 字符串数组. 使用 <code>R.array.[name]</code>, <code>@string/name</code> 引用. 放在 <code>values/strings.xml</code></p>
 </li>
 </ol>
-<pre class="highlight"><code class="language-Xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-Xml linenums">&lt;resources&gt;
     &lt;string-array name="planets_array"&gt;
         &lt;item&gt;Mercury&lt;/item&gt;
         &lt;item&gt;Venus&lt;/item&gt;
@@ -376,7 +372,7 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
 <ol>
 <li>
 <p><a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Plurals</a> 英文中的单复数形式</p>
-<pre class="highlight"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
     &lt;plurals name="numberOfSongsAvailable"&gt;
         &lt;item quantity="one"&gt;Znaleziono %d piosenkę.&lt;/item&gt;
         &lt;item quantity="few"&gt;Znaleziono %d piosenki.&lt;/item&gt;
@@ -395,76 +391,20 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -494,39 +434,7 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -538,85 +446,30 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -646,38 +499,6 @@ Drawable drawable = icons.getDrawable(0);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>
