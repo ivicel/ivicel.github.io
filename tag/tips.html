@@ -75,9 +75,9 @@ Ambertime - Tag tips        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag tips        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/python-tips.html" rel="bookmark" title="Permalink to python tips">python tips</a>
+                <h2 class="post-title"><a href="/2018/09/python-tips.html" rel="bookmark" title="Permalink to python tips">python tips</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag tips        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        a = (1, 2, [3, 4]) a[2] += [5, 6] # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6] # 这是因为 a[2] 在增量时是分成两步 # 一是把 a[2] 的列表值入栈 , 扩展成 [3, 4, 5, 6], 这是成功的 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError 不要把可变对象放在元组中 列表增量赋值不是一个原子 , 是分成两步进行的 , 其实也可以从...
+                        a = (1, 2, [3, 4]) a[2] += [5, 6] # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6] # 这是因为 a[2] 在增量时是分成两步 # 一是把 a[2] 的列表值入栈, 扩展成 [3, 4, 5, 6], 这是成功的 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError 不要把可变对象放在元组中 列表增量赋值不是一个原子, 是分成两步进行的, 其实也可以从...
                     </p>
                 </section>
             </div>
@@ -174,5 +174,13 @@ Ambertime - Tag tips        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

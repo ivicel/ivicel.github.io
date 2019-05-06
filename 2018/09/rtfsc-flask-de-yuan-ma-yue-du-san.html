@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+RTFSC: Flask 的源码阅读(三)        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" rel="canonical" />
+
+    <meta name="description" content="1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="flask">
+    <meta name="tags" content="python">
+    <meta name="tags" content="源代码阅读">
+    <meta name="tags" content="RTFSC">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="RTFSC: Flask 的源码阅读(三)"/>
+<meta property="og:description" content="1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None,..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-09-19 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="flask"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="源代码阅读"/>
+<meta property="article:tag" content="RTFSC"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "RTFSC: Flask 的源码阅读(三)",
+  "headline": "RTFSC: Flask 的源码阅读(三)",
+  "datePublished": "2018-09-19 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html",
+  "description": "1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None,..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">RTFSC: Flask 的源码阅读(三)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Wed 19 September 2018">Wed 19 September 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h4 id="1">1. 路由的实现</h4>
+<p>有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 <code>add_url_rule()</code> 方法, 装饰器是一种简洁明了的方式. </p>
+<pre class="highlight"><code class="language-python linenums">def add_url_rule(self, rule, endpoint=None, view_func=None,
+                 provide_automatic_options=None, **options):
+    # endpoint 默认使用的是函数名
+    if endpoint is None:
+        endpoint = _endpoint_from_view_func(view_func)
+    options['endpoint'] = endpoint
+    # 提供 HTTP 方法
+    # 1) methods 参数 2) 从 view_func 的 methods 属性 3) view_func 的 require_methods 属性
+    # 如果这两个都没提供, 则默认只支持 GET
+    methods = options.pop('methods', None)
+    if methods is None:
+        methods = getattr(view_func, 'methods', None) or ('GET',)
+    if isinstance(methods, string_types):
+        raise TypeError('Allowed methods have to be iterables of strings, '
+                        'for example: @app.route(..., methods=["POST"])')
+    methods = set(item.upper() for item in methods)
+
+    # Methods that should always be added
+    required_methods = set(getattr(view_func, 'required_methods', ()))
+
+    # provide_automatic_options 为非 None 时不会自动提供 OPTIONS 方法
+    if provide_automatic_options is None:
+        provide_automatic_options = getattr(view_func,
+            'provide_automatic_options', None)
+
+    if provide_automatic_options is None:
+        if 'OPTIONS' not in methods:
+            provide_automatic_options = True
+            required_methods.add('OPTIONS')
+        else:
+            provide_automatic_options = False
+
+    # Add the required methods now.
+    methods |= required_methods
+
+    rule = self.url_rule_class(rule, methods=methods, **options)
+    rule.provide_automatic_options = provide_automatic_options
+
+    self.url_map.add(rule)
+    if view_func is not None:
+        old_func = self.view_functions.get(endpoint)
+        if old_func is not None and old_func != view_func:
+            raise AssertionError('View function mapping is overwriting an '
+                                 'existing endpoint function: %s' % endpoint)
+        self.view_functions[endpoint] = view_func
+</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=RTFSC: Flask 的源码阅读(三)&amp;url=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/flask.html">flask</a><a href="/tag/python.html">python</a><a href="/tag/yuan-dai-ma-yue-du.html">源代码阅读</a><a href="/tag/rtfsc.html">RTFSC</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>

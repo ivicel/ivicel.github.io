@@ -75,9 +75,9 @@ Ambertime - Tag 缓存        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag 缓存        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-ying-pan-huan-cun-disklruccache.html" rel="bookmark" title="Permalink to Android 硬盘缓存 DiskLrucCache">Android 硬盘缓存 DiskLrucCache</a>
+                <h2 class="post-title"><a href="/2018/04/android-ying-pan-huan-cun-disklruccache.html" rel="bookmark" title="Permalink to Android 硬盘缓存 DiskLrucCache">Android 硬盘缓存 DiskLrucCache</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag 缓存        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码 , 只是官方推荐的一种实现方式 , 可以在 这里 找到源码 , 这个源码使用了其他几个自定义类里的方法 , 比如读行 , 出错打印 . Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存 , 可直接使用 , 可以在 这里 找到源码 . 另外一个 GitHub 备份地址 Android Developer Sample 里的源码没有有效的初始化...
+                        1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 这里 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 这里 找到源码. 另外一个 GitHub 备份地址 Android Developer Sample 里的源码没有有效的初始化...
                     </p>
                 </section>
             </div>
@@ -133,7 +133,7 @@ Ambertime - Tag 缓存        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/androidnei-cun-huan-cun-lrucache.html" rel="bookmark" title="Permalink to Android内存缓存LruCache">Android内存缓存LruCache</a>
+                <h2 class="post-title"><a href="/2018/04/androidnei-cun-huan-cun-lrucache.html" rel="bookmark" title="Permalink to Android内存缓存LruCache">Android内存缓存LruCache</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -143,7 +143,7 @@ Ambertime - Tag 缓存        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 . 传入的内存最大值的 单位 要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法 , 该方法返回值表示了每个元素的大小 , 以便确定缓存是否需要删除旧的元素 . 这个方法的默认实现是返回...
+                        1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小, 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. 传入的内存最大值的单位要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1. //...
                     </p>
                 </section>
             </div>
@@ -192,5 +192,13 @@ Ambertime - Tag 缓存        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

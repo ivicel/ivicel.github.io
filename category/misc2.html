@@ -75,9 +75,9 @@ Ambertime - Articles in the misc category        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -117,7 +117,7 @@ Ambertime - Articles in the misc category        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-san.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(三)">RTFSC: Flask 的源码阅读(三)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(三)">RTFSC: Flask 的源码阅读(三)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -127,7 +127,7 @@ Ambertime - Articles in the misc category        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 路由的实现 有两种方式来添加路由 , 通常使用装饰器来添加 , 其内部也是通过第二种 add_url_rule() 方法 , 装饰器是一种简洁明了的方式 . def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint =...
+                        1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint =...
                     </p>
                 </section>
             </div>
@@ -135,7 +135,7 @@ Ambertime - Articles in the misc category        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-er.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(二)">RTFSC: Flask 的源码阅读(二)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-er.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(二)">RTFSC: Flask 的源码阅读(二)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -145,7 +145,7 @@ Ambertime - Articles in the misc category        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调 , 在这我们也可以看到 # 只有...
+                        1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有...
                     </p>
                 </section>
             </div>
@@ -153,7 +153,7 @@ Ambertime - Articles in the misc category        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-yi.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(一)">RTFSC: Flask 的源码阅读(一)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(一)">RTFSC: Flask 的源码阅读(一)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -163,7 +163,7 @@ Ambertime - Articles in the misc category        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行 , 传入的的...
+                        使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行, 传入的的 WSGI...
                     </p>
                 </section>
             </div>
@@ -171,7 +171,7 @@ Ambertime - Articles in the misc category        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html" rel="bookmark" title="Permalink to 基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a>
+                <h2 class="post-title"><a href="/2018/09/ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html" rel="bookmark" title="Permalink to 基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植">基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -181,7 +181,7 @@ Ambertime - Articles in the misc category        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        steam-key-python 是 steam-key 的 python 移植 , 原开发基于 node.js. 使用到的主要开发包 : steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议 , 从 HTTP 升级到 Websocket 要发送以下 GET 请求 , 来协商 GET /websocket...
+                        steam-key-python 是 steam-key 的python 移植, 原开发基于 node.js. 使用到的主要开发包: steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商 GET /websocket HTTP/1.1...
                     </p>
                 </section>
             </div>
@@ -189,7 +189,7 @@ Ambertime - Articles in the misc category        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/python-tips.html" rel="bookmark" title="Permalink to python tips">python tips</a>
+                <h2 class="post-title"><a href="/2018/09/python-tips.html" rel="bookmark" title="Permalink to python tips">python tips</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -199,7 +199,7 @@ Ambertime - Articles in the misc category        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        a = (1, 2, [3, 4]) a[2] += [5, 6] # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6] # 这是因为 a[2] 在增量时是分成两步 # 一是把 a[2] 的列表值入栈 , 扩展成 [3, 4, 5, 6], 这是成功的 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError 不要把可变对象放在元组中 列表增量赋值不是一个原子 , 是分成两步进行的 , 其实也可以从...
+                        a = (1, 2, [3, 4]) a[2] += [5, 6] # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6] # 这是因为 a[2] 在增量时是分成两步 # 一是把 a[2] 的列表值入栈, 扩展成 [3, 4, 5, 6], 这是成功的 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError 不要把可变对象放在元组中 列表增量赋值不是一个原子, 是分成两步进行的, 其实也可以从...
                     </p>
                 </section>
             </div>
@@ -250,5 +250,13 @@ Ambertime - Articles in the misc category        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

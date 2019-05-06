@@ -74,7 +74,7 @@ Ambertime        </title>
 <meta property="og:site_name" content="Ambertime"/>
 <meta property="og:type" content="blog"/>
 <meta property="og:title" content="Ambertime"/>
-<meta property="og:description" content="View the blog."/>
+<meta property="og:description" content="Make memory in past times"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="/"/>
 <meta property="og:image" content="/theme/images/home-bg.jpg">
@@ -88,7 +88,7 @@ Ambertime        </title>
   "name": " Ambertime ",
   "url" : "/",
   "image": "/theme/images/home-bg.jpg",
-  "description": "View the blog."
+  "description": "Make memory in past times"
 }
 </script>    </head>
     <!-- TODO : Body class -->
@@ -99,9 +99,9 @@ Ambertime        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,6 +115,7 @@ Ambertime        </title>
           </span>
         </nav>
         <h1 class="blog-name"><a href="/">Ambertime</a></h1>
+        <span class="blog-description">Make memory in past times</span>
 
           <div class="blog-cover cover" style="background-image: url('/assets/images/header.jpg')">
       </div>
@@ -140,7 +141,7 @@ Ambertime        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-ying-pan-huan-cun-disklruccache.html" rel="bookmark" title="Permalink to Android 硬盘缓存 DiskLrucCache">Android 硬盘缓存 DiskLrucCache</a>
+                <h2 class="post-title"><a href="/2018/04/android-ying-pan-huan-cun-disklruccache.html" rel="bookmark" title="Permalink to Android 硬盘缓存 DiskLrucCache">Android 硬盘缓存 DiskLrucCache</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -150,7 +151,7 @@ Ambertime        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码 , 只是官方推荐的一种实现方式 , 可以在 这里 找到源码 , 这个源码使用了其他几个自定义类里的方法 , 比如读行 , 出错打印 . Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存 , 可直接使用 , 可以在 这里 找到源码 . 另外一个 GitHub 备份地址 Android Developer Sample 里的源码没有有效的初始化...
+                        1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 这里 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 这里 找到源码. 另外一个 GitHub 备份地址 Android Developer Sample 里的源码没有有效的初始化...
                     </p>
                 </section>
             </div>
@@ -158,7 +159,7 @@ Ambertime        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/androidnei-cun-huan-cun-lrucache.html" rel="bookmark" title="Permalink to Android内存缓存LruCache">Android内存缓存LruCache</a>
+                <h2 class="post-title"><a href="/2018/04/androidnei-cun-huan-cun-lrucache.html" rel="bookmark" title="Permalink to Android内存缓存LruCache">Android内存缓存LruCache</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -168,7 +169,7 @@ Ambertime        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小 , 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少 , 然后取其中的一部分作为值来传入 . 传入的内存最大值的 单位 要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法 , 该方法返回值表示了每个元素的大小 , 以便确定缓存是否需要删除旧的元素 . 这个方法的默认实现是返回...
+                        1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小, 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. 传入的内存最大值的单位要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1. //...
                     </p>
                 </section>
             </div>
@@ -176,7 +177,7 @@ Ambertime        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html" rel="bookmark" title="Permalink to AIDL生成的接口及Binder的分析">AIDL生成的接口及Binder的分析</a>
+                <h2 class="post-title"><a href="/2018/04/aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html" rel="bookmark" title="Permalink to AIDL生成的接口及Binder的分析">AIDL生成的接口及Binder的分析</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -186,7 +187,7 @@ Ambertime        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. Android 上的 Binder 1.1 Binder 的构架 1-2 Binder 的机制 2. AIDL 文件实现分析 Reference: 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道 , 信号 , 信号量 , Socket, 共享内存 , 互斥锁 . 但 Binder 能在 Android 这个特定的平台上会比其他更 高效 , 也更 安全 , 其他 IPC 没有严格权限验证机制 1.1 Binder 的构架 ​ Binder...
+                        1. Android 上的 Binder 1.1 Binder 的构架 1-2 Binder 的机制 2. AIDL 文件实现分析 Reference: 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 …
                     </p>
                 </section>
             </div>
@@ -194,7 +195,7 @@ Ambertime        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html" rel="bookmark" title="Permalink to Android Activity生命周期和启动模式">Android Activity生命周期和启动模式</a>
+                <h2 class="post-title"><a href="/2018/04/android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html" rel="bookmark" title="Permalink to Android Activity生命周期和启动模式">Android Activity生命周期和启动模式</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -204,7 +205,7 @@ Ambertime        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. Activity 的生命周期 2. Activity 的启动模式 3. Intent 的过滤规则 Reference: 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图 : 需要注意的几个点 : 当一个 Activity A 启动加一个 Activity B 时 , 只有 A 的...
+                        1. Activity 的生命周期 2. Activity 的启动模式 3. Intent 的过滤规则 Reference: 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图: 需要注意的几个点: 当一个 Activity A 启动加一个 Activity B 时, 只有 A 的 onPause...
                     </p>
                 </section>
             </div>
@@ -212,7 +213,7 @@ Ambertime        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/android-dui-xiang-xu-lie-hua-fang-shi.html" rel="bookmark" title="Permalink to Android 对象序列化方式">Android 对象序列化方式</a>
+                <h2 class="post-title"><a href="/2018/04/android-dui-xiang-xu-lie-hua-fang-shi.html" rel="bookmark" title="Permalink to Android 对象序列化方式">Android 对象序列化方式</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -222,7 +223,7 @@ Ambertime        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        Android 内序列化对象主要有两种方式 , 一是原 Java 自带的 Serializable 接口 , 二是 Android 内自有的 Parcelable 接口 1. Serializable 接口 Java 自带的序列接口使用非常简单 , 只要实现 Serializable 接口即可 . Serializable 接口只是一个标志类 , 系统会将实现了这个接口的类自动进行序列化 . 如果想自定义序列化 / 反序列化过程 , 可以自主实现 writeObject() 和...
+                        Android内序列化对象主要有两种方式, 一是原Java自带的Serializable接口, 二是Android内自有的Parcelable接口 1. Serializable接口 Java自带的序列接口使用非常简单, 只要实现Serializable接口即可. Serializable接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. 如果想自定义序列化/反序列化过程, 可以自主实现writeObject()和readObject(). 一般我们都不会这么做的...
                     </p>
                 </section>
             </div>
@@ -273,5 +274,13 @@ Ambertime        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

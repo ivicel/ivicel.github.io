@@ -75,9 +75,9 @@ Ambertime - Tag 算法        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -116,7 +116,7 @@ Ambertime - Tag 算法        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/a-ha-suan-fa-1.html" rel="bookmark" title="Permalink to 啊哈算法1">啊哈算法1</a>
+                <h2 class="post-title"><a href="/2018/04/a-ha-suan-fa-1.html" rel="bookmark" title="Permalink to 啊哈算法1">啊哈算法1</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -126,7 +126,7 @@ Ambertime - Tag 算法        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 简单桶排序 对于要排序的数据 , 其有范围在 n <= k <= m 之内 , 则令有 m - n + 1 个桶 , 然后对需要排序的 x 个数据 , 依次遍历后 , 装到对应的桶中 , 最后再对桶进行遍历可得到排序后的数据 . 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据 , 其值在 1 - 100 之间 , 则有桶的个数为 100 个 . 对数据进行遍历 , 每次把数据装到桶中 , 8 则装到 第 8 个桶 , 依次进行 . 最后再遍历这 100...
+                        1. 简单桶排序 对于要排序的数据, 其有范围在 n <= k <= m 之内, 则令有 m - n + 1 个桶, 然后对需要排序的 x 个数据, 依次遍历后, 装到对应的桶中, 最后再对桶进行遍历可得到排序后的数据. 比如有 [8, 5, 2, 3, 1, 5, 10] 这 7 个数据, 其值在 1 - 100 之间, 则有桶的个数为 100 个. 对数据进行遍历, 每次把数据装到桶中, 8 则装到 第 8 个桶, 依次进行. 最后再遍历这 100...
                     </p>
                 </section>
             </div>
@@ -134,7 +134,7 @@ Ambertime - Tag 算法        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/grokking-algorithms-3.html" rel="bookmark" title="Permalink to Grokking Algorithms-3">Grokking Algorithms-3</a>
+                <h2 class="post-title"><a href="/2017/04/grokking-algorithms-3.html" rel="bookmark" title="Permalink to Grokking Algorithms-3">Grokking Algorithms-3</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -144,7 +144,7 @@ Ambertime - Tag 算法        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        集合覆盖问题 (Set Covering) 假设某个广播节目在播出时要尽可能覆盖每个地方 , 现有一些广播电台 , 每个电台能在某几个地方播出 , 电台播出范围有重合 , 在怎么选择使用最少的电台覆盖到最多的地方 一种方法是使用贪婪算法 , 但有可能不是最佳解 , 近似最佳解 贪婪算法每次的选择都尽可能覆盖到最多的地方 , 重复这个直到全部地方被覆盖完 state_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az'])...
+                        集合覆盖问题(Set Covering) 假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方 一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解 贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完 state_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az']) #...
                     </p>
                 </section>
             </div>
@@ -152,7 +152,7 @@ Ambertime - Tag 算法        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/grokking-algorithms-1.html" rel="bookmark" title="Permalink to Grokking Algorithms-1">Grokking Algorithms-1</a>
+                <h2 class="post-title"><a href="/2017/04/grokking-algorithms-1.html" rel="bookmark" title="Permalink to Grokking Algorithms-1">Grokking Algorithms-1</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -162,7 +162,7 @@ Ambertime - Tag 算法        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        binary search 二分法查找 # 二分法查找 , 返回数值在 list 中的位置 , 否则返回 None def binary_search(num_list, item): # 确定查找的数在列表中 if item < num_list[0] or item > num_list[-1]: return None # 最小值位置 low = 0 # 最大值位置 high = len(num_list) - 1 while low <= high: # 中间位置 , 向下取整...
+                        binary search 二分法查找 # 二分法查找, 返回数值在 list 中的位置, 否则返回 None def binary_search(num_list, item): # 确定查找的数在列表中 if item < num_list[0] or item > num_list[-1]: return None # 最小值位置 low = 0 # 最大值位置 high = len(num_list) - 1 while low <= high: # 中间位置, 向下取整 mid...
                     </p>
                 </section>
             </div>
@@ -170,7 +170,7 @@ Ambertime - Tag 算法        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/grokking-algorithms-2.html" rel="bookmark" title="Permalink to Grokking Algorithms-2">Grokking Algorithms-2</a>
+                <h2 class="post-title"><a href="/2017/04/grokking-algorithms-2.html" rel="bookmark" title="Permalink to Grokking Algorithms-2">Grokking Algorithms-2</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -188,7 +188,7 @@ Ambertime - Tag 算法        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-7: 排序和搜索">Matserting Algorithms with C-7: 排序和搜索</a>
+                <h2 class="post-title"><a href="/2017/04/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html" rel="bookmark" title="Permalink to Matserting Algorithms with C-7: 排序和搜索">Matserting Algorithms with C-7: 排序和搜索</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -198,7 +198,7 @@ Ambertime - Tag 算法        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        插入排序 ( 选择排序 , 冒泡排序 Insertion Sort) 插入排序每次从数组里选出一个元素 , 和新数组里的元素一一进行对比 , 然后将新元素排到比它最大 / 小的元素的左或右边 , 时间复杂度为 O(n2) /* issort.c */ #include <stdlib.h> #include <string.h> /* data 指向数组 , size 是数组中元素个数 , esize 是每个元素的大小 , compare 是元素之间的比较函数 */ iint...
+                        插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include <stdlib.h> #include <string.h> /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void...
                     </p>
                 </section>
             </div>
@@ -248,5 +248,13 @@ Ambertime - Tag 算法        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

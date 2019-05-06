@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+Matserting Algorithms with C-7: 图        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2017/04/matserting-algorithms-with-c-7-tu.html" rel="canonical" />
+
+    <meta name="description" content="图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1,...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="算法">
+    <meta name="tags" content="C">
+    <meta name="tags" content="图">
+    <meta name="tags" content="数据结构">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="Matserting Algorithms with C-7: 图"/>
+<meta property="og:description" content="图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1,..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2017/04/matserting-algorithms-with-c-7-tu.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-04-02 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="算法"/>
+<meta property="article:tag" content="C"/>
+<meta property="article:tag" content="图"/>
+<meta property="article:tag" content="数据结构"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Matserting Algorithms with C-7: 图",
+  "headline": "Matserting Algorithms with C-7: 图",
+  "datePublished": "2017-04-02 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2017/04/matserting-algorithms-with-c-7-tu.html",
+  "description": "图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1,..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Matserting Algorithms with C-7: 图</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Sun 02 April 2017">Sun 02 April 2017</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <h3 id="graphs">图(Graphs)</h3>
+<p><img alt="图" src="../images/图.png" /></p>
+<p>图由<strong>顶点</strong>(vertices)和<strong>边</strong>(edges)组成, 图的边分为<strong>有向</strong>和<strong>无向</strong></p>
+<p>图表示为<code>G=(V, E)</code>, V 代表顶点的集合, E 和 V 是一种二元关系</p>
+<blockquote>
+<p>有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)}</p>
+<p>无向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)}</p>
+<p>有向图中<code>(1, 2)</code>代表中顶点 <code>1</code>指向顶点<code>2</code></p>
+</blockquote>
+<p>图中两个重要关系是<strong>邻接</strong>(adjacency)和<strong>关联</strong>(incidence)</p>
+<blockquote>
+<p>无向图中, 顶点相连就是邻接, 而在有向图中, 只有两个顶点都相互指向对方是才是邻接的, 上图 1 和 2 就不邻接</p>
+<p>关联是指顶点和边之间的关系. 有向图<code>(1, 2)</code>中称<code>1</code>关联到<code>2</code>, 无向图都是相互关联的</p>
+<p>顶点的入度(in-degree)是指以顶点为终点的边的数目</p>
+<p>顶点的出度(out-degree)是指以顶点为起点的边的数目</p>
+<p>无向图中入度和出度都指顶点边的数目</p>
+</blockquote>
+<p><strong>路径</strong>是依次遍历顶点序列之间的边所形成的轨迹. 如果存在一条<code>u</code>到<code>u&lt;sup&gt;'&lt;/sup&gt;</code>的路径, 则称<code>u</code>到<code>u&lt;sup&gt;'&lt;/sup&gt;</code>是可达的. 没有重复顶点的路径称为<strong>简单路径</strong></p>
+<p>如果从某顶点出发, 最后能够返回该顶点, 则称该路径为<strong>环</strong></p>
+<p>如果图中的每个顶点都能通过某条路径到达其他顶点, 对于无向图则称为<strong>连通</strong>, 对有向图称为<strong>强连通</strong>. 如果只有图中部分是连通的, 无向图中称为<strong>连通分支</strong>, 有向图中称为<strong>强连通分支</strong>. 如果移除某个结点, 使得图或分支推动连通性, 则称该顶点为<strong>关结点</strong>. 如果移除某条边使得图失去连通性, 则称该边为<strong>桥</strong></p>
+<p>计算机中通常使用<strong>邻接链表</strong>(adjacency-list representation)来表示图. 邻接表按照链表的方式组织, 链表中的每个结构都包含两个成员: 一个顶点和与该顶点邻接的顶点所组成的一个邻接表</p>
+<p>有向图中, 邻接表的顶点总数同总的边数相等; 无向图中, 邻接表的顶点总数是边的两倍</p>
+<p><img alt="邻接表" src="../images/邻接表.png" /></p>
+<ul>
+<li><strong>搜索方法</strong></li>
+</ul>
+<h4 id="breadth-first-search">广度优先算法(breadth-first search)</h4>
+<p>在进一步探索图中的顶点之前先访问当前顶点的所有邻接结点.</p>
+<blockquote>
+<ol>
+<li>开始前, 首先选择一个起始顶点并将其涂成灰色, 而其他顶点为白色. 然后把起始点单独置于一个队列中.  </li>
+<li>对于队列中的每个顶点(初始状态下只有起始顶点), 依次找出和队列首部顶点相邻接的顶点, 将其涂成灰色然后加入到队列末尾.  </li>
+<li>将队列首部顶点涂黑表示已经访问过, 然后出队; 继续访问下一个首部顶点, 回到第 3 步继续查找相邻接的顶点; 如果相邻接的顶点是白色, 表示还没有发现它, 将其涂成灰色, 并把它入队到末尾.  </li>
+<li>直到队列中没有任何顶点时, 完成搜索</li>
+</ol>
+</blockquote>
+<p><img alt="图广度优先算法" src="../images/图广度优先算法.png" /></p>
+<h4 id="depth-first-search">深度优先算法(depth-first search)</h4>
+<p>在访问某个顶点后, 递归地访问此顶点的所有未访问过的相邻顶点, 尽可能深的持续探索直到无法继续为止</p>
+<blockquote>
+<ol>
+<li>选择一个起始点并涂成灰色加入到栈中, 其他顶点涂为白色.  </li>
+<li>查找该顶点所有的邻接顶点, 如果是白色表示尚未发现该顶点, 则把该顶点涂成灰色并加入到栈中.  </li>
+<li>最后加入也即是栈顶的顶点, 以该顶点为起始点重复第 2 步; 这样依次循环递归第 2 和 3 步骤, 直到栈顶邻接的顶点全涂成灰色, 或是没有邻接的顶点</li>
+<li>当栈顶顶点没有邻接时或是邻接全是灰色时, 将栈顶涂成黑色, 表示已经访问过该顶点, 然后将其出栈.  </li>
+<li>对栈顶重复第 2, 3, 4 步骤, 直到所有的顶点都出栈.  </li>
+<li>当栈中所有顶点都出栈后, 如果图中还有白色顶点, 则选择其中的任意一个作为起始点, 从第 2 步骤开始, 直至图中所有的顶点都被涂成黑色</li>
+</ol>
+</blockquote>
+<p><img alt="图广度优先算法" src="../images/图广度优先算法.png" /></p>
+<p>图抽象数据类型头文件</p>
+<pre class="highlight"><code class="language-c linenums">/* graph.h */
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#include &lt;stdlib.h&gt;
+#include "list.h"
+#include "set.h"
+
+/* 邻接链表顶点结构 */
+typedef struct AdjList_ {
+    /* 顶点数据 */
+    void *vertex;
+    /* 邻接顶点集合 */
+    Set adjacent;
+}AdjList;
+
+/* 图结构 */
+typedef struct Graph_ {
+    /* 图中顶点数量 */
+    int vcount;
+    /* 图中边的数量 */
+    int ecount;
+
+    int (*match)(const void *key1, const void *key2);
+    void (*destroy)(void *data);
+    /* 链表 */
+    List adjlists;
+}Graph;
+
+typedef enum VertexColor_ {white, gray, black} VertexColor;
+/* 初始化 */
+void graph_init(Graph *graph, int (*match)(const void *key1, const void *key2),
+    void (*destroy)(void *data));
+/* 销毁 */
+void graph_destroy(Graph *graph);
+/* 插入顶点 */
+int graph_ins_vertex(Graph *graph, const void *data):
+/* 在 data1 和 data2 中建立邻接关系 */
+int graph_ins_edge(Graph *graph, const void *data1, const void *data2);
+/* 删除顶点 */
+int graph_rem_vertex(Graph *graph, void **data);
+/* 删除边 */
+int graph_rem_edge(Graph *graph, void **data);
+/* 取得顶点的邻接表 */
+int graph_adjlist(const Graph *graph, const void *data, AdjList **adjlist);
+/* 判断 data2 是否是 data1 的邻接点 */
+int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2);
+
+#define graph_adjlists(graph) ((graph)-&gt;adjlists)
+#define graph_vcount(graph) ((graph)-&gt;vcount)
+#define graph_ecount(graph) ((graph)-&gt;ecount)
+
+#endif</code></pre>
+
+<p>图的实现</p>
+<pre class="highlight"><code class="language-c linenums">/* graph.c */
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include "graph.h"
+#include "list.h"
+#include "set.h"
+
+/* 初始化 */
+void graph_init(Graph *graph, int (*match)(const void *key1, const void *key2),
+    void (*destroy)(void *data))
+{
+    graph-&gt;vcount = 0;
+    graph-&gt;ecount = 0;
+    graph-&gt;destroy = destroy;
+    graph-&gt;match = match;
+    /* 初始化图链表 */
+    list_init(&amp;graph-&gt;adjlists, NULL);
+}
+
+/* 销毁 */
+void graph_destroy(Graph *graph)
+{
+    AdjList *adjlist;
+
+    /* 删除每一个顶点 */
+    while (list_size(&amp;graph-&gt;adjlists) &gt; 0) {
+        /* 删除链表结点 */
+        if (list_rem_next(&amp;graph-&gt;adjlists, NULL, (void **)&amp;adjlist) == 0) {
+            /* 释放顶点的邻接顶点 */
+            set_destroy(&amp;adjlist-&gt;adjacent);
+            if (graph-&gt;destroy != NULL) {
+                graph-&gt;destroy(adjlist-&gt;vertex);
+            }
+            free(adjlist);
+        }
+    }
+    /* 删除链表 */
+    list_destroy(&amp;graph-&gt;adjlists);
+    memset(graph, 0, sizeof(Graph));
+}
+
+int graph_ins_vertex(Graph *graph, const void *data)
+{
+    ListElmt *element;
+    AdjList *adjlist;
+    int retval;
+
+    /* 确认没有重复数据存在图中链表里 */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        if (graph-&gt;match(data, ((AdjList *)list_data(element))-&gt;vertext)) {
+            return -1;
+        }
+    }
+    /* 顶点内存 */
+    if ((adjlist = (AdjList *)malloc(sizeof(AdjList))) == NULL) {
+        return -1;
+    }
+    adjlist-&gt;vertex = (void *)data;
+    /* 初始化新顶点邻接点 */
+    set_init(&amp;adjlist-&gt;adjacent, graph-&gt;match, NULL);
+    /* 将新顶点插入到链表尾部 */
+    if ((retval = list_ins_next(&amp;graph-&gt;adjlists, list_tail(&amp;graph-&gt;adjlists),
+        adjlist)) != 0) {
+        return retval;
+    }
+    /* 增加顶点数量 */
+    graph-&gt;vcount++;
+    return retval;
+}
+
+int graph_ins_edge(Graph *graph, const void *data1, const void *data2)
+{
+    ListElmt *element;
+    int retval;
+
+    /* 查找是否存在顶点数据 data2 */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL; 
+        element = list_next(element)) {
+        if (graph-&gt;match(data2, ((AdjList *)list_data(element))-&gt;vertex)) {
+            break;
+        }
+    }
+    /* 顶点不存在 */
+    if (element == NULL) {
+        return -1;
+    }
+
+    /* 查找是否存在顶点数据 data1 */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL; 
+        element = list_next(element)) {
+        if (graph-&gt;match(data1, ((AdjList *)list_data(element))-&gt;vertex)) {
+            break;
+        }
+    }
+    /* 顶点不存在 */
+    if (element == NULL) {
+        return -1;
+    }
+    /* 插入边关系集合 
+     * 邻接点集合里结点数据指向实际的数据, 而不是顶点结构
+     */
+    if ((retval = set_insert(&amp;((AdjList *)list_data(element)-&gt;adjacent, data2))) != 0) {
+        return retval;
+    }
+    graph-&gt;ecount++;
+    return 0;
+}
+/* 删除顶点 */
+int graph_rem_vertex(Graph *graph, void **data)
+{
+    ListElmt *element, *temp, *prev = NULL;
+    AdjList *adjlist;
+    int found = 0;
+
+    /*遍历链表中所有顶点, 找到匹配的顶点和邻接点 */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        /* 当该顶点是其他顶点的邻接点时, 不允许删除 */
+        if (set_is_memember(&amp;((AdjList *)list_data(element))-&gt;adjacent, *data)) {
+            return -1;
+        }
+        /* 找到匹配的顶点位置 */
+        if (graph-&gt;match(*data, ((AdjList *)list_data(element))-&gt;vertex)) {
+            temp = element;
+            found = 1;
+        }
+        if (!found) {
+            prev = element;
+        }
+    }
+    /* 未找到符合顶点 */
+    if (!found) {
+        return -1;
+    }
+    /* 不能删除有还有邻接点的顶点 */
+    if (set_size(&amp;((AdjList *)list_data(temp))-&gt;adjacent) &gt; 0) {
+        return -1;
+    }
+    /* 删除顶点 */
+    if (list_rem_next(&amp;graph-&gt;adjlists, prev, (void **)&amp;adjlist) != 0) {
+        return -1;
+    }
+
+    *data = adjlist-&gt;vertex;
+    free(adjlist);
+
+    graph-&gt;vcount--;
+    return 0;
+}
+
+int graph_rem_edge(Graph *graph, void *data1, void *data2)
+{
+    ListElmt *element;
+    /* 查找第一个顶点 */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        if (graph-&gt;match(data1, ((AdjList *)list_data(element))-&gt;vertex)) {
+            break;
+        }
+    }
+
+    if (element == NULL) {
+        return -1;
+    }
+    /* 将顶点的邻接边删除 */
+    if (set_remove(&amp;((AdjList *)list_data(element))-&gt;adjacent, data2) != 0) {
+        return -1;
+    }
+
+    graph-&gt;ecount--;
+    return 0;
+}
+/* 取得顶点 */
+int graph_adjlist(const Graph *graph, const void *data, AdjList **adjlist)
+{
+    ListElmt *element, *prev = NULL;
+    /* locate the adjacency list for the vertex */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        if (graph-&gt;match(data, ((AdjList *)list_data(element))-&gt;vertex)) {
+            break;
+        }
+        prev = element;
+    }
+    /* return if the vertex was not found */
+    if (element == NULL) {
+        return -1;
+    }
+    /* pass back the adjacency list for the vertex */
+    *adjlist = list_data(element);
+    return 0;
+}
+/* 判断邻接关系 */
+int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2)
+{   
+    ListElmt *element, *prev = NULL
+
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        if (graph-&gt;match(data1, ((AdjList *)list_data(element))-&gt;vertex)) {
+            break;
+        }
+        prev = element;
+    }
+
+    if (element == NULL) {
+        return -1;
+    }
+    return set_is_memember(&amp;((AdjList *)list_data(element))-&gt;adjacent, data2);
+}</code></pre>
+
+<p>图的应用: 计算网络跳数(Counting Network Hops)</p>
+<p><img alt="网络跳数" src="https://ivicel.github.io/images/网络跳数.png" /></p>
+<p>使用广度优先算法, 对于某个顶点的的邻接点, 其邻接点的跳数都等于该顶点跳数加上 1</p>
+<pre class="highlight"><code class="language-c linenums">/* bfs.c */
+#include &lt;string.h&gt;
+#include "graph.h"
+#include "list.h"
+#include "queue.h"
+#include "set.h"
+
+
+/* define a struct for vertices in a breadth-first search */
+typedef struct BfsVertext_ {
+    void *data;
+    /* 顶点颜色 */
+    VertexColor color;
+    int hops;
+}BfsVertex;
+
+int bfs(Graph *graph, BfsVertex *start, List *hops)
+{
+    Queue queue;
+    AdjList *adjlist, *clr_adjlist;
+    BfsVertex *clr_vertex, *adj_vertex;
+    ListElmt *element, *member;
+
+    /* 初始化顶点颜色 */
+    for (element = list_head(&amp;graph_adjlists(graph)); element != NULL;
+        element = list_next(element)) {
+        clr_vertex = ((AdjList *)list_data(element))-&gt;vertex;
+        if (graph-&gt;match(clr_vertex, start)) {
+            /* 确定起点 */
+            clr_vertex-&gt;color = gray;
+            clr_vertex-&gt;hops = 0;
+        } else {
+            clr_vertex-&gt;color = white;
+            clr_vertex-&gt;hops = -1;
+        }
+    }
+    /* 取得起始顶点 */
+    if (graph_adjlist(graph, start, &amp;clr_adjlist) != 0) {
+        return -1;
+    }
+
+    /* 将起始点加入队列中 */
+    queue_init(&amp;queue, NULL);
+    if (queue_enqueue(&amp;queue, clr_adjlist) != 0) {
+        queue_destroy(&amp;queue);
+        return -1;
+    }
+    /* 循环队列, 广度优先 */
+    while (queue_size(&amp;queue) &gt; 0) {
+        adjlist = queue_peek(&amp;queue);
+        /* 循环邻接点 */
+        for (member = set_head(&amp;adjlist-&gt;adjacent); member != NULL;
+            member = member-&gt;next) {
+            /* 注意集合结点存储的数据指向并不是一个顶点, 而是顶点指向的实际数据 */
+            adj_vertex = set_data(member);
+            /* 确认顶点存在于图中 */
+            if (graph_adjlist(graph, adj_vertex, &amp;clr_adjlist) != 0) {
+                queue_destroy(&amp;queue);
+                return -1;
+            }
+            clr_vertex = clr_adjlist-&gt;vertex;
+
+            if (clr_vertex-&gt;color == white) {
+                /* 如果顶点还没有添加到队列中, 将其涂成灰色并加入到队列里 */
+                clr_vertex-&gt;color = gray;
+                /*  队列首部顶点到达这个顶点所需跳数 + 1, 也即是起始点到该点的跳数 */
+                clr_vertex-&gt;hops = ((BfsVertex *)adjlist-&gt;vertex)-&gt;hops + 1;
+
+                if (queue_enqueue(&amp;queue, clr_adjlist) != 0) {
+                    queue_destroy(&amp;queue);
+                    return -1;
+                }
+            }
+        }
+        /* 队首部出队, 涂成黑色 */
+        if (queue_dequeue(&amp;queue, (void **)&amp;adjlist) == 0) {
+            ((BfsVertex *)adjlist-&gt;vertex)-&gt;color = black;
+        } else {
+            queue_destroy(&amp;queue);
+            return -1;
+        }
+    }
+    /* 完成循环成销毁队列 */
+    queue_destroy(&amp;queue);
+    /* 初始一个队列 hops */
+    list_init(hops, NULL);
+    for (element = list_head(&amp;graph_adjlist(graph)); element != NULL;
+        element = list_next(element)) {
+        clr_vertex = ((AdjList *)list_data(element))-&gt;vertex;
+        /* 对于 hops 值为即为到达该顶点所需最少跳数, -1 是不可到达的顶点 */
+        if (clr_vertex-&gt;hops != -1) {
+            if (list_ins_next(hops, list_tail(hops), clr_vertex) != 0) {
+                list_destroy(hops);
+                return -1;
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+
+<p>图的应用: 拓扑排序(Topological Sorting)</p>
+<pre class="highlight"><code class="language-c linenums">/* dfs.c */
+#include &lt;stdlib.h&gt;
+#include "graph"
+#include "list.h"
+#include "set.h"
+
+typedef struct DfsVertex_ {
+    void *data;
+    VertexColor color;
+}DfsVertex;
+
+static int dfs_main(Graph *graph, AdjList *adjlist, List *ordered)
+{
+    AdjList *clr_adjlist;
+    DfsVertex *clr_vertex, *adj_vertex;
+    ListElmt *member;
+    /* change the color of vertex to gray */
+    ((DfsVertex *)adjlist-&gt;vertex)-&gt;color = gray;
+    /* search its adjacency set */
+    for (member = set_head(&amp;adjlist-&gt;adjacent); member != NULL;
+        member = member-&gt;next) {
+        /* determine the color of the next adjacent vertex */
+        adj_vertex = set_data(member);
+        /* 取得该顶点 */
+        if (graph_adjlist(graph, adj_vertex, &amp;clr_adjlist) != 0) {
+            return -1;
+        }
+        clr_vertex = clr_adjlist-&gt;vertex;
+        /* move one vertex deeper when the next adjacent vertex is white */
+        /* 如果顶点是白色, 表明还没被访问过, 如果有邻接点, 继续向下层访问 */
+        if (clr_vertex-&gt;color == white) {
+            if (dfs_main(graph, clr_adjlist, ordered) != 0) {
+                return -1;
+            }
+        }
+    }
+    /* color the current vertex black and make it first in the list */
+    ((DfsVertex *)adjlist-&gt;vertex)-&gt;color = black;
+
+    if (list_ins_next(ordered, NULL, (DfsVertex *)adjlist-&gt;vertex) != 0) {
+        return -1;
+    }
+    return 0;
+}
+
+int dfs(Graph *graph, List *ordered)
+{
+    DfsVertex *vertex;
+    ListElmt *element;
+
+    /* initial all of the vertices in the graph */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        vertex = ((AdjList *)list_data(element))-&gt;vertex;
+        vertex-&gt;color = white;
+    }
+
+    /* initialize list */
+    list_init(ordered, NULL);
+    /* perform depth-first search */
+    for (element = list_head(&amp;graph-&gt;adjlists); element != NULL;
+        element = list_next(element)) {
+        /* ensure that every component of unconnected graphs is searched */
+        vertex = ((AdjList *)list_data(element))-&gt;vertex;
+        if (vertex-&gt;color == white) {
+            /* 确保所有顶点遍历到, 发生错误就退出 */
+            if (dfs_main(graph, (AdjList *)list_data(element), ordered) != 0) {
+                list_destroy(ordered);
+                return -1;
+            }
+        }
+    }
+    return 0;
+}
+</code></pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Matserting Algorithms with C-7: 图&amp;url=/2017/04/matserting-algorithms-with-c-7-tu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2017/04/matserting-algorithms-with-c-7-tu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2017/04/matserting-algorithms-with-c-7-tu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/suan-fa.html">算法</a><a href="/tag/c.html">C</a><a href="/tag/tu.html">图</a><a href="/tag/shu-ju-jie-gou.html">数据结构</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>

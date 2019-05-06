@@ -75,9 +75,9 @@ Ambertime - Tag RTFSC        </title>
     <p class="nav-label">Menu</p>
     <ul>
 
-              <li role="presentation"><a href="/pages/about.html">About</a></li>
-              <li role="presentation"><a href="/pages/archives.html">Archives</a></li>
-              <li role="presentation"><a href="/pages/category.html">Category</a></li>
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
 
     </ul>
   </div>
@@ -115,7 +115,7 @@ Ambertime - Tag RTFSC        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-san.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(三)">RTFSC: Flask 的源码阅读(三)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-san.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(三)">RTFSC: Flask 的源码阅读(三)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -125,7 +125,7 @@ Ambertime - Tag RTFSC        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 路由的实现 有两种方式来添加路由 , 通常使用装饰器来添加 , 其内部也是通过第二种 add_url_rule() 方法 , 装饰器是一种简洁明了的方式 . def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint =...
+                        1. 路由的实现 有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 add_url_rule() 方法, 装饰器是一种简洁明了的方式. def add_url_rule(self, rule, endpoint=None, view_func=None, provide_automatic_options=None, **options): # endpoint 默认使用的是函数名 if endpoint is None: endpoint =...
                     </p>
                 </section>
             </div>
@@ -133,7 +133,7 @@ Ambertime - Tag RTFSC        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-er.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(二)">RTFSC: Flask 的源码阅读(二)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-er.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(二)">RTFSC: Flask 的源码阅读(二)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -143,7 +143,7 @@ Ambertime - Tag RTFSC        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调 , 在这我们也可以看到 # 只有...
+                        1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有...
                     </p>
                 </section>
             </div>
@@ -151,7 +151,7 @@ Ambertime - Tag RTFSC        </title>
         <article class="post">
         <div class="inner">
             <header class="post-header">
-                <h2 class="post-title"><a href="/rtfsc-flask-de-yuan-ma-yue-du-yi.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(一)">RTFSC: Flask 的源码阅读(一)</a>
+                <h2 class="post-title"><a href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" rel="bookmark" title="Permalink to RTFSC: Flask 的源码阅读(一)">RTFSC: Flask 的源码阅读(一)</a>
                 </h2>
                 <span class="post-meta">
                         <a href="/author/ivicel.html">Ivicel</a>
@@ -161,7 +161,7 @@ Ambertime - Tag RTFSC        </title>
             </header>
                 <section class="post-excerpt">
                     <p>
-                        使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行 , 传入的的...
+                        使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行, 传入的的 WSGI...
                     </p>
                 </section>
             </div>
@@ -210,5 +210,13 @@ Ambertime - Tag RTFSC        </title>
 
         <!-- Script specified by the user -->
            <script type="text/javascript" src="/assets/js/prism.js"></script>
-       </body>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
 </html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+          <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+        <title>
+RTFSC: Flask 的源码阅读(一)        </title>
+
+
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="referrer" content="origin" />
+        <meta name="generator" content="Pelican" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/assets/images/favicon.png"
+        />
+        <link href="/" rel="canonical" />
+
+        <!-- Feed -->
+         
+        <link
+            href="/theme/css/style.css"
+            type="text/css"
+            rel="stylesheet"
+        />
+
+        <!-- Code highlight color scheme -->
+        <link
+            href="/theme/css/code_blocks/github.css"
+            rel="stylesheet"
+        />
+         <!-- CSS specified by the user -->
+  
+        <link href="/assets/css/prism.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/base-control.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/github.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/codemirror.css" type="text/css" rel="stylesheet" />
+  
+        <link href="/assets/css/ivicel.css" type="text/css" rel="stylesheet" />
+ 
+        <!-- Custom fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,300"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Lato"
+            rel="stylesheet"
+            type="text/css"
+        />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+  <link href="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" rel="canonical" />
+
+    <meta name="description" content="使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return...">
+
+    <meta name="author" content="ivicel">
+
+    <meta name="tags" content="flask">
+    <meta name="tags" content="python">
+    <meta name="tags" content="源代码阅读">
+    <meta name="tags" content="RTFSC">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="Ambertime"/>
+<meta property="og:title" content="RTFSC: Flask 的源码阅读(一)"/>
+<meta property="og:description" content="使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-09-18 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/ivicel.html">
+<meta property="article:section" content="misc"/>
+<meta property="article:tag" content="flask"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="源代码阅读"/>
+<meta property="article:tag" content="RTFSC"/>
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "RTFSC: Flask 的源码阅读(一)",
+  "headline": "RTFSC: Flask 的源码阅读(一)",
+  "datePublished": "2018-09-18 00:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "ivicel",
+    "url": "/author/ivicel.html"
+  },
+  "image": "/theme/images/post-bg.jpg",
+  "url": "/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html",
+  "description": "使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return..."
+}
+</script>    </head>
+    <!-- TODO : Body class -->
+    <body class="home-template">
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+              <li role="presentation"><a href="/pages/about/">About</a></li>
+              <li role="presentation"><a href="/pages/archives/">Archives</a></li>
+              <li role="presentation"><a href="/pages/category/">Category</a></li>
+
+    </ul>
+  </div>
+</nav>     <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="blog-header" >
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">RTFSC: Flask 的源码阅读(一)</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/ivicel.html">Ivicel</a>
+            | <time datetime="Tue 18 September 2018">Tue 18 September 2018</time>
+        </span>
+        <!-- TODO : Modified check -->
+      </div>
+    </header>
+
+        <section id="wrapper">
+            <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <blockquote>
+<p>使用自带的单线程 server 看源码</p>
+</blockquote>
+<h4 id="1-wsgi">1. 从 WSGI 开始</h4>
+<p>一个最简单的 Flask 程序</p>
+<pre class="highlight"><code class="language-python linenums">from flask import Flask
+
+app = Flask(__file__)
+
+@app.route('/')
+def index():
+    return 'Hello, world'
+
+if __name__ == '__main__':
+    app.run()</code></pre>
+
+<p>在 <code>run()</code> 方法中可以看到调用了 <code>werkzeug.serving.run_simple()</code> 来运行, 传入的的 <code>WSGI</code> 应用就是 <code>self</code> 也就是 <code>Flask</code> 对象. 根据 <code>WSGI</code> 协议, 其必定是一个 <code>callable_appliaction(environ, start_response)</code>. 所以下来查看类对象的 <code>__call__()</code> 方法. 可以看到真正的 <code>WSGI</code> 定义是 <code>Flask.wsgi_app()</code> 方法. </p>
+<p>代码文档也说明了这样定义的原因, 就是方便我们使用时做 <code>Middleware</code>, 只要 </p>
+<pre class="highlight"><code class="language-python linenums">app.wsgi_app = MyMiddleware(app.wsgi_app)</code></pre>
+
+<p>这样我们依旧还能使用 <code>Flask</code> 来方便的处理各种 HTTP 请求.</p>
+<pre class="highlight"><code class="language-python linenums">def wsgi_app(self, environ, start_response):
+    # 生成请求上下文
+    ctx = self.request_context(environ)
+    error = None
+    try:
+        try:
+            # 将其入栈
+            ctx.push()
+            # 派发请求 url 到对应的处理方法中
+            response = self.full_dispatch_request()
+        except Exception as e:
+            # 属于 HTTP 错误, 记录出错情况, 404, 501, 403...
+            error = e
+            response = self.handle_exception(e)
+        except:
+            # 系统程序错误
+            error = sys.exc_info()[1]
+            # 向上抛, 告知 WSGI server 程序产生了错误
+            raise
+        # 有 HTTP 返回结果
+        return response(environ, start_response)
+    finally:
+        # 
+        if self.should_ignore_error(error):
+            error = None
+        # 请求完毕时, 将请求出栈
+        ctx.auto_pop(error)</code></pre>
+
+<h4 id="2">2. 请求上下文都初看</h4>
+<p>在进入到 WSGI 之后, 根据传入的环境变量 <code>environ</code> 生成一个请求上下文对象 <code>RequestContext</code>, 调用对象的 <code>push</code> 方法.</p>
+<p>根据类的文档, 上下文把当前请求相当的东西都压入栈,  然后在请求完毕的时候把这些都出栈. 这个栈指的就是 <code>flask.global._request_ctx_stack</code>, 并且在弹出栈时, 调用所有在 <code>flask.Flask.teardown_request</code> 的注册方法.</p>
+<pre class="highlight"><code class="language-python linenums">class RequestContext(object):
+    def __init__(self, app, environ, request=None):
+        # app 就是 Flask() 对象
+        self.app = app
+        # 默认的 flask.wrapper.Request 实现是从 werkzeug.wrappers.Request 继承 
+        # 这样方便我们自己实现自己的 Request
+        if request is None:
+            request = app.request_class(environ)
+        self.request = request
+        # 创建一个 werkzeug.routing.MapAdapter 用于检测匹配 url
+        self.url_adapter = app.create_url_adapter(self.request)
+        self.flashes = None
+        self.session = None
+        self._implicit_app_ctx_stack = []
+        self.preserved = False
+        self._preserved_exc = None
+        self._after_request_functions = []
+        # 在这里对 url 进行了匹配
+        # self.request.url_rule 保存了匹配的 url
+        # self.request.view_args 保存了匹配的 query_args
+        # 匹配失败的话, self.request.routing_exception 保存了异常对象
+        self.match_request()</code></pre>
+
+<h4 id="3-requestcontext-appcontext">3. 所以什么是上下文: RequestContext, AppContext</h4>
+<p>flask 中实现了两个全局的上下文栈, <code>flask.globals</code> 文件内</p>
+<p>1) 请求上下文 <code>_request_ctx_stack</code>, 用来保存每一次 <code>HTTP Request</code> 的大部分信息, 每次请求开始时都会压入栈中, 在请求结束时被弹出栈. </p>
+<p>2) 应用上下文, 根据 <code>WSGI</code> 协议, <code>WSGI</code> 分为 <code>Server</code>, <code>Client</code>, <code>Middleware</code> 三种部件, 但这三种限定也是模糊的. 只要实现 <code>S</code> 和 <code>C</code> 端两个方向的都可以叫 <code>Middleware</code>. 所以我们可以把 <code>Flask</code> 请求再一次传给另一个 <code>WSGI Application</code> 来处理, 比如 <code>Django</code> 或者多个 <code>Flask</code> 程序, 或者处理完成再返还给 <code>Flask</code>, 这就有一个应用上下文. 而 flask 自己的应用上下文是在第一次收到 <code>request</code> 的时候生成的.</p>
+<p>上下文指的是, 简单理解就是记录<strong>一定区域内的信息</strong>, 离开这个区域, 这个信息就不存在了, 在这个区域内保证了一定的操作. 比如<code>with open</code>, 我们可以保证 打开/关闭 操作, 在这之内是 可读/可写 的. </p>
+<p><code>Flask</code> 内实现的上下文其实只是一个 Python 字典, 字典每一个值就对应一个 stack, 是一个 list. 因为请求是并发/并行的, 也有可能多个应用程序在同时运行.  所以字典的 key 是一个需要能区分不同线程/进程的值.</p>
+<pre class="highlight"><code class="language-python linenums">try:
+    # 首选 greenlet 的当前运行 greenlet 对象的标识符
+    from greenlet import getcurrent as get_ident
+except ImportError:
+    # 没有安装 greenlet 时, 使用当前线程的 thread_local 标识, 注意 py2/3 的兼容
+    try:
+        from thread import get_ident
+    except ImportError:
+        from _thread import get_ident</code></pre>
+
+<p>两个上下文都是一个栈, 都定义在 <code>flask.globals</code></p>
+<pre class="highlight"><code class="language-python linenums">_request_ctx_stack = LocalStack()
+_app_ctx_stack = LocalStack()</code></pre>
+
+<p>栈的实现在 <code>werkzeug.local</code> 中</p>
+<pre class="highlight"><code class="language-python linenums">class Local(object):
+    """
+        实际底层的数据实现, 使用 __slots__ 避免占用大量内存
+        __storage__ 为实际储存数据的字典
+        __ident_func__ 为 __storage__ 的 key
+        实现了一些 magic method 都很简单, 主要是要 get_ident
+    """
+    __slots__ = ('__storage__', '__ident_func__')
+
+    def __init__(self):
+        object.__setattr__(self, '__storage__', {})
+        object.__setattr__(self, '__ident_func__', get_ident)
+
+    def __iter__(self):
+        return iter(self.__storage__.items())
+
+    def __call__(self, proxy):
+        """Create a proxy for a name."""
+        return LocalProxy(self, proxy)
+
+    def __release_local__(self):
+        self.__storage__.pop(self.__ident_func__(), None)
+    # 因为我们把数据存储到 __storage__ 中, 对应的 setter, getter 方法
+    def __getattr__(self, name):
+        try:
+            return self.__storage__[self.__ident_func__()][name]
+        except KeyError:
+            raise AttributeError(name)
+
+    def __setattr__(self, name, value):
+        ident = self.__ident_func__()
+        storage = self.__storage__
+        # 每个独立的线程或者 greentlet 对象都有一个保存自己的字典
+        # 比如在多线程状态下多个 request 时, 就有
+        # 每个 request 都在 storage[thread_identification] = {'request': value}
+        # 注意存进来的 name 其实是最后的 key
+        try:
+            storage[ident][name] = value
+        except KeyError:
+            storage[ident] = {name: value}
+
+    def __delattr__(self, name):
+        try:
+            del self.__storage__[self.__ident_func__()][name]
+        except KeyError:
+            raise AttributeError(name)
+
+
+class LocalStack(object):
+    """
+        栈的实现, 回过来看
+        请求上下文: _request_ctx_stack = LocalStack()
+        应用上下文: _app_ctx_stack = LocalStack()
+    """
+
+    def __init__(self):
+        self._local = Local()
+
+    def __release_local__(self):
+        self._local.__release_local__()
+
+    def push(self, obj):
+        """
+            当在 RequestContext 里调用 _request_ctx_stack.push 时, 也就是相当
+            Local.__storage__[Local.__ident_func__()]['stack'] = [RequestContext()]
+            对于 _app_ctx_stack, 就是存了 AppContext 对象而已
+        """
+        rv = getattr(self._local, 'stack', None)
+        if rv is None:
+            self._local.stack = rv = []
+        rv.append(obj)
+        return rv
+
+    def pop(self):
+        """
+            弹出栈顶元素, 当最后只有一个元素在栈中的时候, 这时再弹出元素时, 会把这个栈置为 None
+            原因应该是因为这个实现 Request 也是要用的, 请求结束了, 这线程也不需要了
+            最终调用的是 Local.__release_local__
+            其实就是 __storage__.pop(__ident_func__(), None)
+        """
+        stack = getattr(self._local, 'stack', None)
+        if stack is None        if stack is None:
+            return None
+        elif len(stack) == 1:
+            release_local(self._local)
+            return stack[-1]
+        else:
+            return stack.pop()
+
+    @property
+    def top(self):
+        """返回栈顶"""
+        try:
+            return self._local.stack[-1]
+        except (AttributeError, IndexError):
+            return None
+</code></pre>
+
+<p>上下文其实是很简单的结构, 关键是怎么使用, 回过来, 我们知道, 请求到来时, 使用环境变量生成了一个请求上下文, 然后调用了对象的 <code>RequestContext.push()</code> 方法</p>
+<pre class="highlight"><code class="language-python linenums">class RequestContext(object):
+    def push(self):
+        # 查找当前请求栈中顶端的请求, 这里的 top 是 RequestContext 对象, 第一次为 None,
+        top = _request_ctx_stack.top
+        # RequestContext.preserved 代表这个请求是否保留,
+        # 在下一个请求(同一线程中)到来时, 把保留的请求弹出
+        if top is not None and top.preserved:
+            top.pop(top._preserved_exc)
+        # 确保这个请求栈带有应用上下文 AppContext 对象
+        # 如果请求被保留的话那么 app_ctx 不为 None, 这时我们就不再创建新的 AppContext
+        app_ctx = _app_ctx_stack.top
+        if app_ctx is None or app_ctx.app != self.app:
+            app_ctx = self.app.app_context()
+            app_ctx.push()
+            self._implicit_app_ctx_stack.append(app_ctx)
+        else:
+            self._implicit_app_ctx_stack.append(None)
+        # py3 移除了该方法, 清除当前线程的 exception 信息
+        if hasattr(sys, 'exc_clear'):
+            sys.exc_clear()
+        # 压入 Request 栈中
+        _request_ctx_stack.push(self)
+        # 第一次请求时, 创建一个新的 session
+        if self.session is None:
+            session_interface = self.app.session_interface
+            self.session = session_interface.open_session(
+                self.app, self.request
+            )
+            # 默认的 session 是实现在内存中的 python 对象
+            # 当网站并发达到一定规模或者需要分布式时, 我们也可以使用 redis 这样的数据库来实现
+            if self.session is None:
+                self.session = session_interface.make_null_session(self.app)
+</code></pre>
+
+<p>这样我们就清楚了, <code>_request_ctx_stack</code> 为我们保存了每一次的请求对象, 而且这个 <code>RequestContext</code> 对象还有对应指 <code>WSGI</code> 应用上下文, 存在对应的 <code>_app_ct_stack</code> 相同的线程标识符里的字典. 另外还有从客户端发过来的对应 <code>session</code> 信息, 这样回应一个请求的信息都具备完了.</p>
+<h4 id="reference">Reference:</h4>
+<ol>
+<li><a href="https://github.com/pallets/flask">https://github.com/pallets/flask</a></li>
+<li><a href="https://github.com/pallets/werkzeug">https://github.com/pallets/werkzeug</a></li>
+<li><a href="http://flask.pocoo.org">http://flask.pocoo.org</a></li>
+<li><a href="http://werkzeug.pocoo.org">http://werkzeug.pocoo.org</a></li>
+</ol>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=RTFSC: Flask 的源码阅读(一)&amp;url=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="/tag/flask.html">flask</a><a href="/tag/python.html">python</a><a href="/tag/yuan-dai-ma-yue-du.html">源代码阅读</a><a href="/tag/rtfsc.html">RTFSC</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+            <!-- TODO : Body class -->
+            <div
+                id="body-class"
+                style="display: none;"
+                class=""
+            ></div>
+
+            <footer id="footer">
+                <div class="inner">
+                    <section class="credits">
+      
+                        <span class="credits-theme">Theme
+                        <a
+                            href="https://github.com/arulrajnet/attila"
+                            rel="nofollow"
+                            >Attila</a
+                        ></span>
+                        <span class="credits-software">Published with
+                        <a
+                            href="https://github.com/getpelican/pelican"
+                            rel="nofollow"
+                            >Pelican</a
+                        ></span>
+                    </section>
+                </div>
+            </footer>
+        </section>
+
+        <script
+            type="text/javascript"
+            src="/theme/js/script.js"
+        ></script>
+
+        <!-- Script specified by the user -->
+           <script type="text/javascript" src="/assets/js/prism.js"></script>
+      <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113622715-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-113622715-2', { 'anonymize_ip': true });
+    </script>
+     </body>
+</html>
