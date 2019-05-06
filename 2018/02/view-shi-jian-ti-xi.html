@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -175,12 +171,12 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h5 id="view"><code>view</code>坐标和滑动方法</h5>
+                <h5><code>view</code>坐标和滑动方法</h5>
 <ul>
 <li>触摸事件<code>MotionEvent</code>和<code>TouchSlop</code></li>
 </ul>
@@ -194,7 +190,7 @@ Ambertime        </title>
 <li>滑动速度追踪<code>VelocityTracker</code></li>
 </ul>
 <p>滑动速度指的是在某一个时间段内的速度. </p>
-<pre class="highlight"><code class="language-java linenums">/* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
+<pre class="highlight line-numbers"><code class="language-java linenums">/* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
 VelocityTracker vt = VelocityTracker.obtain();
 vt.addMovement(event);
 /* 然后必须要先设定时间段以便计算出该时间内的速度, 最后再获取速度, 速度为负时表示向左滑动 */
@@ -208,7 +204,7 @@ vt.recycle();</code></pre>
 <ul>
 <li>手势检测<code>GestureDetector</code>, 单击, 滑动, 长按, 双击</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// 在view 里onTouchEvent中截断事件来进行监听
+<pre class="highlight line-numbers"><code class="language-java linenums">// 在view 里onTouchEvent中截断事件来进行监听
 GestureDetector mGestureDetector = new GestureDetector(context);
 // 设置是否需要长按
 mGestureDetector.setIsLongpressEnabled(false);
@@ -256,7 +252,7 @@ return mGestureDetector.onTouchEvent(event);</code></pre>
 <p><code>Scroller</code>类是一个滑动的<code>Helper</code>类, 其本质上是使用<code>view.scrollTo</code>方法来滑动, 但内部有一个可定义<code>Interpolator</code>类, 即插值属性来提供滑动变动曲线, 使得滑动更加的流畅.</p>
 </li>
 </ul>
-<pre class="highlight"><code class="language-Java linenums"> /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
+<pre class="highlight line-numbers"><code class="language-Java linenums"> /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
   * 在自定义 View 的构造方法获取一个 Scroller 实例
   * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用
   * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
@@ -300,13 +296,13 @@ return mGestureDetector.onTouchEvent(event);</code></pre>
      }
  }</code></pre>
 
-<h5 id="view_1"><code>view</code>事件的分发体系</h5>
+<h5><code>view</code>事件的分发体系</h5>
 <p>同一事件序列是指手指接触屏幕的那一刻起, 到手指离开屏幕的进结束, 这其中产的一系列事件. 这包括<code>ACTION_DOWN</code>和0个或多个<code>ACTION_MOVE</code>和<code>ACTION_UP</code>事件. </p>
 <p>在默认不做特殊处理的情况下一个事件序列只能被一个<code>view</code>处理</p>
 <p><code>view</code>的事件分发首先由<code>Activity</code>最先捕获, 然后一层一层的分发到具体的子<code>view</code>, 如果中途没有被截断的话;</p>
 <p>子<code>view</code>如果没有处理这个事件的话, 最后再沿路返回到<code>Activity</code>中.</p>
 <p>首先看<code>Activity#dispatchTouchEvent</code>和<code>PhoneWindow#superDispatchTouchEvent</code>代码</p>
-<pre class="highlight"><code class="language-java linenums">// Activity#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java linenums">// Activity#dispatchTouchEvent
 
 public boolean dispatchTouchEvent(MotionEvent ev) {
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -336,12 +332,12 @@ public boolean superDispatchTouchEvent(MotionEvent ev) {
 }</code></pre>
 
 <p><code>DecorView</code>继承了<code>FrameLayout</code>并实现了<code>RootViewSurfaceTracker</code>, <code>WindowCallbacks</code>. <code>DecorView</code>即是屏幕的总父<code>view</code>, 包括了标题栏和内容部分, 即是<code>setContentView</code>的父<code>view</code>. 其在接收到<code>view</code>事件后, 会继续向下派发, 由于<code>FrameLayout</code>并没覆写这个方法, 所以最终传到父<code>ViewGroup</code>来处理.   (<del>这火传的2333333</del>)</p>
-<pre class="highlight"><code class="language-java linenums">public boolean superDispatchTouchEvent(MotionEvent ev) {
+<pre class="highlight line-numbers"><code class="language-java linenums">public boolean superDispatchTouchEvent(MotionEvent ev) {
     return super.dispatchTouchEvent(ev);
 }</code></pre>
 
 <p><code>ViewGroup#dispatchTouchEvent</code>. <code>ViewGroup</code>会判断是否要向下一层<code>view</code>传递事件, 这样一层一层如此循环, 最终完成整个事件的分发.</p>
-<pre class="highlight"><code class="language-java linenums">// ViewGroup#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#dispatchTouchEvent
 
 public boolean dispatchTouchEvent(MotionEvent ev) {
     /* ..... */
@@ -407,7 +403,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
 </li>
 </ul>
 <p><code>ViewGroup</code>只在<strong>当为鼠标的左键(主按键)的按下事件并且屏幕能滚动时</strong>才会中断事件的派发, 否则默认不中断分发事件 </p>
-<pre class="highlight"><code class="language-java linenums">// ViewGroup#onInterceptTouchEvent
+<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#onInterceptTouchEvent
 
 public boolean onInterceptTouchEvent(ev) {
     if (ev.isFromSource(InputDevice.SOURCE_MOUSE) &amp;&amp;
@@ -425,7 +421,7 @@ public boolean onInterceptTouchEvent(ev) {
 <li>一是作为子<code>view</code>即像<code>TextView</code>之类时处理从<code>ViewGroup</code>派发下来的事件</li>
 <li>二是作为<code>ViewGroup</code>的父类, 处理<code>ViewGroup#dispatchTouchEvent</code>(实际是在<code>ViewGroup#dispatchTransformedTouchEvent</code>)调用父类的<code>dispatchTouchEvent</code>时</li>
 </ul>
-<pre class="highlight"><code class="language-java linenums">// View#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java linenums">// View#dispatchTouchEvent
 public boolean dispatchTouchEvent(MotionEvent event) {
     if (event.isTargetAccessibilityFocus()) {
         // We don't have focus or no virtual descendant has it, do not handle the event.
@@ -490,7 +486,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 }</code></pre>
 
 <p>来看 <code>View#onTouchEvent</code></p>
-<pre class="highlight"><code class="language-java linenums">// View#onTouchEvent
+<pre class="highlight line-numbers"><code class="language-java linenums">// View#onTouchEvent
 
 public boolean onTouchEvent(MotionEvent event) {
     final float x = event.getX();
@@ -699,76 +695,20 @@ public boolean onTouchEvent(MotionEvent event) {
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -798,39 +738,7 @@ public boolean onTouchEvent(MotionEvent event) {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -842,85 +750,30 @@ public boolean onTouchEvent(MotionEvent event) {
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -950,38 +803,6 @@ public boolean onTouchEvent(MotionEvent event) {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

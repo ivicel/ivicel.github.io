@@ -7,3 +7,7 @@
 article {
     overflow: visible;
 }
+
+pre.highlight {
+    font-size: 0.95em;
+}

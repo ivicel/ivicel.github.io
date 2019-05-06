@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -174,31 +170,19 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <div class="toc">
-<ul>
-<li><a href="#1-content-provider">1. Content Provider 的优势:</a></li>
-<li><a href="#2-content-uri">2. Content URI 的写法:</a><ul>
-<li><a href="#mime">MIME的写法</a></li>
-<li><a href="#androidmanifestxml">在AndroidManifest.xml中写法</a></li>
-<li><a href="#content-provider">创建一个自定义的Content Provider</a></li>
-<li><a href="#contentresolver-content-provider">除了使用ContentResolver外, 其他几种访问Content Provider方法</a></li>
-<li><a href="#contract-classses">Contract Classses</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h3 id="1-content-provider">1. Content Provider 的优势:</h3>
+                <p>[TOC]</p>
+<h3>1. Content Provider 的优势:</h3>
 <ol>
 <li>可以用来提供进程间的通信</li>
 <li>提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如<code>SQLite</code>, 文件, 或者从网络中获取</li>
 <li>提供了一个<code>权限</code>限制</li>
 </ol>
-<h3 id="2-content-uri">2. Content URI 的写法:</h3>
+<h3>2. Content URI 的写法:</h3>
 <blockquote>
 <p><code>content://</code> + <code>AUTHORITY</code> + <code>/表名</code></p>
 <p><code>content://com.example.myapp.provider/table1</code></p>
@@ -218,7 +202,7 @@ Ambertime        </title>
 <p>此时可以使用类<code>ContentUris</code>添加一个<code>id</code>, 类<code>Uri#withAppendedPath</code>也是一样, 只不过接收的是一个<code>String</code>类型</p>
 <p><code>Uri singleUri = ContentUris.withAppendedId(MyProvider.CONTENT_URI, id)</code></p>
 </blockquote>
-<h4 id="mime"><code>MIME</code>的写法</h4>
+<h4><code>MIME</code>的写法</h4>
 <hr />
 <blockquote>
 <ol>
@@ -231,11 +215,11 @@ Ambertime        </title>
 <p><code>ContentResolver</code>类中有两个预定义的<code>vendor</code></p>
 <p><code>ContentResolver.CURSOR_ITEM_BASE_TYPE = "vnd.android.cursor.item"</code></p>
 <p><code>ContentResolver.CURSOR_DIR_BASE_TYPE = "vnd.android.cursor.dir"</code></p>
-<h4 id="androidmanifestxml">在<code>AndroidManifest.xml</code>中写法</h4>
+<h4>在<code>AndroidManifest.xml</code>中写法</h4>
 <hr />
 <p>当非同一个程序中需要使用<code>Content Provider</code>时, 必须要在<code>AndroidManifest.xml</code>声明使用权限. 比如读写用户字典:<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
 <p>然而如果在同一程序中, 无论是否声明自定义权限, 原程序都有其读写的权限</p>
-<pre class="highlight"><code class="linenums">&lt;provider 
+<pre class="highlight line-numbers"><code class="linenums">&lt;provider 
           android:authorities="list" // 要和类中定义的认证名完全一样
           android:directBootAware=["true" | "false"] // unlock deivce之前进行启动privoder
           andorid:enabled=["true" | "false"] // 启用
@@ -267,13 +251,13 @@ Ambertime        </title>
 
 </code></pre>
 
-<h4 id="content-provider">创建一个自定义的<code>Content Provider</code></h4>
+<h4>创建一个自定义的<code>Content Provider</code></h4>
 <hr />
 <ol>
 <li>自定义一个类继承<code>ContentProvider</code>, 实现<code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code>方法</li>
 <li>使用<code>UriMatcher</code>类快速生成或者匹配<code>uri</code></li>
 </ol>
-<pre class="highlight"><code class="language-java linenums">
+<pre class="highlight line-numbers"><code class="language-java linenums">
 public class MyProvider extends ContentProvider {
 
     public static final String AUTHORITY = "com.example.myapp.MyProvider";
@@ -359,7 +343,7 @@ public class MyProvider extends ContentProvider {
 }
 </code></pre>
 
-<h4 id="contentresolver-content-provider">除了使用<code>ContentResolver</code>外, 其他几种访问<code>Content Provider</code>方法</h4>
+<h4>除了使用<code>ContentResolver</code>外, 其他几种访问<code>Content Provider</code>方法</h4>
 <hr />
 <ul>
 <li><code>Batch access</code></li>
@@ -384,7 +368,7 @@ public class MyProvider extends ContentProvider {
 <p>Tips: <code>FileProvider</code>在4.4以上会自动授权</p>
 </blockquote>
 <p>又例如, 即使没有声明<code>Manifest.permission.READ_CONTACTS</code>, 也可以使用一个<code>Intent.ACTION_PICK</code>来挑选个联系人加上<code>ContactsContrac.RawContacts.CONTENT_ITEM_TYPE</code>这个<code>uri</code>来获取一个联系人信息. 由于这些操作是在前台<code>UI</code>上执行的, 用户可以看到并且选择联系人是自己操作的, 相当用户同意授予了其读取联系人的权限</p>
-<h4 id="contract-classses"><code>Contract Classses</code></h4>
+<h4><code>Contract Classses</code></h4>
 <hr />
 <p>所谓<code>Contract Classes</code>是一些定义了一些<code>constants</code>, <code>content URIs</code>, <code>column names</code>, <code>intent actions</code></p>
 <p>例如<code>UserDictionary.Words.CONTENT_URI</code>, <code>UserDictionary.Words</code>, <code>ContactsContract</code></p>
@@ -396,76 +380,20 @@ public class MyProvider extends ContentProvider {
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -495,39 +423,7 @@ public class MyProvider extends ContentProvider {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -539,85 +435,30 @@ public class MyProvider extends ContentProvider {
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -647,38 +488,6 @@ public class MyProvider extends ContentProvider {
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

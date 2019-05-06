@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -175,13 +171,13 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h4 id="1">1. 概念, 性质, 实现</h4>
-<h5 id="11">1.1 定义</h5>
+                <h4>1. 概念, 性质, 实现</h4>
+<h5>1.1 定义</h5>
 <p>图是一个二元组 <code>G=(V, E)</code>, <code>V</code> 是非空有穷的顶点集合, <code>E</code> 是顶点的边, 也是顶点之间的相互直接联系</p>
 <p>图分为有向图, 无向图. 根据边的关系类型来分</p>
 <ul>
@@ -193,7 +189,7 @@ Ambertime        </title>
 <li><strong>简单路径</strong>: 不包含回路的路径</li>
 <li><strong>连通</strong>: 存在一条路径使得顶点 x 可以到达顶点 y, 则叫 x 到 y 是连通的. 注意到, 在有向图中, x -&gt; y 连通, 并不意味 y -&gt; x 也是连通的</li>
 </ul>
-<h4 id="12">1.2 一些图有名字的图</h4>
+<h4>1.2 一些图有名字的图</h4>
 <ol>
 <li>
 <p><strong>有根图</strong>: 图中至少存在一个顶点 v, 从顶点 v 能到图中的任意一个顶点, 意思顶点 v 和任意一个点都是连通的(<strong>注意边通不等于邻接</strong>). 这个顶点 v 就叫图的 <strong>根</strong>. <em>"至少"</em> 两个字说明一个有根图中可能存在许多个根</p>
@@ -244,20 +240,20 @@ Ambertime        </title>
 <p><strong>带权图</strong>: 图中的每条边都有一个权值</p>
 </li>
 </ol>
-<h5 id="12_1">1.2 图的表现形式</h5>
+<h5>1.2 图的表现形式</h5>
 <p>一般用两种形式来表现图, 一是邻接矩阵, 二是邻接表</p>
 <ul>
 <li><strong>邻接矩阵</strong>: 一个二维的数组, 图中的每一个元素表示其对应的顶点是否邻接. 如果是一个带权的邻接矩阵图, 一般我们会用一个无穷大来表示其不邻接. 然后可以用 0 来表示自身到自身是邻接的. 邻接矩阵的缺点就是占空间, 但其某个点到某个点是否为邻接是 <code>O(1)</code>, 因为是数组实现</li>
 <li><strong>邻接表</strong>: 用一个数组来记录所有的顶点, 然后这个数组元素里的顶点都有一个指针指向一个自己邻接顶点集合, 这个集合可以用数组或者用链表来实现. 集合中的邻接点不同的位置会导致我们在遍历图时有不同的顺序. 邻接表就是省空间, 而且使用链表实现的邻接集合也是很容易添加新的邻接关系, 但在查找邻接关系所需时间就需要看具体实现</li>
 </ul>
-<h5 id="13-python">1.3 在 Python 中图数据的实现</h5>
+<h5>1.3 在 Python 中图数据的实现</h5>
 <ul>
 <li>用两个 <code>list</code> 或者两个 <code>tuple</code> 都能很好的实现邻接矩阵</li>
 <li>我们也可以自定义一种 <code>dict</code> 对象, <code>{i: j}</code> 来表示邻接映射关系, 这种实现可以让我们很容易在 <code>O(1)</code> 查找到邻接关系, 但由于内置 <code>dict</code> 是一个顺序储存的 hash 实现, 在大型图上我们需要的容量比图的实际容量大. 还有需要用到一些 python 小技巧, 我们并存储非邻接关系, 而是使用 <code>dict.get</code> 来默认返回一个 <code>None</code> 值, 这样所需空间可以小些</li>
 <li>利用 <code>bytearray</code> 或者内置库 <code>array</code> 来实现, 这两种都是可变类型</li>
 <li>自定义类型来实现邻接表, 比如集合以上方法</li>
 </ul>
-<h5 id="14">1.4 图的遍历算法</h5>
+<h5>1.4 图的遍历算法</h5>
 <p>遍历指的是把图中的顶点都访问过一遍, 我们需要一个集合来记录已经访问过的顶点, 避免在回路中重复访问顶点, 另外一般图可能不是连通图, 我们可能需要重新选择一个起点来遍历图</p>
 <ul>
 <li><strong>深度优先</strong>: 总是先一条路径走到黑, 然后再从邻接点里选一个再走, 直到所有顶点都遍历</li>
@@ -270,23 +266,23 @@ Ambertime        </title>
 <li>依次访问队列头的顶点, 然后把该顶点的邻接点都加到队尾中</li>
 <li>循环上面操作直到队列中没有顶点为止(<strong>在连通图中</strong>)</li>
 </ul>
-<h4 id="2">2. 生成树</h4>
-<h5 id="21">2.1 什么是生成树</h5>
+<h4>2. 生成树</h4>
+<h5>2.1 什么是生成树</h5>
 <p>我们知道 1: 对于<strong>连通无向图/强连通图</strong>, 从任意一个顶点 v 都能到达其他任意顶点; 2: 对于<strong>有根有向图</strong>, 从根都可以到达任意一顶点. </p>
 <p><strong>生成树</strong>: 对于图 G 生成树是具有 G 所有的顶点, 并且边数<strong>最少</strong>的边通子图(因为条件是最少, 所以生成树不存在回路问题), 连通图的生成树可能有多个, 有根有向图只能是从根开始, 所以是一个</p>
 <ul>
 <li>生成树的边数: 如果 n 个顶点的连通图 G  生成树包含恰好 <code>n - 1</code> 条边, 所以在无向图的生成树就是其最小连通子图. 有向图的生成树中所有的边都位于从根到其他顶点的路径上</li>
 <li>包含 n 个顶点, m 个连通分量的无向图 G 的生成树恰好包含 <code>n - m</code> 条边</li>
 </ul>
-<h5 id="22">2.2 生成树构造方法</h5>
+<h5>2.2 生成树构造方法</h5>
 <ul>
 <li>依据图的深度优先算法构造的<strong>尝试优先生成树</strong></li>
 <li>依据图的广度优先算法构造的<strong>广度优先生成树</strong></li>
 </ul>
-<h4 id="3">3. 最小生成树</h4>
+<h4>3. 最小生成树</h4>
 <p>如果图是一个带权图, 那么其不同的生成树, 权值可能就不一样. 最小权值合的生成树便叫<strong>最小生成树</strong></p>
 <p>显然, 最小生成树也可能惟一. 下面是几种构造最小生成树的算法</p>
-<h5 id="31-kruskal">3.1 Kruskal 算法</h5>
+<h5>3.1 Kruskal 算法</h5>
 <p>如果图 G = (V, E) 是一个包含 n 个顶点的连通图, 构造最小生成树步骤如下</p>
 <ol>
 <li>初始时我们取 G 的所有的 n 个顶点, 形成一个孤立的图 <code>T = (V, {})</code>. 这样每一个顶点都是自成一个连通分量</li>
@@ -297,7 +293,7 @@ Ambertime        </title>
 <p>用来判断的条件我们可以构造一个集合, 初始时集合中包含所有的顶点, 每次找到一个邻接关系时, 把对应的邻接点都集合中去掉, 当的集合为空时, 便得到了最小生成树. </p>
 <p>而如果邻接边全都遍历过了, 并且集合也不为空, 说明没有得到最小生成树, 原图是不连通的</p>
 </blockquote>
-<h5 id="32-prim">3.2 Prim 算法</h5>
+<h5>3.2 Prim 算法</h5>
 <p>Prim 算法主要使用了 MST 性质:</p>
 <blockquote>
 <p>设有 <code>G = (V, E)</code> 图, U 是 V 的一个真子集, 当有一对邻接点(也是边) <code>e = (u, v), u ⊆ U, v ⊆ (V -U)</code>, 也就是说, 这两个邻接点, 一个点 u 是在集合 U 中, 另一个点不在集合 U中, 并且点 v 是点 u 所有在集合 (V - U) 中邻接边可能会最小的. 这样的话, 图 G 必定有一棵包括边 e 的最小生成树</p>
@@ -314,76 +310,20 @@ Ambertime        </title>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -413,39 +353,7 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -457,85 +365,30 @@ Ambertime        </title>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -565,38 +418,6 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

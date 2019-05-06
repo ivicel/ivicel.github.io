@@ -1,5 +1,5 @@
 /* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+bash+cpp+css-extras+git+http+hpkp+hsts+ini+java+javastacktrace+javadoclike+json+sql+python+javadoc+yaml&plugins=line-highlight+line-numbers+wpd+toolbar+highlight-keywords+command-line+show-language */
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+bash+cpp+git+http+hpkp+hsts+ini+java+javastacktrace+javadoclike+json+jsonp+json5+kotlin+markdown+makefile+jsdoc+sql+properties+python+js-extras+javadoc+yaml+regex&plugins=line-highlight+line-numbers+data-uri-highlight+toolbar+jsonp-highlight+highlight-keywords+command-line+show-language+copy-to-clipboard */
 /**
  * prism.js default theme for JavaScript, CSS and HTML
  * Based on dabblet (http://dabblet.com)
@@ -232,17 +232,6 @@ pre[class*="language-"].line-numbers > code {
 			text-align: right;
 		}
 
-code[class*="language-"] a[href],
-pre[class*="language-"] a[href] {
-	cursor: help;
-	text-decoration: none;
-}
-
-code[class*="language-"] a[href]:hover,
-pre[class*="language-"] a[href]:hover {
-	cursor: help;
-	text-decoration: underline;
-}
 div.code-toolbar {
 	position: relative;
 }

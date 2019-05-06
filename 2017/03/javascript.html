@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -171,12 +167,12 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <h4 id="_1">对象属性特征</h4>
+                <h4>对象属性特征</h4>
 <p>1.数据属性
 <code>[[Configurable]]</code> 能否通过 <code>delete</code> 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性
 <code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
@@ -187,25 +183,25 @@ Ambertime        </title>
 <code>[[Enumerable]]</code> 能否通过 <code>for-in</code> 循环返回属性
 <code>[[Get]]</code> 在读取属性时调用的函数
 <code>[[Set]]</code> 在写入属性时调用的函数</p>
-<h4 id="_2">对象属性查找</h4>
+<h4>对象属性查找</h4>
 <p>每当代码读取某个对象的某个属性时，都会执行一次搜索，目标是具有给定名字的属性。</p>
 <p>搜索首先从对象实例本身开始。如果在实例中找到了具有给定名字的属性，则返
 回该属性的值；</p>
 <p>如果没有找到，则继续搜索指针指向的原型对象，在原型对象中查找具有给定名字的属性。</p>
 <hr />
-<h4 id="_3">判断属性是否为对象本身属性或是在原型链中</h4>
+<h4>判断属性是否为对象本身属性或是在原型链中</h4>
 <p><code>hasOwnProperty()</code> 方法断访问是属性是否是在实例中</p>
 <p><code>in</code> 操作符会在通过对象能够访问给富属性时返回 <code>true</code>，无论该属性存在于实例中还是原型中。</p>
 <hr />
-<h4 id="_4">函数原型</h4>
+<h4>函数原型</h4>
 <p>只要创建一个函数，就会根据一组特定的规则为该函数创建一个 <code>prototype</code> 属性，该属性指向函数的原型对象</p>
 <p>默认的情况下，所有的原型对象都会自动获得一个 <code>constructor</code> (构造函数) 属性，这个属性包含一个指向 <code>prototype</code> 属性所在函数的指针</p>
 <p>当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向函数的原型对象。ECMAScript 5把这个指针叫做 <code>[[prototype]]</code> ，通过<code>Object.getPrototypeOf()</code> 访问到这个指针，或是使用非标准属性 <code>__proto__</code></p>
 <p><img alt="函数原型" src="../images/函数原型.png" /></p>
 <hr />
-<h4 id="_5">原型语法</h4>
+<h4>原型语法</h4>
 <p><strong>写法一</strong></p>
-<pre class="highlight"><code class="language-javascript linenums">function Person() {
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person() {
 }
 Person.prototype.name = "Nicholas";
 Person.prototype.age = 29;
@@ -215,7 +211,7 @@ Person.prototype.sayName = function() {
 }</code></pre>
 
 <p><strong>写法二</strong></p>
-<pre class="highlight"><code class="language-javascript linenums">function Person() {
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person() {
 }
 Person.prototype = {
     name: "Nicholas",
@@ -227,8 +223,8 @@ Person.prototype = {
 }</code></pre>
 
 <p><strong>写法二</strong>相当把 <code>Person.prototype</code> 重新指向新的对象</p>
-<h4 id="1">1. 工厂模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function createPerson(name, age, job) {
+<h4>1. 工厂模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function createPerson(name, age, job) {
     var o = new Object();
     o.name = name;
     o.age = age;
@@ -242,8 +238,8 @@ Person.prototype = {
 var person1 = createPerson("Nicholas", 29, "Software Egineer");
 var person2 = createPerson("Greg", 27, "Doctor");</code></pre>
 
-<h4 id="2">2.构造函数模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">    fucntion Person(name, age, job) {
+<h4>2.构造函数模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">    fucntion Person(name, age, job) {
         this.name = name;
         this.age = age;
         this.job = job;
@@ -257,8 +253,8 @@ var person2 = createPerson("Greg", 27, "Doctor");</code></pre>
 
     console.log(person1.sayName == person2.sayName); //false, 说明在两个对象中，sayName是不同的对象</code></pre>
 
-<h4 id="3">3.原型模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function Person() {
+<h4>3.原型模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person() {
 }
 Person.prototype.name = "Nicholas";
 Person.prototype.age = 29;
@@ -273,8 +269,8 @@ Person.prototype.sayName = function() {
     person2.sayName();  //"Nicholas"
     console.log(person1.sayName == person2.sayName); //true, 说明在两个对象中，sayName是相同的对象</code></pre>
 
-<h4 id="4">4.组合使用构造函数模式和原型模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function Person(name, age, job) {
+<h4>4.组合使用构造函数模式和原型模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person(name, age, job) {
     this.name = name;
     this.age = age;
     this.job = job;
@@ -297,8 +293,8 @@ console.log(person2.friends);       //"Shelby, Count"
 console.log(person1.friends === person2.friends);   //false
 console.log(person2.sayName === person2.sayName);   //true</code></pre>
 
-<h4 id="5">5.动态原型模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function Person(name, age, job) {
+<h4>5.动态原型模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person(name, age, job) {
     this.name = name;
     this.age = age;
     this.job = job;
@@ -313,8 +309,8 @@ console.log(person2.sayName === person2.sayName);   //true</code></pre>
 var friend = new Person("Nicholas", 29, "Software Engineer");
 friend.sayName();</code></pre>
 
-<h4 id="6">6.寄生构造函数模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function Person(name, age, job) {
+<h4>6.寄生构造函数模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person(name, age, job) {
     var o = new Object();
     o.name = name;
     o.age = age;
@@ -336,7 +332,7 @@ friend.sayName();       //"Nicholas"
 这种模式可以在行列的情况下用来为对象创建构造函数。<br />
 假如想创建一个具有额外方法的特殊数组，由于不能直接修改 <code>Array</code> 构造函数，可以使用这种模式</p>
 </blockquote>
-<pre class="highlight"><code class="language-javascript linenums">function SpecialArray() {
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function SpecialArray() {
     //创建数组
     var values = new Array();
     //添加值
@@ -352,8 +348,8 @@ friend.sayName();       //"Nicholas"
 var colors = new SpecialArray("red", "blue", "green");
 console.log(colors.toPipedString()); //"red|blue|green"</code></pre>
 
-<h4 id="7">7.稳妥构造函数模式</h4>
-<pre class="highlight"><code class="language-javascript linenums">function Person(name, age, job) {
+<h4>7.稳妥构造函数模式</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function Person(name, age, job) {
     var o = new Object();
 
     o.sayName = function() {
@@ -362,8 +358,8 @@ console.log(colors.toPipedString()); //"red|blue|green"</code></pre>
     return o;
 }</code></pre>
 
-<h4 id="_6">原型链</h4>
-<pre class="highlight"><code class="language-javascript linenums">function SuperType() {
+<h4>原型链</h4>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function SuperType() {
     this.property = true;
     //something else
 }
@@ -386,14 +382,14 @@ var instance = new SubType();
 console.log(instance.getSuperValue());      //true</code></pre>
 
 <p><img alt="函数继承原型链" src="https://ivicel.github.io/images/函数继承原型链.png" /></p>
-<h4 id="_7">原型链继承的问题</h4>
+<h4>原型链继承的问题</h4>
 <ul>
 <li>创建子类型时，原先的超类型实例属性变成了子类的原型属性</li>
 <li>创建子类型时，没有办法在不影响所有对象实例的情况下给超类型的构造函数传递对数</li>
 </ul>
-<h4 id="_8">继承方法</h4>
-<h5 id="1_1">1. 借用构造函数（伪造对象、经典继承）</h5>
-<pre class="highlight"><code class="language-javascript linenums">function SuperType(newColor) {
+<h4>继承方法</h4>
+<h5>1. 借用构造函数（伪造对象、经典继承）</h5>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function SuperType(newColor) {
     this.color = ["red", "blue", "green"];
 }
 
@@ -409,8 +405,8 @@ console.log(instance1.colors);  //"red,blue,green,yellow,black"
 var isntance1 = new SubType();
 console.log(instance2.colors);  //"red,blue,green,yellow"</code></pre>
 
-<h5 id="2_1">2. 组合继承（伪经典继承）</h5>
-<pre class="highlight"><code class="language-javascript linenums">function SuperType(name) {
+<h5>2. 组合继承（伪经典继承）</h5>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function SuperType(name) {
     this.name = name;
     this.colors = ["red", "blue", "green"];
 }
@@ -442,8 +438,8 @@ console.log(instance2.colors);  //"red,blue,green"
 instance2.sayName();    //"Greg"
 instance2.sayAge();     //27</code></pre>
 
-<h5 id="3_1">3. 原型式继承</h5>
-<pre class="highlight"><code class="language-javascript linenums">function object(o) {
+<h5>3. 原型式继承</h5>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function object(o) {
     function F() {}
     F.prototype = o;
     return new F();
@@ -473,7 +469,7 @@ console.log(person.friends);  //"Shelby,Court,Van,Rob,Barbie"</code></pre>
 <ul>
 <li><strong>使用一个参数</strong></li>
 </ul>
-<pre class="highlight"><code class="language-javascript linenums">var person = {
+<pre class="highlight line-numbers"><code class="language-javascript linenums">var person = {
     name: "Nicholas",
     friends: [
         "Shelby",
@@ -494,7 +490,7 @@ console.log(person.friends);  //"Shelby,Court,Van,Rob,Barbie"</code></pre>
 <ul>
 <li><strong>使用两个参数，参数传入方式与 <code>Object.definePrototies()</code> 相同</strong></li>
 </ul>
-<pre class="highlight"><code class="language-javascript linenums">var person = {
+<pre class="highlight line-numbers"><code class="language-javascript linenums">var person = {
     name: "Nicholas",
     friends: [
         "Shelby",
@@ -510,8 +506,8 @@ var anotherPerson = Object.create(person, {
 });
 console.log(anotherPerson.name);  //"Greg"</code></pre>
 
-<h5 id="4_1">4. 寄生式继承</h5>
-<pre class="highlight"><code class="language-javascript linenums">function createAnother(original) {
+<h5>4. 寄生式继承</h5>
+<pre class="highlight line-numbers"><code class="language-javascript linenums">function createAnother(original) {
     //通过调用函数创建一个新对象
     var clone = Object.create(original);
     //以某种方式来增强这个对象
@@ -535,8 +531,8 @@ var anotherPerson = createAnother(person);
 anotherPerson.sayHi();  //"hi"
 </code></pre>
 
-<h5 id="5_1">5. 寄生组合式继承</h5>
-<p><pre class="highlight"><code class="language-javascript linenums">function inheritPrototype(subType, superType) {
+<h5>5. 寄生组合式继承</h5>
+<p><pre class="highlight line-numbers"><code class="language-javascript linenums">function inheritPrototype(subType, superType) {
     //创建对象
     var prototype = Object.create(superType.prototype);
     //增强对象
@@ -574,76 +570,20 @@ var instance = new SubType("Nicholas", 29);</code></pre>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -673,39 +613,7 @@ var instance = new SubType("Nicholas", 29);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -717,85 +625,30 @@ var instance = new SubType("Nicholas", 29);</code></pre>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -825,38 +678,6 @@ var instance = new SubType("Nicholas", 29);</code></pre>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

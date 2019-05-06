@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-            name="google-site-verification"
-            content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
 Ambertime        </title>
@@ -20,20 +14,15 @@ Ambertime        </title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico"/>
-
         <!-- Canonical URL -->
         <link rel="canonical" href="" />
-
-        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="/theme/css/bootstrap.min.css" />
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/theme/css/hux-blog.min.css" />
-        <link rel="stylesheet" href="/assets/css/ivicel.css" />
-        <!-- Custom Fonts -->
-        <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-        <!-- Hux change font-awesome CDN to qiniu -->
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/theme/css/prism.css" />
+        <link rel="stylesheet" href="/theme/css/ivicel.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +30,31 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
 
-        <!-- ga & ba script hoook -->
-        <script></script>
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -71,15 +82,12 @@ Ambertime        </title>
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    <li>
-                        <a href="pages/about/">About</a>
-                    </li>
-                    <li>
-                        <a href="pages/archives/">Archives</a>
-                    </li>
-                    <li>
-                        <a href="pages/category/">Category</a>
-                    </li>
+                        <li>
+                            <a href="/archives">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="/about">ABOUT</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -141,19 +149,7 @@ Ambertime        </title>
 </script> 
         
 <!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/assets/images/header.jpg');
-    }
 
-    header.intro-header .header-mask{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: rgba(0,0,0, 0.3);
-    }
-</style>
 <header class="intro-header" >
     <div class="header-mask"></div>
     <div class="container">
@@ -177,13 +173,13 @@ Ambertime        </title>
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="container">
+<div class="container">
+    <article>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <p>字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等.</p>
-<h4 id="1">1. 字典的线性表实现</h4>
+<h4>1. 字典的线性表实现</h4>
 <ul>
 <li>使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 <code>O(1)</code>, 而在查找方面, 需要遍历所有的值, 所以是 <code>O(n)</code>, 删除操作也是一样需要 O(n). 基于这种表的字典: </li>
 <li>数据结构和算法简单, 检索方便</li>
@@ -196,8 +192,8 @@ Ambertime        </title>
 <li>在非有序实现中, 在表头插入时依旧是 O(1), 删除操作依旧顺序扫描整个表, 为 O(n)</li>
 <li>在有序实现中, 查找和插入都是 O(n). 因为链表都是得从表头开始查找</li>
 </ul>
-<h4 id="2">2. 基于散列表的实现</h4>
-<h5 id="21">2.1 简述</h5>
+<h4>2. 基于散列表的实现</h4>
+<h5>2.1 简述</h5>
 <p>如果我们数据在计算机存储方式是连续的, 那么我们只要知道一个数据的下标, 那么我们查找数据时总是 O(1), 而如果这个下标正好是我们的 key 值的话, 那么这个字典的查找就很快了.</p>
 <p>基于这种想法, 带来的问题有:</p>
 <ul>
@@ -205,12 +201,12 @@ Ambertime        </title>
 <li>即使 key 是整数, 可能也是很大的整数, 比如 18 位的身份证号就可能有 10<sup>18</sup> 个数(不考虑非法数值情况)</li>
 </ul>
 <p>解决问题的方法是, 定义一个函数 h(key), 函数参数为 key 值, 然后我们总是能得到一个较小的整数值. 这个函数称之为 hash 函数, 或者散列函数</p>
-<h5 id="22">2.2 冲突问题</h5>
+<h5>2.2 冲突问题</h5>
 <p>一般来说, key 的值是不确定性的, 可能会很大. 这就决定了, 如果我们在设计 hash 函数时产生的下标范围过小时, 在大量的 hash(key) 计算后, 总有可能得到相同的下标值. 比如我们采用 <code>mod 100</code> 来计算下标, 如果 key 的范围是 10000 甚至以上, 总会有相同的下标产生. 这时我们就称之为产生了冲突.</p>
 <p>如果冲突过多, 会导致哈希表查找效率下降. 但如果要完全无冲突, 就得使用一个很大的表. 我们需要一个负载因子系数来衡量这种情况.</p>
 <p><code>负载因子 𝜶 = 散列表中实际数据大小 n / 散列表的存储大小 m</code></p>
 <p>一般我们都会取 0.70, 0.75 左右的值, 也就是说, 表中数据存储的了 70% 左右就考虑扩容</p>
-<h5 id="23">2.3 散列函数</h5>
+<h5>2.3 散列函数</h5>
 <p>散列函数的设计优劣会影响散列表的性能, 在设计散列函数时, 应当考虑以下几点</p>
 <ul>
 <li>函数的值要在设计的散列表下标范围内, 如果总是超出, 我们只能扩大散列表, 不然这下标是无意义的</li>
@@ -243,15 +239,15 @@ Ambertime        </title>
    把数转换成其他进制数, 然后再使用除余法</p>
 </li>
 </ol>
-<h5 id="24">2.4 冲突的解决</h5>
+<h5>2.4 冲突的解决</h5>
 <ul>
 <li><strong>开地址法</strong>: 开地址法最主要的思想就是, 当冲突发生时, 就在散列表中的下一个为空的地方来放. 
   查找下一个空槽的方法也有多种, 像线性查找, 就是按顺序一个一个查找过去, 直到找到一个为空的槽. 这导致了当我们的散列表冲突比较多时, 查找会越来越长, 并且数据会比较集中在一个地方. 还有一种方法, 就是隔几个槽来放置而不是挨着放, 比如产生冲突时, 隔 3 个查找位置, 这样能稍微使数值平均分布些</li>
 <li><strong>溢出区方法</strong>: 设置一个溢出存储区, 一般是一个线性表. 当发生冲突时, 就把这个冲突的后来者放入来溢出存储区中. 然后在查找的时候, 查找到的是原先的冲突项, 如果槽是空说明值不存在. 如果是非空, 对比其中的数值标志, 不相同的话, 说明先前有过冲突, 再去溢出区查找, 直到找到或者找不到. 使用这种方法, 当溢出区增大时, 散列表性能会线性下降</li>
 <li><strong>桶散列</strong>:  我们假定散列中都有自己一个指针指向一个链表, 当发生冲突时, 我们就把新来的 key 加到指针指向的链表中, 这样我们在查找时, 如果链表长度不是 1, 那么按顺序遍历链表即可.</li>
 </ul>
-<h4 id="3">3. 集合</h4>
-<h5 id="31">3.1 简单线性表实现</h5>
+<h4>3. 集合</h4>
+<h5>3.1 简单线性表实现</h5>
 <p>使用线性表, 也就是数组, 链表之类的来实现集合, 简单, 快捷, 这两种实现性能一致的</p>
 <ul>
 <li><code>in</code>  操作: 因为要遍历整个表, 所以是 <code>O(n)</code></li>
@@ -260,16 +256,16 @@ Ambertime        </title>
 <li>交集, 并集, 差集这样操作会导致 <code>O(n&lt;sup&gt;2&lt;/sup&gt;)</code>, 因为总是要遍历两个集合所有元素</li>
 </ul>
 <p>如果我们让线性表总是保持其有序, 这样在查找的时候使用二分查找可以使用之降到 <code>O(logN)</code></p>
-<h5 id="32">3.2 散列表实现</h5>
+<h5>3.2 散列表实现</h5>
 <p>我们可以使用散列表来实现集合, 这样查找操作就变成了 <code>O(1)</code>. 在交集, 并集, 差集操作中, 只要 <code>O(m + n)</code></p>
-<h4 id="4-python-dict-set">4. Python 中的 dict 和 set</h4>
+<h4>4. Python 中的 dict 和 set</h4>
 <p>在 CPython 中这两者都是使用散列方法实现的</p>
 <ul>
 <li>dict 类型的 key 是一个不可变对象, 不可变对象都实现了 hashable 方法. 值可以是任意对象</li>
 <li>创建空或者很小的字典时, 初始容量为 8</li>
 <li>当负载因为超过 2/3 时自动扩大表的容量, 如果容量不大, 按 4 倍来扩大. 当容量超过 50000 时, 按 2 倍扩大</li>
 </ul>
-<h4 id="5">5. 二叉排序树</h4>
+<h4>5. 二叉排序树</h4>
 <ul>
 <li>二叉排序树的左子树上的值总是小于(有需要的话也可以等于根)</li>
 <li>二叉排序树的右子树上的值总是大于(有需要的话也可以等于根)</li>
@@ -288,76 +284,20 @@ Ambertime        </title>
 
             </div>  
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -387,39 +327,7 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
  
         
 <!-- Footer -->
@@ -431,85 +339,30 @@ Ambertime        </title>
 
                 <p class="copyright text-muted">
                     Copyright &copy; Ambertime 2019                    <br>
-                    Powered by <a href="">Ambertime</a> |
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
                         frameborder="0" scrolling="0" width="100px" height="20px"
                         src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
                     </iframe>
+                    
                 </p>
             </div>
         </div>
     </div>
 </footer> 
         
-
-        <!-- jQuery -->
         <script src="/theme/js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
         <script src="/theme/js/bootstrap.min.js"></script>
-
-        <!-- Custom Theme JavaScript -->
+        <script src="/theme/js/prism.js"></script>
         <script src="/theme/js/hux-blog.min.js"></script>
-
-        <!-- Service Worker -->
-
-        <!-- async load function -->
-        <script>
-            function async(u, c) {
-                var d = document,
-                    t = "script",
-                    o = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                o.src = u;
-                if (c) {
-                    o.addEventListener(
-                        "load",
-                        function(e) {
-                            c(null, e);
-                        },
-                        false
-                    );
-                }
-                s.parentNode.insertBefore(o, s);
-            }
-        </script>
-
-        <!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-        <!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
-    </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
-
+        <script src="/theme/js/snackbar.js"></script>
+        <script src="/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
-        <script>
-            async(
-                "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js",
-                function() {
-                    var $nav = document.querySelector("nav");
-                    if ($nav) FastClick.attach($nav);
-                }
-            );
-        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 
         <!-- Google Analytics -->
         <script>
-            // dynamic User by Hux
             var _gaId = "UA-113622715-2";
             var _gaDomain = "";
 
@@ -539,38 +392,6 @@ Ambertime        </title>
         </script>
 
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>
