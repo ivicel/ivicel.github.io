@@ -1,21 +1,18 @@
-{{ tag }}
 <div class="mini-post-list js-result d-none">
-    {% set current_date = "" %}
-    {% set flag = False %}
-    {% set first = True %}
+    {% set ns = namespace(current_date="", flag=False, first=True) %}
+
     {% for article in articles | sort(reverse=True, attribute="date") %}
-        
     <section>
-        {% if current_date != (article.date | strftime("%Y")) %}
-        {% set current_date = article.date | strftime("%Y") %}
-        {% set flag = True %}
-        {% if flag and first %}<hr>{% endif %}
-            {% set first = True %}
-            <span class="fa listing-seperator">
-                <span class="tag-text">{{ current_date }}</span>
-            </span>
+        {% if ns.current_date != article.date | strftime("%Y") %}
+        {% if ns.flag and not ns.first %}<hr>{% endif %}
+        {% set ns.current_date = article.date | strftime("%Y") %}
+        {% set ns.flag = True %}
+        {% set ns.first = False %}
+        <span class="fa listing-seperator">
+            <span class="tag-text">{{ ns.current_date }}</span>
+        </span>
         {% else %}
-            {% set first = False %}
+            {% set ns.first = False %}
         {% endif %}
             
         <div class="post-preview item" data-tags="{{ tag }}">
@@ -31,7 +28,7 @@
             </a>
         </div>
         
-        {% endfor %}
     </section>
+    {% endfor %}
 </div>
 		

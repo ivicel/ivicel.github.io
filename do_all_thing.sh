@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pelican -s pelicanconf.py -o ivicel.info -t themes/attila -D
+pelican -s pelicanconf.py -t themes/clean-blog -o ivicel.info -D
 git --work-tree ivicel.info --git-dir ivicel.github.io.git add .
 git --work-tree ivicel.info --git-dir ivicel.github.io.git commit -m "generate blog $(date)"
 git --work-tree ivicel.info --git-dir ivicel.github.io.git push origin master
