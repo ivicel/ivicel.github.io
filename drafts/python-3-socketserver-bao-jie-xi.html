@@ -292,16 +292,20 @@ Ambertime        </title>
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "ambertime";
-    var disqus_identifier = "Python 3 socketserver 包解析";
-    var disqus_url = "drafts/python-3-socketserver-bao-jie-xi.html";
+    var disqus_config = function () {
+        this.page.url = '/drafts/python-3-socketserver-bao-jie-xi.html';
+        this.page.identifier = 'Python 3 socketserver 包解析';
+        this.page.title = 'Python 3 socketserver 包解析';
+    };
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.src = '//ambertime.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <!-- disqus 公共JS代码 end -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>

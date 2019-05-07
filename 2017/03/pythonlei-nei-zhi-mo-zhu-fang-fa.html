@@ -772,16 +772,20 @@ __deepcopy__(self, memodict=)</code></pre>
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "ambertime";
-    var disqus_identifier = "Python类内置魔术方法";
-    var disqus_url = "2017/03/pythonlei-nei-zhi-mo-zhu-fang-fa.html";
+    var disqus_config = function () {
+        this.page.url = '/2017/03/pythonlei-nei-zhi-mo-zhu-fang-fa.html';
+        this.page.identifier = 'Python类内置魔术方法';
+        this.page.title = 'Python类内置魔术方法';
+    };
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.src = '//ambertime.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <!-- disqus 公共JS代码 end -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>

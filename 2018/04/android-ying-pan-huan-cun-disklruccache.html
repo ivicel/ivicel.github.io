@@ -746,16 +746,20 @@ private void trimToSize() throws IOException {
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "ambertime";
-    var disqus_identifier = "Android 硬盘缓存 DiskLrucCache";
-    var disqus_url = "2018/04/android-ying-pan-huan-cun-disklruccache.html";
+    var disqus_config = function () {
+        this.page.url = '/2018/04/android-ying-pan-huan-cun-disklruccache.html';
+        this.page.identifier = 'Android 硬盘缓存 DiskLrucCache';
+        this.page.title = 'Android 硬盘缓存 DiskLrucCache';
+    };
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.src = '//ambertime.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <!-- disqus 公共JS代码 end -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
