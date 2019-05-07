@@ -62,6 +62,8 @@ GOOGLE_ANALYTICS = 'UA-113622715-2'
 
 COPYRIGHT_YEAR = 2019
 
+DISQUS_SITENAME = 'ambertime'
+
 HOME_COVER = 'assets/images/header.jpg'
 # COLOR_SCHEME_CSS = 'monokai.css'
 CSS_OVERRIDE = ['assets/css/prism.css', 'assets/css/base.css', 'assets/css/base-control.css',

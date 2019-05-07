@@ -34,14 +34,14 @@
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<!-- Tags (as filter) -->
 			<div id='tag_cloud' class="tags tags-sup js-tags">
-				<a class="tag-button--all" data-encode="">
+				<a class="tag-button tag-button--all" data-encode="{{ SITEURL }}/tags.html">
 					Show All
 					<sup>{{ tags | length }}</sup>
 				</a>
 
 				{% for tag, articles in tags | sort_by_article_count %}
 				<a data-sort="{{ articles | length }}"
-					data-encode="{{ SITEURL }}/tag/{{ tag | urlencode }}"
+					data-encode="{{ SITEURL }}/{{ tag.url }}"
 					class="tag-button"
 					title="{{ tag }}" rel="{{ articles | length }}">
 					{{ tag }}
@@ -49,8 +49,8 @@
 				</a>
 				{% endfor %}
 			</div>
-
-			<iframe src="{{ SITEURL }}/{{ TAG_URL }}/">
+			
+			<div id="placeholder"></div>
 		</div>
 	</div>
 </div>
@@ -67,7 +67,19 @@
             //size: {start: 1, end: 1, unit: 'em'},
             color: {start: '#bbbbee', end: '#2f93b4'},
         };
-        $('#tag_cloud a').tagcloud();
+		$('#tag_cloud a').tagcloud();
+		
+		$('.tag-button').on('click', function(e) {
+			e.preventDefault();
+			let $this = $(this);
+			$.get($this.data('encode'), function(data) {
+				$('#placeholder').html(data);
+			});
+		});
+
+		$.get($('.tag-button--all').data('encode'), function(data) {
+			$('#placeholder').html(data);
+		});
+
 	</script>
-	<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/archive.js "></script>
 {% endblock %}
