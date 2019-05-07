@@ -50,8 +50,8 @@ YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 
 MENUITEMS = [
-    ('archives', '/archives'),
-    ('about', '/about')
+    ('archives', '/archives.html'),
+    ('about', '/about.html')
 ]
 
 STATIC_PATHS = ['assets']
@@ -72,7 +72,6 @@ JS_OVERRIDE = ['assets/js/prism.js']
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
     'i18n_subsites',
-    # 'pelican-toc',
     'sitemap',
     # 'cjk-auto-spacing'
 ]

@@ -18,6 +18,16 @@
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
             {{ page.content }}
+
+            <div>
+          {% if DISQUS_SITENAME %}
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                {% endif %}
+        </div>
         </div>
         <!-- Sidebar Container -->
         <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12
@@ -31,6 +41,7 @@
             <!-- Friends Blog -->
             {% include "partials/friends.html" %}
         </div>
+        
     </div>
 </div>
 
