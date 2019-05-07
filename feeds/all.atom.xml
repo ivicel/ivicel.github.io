@@ -749,7 +749,7 @@ public void test2() {
     } catch(Exception e) {}
 }&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4&gt;2. &lt;code&gt;@Transactional&lt;/code&gt; 自调用类中方法失效问题&lt;/h4&gt;
+&lt;h4&gt;2.4 &lt;code&gt;@Transactional&lt;/code&gt; 自调用类中方法失效问题&lt;/h4&gt;
 &lt;p&gt;Spring 的事务处理是基于 AOP, 通过动态代理生成一个类的代理对象, 而当我们在类的方法中再调用同一个类的事务方法, 其实际还是在同一个事务中, 是类自身的调用, 而不是代理调用, 这样就还是在同一次 AOP 中.&lt;/p&gt;
 &lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java linenums"&gt;@Service("userService")
 public class UserServiceImple implements IUserService {

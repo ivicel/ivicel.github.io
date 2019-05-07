@@ -85,10 +85,10 @@ Ambertime        </title>
                         <a href="https://ivicel.info/">Home</a>
                     </li>
                         <li>
-                            <a href="https://ivicel.info/archives">ARCHIVES</a>
+                            <a href="https://ivicel.info/archives.html">ARCHIVES</a>
                         </li>
                         <li>
-                            <a href="https://ivicel.info/about">ABOUT</a>
+                            <a href="https://ivicel.info/about.html">ABOUT</a>
                         </li>
                 </ul>
             </div>
@@ -569,7 +569,7 @@ public void test2() {
     } catch(Exception e) {}
 }</code></pre>
 
-<h4>2. <code>@Transactional</code> 自调用类中方法失效问题</h4>
+<h4>2.4 <code>@Transactional</code> 自调用类中方法失效问题</h4>
 <p>Spring 的事务处理是基于 AOP, 通过动态代理生成一个类的代理对象, 而当我们在类的方法中再调用同一个类的事务方法, 其实际还是在同一个事务中, 是类自身的调用, 而不是代理调用, 这样就还是在同一次 AOP 中.</p>
 <pre class="highlight line-numbers"><code class="language-java linenums">@Service("userService")
 public class UserServiceImple implements IUserService {
@@ -623,12 +623,22 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
                 </ul>
                 <hr style="visibility: hidden;">
 
+
                 <!-- disqus 评论框 start -->
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
                 <!-- disqus 评论框 end -->
             </div>  
+            <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         </div>
     </article>
 </div>
@@ -659,10 +669,10 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
         
         <script src="https://ivicel.info/theme/js/jquery.min.js"></script>
         <script src="https://ivicel.info/theme/js/bootstrap.min.js"></script>
+        <script src="https://ivicel.info/theme/js/animatescroll.min.js"></script>
         <script src="https://ivicel.info/theme/js/prism.js"></script>
         <script src="https://ivicel.info/theme/js/hux-blog.min.js"></script>
         <script src="https://ivicel.info/theme/js/snackbar.js"></script>
-        <script src="https://ivicel.info/theme/js/sw-registration.js"></script>
         <!--fastClick.js -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
         <script type="text/x-mathjax-config">
@@ -711,10 +721,46 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
             ga("send", "pageview");
         </script>
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+        <!-- Side Catalog -->
+
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'ambertime';
+    
+
+</script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
+<script src="https://ivicel.info/theme/js/jquery.nav.js"></script>
+
+<script type="text/javascript">
+    anchors.options = {
+        visible: 'always',
+        placement: 'right',
+        icon: '#'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }));
+    
     var disqus_config = function () {
         this.page.url = 'https://ivicel.info/2019/01/spring-shu-ju-ku-shi-wu-chu-li.html';
         this.page.identifier = 'Spring 数据库事务处理';
@@ -729,8 +775,6 @@ public class UserServiceImple implements IUserService, ApplicationContextAware {
     
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<!-- disqus 公共JS代码 end -->
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>
