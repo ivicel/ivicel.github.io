@@ -38,7 +38,7 @@ Tags: android, view绘制
 
 2. 普通子`view`的大小要受到父`ViewGroup`的`MeasureSpec.getMode`的值(`UNSPECIFIED`, `EXACTLY`, `AT_MOST`)影响.子`view`的大小指子`view`的**内容+左右`margin`+左右`padding`值**
 
-![子view的MeasureSpec](../images/子view的MeasureSpec.png)
+![子view的MeasureSpec](../../assets/images/子view的MeasureSpec.png)
 
 子`view`的测量要从父`ViewGroup`开始, 在`ViewGroup#measureChildWithMargins`中, 如果这个`view`支持`margin`, `padding`的话
 

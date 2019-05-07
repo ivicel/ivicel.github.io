@@ -14,7 +14,7 @@ tags: activity, android
 
 官方的生命周期图:
 
-![Activity Life Cycle](../images/activity_lifecycle.png)
+![Activity Life Cycle](../../assets/images/activity_lifecycle.png)
 
 需要注意的几个点:
 
@@ -35,7 +35,7 @@ tags: activity, android
 
 完整的`Fragment`和`Activity`生命周期图
 
-![Activity with Fragment life cycler](../images/complete_android_fragment_lifecycle.png)
+![Activity with Fragment life cycler](../../assets/images/complete_android_fragment_lifecycle.png)
 
 
 

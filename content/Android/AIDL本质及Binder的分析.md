@@ -14,7 +14,7 @@ Tags: aidl, 源码, 分析
 
 ​        Binder 通信是基于 **C/S 构架**. 多个 C 端可以同步连接 S 端, 所以 S 端需要**同步**设置
 
-![binder架构](../images/binder架构.jpg)
+![binder架构](../../assets/images/binder架构.jpg)
 
 #### 1-2 Binder 的机制
 
@@ -24,7 +24,7 @@ Tags: aidl, 源码, 分析
   `WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE)`
 * 这些都是在 native 和内核层帮助我们转换完成
 
-![binder机制](../images/binder机制.jpg)
+![binder机制](../../assets/images/binder机制.jpg)
 
 `Java`层的`Binder`主要与几个类(`Binder`, `BinderProxy`, `Stub`)和接口(`IBinder`, `IInterface)`有关
 
@@ -169,7 +169,7 @@ public interface BookManager extends IInterface {
 
 `AIDL` 的工作机制
 
-![AIDL里的Binder工作流程](../images/aidl_binder工作机制.jpeg)
+![AIDL里的Binder工作流程](../../assets/images/aidl_binder工作机制.jpeg)
 
 
 

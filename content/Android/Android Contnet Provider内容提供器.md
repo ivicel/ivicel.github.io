@@ -72,8 +72,8 @@ tags: android, content provider, 内容提供器
 
 然而如果在同一程序中, 无论是否声明自定义权限, 原程序都有其读写的权限
 
-```
-<provider 
+```xml
+<provider
           android:authorities="list" // 要和类中定义的认证名完全一样
           android:directBootAware=["true" | "false"] // unlock deivce之前进行启动privoder
           andorid:enabled=["true" | "false"] // 启用
@@ -106,11 +106,9 @@ tags: android, content provider, 内容提供器
 
 ```
 
-
-
 #### 创建一个自定义的`Content Provider`
 
---------------------------------------
+--------------------------------------;
 
 1. 自定义一个类继承`ContentProvider`, 实现`onCreate`, `query`, `insert`, `update`, `delete`, `getType`方法
 2. 使用`UriMatcher`类快速生成或者匹配`uri`

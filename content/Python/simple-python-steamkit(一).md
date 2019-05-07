@@ -96,7 +96,7 @@ sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs
 * 固定的 4 bytes magic number, 为 `0x31305456`
 * 4 bytes 的 消息类型, 消息的最高位为 protobuf 消息掩码位, `0` 表示非 protobuf, `1` 为 protobuf
 
-```
+```plain
 1. handshake packet: <ChannelEncryptRequest>, <ChannelEncryptResponse>, <ChannelEncryptResult>
 + + + + + + + + + + + + + + +
 |   4 bytes msg_len         |

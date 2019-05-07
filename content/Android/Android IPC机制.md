@@ -75,7 +75,7 @@ Android 应用启动时会自动创建一个新的进程, 其进程名默认为*
 
    > `Messenger` 类是 `final` 的, 不可能通过继承 `Messenger` 来重写传送数据方式
 
-   ![Messenger机制](../images/Messenger机制.jpeg)
+   ![Messenger机制](../../assets/images/Messenger机制.jpeg)
 
 
 

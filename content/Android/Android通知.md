@@ -18,11 +18,11 @@ tags: 通知, notification
 
 5. 在 Android 8.0(SDK 26) 之后, 如果 launcher 支持了未读通知的 badge, 当长按该 app 时会弹出一个通知, 可以像 notification drawer 左右滑掉或者点击, 即使 app 没有支持长按 shortcuts 也是可以弹出的通知的
 
-![notification-badges](../images/notification-badges.png)
+![notification-badges](../../assets/images/notification-badges.png)
 
 #### 1.2 通知基础结构
 
-![basic-notification](../images/basic-notification.png)
+![basic-notification](../../assets/images/basic-notification.png)
 
 1. Small icon: 通过 `setSmallIcon()` 来设置, 一般为 app 图标, 这个必须设置
 2. App name: 系统自动设置
@@ -138,7 +138,7 @@ builder.setContentIntent(pi)
 
 在 Android 4.1 之后, 通知可设置如下图的 action button, 通过 `addAction()` 来设置
 
-![notification-basic-action](../images/notification-basic-action.png)
+![notification-basic-action](../../assets/images/notification-basic-action.png)
 
 比如点击后, 产生一个广播的代码如下. 可以添加多个 action button
 
@@ -153,7 +153,7 @@ builder.addAction(R.drawable.ic_snooze, snoozeString, pi);
 
 #### 2.4 direct reply 直接回复按钮
 
-在 Android 7.0, API level 24 之后添加可以直接在通知栏回复消息的按钮. 点击前和点击后的样式如下图![reply-button1](../images/reply-button.png)
+在 Android 7.0, API level 24 之后添加可以直接在通知栏回复消息的按钮. 点击前和点击后的样式如下图![reply-button1](../../assets/images/reply-button.png)
 
 ```java
 private static final String KEY_TEXT_REPLY = "key_text_reply";
@@ -249,7 +249,7 @@ notificationManager.notify(id, repliedNotification);
 
 大图模式常见的是截图时的样式
 
-![bigpicturestyle](../images/bigpicturestyle.png)
+![bigpicturestyle](../../assets/images/bigpicturestyle.png)
 
 ```java
 Notification noti = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -263,7 +263,7 @@ Notification noti = new NotificationCompat.Builder(context, CHANNEL_ID)
 
 #### 3.2 BigTextStyle 多文本模式
 
-![large-text](../images/large-text.png)
+![large-text](../../assets/images/large-text.png)
 
 ```java
 builder.setStyle(new NotificationCompat.BigTextStyle()
@@ -286,7 +286,7 @@ builder.setStyle(new NotificationCompat.InboxStyle()
 
 #### 3.4 MessagingStyle
 
-像信息 app 一样能设置对话形式的样式![messaging-style](../images/messaging-style.png)
+像信息 app 一样能设置对话形式的样式![messaging-style](../../assets/images/messaging-style.png)
 
 ```java
 Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
@@ -307,7 +307,7 @@ v7 的包是继承了 v4 包的类, 在 API level 26 以上, v7 包类已经弃�
 
 MediaStyle 一般用于音乐播放器, 其界面类似下图
 
-![media-style](../images/media-style.png)
+![media-style](../../assets/images/media-style.png)
 
 MediaStyle 扩展界面最多可以添加 5 个按钮, 按钮的顺序从左到右为添加的顺序. 非扩展界面最多可以显示 3 个按钮. 显示的按从扩展界面添加的顺序中选出序号(0-4). 
 
@@ -341,7 +341,7 @@ builder = new NotificationCompat.Builder(this, CHANNEL_ID)
 
 在 Android 7.0, API 24 之后, 可以对通知按 app 来分组. 如果使用分组策略, 在低于 Android 7.0 的系统会忽略这个功能, 还是一条一条的发出来. 在 7.0 以上, 系统也会自动把一个 app 的 4 个及以上的通知归为一个组
 
-![notification-group](../images/notification-group.png)
+![notification-group](../../assets/images/notification-group.png)
 
 分组的使用方法是, 对想要分组的通知使用 `setGroup(key)` 来设置一个 group key, 拥有同一个 group key 的通知会被分到同一个组(这个通知要注意使用不同的 id, 因为这些通知都是独立的). 发送出这个通知后, 我们还要发送一个整理-归类通知, 告诉系统, 把上一个通知分到组里面, 而不是作为一个普通的通知显示出来. 
 
@@ -380,7 +380,7 @@ final Notification summaryNotification = new NotificationCompat.Builder(this,
 
 如果 `targetSdkVersion` 为 25 及以下, 那么无论运行在哪个系统上, 行为将和 Android 7.1 及以下版本一样
 
-![channel-settings](../images/channel-settings.png)
+![channel-settings](../../assets/images/channel-settings.png)
 
 #### 5.1 创建 channel 的步骤:
 
@@ -475,7 +475,7 @@ Android 系统内置了一些预定义默认的通知分类, 比如 `CATEGORY_AL
 
 在 Android 8.0, API 26 及以上, 用户可以通过设置 channel 的影响免打扰模式
 
-![do-not-disturb-filter-settings](../images/do-not-disturb-filter-settings.png)
+![do-not-disturb-filter-settings](../../assets/images/do-not-disturb-filter-settings.png)
 
 
 

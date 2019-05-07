@@ -3,7 +3,8 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
+        <meta name="google-site-verification" content="H97dWyn-QYy4n8BEw7ZAX8bFDDin_BwYiEOb3v_4dEs" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -178,7 +179,7 @@ Ambertime        </title>
                 <p><code>socketserver</code> 包实现了简单的 <code>socket</code> 通信任务. 一共有 4 种基础通信服务: <code>TCPServer</code>, <code>UDPServer</code>, <code>UnixStreamServer</code>, <code>UnixDatagramServer</code>. 基于 tcp/udp, unix stream 的. 这 4 种是同步的, 另外有基于进程和线程服务混合类可用来实现异步(多线程/多进程)服务器, <code>ForkingMixIn</code> 只能用于支持 POSIX 系统, <code>ThreadingMixIn</code> 可用于线程服务器. </p>
 <p>包内实现了基础的异步(多线程/多进程)服务器示例 <code>ForkingTCPServer</code>, <code>ForkingUDPServer</code>, <code>ThreadingTCPServer</code>, <code>ThreadingUDPServer</code>. 要注意, 如果实现自己的异步服务器, 继承顺序要先继承 mixin 类再继承 server 类, mixin 类中覆盖了 如 <code>class ForkingTCPServer(ForkingMixIn, TCPServer)</code></p>
 <p>主要类的基本继承:</p>
-<pre class="highlight line-numbers"><code class="linenums">+------------+
+<pre class="highlight line-numbers"><code class="language-plain linenums">+------------+
 | BaseServer |
 +------------+
       |

@@ -37,4 +37,4 @@ tags: view, 坐标
 3. 重写`view.onLayout`方法
 4. 重写`Activity.onWindowFocusChange`方法
 
-![view坐标](../images/view坐标.png)
+![view坐标](../../assets/images/view坐标.png)

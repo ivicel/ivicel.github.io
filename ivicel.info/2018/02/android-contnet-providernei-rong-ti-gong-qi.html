@@ -3,7 +3,8 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
+        <meta name="google-site-verification" content="H97dWyn-QYy4n8BEw7ZAX8bFDDin_BwYiEOb3v_4dEs" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -219,7 +220,7 @@ Ambertime        </title>
 <hr />
 <p>当非同一个程序中需要使用<code>Content Provider</code>时, 必须要在<code>AndroidManifest.xml</code>声明使用权限. 比如读写用户字典:<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
 <p>然而如果在同一程序中, 无论是否声明自定义权限, 原程序都有其读写的权限</p>
-<pre class="highlight line-numbers"><code class="linenums">&lt;provider 
+<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;provider
           android:authorities="list" // 要和类中定义的认证名完全一样
           android:directBootAware=["true" | "false"] // unlock deivce之前进行启动privoder
           andorid:enabled=["true" | "false"] // 启用
@@ -252,7 +253,7 @@ Ambertime        </title>
 </code></pre>
 
 <h4>创建一个自定义的<code>Content Provider</code></h4>
-<hr />
+<p>--------------------------------------;</p>
 <ol>
 <li>自定义一个类继承<code>ContentProvider</code>, 实现<code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code>方法</li>
 <li>使用<code>UriMatcher</code>类快速生成或者匹配<code>uri</code></li>

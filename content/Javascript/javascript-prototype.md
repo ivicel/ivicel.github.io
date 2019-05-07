@@ -43,7 +43,7 @@ date: 2017-03-21
 
 当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向函数的原型对象。ECMAScript 5把这个指针叫做 `[[prototype]]` ，通过`Object.getPrototypeOf()` 访问到这个指针，或是使用非标准属性 `__proto__`
 
-![函数原型](../images/函数原型.png)
+![函数原型](../../assets/images/函数原型.png)
 
 -----------
 
@@ -263,7 +263,7 @@ console.log(instance.getSuperValue());      //true
 ```
 
 
-![函数继承原型链](https://ivicel.github.io/images/函数继承原型链.png)
+![函数继承原型链](../../assets/images/函数继承原型链.png)
 
 #### 原型链继承的问题
 - 创建子类型时，原先的超类型实例属性变成了子类的原型属性
@@ -459,7 +459,7 @@ SubType.prototype.sayAge = function() {
 
 var instance = new SubType("Nicholas", 29);
 ```
-![寄生组合式继承](../images/寄生组合式继承.png)
+![寄生组合式继承](../../assets/images/寄生组合式继承.png)
 
 
 

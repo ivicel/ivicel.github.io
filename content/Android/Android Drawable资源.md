@@ -125,7 +125,7 @@ layer-list 会把一组设置好的 drawable 按顺序从堆叠起来. 跟 level
 </layer-list>
 ```
 
-![layer-list textview示例](../images/layer-list textview示例.png)
+![layer-list textview示例](../../assets/images/layer-list-textview示例.png)
 
 ### 5. StateListDrawable(selector 标签)
 
@@ -286,7 +286,7 @@ clip 标签的 level 设置需要使用 `Drawable#setLevel()` 来设置, 比如 
 </clip>
 ```
 
-![clip_gravity_center](../images/clip_gravity_center.png)
+![clip_gravity_center](../../assets/images/clip_gravity_center.png)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -297,7 +297,7 @@ clip 标签的 level 设置需要使用 `Drawable#setLevel()` 来设置, 比如 
 </clip>
 ```
 
-![clip_gravity_left](../images/clip_gravity_left.png)
+![clip_gravity_left](../../assets/images/clip_gravity_left.png)
 
 ### 10. ScaleDrawable(scale 标签)
 

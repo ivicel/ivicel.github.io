@@ -3,7 +3,8 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
+        <meta name="google-site-verification" content="H97dWyn-QYy4n8BEw7ZAX8bFDDin_BwYiEOb3v_4dEs" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -276,7 +277,7 @@ sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs
 <li>固定的 4 bytes magic number, 为 <code>0x31305456</code></li>
 <li>4 bytes 的 消息类型, 消息的最高位为 protobuf 消息掩码位, <code>0</code> 表示非 protobuf, <code>1</code> 为 protobuf</li>
 </ul>
-<pre class="highlight line-numbers"><code class="linenums">1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
+<pre class="highlight line-numbers"><code class="language-plain linenums">1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
 + + + + + + + + + + + + + + +
 |   4 bytes msg_len         |
 + - - - - - - - - - - - - - +
