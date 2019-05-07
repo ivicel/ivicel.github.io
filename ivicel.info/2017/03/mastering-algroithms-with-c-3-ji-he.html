@@ -633,16 +633,20 @@ int cover(Set *members, Set *subsets, Set *covering)
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "ambertime";
-    var disqus_identifier = "Mastering Algroithms with C-3: 集合";
-    var disqus_url = "2017/03/mastering-algroithms-with-c-3-ji-he.html";
+    var disqus_config = function () {
+        this.page.url = '/2017/03/mastering-algroithms-with-c-3-ji-he.html';
+        this.page.identifier = 'Mastering Algroithms with C-3: 集合';
+        this.page.title = 'Mastering Algroithms with C-3: 集合';
+    };
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.src = '//ambertime.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <!-- disqus 公共JS代码 end -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
