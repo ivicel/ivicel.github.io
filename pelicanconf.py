@@ -58,11 +58,10 @@ STATIC_PATHS = ['assets']
 
 USE_FOLDER_AS_CATEGORY = False
 
-GOOGLE_ANALYTICS = 'UA-113622715-2'
+
 
 COPYRIGHT_YEAR = 2019
 
-DISQUS_SITENAME = 'ambertime'
 
 HOME_COVER = 'assets/images/header.jpg'
 # COLOR_SCHEME_CSS = 'monokai.css'
