@@ -3,7 +3,7 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -183,7 +183,7 @@ Ambertime        </title>
 <p>链式哈希表在插入元素时, 将其键传入一个<strong>哈希函数</strong><code>h(k)</code>, 函数通过散列的方式告知元素属于哪个"桶",然后在相应的<strong>链表头</strong>插入元素</p>
 <p>在查找或删除元素时, 用同样的方式先找到元素的"桶", 然后遍历相应的链表</p>
 <p>每个链表并不限制包含元素的个数, 但是表如果变得很大, 性能就会变得很低</p>
-<p><img alt="链式哈希表" src="../images/链式哈希表.png" /></p>
+<p><img alt="链式哈希表" src="../../assets/images/链式哈希表.png" /></p>
 <h4>冲突的发生</h4>
 <p>当两个键通过哈希函数到表里相同的位置时, 这两个键就产生的冲突.</p>
 <p>链式哈希表当产生冲突时, 它就把元素放到冲突发生的"桶"中. 这就产生一个问题, 如果总是发生这样的冲突, 那么这个桶就会越来越大, 里面的元素越来越多</p>
@@ -428,13 +428,13 @@ Token lex(const char *istream, CHTbl *symtbl)
 <h4>线性探查</h4>
 <p>开地址哈希表中的一种简单的探查方法就是探查表中连续的槽位.</p>
 <p><code>h(k, i) = (h&lt;sup&gt;'&lt;/sup&gt;(k)+i) mod m</code>  0 &lt; i &lt; m-1(m 是表中槽位个数), h<sup>'</sup>是一个辅助函数, 比如取余法函数</p>
-<p><img alt="线性探查" src="../images/线性探查.png" /></p>
+<p><img alt="线性探查" src="../../assets/images/线性探查.png" /></p>
 <h4>双散列</h4>
 <p>最有效地探查开地址哈希表的方法之一, 就是通过求两个辅助哈希函数的哈希编码之和, 来得到最终的哈希编码值</p>
 <p><code>h(h, i)  = (h&lt;sub&gt;1&lt;/sub&gt;(k) + i * h&lt;sub&gt;2&lt;/sub&gt;(k)) mod m</code><br />
 h<sub>1</sub>和h<sub>2</sub>分别是两个不两同的哈希辅助函数, 为了保证第二次访问任何一个槽之前, 其他所有槽都访问过了, 方法一是: m 必须是 2 次幂, 让 h<sub>2</sub> 返回一个奇数值; 另一种方法是选择 m 为一个素数, h<sub>2</sub> 返回值在 1 &lt;= h<sub>2</sub>(k) &lt;= m-1 之间</p>
 <p>通常情况下, 令h<sub>1</sub>(k) = k mod m, h<sub>2</sub>(k) = 1 + (k mod m<sup>'</sup>), 其中 m<sup>'</sup> 略小于 m, 类似 m-1, m-2. 双散列的优点是能够探查并产生较好的颁布, 缺点是必须限制 m 的值, 也是表的大小不变, 这样才能保证在一系列探查中访问表中所有槽之后才会再次探查任何槽</p>
-<p><img alt="双散列" src="../images/双散列.png" /></p>
+<p><img alt="双散列" src="../../assets/images/双散列.png" /></p>
 <p>开地址哈希表头文件</p>
 <pre class="highlight line-numbers"><code class="language-c linenums">#ifndef OHTBL_H
 #define OHTBL_H

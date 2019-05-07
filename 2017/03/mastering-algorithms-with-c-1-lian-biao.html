@@ -3,7 +3,7 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -246,7 +246,7 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 </code></pre>
 
 <p>元素插入链表</p>
-<p><img alt="元素插入链表" src="../images/元素插入链表.png" /></p>
+<p><img alt="元素插入链表" src="../../assets/images/元素插入链表.png" /></p>
 <p>函数实现</p>
 <pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -352,7 +352,7 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
 <li>如果有可用的页表，<code>alloc_frame</code> 返回其页表号码，并释放其<code>data</code>指向的内存以便令程序可能使用</li>
 <li>释放页表时，重新为页表元素数据申请一个内存，如果没有可用内存，释放失败</li>
 </ul>
-<p><img alt="页帧映射" src="https://ivicel.github.io/images/页表映射.png" /></p>
+<p><img alt="页帧映射" src="../../assets/images/页表映射.png" /></p>
 <pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
 #include "list.h"
 
@@ -398,7 +398,7 @@ int free_frame(List *frames, int frame_number)
 <ul>
 <li><strong>双向链表</strong>(Doubly-Linked List)</li>
 </ul>
-<p><img alt="双向链表" src="https://ivicel.github.io./images/双向链表.png" /></p>
+<p><img alt="双向链表" src="../../assets/images/双向链表.png" /></p>
 <p>头文件
 <pre class="highlight line-numbers"><code class="language-c linenums">/* dlist.h */
 #ifndef DLIST_H
@@ -598,7 +598,7 @@ int dlist_remove(DList *list, DListElmt *element, void **data)
 <ul>
 <li><strong>循环链表</strong>(Circular Lists)</li>
 </ul>
-<p><img alt="循环链表" src="../images/循环链表.png" /></p>
+<p><img alt="循环链表" src="../../assets/images/循环链表.png" /></p>
 <p><pre class="highlight line-numbers"><code class="language-c linenums">/* clist.h */
 #ifndef CLIST_H
 #define CLIST_H

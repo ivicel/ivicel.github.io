@@ -3,7 +3,7 @@
     <head>
             <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"/>
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   
         <title>
@@ -197,7 +197,7 @@ Ambertime        </title>
 <p>只要创建一个函数，就会根据一组特定的规则为该函数创建一个 <code>prototype</code> 属性，该属性指向函数的原型对象</p>
 <p>默认的情况下，所有的原型对象都会自动获得一个 <code>constructor</code> (构造函数) 属性，这个属性包含一个指向 <code>prototype</code> 属性所在函数的指针</p>
 <p>当调用构造函数创建一个新实例后，该实例的内部将包含一个指针（内部属性），指向函数的原型对象。ECMAScript 5把这个指针叫做 <code>[[prototype]]</code> ，通过<code>Object.getPrototypeOf()</code> 访问到这个指针，或是使用非标准属性 <code>__proto__</code></p>
-<p><img alt="函数原型" src="../images/函数原型.png" /></p>
+<p><img alt="函数原型" src="../../assets/images/函数原型.png" /></p>
 <hr />
 <h4>原型语法</h4>
 <p><strong>写法一</strong></p>
@@ -381,7 +381,7 @@ SubType.prototype.getSubValue = function() {
 var instance = new SubType();
 console.log(instance.getSuperValue());      //true</code></pre>
 
-<p><img alt="函数继承原型链" src="https://ivicel.github.io/images/函数继承原型链.png" /></p>
+<p><img alt="函数继承原型链" src="../../assets/images/函数继承原型链.png" /></p>
 <h4>原型链继承的问题</h4>
 <ul>
 <li>创建子类型时，原先的超类型实例属性变成了子类的原型属性</li>
@@ -561,7 +561,7 @@ SubType.prototype.sayAge = function() {
 };
 
 var instance = new SubType("Nicholas", 29);</code></pre>
-<img alt="寄生组合式继承" src="../images/寄生组合式继承.png" /></p>
+<img alt="寄生组合式继承" src="../../assets/images/寄生组合式继承.png" /></p>
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
