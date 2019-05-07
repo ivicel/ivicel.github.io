@@ -4,13 +4,12 @@ from __future__ import unicode_literals
 
 import os
 import sys
+sys.path.append(os.curdir)
 
-from pelicanconf import *
 from pelicanconf import *
 
 # This file is only used if you use `make publish` or
 
-sys.path.append(os.curdir)
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = 'https://ivicel.info'
