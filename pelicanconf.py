@@ -54,7 +54,7 @@ MENUITEMS = [
     ('about', '/about.html')
 ]
 
-STATIC_PATHS = ['assets']
+STATIC_PATHS = ['assets','CNAME']
 
 USE_FOLDER_AS_CATEGORY = False
 
