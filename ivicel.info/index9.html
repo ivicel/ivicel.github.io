@@ -148,6 +148,20 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/02/javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">
+            <h2 class="post-title">
+                Java中static关键字以及修饰符
+            </h2>
+            <div class="post-content-preview">
+                    Java类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法) 另外, static变量会优先于普通变量进行初始化, static变量也是按顺序 只有static初始化完成, 普通变量才会初始化 1. static修饰类 // 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用 // 只能使用外部类的 static 变量和方法 public class OutterClass { public OutterClass() {} public static class InnerClass {} } 2. static修饰成员变量 //...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/02/view-shi-jian-ti-xi.html">
             <h2 class="post-title">
                 View 事件体系
@@ -196,20 +210,6 @@ Ambertime        </title>
             </h2>
             <div class="post-content-preview">
                     binary search 二分法查找 # 二分法查找, 返回数值在 list 中的位置, 否则返回 None def binary_search(num_list, item): # 确定查找的数在列表中 if item < num_list[0] or item > num_list[-1]: return None # 最小值位置 low = 0 # 最大值位置 high = len(num_list) - 1 while low <= high: # 中间位置, 向下取整 mid = (low + hight) // 2 if num_list[mid] < item: low...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Fri 07 April 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/04/grokking-algorithms-2.html">
-            <h2 class="post-title">
-                Grokking Algorithms-2
-            </h2>
-            <div class="post-content-preview">
-                    图 # 使用散列表来表示图 class GraphItem: class Graph: item = {} # 向图中加入顶点 # 删除顶点 def dl 广度优先算法 # 在图 graph 中从 start 到 item 的广度优先算法 def breadth_first_search(start, item): import queue search_queue = queue.Queue() # 将 start 顶点的邻接点加入到队列中 for element in start['neighbors']: if match(element, item): return True...
             </div>
         </a>
         <p class="post-meta">
@@ -317,7 +317,6 @@ Ambertime        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/notification-badges.png');
     }
 
     header.intro-header .header-mask{
@@ -176,8 +176,7 @@ Ambertime        </title>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <p>[TOC]</p>
-<h3>1. 简介</h3>
+                <h3>1. 简介</h3>
 <h4>1.1 通知可出现的地方</h4>
 <ol>
 <li>
@@ -258,7 +257,7 @@ Ambertime        </title>
 <h3>2. 创建通知及通知行为(Notification actions)</h3>
 <h4>2.1 基本通知的创建</h4>
 <p>以 target sdk 26 来创建新的通知</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public static final String CHANNEL_ID = "my_channel_id";
+<pre class="highlight line-numbers"><code class="language-java">public static final String CHANNEL_ID = "my_channel_id";
 NotificationCompat.Builder builder = new NotificationCompat.Builder(
         context, CHANNEL_ID)
         .setSmallIcon(R.drawable.notification_icon)
@@ -280,14 +279,14 @@ if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
 }</code></pre>
 
 <p>在创建完通知后, 可以通过 <code>NotificationManagerCompat.notify()</code> 来显示通知.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">NotificationMangerCompat notificationManger = NotificationMangerCompat.from(context);
+<pre class="highlight line-numbers"><code class="language-java">NotificationMangerCompat notificationManger = NotificationMangerCompat.from(context);
 notificationManger.notify(notificationId, builder.build());</code></pre>
 
 <p><code>notificationId</code> 是一个重要的参数, 之后我们通 <code>cancel(notificationId)</code> 来取消特定通知, 或者 <code>cancelAll()</code> 取消所有通知. </p>
 <p>对同一个 <code>notificationId</code> 进行调用 <code>NotificationManagerCompat.notify()</code> 便会更新通知</p>
 <h4>2.2 通知的点击行为(tap action)</h4>
 <p>在下拉通知中, 通过点击通知可以跳转到通过的来源处, 通过 <code>setContentIntent(PendingIntent)</code> 来实现. PendingIntent 可以启动 activity, service, 发送 broadCast. </p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 启动一个 activity
+<pre class="highlight line-numbers"><code class="language-java">// 启动一个 activity
 Intent intent = new Intent(context, SourceActivity.class);
 // 设置一个新栈来跳转, 这样不会影响当前任务栈里的 activity
 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -301,7 +300,7 @@ builder.setContentIntent(pi)
 <p>在 Android 4.1 之后, 通知可设置如下图的 action button, 通过 <code>addAction()</code> 来设置</p>
 <p><img alt="notification-basic-action" src="../../assets/images/notification-basic-action.png" /></p>
 <p>比如点击后, 产生一个广播的代码如下. 可以添加多个 action button</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Intent snoozeIntent = new Intent(context, MyBroadCastReceiver.class);
+<pre class="highlight line-numbers"><code class="language-java">Intent snoozeIntent = new Intent(context, MyBroadCastReceiver.class);
 snoozeIntent.setAction(ACTION_SNOOZE);
 snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
 PendingIntent pi = PendingIntent.getBroadcast(context, 0, snoozeIntent, 0);
@@ -310,7 +309,7 @@ builder.addAction(R.drawable.ic_snooze, snoozeString, pi);</code></pre>
 
 <h4>2.4 direct reply 直接回复按钮</h4>
 <p>在 Android 7.0, API level 24 之后添加可以直接在通知栏回复消息的按钮. 点击前和点击后的样式如下图<img alt="reply-button1" src="../../assets/images/reply-button.png" /></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">private static final String KEY_TEXT_REPLY = "key_text_reply";
+<pre class="highlight line-numbers"><code class="language-java">private static final String KEY_TEXT_REPLY = "key_text_reply";
 
 if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {
     // 1. 创建一个 RemoteInput. 传入的 key 值会在发送的 intent 中用来获得消息体
@@ -340,7 +339,7 @@ if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) {
 }</code></pre>
 
 <p>通过 <code>RemoteInput.getResultsFromIntent()</code> 在 BroadCastReceiver 中获得传过来的 intent 里的消息</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// intent 便是传入 broadcast 里的 intent, 使用原先传入的 key 值
+<pre class="highlight line-numbers"><code class="language-java">// intent 便是传入 broadcast 里的 intent, 使用原先传入的 key 值
 private CharSequence getMessageText(Intent intent) {
     Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
     if (remoteInput != null) {
@@ -351,7 +350,7 @@ private CharSequence getMessageText(Intent intent) {
 }</code></pre>
 
 <p>在用户使用直接回复之后, 我们还要关闭这个通知, 显示已回复等</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Notification repliedNotification = new NotificationCompat.Builder(context, CHANNEL_ID)
+<pre class="highlight line-numbers"><code class="language-java">Notification repliedNotification = new NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.message_replied)
         .setContentText(repliedString)
         .build();
@@ -384,7 +383,7 @@ notificationManager.notify(id, repliedNotification);</code></pre>
 <h4>3.1 BigPictureStyle 大图模式</h4>
 <p>大图模式常见的是截图时的样式</p>
 <p><img alt="bigpicturestyle" src="../../assets/images/bigpicturestyle.png" /></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Notification noti = new NotificationCompat.Builder(context, CHANNEL_ID)
+<pre class="highlight line-numbers"><code class="language-java">Notification noti = new NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.new_post)
         .setLargeIcon(myBitmap)
         .setStyle(new NotificationCompat.BigPictureStyle()
@@ -394,14 +393,14 @@ notificationManager.notify(id, repliedNotification);</code></pre>
 
 <h4>3.2 BigTextStyle 多文本模式</h4>
 <p><img alt="large-text" src="../../assets/images/large-text.png" /></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">builder.setStyle(new NotificationCompat.BigTextStyle()
+<pre class="highlight line-numbers"><code class="language-java">builder.setStyle(new NotificationCompat.BigTextStyle()
         // 设置长文本, 文本换自动换行, 单行的原本还是使用 setContentText 
         .bigText(textString))
         .build();</code></pre>
 
 <h4>3.3 InboxStyle</h4>
 <p>这个模式相当于可以设置多个单行, 超出的文本不会自己换行而是使用 <code>…</code> 来代替</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">builder.setStyle(new NotificationCompat.InboxStyle()
+<pre class="highlight line-numbers"><code class="language-java">builder.setStyle(new NotificationCompat.InboxStyle()
         .addLine(str1)
         .addLine(str2)
         .addLine(str3))
@@ -409,7 +408,7 @@ notificationManager.notify(id, repliedNotification);</code></pre>
 
 <h4>3.4 MessagingStyle</h4>
 <p>像信息 app 一样能设置对话形式的样式<img alt="messaging-style" src="../../assets/images/messaging-style.png" /></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+<pre class="highlight line-numbers"><code class="language-java">Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.new_message)     
         .setLargeIcon(aBitmap)
         .setStyle(new Notification.MessagingStyle(
@@ -427,7 +426,7 @@ notificationManager.notify(id, repliedNotification);</code></pre>
 <blockquote>
 <p>如果只添加了 4 个按钮, 却在非扩展里选择超出的下标值, 比如 4 则 app crash</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-java linenums">builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+<pre class="highlight line-numbers"><code class="language-java">builder = new NotificationCompat.Builder(this, CHANNEL_ID)
         .setSmallIcon(R.mipmap.ic_launcher_round)
         .setLargeIcon(bitmap)
         .setContentTitle("Song's name")
@@ -451,7 +450,7 @@ notificationManager.notify(id, repliedNotification);</code></pre>
 <p>在 Android 7.0, API 24 之后, 可以对通知按 app 来分组. 如果使用分组策略, 在低于 Android 7.0 的系统会忽略这个功能, 还是一条一条的发出来. 在 7.0 以上, 系统也会自动把一个 app 的 4 个及以上的通知归为一个组</p>
 <p><img alt="notification-group" src="../../assets/images/notification-group.png" /></p>
 <p>分组的使用方法是, 对想要分组的通知使用 <code>setGroup(key)</code> 来设置一个 group key, 拥有同一个 group key 的通知会被分到同一个组(这个通知要注意使用不同的 id, 因为这些通知都是独立的). 发送出这个通知后, 我们还要发送一个整理-归类通知, 告诉系统, 把上一个通知分到组里面, 而不是作为一个普通的通知显示出来. </p>
-<pre class="highlight line-numbers"><code class="language-java linenums">String GROUP_KEY_WORK_EMAIL = "com.android.example.WORK_EMAIL";
+<pre class="highlight line-numbers"><code class="language-java">String GROUP_KEY_WORK_EMAIL = "com.android.example.WORK_EMAIL";
 // 发送普通的通知
 final Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
         .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -486,7 +485,7 @@ final Notification summaryNotification = new NotificationCompat.Builder(this,
 <li>可额外设置 channel 的描述 <code>setDescription()</code>, 这样用户点开通知设置时可见</li>
 <li>使用 <code>NotificationManager#createNotificationChannel()</code> 方法注册该 channel</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">private void createNotificationChannel() {
+<pre class="highlight line-numbers"><code class="language-java">private void createNotificationChannel() {
     // 兼容检查
     if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
         NotificationChannenl channel = new NotificationChannel(CHANNEL_ID, 
@@ -500,14 +499,14 @@ final Notification summaryNotification = new NotificationCompat.Builder(this,
 
 <h4>5.2 用户通知 channel 设置</h4>
 <p>一但注册通知 channel 后, 我们在编码时只能更改 channel name 和 channel description, 而其他的设置只能交由用户自己设置更改. 为了能让用户自己作出更改, 需要为用户提供一个 settings ui, 通过 <code>Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS</code> . 下面是启动一个通知设置的示例</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Intent intent = new Intent(Settings.ACTIOIN_CHANNEL_NOTIFICATION_SETTINGS);
+<pre class="highlight line-numbers"><code class="language-java">Intent intent = new Intent(Settings.ACTIOIN_CHANNEL_NOTIFICATION_SETTINGS);
 // 这两个值是必须要值的, 包名和通知 id
 intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
 intent.putExtra(Settings.EXTRA_CHANNEL_ID, myNotificationChannel.getId());
 startActivity(intent);</code></pre>
 
 <h4>5.3 删除通知 channel</h4>
-<pre class="highlight line-numbers"><code class="language-java linenums">private void deleteNotification(String notificationId) {
+<pre class="highlight line-numbers"><code class="language-java">private void deleteNotification(String notificationId) {
     if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
         NotificationManager manger = (NotificationManager) getSystemService(
                 Context.NOTIFICATION_SERVICE);
@@ -517,7 +516,7 @@ startActivity(intent);</code></pre>
 
 <h4>5.4 分组 channel</h4>
 <p>可以对 channel 进行不同的分组, 这个在多用户 app 上对不同的用户可以设置不同 channel 策略</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 每一个分组都需要一个惟一的 group id
+<pre class="highlight line-numbers"><code class="language-java">// 每一个分组都需要一个惟一的 group id
 String groupId = "my_group_id";
 // 用户可见的 group name
 CharSequence groupName = getString(R.string.group_name);

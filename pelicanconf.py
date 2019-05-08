@@ -27,8 +27,7 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+         ('Jinja2', 'http://jinja.pocoo.org/'))
 
 # Social widget
 SOCIALS = {
@@ -58,16 +57,9 @@ STATIC_PATHS = ['assets','CNAME']
 
 USE_FOLDER_AS_CATEGORY = False
 
-
-
 COPYRIGHT_YEAR = 2019
 
-
 HOME_COVER = 'assets/images/header.jpg'
-# COLOR_SCHEME_CSS = 'monokai.css'
-CSS_OVERRIDE = ['assets/css/prism.css', 'assets/css/base.css', 'assets/css/base-control.css',
-                'assets/css/github.css', 'assets/css/codemirror.css', 'assets/css/ivicel.css']
-JS_OVERRIDE = ['assets/js/prism.js']
 
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
@@ -97,11 +89,10 @@ MARKDOWN = {
         'pymdownx.tasklist',
         'pymdownx.superfences',
         'pymdownx.highlight',
-        # 'pymdownx.inlinehilite'
+        'pymdownx.inlinehilite'
     ],
     'extension_configs': {
         'pymdownx.highlight': {
-            'linenums': True,
             'css_class': 'highlight line-numbers',
             'use_pygments': False
         }

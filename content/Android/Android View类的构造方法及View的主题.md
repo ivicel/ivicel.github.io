@@ -1,6 +1,7 @@
 title: Android View类的构造方法及View的主题属性优先级相关
 date: 2018-04-22
 tags: view, 构造方法, attrs, declare-styleable, style
+cover: ../assets/images/hamburg.jpg
 
 
 

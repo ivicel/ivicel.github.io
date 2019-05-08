@@ -148,6 +148,20 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/02/android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">
+            <h2 class="post-title">
+                Android 中自定义ViewPager, 添加页面指示器
+            </h2>
+            <div class="post-content-preview">
+                    在页面滑动时会回调ViewPager.OnPageChangeListener接口里的方法. 用ViewPage.addOnPageChangeListener添加和ViewPage.removeOnPageChangeListener删除监听回调方法. 如果不想实现所有方法, ViewPager内有个空的类SimpleOnPageChangeListener实现了这个接口, 继承这个类便可. 注意可以多次调用addOnPageChangeListener方法添加多个回调, ViewPager按添加顺序进行调用, 所以在不需要回调时,...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/02/androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">
             <h2 class="post-title">
                 Android高效加载图片防止OOM
@@ -196,20 +210,6 @@ Ambertime - misc category        </title>
             </h2>
             <div class="post-content-preview">
                     ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。 ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 ROUND_UP，若为负数，舍入行为类似于 ROUND_DOWN。Math.round() 方法就是使用的此模式。 ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 ROUND_DOWN；若为负数，舍入行为类似于 ROUND_UP。 HALF_UP：最近数字舍入 (5...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">
-            <h2 class="post-title">
-                Java中static关键字以及修饰符
-            </h2>
-            <div class="post-content-preview">
-                    Java类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法) 另外, static变量会优先于普通变量进行初始化, static变量也是按顺序 只有static初始化完成, 普通变量才会初始化 1. static修饰类 // 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用 // 只能使用外部类的 static 变量和方法 public class OutterClass { public OutterClass() {} public static class InnerClass {} } 2. static修饰成员变量 //...
             </div>
         </a>
         <p class="post-meta">
@@ -317,7 +317,6 @@ Ambertime - misc category        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

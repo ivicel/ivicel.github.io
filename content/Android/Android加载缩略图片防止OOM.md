@@ -10,13 +10,13 @@ Tags: andorid图片加载
 
 生成所需大小的 bitmap 的一般步骤:
 
-1. `new` 一个新`BitmapFactory.Options` 对象, 并将其 `BitmapFactory.Options.inJustDecodeBounds` 设置为 `true`, 这样可以使其解析图片时, 并不会加载图片而只是解读其中信息
+1. `new` 一个新 `BitmapFactory.Options` 对象, 并将其 `BitmapFactory.Options.inJustDecodeBounds` 设置为 `true`, 这样可以使其解析图片时, 并不会加载图片而只是解读其中信息
 2. 获得图片的长和宽, 分别为所期望的长和宽进行对比, 取其中**比值大**的数
 3. `BitmapFactory.Options.inJustDecodeBounds` 设置成 `false`, 重新解析出所需图片
 
 
 
-<<Android开发权威指南>>依据想需要的大小生成`bitmap`, 其取的值是较大值, 然后向下取整. 这样能获得更小的分辨率, 占用的内存更小
+<<Android开发权威指南>>依据想需要的大小生成 `bitmap`, 其取的值是较大值, 然后向下取整. 这样能获得更小的分辨率, 占用的内存更小
 
 ```java
 public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {

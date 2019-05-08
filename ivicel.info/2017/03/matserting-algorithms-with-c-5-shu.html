@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/树的遍历方法.png');
     }
 
     header.intro-header .header-mask{
@@ -189,7 +189,7 @@ Ambertime        </title>
 <p>树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的</p>
 </blockquote>
 <p>二叉的接口定义</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */
+<pre class="highlight line-numbers"><code class="language-c">/* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */
 /* bitree.h */
 #ifndef BITREE_H
 #define BITREE_H
@@ -237,7 +237,7 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data);
 #endif</code></pre>
 
 <p>二叉树的实现 </p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include "bitree.h"
 
@@ -383,7 +383,7 @@ int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
 }</code></pre>
 
 <p>遍历二叉树的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include "list.h"
+<pre class="highlight line-numbers"><code class="language-c">#include "list.h"
 #include "bitree.h"
 /* 前序遍历 */
 int preorder(const BiTreeNode *node, List *list)
@@ -491,7 +491,7 @@ int postorder(const BiTreeNode *node, List *list)
 <p>如果 grandchild 结点的原始平衡因子为 0, 就将 A 和 left 结点的平衡因为都设置为 0</p>
 <p>如果 grandchild 结点的原始平衡因子为-1, 就将 A 的平衡因子设置为 +1, 将 right 的平衡因为设置为0</p>
 <p>二叉搜索树头文件</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#ifndef BISTREE_H
+<pre class="highlight line-numbers"><code class="language-c">#ifndef BISTREE_H
 #define BISTREE_H
 
 #include "bitree.h"
@@ -524,7 +524,7 @@ int bistree_lookup(BisTree *tree, void **data);
 #endif</code></pre>
 
 <p>二叉搜索树实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* bistree.c */
+<pre class="highlight line-numbers"><code class="language-c">/* bistree.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "bistree.h"

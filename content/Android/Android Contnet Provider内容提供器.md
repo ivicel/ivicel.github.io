@@ -1,7 +1,7 @@
 title: Android Contnet Provider内容提供器
 date: 2018-02-22
 tags: android, content provider, 内容提供器
-
+cover: ../../assets/images/markus-spiske.jpg
 
 
 [TOC]

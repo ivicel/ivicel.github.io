@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/markus-spiske.jpg');
     }
 
     header.intro-header .header-mask{
@@ -221,7 +221,7 @@ Ambertime        </title>
 <hr />
 <p>当非同一个程序中需要使用<code>Content Provider</code>时, 必须要在<code>AndroidManifest.xml</code>声明使用权限. 比如读写用户字典:<code>&lt;use-permission name="android.permission.READ_USER_DICTIONARY&gt;</code></p>
 <p>然而如果在同一程序中, 无论是否声明自定义权限, 原程序都有其读写的权限</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;provider
+<pre class="highlight line-numbers"><code class="language-xml">&lt;provider
           android:authorities="list" // 要和类中定义的认证名完全一样
           android:directBootAware=["true" | "false"] // unlock deivce之前进行启动privoder
           andorid:enabled=["true" | "false"] // 启用
@@ -259,7 +259,7 @@ Ambertime        </title>
 <li>自定义一个类继承<code>ContentProvider</code>, 实现<code>onCreate</code>, <code>query</code>, <code>insert</code>, <code>update</code>, <code>delete</code>, <code>getType</code>方法</li>
 <li>使用<code>UriMatcher</code>类快速生成或者匹配<code>uri</code></li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">
+<pre class="highlight line-numbers"><code class="language-java">
 public class MyProvider extends ContentProvider {
 
     public static final String AUTHORITY = "com.example.myapp.MyProvider";

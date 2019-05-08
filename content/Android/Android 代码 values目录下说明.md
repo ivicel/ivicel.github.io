@@ -1,6 +1,7 @@
 title:  Android 代码 values 目录下说明
 date: 2018-04-22
 tags: resources, android资源文件, attrs, style, styleable
+cover: ../../assets/images/candy-bomber.jpg
 
 
 

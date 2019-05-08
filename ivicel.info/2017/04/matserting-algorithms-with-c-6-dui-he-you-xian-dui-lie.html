@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/删除堆顶点.png');
     }
 
     header.intro-header .header-mask{
@@ -187,7 +187,7 @@ Ambertime        </title>
 <p><img alt="向堆中插入结点" src="../../assets/images/向堆中插入结点.png" /></p>
 <p>删除堆顶点</p>
 <p><img alt="删除堆顶点" src="../../assets/images/删除堆顶点.png" /></p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* heap.h */
+<pre class="highlight line-numbers"><code class="language-c">/* heap.h */
 #ifndef HEAP_H
 #define HEAP_H
 /* 堆的数据结构 */
@@ -213,7 +213,7 @@ int heap_extract(Heap *heap, void **data);
 #endif</code></pre>
 
 <p>堆的实现 </p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* heap.c */
+<pre class="highlight line-numbers"><code class="language-c">/* heap.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -347,7 +347,7 @@ int heap_extract(Heap *heap, void **)
 <h3>优先队列(Priority Queues)</h3>
 <p>优先队列将数据按照数据的优先级顺序排列, 这样可以最快定位到优先级最高的元素. 例如在服务器做负载均衡时, 最空闲的服务器优先级最高, 这样可以更好的处理请求服务</p>
 <p>优先队列的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* pqueue.h */
+<pre class="highlight line-numbers"><code class="language-c">/* pqueue.h */
 #ifndef PQUEUE_H
 #define PQUEUE_H
 
@@ -366,7 +366,7 @@ typedef Heap PQueue;
 #endif </code></pre>
 
 <p>优先队列的示例: 包裹分拣</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* parels.c */
+<pre class="highlight line-numbers"><code class="language-c">/* parels.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "pqueue.h"

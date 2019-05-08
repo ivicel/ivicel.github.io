@@ -1,7 +1,7 @@
 title: Android Drawable资源
 date: 2018-04-28
 tags: drawable, 资源, 样式
-
+cover: ../../assets/images/layer-list-textview示例.png
 
 
 

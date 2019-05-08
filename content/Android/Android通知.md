@@ -1,8 +1,7 @@
 title: Android 通知
 date: 2018-05-02
 tags: 通知, notification
-
-[TOC]
+cover: ../../assets/images/notification-badges.png
 
 ### 1. 简介
 

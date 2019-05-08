@@ -1,6 +1,6 @@
 title: javascript
 date: 2017-03-21
-
+cover: ../../assets/images/函数原型.png
 
 #### 对象属性特征
 

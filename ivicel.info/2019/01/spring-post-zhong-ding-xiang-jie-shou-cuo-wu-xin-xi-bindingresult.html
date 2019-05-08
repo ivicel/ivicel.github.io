@@ -187,7 +187,7 @@ Ambertime        </title>
 <li><code>RedirectAttributes.addFlashAttribute()</code> 方法实际是使用了 session, 但会使用后系统自动删除这个属性</li>
 <li><code>BindingResult</code> 类内的错误信息的 key 值是 <code>BindingResult.class.getName() + "." + ModelAttribute修饰的名称</code>. 如 <code>org.springframework.validation.BindingResult.user</code></li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">@RequestMapping(value = "/register", method = RequestMethod.GET)
+<pre class="highlight line-numbers"><code class="language-java">@RequestMapping(value = "/register", method = RequestMethod.GET)
 public String register(Model model) {
     // 注意检测 user 对象, 不能在参数中添加 User 参数, 这会优先使用从页面请求参数
     if (!model.containsAttribute("user")) {
@@ -213,7 +213,7 @@ public String register(@Valid @ModelAttribute("user") User user,
 
 <h4>2. Thymeleaf 中错误信息的使用</h4>
 <p>在 thymeleaf 中使用 <code>#fields</code> 来获得 form 的错误消息. 比如有一个 form, 其提交的是一个 User 对象. </p>
-<pre class="highlight line-numbers"><code class="language-html linenums">&lt;!-- register.html --&gt;
+<pre class="highlight line-numbers"><code class="language-html">&lt;!-- register.html --&gt;
 &lt;form th:object="${user}" th:action="@{/register}"&gt;
   &lt;input th:name="*{username}" th:value="*{username}"&gt;
   &lt;!-- 在这里获到错误消息, 检查 username 字段是否有错误消息, 

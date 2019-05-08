@@ -183,7 +183,7 @@ Ambertime        </title>
 <ol>
 <li>在<code>manifest</code>中指定分享的文件, 具体的分享目录路径在<code>res/xml/filepaths</code>中指定, <code>android:authorities</code>为指定的认证, 自行定义, 一般为 <code>package name</code> + <code>fileprovider</code>, 其他为固定写法</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<pre class="highlight line-numbers"><code class="language-xml">&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapp"&gt;
       &lt;application
         ...&gt;
@@ -205,7 +205,7 @@ Ambertime        </title>
 <ol>
 <li><code>res/xml/filepaths</code>写法</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;paths&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;paths&gt;
   &lt;files-path path="images" name="my-images"/&gt;
   &lt;cache-path path="..." name="..."/&gt;
   &lt;external-files-path path="...." name="..."/&gt;
@@ -234,7 +234,7 @@ Ambertime        </title>
 <ol>
 <li>使用<code>FileProvider.getUriForFile(Context, String, File)</code>方法来获取共享的文件<code>uri</code>路径</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">/* 生成 content://com.example.myapp.fileprovider/my_images/default_image.jpg */
+<pre class="highlight line-numbers"><code class="language-java">/* 生成 content://com.example.myapp.fileprovider/my_images/default_image.jpg */
 File imagePath = new File(context.getFilesPath(), "images");
 File newFile = new File(imagePath, "default_image.jpg");
 Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprovider",
@@ -250,7 +250,7 @@ Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprov
 </li>
 <li>或者使用<code>Intent.setData()</code>把<code>uri</code>放到<code>intent</code>中后, 使用<code>Intent.setFlags()</code>来设置权限标志位, 建议使用这种授权方式, 这样就不用手动来取消授权了</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">List&lt;ResolveInfo&gt; resolveActivities = getPackageManager().queryInetntActivities(
+<pre class="highlight line-numbers"><code class="language-java">List&lt;ResolveInfo&gt; resolveActivities = getPackageManager().queryInetntActivities(
      imageCapture, PackageManager.MATCH_DEFAULT_ONLY);
 /* 为每个activity授权 */
 for (ResolveInfo resolveActivity : resolveActivities) {

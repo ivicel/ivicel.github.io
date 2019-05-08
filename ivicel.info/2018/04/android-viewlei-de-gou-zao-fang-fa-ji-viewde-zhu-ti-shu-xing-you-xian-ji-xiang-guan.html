@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../assets/images/hamburg.jpg');
     }
 
     header.intro-header .header-mask{
@@ -193,14 +193,14 @@ Ambertime        </title>
 <p>在 <strong>layout</strong> 布局文件里对 view 直接赋值</p>
 </li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;TextView
+<pre class="highlight line-numbers"><code class="language-xml">&lt;TextView
  android:textColor="#332211"/&gt;</code></pre>
 
 <ol>
 <li>自定义一个 <code>style</code>, 然后在 <code>layout</code> 里的 <code>view</code> 使用 <code>style</code> 属性来覆盖. </li>
 </ol>
 <p>影响该 <code>view</code> 以及其子 <code>view</code>. 只有 <code>view</code> 有对应属性时才进行替换</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;style name="MyTextStyle"&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;style name="MyTextStyle"&gt;
     &lt;item name="android:textColor"&gt;
 &lt;/style&gt;
 &lt;!-- 直接对 view 使用 --&gt;
@@ -223,12 +223,12 @@ Ambertime        </title>
 <li>Default Style Attribute (defStyleAttr)</li>
 </ol>
 <p>在 <code>TextView</code> 的源代码里有一个构造方法是这样的</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public TextView(Context context, @Nullable AttributeSet attrs) {
+<pre class="highlight line-numbers"><code class="language-java">public TextView(Context context, @Nullable AttributeSet attrs) {
     this(context, attrs, com.android.internal.R.attr.textViewStyle);
 }</code></pre>
 
 <p><code>com.android.internal.R.attr.textViewStyle</code> 是一个 frameworks 层定义的 <a href="https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/attrs.xml">attr</a>. </p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;resources&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;resources&gt;
     &lt;!-- These are the standard attributes that make up a complete theme. --&gt;
     &lt;declare-styleable name="Theme"&gt;
         &lt;!-- ... --&gt;
@@ -239,7 +239,7 @@ Ambertime        </title>
 &lt;/resources&gt;</code></pre>
 
 <p>可以看到这个 attr 类型是一个引用, 所以当我们这样定义一个 style item 时</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"&gt;
     &lt;item name="android:textColor"&gt;@android:color/holo_green_dark&lt;/item&gt;
     &lt;!-- 由于 defStyleAttr 的优先级比主题的高, 
      所以 textColor 被覆盖为 holo_blue_light, 即使上面定义了 textColor
@@ -262,7 +262,7 @@ Ambertime        </title>
 <li>在主题文件里赋值, 比如我们在 <code>styles.xml</code> 里自定义了一个主题 <code>AppTheme</code>. </li>
 </ol>
 <p>这个主题可以在 <code>activity</code> 里覆盖, 也可以设置为程序的默认主题</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;!--比如我们在 styles.xml 里自定义一个主题, 覆盖 andorid:textColor 后, 
+<pre class="highlight line-numbers"><code class="language-xml">&lt;!--比如我们在 styles.xml 里自定义一个主题, 覆盖 andorid:textColor 后, 
  使用该主题的 view 中有 android:textColor 这个属性的会使用我们设定的值
  因为我们定义的是一个应用的主题, 而不是单独某个 view 下的某些个属性
  所以这个主题需要继承系统的主题, 然后再覆盖, 下面继承的是 support 包里的兼容主题
@@ -282,7 +282,7 @@ Ambertime        </title>
 
 <h3>2. 构造方法介绍</h3>
 <p>以 SDK 27 中的 <code>ImageView</code> 为例, 一共有 4 个构造方法, 如下</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public ImageView(Context context) {
+<pre class="highlight line-numbers"><code class="language-java">public ImageView(Context context) {
         super(context);
         initImageView();
 }
@@ -312,7 +312,7 @@ public ImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr
 <blockquote>
 <p><code>Context</code> 中也有对应的方法, 其实质是调用了 context.getTeme.obtainStyledAttributes 而已</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 从解析好的 AttributeSet 查找
+<pre class="highlight line-numbers"><code class="language-java">// 从解析好的 AttributeSet 查找
 TypedArray obtainStyledAttributes(AttributeSet set, int[] attrs, int defStyleAttr, 
         int defStyleRes)
 // 从主题中查找

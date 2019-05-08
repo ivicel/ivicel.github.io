@@ -181,7 +181,7 @@ Ambertime        </title>
 <p>假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方</p>
 <p>一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解</p>
 <p>贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">state_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az'])
+<pre class="highlight line-numbers"><code class="language-python">state_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az'])
 # 各个电台广播可以覆盖到的地方
 stations = {
     'kone': set(['id', 'nv', 'ut']),

@@ -175,7 +175,7 @@ Ambertime        </title>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <pre class="highlight line-numbers"><code class="language-python linenums">a = (1, 2, [3, 4])
+                <pre class="highlight line-numbers"><code class="language-python">a = (1, 2, [3, 4])
 a[2] += [5, 6]
 
 # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6]
@@ -205,7 +205,7 @@ a[2] += [5, 6]
 <li><strong>类定义体</strong></li>
 </ul>
 <p>比如属性的初始化, <strong>写在非方法内的语句都会初始化运行</strong>, 如果类内还有嵌套类, 嵌套类的定义体也会运行. 比如有下面类的定义</p>
-<pre class="highlight line-numbers"><code class="language-python linenums"># print('initial A...'), print('initial B...') 语句 和 m = 3 会被运行
+<pre class="highlight line-numbers"><code class="language-python"># print('initial A...'), print('initial B...') 语句 和 m = 3 会被运行
 
 class A(object):
     m = 3
@@ -221,7 +221,7 @@ class A(object):
 <li><strong>类的元类</strong>
   类的元类会被调用来初始化类, 比如</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 作为 B 的元类, A.__new__, A.__init__ 都会被调用
+<pre class="highlight line-numbers"><code class="language-python"># 作为 B 的元类, A.__new__, A.__init__ 都会被调用
 class A(type):
     def __new__(meta, name, bases, attrs):
         # meta 是传入的元类, 也就是类 A 本身
@@ -246,7 +246,7 @@ class B(metaclass=A):
 <li><strong>装饰器</strong></li>
 </ul>
 <p>装饰器会被动行, 装饰器的运行顺序比如. </p>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 装饰器相当于 ClassThree = deco_alpha(ClassThree) 
+<pre class="highlight line-numbers"><code class="language-python"># 装饰器相当于 ClassThree = deco_alpha(ClassThree) 
 # 所以是先被装饰者运行, 然后才到装饰器本身
 @deco_alpha
 class ClassThree():

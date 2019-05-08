@@ -222,7 +222,7 @@ Ambertime        </title>
 </li>
 <li>一直判断栈中没有节点为止</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-c linenums">void preorder(BinaryTree *tree)
+<pre class="highlight line-numbers"><code class="language-c">void preorder(BinaryTree *tree)
 {
     if (tree == NULL || tree-&gt;root == NULL) {
         return;
@@ -259,7 +259,7 @@ Ambertime        </title>
 <li>处理 node , 然后把 node 指向 node 的右子结点, 回到 循环条件</li>
 <li>这样通过两个条件先向下查找, 到底后再弹出, 弹出再查找其右结点</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-c linenums">void inorder(BinaryTree *tree)
+<pre class="highlight line-numbers"><code class="language-c">void inorder(BinaryTree *tree)
 {
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     if (stack == NULL) {
@@ -284,7 +284,7 @@ Ambertime        </title>
 <ul>
 <li>简单方法, 使用两个栈: 我们使用容易的对 <strong>前序遍历</strong> 稍加修改便可以得到一个 <strong>根 -&gt; 右 -&gt; 左</strong> 访问顺序栈 s1, 然后依次把这个遍历压入另一个栈 s2 中, 当 s1 遍历完成时, 对 s2 进行遍历我们便得到一个 <strong>左 -&gt; 右 -&gt; 根</strong> 的遍历顺序</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-c linenums">void postorder(BinaryTree *tree)
+<pre class="highlight line-numbers"><code class="language-c">void postorder(BinaryTree *tree)
 {
     if (tree == NULL || tree-&gt;root == NULL) {
         return;
@@ -322,7 +322,7 @@ Ambertime        </title>
 </ul>
 <blockquote>
 <p>当使用递归方式遍历时, 每次我们都是递归左子树再递归又子树, 所以这两次递归中, 每层函数在栈中都保存有递归节点, 不同的遍历方式只是体现在, 处理访问节点的时机不两路;</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">void preorder(Node *node)
+<pre class="highlight line-numbers"><code class="language-c">void preorder(Node *node)
 {
     if (node == NULL) {
         return;

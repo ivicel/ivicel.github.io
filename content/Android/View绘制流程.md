@@ -1,7 +1,7 @@
 Title:  View绘制流程
 Date: 2018-02-22
 Tags: android, view绘制
-
+cover: ../../assets/images/子view的MeasureSpec.png
 
 
 * 一.  `view`的`MeasureSpec`测量取值

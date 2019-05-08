@@ -148,6 +148,20 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/java-xian-cheng-ji-xian-cheng-chi.html">
+            <h2 class="post-title">
+                Java 线程及线程池
+            </h2>
+            <div class="post-content-preview">
+                    1. Java 线程池 1.1 java 线程池框架的主要类和接口 Executor 接口定义了执行器 Runnable 执行方式 ExecutorService 定义了线程具体接口 ScheduledExecutorService 定义了定时执行线程的接口 AbstractExecutorService 线程池的实现的抽象类 ThreadPoolExecutor 线程池的具体实现类 ScheduledThreadPoolExecutor 定时线程池的实现类 Executors 线程池的辅助工具类 1.2 Executors 辅助类主要几种线程池模型...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 10 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/04/android-ying-pan-huan-cun-disklruccache.html">
             <h2 class="post-title">
                 Android 硬盘缓存 DiskLrucCache
@@ -181,7 +195,7 @@ Ambertime        </title>
                 AIDL生成的接口及Binder的分析
             </h2>
             <div class="post-content-preview">
-                    [TOC] 1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成 …
+                    1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成binder_proc …
             </div>
         </a>
         <p class="post-meta">
@@ -196,20 +210,6 @@ Ambertime        </title>
             </h2>
             <div class="post-content-preview">
                     [TOC] 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图: 需要注意的几个点: 当一个 Activity A 启动加一个 Activity B 时, 只有 A 的 onPause 执行完返回时, B 才开始执行onCreate onStart, 直到 onResume显示在前台, A 会执行 onStop onDestroy, 所以在 onPause不能执行太耗时的操作, 以便让另一个...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 01 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/android-dui-xiang-xu-lie-hua-fang-shi.html">
-            <h2 class="post-title">
-                Android 对象序列化方式
-            </h2>
-            <div class="post-content-preview">
-                    Android内序列化对象主要有两种方式, 一是原Java自带的Serializable接口, 二是Android内自有的Parcelable接口 1. Serializable接口 Java自带的序列接口使用非常简单, 只要实现Serializable接口即可. Serializable接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. 如果想自定义序列化/反序列化过程, 可以自主实现writeObject()和readObject(). 一般我们都不会这么做的 还可以定义一个long serialVersionUID来检测反序列时的数据. 如果值不一样,...
             </div>
         </a>
         <p class="post-meta">
@@ -317,7 +317,6 @@ Ambertime        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

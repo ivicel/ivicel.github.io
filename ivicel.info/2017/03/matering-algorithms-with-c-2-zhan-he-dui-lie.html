@@ -192,7 +192,7 @@ Ambertime        </title>
 </li>
 </ul>
 <p>栈最常用的是使用链表来实现, 以下是栈的抽象数据类型头文件</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* stack.h */
+<pre class="highlight line-numbers"><code class="language-c">/* stack.h */
 #ifndef STACK_H
 #define STACK_H
 
@@ -228,7 +228,7 @@ int stack_pop(Stack *stack, void **data);
 #endif</code></pre>
 
 <p>栈的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* stack.c */
+<pre class="highlight line-numbers"><code class="language-c">/* stack.c */
 #include &lt;stdlib.h&gt;
 #include "stack.h"
 
@@ -284,7 +284,7 @@ int stack_push(Stack *stack, const void *data)
 
 <p>队列其实就是一个链表结构, 但只提供了先进先出的接口
 队列头文件定义</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* queue.h */
+<pre class="highlight line-numbers"><code class="language-c">/* queue.h */
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -323,7 +323,7 @@ int queue_dequeue(Queue *queue, void **data);
 #endif</code></pre>
 
 <p>队列抽象数据类型的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* queue.h */
+<pre class="highlight line-numbers"><code class="language-c">/* queue.h */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "queue.h"

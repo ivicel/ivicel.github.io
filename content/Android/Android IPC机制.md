@@ -1,7 +1,7 @@
 title: Android IPC机制
 date: 2018-04-01
 tags: IPC, Android, 进程间通信
-
+cover: ../../assets/images/Messenger机制.jpeg
 
 
 #### 1. 开启多进程的方法

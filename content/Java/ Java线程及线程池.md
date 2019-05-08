@@ -1,7 +1,7 @@
 title: Java 线程及线程池
 date: 2018-04-10
 tags: 线程, 线程池, AsyncTask, Handler Thread
-cover: /assets/images/java线程池框架.jpg
+cover: ../../assets/images/java线程池框架.jpg
 
 ### 1. Java 线程池
 

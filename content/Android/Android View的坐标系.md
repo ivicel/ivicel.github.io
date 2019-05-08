@@ -1,7 +1,7 @@
 title: Android View 的坐标系
 date: 2018-04-28
 tags: view, 坐标
-
+cover: ../../assets/images/view坐标.png
 
 
 屏幕的坐标原点为屏幕的左上角, 往右为**正向x轴**, 往下为**正向y轴**. 坐标参数顺序一般为`左`, `上`, `右`, `下`

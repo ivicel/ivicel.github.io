@@ -1,10 +1,9 @@
 Title: AIDL生成的接口及Binder的分析
 Date: 2018-04-01
-Tags: aidl, 源代码阅读, 分析
+Tags: aidl, 源代码阅读, android
+cover: ../../assets/images/binder架构.jpg
 
 
-
-[TOC]
 
 ### 1. Android 上的 Binder
 

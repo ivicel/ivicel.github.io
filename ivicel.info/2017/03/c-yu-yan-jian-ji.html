@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/存储大小.jpg');
     }
 
     header.intro-header .header-mask{
@@ -176,7 +176,7 @@ Ambertime        </title>
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <p>First C program</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdio.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 
 int main(int argc, char **argv)
 {
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 }</code></pre>
 
 <h4><strong>1. 注释</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 
+<pre class="highlight line-numbers"><code class="language-c">/* 
  *
  * 注释不能嵌套 
  *  
@@ -271,7 +271,7 @@ int main(int argc, char **argv)
 <li>在所有函数外部的<strong>全局变量</strong></li>
 <li>在函数中定义的<strong>形式参数</strong></li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdio.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdio.h&gt;
 
 /* 全局变量 */
 /* 不手动初始化时，默认值被系统初始化为:
@@ -300,7 +300,7 @@ void func(int a)
 字符常量：<code>'x'</code>, <code>'y'</code>, 转义字符<br />
 字符串常量：<code>"hello"</code></p>
 <p>定义常量：</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 1. define预处理器 */ 
+<pre class="highlight line-numbers"><code class="language-c">/* 1. define预处理器 */ 
 #define LENGTH 10
 /* 2. const关键字 */
 const int LEN = 10</code></pre>
@@ -322,7 +322,7 @@ const int LEN = 10</code></pre>
 赋值运算符: <code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>|=</code><br />
 其他运算符: <code>sizeof</code>, <code>&amp;</code>(返回变量地址), <code>*</code>(指向一个变量), <code>?:</code></p>
 <h4><strong>8. 语句</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 判断 */
+<pre class="highlight line-numbers"><code class="language-c">/* 判断 */
 if (a == b) {
     printf("yes\n");
 } esle {
@@ -361,7 +361,7 @@ for (int i = 0; i &lt; 10; i++) {
 </code></pre>
 
 <h4><strong>9. 函数</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 传值 */
+<pre class="highlight line-numbers"><code class="language-c">/* 传值 */
 int func1(int a, int b)
 {
     /* do something */
@@ -376,7 +376,7 @@ int func2(int *a, int *b)
 }</code></pre>
 
 <h4><strong>10. 数组</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">double balance[10];
+<pre class="highlight line-numbers"><code class="language-c">double balance[10];
 int a[5] = {1, 2, 3, 4, 5};
 char b[6] = "hello";    /* 最后一位存储'\0' */
 int c[] = {1, 2, 3, 4}; /* 忽略数组大小时，数组大小初始化为元素个数 */
@@ -388,7 +388,7 @@ int val[3][2] = {
 }</code></pre>
 
 <h4><strong>11. 指针</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 指针的大小跟系统有关，64位中为8个字节 */
+<pre class="highlight line-numbers"><code class="language-c">/* 指针的大小跟系统有关，64位中为8个字节 */
 int a = 5;
 int *p1 = &amp;a;    /* p是a的地址，*p是a的值 */
 int *p2 = NULL;  /* 空指针 */
@@ -406,7 +406,7 @@ int *p = &amp;a;
 int **ptr = &amp;p;</code></pre>
 
 <h4><strong>12. 结构体</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 定义 */
+<pre class="highlight line-numbers"><code class="language-c">/* 定义 */
 struct Books {
     char title[50];
     int book_id;
@@ -420,7 +420,7 @@ b1-&gt;title;
 b1-&gt;book_id;</code></pre>
 
 <h4><strong>13. 共用体</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 大小是占内存最大的成员的大小 */
+<pre class="highlight line-numbers"><code class="language-c">/* 大小是占内存最大的成员的大小 */
 union Data {
     int i;
     float f;
@@ -486,7 +486,7 @@ data.j = 2.300000
 data.a = C Programming</code></pre>
 
 <h4><strong>14. 位域</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
+<pre class="highlight line-numbers"><code class="language-c">/* 一个位域必须存储在同一字节中，有些编译器可以跨字节，可以有空域来作占位符 */
 /* 因为不能跨字节，所以位域最大为8位，大于8位产生不可预计影响 */
 /* 无名位域即空域，只能用来作占位符，不能被使用 */
 
@@ -515,7 +515,7 @@ bs.a;
 bs-&gt;b;</code></pre>
 
 <h4><strong>15. typedef</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* typedef 来定义别名 */
+<pre class="highlight line-numbers"><code class="language-c">/* typedef 来定义别名 */
 typedef unsigned char BYTE;
 BYTE b1, b2;
 
@@ -535,7 +535,7 @@ Book b1;
 读或输出字符：<code>getchar()</code> <code>putchar()</code>
 读或输出一行：<code>gets()</code> <code>puts()</code>
 格式化输入输出：<code>scanf()</code> <code>printf()</code></p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 文件读写 */
+<pre class="highlight line-numbers"><code class="language-c">/* 文件读写 */
 FILE *fopen(const char *filename, const char *mode);
 /* 模式:
  * r 只读，文件不存在程序出错
@@ -557,7 +557,7 @@ size_t fread(void *ptr, size_t size, size_t numbers, FILE *fp);
 size_t fwrite(const void *ptr, size_t size, size_t numbers, FILE *fp);</code></pre>
 
 <h4><strong>17.预处理器</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/*
+<pre class="highlight line-numbers"><code class="language-c">/*
  * #define   定义宏
  * #include  包含一个源代码文件
  * #ifdef    如果宏已经定义，返回真
@@ -616,7 +616,7 @@ token34 = 40
 <h4><strong>18. 类型转换</strong></h4>
 <p><img alt="强制类型转换" src="../../assets/images/强制类型转换.png" /></p>
 <h4><strong>19. 可变参数</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 可变参数定义在 stdarg.h 头文件中
+<pre class="highlight line-numbers"><code class="language-c">/* 可变参数定义在 stdarg.h 头文件中
  * 函数的第一个参数总是int，表示参数的个数，后面跟省略号
  * 使用int参数和va_start宏初始化va_list变量为参数列表
  * 使用va_arg宏和va_list变量来访问参数列表中的每一项
@@ -646,7 +646,7 @@ int main()
 }</code></pre>
 
 <h4><strong>20. 内存管理</strong></h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">void *calloc(int num, int size);
+<pre class="highlight line-numbers"><code class="language-c">void *calloc(int num, int size);
 void *malloc(int num);
 void realloc(void *address, int newsize);
 void free(void *address);</code></pre>

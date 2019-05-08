@@ -148,6 +148,20 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/09/python-tips.html">
+            <h2 class="post-title">
+                python tips
+            </h2>
+            <div class="post-content-preview">
+                    a = (1, 2, [3, 4]) a[2] += [5, 6] # 以上在 python 3.6.5 中抛出了 TypeError, 但 a[2] 的值还是变成了 [3, 4, 5, 6] # 这是因为 a[2] 在增量时是分成两步 # 一是把 a[2] 的列表值入栈, 扩展成 [3, 4, 5, 6], 这是成功的 # 二是赋值回给元组元素 a[2], 这一步就出现的 TypeError 不要把可变对象放在元组中 列表增量赋值不是一个原子, 是分成两步进行的, 其实也可以从 list 没有实现 __iadd__ …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Mon 10 September 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/07/shu-ju-jie-gou-pythonmiao-shu-di-6-zhang-er-cha-shu-yu-shu.html">
             <h2 class="post-title">
                 数据结构(Python描述) 第 6 章 二叉树与树
@@ -200,20 +214,6 @@ Ambertime        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Wed 18 July 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/06/wsgi-xie-yi.html">
-            <h2 class="post-title">
-                WSGI 协议
-            </h2>
-            <div class="post-content-preview">
-                    1. 简介 WSGI(Web Server Gateway Interface) 定义在 PEP 3333 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client. WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种,...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Fri 01 June 2018
         </p>
     </div>
     <hr>
@@ -317,7 +317,6 @@ Ambertime        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

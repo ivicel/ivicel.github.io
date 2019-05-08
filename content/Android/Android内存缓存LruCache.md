@@ -1,7 +1,7 @@
 title: Android内存缓存LruCache
 date: 2018-04-04
 tags: 缓存, lrucache
-
+cover: ../../assets/images/beverage.jpg
 
 
 ### 1. LruCahe 的使用

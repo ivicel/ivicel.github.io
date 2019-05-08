@@ -192,7 +192,7 @@ Ambertime        </title>
 <li>滑动速度追踪<code>VelocityTracker</code></li>
 </ul>
 <p>滑动速度指的是在某一个时间段内的速度. </p>
-<pre class="highlight line-numbers"><code class="language-java linenums">/* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
+<pre class="highlight line-numbers"><code class="language-java">/* 首先可以在 View 中的 onTouchEvent 内获得追踪事件 */
 VelocityTracker vt = VelocityTracker.obtain();
 vt.addMovement(event);
 /* 然后必须要先设定时间段以便计算出该时间内的速度, 最后再获取速度, 速度为负时表示向左滑动 */
@@ -206,7 +206,7 @@ vt.recycle();</code></pre>
 <ul>
 <li>手势检测<code>GestureDetector</code>, 单击, 滑动, 长按, 双击</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 在view 里onTouchEvent中截断事件来进行监听
+<pre class="highlight line-numbers"><code class="language-java">// 在view 里onTouchEvent中截断事件来进行监听
 GestureDetector mGestureDetector = new GestureDetector(context);
 // 设置是否需要长按
 mGestureDetector.setIsLongpressEnabled(false);
@@ -254,7 +254,7 @@ return mGestureDetector.onTouchEvent(event);</code></pre>
 <p><code>Scroller</code>类是一个滑动的<code>Helper</code>类, 其本质上是使用<code>view.scrollTo</code>方法来滑动, 但内部有一个可定义<code>Interpolator</code>类, 即插值属性来提供滑动变动曲线, 使得滑动更加的流畅.</p>
 </li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-Java linenums"> /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
+<pre class="highlight line-numbers"><code class="language-Java"> /* 一般使用 Scroller 类来滚动 View 时, 都使用在自定义 View 中 
   * 在自定义 View 的构造方法获取一个 Scroller 实例
   * 然后重写 View.computeScroll 方法, 该方法会在重绘 view 时被调用
   * 在 View.computeScroll 中使用 Scroller.computeScrollOffset 来确认是否完成滑动
@@ -304,7 +304,7 @@ return mGestureDetector.onTouchEvent(event);</code></pre>
 <p><code>view</code>的事件分发首先由<code>Activity</code>最先捕获, 然后一层一层的分发到具体的子<code>view</code>, 如果中途没有被截断的话;</p>
 <p>子<code>view</code>如果没有处理这个事件的话, 最后再沿路返回到<code>Activity</code>中.</p>
 <p>首先看<code>Activity#dispatchTouchEvent</code>和<code>PhoneWindow#superDispatchTouchEvent</code>代码</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// Activity#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java">// Activity#dispatchTouchEvent
 
 public boolean dispatchTouchEvent(MotionEvent ev) {
     if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -334,12 +334,12 @@ public boolean superDispatchTouchEvent(MotionEvent ev) {
 }</code></pre>
 
 <p><code>DecorView</code>继承了<code>FrameLayout</code>并实现了<code>RootViewSurfaceTracker</code>, <code>WindowCallbacks</code>. <code>DecorView</code>即是屏幕的总父<code>view</code>, 包括了标题栏和内容部分, 即是<code>setContentView</code>的父<code>view</code>. 其在接收到<code>view</code>事件后, 会继续向下派发, 由于<code>FrameLayout</code>并没覆写这个方法, 所以最终传到父<code>ViewGroup</code>来处理.   (<del>这火传的2333333</del>)</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public boolean superDispatchTouchEvent(MotionEvent ev) {
+<pre class="highlight line-numbers"><code class="language-java">public boolean superDispatchTouchEvent(MotionEvent ev) {
     return super.dispatchTouchEvent(ev);
 }</code></pre>
 
 <p><code>ViewGroup#dispatchTouchEvent</code>. <code>ViewGroup</code>会判断是否要向下一层<code>view</code>传递事件, 这样一层一层如此循环, 最终完成整个事件的分发.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java">// ViewGroup#dispatchTouchEvent
 
 public boolean dispatchTouchEvent(MotionEvent ev) {
     /* ..... */
@@ -405,7 +405,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
 </li>
 </ul>
 <p><code>ViewGroup</code>只在<strong>当为鼠标的左键(主按键)的按下事件并且屏幕能滚动时</strong>才会中断事件的派发, 否则默认不中断分发事件 </p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#onInterceptTouchEvent
+<pre class="highlight line-numbers"><code class="language-java">// ViewGroup#onInterceptTouchEvent
 
 public boolean onInterceptTouchEvent(ev) {
     if (ev.isFromSource(InputDevice.SOURCE_MOUSE) &amp;&amp;
@@ -423,7 +423,7 @@ public boolean onInterceptTouchEvent(ev) {
 <li>一是作为子<code>view</code>即像<code>TextView</code>之类时处理从<code>ViewGroup</code>派发下来的事件</li>
 <li>二是作为<code>ViewGroup</code>的父类, 处理<code>ViewGroup#dispatchTouchEvent</code>(实际是在<code>ViewGroup#dispatchTransformedTouchEvent</code>)调用父类的<code>dispatchTouchEvent</code>时</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// View#dispatchTouchEvent
+<pre class="highlight line-numbers"><code class="language-java">// View#dispatchTouchEvent
 public boolean dispatchTouchEvent(MotionEvent event) {
     if (event.isTargetAccessibilityFocus()) {
         // We don't have focus or no virtual descendant has it, do not handle the event.
@@ -488,7 +488,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 }</code></pre>
 
 <p>来看 <code>View#onTouchEvent</code></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// View#onTouchEvent
+<pre class="highlight line-numbers"><code class="language-java">// View#onTouchEvent
 
 public boolean onTouchEvent(MotionEvent event) {
     final float x = event.getX();

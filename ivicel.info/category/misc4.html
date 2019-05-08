@@ -148,12 +148,26 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/06/wsgi-xie-yi.html">
+            <h2 class="post-title">
+                WSGI 协议
+            </h2>
+            <div class="post-content-preview">
+                    1. 简介 WSGI(Web Server Gateway Interface) 定义在 PEP 3333 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client. WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种,...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Fri 01 June 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/05/android-tong-zhi.html">
             <h2 class="post-title">
                 Android 通知
             </h2>
             <div class="post-content-preview">
-                    [TOC] 1. 简介 1.1 通知可出现的地方 以一个图标出现在 status bar 中, 一般是一个单 alpha 通道的图标, 但有些魔改的系统是可以显示多色图标的 notification drawer 模式, 也就是下拉状态栏 heads-up notification 模式, 在 Android 5.0(SDK 21) 之后, 如果当前 app 全屏显示, 手机处于解锁状态, 然后通知拥有高优先级(high priority, Android 7.1, SDK 25)并产生铃音/震动, 或通知的 channel 拥有重要重级(high importance, Android 8.0 …
+                    1. 简介 1.1 通知可出现的地方 以一个图标出现在 status bar 中, 一般是一个单 alpha 通道的图标, 但有些魔改的系统是可以显示多色图标的 notification drawer 模式, 也就是下拉状态栏 heads-up notification 模式, 在 Android 5.0(SDK 21) 之后, 如果当前 app 全屏显示, 手机处于解锁状态, 然后通知拥有高优先级(high priority, Android 7.1, SDK 25)并产生铃音/震动, 或通知的 channel 拥有重要重级(high importance, Android 8.0, SDK …
             </div>
         </a>
         <p class="post-meta">
@@ -196,20 +210,6 @@ Ambertime - misc category        </title>
             </h2>
             <div class="post-content-preview">
                     屏幕的坐标原点为屏幕的左上角, 往右为正向x轴, 往下为正向y轴. 坐标参数顺序一般为左, 上, 右, 下 子view可以获取其相对于父ViewGroup的坐标. 这个要跟点击事件MotionEvent的坐标获取方法区别开来 view由于是一个框模型, 所以当确定左上点和右下点的位置, 我们便可以确定一个view的大小和位置. 左上点坐标为 (View.getLeft(), View.getTop()), 右下点坐标 (View.getRight(), View.getBottom()) view 的大小: 宽度 width = getRight() - getLeft() 高度...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sat 28 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/circleimageviewshi-xian-jie-xi.html">
-            <h2 class="post-title">
-                CircleImageView实现解析
-            </h2>
-            <div class="post-content-preview">
-                    1. CircleImageView 的实现 1.1 自定义的属性 CircleImageView 一共自定义的 5 个自定义属性 civ_border_width 边框的大小 civ_border_color 边框的颜色 civ_border_overlay 边框覆盖 civ_fill_color 图片背景填充, 已弃用, 使用 civ_circle_background_color 替代 1.2 流程 CircleImageView 是继承自系统控件 android.widget.ImageView, 而不是 support 里的兼容控件...
             </div>
         </a>
         <p class="post-meta">
@@ -317,7 +317,6 @@ Ambertime - misc category        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

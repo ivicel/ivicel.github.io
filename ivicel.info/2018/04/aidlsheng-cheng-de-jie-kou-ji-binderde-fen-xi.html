@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/binder架构.jpg');
     }
 
     header.intro-header .header-mask{
@@ -161,7 +161,7 @@ Ambertime        </title>
                     <div class="tags">
                         <a class="tag" href="#" title="aidl">aidl</a>
                         <a class="tag" href="#" title="源代码阅读">源代码阅读</a>
-                        <a class="tag" href="#" title="分析">分析</a>
+                        <a class="tag" href="#" title="android">android</a>
                     </div>
                     <h1>AIDL生成的接口及Binder的分析</h1>
                     <span class="meta">Posted by ivicel on 2018-04-01</span>
@@ -177,8 +177,7 @@ Ambertime        </title>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <p>[TOC]</p>
-<h3>1. Android 上的 Binder</h3>
+                <h3>1. Android 上的 Binder</h3>
 <p>在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量,  Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更<strong>高效</strong>, 也更<strong>安全</strong>, 其他<code>IPC</code>没有严格权限验证机制</p>
 <h4>1.1 Binder 的构架</h4>
 <p>​        Binder 通信是基于 <strong>C/S 构架</strong>. 多个 C 端可以同步连接 S 端, 所以 S 端需要<strong>同步</strong>设置</p>
@@ -209,7 +208,7 @@ Ambertime        </title>
 <li>从<code>onTransact()</code>返回后, 依据<code>aidl</code>定义向<code>client</code>, <code>server</code>两方读或写入</li>
 <li><code>client</code>在调用<code>server service</code>时进行休闲, 直到<code>server</code>端调用结束返回唤醒<code>client</code>. 所以如果<code>server</code>的调用耗时很久, 不要在<code>client</code>的<code>UI</code>线程调用, 以免导致 <strong>ANR</strong></li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">public interface BookManager extends IInterface {
+<pre class="highlight line-numbers"><code class="language-java">public interface BookManager extends IInterface {
     public static abstract class Stub extends Binder implements BookManager {
         // 描述符, 用于在 binder 连接池中查找对应的 binder
         private static final java.lang.String DESCRIPTOR = "info.ivicel.github.aidldemo.BookManager";

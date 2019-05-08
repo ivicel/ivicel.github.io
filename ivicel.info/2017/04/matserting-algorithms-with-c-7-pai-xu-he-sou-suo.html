@@ -181,7 +181,7 @@ Ambertime        </title>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <h4>插入排序(选择排序, 冒泡排序Insertion Sort)</h4>
 <p>插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n<sup>2</sup>)</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* issort.c */
+<pre class="highlight line-numbers"><code class="language-c">/* issort.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
@@ -230,7 +230,7 @@ iint issort(void *data, int size, int esize, int (*compare)(const void *key1,
 </ol>
 <p>快速排序的时间复杂度依赖于每次所选的数, 最坏为<code>O(n&lt;sup&gt;2&gt;&lt;/sup&gt;)</code>, 平均是<code>O(nlog n)</code></p>
 <p>为最大可能接近<code>O(nlog n)</code>, 每次都随机从数组中选择三个数, 取这三个数的中间值</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "sort.h"
 
@@ -320,7 +320,7 @@ int qksort(void *data, int size, int esize, int i, int k,
 }</code></pre>
 
 <h4>快速排序的例子: 目录列表</h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdi.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdi.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;dirent.h&gt;
@@ -378,7 +378,7 @@ int directls(const char *path, Directory **dir)
 </code></pre>
 
 <h4>归并排序(Merge Sort)</h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include "sort.h"
 
@@ -461,7 +461,7 @@ int mgsort(void *data, int size, int esize, int i, int k,
     return 0;
 }</code></pre>
 
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 一种排序数组的方法, 每次会使用新的内存来保存左右值, 写回原数组后再释放 */
+<pre class="highlight line-numbers"><code class="language-c">/* 一种排序数组的方法, 每次会使用新的内存来保存左右值, 写回原数组后再释放 */
 int merge_sort(void *data, int size, int esize,
     int (*compare)(const void *key1, const void *key2))
 {
@@ -526,7 +526,7 @@ int merge_sort(void *data, int size, int esize,
 
 <h4>计数排序(Counting Sort)</h4>
 <p>计数排序只能用于整型或者那些可以用整型来表示的数据集合, 通过计算一个集合中元素出现的次数来确定集合如何排列</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "sort.h"
 
@@ -625,7 +625,7 @@ int rxsort(int *data, int size, int p, int k)
 </code></pre>
 
 <h4>二分查找(Binary Search)</h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "search.h"
 
@@ -658,7 +658,7 @@ int bisearch(void *sorted, void *target, int size, int esize,
 }</code></pre>
 
 <h4>二分查找示例: 拼写检查器</h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;string.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
 
 

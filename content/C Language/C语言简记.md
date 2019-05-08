@@ -1,7 +1,7 @@
 title: C 语言简记
 date: 2017-03-20
 tags: C
-
+cover: ../../assets/images/存储大小.jpg
 
 
 First C program
