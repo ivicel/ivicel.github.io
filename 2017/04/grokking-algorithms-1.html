@@ -179,7 +179,7 @@ Ambertime        </title>
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <h4>binary search 二分法查找</h4>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 二分法查找, 返回数值在 list 中的位置, 否则返回 None
+<pre class="highlight line-numbers"><code class="language-python"># 二分法查找, 返回数值在 list 中的位置, 否则返回 None
 def binary_search(num_list, item):
     # 确定查找的数在列表中
     if item &lt; num_list[0] or item &gt; num_list[-1]:
@@ -218,7 +218,7 @@ def binary_search(num_list, item):
 </ol>
 </blockquote>
 <h4>selection sort 选择排序</h4>
-<pre class="highlight line-numbers"><code class="language-python linenums">def selection_sort(arr):
+<pre class="highlight line-numbers"><code class="language-python">def selection_sort(arr):
     def findSmallest(arr):
         smallest = arr[0]
         smallest_index = 0
@@ -249,7 +249,7 @@ def bubble_sort(arr):
 这样不断为一条较小边为基准画方块, 最后便可以得到最后一个 80 * 80 大小的方块, 这个长度便是最佳长度</p>
 </blockquote>
 <p>将问题范围不断缩小后, 求出最简单问题的解, 然后用这个解去求原始问题的解, 递归使用这种思想</p>
-<pre class="highlight line-numbers"><code class="language-python linenums"># n!
+<pre class="highlight line-numbers"><code class="language-python"># n!
 def fb(n):
     if n == 1:
         return 1
@@ -266,7 +266,7 @@ def fb(n):
 <p>每层都需要比较<code>n</code>次</p>
 <p>最坏情况是<code>O(log n&lt;sup&gt;2&lt;/sup&gt;)</code></p>
 <p>平均情况是<code>O(nlog n)</code>, 也是最好情况</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def quicksort(arr):
+<pre class="highlight line-numbers"><code class="language-python">def quicksort(arr):
     if len(arr) &lt; 2:
         return arr
     base = arr[0]

@@ -189,14 +189,14 @@ Ambertime        </title>
 </ul>
 <h5>1. flask 结合 websocket 问题</h5>
 <p>根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商</p>
-<pre class="highlight line-numbers"><code class="linenums">GET /websocket HTTP/1.1
+<pre class="highlight line-numbers"><code>GET /websocket HTTP/1.1
 Connection: Upgrade
 Upgrade: websocket
 Sec-WebSocket-Version: 13
 Sec-WebSocket-Key: KSk4Wty1NJInqzWMBbQqCQ==</code></pre>
 
 <p>当我们收到这个请求时, 返回一个 response 来确定升级到</p>
-<pre class="highlight line-numbers"><code class="linenums">HTTP/1.1 101 Switching Protocols
+<pre class="highlight line-numbers"><code>HTTP/1.1 101 Switching Protocols
 Server: nginx/1.15.3
 Date: Thu, 13 Sep 2018 05:56:14 GMT
 Connection: upgrade
@@ -209,7 +209,7 @@ Sec-WebSocket-Accept: B1HnOTYR2fZO2PT0y6LImuBQtzQ=</code></pre>
 <li>在获得到 TCP 连接后, 由于 Websocket 是基于 message 而不是基于 stream 的, 我们还需要实现 websocket 协议, 接管请求到 <code>/websocket</code> 的连接, 比如 ping/pong, send/receive</li>
 </ol>
 <p>以上两点 uWSGI 已经帮我们实现好, 在 <a href="https://uwsgi-docs.readthedocs.io/en/latest/WebSockets.html">uWSGI 文档</a>中提到了当使用 <code>--http-socket</code> 参数来运行的 wsgi 应用时, 只要我们检查 <code>environ['HTTP_SEC_WEBSOCKET_KEY']</code> 变量, 这是升级到 websocket 里的请求, 便可知道该连接之后想升级到 websocket. uWSGI 已经帮我们把实现了 websocket 协议, 我们只要使用以下几个接口即可</p>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 确定发回 Connection upgrade
+<pre class="highlight line-numbers"><code class="language-python"># 确定发回 Connection upgrade
 uwsgi.websocket_handshake([key, origin, proto])
 
 uwsgi.websocket_recv()
@@ -222,14 +222,14 @@ uwsgi.websocket_send_from_sharedarea(id, pos) </code></pre>
 <p>Flask 是同步执行的, 我们主要的请求都在 websocket 中, 所以我们只在每一个 websocket upgrade request 中 patch 所有的 socket 即可. </p>
 <h5>3. 代码实现</h5>
 <p>前面说到, 因为要检测 <code>environ</code> 的值, 我们可以使用一个中间件 <code>WebsocketMiddleware</code>, 这样当我们生成 <code>ws = Websocket(app)</code>, 然后使用 <code>@ws.route('/ws')</code> 时便说明, url <code>/ws</code> 使用 websocket 连接.</p>
-<pre class="highlight line-numbers"><code class="linenums">uWSGI ------ Websocket Middleware ---if is websocket---&gt; Websocket Application 
+<pre class="highlight line-numbers"><code>uWSGI ------ Websocket Middleware ---if is websocket---&gt; Websocket Application 
                      |
                      | else
                      |
               Flask Application</code></pre>
 
 <p>查看 flask 的源码可以看到在类 Flask 的最终实现 wsgi 协议的是方法 <code>wsgi_app()</code>, 并且源码里也说明了最好的中间件实现方式. </p>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 简化实现说明
+<pre class="highlight line-numbers"><code class="language-python"># 简化实现说明
 from flask import Flask
 from .websocket import Websocket
 
@@ -253,7 +253,7 @@ def websocket_connect(ws):
 </code></pre>
 
 <p>主要类的实现, <code>Websocket</code> 类实现了一个 WGSI 协议, 接收从 uWSGI 的回调, 然后将请求放到 <code>WebsocketMiddleware</code> 中判断是否为 websocket, 不是的话发送到 flask application 来处理</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">import uwsgi
+<pre class="highlight line-numbers"><code class="language-python">import uwsgi
 import gevent
 from gevent.queue import Empty, Queue
 from gevent.event import Event

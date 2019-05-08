@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/activity_lifecycle.png');
     }
 
     header.intro-header .header-mask{
@@ -226,7 +226,7 @@ Ambertime        </title>
 </blockquote>
 <h3>3. Intent 的过滤规则</h3>
 <p><code>intent-filter</code>需要匹配<code>action</code>, <code>category</code>, <code>data</code>三个项目. 可以混搭写, 同时匹配多个不同的. 还可以同时有多个<code>intent-filter</code></p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;intent-filter&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;intent-filter&gt;
     &lt;action android:name="android.intent.action.SEND"/&gt;
     &lt;action android:name="android.intent.action.SEND_MULTIPLE"/&gt;
     &lt;category android:name="android.intent.category.DEFAULT"/&gt;
@@ -240,7 +240,7 @@ Ambertime        </title>
 <li><code>data</code>的匹配规则: 只要有一条能匹配上即可</li>
 </ol>
 <p><code>data</code>的语法:</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;data
+<pre class="highlight line-numbers"><code class="language-xml">&lt;data
       android:scheme="string"
       android:host="string"
       andorid:port="string"

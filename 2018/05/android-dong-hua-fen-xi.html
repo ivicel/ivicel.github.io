@@ -198,7 +198,7 @@ Ambertime        </title>
 <blockquote>
 <p>在 drawable 中也有 scale, rotate 标签, 不过存放目录不同, 生成的 java 类也是不同(Drawable).</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;set xmlns:android="http://schemas.android.com/apk/res/android"
     android:interpolator="@[package:]anim/interpolator_resource"
     android:shareInterpolator=["true" | "false"] &gt;
@@ -253,7 +253,7 @@ Ambertime        </title>
 <li><code>android:pivotY</code> 旋转的中心点纵坐标</li>
 </ul>
 <p>通过 java 代码来启动动画</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">ImageView iv = findViewById(R.id.image_view);
+<pre class="highlight line-numbers"><code class="language-java">ImageView iv = findViewById(R.id.image_view);
 Animation animation = AnimationUtils.loadAnimation(this, R.anim.my_animation);
 // 另外还可以设置动画时间, 动画完成后是否停留在结束位置
 animation.setDuration(3000);
@@ -262,7 +262,7 @@ iv.startAnimation(animation);</code></pre>
 
 <h3>2. 帧动画(Frame Animation)</h3>
 <p>帧动画比较简单, 就是按规定的顺序来播放一系列的图片. 需要注意的是避免加载过多尺寸较大的图片从而引起 OOM. <code>animation-list</code> 对应的是类 <code>AnimationDrawable</code>, 可以跟多个 item</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<pre class="highlight line-numbers"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot=["true" | "false"] &gt;
     &lt;item
@@ -275,7 +275,7 @@ iv.startAnimation(animation);</code></pre>
 <li><code>android:drawable</code> 图片来源</li>
 <li><code>andorid:duration</code> 图片播放时间</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">ImageView rocketImage = findViewById(R.id.rocket_image);
+<pre class="highlight line-numbers"><code class="language-java">ImageView rocketImage = findViewById(R.id.rocket_image);
 rocketImage.setBackgroundResource(R.drawable.rockets);
 
 AnimationDrawable rocketAnimation = (AnimationDrawable) rocketImage.getDrawable();
@@ -283,7 +283,7 @@ rocketAnimation.start();</code></pre>
 
 <h3>3. 属性动画(Property Animation)</h3>
 <p>属性动画是 SDK 11 之后加入的特性, 可以对任意的对象而不单单只是 view, 在一定的时间内(默认 300ms)把对象的属性从一个值变化到另一个值. 所以属性动画几乎无所不能. 属性动画对应的类为 <code>Animator</code>, 资源文件存在 <code>res/animator/</code> 中</p>
-<pre class="highlight line-numbers"><code class="language-xml linenums">&lt;set
+<pre class="highlight line-numbers"><code class="language-xml">&lt;set
   android:ordering=["together" | "sequentially"]&gt;
     &lt;objectAnimator
         android:propertyName="string"
@@ -341,13 +341,13 @@ rocketAnimation.start();</code></pre>
 </li>
 </ul>
 <p>对于一个定义好的 xml, 可以使用 java 代码来启动动画</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">AnimatorSet as = (AnimatorSet) AnimatorInflater.loadAnimator(myContext, R.animator.property_animator);
+<pre class="highlight line-numbers"><code class="language-java">AnimatorSet as = (AnimatorSet) AnimatorInflater.loadAnimator(myContext, R.animator.property_animator);
 as.setTarget(myObject);
 as.start();</code></pre>
 
 <h3>4. 属性动画的监听器</h3>
 <p>属性动画主要有两个监听器 </p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public interface AnimatorUpdateListener {
+<pre class="highlight line-numbers"><code class="language-java">public interface AnimatorUpdateListener {
     // 开始, 结束, 取消, 重复时调用
     void onAnimationStart(Animator animator);
     void onAnimationEnd(Animator animator);
@@ -364,7 +364,7 @@ public interface AnimatorListener {
 
 <h3>5. 插值器(Interpolator)</h3>
 <p>插值器其实就是一类描述在指定时间内(默认 300ms)变化速率的函数 f(x), 其类都实现了 <code>android.view.animation.Interpolator</code> 接口. 主要有以下几种, 每个插值类都有对应的 xml 描述. <code>getInterpolation</code> 方法返回的是一个百分比.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public interface Interpolator {
+<pre class="highlight line-numbers"><code class="language-java">public interface Interpolator {
     abstract float getInterpolation(float input);   
 }</code></pre>
 
@@ -384,7 +384,7 @@ public interface AnimatorListener {
 <blockquote>
 <p>如果不实现 TypeEvaluator, 也可以在监听 Interpolator 的变化时做出值的改变</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-java linenums">public interface TypeEvaluator&lt;T&gt; {
+<pre class="highlight line-numbers"><code class="language-java">public interface TypeEvaluator&lt;T&gt; {
     public T evaluate(float fraction, T starValue, T endValue);   
 }</code></pre>
 

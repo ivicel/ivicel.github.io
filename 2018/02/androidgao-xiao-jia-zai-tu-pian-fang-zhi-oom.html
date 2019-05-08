@@ -179,12 +179,12 @@ Ambertime        </title>
 <p><code>inSampleSize</code> 一般取为 2 的指数, 有些系统会对其向下取整为近似 2 的指数, 但不是所有系统都会这么做. 如果当长和宽的 <code>inSampleSize</code> 不一样时, 取较小的值, 这样可以让图片不至于模糊</p>
 <p>生成所需大小的 bitmap 的一般步骤:</p>
 <ol>
-<li><code>new</code> 一个新<code>BitmapFactory.Options</code> 对象, 并将其 <code>BitmapFactory.Options.inJustDecodeBounds</code> 设置为 <code>true</code>, 这样可以使其解析图片时, 并不会加载图片而只是解读其中信息</li>
+<li><code>new</code> 一个新 <code>BitmapFactory.Options</code> 对象, 并将其 <code>BitmapFactory.Options.inJustDecodeBounds</code> 设置为 <code>true</code>, 这样可以使其解析图片时, 并不会加载图片而只是解读其中信息</li>
 <li>获得图片的长和宽, 分别为所期望的长和宽进行对比, 取其中<strong>比值大</strong>的数</li>
 <li><code>BitmapFactory.Options.inJustDecodeBounds</code> 设置成 <code>false</code>, 重新解析出所需图片</li>
 </ol>
-<p>&lt;<Android开发权威指南>&gt;依据想需要的大小生成<code>bitmap</code>, 其取的值是较大值, 然后向下取整. 这样能获得更小的分辨率, 占用的内存更小</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
+<p>&lt;<Android开发权威指南>&gt;依据想需要的大小生成 <code>bitmap</code>, 其取的值是较大值, 然后向下取整. 这样能获得更小的分辨率, 占用的内存更小</p>
+<pre class="highlight line-numbers"><code class="language-java">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
     BitmapFactory.Options options = new BitmapFactory.Options();
     /* 设置为true后, 在decode时不会真的加载图片而是获取图片信息 */
     options.inJustDecodeBounds = true;
@@ -204,7 +204,7 @@ Ambertime        </title>
 }</code></pre>
 
 <p>Android Develper 官网的示例, 其严格的按 2 的倍数来取值</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
+<pre class="highlight line-numbers"><code class="language-java">public Bitmap loadSpecifySizeImage(String imagePath, int destWidth, int destHeight) {
     BitmapFactory.Options options = new BitmapFactory.Options();
     options.inJustDecodeBounds = true;
     BitmapFactory.decodeFile(imagePath, options);

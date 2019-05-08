@@ -194,7 +194,7 @@ Ambertime        </title>
 <p>我们都知道, xml 的 inflate 使用的是控件里的第二个构造方法, 即 <code>public CircleImageView(Context context, AttributeSet attrs)</code>, 然后这里调用了 <code>public CircleImageView(Context context, AttributeSet attrs, int defStyle)</code>.</p>
 <p>在第三个构造调用了父类 <code>ImageView</code> 里对应的构造方法, 这里要注意的是, 父类里会解析我们所写的 xml 文件, 然后如果我们写了图片文件来源 <code>android:src</code>, 这里就会调用了 <code>ImageView#setDrawable</code> 来设置图片文件来源.</p>
 <p>然后我们看到 CircleImageView 源码里面设置图片的 setXXX 方法都已经被重写了, 都只增加了一行 <code>initializeBitmap()</code> 来初始化图片 mBitmap 来源.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">private void initializeBitmap() {
+<pre class="highlight line-numbers"><code class="language-java">private void initializeBitmap() {
     // 通过这个标志可以设定我们是否需要把图片变形为圆形或者不改变
     // 如果设定了 onDraw 那就按 ImageView 来绘画
     if (mDisableCircularTransformation) {
@@ -231,7 +231,7 @@ private void setup() {
 <li>通过 java 代码来设置图片来源.</li>
 </ol>
 <p>重写 <code>setImageXXXX()</code> 方法, 里面都调用了 <code>initializeBitmap()</code>. 然后跟上面的一样, 只不过这时候 <code>mReady</code> 已经是 <code>true</code>, 因为在 <code>init()</code> 里已经设置了, 并且此时我们已经完成了对 view 的测量, 这样在 <code>setup()</code> 里就直接测量圆的半径等等所需的值</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">private void init() {
+<pre class="highlight line-numbers"><code class="language-java">private void init() {
     super.setScaleType(SCALE_TYPE);
     mReady = true;
 
@@ -246,7 +246,7 @@ private void setup() {
 }</code></pre>
 
 <p>来看如何获得 bitmap.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">private Bitmap getBitmapFromDrawable(Drawable drawable) {
+<pre class="highlight line-numbers"><code class="language-java">private Bitmap getBitmapFromDrawable(Drawable drawable) {
     if (drawable == null) {
         return null;
     }
@@ -276,7 +276,7 @@ private void setup() {
 }</code></pre>
 
 <p>回过来看最重要的 setup 方法</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">private void setup() {
+<pre class="highlight line-numbers"><code class="language-java">private void setup() {
     if (!mReady) {
         mSetupPending = true;
         return;

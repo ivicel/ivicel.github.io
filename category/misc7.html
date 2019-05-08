@@ -148,6 +148,20 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/android-dui-xiang-xu-lie-hua-fang-shi.html">
+            <h2 class="post-title">
+                Android 对象序列化方式
+            </h2>
+            <div class="post-content-preview">
+                    Android内序列化对象主要有两种方式, 一是原Java自带的Serializable接口, 二是Android内自有的Parcelable接口 1. Serializable接口 Java自带的序列接口使用非常简单, 只要实现Serializable接口即可. Serializable接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. 如果想自定义序列化/反序列化过程, 可以自主实现writeObject()和readObject(). 一般我们都不会这么做的 还可以定义一个long serialVersionUID来检测反序列时的数据. 如果值不一样,...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 01 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/04/android-ipcji-zhi.html">
             <h2 class="post-title">
                 Android IPC机制
@@ -196,20 +210,6 @@ Ambertime - misc category        </title>
             </h2>
             <div class="post-content-preview">
                     危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">
-            <h2 class="post-title">
-                Android 中自定义ViewPager, 添加页面指示器
-            </h2>
-            <div class="post-content-preview">
-                    在页面滑动时会回调ViewPager.OnPageChangeListener接口里的方法. 用ViewPage.addOnPageChangeListener添加和ViewPage.removeOnPageChangeListener删除监听回调方法. 如果不想实现所有方法, ViewPager内有个空的类SimpleOnPageChangeListener实现了这个接口, 继承这个类便可. 注意可以多次调用addOnPageChangeListener方法添加多个回调, ViewPager按添加顺序进行调用, 所以在不需要回调时,...
             </div>
         </a>
         <p class="post-meta">
@@ -317,7 +317,6 @@ Ambertime - misc category        </title>
   <li><a href="http://getpelican.com/">Pelican</a></li>
   <li><a href="http://python.org/">Python.org</a></li>
   <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-  <li><a href="#">You can modify those links in your config file</a></li>
 </ul>
         </div>
     </div>

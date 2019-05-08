@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/页表映射.png');
     }
 
     header.intro-header .header-mask{
@@ -184,7 +184,7 @@ Ambertime        </title>
 这样从而导致在向指定结点前面或后面插入元素时, 不能过早将<code>element-prev</code> <code>element-&gt;next</code> 指向新结点<code>new_element</code> 以避免判断头尾结点失败</p>
 </blockquote>
 <h4><strong>单链表</strong>(Linked List)</h4>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* list.h */
+<pre class="highlight line-numbers"><code class="language-c">/* list.h */
 
 #ifndef LIST_H
 #define LIST_H
@@ -250,7 +250,7 @@ int list_rem_next(List *list, ListElmt *element, void **data);
 <p>元素插入链表</p>
 <p><img alt="元素插入链表" src="../../assets/images/元素插入链表.png" /></p>
 <p>函数实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
 #include "list.h"
@@ -355,7 +355,7 @@ int list_rem_next(List *list, ListElmt *element, void **data) {
 <li>释放页表时，重新为页表元素数据申请一个内存，如果没有可用内存，释放失败</li>
 </ul>
 <p><img alt="页帧映射" src="../../assets/images/页表映射.png" /></p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include "list.h"
 
 /* 申请空闲页帧 */
@@ -402,7 +402,7 @@ int free_frame(List *frames, int frame_number)
 </ul>
 <p><img alt="双向链表" src="../../assets/images/双向链表.png" /></p>
 <p>头文件
-<pre class="highlight line-numbers"><code class="language-c linenums">/* dlist.h */
+<pre class="highlight line-numbers"><code class="language-c">/* dlist.h */
 #ifndef DLIST_H
 #define DLIST_H
 
@@ -457,7 +457,7 @@ int dlist_remove(DList *list, DListElmt *element, void **data);
 
 #endif</code></pre></p>
 <p>函数实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* dlist.c */
+<pre class="highlight line-numbers"><code class="language-c">/* dlist.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "dlist.h"
@@ -601,7 +601,7 @@ int dlist_remove(DList *list, DListElmt *element, void **data)
 <li><strong>循环链表</strong>(Circular Lists)</li>
 </ul>
 <p><img alt="循环链表" src="../../assets/images/循环链表.png" /></p>
-<p><pre class="highlight line-numbers"><code class="language-c linenums">/* clist.h */
+<p><pre class="highlight line-numbers"><code class="language-c">/* clist.h */
 #ifndef CLIST_H
 #define CLIST_H
 
@@ -644,7 +644,7 @@ int clist_rem_next(CList *list, CListElmt *element, void **data);
 
 #endif</code></pre>
 函数实现
-<pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "clist.h"
 

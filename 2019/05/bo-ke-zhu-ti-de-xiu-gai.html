@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/kittens-4020199_1280.jpg');
     }
 
     header.intro-header .header-mask{
@@ -159,11 +159,9 @@ Ambertime        </title>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <div class="tags">
-                        <a class="tag" href="#" title="android">android</a>
-                        <a class="tag" href="#" title="fileprovider">fileprovider</a>
                     </div>
-                    <h1>Anroid FileProvider的使用</h1>
-                    <span class="meta">Posted by ivicel on 2018-02-22</span>
+                    <h1>博客主题的修改</h1>
+                    <span class="meta">Posted by ivicel on 2019-05-01</span>
                 </div>
             </div>
         </div>
@@ -176,94 +174,11 @@ Ambertime        </title>
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-                <blockquote>
-<p><code>FileProvider</code> 是在 <code>v4 support library</code> 里的, 使用之前要添加 <code>v4 support library</code> </p>
-<p>默认 <code>v7 support</code> 继承了 <code>v4</code></p>
-</blockquote>
-<ol>
-<li>在<code>manifest</code>中指定分享的文件, 具体的分享目录路径在<code>res/xml/filepaths</code>中指定, <code>android:authorities</code>为指定的认证, 自行定义, 一般为 <code>package name</code> + <code>fileprovider</code>, 其他为固定写法</li>
-</ol>
-<pre class="highlight line-numbers"><code class="language-xml">&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapp"&gt;
-      &lt;application
-        ...&gt;
-
-        &lt;provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.myapp.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false"&gt;
-            &lt;meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/&gt;
-        &lt;/provider&gt;
-
-        ...
-    &lt;/application&gt;
-&lt;/manifest&gt;</code></pre>
-
-<ol>
-<li><code>res/xml/filepaths</code>写法</li>
-</ol>
-<pre class="highlight line-numbers"><code class="language-xml">&lt;paths&gt;
-  &lt;files-path path="images" name="my-images"/&gt;
-  &lt;cache-path path="..." name="..."/&gt;
-  &lt;external-files-path path="...." name="..."/&gt;
-  &lt;external-cache-path path="...." name="..."/&gt;
-  &lt;external-path path="..." name="...."/&gt;
-&lt;/paths&gt;</code></pre>
-
-<ul>
-<li><code>file-path</code>为<code>Context.getFilesDir()</code>代表的目录, 内部(<strong>internal</strong>)存储目录<code>files/</code>.可能有两个位置, <code>/data/data/package_name/files</code>下, 或者<code>/data/user/../package_name/files</code>下</li>
-<li><code>cache-path</code>为<code>Context.getCacheDir()</code>代表的内部目录 <code>cache/</code></li>
-<li><code>external-files-path</code>为外部存储目录<code>Context#getExternalFilesDir(String)</code> 和<code>Context.getExternalFilesDir(null)</code>这个目录一般在外部存储中的<code>Android/data/package_name/files</code>中</li>
-<li><code>external-cache-path</code>为外部缓存目录<code>Android/data/package_name/cache</code>中, 由<code>Context.getExternalCacheDir()</code>获得</li>
-<li><code>external-path</code>为外部存储的根目录<code>Context.getExternalStorageDirectory()</code></li>
-</ul>
-<blockquote>
-<p>如果使用外部目录, 因为存在 <code>SDCard</code>可插拔的原因, 最好使用<code>Environment.getExternalStorageState()</code>来检测当前外部存储状态, 返回<code>Environment.MEDIA_MOUNTED</code>表示存储可用.</p>
-</blockquote>
-<p><code>path="path"</code></p>
-<blockquote>
-<p>代表是指定目录下的子目录, 或者当前目录(使用<code>.</code>表示共享当前目录)</p>
-</blockquote>
-<p><code>name="name"</code></p>
-<blockquote>
-<p>代表将共享的目录名称(<code>path</code>)在生成<code>content://uri</code>时替换成这个值</p>
-</blockquote>
-<ol>
-<li>使用<code>FileProvider.getUriForFile(Context, String, File)</code>方法来获取共享的文件<code>uri</code>路径</li>
-</ol>
-<pre class="highlight line-numbers"><code class="language-java">/* 生成 content://com.example.myapp.fileprovider/my_images/default_image.jpg */
-File imagePath = new File(context.getFilesPath(), "images");
-File newFile = new File(imagePath, "default_image.jpg");
-Uri contentUri = FileProvider.getUriForFile(context, "com.example.myapp.fileprovider",
-     newFile);</code></pre>
-
-<p><code>authorities</code>参数要和<code>meta-data</code>中写的一样, 不然会找不到共享目录, 抛出错误. <code>getUriForFile</code>会在设定好的<code>xml</code>文件中从上逐行进行匹配, 若匹配不到任何一行, 抛出<code>IllegalArgumentException</code></p>
-<ol>
-<li>
-<p>给<code>uri</code>授予权限, 为了兼容<strong>Kitkat</strong>(SDK 19)及以下的Android版本, 一定要对<code>uri</code>授予读写权限. 在<code>Kitkat</code>以上的版本会自动授予权限.</p>
-</li>
-<li>
-<p>使用<code>Context.grantUriPermissioin(package, Uri, mode_flags)</code>来授权, 比如<code>Intent.FLAG_GRANT_READ_URI_PERMISSIOIN</code>和<code>Intent.FLAG_GRANT_WRITE_URI_PERMISSION</code>标志位, 在适当的时候使用<code>Context.revokeUriPermission(Uri, mode_flags)</code>来去掉授予的权限</p>
-</li>
-<li>或者使用<code>Intent.setData()</code>把<code>uri</code>放到<code>intent</code>中后, 使用<code>Intent.setFlags()</code>来设置权限标志位, 建议使用这种授权方式, 这样就不用手动来取消授权了</li>
-</ol>
-<pre class="highlight line-numbers"><code class="language-java">List&lt;ResolveInfo&gt; resolveActivities = getPackageManager().queryInetntActivities(
-     imageCapture, PackageManager.MATCH_DEFAULT_ONLY);
-/* 为每个activity授权 */
-for (ResolveInfo resolveActivity : resolveActivities) {
-    grantUriPermission(resolveActivity.activityInfo.packageName, uri,
-         Intent.FLAG_GRANT_WRITE_PERMISSION);
-}</code></pre>
-
-<p>​</p>
-<h5>Reference:</h5>
-<ol>
-<li><a href="https://developer.android.google.cn/reference/android/support/v4/content/FileProvider.html?hl=zh-cn#getUriForFile(android.content.Context, java.lang.String, java.io.File)">Android Developer FileProvider</a></li>
-<li><a href="https://developer.android.google.cn/training/secure-file-sharing">Android Tranning Share a File</a></li>
-</ol>
+                <p>这个博客是使用 <a href="http://getpelican.com">Pelican</a> 搭建了, Pelican 是一个使用了 Python 写的一个静态博客生成框架, 里面使用了 <a href="http://jinja.pocoo.org/">Jinja2</a> 作为模版</p>
+<p>最近重新修改了博客主题, 使用了 <a href="http://huangxuan.me/">HuxPro</a> 里的样式主题, 原主题里使用的是 <a href="https://jekyllrb.com/">Jekyll</a> 生成, 不过其模版写法和 Jinja2 差不多, 自己稍微修改了下, 用 jinja2 重新写了一个</p>
+<p>由于 Pelican 生成的目录结构不同, 其针对 article, archive, category, page, tag 都可以生成单独的页面, 所以在一些内嵌的页面里 (archives), 取巧的使用 ajax 来请求刷新 tag</p>
+<p>由于 Python Markdown 只支持最基本的 Markdown 语法, 所以需要扩展插件, 我使用了 <a href="https://facelessuser.github.io/pymdown-extensions/">pymdownx</a>, 这是一个扩展包, 包含了比如基于 js 的语法高亮, ``` 格式的代码标记, 路径转换(这个在写 markdown 时图片和上传后的图片路径不一致时进行转换), todo-list 等等.</p>
+<p>语法高亮使用了<a href="https://prismjs.com/"> prismjs</a>, 先在 <code>pymdownx.highlight</code> 里禁用 markdown 使用 pygments 语法高亮, 设置自定义生成 <code>css_class</code>, 主要是用于生成行号. prismjs 需要在 <code>pre</code> 标签读取 <code>.line-numbers</code> 这个 class, 默认只生成 <code>.highlight</code>, 设置成 <code>highlight line-nubmers</code> 即可</p>
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
@@ -409,9 +324,9 @@ for (ResolveInfo resolveActivity : resolveActivities) {
     }));
     
     var disqus_config = function () {
-        this.page.url = 'https://ivicel.info/2018/02/anroid-fileproviderde-shi-yong.html';
-        this.page.identifier = 'Anroid FileProvider的使用';
-        this.page.title = 'Anroid FileProvider的使用';
+        this.page.url = 'https://ivicel.info/2019/05/bo-ke-zhu-ti-de-xiu-gai.html';
+        this.page.identifier = '博客主题的修改';
+        this.page.title = '博客主题的修改';
     };
 
     (function() {

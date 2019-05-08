@@ -187,7 +187,7 @@ Ambertime        </title>
 <p>还可以定义一个<code>long serialVersionUID</code>来检测反序列时的数据. 如果值不一样, 反序列时出抛出错误. 这个值可以使用<code>Android Studio</code>自动生成, 也可以手工指定一个. 数值不论如何, 其本质是一样的.</p>
 <p>实现<code>Serializable</code>的类成员也一定是可以<code>Serializable</code>的, 比如基本类型<code>int</code>, <code>long</code>, 字符类型<code>String</code>, 或者实现了<code>Serializable</code>接口的自定义类. </p>
 <p>可以使用关键字<code>transient</code>来标明不参与序列化过程的变量</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">public class User implements Serializable {
+<pre class="highlight line-numbers"><code class="language-java">public class User implements Serializable {
     // 定义一个数值以便验证反序列化时的数据正确性
     private static final long serialVersionUID = 8711368828010083044L;
 
@@ -214,7 +214,7 @@ Ambertime        </title>
    <code>T createFromParcel(Parcel in)</code>方法表明如何反序列化一个类. <strong>反序列化的顺序要和序列化时一样</strong>
    <code>T[] newArray(int size)</code>方法表明如何反序列化出一个类的对象数组</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">public class User implements Parcelable {
+<pre class="highlight line-numbers"><code class="language-java">public class User implements Parcelable {
     private int id;
     private String name;
     // 要注意自定义的类也得是可序列化的

@@ -185,7 +185,7 @@ Ambertime        </title>
 <h4>2. Client 端</h4>
 <p>client 端会从被 server 端调用, 所以传给 server 的必须是一个 <code>callable</code> 对象, 比如 <code>function</code>, <code>method</code>, <code>class</code>, 实现了 <code>__call__</code> 方法的对象实例, server 端不会假想 client 是怎么实现的, 是一个函数还是一个方法, 只知道这一定是 callable 的. </p>
 <p>server 调用时, 会传会 client 两个参数, 参数名不是固定的, 只是约定俗成而已. 以 <code>function</code> 来举例: </p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def application(environ, start_response):
+<pre class="highlight line-numbers"><code class="language-python">def application(environ, start_response):
     status = '200 OK'
     response_headers = [('Content-Type', 'text/plain')]
     start_response(status, response_headers)

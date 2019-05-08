@@ -226,7 +226,7 @@ Ambertime        </title>
 <blockquote>
 <p>下方所有的 <code>test*()</code> 方法都应该在不在 <code>User1Service</code> 或 <code>User2Service</code> 类内, 避免产生类内自调用</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 表 t_user1 对应的 POJO
+<pre class="highlight line-numbers"><code class="language-java">// 表 t_user1 对应的 POJO
 public Class User1 {
         private Long id;
     private String name;
@@ -241,7 +241,7 @@ public Class User2 {
 }</code></pre>
 
 <h5>2.1 <code>PROPAGATION_REQUIRED</code> 行为</h5>
-<pre class="highlight line-numbers"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中, 传播都为 PROPAGATION_REQUIRED
+<pre class="highlight line-numbers"><code class="language-java">// user1 和 user2 的 service 的插入操作都在事务中, 传播都为 PROPAGATION_REQUIRED
 public class User1Service {
         @Transactional(propagation = Propagation.REQUIRED)
     public void addRequired(User1 user1) {
@@ -266,7 +266,7 @@ public class User2Service {
 <ul>
 <li>在外围非事务的方法中调用, 各个事务都是相对独立的, 成功或失败都不互相干扰</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一
+<pre class="highlight line-numbers"><code class="language-java">// 测试一
 public void test1(){
     User1 user1 = new User1();
     user1.setName("张三");
@@ -296,7 +296,7 @@ public void test2(){
 <ul>
 <li>在外围调用方法是开启事务时, 这时的要将被调用方法加入到这个事务当中而不是自己新创建事务</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 三个测试都开启了事务
+<pre class="highlight line-numbers"><code class="language-java">// 三个测试都开启了事务
 
 // 测试一
 @Transactional
@@ -349,7 +349,7 @@ public void test2(){
 }</code></pre>
 
 <h5>2.2 <code>PROPAGATION_REQUIRED_NEW</code> 行为</h5>
-<pre class="highlight line-numbers"><code class="language-java linenums">// user1 和 user2 的 service 的插入操作都在事务中
+<pre class="highlight line-numbers"><code class="language-java">// user1 和 user2 的 service 的插入操作都在事务中
 public class User1Service {
         @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void addRequiresNew(User1 user1) {
@@ -380,7 +380,7 @@ public class User2Service {
 <ul>
 <li>外围调用方法没有添加事务</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一
+<pre class="highlight line-numbers"><code class="language-java">// 测试一
 public void test1() {
     User1 user1 = new User1();
     user1.setName("张三");
@@ -409,7 +409,7 @@ public void test2() {
 <ul>
 <li>外围调用方法是在事务中</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 测试外围事务的异常对内部方法的影响
+<pre class="highlight line-numbers"><code class="language-java">// 测试一, 测试外围事务的异常对内部方法的影响
 @Transactional
 public void test1() {
     User1 user1 = new User1();
@@ -469,7 +469,7 @@ public void test3() {
 <blockquote>
 <p><code>PROPAGATION_NESTED</code> 事务嵌套行为需要数据库中的<strong>保存点(save point)</strong>, Hibernate 并不支持这个功能, 会抛出: <code>JpaDialect does not support savepoints - check your JPA provider's capabilities</code> 异常</p>
 </blockquote>
-<pre class="highlight line-numbers"><code class="language-java linenums">public class User1Service {
+<pre class="highlight line-numbers"><code class="language-java">public class User1Service {
         @Transactional(propagation = Propagation.NESTED)
     public void addNested(User1 user1) {
         user1Mapper.insert(user1);
@@ -492,7 +492,7 @@ public class User2Service {
 <ul>
 <li>外围方法没有开启事务</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 外围方法抛出异常
+<pre class="highlight line-numbers"><code class="language-java">// 测试一, 外围方法抛出异常
 public void test1() {
     User1 user1 = new User1();
     user1.setName("张三");
@@ -523,7 +523,7 @@ public void test2() {
 <ul>
 <li>外围方法开启事务</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 测试一, 外围方法抛出异常
+<pre class="highlight line-numbers"><code class="language-java">// 测试一, 外围方法抛出异常
 @Transactional
 public void test1() {
     User1 user1 = new User1();
@@ -571,7 +571,7 @@ public void test2() {
 
 <h4>2.4 <code>@Transactional</code> 自调用类中方法失效问题</h4>
 <p>Spring 的事务处理是基于 AOP, 通过动态代理生成一个类的代理对象, 而当我们在类的方法中再调用同一个类的事务方法, 其实际还是在同一个事务中, 是类自身的调用, 而不是代理调用, 这样就还是在同一次 AOP 中.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Service("userService")
+<pre class="highlight line-numbers"><code class="language-java">@Service("userService")
 public class UserServiceImple implements IUserService {
         @Override
     @Transactional
@@ -589,7 +589,7 @@ public class UserServiceImple implements IUserService {
 }</code></pre>
 
 <p>也可以通过手动每次获取类的代理对象, 来手动调用类的方法</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Service("userService")
+<pre class="highlight line-numbers"><code class="language-java">@Service("userService")
 public class UserServiceImple implements IUserService, ApplicationContextAware {
     private ApplicationContext applicationContext;
 

@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/子view的MeasureSpec.png');
     }
 
     header.intro-header .header-mask{
@@ -189,7 +189,7 @@ Ambertime        </title>
 <li>如果要求为内容大小<code>WRAP_CONTENT</code>, 就设置为窗口大小<code>windowSize</code>, 模式为至多<code>AT_MOST</code>, 表示不能超过子<code>view</code>这个大小</li>
 <li>默认设置为要求的大小<code>rootDimension</code>, 模式为精确<code>EXACTLY</code></li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-java linenums">   // ViewRootImpl#getRootMeasureSpec
+<pre class="highlight line-numbers"><code class="language-java">   // ViewRootImpl#getRootMeasureSpec
    private static int getRootMeasureSpec(int windowSize, int rootDimension) {
            int measureSpec;
            switch (rootDimension) {
@@ -214,7 +214,7 @@ Ambertime        </title>
 </ol>
 <p><img alt="子view的MeasureSpec" src="../../assets/images/子view的MeasureSpec.png" /></p>
 <p>子<code>view</code>的测量要从父<code>ViewGroup</code>开始, 在<code>ViewGroup#measureChildWithMargins</code>中, 如果这个<code>view</code>支持<code>margin</code>, <code>padding</code>的话</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#measureChildWithMargins
+<pre class="highlight line-numbers"><code class="language-java">// ViewGroup#measureChildWithMargins
 
 protected void measureChildWithMargins(View child,
             int parentWidthMeasureSpec, int widthUsed,
@@ -316,7 +316,7 @@ public static int getChildMeasureSpec(int spec, int padding, int childDimension)
 <ol>
 <li>当测量<code>view</code>时会调用<code>View#measure</code>, 该方法是<code>final</code>不能重写. 如果<code>view</code>没有测量过或者是需要重新测量的, 该方法会调用<code>View#onMeasure</code>, 如有需要可以重写<code>View#onMeasure</code>, <strong>注意, 如果需要<code>view</code>支持<code>padding</code>属性则需要在此处理</strong></li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-java linenums">// View#onMeasure
+<pre class="highlight line-numbers"><code class="language-java">// View#onMeasure
 
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     // getSuggestMinimumXXX 主要是检测是否设置了背景, 如果设置了取
@@ -368,7 +368,7 @@ protected int getSuggestedMinimumHeight() {
 
 <p>一般自定义<code>view</code>多使用<code>AT_MOST</code>, <code>EXACTLY</code>来指定大小</p>
 <p>这样其<code>specWidth</code>, <code>specHeight</code>就决定其宽/高度的大小. 所以当我们直接继承<code>View</code>来自定义<code>view</code>时, 如果设置<code>view</code>的宽/高为<code>wrap_content</code>时, 结合上表中的值, 可以知道如果我们不测量该<code>view</code>内容的大小, 其最终的大小为父<code>ViewGroup</code>的大小, 和设置<code>match_parent</code>一样. 可以使用以下的方法解决</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 重写该 view 的 onMeasure, 测量内容大小
+<pre class="highlight line-numbers"><code class="language-java">// 重写该 view 的 onMeasure, 测量内容大小
 protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
@@ -391,7 +391,7 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 <li><code>ViewGroup</code>的<code>measure</code>过程. 对于<code>ViewGroup</code>来说, 除了要测量自己的大小外, 还有递归的测量各个子元素的大小. 由于不同的布局其测量方法定义不同, 所以<code>ViewGroup</code>没有默认的<code>onMeasure</code>方法, 而是需要具体的继承类来实现该方法. <code>onMeasure</code>中调用<code>measureChildren</code>或是<code>measureChildWithMargins</code>来测量子类</li>
 </ol>
 <p><strong>需要注意的是如果不需要子<code>view</code>支持<code>margin</code>时, 使用<code>ViewGroup#measureChildren</code>来测量, 否则应当使用<code>ViewGroup#measureChildWithMargins</code>, 自定义的<code>ViewGroup</code>在重写<code>onMeasure</code>时需要特别注意</strong></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#measureChildren
+<pre class="highlight line-numbers"><code class="language-java">// ViewGroup#measureChildren
 
 // measureChild 主要递归的调用 view#measure 来测量子 view
 // 的大小, 如果 view 不为 View.GONE 的话
@@ -419,7 +419,7 @@ protected void measureChild(View child, int parentWidthMeasureSpec,
 }</code></pre>
 
 <p><code>layout</code>过程. 当<code>ViewGroup</code>的位置确定后, 其会调用<code>layout</code>, 并在其中调用 <code>onLayout</code>来遍历子<code>view</code>的<code>layout</code>方法来确定子<code>view</code>的位置. 子<code>view</code>的<code>layout</code>会调用自己的<code>onLayout</code>方法. <code>ViewGroup</code>没有默认实现<code>onLayout</code>, 交给具体的布局来实现, 以方法实现不同的布局</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// ViewGroup#layout
+<pre class="highlight line-numbers"><code class="language-java">// ViewGroup#layout
 @Override
 public final void layout(int l, int t, int r, int b) {
     if (!mSuppressLayout &amp;&amp; (mTransition == null ||          

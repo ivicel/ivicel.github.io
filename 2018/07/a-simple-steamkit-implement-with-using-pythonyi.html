@@ -232,7 +232,7 @@ Ambertime        </title>
 <li>使用 Python protocol buffer API 读写, API 文档在 <a href="https://developers.google.com/protocol-buffers/docs/reference/python/">这里</a></li>
 </ol>
 <h4>3. 编译 protobuf</h4>
-<pre class="highlight line-numbers"><code class="language-shell linenums"># project 目录
+<pre class="highlight line-numbers"><code class="language-shell"># project 目录
 mkdir python-steamkit &amp;&amp; cd python-steamkit
 python3 -m venv venv
 # 用于加密和 protobuf 的依赖包
@@ -278,7 +278,7 @@ sed -E '/^import\s+"[^\/]*$/s/"(.*)";$/"steam\/protobufs\/\1";/' steam/protobufs
 <li>固定的 4 bytes magic number, 为 <code>0x31305456</code></li>
 <li>4 bytes 的 消息类型, 消息的最高位为 protobuf 消息掩码位, <code>0</code> 表示非 protobuf, <code>1</code> 为 protobuf</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-plain linenums">1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
+<pre class="highlight line-numbers"><code class="language-plain">1. handshake packet: &lt;ChannelEncryptRequest&gt;, &lt;ChannelEncryptResponse&gt;, &lt;ChannelEncryptResult&gt;
 + + + + + + + + + + + + + + +
 |   4 bytes msg_len         |
 + - - - - - - - - - - - - - +

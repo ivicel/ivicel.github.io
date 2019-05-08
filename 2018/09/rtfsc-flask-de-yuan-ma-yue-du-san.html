@@ -180,7 +180,7 @@ Ambertime        </title>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <h4>1. 路由的实现</h4>
 <p>有两种方式来添加路由, 通常使用装饰器来添加, 其内部也是通过第二种 <code>add_url_rule()</code> 方法, 装饰器是一种简洁明了的方式. </p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def add_url_rule(self, rule, endpoint=None, view_func=None,
+<pre class="highlight line-numbers"><code class="language-python">def add_url_rule(self, rule, endpoint=None, view_func=None,
                  provide_automatic_options=None, **options):
     # endpoint 默认使用的是函数名
     if endpoint is None:

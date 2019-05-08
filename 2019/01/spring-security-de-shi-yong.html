@@ -193,7 +193,7 @@ Ambertime        </title>
 <h4>2. 验证用户(用户名, 密码, 角色...)</h4>
 <h5>2.1 使用内存签名</h5>
 <p>在 Spring 5 之后要求使用一个密码编码器, 用来对密码进行加密以及密码匹配, 其要实现接口 <code>PasswordEncoder</code>, 以使用内存签名服务为例</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Override
+<pre class="highlight line-numbers"><code class="language-java">@Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     // 设置使用内在签名验证
     auth.inMemeoryAuthentication()
@@ -225,7 +225,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 <h5>2.2 使用数据库定义用户认证服务</h5>
 <p><code>AuthenticationManagerBuilder#jdbcAuthentication</code> 方法会返回  <code>JdbcUserDetailsManagerConfigurer</code> 对象, 数据库用户表为  <code>org.springframework.security.core.userdetails.User</code>, 数据库至少要实现 4 个字段(<code>id</code>, <code>username</code>, <code>password</code>, <code>available</code>), 并且这顺序是固定的, 另外角色的权限表, 权限表要实现 2 个字段(<code>id</code>, <code>name</code>), 并且顺序也是固定的, 角色权限查询返回的是一个 List.</p>
 <p>如果没有实现自己的查询方法, 则会使用内部的查询类 <code>org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl</code></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Override
+<pre class="highlight line-numbers"><code class="language-java">@Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     // 使用 JDBC 认证
     auth.jdbcAuthentication()
@@ -242,7 +242,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 }</code></pre>
 
 <p>如果需要实现自己的查询处理, 那么可以使用 <code>AuthenticationManagerBuilder#userDetailsService()</code> 方法, 其参数是实现了 <code>UserDetailsService</code> 接口的类, 只有一个方法 <code>loadUserByUsername</code>, 该方法返回 <code>UserDetails</code> 对象, 需要自己实现该接口</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 用户模型
+<pre class="highlight line-numbers"><code class="language-java">// 用户模型
 public class User implements UserDetails {
     private String username;
     private String password;
@@ -292,7 +292,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 <h4>3. 限制请求(对 url 的配置)</h4>
 <p>限制请求主要是对不同的路径(url)实现不同的策略, 通过这能够实现对不同角色赋予不同权限.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Override
+<pre class="highlight line-numbers"><code class="language-java">@Override
 protected void configure(HttpSecurity http) throws Exception {
     // 开启认证
     http.authorizeRequests()   
@@ -332,7 +332,7 @@ protected void configure(HttpSecurity http) throws Exception {
 <p>有时候我们需要更加强大的验证功能, 可以使用 SpEL(Spring 表达式), 比如 <code>access("hasRole('USER') or hasRole('ADMIN')")</code> 来表示需要 USER 或 ADMIN 角色</p>
 <h4>3.1. 自定义登录页面</h4>
 <p>在登录页面都有一个 Remember Me 的功能, 默认的实现是<strong>记住一天</strong>, 记录在浏览器的 Cookie 中, 其键为 <code>remember-me-key</code>, 其值为 MD5 Hash 过的值</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">@Override
+<pre class="highlight line-numbers"><code class="language-java">@Override
 protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ADMIN')")
         // 启用 remember me 功能, 设置其时间限制和 cookie key
@@ -350,7 +350,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <h4>5. 防止跨站请求伪造(CSRF)</h4>
 <p>添加 Spring Security 后, 会自动添加 CSRF 认证, 可以使用 <code>HttpSecurity#csrf().disable()</code> 来关闭. Spring Security 会生成一个 <code>_csrf</code> 变量, 可以在页面模版中使用这个变量</p>
-<pre class="highlight line-numbers"><code class="language-html linenums">&lt;input type=hidden id="${_csrf.parameterName}" name="${_csrf.parameterName}" 
+<pre class="highlight line-numbers"><code class="language-html">&lt;input type=hidden id="${_csrf.parameterName}" name="${_csrf.parameterName}" 
     value="${_csrf.token}"&gt;</code></pre>
 
                 <hr style="visibility: hidden;">

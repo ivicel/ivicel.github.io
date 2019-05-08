@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/图.png');
     }
 
     header.intro-header .header-mask{
@@ -229,7 +229,7 @@ Ambertime        </title>
 </blockquote>
 <p><img alt="图广度优先算法" src="../../assets/images/图广度优先算法.png" /></p>
 <p>图抽象数据类型头文件</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* graph.h */
+<pre class="highlight line-numbers"><code class="language-c">/* graph.h */
 #ifndef GRAPH_H
 #define GRAPH_H
 
@@ -284,7 +284,7 @@ int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2);
 #endif</code></pre>
 
 <p>图的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* graph.c */
+<pre class="highlight line-numbers"><code class="language-c">/* graph.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "graph.h"
@@ -499,7 +499,7 @@ int graph_is_adjacent(const Graph *graph, const void *data1, const void *data2)
 <p>图的应用: 计算网络跳数(Counting Network Hops)</p>
 <p><img alt="网络跳数" src="../../assets/images/网络跳数.png" /></p>
 <p>使用广度优先算法, 对于某个顶点的的邻接点, 其邻接点的跳数都等于该顶点跳数加上 1</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* bfs.c */
+<pre class="highlight line-numbers"><code class="language-c">/* bfs.c */
 #include &lt;string.h&gt;
 #include "graph.h"
 #include "list.h"
@@ -600,7 +600,7 @@ int bfs(Graph *graph, BfsVertex *start, List *hops)
 }</code></pre>
 
 <p>图的应用: 拓扑排序(Topological Sorting)</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* dfs.c */
+<pre class="highlight line-numbers"><code class="language-c">/* dfs.c */
 #include &lt;stdlib.h&gt;
 #include "graph"
 #include "list.h"

@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/beverage.jpg');
     }
 
     header.intro-header .header-mask{
@@ -182,7 +182,7 @@ Ambertime        </title>
 <p>传入的内存最大值的<strong>单位</strong>要和 <code>sizeOf()</code> 返回的单位一致即可</p>
 </blockquote>
 <p>另然最重要的需要重写这个类的 <code>sizeOf()</code> 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 获得应用可使用的最大内存, 取 1/8 作为缓存
+<pre class="highlight line-numbers"><code class="language-java">// 获得应用可使用的最大内存, 取 1/8 作为缓存
 final int maxSize = Runtime.getRuntime().maxMemory() / 8;
 LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
     @Override
@@ -195,7 +195,7 @@ LruCache&lt;String, Bitmap&gt; bitmapCache = new LruCache&lt;&gt;(maxSize) {
 };</code></pre>
 
 <p>在获得 <code>LruCache</code> 对象之后, 便可以对其进行读, 写, 删除</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">Bitmap bitmap = bitmapCache.get(key);
+<pre class="highlight line-numbers"><code class="language-java">Bitmap bitmap = bitmapCache.get(key);
 // 如果缓存中已经存在, 那么旧的会被返回, 不存在则返回 null
 Bitmap prevBitmap = bitmapCache.put(key, bitmap);
 // 删除缓存
@@ -231,7 +231,7 @@ public String bytesToHexString(byte[] input) {
 }</code></pre>
 
 <p>另外还可以重写 <code>entryRemove()</code> 方法, 这个方法会在<strong>元素被删除</strong>(内存不足时, remove 操作时), <strong>元素被替换</strong>(put 操作时)被调用, 默认的实现是一个空实现, 并且这个调用不是 <code>synchronization</code></p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
+<pre class="highlight line-numbers"><code class="language-java">// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
 // @param key 元素的 key
 // @param oldValue 元素的旧值
 // @param newValue 元素是被替换时的新值, 被删除时该值为 null
@@ -239,7 +239,7 @@ protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</co
 
 <h3>2. 源码解析</h3>
 <p>由于需要不断重新排序, <code>LruCache</code> 内部使用了一个 <code>LinkHashMap</code> 数据结构来存储实际内容. 这是一个<strong>双向链表</strong> 实现的 <strong>HashMap</strong>. <code>LinkHashMap</code>可以设置成<strong>基于插入顺序优先</strong>, 或者<strong>基于访问顺序优先</strong>, 把优先的元素放在链表<strong>末端</strong>, 这样链表头结点总是表示<strong>最后插入</strong>/<strong>最少访问</strong>的元素, 可以把头结点从链接中删除</p>
-<pre class="highlight line-numbers"><code class="language-Java linenums">public class LruCache&lt;K, V&gt; {
+<pre class="highlight line-numbers"><code class="language-Java">public class LruCache&lt;K, V&gt; {
     public LruCache(int maxSize) {
         if (maxSize) {
             throw new IllegalArgumentException("maxSize &lt;= 0");   
@@ -251,7 +251,7 @@ protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);</co
 }</code></pre>
 
 <p>在每次 <code>put</code>, <code>get</code> 之后, 都要使用 <code>trimToSize()</code> 来确保使用的内存容量是在规定的范围内</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除
+<pre class="highlight line-numbers"><code class="language-java">// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除
 public void trimToSize(int maxSize) {
     // 不断循环的删除头结点, 直到使用的内存小于 maxSize
     while (true) {
@@ -292,7 +292,7 @@ public void trimToSize(int maxSize) {
 }</code></pre>
 
 <p><code>LruCache#put()</code>, <code>LruCache#get()</code>方法的实现</p>
-<pre class="highlight line-numbers"><code class="language-java linenums">// LruCache#put()
+<pre class="highlight line-numbers"><code class="language-java">// LruCache#put()
 public final V put(K key, V value) {
     if (key == null || value == null) {
         throw new NullPointerException("key == null || value == null");

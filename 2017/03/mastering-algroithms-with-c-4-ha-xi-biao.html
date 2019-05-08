@@ -38,7 +38,7 @@ Ambertime        </title>
     <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('https://ivicel.info/assets/images/header.jpg');
+        background-image: url('https://ivicel.info/../../assets/images/线性探查.png');
     }
 
     header.intro-header .header-mask{
@@ -203,7 +203,7 @@ Ambertime        </title>
 <li>乘法: <code>h(k) = m(kA mod 1)</code>, <code>A</code>(0&lt;A&lt;1)通常是 0.618 左右</li>
 </ul>
 <p>这种方法对<code>m</code>的选择不像取余法中那么慎重</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* 一个适用于处理字符串的哈希函数 */
+<pre class="highlight line-numbers"><code class="language-c">/* 一个适用于处理字符串的哈希函数 */
 /* hashpjw.c */
 
 unsigned int hashpjw(const void *key)
@@ -226,7 +226,7 @@ unsigned int hashpjw(const void *key)
 }</code></pre>
 
 <p>链式哈希表头文件</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/** chtbl.h */
+<pre class="highlight line-numbers"><code class="language-c">/** chtbl.h */
 #ifndef CHTBL_H
 #define CHTBL_H
 
@@ -263,7 +263,7 @@ int chtbl_lookup(const CHTbl *htbl, void **data);
 #endif</code></pre>
 
 <p>链式哈希表的实现</p>
-<p><pre class="highlight line-numbers"><code class="language-c linenums">#include &lt;stdlib.h&gt;
+<p><pre class="highlight line-numbers"><code class="language-c">#include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 
 #include "list.h"
@@ -364,7 +364,7 @@ int chtbl_lookup(const CHTbl *htbl, void **data)
 <p>在使用程序解析某种语法时, 为了能够更有效的管理程序中的符号信息, 通学使用一种叫做符号表的数据结构, 一般使用哈希表来实现. 对符号表进行插入数据时, 也即是向哈希表插入数据, 称为词法分析.</p>
 <p>下面的例子是一个非常简单的词法分析器, 分析传入的字符串, <code>next_token</code>从输入<code>istream</code>中取得下一个字符串, 如果没有了, 就返回退出</p>
 <p>假设输入的字符只有两种: 一种是数字, 另一种是数字之外的字符. 字符之间以空格隔开</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* lex.c */
+<pre class="highlight line-numbers"><code class="language-c">/* lex.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "chtbl.h"
@@ -438,7 +438,7 @@ h<sub>1</sub>和h<sub>2</sub>分别是两个不两同的哈希辅助函数, 为�
 <p>通常情况下, 令h<sub>1</sub>(k) = k mod m, h<sub>2</sub>(k) = 1 + (k mod m<sup>'</sup>), 其中 m<sup>'</sup> 略小于 m, 类似 m-1, m-2. 双散列的优点是能够探查并产生较好的颁布, 缺点是必须限制 m 的值, 也是表的大小不变, 这样才能保证在一系列探查中访问表中所有槽之后才会再次探查任何槽</p>
 <p><img alt="双散列" src="../../assets/images/双散列.png" /></p>
 <p>开地址哈希表头文件</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">#ifndef OHTBL_H
+<pre class="highlight line-numbers"><code class="language-c">#ifndef OHTBL_H
 #define OHTBL_H
 
 #include &lt;stdlib.h&gt;
@@ -485,7 +485,7 @@ int ohtbl_lookup(const OHTbl *htbl, void **data);
 #endif</code></pre>
 
 <p>开地址哈希表的实现</p>
-<pre class="highlight line-numbers"><code class="language-c linenums">/* ohtbl.c */
+<pre class="highlight line-numbers"><code class="language-c">/* ohtbl.c */
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include "ohtbl.h"

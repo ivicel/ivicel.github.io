@@ -180,7 +180,7 @@ Ambertime        </title>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
                 <h4>1. 路由派发</h4>
 <p>由 <code>Flask.full_dispatch_request()</code> 发起路由派发</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def full_dispatch_request(self):
+<pre class="highlight line-numbers"><code class="language-python">def full_dispatch_request(self):
     # before_first_request 的回调
     self.try_trigger_before_first_request_functions()
     try:
@@ -204,7 +204,7 @@ Ambertime        </title>
 <li>回调这些方法的时, 使用了线程锁 <code>_before_request_lock</code> 在保证方法总是在回调用 reqeust 之前被调用, 想像一下多线程版本时, 可以同时到达多个 request. </li>
 <li>在取得锁之后, 我们还在再次检查 <code>_got_first_request</code> 标志, 确保这些回调只调用过一次</li>
 </ol>
-<pre class="highlight line-numbers"><code class="language-python linenums">with self._before_request_lock:
+<pre class="highlight line-numbers"><code class="language-python">with self._before_request_lock:
     if self._got_first_request:
         return
     # before_first_request_funcs 是注册的方法列表
@@ -227,7 +227,7 @@ Ambertime        </title>
 <ul>
 <li>下来派发到我们注册的路由方法</li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-python linenums">def dispatch_request(self):
+<pre class="highlight line-numbers"><code class="language-python">def dispatch_request(self):
     # Request 是从 werkzeug.wrapper.Reqeust 继承来的
     # 前面讲过, 当有 exception 时, exception 保存在 Request.routing_exception 中
     req = _request_ctx_stack.top.request
@@ -258,7 +258,7 @@ def raise_routing_exception(self, request):
 
 <h4>2. 请求异常处理</h4>
 <p>如果在请求处理是发生异常, 会抛到 <code>full_dispatch_request()</code> 中, 在 <code>handle_user_exception()</code> 中处理</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def handle_user_exception(self, e):
+<pre class="highlight line-numbers"><code class="language-python">def handle_user_exception(self, e):
     # 确保当前系统中刚发生的异常是原先我们捕捉到的异常
     # 如果不是的话, 那么向上 wsgi_app 中抛出 AssertionError
     # 由 handle_exception() 来处理
@@ -311,7 +311,7 @@ def raise_routing_exception(self, request):
 
 <h4>3. 结束派发</h4>
 <p>如果我们在 <code>handle_user_exception</code> 不向上抛出异常, 将会运行到 <code>finalize_request()</code></p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def finalize_request(self, rv, from_error_handler=False):
+<pre class="highlight line-numbers"><code class="language-python">def finalize_request(self, rv, from_error_handler=False):
     # 从 view_func 获得的正常 resepon 
     # 或者由捕获异常后, 生成的 404, 400, 500 之类的 response 对象
     response = self.make_response(rv)
@@ -331,7 +331,7 @@ def raise_routing_exception(self, request):
     return response</code></pre>
 
 <p>返回到 <code>Flask.wsgi_app</code> 中, 然后依设置来决定是否弹出 <code>RequestContext</code></p>
-<pre class="highlight line-numbers"><code class="language-python linenums">def auto_pop(self, exc):
+<pre class="highlight line-numbers"><code class="language-python">def auto_pop(self, exc):
     # 通过设置 flask._preserve_context 来保留 context
     # 出错了, 并且通过配置文件设置了 PRESERVE_CONTEXT_ON_EXCEPTION
     # 这个会下次 push 的时候被弹出
@@ -388,7 +388,7 @@ def pop(self, exc=_sentinel):
 <li><code>g</code> 指向的是当前的 <code>flask.app.Flask</code> 对象 <code>g</code> 字典, 一般用来</li>
 </ul>
 <p>当使用 <code>with Flask.app_context()</code> 的时候, 在 <code>with</code> 语句内 <code>current_app</code> 便会指向当前的 <code>Flask</code> 对象.  我们也知道在请求到来的时候, <code>RequestContext.push()</code> 也会把 <code>AppContext</code> 压入栈中, 此时 <code>current_app</code> 也是可以使用的. <code>g</code> 对象则是 <code>AppContext</code> 中的一个</p>
-<pre class="highlight line-numbers"><code class="language-python linenums">current_app = LocalProxy(_find_app)
+<pre class="highlight line-numbers"><code class="language-python">current_app = LocalProxy(_find_app)
 g = LocalProxy(_partial(_loopku_app_object, 'g'))</code></pre>
 
 <p>从由 <code>_request_ctx_stack</code> 获得的</p>
@@ -400,12 +400,12 @@ g = LocalProxy(_partial(_loopku_app_object, 'g'))</code></pre>
 <p><code>session</code> 指向是当前的 session, <code>flask.sessions.SecureCookieSession</code> 对象</p>
 </li>
 </ul>
-<pre class="highlight line-numbers"><code class="language-python linenums"># 这两个都是代理对象, 经过 RequestContext 中取得其内部的值
+<pre class="highlight line-numbers"><code class="language-python"># 这两个都是代理对象, 经过 RequestContext 中取得其内部的值
 request = LocalProxy(partial(_lookup_req_object, 'request'))
 session = LocalProxy(partial(_lookup_req_object, 'session'))</code></pre>
 
 <p>在 <code>_lookup_xx_object</code> 中都是调用对应的 <code>_ctx_xx_stack.top</code>, 这里检查了 <code>top</code> 是否存在, 不存在的话抛出 <code>RuntimeError</code></p>
-<pre class="highlight line-numbers"><code class="language-python linenums">class LocalProxy(object):
+<pre class="highlight line-numbers"><code class="language-python">class LocalProxy(object):
     """代理类的源码, 主要是 __getattr__, __getitem__, __setitem__ 这些对应到内部的
        真正的对象
     """
