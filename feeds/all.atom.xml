@@ -1,5 +1,539 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ambertime</title><link href="https://ivicel.info/" rel="alternate"></link><link href="https://ivicel.info/feeds/all.atom.xml" rel="self"></link><id>https://ivicel.info/</id><updated>2019-05-01T00:00:00+08:00</updated><subtitle>Make memory in past times</subtitle><entry><title>博客主题的修改</title><link href="https://ivicel.info/2019/05/bo-ke-zhu-ti-de-xiu-gai.html" rel="alternate"></link><published>2019-05-01T00:00:00+08:00</published><updated>2019-05-01T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2019-05-01:/2019/05/bo-ke-zhu-ti-de-xiu-gai.html</id><summary type="html">&lt;p&gt;这个博客是使用 &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt; 搭建了, Pelican 是一个使用了 Python 写的一个静态博客生成框架, 里面使用了 &lt;a href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt; 作为模版&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ambertime</title><link href="https://ivicel.info/" rel="alternate"></link><link href="https://ivicel.info/feeds/all.atom.xml" rel="self"></link><id>https://ivicel.info/</id><updated>2019-05-04T00:00:00+08:00</updated><subtitle>Make memory in past times</subtitle><entry><title>Spring Flasky 开发(三)</title><link href="https://ivicel.info/2019/05/spring-flasky-kai-fa-san.html" rel="alternate"></link><published>2019-05-04T00:00:00+08:00</published><updated>2019-05-04T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2019-05-04:/2019/05/spring-flasky-kai-fa-san.html</id><summary type="html">&lt;h3&gt;1. XSS 保护&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不要相信用户每一个输入&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们需要对用户写的 post 进行过滤, 以避免 XSS 攻击. 其他的因为 Thymeleaf 默认输出都是 escape 的, 所以我们不需要对像个人 Profile 的信息输入进行过滤. &lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;// 这里设置一些支持的标签, 比如 span, p, h* 之类
+private static final PolicyFactory POLICY_FACTORY = new HtmlPolicyBuilder()
+        .allowElements(Const.ALLOWED_HTML_TAG).toFactory();
+
+public static String sanitize(final String text) {
+    return POLICY_FACTORY.sanitize(text);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们自定义一个 &lt;code&gt;EntityEventListener&lt;/code&gt;, 在保存 post …&lt;/p&gt;</summary><content type="html">&lt;h3&gt;1. XSS 保护&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不要相信用户每一个输入&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们需要对用户写的 post 进行过滤, 以避免 XSS 攻击. 其他的因为 Thymeleaf 默认输出都是 escape 的, 所以我们不需要对像个人 Profile 的信息输入进行过滤. &lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;// 这里设置一些支持的标签, 比如 span, p, h* 之类
+private static final PolicyFactory POLICY_FACTORY = new HtmlPolicyBuilder()
+        .allowElements(Const.ALLOWED_HTML_TAG).toFactory();
+
+public static String sanitize(final String text) {
+    return POLICY_FACTORY.sanitize(text);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们自定义一个 &lt;code&gt;EntityEventListener&lt;/code&gt;, 在保存 post 到数据库之前对 markdown 和 HTML 过滤.&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class SanitizerListener {
+    // 在新插入, 和更新前调用
+    @PrePersist
+    @PreUpdate
+    public void sanitize(Object object) {
+        try {
+            // 通过反射查找到实体类中被 Sanitize 注解标记的成员变量
+            // Sanitize 是自定义的一个注解
+            Field[] fields = object.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getAnnotation(Sanitize.class) != null) {
+                    // 只支持字符类型
+                    log.error(field.getType().toString());
+                    if (!CharSequence.class.isAssignableFrom(field.getType())) {
+                        log.warn("Annotation @Sanitize only support string field.");
+                        continue;
+                    }
+                    // 通过 bean 反省拿到变量的值, 调用过滤方法后再将值写回
+                    PropertyDescriptor descriptor = new PropertyDescriptor(field.getName(), object.getClass());
+                    String text = (String) descriptor.getReadMethod().invoke(object);
+                    text = CommonUtil.sanitize(text);
+                    Method writeMethod = descriptor.getWriteMethod();
+                    writeMethod.invoke(object, text);
+                }
+            }
+        } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
+            log.error("can't sanitize {}: {}", object, e.getMessage());
+        }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样我们只需要在实体类 &lt;code&gt;Post&lt;/code&gt; 和 &lt;code&gt;Comment&lt;/code&gt; 上加上注解事件, 在成员变量上加入标记注解 &lt;code&gt;@Sanitize&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;@EntityListeners({SanitizerListener.class})
+public class Post extends BaseDomain implements Serializable {
+    @Sanitize
+    private String body;
+
+    @Sanitize
+    private String bodyHtml;    
+}
+
+@EntityListeners(SanitizerListener.class)
+public class Comment extends BaseDomain implements Serializable {
+    @Sanitize
+    private String body;
+
+    @Sanitize
+    private String bodyHtml;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;2. 原生 &lt;code&gt;HttpServletResponse&lt;/code&gt; 对象返回 Thymeleaf 模版&lt;/h3&gt;
+&lt;p&gt;在登录失败时, 我们会提醒返回用户名或密码错误的提示&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class LoginFailureHandler implements AuthenticationFailureHandler {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
+        // 获取 Thymeleaf 模版上下文
+        WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale());
+        // 设置返回 status code
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        // 把原用户的输入填回模版中, 避免用户再次输入
+        LoginDTO user = new LoginDTO();
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setRememberMe(request.getParameter("rememberMe") != null);
+        ctx.setVariable("user", user);
+        ctx.setVariable("msg", "username or password error.");
+        ctx.setVariable("classappend", "alert-warning");
+        // 当加入 Thymeleaf 依赖时, 自动配置模版处理引擎 bean
+        templateEngine.process("auth/login", ctx, response.getWriter());
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;项目地址: &lt;a href="https://github.com/ivicel/spring-flasky"&gt;https://github.com/ivicel/spring-flasky&lt;/a&gt;&lt;/p&gt;</content><category term="spring boot"></category><category term="flasky"></category></entry><entry><title>Spring Flasky 开发(二)</title><link href="https://ivicel.info/2019/05/spring-flasky-kai-fa-er.html" rel="alternate"></link><published>2019-05-03T00:00:00+08:00</published><updated>2019-05-03T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2019-05-03:/2019/05/spring-flasky-kai-fa-er.html</id><summary type="html">&lt;h3&gt;1. 注册功能&lt;/h3&gt;
+&lt;p&gt;注册需要 4 个字段, 分别是 &lt;code&gt;username&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt;, &lt;code&gt;password&lt;/code&gt;, &lt;code&gt;confirmPassword&lt;/code&gt;, 注册的 &lt;code&gt;username&lt;/code&gt; 和 &lt;code&gt;email&lt;/code&gt; 都是惟一的, 需要从库查找. 两次输入的密码需要相同, 这里自己定义了一个注解约束, 然后实现 ConstraintValidator 接口&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;// 这个注解作用于类上面, 目标是字段 first 的值要等于字段 second
+@Retention(RUNTIME)
+@Target(value = {TYPE, ANNOTATION_TYPE})
+// 约束的具体实现类
+@Constraint(validatedBy = EqualsMatchValidator.class)
+public @interface EqualsMatch {
+    String first();
+
+    String second();
+
+    String message() default "{first} not equals …&lt;/code&gt;&lt;/pre&gt;</summary><content type="html">&lt;h3&gt;1. 注册功能&lt;/h3&gt;
+&lt;p&gt;注册需要 4 个字段, 分别是 &lt;code&gt;username&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt;, &lt;code&gt;password&lt;/code&gt;, &lt;code&gt;confirmPassword&lt;/code&gt;, 注册的 &lt;code&gt;username&lt;/code&gt; 和 &lt;code&gt;email&lt;/code&gt; 都是惟一的, 需要从库查找. 两次输入的密码需要相同, 这里自己定义了一个注解约束, 然后实现 ConstraintValidator 接口&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;// 这个注解作用于类上面, 目标是字段 first 的值要等于字段 second
+@Retention(RUNTIME)
+@Target(value = {TYPE, ANNOTATION_TYPE})
+// 约束的具体实现类
+@Constraint(validatedBy = EqualsMatchValidator.class)
+public @interface EqualsMatch {
+    String first();
+
+    String second();
+
+    String message() default "{first} not equals {second}";
+
+    Class&amp;lt;?&amp;gt;[] groups() default {};
+
+    Class&amp;lt;? extends Payload&amp;gt;[] payload() default {};
+
+
+    @Documented
+    @Target(value = {TYPE, ANNOTATION_TYPE})
+    @Retention(RUNTIME)
+    @interface List {
+        EqualsMatch[] value();
+    }
+}
+
+public class EqualsMatchValidator implements ConstraintValidator&amp;lt;EqualsMatch, Object&amp;gt; {
+    // 字段一名称
+    private String firstFieldName;
+    // 字段二名称
+    private String secondFieldName;
+
+    @Override
+    public void initialize(EqualsMatch constraintAnnotation) {
+        firstFieldName = constraintAnnotation.first();
+        secondFieldName = constraintAnnotation.second();
+    }
+
+    // 返回 false 则为不相等, 反之亦然
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        // 通过 java bean 反省拿到两个字段的值
+        String first = getField(value, firstFieldName);
+        String second = getField(value, secondFieldName);
+        // 两个都为 null 时
+        if (first == null) {
+            return second == null;
+        }
+
+        return first.equals(second);
+    }
+
+    private String getField(Object obj, String name) {
+        try {
+            PropertyDescriptor descriptor = new PropertyDescriptor(name, obj.getClass());
+            Method method = descriptor.getReadMethod();
+            return (String) method.invoke(obj);
+        } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
+            return null;
+        }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;2. 登录功能&lt;/h3&gt;
+&lt;p&gt;权限控制保护使用的是 Spring Security, 添加 Spring Security 依赖后, 使我们的 &lt;code&gt;User&lt;/code&gt; 类实现 &lt;code&gt;UserDetails&lt;/code&gt;, 这是 Spring Security 内置的用户接口, Spring Security 会使用其实现来查找用户的权限认证(Authorization), 以及身份认证(Authentication), 现在我们只需根据数据库中的 &lt;code&gt;confirmed&lt;/code&gt; 字段来判断用户是否激活了其邮箱, 所以其他的判断都返回 &lt;code&gt;true&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;要注意的是 Spring Security 使用的原生的 Servlet Filter 来拦截 request, 有一套自己的拦截顺序, 并不依赖 Spring MVC 框架, 所以如果请求被拦截并不会到达 DispatcherServlet 派发给我们的 Controller&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class User implements UserDetails {
+    // 用户的角色集合, 这里我们只有一个, 简单的返回一个 singleton 集合
+    @Override
+    public Collection&amp;lt;? extends GrantedAuthority&amp;gt; getAuthorities() {
+        return Collections.singleton(role);
+    }
+
+    // 帐号是否非过期
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    // 帐号是否非锁定
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    // 认证是否非过期
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    // 帐号是否已启用
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来是实现一个用户查询, 我们想要的是, 当用户登录时, 会去数据库中查找这个用户, 如果存在返回其信息包装成一个 &lt;code&gt;UserDetails&lt;/code&gt;, 然后对比其密码. 我们在 &lt;code&gt;UserServiceImpl&lt;/code&gt; 中实现这个接口&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
+
+    @Override
+    public UserDetails loadUserByUsername(String username) 
+            throws UsernameNotFoundException {
+        Optional&amp;lt;User&amp;gt; user;
+        // 根据用户使用的是邮箱还是帐户名登录来查找出
+        if (emailPattern.matcher(username).matches()) {
+            user = findByEmail(username);
+        } else {
+            user = findByUsername(username);
+        }
+        // 帐号不存在
+        if (!user.isPresent()) {
+            throw new UsernameNotFoundException(String.format("username of %s not found", username));
+        }
+
+        return user.get();
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Spring Security 会自动的调用我们上面的实现, 返回 &lt;code&gt;UserDetails&lt;/code&gt;. 然后对 password 进行对比.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Spring Security 默认所有的 POST 方法都是有 CSRF 保护&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;新建一个类继承 &lt;code&gt;WebSecurityConfigurerAdapter&lt;/code&gt;, 在这里配置登录以及一些拦截, 使用 &lt;code&gt;@EnableGlobalMethodSecurity(prePostEnabled = true)&lt;/code&gt; 开启 post 请求之前的方法保护, 使用 &lt;code&gt;@PreAuthorize&lt;/code&gt; 注解, 这使得我们可以保护一些必要的方法, 比如发表 post 必须要先行登录.&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;// 不要让系统自动配置 
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // 登录与登出保护, 已登录的不要重复登录, 未登录的不能登出
+        // 因为我们使用的是内置 login, logout 拦截, 所以 post 不用自己写 controller
+        http.authorizeRequests()
+            .antMatchers("/auth/login")
+            .access("not @webAuth.loginRequired(authentication)")
+            .antMatchers("/auth/logout")
+            .access("@webAuth.loginRequired(authentication)");
+
+        // 403 handler
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+
+        // other urls, 其他 url 都允许
+        http.authorizeRequests().anyRequest().permitAll();
+
+        // custom form login, logout
+        http.formLogin()
+            // 自定义的登录页面, 默认的字段是 username, password
+            .loginPage("/auth/login")
+            // 登录失败时, 返回用户名或密码错误, 不要返回详细信息, 避免猜解
+            .failureHandler(loginFailureHandler)
+            // 登录成功后的跳转, 更新最后可见信息等
+            .successHandler(loginSuccessHandler)
+            .and()
+            .logout()
+            // 登出控制, 自定义登录 url
+            .logoutUrl("/auth/logout")
+            // 因为登出是被 filter 拦截的, 并且默认是 POST, 
+            // 所以在这给客户端返回一个 JSON, 并给出跳转 url, 由客户端重定向
+            .logoutSuccessHandler((request, response, authentication) -&amp;gt; {
+                    response.setStatus(HttpStatus.OK.value());
+                    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                    Map&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;&amp;gt;();
+                    map.put("url", request.getContextPath() + "/");
+                    new ObjectMapper().writeValue(response.getWriter(), map);
+                })
+            // 清除 sesssion 及 cookie 信息
+            .clearAuthentication(true).invalidateHttpSession(true)
+            .and().rememberMe();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 配置我们的登录查询
+        // 这里配置后, 登录时系统会查询数据库, 取出匹配数据, 把发送过来的密码
+        // 使用 passswordEncoder 加密后, 与库中字段对比
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在这里, 我们自定义了一个 Bean 用来处理一些常用到的认证, 比如是否登录, 是否是该帐号等, 自定义 &lt;a href="https://docs.spring.io/spring-security/site/docs/current/reference/html5/#el-access-web-beans"&gt;Security Bean&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class WebSecurityAuth {
+    // 修改 post 的权限, 本人和管理员都可
+    public boolean canModfiyPost(Authentication auth, Post post) {
+        // check anonymous
+        if (auth == null || !(auth.getPrincipal() instanceof User)) {
+            return false;
+        }
+
+        return hasPermission(auth, Permission.ADMIN) ||
+                (post.getAuthor().equals(auth.getPrincipal()) &amp;amp;&amp;amp; hasPermission(auth, Permission.WRITE));
+    }
+
+    // 修改一些普通个人信息, moderator, 本人, admin
+    public boolean canEditProfile(Authentication auth, String username) {
+        if (!(auth instanceof User)) {
+            return false;
+        }
+
+        return auth.getName().equals(username) ||
+                AuthorityUtils.authorityListToSet(
+            auth.getAuthorities()).contains("ROLE_ADMIN") ||
+                AuthorityUtils.authorityListToSet(
+            auth.getAuthorities()).contains("ROLE_MODERATOR");
+    }
+
+    // 需要登录才可查看
+    public boolean loginRequired(Authentication auth) {
+        return auth.getPrincipal() instanceof User;
+    }
+
+    // 帐户是否激活
+    public boolean isConfirmed(Authentication auth) {
+        if (auth == null || !(auth.getPrincipal() instanceof User)) {
+            return false;
+        }
+
+        return ((User) auth.getPrincipal()).isConfirmed();
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;我们的好多认证都是在 Session 里查找的, 这就要求我们保持同步 Session 里的信息和数据库一样, 比如注册后, 我们是在 A 浏览器里登录, 在 B 里确认了邮箱链接, 那么在确认后, 我们只更改数据库里的字段, 但 A 浏览器使用的是 Session 里的信息, 只能重新登录. 一是要么只使用 &lt;code&gt;Authentication&lt;/code&gt; 里的 username, 总是去数据库中查找相应数据, 二是要么建立一种 Sync 机制, 要修改数据后将数据同步到 Session Cache 中. Spring Security 没有提供这样同步机制, 因为这机制强烈依赖具体业务, 多久同步, 同步及时或失败是否影响到了业务&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;3. 邮件发送&lt;/h3&gt;
+&lt;p&gt;我们使用的是 &lt;code&gt;OhMyEmail&lt;/code&gt; 简单邮件发送系统, 基于 SMTP. 因为我们没有使用 spring-boot-mail, 所以 email 的自动配置并不会启动, 首先在设置启动 &lt;code&gt;@EnableConfigurationProperties({MailProperties.class})&lt;/code&gt;, 用来接收 &lt;code&gt;spring.mail&lt;/code&gt; 的配置, 然后在 &lt;code&gt;WebConfig&lt;/code&gt; 里设置 &lt;code&gt;OhMyEmail&lt;/code&gt; 的配置&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;@Configuration
+public class WebConfig {
+    // 依赖内置的 MailProperties
+    private MailProperties mailProperties;
+
+    @PostConstruct
+    public void initEmail() {
+        Properties props = new Properties();
+        // 配置用户名, 密码, host, 端口, 和其他的一些配置, 之后使用静态的 builder 即可
+        props.setProperty("username", mailProperties.getUsername());
+        props.setProperty("password", mailProperties.getPassword());
+        props.setProperty("mail.smtp.host", mailProperties.getHost());
+        props.setProperty("mail.smtp.port", String.valueOf(mailProperties.getPort()));
+        props.putAll(mailProperties.getProperties());
+
+        OhMyEmail.config(props);
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;4. 自定义的权限检查&lt;/h3&gt;
+&lt;p&gt;如果我们定义一个 Bean, 其实现了 &lt;code&gt;PermissionEvaluator&lt;/code&gt;, Spring 会自动扫描到这个 Bean 将其用作 &lt;code&gt;hasPermission&lt;/code&gt; 的检查实现.&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class WebPermissionEvalutor implements PermissionEvaluator {
+    // targetDomainObject 一般传进来的是一个 entity, 以检查是否有操作该 entity 的权限
+    @Override
+    public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
+        // 这里我们并用不到 targetDomainObject
+        // 我们传进来的是一个 Permission 对象
+        if (!(permission instanceof Permission) || authentication == null ||
+                !(authentication.getPrincipal() instanceof User)) {
+            return false;
+        }
+
+        User currentUser = (User) authentication.getPrincipal();
+
+        return currentUser.can((Permission) permission);
+    }
+
+    @Override
+    public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType,
+            Object permission) {
+        return false;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;5. Spring Security Authorize&lt;/h3&gt;
+&lt;p&gt;如果我们需要在普通类中使用 &lt;code&gt;Authentication&lt;/code&gt; 对象, 可以使用 &lt;code&gt;org.springframework.security.core.context.SecurityContextHolder&lt;/code&gt; 来获取&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;Authentication auth = SecurityContextHolder.getContext().getAuthentication();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;@PreAuthorize&lt;/code&gt; 和 &lt;code&gt;@PostAuthorize&lt;/code&gt; 分别是在调用方法前和方法后的认证. 支持 SpEL 表达式, 比如我们可以在用户发表新的 Post 前这样判断当前用户是否有写权限&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;@PostMapping
+@PreAuthorize("hasPermission(null, T(info.ivicel.springflasky.web.model.Permission).WRITE)")
+public ResponseEntity addNewPost(Authentication auth, @Validated PostDTO postDto) {
+    // ....
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;参考 &lt;a href="https://docs.spring.io/spring-security/site/docs/current/reference/html5/#jc-method"&gt;Method Security&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于 &lt;code&gt;hasRole(…)&lt;/code&gt; 这样的角色检查, 我们在实体类 &lt;code&gt;Role&lt;/code&gt; 实现了 &lt;code&gt;GrantedAuthority&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class Role extends BaseDomain implements GrantedAuthority {
+    @Override
+    public String getAuthority() {
+        // 默认检查有前缀 'ROLE_'
+        return "ROLE_" + name.toUpperCase();
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;项目地址: &lt;a href="https://github.com/ivicel/spring-flasky"&gt;https://github.com/ivicel/spring-flasky&lt;/a&gt;&lt;/p&gt;</content><category term="spring boot"></category><category term="flasky"></category></entry><entry><title>Spring Flasky 开发(一)</title><link href="https://ivicel.info/2019/05/spring-flasky-kai-fa-yi.html" rel="alternate"></link><published>2019-05-02T00:00:00+08:00</published><updated>2019-05-02T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2019-05-02:/2019/05/spring-flasky-kai-fa-yi.html</id><summary type="html">&lt;h3&gt;1. 项目说明&lt;/h3&gt;
+&lt;p&gt;Flasky 是 &lt;a href="https://book.douban.com/subject/26274202/"&gt;Flask Web Development&lt;/a&gt; 里的一个实例项目, 原项目是使用 Python 开发了, 一个类似微博的小型项目, 我用 Spring Boot 重写了一个
+实现了里面提到了主要功能:&lt;/p&gt;
+&lt;ul class="task-list"&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; Post 分页, 及在登录后查看关注的人发的 Post&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 帐号注册, 登录, 发 Post, 对他人 Post 的评论&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 个人信息页&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 权限系统, 帐号角色分配&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 邮件发送系统, 通过邮件激活帐号, 重置密码&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 关注, 取消关注功能&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled/&gt; Rest API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. 主要依赖&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring Boot&lt;/li&gt;
+&lt;li&gt;Spring Security 用于权限控制, 登录&lt;/li&gt;
+&lt;li&gt;Spring Data JPA 数据库查询 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h3&gt;1. 项目说明&lt;/h3&gt;
+&lt;p&gt;Flasky 是 &lt;a href="https://book.douban.com/subject/26274202/"&gt;Flask Web Development&lt;/a&gt; 里的一个实例项目, 原项目是使用 Python 开发了, 一个类似微博的小型项目, 我用 Spring Boot 重写了一个
+实现了里面提到了主要功能:&lt;/p&gt;
+&lt;ul class="task-list"&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; Post 分页, 及在登录后查看关注的人发的 Post&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 帐号注册, 登录, 发 Post, 对他人 Post 的评论&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 个人信息页&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 权限系统, 帐号角色分配&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 邮件发送系统, 通过邮件激活帐号, 重置密码&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled checked/&gt; 关注, 取消关注功能&lt;/li&gt;
+&lt;li class="task-list-item"&gt;&lt;input type="checkbox" disabled/&gt; Rest API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. 主要依赖&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring Boot&lt;/li&gt;
+&lt;li&gt;Spring Security 用于权限控制, 登录&lt;/li&gt;
+&lt;li&gt;Spring Data JPA 数据库查询 ORM&lt;/li&gt;
+&lt;li&gt;Thymeleaf 模版引擎&lt;/li&gt;
+&lt;li&gt;MySQL 数据库&lt;/li&gt;
+&lt;li&gt;OhMyEmail 最简单邮箱发送系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3. 数据库模型&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="flasky 数据库模型" src="../../assets/images/flasky.png" /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;users&lt;/code&gt; 用户表, 有几个冗余的设计, 比如常用到的关注, 被关注数量, 发表 post 数量, 评论数量等&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;comments&lt;/code&gt; 评论表, 和 posts, users 都是多对一关系&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;roles&lt;/code&gt; 角色权限表, permissions 是一个 32 位的 int, 每位代表一个权限, 默认初始三种角色&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;posts&lt;/code&gt; post 内容, 和 users 是多对一关系&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;follows&lt;/code&gt; 关注映射表, followed_id, follower_id 都是 users.id, 表 users 是一个自身多对多的关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于我们需要对 &lt;code&gt;follows&lt;/code&gt; 表添加一些额外的字段, 所以在 Spring JPA 的关系映射中, &lt;code&gt;User&lt;/code&gt; 和 &lt;code&gt;Follow&lt;/code&gt; 这两个实体是一个多对一个关系, 在 &lt;code&gt;User&lt;/code&gt; 实体中, 不再用 &lt;strong&gt;多对多&lt;/strong&gt; 的关系表示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;4. 实体类&lt;/h3&gt;
+&lt;p&gt;主要注意要自己定义 follows 表实体类, &lt;code&gt;follower&lt;/code&gt; 是关注者, &lt;code&gt;followed&lt;/code&gt; 是被关注者, 多对多的中间映射表是自己定义的, 所以 &lt;code&gt;User&lt;/code&gt; 中不再定义多对多的映射&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class Follow extends BaseDomain {
+
+    private static final long serialVersionUID = -119359227790097339L;
+
+    // 两个多对一关系, 一个关注者 id, 一个是被关注者 id
+    @ManyToOne
+    @JoinColumn(name = "follower_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private User follower;
+
+    @ManyToOne
+    @JoinColumn(name = "followed_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private User followed;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;User&lt;/code&gt; 中和 &lt;code&gt;Role&lt;/code&gt; 的多对一关系&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class User {
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false, foreignKey =       @ForeignKey(NO_CONSTRAINT))
+    private Role role;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Post&lt;/code&gt; 和 &lt;code&gt;User&lt;/code&gt; 的多对一关系&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class Post extends BaseDomain implements Serializable {
+
+    private static final long serialVersionUID = -6830098959594362217L;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(NO_CONSTRAINT))
+    private User author;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Comment&lt;/code&gt; 和 &lt;code&gt;User&lt;/code&gt;, &lt;code&gt;Post&lt;/code&gt; 的多对一关系&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public class Comment extends BaseDomain implements Serializable {
+
+    private static final long serialVersionUID = -1029418689058348694L;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, columnDefinition = "bigint",
+            foreignKey = @ForeignKey(NO_CONSTRAINT))
+    private User author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false, columnDefinition = "bigint",
+            foreignKey = @ForeignKey(NO_CONSTRAINT))
+    private Post post;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;定义一个 &lt;code&gt;Permission&lt;/code&gt;, 用于映射权限, 当有权限增改时, 修改这个类即可&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-java"&gt;public enum Permission {
+    /**
+     * 关注权限
+     */
+    FOLLOW(0x01, "FOLLOW"),
+
+    /**
+     * 评论权限
+     */
+    COMMENT(0x02, "COMMENT"),
+
+    /**
+     * 写 post 权限
+     */
+    WRITE(0x04, "WRITE"),
+
+    /**
+     * 修改他人信息的权限,
+     */
+    MODERATE(0x08, "MODERATE"),
+
+    /**
+     * 管理员权限
+     */
+    ADMIN(0xff, "ADMIN");&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;项目地址: &lt;a href="https://github.com/ivicel/spring-flasky"&gt;https://github.com/ivicel/spring-flasky&lt;/a&gt;&lt;/p&gt;</content><category term="spring boot"></category><category term="flasky"></category></entry><entry><title>博客主题的修改</title><link href="https://ivicel.info/2019/05/bo-ke-zhu-ti-de-xiu-gai.html" rel="alternate"></link><published>2019-05-01T00:00:00+08:00</published><updated>2019-05-01T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2019-05-01:/2019/05/bo-ke-zhu-ti-de-xiu-gai.html</id><summary type="html">&lt;p&gt;这个博客是使用 &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt; 搭建了, Pelican 是一个使用了 Python 写的一个静态博客生成框架, 里面使用了 &lt;a href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt; 作为模版&lt;/p&gt;
 &lt;p&gt;最近重新修改了博客主题, 使用了 &lt;a href="http://huangxuan.me/"&gt;HuxPro&lt;/a&gt; 里的样式主题, 原主题里使用的是 &lt;a href="https://jekyllrb.com/"&gt;Jekyll&lt;/a&gt; 生成, 不过其模版写法和 Jinja2 差不多, 自己稍微修改了下, 用 jinja2 重新写了一个&lt;/p&gt;
 &lt;p&gt;由于 Pelican 生成的目录结构不同, 其针对 article, archive, category, page, tag 都可以生成单独的页面, 所以在一些内嵌的页面里 (archives), 取巧的使用 ajax 来请求刷新 tag&lt;/p&gt;
 &lt;p&gt;由于 Python Markdown 只支持最基本的 Markdown 语法, 所以需要扩展插件, 我使用了 &lt;a href="https://facelessuser.github.io/pymdown-extensions/"&gt;pymdownx&lt;/a&gt;, 这是一个扩展包 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;这个博客是使用 &lt;a href="http://getpelican.com"&gt;Pelican&lt;/a&gt; 搭建了, Pelican 是一个使用了 Python 写的一个静态博客生成框架, 里面使用了 &lt;a href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt; 作为模版&lt;/p&gt;

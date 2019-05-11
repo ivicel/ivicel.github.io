@@ -148,6 +148,48 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/09/rtfsc-flask-de-yuan-ma-yue-du-er.html">
+            <h2 class="post-title">
+                RTFSC: Flask 的源码阅读(二)
+            </h2>
+            <div class="post-content-preview">
+                    1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有 before_request 回调中返回 None, 才继续向下派发 rv =...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 18 September 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html">
+            <h2 class="post-title">
+                RTFSC: Flask 的源码阅读(一)
+            </h2>
+            <div class="post-content-preview">
+                    使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行, 传入的的 WSGI 应用就是 self 也就是 Flask 对象. 根据 WSGI 协议, 其必定是一个...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 18 September 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/09/ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">
+            <h2 class="post-title">
+                基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植
+            </h2>
+            <div class="post-content-preview">
+                    steam-key-python 是 steam-key 的python 移植, 原开发基于 node.js. 使用到的主要开发包: steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商 GET /websocket HTTP/1.1 Connection: Upgrade Upgrade: websocket...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Mon 10 September 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/09/python-tips.html">
             <h2 class="post-title">
                 python tips
@@ -172,48 +214,6 @@ Ambertime - misc category        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Mon 30 July 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/07/shu-ju-jie-gou-pythonmiao-shu-di-7-zhang-tu.html">
-            <h2 class="post-title">
-                数据结构(Python描述) 第 7 章 图
-            </h2>
-            <div class="post-content-preview">
-                    1. 概念, 性质, 实现 1.1 定义 图是一个二元组 G=(V, E), V 是非空有穷的顶点集合, E 是顶点的边, 也是顶点之间的相互直接联系 图分为有向图, 无向图. 根据边的关系类型来分 邻接点: 无向图中, 相互连接起来的就叫邻接点, 有向图中, x 指向 y, y 是 x 的邻接点. 这个连接的边就叫 邻接边 顶点的 度: 一个顶点有几条邻接边, 叫做该点的度. 对于无向图和邻接点是一个意思. 不过对于有向图就不一样了. 有出度和入度之分. 意思是指出去的方向的邻接边数量, 和指向自己的边的数量 路径长度: 点 a 到点 b …
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 29 July 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/07/shu-ju-jie-gou-pythonmiao-shu-di-8-zhang-zi-dian-yu-ji-he.html">
-            <h2 class="post-title">
-                数据结构(Python描述) 第 8 章 字典与集合
-            </h2>
-            <div class="post-content-preview">
-                    字典是一种支持基于关键码的数据存储与检索的数据结构, 也称就查找表, 映射, 关联表等. 1. 字典的线性表实现 使用一个数组来保存字典的 key, 如果我们不考虑重复问题, 每次添加新的 key 都是在末尾添加, 这样都是 O(1), 而在查找方面, 需要遍历所有的值, 所以是 O(n), 删除操作也是一样需要 O(n). 基于这种表的字典: 数据结构和算法简单, 检索方便 检索效率低, 当表很大时, 检索很耗时 删除操作也很耗时, 删除后还需要移动后面的数据 依旧使用的一个数组来实现. 不过我们会保持数组(key)处于一个有序的状态. 这样检索和删除时, 使用二分查找, 查找效率是...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 29 July 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/07/a-simple-steamkit-implement-with-using-pythonyi.html">
-            <h2 class="post-title">
-                A Simple SteamKit implement with using Python(一)
-            </h2>
-            <div class="post-content-preview">
-                    1. 连接握手 与 steam 客户端进行通信的称为 CM Server, Steam 客户端首先要向发送一个连接请求, 然后服务器会返回一个 CHANNEL_ENCRYPT_REQUEST, 这个消息包会带有一个 16 字节的 质询 challenge 我们随机生生成一个 256 位长度的密钥 session_key, 使用 steam 的公钥对密钥加密后再发回给服务器, 加密方法为 RSA, padding 为 OAEP(mgf=MGF1(algorithm=SHA1), algorithm=SHA1) 这里可里选择只发送回 session_key(legacy mode),...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Wed 18 July 2018
         </p>
     </div>
     <hr>
@@ -243,6 +243,10 @@ Ambertime - misc category        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime - misc category        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->

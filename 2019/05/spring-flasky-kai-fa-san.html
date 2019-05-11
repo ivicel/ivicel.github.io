@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+            <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
         <meta name="google-site-verification" content="H97dWyn-QYy4n8BEw7ZAX8bFDDin_BwYiEOb3v_4dEs" />
@@ -33,6 +33,30 @@ Ambertime        </title>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         
+
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('https://ivicel.info/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
     </head>
 
 
@@ -126,136 +150,144 @@ Ambertime        </title>
     })
 </script> 
         
-    <header class="intro-header" style="background-image: url('https://ivicel.info/assets/images/header.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="site-heading">
-          <h1>About</h1>
+<!-- Post Header -->
+
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        <a class="tag" href="#" title="spring boot">spring boot</a>
+                        <a class="tag" href="#" title="flasky">flasky</a>
+                    </div>
+                    <h1>Spring Flasky 开发(三)</h1>
+                    <span class="meta">Posted by ivicel on 2019-05-04</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
+<!-- Post Content -->
 <div class="container">
-	<div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
-            col-xs-12 postlist-container">
-            <p>只要偶尔深夜想起有你</p>
-<p>会有一丝微微的酒意</p>
+    <article>
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+                <h3>1. XSS 保护</h3>
+<blockquote>
+<p>不要相信用户每一个输入</p>
+</blockquote>
+<p>我们需要对用户写的 post 进行过滤, 以避免 XSS 攻击. 其他的因为 Thymeleaf 默认输出都是 escape 的, 所以我们不需要对像个人 Profile 的信息输入进行过滤. </p>
+<pre class="highlight line-numbers"><code class="language-java">// 这里设置一些支持的标签, 比如 span, p, h* 之类
+private static final PolicyFactory POLICY_FACTORY = new HtmlPolicyBuilder()
+        .allowElements(Const.ALLOWED_HTML_TAG).toFactory();
 
-            <div>
+public static String sanitize(final String text) {
+    return POLICY_FACTORY.sanitize(text);
+}</code></pre>
+
+<p>我们自定义一个 <code>EntityEventListener</code>, 在保存 post 到数据库之前对 markdown 和 HTML 过滤.</p>
+<pre class="highlight line-numbers"><code class="language-java">public class SanitizerListener {
+    // 在新插入, 和更新前调用
+    @PrePersist
+    @PreUpdate
+    public void sanitize(Object object) {
+        try {
+            // 通过反射查找到实体类中被 Sanitize 注解标记的成员变量
+            // Sanitize 是自定义的一个注解
+            Field[] fields = object.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getAnnotation(Sanitize.class) != null) {
+                    // 只支持字符类型
+                    log.error(field.getType().toString());
+                    if (!CharSequence.class.isAssignableFrom(field.getType())) {
+                        log.warn("Annotation @Sanitize only support string field.");
+                        continue;
+                    }
+                    // 通过 bean 反省拿到变量的值, 调用过滤方法后再将值写回
+                    PropertyDescriptor descriptor = new PropertyDescriptor(field.getName(), object.getClass());
+                    String text = (String) descriptor.getReadMethod().invoke(object);
+                    text = CommonUtil.sanitize(text);
+                    Method writeMethod = descriptor.getWriteMethod();
+                    writeMethod.invoke(object, text);
+                }
+            }
+        } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
+            log.error("can't sanitize {}: {}", object, e.getMessage());
+        }
+    }
+}</code></pre>
+
+<p>这样我们只需要在实体类 <code>Post</code> 和 <code>Comment</code> 上加上注解事件, 在成员变量上加入标记注解 <code>@Sanitize</code></p>
+<pre class="highlight line-numbers"><code class="language-java">@EntityListeners({SanitizerListener.class})
+public class Post extends BaseDomain implements Serializable {
+    @Sanitize
+    private String body;
+
+    @Sanitize
+    private String bodyHtml;    
+}
+
+@EntityListeners(SanitizerListener.class)
+public class Comment extends BaseDomain implements Serializable {
+    @Sanitize
+    private String body;
+
+    @Sanitize
+    private String bodyHtml;
+}</code></pre>
+
+<h3>2. 原生 <code>HttpServletResponse</code> 对象返回 Thymeleaf 模版</h3>
+<p>在登录失败时, 我们会提醒返回用户名或密码错误的提示</p>
+<pre class="highlight line-numbers"><code class="language-java">public class LoginFailureHandler implements AuthenticationFailureHandler {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
+        // 获取 Thymeleaf 模版上下文
+        WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale());
+        // 设置返回 status code
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        // 把原用户的输入填回模版中, 避免用户再次输入
+        LoginDTO user = new LoginDTO();
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setRememberMe(request.getParameter("rememberMe") != null);
+        ctx.setVariable("user", user);
+        ctx.setVariable("msg", "username or password error.");
+        ctx.setVariable("classappend", "alert-warning");
+        // 当加入 Thymeleaf 依赖时, 自动配置模版处理引擎 bean
+        templateEngine.process("auth/login", ctx, response.getWriter());
+    }
+}</code></pre>
+
+<p>项目地址: <a href="https://github.com/ivicel/spring-flasky">https://github.com/ivicel/spring-flasky</a></p>
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                </ul>
+                <hr style="visibility: hidden;">
+
+
                 <!-- disqus 评论框 start -->
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
                 <!-- disqus 评论框 end -->
+            </div>  
+            <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         </div>
-        </div>
-        <!-- Sidebar Container -->
-        <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12
-            sidebar-container">
-            <!-- Featured Tags -->
-<section>
-    <hr class="hidden-sm hidden-xs">
-
-    <h5><a href="https://ivicel.info/archive/">FEATURED TAGS</a></h5>
-    <div class="tags">
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
-                title="数据结构" rel="数据结构">数据结构</a>
-            <a href="https://ivicel.info/tag/%E7%AE%97%E6%B3%95"
-                title="算法" rel="算法">算法</a>
-            <a href="https://ivicel.info/tag/python"
-                title="python" rel="python">python</a>
-            <a href="https://ivicel.info/tag/android"
-                title="android" rel="android">android</a>
-            <a href="https://ivicel.info/tag/C"
-                title="C" rel="C">C</a>
-            <a href="https://ivicel.info/tag/flask"
-                title="flask" rel="flask">flask</a>
-            <a href="https://ivicel.info/tag/%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB"
-                title="源代码阅读" rel="源代码阅读">源代码阅读</a>
-            <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
-                title="集合" rel="集合">集合</a>
-            <a href="https://ivicel.info/tag/spring%20boot"
-                title="spring boot" rel="spring boot">spring boot</a>
-            <a href="https://ivicel.info/tag/flasky"
-                title="flasky" rel="flasky">flasky</a>
-            <a href="https://ivicel.info/tag/RTFSC"
-                title="RTFSC" rel="RTFSC">RTFSC</a>
-            <a href="https://ivicel.info/tag/spring"
-                title="spring" rel="spring">spring</a>
-            <a href="https://ivicel.info/tag/steam"
-                title="steam" rel="steam">steam</a>
-            <a href="https://ivicel.info/tag/%E5%9B%BE"
-                title="图" rel="图">图</a>
-            <a href="https://ivicel.info/tag/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"
-                title="python数据结构" rel="python数据结构">python数据结构</a>
-            <a href="https://ivicel.info/tag/interpolator"
-                title="interpolator" rel="interpolator">interpolator</a>
-            <a href="https://ivicel.info/tag/view"
-                title="view" rel="view">view</a>
-            <a href="https://ivicel.info/tag/%E6%8E%92%E5%BA%8F"
-                title="排序" rel="排序">排序</a>
-            <a href="https://ivicel.info/tag/attrs"
-                title="attrs" rel="attrs">attrs</a>
-            <a href="https://ivicel.info/tag/style"
-                title="style" rel="style">style</a>
-            <a href="https://ivicel.info/tag/%E7%BA%BF%E7%A8%8B"
-                title="线程" rel="线程">线程</a>
-            <a href="https://ivicel.info/tag/%E7%BA%BF%E7%A8%8B%E6%B1%A0"
-                title="线程池" rel="线程池">线程池</a>
-            <a href="https://ivicel.info/tag/AsyncTask"
-                title="AsyncTask" rel="AsyncTask">AsyncTask</a>
-            <a href="https://ivicel.info/tag/%E7%BC%93%E5%AD%98"
-                title="缓存" rel="缓存">缓存</a>
-            <a href="https://ivicel.info/tag/aidl"
-                title="aidl" rel="aidl">aidl</a>
-            <a href="https://ivicel.info/tag/IPC"
-                title="IPC" rel="IPC">IPC</a>
-            <a href="https://ivicel.info/tag/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"
-                title="进程间通信" rel="进程间通信">进程间通信</a>
-            <a href="https://ivicel.info/tag/java"
-                title="java" rel="java">java</a>
-            <a href="https://ivicel.info/tag/mysql"
-                title="mysql" rel="mysql">mysql</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
-                title="事务" rel="事务">事务</a>
-    </div>
-</section>
-            <!-- Short About -->
-<section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="https://ivicel.info/about">ABOUT ME</a></h5>
-  <div class="short-about">
-    <img src="/assets/images/avatar.png" />
-
-    <p>只要偶尔深夜想起有你, 会有一丝微微的酒意</p>
-    <!-- SNS Link -->
-<ul class="list-inline">
-  <li>
-    <a target="_blank" href="https://github.com/ivicel">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-</ul>
-  </div>
-</section>
-            <!-- Friends Blog -->
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-  <li><a href="http://getpelican.com/">Pelican</a></li>
-  <li><a href="http://python.org/">Python.org</a></li>
-  <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-</ul>
-        </div>
-        
-    </div>
+    </article>
 </div>
 
  
@@ -344,13 +376,42 @@ Ambertime        </title>
 </script>
 
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
+<script src="https://ivicel.info/theme/js/jquery.nav.js"></script>
+
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
+    anchors.options = {
+        visible: 'always',
+        placement: 'right',
+        icon: '#'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }));
+    
     var disqus_config = function () {
-        this.page.url = 'https://ivicel.info/about';
-        this.page.identifier = 'About';
-        this.page.title = 'About';
+        this.page.url = 'https://ivicel.info/2019/05/spring-flasky-kai-fa-san.html';
+        this.page.identifier = 'Spring Flasky 开发(三)';
+        this.page.title = 'Spring Flasky 开发(三)';
     };
 
     (function() {
@@ -358,10 +419,9 @@ Ambertime        </title>
         dsq.src = '//ambertime.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
+    
 </script>
-                            
-<!-- disqus 公共JS代码 end -->
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     </body>
 </html>

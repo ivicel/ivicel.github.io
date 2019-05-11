@@ -148,6 +148,48 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2019/01/spring-shu-ju-ku-shi-wu-chu-li.html">
+            <h2 class="post-title">
+                Spring 数据库事务处理
+            </h2>
+            <div class="post-content-preview">
+                    1. 事务的传播行为 事务的传播行为是 Spring 对数据库事务添加的特定功能, 指的是当方法 A 调用另一个方法 B 时, B 事务中所采取的不同策略的行为, 比如新建事务, 挂起事务等. 事务的传播注解修饰的是方法 B 自己, 当被别的方法调用时才起的作用, 而不是方法内起作用 1.1 Spring 中七种事务传播行为 事务传播行为类型 说明 PROPAGATION_REQUIRED 1. 如果当前没有事务, 则新建一个事务2. 有的话就则加入到这个事务中 PROPAGATION_SUPPORTS 有则沿用, 没有也不新建1. 如果当前存在事务, 则沿用当前事务 2....
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sat 12 January 2019
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2019/01/spring-post-zhong-ding-xiang-jie-shou-cuo-wu-xin-xi-bindingresult.html">
+            <h2 class="post-title">
+                Spring POST 重定向接收错误信息(BindingResult)
+            </h2>
+            <div class="post-content-preview">
+                    1. POST 请求的错误信息重定向 在发送 POST 之后, 如果遇到错误, 我们经常会重定向(GET)回到原页面, 而不是直接返回页面, 这样做是为了避免如果我们点击浏览器刷新按钮时, 会再次发送 POST 请求. 重定向之后, 我们需要获得前面的错误信息. 使用 @ModelAttribute 注解来修饰 RequestMapping 方法的参数, ModelAttibute 注解实际上是接收请求参数, 添加到 Model 中, 在取出后自动删除. 需要注意的几点: 在 GET 处理方法中, 因为我们在渲染的 html/jsp 页面中使用了 User 对象,...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 10 January 2019
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2019/01/spring-security-de-shi-yong.html">
+            <h2 class="post-title">
+                Spring Security 的使用
+            </h2>
+            <div class="post-content-preview">
+                    1. Spring Security 的开启方式 在 Java Web 中一般使用 Filter 来对请求进行拦截, Spring Security 基于此来对在进入 DispatcherServlet 前对 Spring MVC 进行请求拦截, 进行统一难, 从而决定是否放行 如果使用 web.xml 进行配置, Spring Security 提供了一个 DelegatingFilterProxy 的 Filter 代理器, 只要在 web.xml 中配置该 Filter 如果使用注解方式, 则在配置中加入 @EnableWebSecurity, 该注解会自动生成一个...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 03 January 2019
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2019/01/mybatis-generator-xml-pei-zhi-xiang-jie.html">
             <h2 class="post-title">
                 MyBatis Generator XML 配置详解
@@ -172,48 +214,6 @@ Ambertime        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Wed 19 September 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/09/rtfsc-flask-de-yuan-ma-yue-du-er.html">
-            <h2 class="post-title">
-                RTFSC: Flask 的源码阅读(二)
-            </h2>
-            <div class="post-content-preview">
-                    1. 路由派发 由 Flask.full_dispatch_request() 发起路由派发 def full_dispatch_request(self): # before_first_request 的回调 self.try_trigger_before_first_request_functions() try: # signal 注册的回调 request_started.send(self) # before_request 的回调, 在这我们也可以看到 # 只有 before_request 回调中返回 None, 才继续向下派发 rv =...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Tue 18 September 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/09/rtfsc-flask-de-yuan-ma-yue-du-yi.html">
-            <h2 class="post-title">
-                RTFSC: Flask 的源码阅读(一)
-            </h2>
-            <div class="post-content-preview">
-                    使用自带的单线程 server 看源码 1. 从 WSGI 开始 一个最简单的 Flask 程序 from flask import Flask app = Flask(__file__) @app.route('/') def index(): return 'Hello, world' if __name__ == '__main__': app.run() 在 run() 方法中可以看到调用了 werkzeug.serving.run_simple() 来运行, 传入的的 WSGI 应用就是 self 也就是 Flask 对象. 根据 WSGI 协议, 其必定是一个...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Tue 18 September 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/09/ji-yu-uwsgi-de-shi-xian-flask-de-websocket-lian-jie-steamkey-de-yi-zhi.html">
-            <h2 class="post-title">
-                基于 uwsgi 的实现 flask 的 websocket 连接 -- steamkey 的移植
-            </h2>
-            <div class="post-content-preview">
-                    steam-key-python 是 steam-key 的python 移植, 原开发基于 node.js. 使用到的主要开发包: steam 一个用 python 实现的 steamkit flask web 框架 gevent 异步框架 uwsgi 后端 server 1. flask 结合 websocket 问题 根据 Websocket 协议, 从 HTTP 升级到 Websocket 要发送以下 GET 请求, 来协商 GET /websocket HTTP/1.1 Connection: Upgrade Upgrade: websocket...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Mon 10 September 2018
         </p>
     </div>
     <hr>
@@ -243,6 +243,10 @@ Ambertime        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->

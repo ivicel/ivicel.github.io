@@ -148,6 +148,48 @@ Ambertime - Articles by ivicel        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/android-dai-ma-values-mu-lu-xia-shuo-ming.html">
+            <h2 class="post-title">
+                Android 代码 values 目录下说明
+            </h2>
+            <div class="post-content-preview">
+                    对于 Android 源代码目录下 values/* 文件, 其所有的 xml 文件根标签都是 resource. aapt 会把这个目录下的文件全部 build 出 java 可引用的整型数值, 这样的便可以通过 R.[type].[name] 来引用到. 其类型只和标签名有关, 对放在哪个文件无关. 一般我们会把这些个类型不同的分别放在不 values/* 下不同的文件里只是为了方便编码时自己查看.一般有以下几种类型: 1. style 主题文件 主题文件一般有两种, 一个是 style, 一个是属性 attr style 标签是主题文件. 一般我们会从系统中的主题, 或者是某个...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 22 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/android-viewlei-de-gou-zao-fang-fa-ji-viewde-zhu-ti-shu-xing-you-xian-ji-xiang-guan.html">
+            <h2 class="post-title">
+                Android View类的构造方法及View的主题属性优先级相关
+            </h2>
+            <div class="post-content-preview">
+                    1. layout 里 view 的属性赋值 一个 layout 文件里的 view 的属性可以在 5 个地方赋值, 优先级从高到低如下: layout 中对属性直接赋值 layout 中覆盖 view 的 style 构造方法里的 defStyleAttr 构造方法里的 defStyleRes, 这个当仅当 defStyleAttr 值为 0 , 或者其指定的 attr 值找不到(比如没设定) 定义/使用的主题里的值 在 layout 布局文件里对 view 直接赋值 <TextView android:textColor="#332211"/> 自定义一个 style, 然后在...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 22 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/04/asynctaskji-zhi-fen-xi.html">
+            <h2 class="post-title">
+                AsyncTask机制分析
+            </h2>
+            <div class="post-content-preview">
+                    1. AsyncTask 的使用 AsyncTask 为抽象类, 继承该类至少要重写 doInBackground(Params...params) 方法. 除了该方法是在非主程中执行外, 其他的如 onPreExecute() onProgressUpdate(Progress...progresses) onPostExecute(Result result) onCancel() 都是在主线程中执行. AsyncTask 另外可以设置三个类型参数, AsyncTask<Params, Progress, Result> . 分别指传入...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Tue 10 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/04/java-xian-cheng-ji-xian-cheng-chi.html">
             <h2 class="post-title">
                 Java 线程及线程池
@@ -172,48 +214,6 @@ Ambertime - Articles by ivicel        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Wed 04 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/androidnei-cun-huan-cun-lrucache.html">
-            <h2 class="post-title">
-                Android内存缓存LruCache
-            </h2>
-            <div class="post-content-preview">
-                    1. LruCahe 的使用 LruCache 类的构造方法为 public LruCache(int maxSize), 其需要传入一个缓存大小, 单位为 byte, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入. 传入的内存最大值的单位要和 sizeOf() 返回的单位一致即可 另然最重要的需要重写这个类的 sizeOf() 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1. // 获得应用可使用的最大内存, 取 1/8 作为缓存 final int maxSize =...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Wed 04 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/aidlsheng-cheng-de-jie-kou-ji-binderde-fen-xi.html">
-            <h2 class="post-title">
-                AIDL生成的接口及Binder的分析
-            </h2>
-            <div class="post-content-preview">
-                    1. Android 上的 Binder 在原 Linux 上已经有各种 IPC , 管道, 信号, 信号量, Socket, 共享内存, 互斥锁. 但 Binder 能在 Android 这个特定的平台上会比其他更高效, 也更安全, 其他IPC没有严格权限验证机制 1.1 Binder 的构架 ​ Binder 通信是基于 C/S 构架. 多个 C 端可以同步连接 S 端, 所以 S 端需要同步设置 1-2 Binder 的机制 服务端向内核注册服务, 内核生成binder_proc …
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 01 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/android-activitysheng-ming-zhou-qi-he-qi-dong-mo-shi.html">
-            <h2 class="post-title">
-                Android Activity生命周期和启动模式
-            </h2>
-            <div class="post-content-preview">
-                    [TOC] 1. Activity 的生命周期 一般 Activity 生命周期为 onCreate() -> onStart() -> onResume() -> onPause() -> onStop() -> onDestroy() 官方的生命周期图: 需要注意的几个点: 当一个 Activity A 启动加一个 Activity B 时, 只有 A 的 onPause 执行完返回时, B 才开始执行onCreate onStart, 直到 onResume显示在前台, A 会执行 onStop onDestroy, 所以在 onPause不能执行太耗时的操作, 以便让另一个...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 01 April 2018
         </p>
     </div>
     <hr>
@@ -243,6 +243,10 @@ Ambertime - Articles by ivicel        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime - Articles by ivicel        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->

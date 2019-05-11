@@ -148,6 +148,48 @@ Ambertime - Articles by ivicel        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-7-tu.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-7: 图
+            </h2>
+            <div class="post-content-preview">
+                    图(Graphs) 图由顶点(vertices)和边(edges)组成, 图的边分为有向和无向 图表示为G=(V, E), V 代表顶点的集合, E 和 V 是一种二元关系 有向图: V={1, 2, 3, 4} 和 E = {(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 2), (3, 4)} 无向图: V={1, 2, 3 …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 02 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-6-dui-he-you-xian-dui-lie.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-6: 堆和优先队列
+            </h2>
+            <div class="post-content-preview">
+                    堆 (Heap) 堆是一棵二叉树, 子结点存储的值比父结点的值大称为最小值堆, 子结点存储的值比父结点小称为最大值堆 堆是有序的排列, 父子结点存在大小关系, 兄弟结点不存在直接的关系, 堆是快速取得最大/小值的数据结构 堆的实现通常存储在一个连续的数组中, 从根结点为0位置, 任意结点i其父结点的的位置是int((i-2)/2), 舍弃掉小数部分 堆是左平衡的树, 随着结点的增加, 树会逐级从左至右增长. 向堆中插入节点 删除堆顶点 /* heap.h */ #ifndef HEAP_H #define HEAP_H /* 堆的数据结构 */ typedef struct Heap_...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sat 01 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2017/03/matserting-algorithms-with-c-5-shu.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-5: 树
+            </h2>
+            <div class="post-content-preview">
+                    二叉树(Binary tree) 先序遍历: 根结点->左子结点->右子结点 中序遍历: 左子结点->根结点->右子结点 后序遍历: 左子结点->右子结点->根结占 层级遍历: 树根结点->下层左结点->该层右结点 (广度优先方法) 树的平衡是指在添加结点到下一层是必须保证本层的结点是满额的 二叉的接口定义 /* 这里不没包含插入和删除非叶子结点的操作, 这些操作需要根据具体的应用将树中的其他结点做相应的调整 */ /* bitree.h */ #ifndef BITREE_H #define BITREE_H #include <stdlib.h> /* 节点结构 */...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Mon 27 March 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2017/03/mastering-algroithms-with-c-4-ha-xi-biao.html">
             <h2 class="post-title">
                 Mastering Algroithms with C-4: 哈希表
@@ -172,48 +214,6 @@ Ambertime - Articles by ivicel        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Thu 23 March 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/03/matering-algorithms-with-c-2-zhan-he-dui-lie.html">
-            <h2 class="post-title">
-                Matering Algorithms with C-2: 栈和队列
-            </h2>
-            <div class="post-content-preview">
-                    栈: 后进先出(LIFO) 队列: 先进先出(FIFO) 栈和队列的一些应用 信号量: 同步多个进程访问共享资源 事件处理 X Window 系统, 使用队列来存储事件 生产者-消费者问题, 生产者向队列中写入数据, 消费从队列中读出数据 C 函数的调用, 函数的调用会将一些信息压入程序栈, 程序结束时将信息出栈 栈最常用的是使用链表来实现, 以下是栈的抽象数据类型头文件 /* stack.h */ #ifndef STACK_H #define STACK_H /* 元素结点 */ typedef struct StackElmt_ { void *data; struct...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Wed 22 March 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/03/javascript.html">
-            <h2 class="post-title">
-                javascript
-            </h2>
-            <div class="post-content-preview">
-                    对象属性特征 1.数据属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为访问器属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Writable]] 能否修改属性的值 [[Value]] 属性的数据值 2.访问器属性 [[Configurable]] 能否通过 delete 删除属性从而重新定义属性，能否修改属性，或者能否把属性修改为数据属性 [[Enumerable]] 能否通过 for-in 循环返回属性 [[Get]] 在读取属性时调用的函数 [[Set]]...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Tue 21 March 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/03/mastering-algorithms-with-c-1-lian-biao.html">
-            <h2 class="post-title">
-                Mastering Algorithms with C-1: 链表
-            </h2>
-            <div class="post-content-preview">
-                    函数的实现在判断元素结点是否为头结点或尾结点时, 并未使用 list->head list->tail 指针 而是判断该结点是否存在前一结点element->prev或后一结点element->next是否为空 这样从而导致在向指定结点前面或后面插入元素时, 不能过早将element-prev element->next 指向新结点new_element 以避免判断头尾结点失败 单链表(Linked List) /* list.h */ #ifndef LIST_H #define LIST_H #include <stdlib.h> /* 链表元素结构 */ typedef...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Tue 21 March 2017
         </p>
     </div>
     <hr>
@@ -243,6 +243,10 @@ Ambertime - Articles by ivicel        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime - Articles by ivicel        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->
