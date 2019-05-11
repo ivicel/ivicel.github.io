@@ -57,10 +57,6 @@ public String register(@Valid @ModelAttribute("user") User user,
 </form>
 ```
 
-
-
-
-
 #### Reference:
 
 1. https://stackoverflow.com/questions/2543797/spring-redirect-after-post-even-with-validation-errors/10049138#10049138

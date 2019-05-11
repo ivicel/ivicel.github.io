@@ -148,6 +148,48 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html">
+            <h2 class="post-title">
+                在Android中使用AIDL进行IPC
+            </h2>
+            <div class="post-content-preview">
+                    AIDL基本介绍 AIDL全称Android Interface Define Language, 后缀名是.aidl. 其支持以下几个数据类型 基本数据类型int, float, long, double, byte , short, boolean, char String类型和CharSequence类型 List类型, 并其内元素可以是泛型. 但元素一定是可Parcelable类型或是其他AIDL支持的类型. 可选择将 List 用作 “通用” 类（例如，List<String>）。另一端实际接收的具体类始终是 ArrayList，但生成的方法使用的是 List 接口。 Map类型 …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 01 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/02/android-contnet-providernei-rong-ti-gong-qi.html">
+            <h2 class="post-title">
+                Android Contnet Provider内容提供器
+            </h2>
+            <div class="post-content-preview">
+                    [TOC] 1. Content Provider 的优势: 可以用来提供进程间的通信 提供一个统一的接口, 屏蔽了底层的具体实现. 底层可以使用数据库如SQLite, 文件, 或者从网络中获取 提供了一个权限限制 2. Content URI 的写法: content:// + AUTHORITY + /表名 content://com.example.myapp.provider/table1 AUTHORITY一般默认写成包名.provider, 包名.provider类名, 一般用包名在前修饰, 以免在需要共享给别的程度时产生冲突 后面跟表名, 或者还可以跟修饰符*, #,...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/02/android-xi-tong-quan-xian.html">
+            <h2 class="post-title">
+                Android 系统权限
+            </h2>
+            <div class="post-content-preview">
+                    危险权限 权限组 权限 CALENDAR WRITE_CALENDAR READ_CALENDAR CAMERA CAMERA CONTACTS READ_CONTACTS WRITE_CONTACTS GET_ACCOUNTS LOCATION ACCESS_FINE_LOCATION ACCESS_COARES_LOCATION MICROPHONE RECORD_AUDIO PHONE READ_PHONE_STATE CALL_PHONE READ_CALL_LOG WRITE_CALL_LOG ADD_VOICEMAIL USE_SIP...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/02/android-zhong-zi-ding-yi-viewpager-tian-jia-ye-mian-zhi-shi-qi.html">
             <h2 class="post-title">
                 Android 中自定义ViewPager, 添加页面指示器
@@ -168,48 +210,6 @@ Ambertime - misc category        </title>
             </h2>
             <div class="post-content-preview">
                     想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 *1/option.inSampleSize * 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize * 1/option.inSampleSize 大小. inSampleSize 一般取为 2 的指数 …
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/anroid-fileproviderde-shi-yong.html">
-            <h2 class="post-title">
-                Anroid FileProvider的使用
-            </h2>
-            <div class="post-content-preview">
-                    FileProvider 是在 v4 support library 里的, 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在manifest中指定分享的文件, 具体的分享目录路径在res/xml/filepaths中指定, android:authorities为指定的认证, 自行定义, 一般为 package name + fileprovider, 其他为固定写法 <manifest xmlns:android="http://schemas.android.com/apk/res/android"...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/interpolatorzhi.html">
-            <h2 class="post-title">
-                Interpolator值
-            </h2>
-            <div class="post-content-preview">
-                    
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/javaxiao-shu-she-wei-qing-kuang.html">
-            <h2 class="post-title">
-                Java小数舍位情况
-            </h2>
-            <div class="post-content-preview">
-                    ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。 ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 ROUND_UP，若为负数，舍入行为类似于 ROUND_DOWN。Math.round() 方法就是使用的此模式。 ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 ROUND_DOWN；若为负数，舍入行为类似于 ROUND_UP。 HALF_UP：最近数字舍入 (5...
             </div>
         </a>
         <p class="post-meta">
@@ -243,6 +243,10 @@ Ambertime - misc category        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime - misc category        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->

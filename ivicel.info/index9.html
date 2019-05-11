@@ -148,6 +148,48 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/02/anroid-fileproviderde-shi-yong.html">
+            <h2 class="post-title">
+                Anroid FileProvider的使用
+            </h2>
+            <div class="post-content-preview">
+                    FileProvider 是在 v4 support library 里的, 使用之前要添加 v4 support library 默认 v7 support 继承了 v4 在manifest中指定分享的文件, 具体的分享目录路径在res/xml/filepaths中指定, android:authorities为指定的认证, 自行定义, 一般为 package name + fileprovider, 其他为固定写法 <manifest xmlns:android="http://schemas.android.com/apk/res/android"...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/02/interpolatorzhi.html">
+            <h2 class="post-title">
+                Interpolator值
+            </h2>
+            <div class="post-content-preview">
+                    
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
+        <a href="2018/02/javaxiao-shu-she-wei-qing-kuang.html">
+            <h2 class="post-title">
+                Java小数舍位情况
+            </h2>
+            <div class="post-content-preview">
+                    ROUND_UP：远离零方向舍入。向绝对值最大的方向舍入，只要舍弃位非 0 即进位。 ROUND_DOWN：趋向零方向舍入。向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况。 ROUND_CEILING：向正无穷方向舍入。向正最大方向靠拢。若是正数，舍入行为类似于 ROUND_UP，若为负数，舍入行为类似于 ROUND_DOWN。Math.round() 方法就是使用的此模式。 ROUND_FLOOR：向负无穷方向舍入。向负无穷方向靠拢。若是正数，舍入行为类似于 ROUND_DOWN；若为负数，舍入行为类似于 ROUND_UP。 HALF_UP：最近数字舍入 (5...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/02/javazhong-staticguan-jian-zi-yi-ji-xiu-shi-fu.html">
             <h2 class="post-title">
                 Java中static关键字以及修饰符
@@ -172,48 +214,6 @@ Ambertime        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/viewhui-zhi-liu-cheng.html">
-            <h2 class="post-title">
-                View绘制流程
-            </h2>
-            <div class="post-content-preview">
-                    一. view的MeasureSpec测量取值 对于DecorView其大小要求要ViewRootImpl中测量 如果要求MACTH_PARENT,就设置为窗口的大小windowSize, 模式为精确EXACTLY 如果要求为内容大小WRAP_CONTENT, 就设置为窗口大小windowSize, 模式为至多AT_MOST, 表示不能超过子view这个大小 默认设置为要求的大小rootDimension, 模式为精确EXACTLY // ViewRootImpl#getRootMeasureSpec private static int getRootMeasureSpec(int...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/04/grokking-algorithms-3.html">
-            <h2 class="post-title">
-                Grokking Algorithms-3
-            </h2>
-            <div class="post-content-preview">
-                    集合覆盖问题(Set Covering) 假设某个广播节目在播出时要尽可能覆盖每个地方, 现有一些广播电台, 每个电台能在某几个地方播出, 电台播出范围有重合, 在怎么选择使用最少的电台覆盖到最多的地方 一种方法是使用贪婪算法, 但有可能不是最佳解, 近似最佳解 贪婪算法每次的选择都尽可能覆盖到最多的地方, 重复这个直到全部地方被覆盖完 state_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az']) # 各个电台广播可以覆盖到的地方 stations = { 'kone': set(['id', 'nv',...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Tue 11 April 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/04/grokking-algorithms-1.html">
-            <h2 class="post-title">
-                Grokking Algorithms-1
-            </h2>
-            <div class="post-content-preview">
-                    binary search 二分法查找 # 二分法查找, 返回数值在 list 中的位置, 否则返回 None def binary_search(num_list, item): # 确定查找的数在列表中 if item < num_list[0] or item > num_list[-1]: return None # 最小值位置 low = 0 # 最大值位置 high = len(num_list) - 1 while low <= high: # 中间位置, 向下取整 mid = (low + hight) // 2 if num_list[mid] < item: low...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Fri 07 April 2017
         </p>
     </div>
     <hr>
@@ -243,6 +243,10 @@ Ambertime        </title>
                 title="源代码阅读" rel="源代码阅读">源代码阅读</a>
             <a href="https://ivicel.info/tag/%E9%9B%86%E5%90%88"
                 title="集合" rel="集合">集合</a>
+            <a href="https://ivicel.info/tag/spring%20boot"
+                title="spring boot" rel="spring boot">spring boot</a>
+            <a href="https://ivicel.info/tag/flasky"
+                title="flasky" rel="flasky">flasky</a>
             <a href="https://ivicel.info/tag/RTFSC"
                 title="RTFSC" rel="RTFSC">RTFSC</a>
             <a href="https://ivicel.info/tag/spring"
@@ -283,10 +287,6 @@ Ambertime        </title>
                 title="mysql" rel="mysql">mysql</a>
             <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1"
                 title="事务" rel="事务">事务</a>
-            <a href="https://ivicel.info/tag/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB"
-                title="事务隔离" rel="事务隔离">事务隔离</a>
-            <a href="https://ivicel.info/tag/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"
-                title="数据库并发问题" rel="数据库并发问题">数据库并发问题</a>
     </div>
 </section>
             <!-- Short About -->

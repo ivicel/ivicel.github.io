@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ivicel.info/</loc>
-<lastmod>2019-05-08T09:25:31-00:00</lastmod>
+<lastmod>2019-05-11T14:36:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/archives.html</loc>
-<lastmod>2019-05-08T09:25:31-00:00</lastmod>
+<lastmod>2019-05-11T14:36:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/tags.html</loc>
-<lastmod>2019-05-08T09:25:31-00:00</lastmod>
+<lastmod>2019-05-11T14:36:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/categories.html</loc>
-<lastmod>2019-05-08T09:25:31-00:00</lastmod>
+<lastmod>2019-05-11T14:36:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -34,6 +34,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://ivicel.info/about</loc>
 <lastmod>2019-01-08T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/2019/05/spring-flasky-kai-fa-san.html</loc>
+<lastmod>2019-05-04T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/2019/05/spring-flasky-kai-fa-er.html</loc>
+<lastmod>2019-05-03T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/2019/05/spring-flasky-kai-fa-yi.html</loc>
+<lastmod>2019-05-02T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -446,7 +467,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ivicel.info/category/misc.html</loc>
-<lastmod>2019-05-01T00:00:00+08:06</lastmod>
+<lastmod>2019-05-04T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/tag/spring-boot.html</loc>
+<lastmod>2019-05-04T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/tag/flasky.html</loc>
+<lastmod>2019-05-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1139,7 +1174,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ivicel.info/author/ivicel.html</loc>
-<lastmod>2019-05-01T00:00:00+08:06</lastmod>
+<lastmod>2019-05-04T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

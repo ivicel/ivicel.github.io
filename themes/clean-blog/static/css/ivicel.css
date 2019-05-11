@@ -11,3 +11,8 @@ article {
 pre.highlight {
     font-size: 0.95em;
 }
+
+ul.task-list {
+    list-style: none;
+    padding-left: 10px;
+}
