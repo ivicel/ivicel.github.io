@@ -148,6 +148,20 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/android-ying-pan-huan-cun-disklruccache.html">
+            <h2 class="post-title">
+                Android 硬盘缓存 DiskLrucCache
+            </h2>
+            <div class="post-content-preview">
+                    1. DiskLruCache 的使用 DiskLruCache 并不属于 Android 源码, 只是官方推荐的一种实现方式, 可以在 这里 找到源码, 这个源码使用了其他几个自定义类里的方法, 比如读行, 出错打印. Android Developer Sample 里关于 bitmap 的加载使用到了这个类来做缓存, 可直接使用, 可以在 这里 找到源码. 另外一个 GitHub 备份地址 Android Developer Sample 里的源码没有有效的初始化 redundantOpCount, 而是为 0. 这导致如果不断退出重进应用, 很难达到封顶的 2000 行, 即使...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Wed 04 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/04/androidnei-cun-huan-cun-lrucache.html">
             <h2 class="post-title">
                 Android内存缓存LruCache
@@ -196,20 +210,6 @@ Ambertime        </title>
             </h2>
             <div class="post-content-preview">
                     Android内序列化对象主要有两种方式, 一是原Java自带的Serializable接口, 二是Android内自有的Parcelable接口 1. Serializable接口 Java自带的序列接口使用非常简单, 只要实现Serializable接口即可. Serializable接口只是一个标志类, 系统会将实现了这个接口的类自动进行序列化. 如果想自定义序列化/反序列化过程, 可以自主实现writeObject()和readObject(). 一般我们都不会这么做的 还可以定义一个long serialVersionUID来检测反序列时的数据. 如果值不一样,...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Sun 01 April 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/04/android-ipcji-zhi.html">
-            <h2 class="post-title">
-                Android IPC机制
-            </h2>
-            <div class="post-content-preview">
-                    1. 开启多进程的方法 Android 应用启动时会自动创建一个新的进程, 其进程名默认为包名, 为四大组件(Activity , Service, ContentProvider, BroadcastReceiver)启动一个新的进程, 最简单的是在Manifest.xml中为其配置android:process进程名称. 有两种写法. 一是指定进程的全称:android:process="info.ivicel.github.android_ipc.another_process", 此时进程为一个全局进程, 其他应用可以通过ShareUID方式和它跑在同一进程中 二是简写:...
             </div>
         </a>
         <p class="post-meta">

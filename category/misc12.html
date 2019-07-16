@@ -148,6 +148,20 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2017/03/mastering-algroithms-with-c-3-ji-he.html">
+            <h2 class="post-title">
+                Mastering Algroithms with C-3: 集合
+            </h2>
+            <div class="post-content-preview">
+                    集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义: 空集 集合相等 子集 集合操作: 交集 并集 差集 实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n) 由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率 集合的抽象数据类型头文件定义 /* set.h */ #ifndef SET_H #define SET_H #include <stdlib.h> /* 集合元素 */ typedef struct SetElmt_ { void *data;...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 23 March 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2017/03/matering-algorithms-with-c-2-zhan-he-dui-lie.html">
             <h2 class="post-title">
                 Matering Algorithms with C-2: 栈和队列
@@ -196,20 +210,6 @@ Ambertime - misc category        </title>
             </h2>
             <div class="post-content-preview">
                     First C program #include <stdio.h> int main(int argc, char **argv) { printf("Hello C!!!\n"); } 1. 注释 /* * * 注释不能嵌套 * */ 2. 关键字、保留字 auto else long switch break enum register typedef case extern union char float short unsigned const for signed void continue goto sizeof volatile default if static while do …
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Mon 20 March 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/03/pythonlei-nei-zhi-mo-zhu-fang-fa.html">
-            <h2 class="post-title">
-                Python类内置魔术方法
-            </h2>
-            <div class="post-content-preview">
-                    内置类特殊属性 object.__dict__ instance.__class__ class.__bases__ definition.__name__ definition.__qualname__ class.__mro__ class.mro() class.__subclasses__() 自定义类都有一个namespace，即一个字典对象来存储类的属性。C.x即表示C.__dict__['x']，当类C中不存在属性x，会依据继承顺序MRO表来查找该属性。 如若查找完基类后，依然找不到属性，才会调相应用C.__getattribute__()、C.__getattr__()...
             </div>
         </a>
         <p class="post-meta">

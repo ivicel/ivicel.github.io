@@ -3346,7 +3346,656 @@ Multi 包含一个或多个 message, 每个结构为, 前 4 个字节为消息�
 &lt;li&gt;&lt;a href="https://github.com/ValvePython/steam/issues/79"&gt;https://github.com/ValvePython/steam/issues/79&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/ValvePython/steam"&gt;https://github.com/ValvePython/steam&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/SteamRE/SteamKit/issues/555"&gt;https://github.com/SteamRE/SteamKit/issues/555&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><category term="python"></category><category term="steam"></category><category term="steamkit"></category></entry><entry><title>WSGI 协议</title><link href="https://ivicel.info/2018/06/wsgi-xie-yi.html" rel="alternate"></link><published>2018-06-01T00:00:00+08:00</published><updated>2018-06-01T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2018-06-01:/2018/06/wsgi-xie-yi.html</id><summary type="html">&lt;h4&gt;1. 简介&lt;/h4&gt;
+&lt;/ol&gt;</content><category term="python"></category><category term="steam"></category><category term="steamkit"></category></entry><entry><title>Dart Tutor</title><link href="https://ivicel.info/2018/07/dart-tutor.html" rel="alternate"></link><published>2018-07-01T00:00:00+08:00</published><updated>2018-07-01T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2018-07-01:/2018/07/dart-tutor.html</id><summary type="html">&lt;h3&gt;一个基本的 Dart 程序&lt;/h3&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;printInteger(int aNumber) {
+  print('The number is $aNumber.')
+}
+
+// 程序入口
+main() {
+  var number = 42;
+  printInteger(number);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;一些重要的概念&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在 Dart 中, 所有的一切都是对象, 继承自 &lt;code&gt;Object&lt;/code&gt; 类, &lt;code&gt;null&lt;/code&gt; 类型也是一个对象&lt;/li&gt;
+&lt;li&gt;Dart 是强类型语言, 但变量的声明是可以省略类型的, 程序会在第一次赋值时自动推断类型. 也可以使用 &lt;code&gt;dynamic&lt;/code&gt; 关键字来声明动态类型&lt;/li&gt;
+&lt;li&gt;Dart 支持泛型, 如 &lt;code&gt;List&amp;lt;int&amp;gt;&lt;/code&gt; 或 &lt;code&gt;List&amp;lt;dynamic&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Dart 支持 top-level 函数(C 语言中的函数定义), 类成员方法 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h3&gt;一个基本的 Dart 程序&lt;/h3&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;printInteger(int aNumber) {
+  print('The number is $aNumber.')
+}
+
+// 程序入口
+main() {
+  var number = 42;
+  printInteger(number);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;一些重要的概念&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在 Dart 中, 所有的一切都是对象, 继承自 &lt;code&gt;Object&lt;/code&gt; 类, &lt;code&gt;null&lt;/code&gt; 类型也是一个对象&lt;/li&gt;
+&lt;li&gt;Dart 是强类型语言, 但变量的声明是可以省略类型的, 程序会在第一次赋值时自动推断类型. 也可以使用 &lt;code&gt;dynamic&lt;/code&gt; 关键字来声明动态类型&lt;/li&gt;
+&lt;li&gt;Dart 支持泛型, 如 &lt;code&gt;List&amp;lt;int&amp;gt;&lt;/code&gt; 或 &lt;code&gt;List&amp;lt;dynamic&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Dart 支持 top-level 函数(C 语言中的函数定义), 类成员方法, 静态方法, 也同样支持在函数中再定义函数&lt;/li&gt;
+&lt;li&gt;Dart 支持 top-level 变量, 类成员变量, 静态变量&lt;/li&gt;
+&lt;li&gt;Dart 没有 &lt;code&gt;pulibc&lt;/code&gt;, &lt;code&gt;private&lt;/code&gt;, &lt;code&gt;protected&lt;/code&gt; 关键字, 使用前置下划线 &lt;code&gt;_&lt;/code&gt; 来表示变量只能 library 访问&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Identifiers&lt;/em&gt; 可以以下划线 &lt;code&gt;_&lt;/code&gt; 或大小写字母开始, 可以包含数字&lt;/li&gt;
+&lt;li&gt;Dart 编译工具编译时会产生: &lt;code&gt;warnings&lt;/code&gt; 和 &lt;code&gt;errors&lt;/code&gt;, warning 只能产生警告而不会中止程序运行. errors 可能会在编译时或运行产生, 程序不会继续运行, 并产生 exception&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Keywords&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;关键字&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;abstract&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dynamic&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;implements&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;show&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;as&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;else&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;import&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;static&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;assert&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;enum&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;in&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;super&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;async&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;export&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;interface&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;switch&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;await&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;extends&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;is&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;sync&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;break&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;external&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;library&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;this&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;case&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;factory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;mixin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;throw&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;catch&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;new&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;class&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;final&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;null&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;try&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;const&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;finally&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;on&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;typedef&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;continue&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;for&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;operator&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;var&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;convariant&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Function&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;part&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;void&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;default&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;get&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rethrow&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;while&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;deferred&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;hide&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;return&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;with&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;do&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;if&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;set&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;yield&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;变量&lt;/h3&gt;
+&lt;p&gt;Dart 可以使用 &lt;code&gt;var&lt;/code&gt; 关键字来定义变量, 如 &lt;code&gt;var name = 'Bob'&lt;/code&gt;, Dart 会自动推断会变量的类型, Dart 也可以显示的设置变量类型 &lt;code&gt;String name = 'Bob'&lt;/code&gt;, 设置一但设置便不能更改, 若要使用动态类型, 可以使用 &lt;code&gt;dynamic&lt;/code&gt; 类型&lt;/p&gt;
+&lt;h4&gt;默认值&lt;/h4&gt;
+&lt;p&gt;未初始化的变量是默认值为 &lt;code&gt;null&lt;/code&gt;, 即使其类型为 &lt;code&gt;int&lt;/code&gt;&lt;/p&gt;
+&lt;h4&gt;Final 和 const 修饰&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;final&lt;/code&gt; 关键字表示变量在定义之后再无法修改, 其值在运行时确定&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt; 关键字表示变量的值在编译(&lt;strong&gt;compile-time constants&lt;/strong&gt;)时就已经确定, 并且无法更改, 也就是&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;final name = 'Bob';    // name 无法再重新赋值
+
+const age = 12;        // 正确, 12 是一个确定的值
+
+int get(int i) {
+  return i * i;
+}
+const j = get(2);      // 错误, j 的值要到运行时才能确定&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Built-in types&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;numbers&lt;/li&gt;
+&lt;li&gt;strings&lt;/li&gt;
+&lt;li&gt;booleans&lt;/li&gt;
+&lt;li&gt;lists ( 列表或数组)&lt;/li&gt;
+&lt;li&gt;sets&lt;/li&gt;
+&lt;li&gt;maps&lt;/li&gt;
+&lt;li&gt;runes (Unicode 字符)&lt;/li&gt;
+&lt;li&gt;symbols&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Numbers&lt;/h4&gt;
+&lt;p&gt;Dart 数值在 &lt;code&gt;int&lt;/code&gt; 和 &lt;code&gt;double&lt;/code&gt; 两种类型. &lt;code&gt;int&lt;/code&gt; 最大为 64 bits, double 为双精度 64 bits&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;int&lt;/code&gt; 和 &lt;code&gt;double&lt;/code&gt; 都是 &lt;code&gt;num&lt;/code&gt; 的子类型, 可以使用 &lt;code&gt;num i = 3&lt;/code&gt; 来定义变量数值&lt;/p&gt;
+&lt;h4&gt;Strings&lt;/h4&gt;
+&lt;p&gt;字符串可以使用单引号 &lt;code&gt;'&lt;/code&gt; 或双引号 &lt;code&gt;"&lt;/code&gt; 来定义, 引号内可以使用 &lt;code&gt;$&lt;/code&gt; 来引用变量的值, 和 java 不同的是, 字符串值使用 &lt;code&gt;==&lt;/code&gt; 比较&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;var s = 'word';
+var str = 'Hello, $s';
+print(str);     // Hello, word&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外, dart 中还支持和 python 中一样的多行字符, &lt;code&gt;'''&lt;/code&gt; 和 &lt;code&gt;"""&lt;/code&gt;, 原始字符 &lt;code&gt;r&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;var s` = '''
+You can create
+multi-line strings like this one.
+''';
+
+var s2 = """This is also a
+multi-line string.""";
+
+// 使用 r 标志, \n 不会被转义为换行
+var s = r'abc,\n gets special';&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Booleans&lt;/h4&gt;
+&lt;p&gt;只有 &lt;code&gt;true&lt;/code&gt; 和 &lt;code&gt;false&lt;/code&gt; 两个值, 在 dart 中 if 判断只能是这两个值, 不会自动推断, 和 java 是一样的. &lt;code&gt;if (a == null)&lt;/code&gt;&lt;/p&gt;
+&lt;h4&gt;List&lt;/h4&gt;
+&lt;p&gt;列表或者数组, &lt;code&gt;var list = [1, 2, 3, 4];&lt;/code&gt; list 类型为 &lt;code&gt;List&amp;lt;int&amp;gt;&lt;/code&gt;. 在 dart 2.3 添加了 &lt;strong&gt;spread operator&lt;/strong&gt;(&lt;code&gt;…&lt;/code&gt;) 和 &lt;strong&gt;null-aware spread operator&lt;/strong&gt;(&lt;code&gt;…?&lt;/code&gt;) 用来添加列表&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;var list = [1, 2, 3];
+var list2 = [0, ...list];    // [0, 1, 2, 3, 4]
+
+var l1;
+var l2 = [0, ...?l1];    // [0], ...? 用来判断 null 值
+
+// collection if 语句
+var nav = [
+  'Home',
+  'Furniture',
+  'Plants',
+  if (promoActive) 'Outlet'
+];
+
+// collection for 语句
+var listOfInts = [1, 2, 3];
+var listOfStrings = [
+  '#0',
+  for (var i in listOfInts) '#$i'
+];&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Sets&lt;/h4&gt;
+&lt;p&gt;无序不重复的集合.&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 字面量定义, 使用 {} 定义
+var halogens = {'fluorine', 'bromine'};
+
+// {} 指的是空 map, 当要定义空 set 时, 使用 Set 类
+var s = &amp;lt;String&amp;gt;{};&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Map&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;var gifts = {
+  'first': 'partridge',
+  'second': 'turtledoves',
+  'fifth': 'golden rings'
+};
+
+// dart 2 中 new 关键字可以省略
+var gift2 = Map();
+gift2['first'] = 'partridge';&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Runes&lt;/h4&gt;
+&lt;p&gt;在 dart 中, runes 是 UTF-32 code points 字符串.&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;Runes input = Runes('\u2665 \u{1f605}');&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Symbols&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Symbols&lt;/code&gt; 对象代表的是一个操作符或标识符, 比如 &lt;code&gt;#radix&lt;/code&gt;, 可用于类似 C 中的 goto 跳转&lt;/p&gt;
+&lt;h3&gt;Functions&lt;/h3&gt;
+&lt;p&gt;Dart 是一个纯面向对象语言, 函数也是一个对象, 所以可以将函数当作一个参数传递给另一个函数. 函数如果没有写返回值, 则默认返回 &lt;code&gt;null&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// number 的类型和返回值都可以省略, 但为代码阅读方便, 最好不要省略
+bool isNoble(int number) {
+  return _nobleGases[number] != null;
+}
+
+// return 可以简写成 =&amp;gt;, 但和 javascript 的 =&amp;gt; 函数不同
+// 这里只是一个语法糖, =&amp;gt; 后面只能是一条表达式, 不能有多条
+bool isNoble(int number) =&amp;gt; _nobleGases[number] != null;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;可选参数和默认参数值&lt;/h4&gt;
+&lt;p&gt;有两种方法表示可选参数, 命名参数(Optional named parameters), 使用 &lt;code&gt;{...}&lt;/code&gt;,  位置参数(Optional positional parameters), 使用 &lt;code&gt;[…]&lt;/code&gt;, 两种方式不能混合使用. 另外在可选参数中还可以使用 &lt;code&gt;@required&lt;/code&gt; 标识注明该参数必须传值. 默认的参数值只能是使用在可选参数中设置&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 命名参数, 定义时使用 {paramType paramName}
+void namedParamFunc({bool bold, bool hidden}) {...}
+// 调用时 paramName: value
+namedParamFunc(bold: true, hidden: false);
+
+// 也可以使用 @required 表明该参数 hidden 必须传一个值
+void namedParamWithRequired({bool bold, @required bool hidden) {...}
+
+// 位置参数, 使用 [], 位置可选参数必须位于必传参数后面
+void positionalParamFunc(String from, String msg, [String device]) {...}
+
+// 设置默认参数, 默认参数必须是 const
+void defaultParamFunc1({bool bold = false, bool hidden}) {...}
+void defaultParamFunc2(String from, String msg, [String device = 'android']) {...}
+void defaultParamFunc1({bool bold = false, List&amp;lt;int&amp;gt; numbers = const [1, 2, 3}) {...}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;匿名函数&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;/* 
+([[Type] param [, ...]]) {
+  codeBlock;
+};
+*/
+
+var list = ['apples', 'bananas', 'oranges'];
+  list.forEach((item) {
+    print('${list.indexOf(item)}: $item');
+  });&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;几个特殊操作符&lt;/h3&gt;
+&lt;h4&gt;级联操作符(Cascade notation ..)&lt;/h4&gt;
+&lt;p&gt;类似于 java 中类返回 &lt;code&gt;this&lt;/code&gt; 里可级联的操作, dart 中不必显示返回 this&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;querySelector('#confirm') // Get an object.
+  ..text = 'Confirm' // Use its members.
+  ..classes.add('important')
+  ..onClick.listen((e) =&amp;gt; window.alert('Confirmed!'));
+
+// 相当于, 这里 querySelector 一定要返回一个对象
+var button = querySelector('#confirm');
+button.text = 'Confirm';
+button.classes.add('important');
+button.onClick.listen((e) =&amp;gt; window.alert('Confirmed!'));&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;判断 null 操作符&lt;/h4&gt;
+&lt;h4&gt;&lt;code&gt;is&lt;/code&gt;, &lt;code&gt;as&lt;/code&gt;, &lt;code&gt;is!&lt;/code&gt;, &lt;code&gt;??&lt;/code&gt;, &lt;code&gt;?.&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;is&lt;/code&gt; 相当于 java 中 &lt;code&gt;instaceof&lt;/code&gt;, 判断 对象是否是某个类的实例, &lt;code&gt;is!&lt;/code&gt; 反之&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;as&lt;/code&gt; 用于类型强制转换或在 library import 中重命别名&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;?.&lt;/code&gt; 用于在类对象访问成员方法/成员变量, 先进行判断 &lt;code&gt;null&lt;/code&gt; 操作, 以免产生错误&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 用于判断 obj 是否为 null, 以免产生错误
+var a = obj?.a;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;??&lt;/code&gt; 用于判断是是否为 &lt;code&gt;null&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 如果 b 为 null, a 保持不变, 否则则把 b 的值赋给 a
+var a = 'abc';
+a ??= b;
+
+// 如果 name 为 null, 则返回 Guest
+String playerName(String name) =&amp;gt; name ?? 'Guest';
+// 相当
+String playerName(String name) =&amp;gt; name != null ? name : 'Guest';&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;控制流程&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;switch&lt;/code&gt; 语句中, 如果  &lt;code&gt;case&lt;/code&gt; 里面有写了语句, 则 &lt;code&gt;break&lt;/code&gt; 不能缺少, 否则会产生错误. 另外还支持跳转到类似锚点的形式, 使用 &lt;code&gt;continue [tagPosition]&lt;/code&gt; 语句&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;switch (c) {
+  case 'OPEN':
+    doA();
+    // 错误, 缺少 break
+  case 'CLOSED':
+    doB();
+    break;
+}
+
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED':
+    executeClosed();
+    continue nowClosed;
+  // Continues executing at the nowClosed label.
+
+  nowClosed:
+  case 'NOW_CLOSED':
+    // Runs for both CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;异常 Exceptions&lt;/h3&gt;
+&lt;p&gt;抛出异常 &lt;code&gt;throw FormatException('error…')&lt;/code&gt;, dart 可以抛出任何非 null 对象, 如 &lt;code&gt;throw 123&lt;/code&gt;. 捕获异常使用 &lt;code&gt;on&lt;/code&gt; 和 &lt;code&gt;catch&lt;/code&gt; 关键字&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;try {
+  breedMoreLlamas();
+} on OutOfLlamasException {
+    // 捕获特定异常
+} on Exception catch (e, s) {
+  // 捕获特定异常, e 是异常对象, s 是栈错误对象 StackTrace, 可以省略
+  print('Unknown exception: $e');
+} catch (e) {
+  // 捕获所有异常
+} finally {
+    // 一定执行的语句 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;类 Classes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;类的初始化顺序: 1. 参数列表, 2. 父类 constructor, 3. 本类 constructor&lt;/li&gt;
+&lt;li&gt;类的成员变量默认都有 getter/setter 方法, 和 python 中一样直接赋值, 以 &lt;code&gt;_&lt;/code&gt; 开始的为可在 library 内访问, 没有 private, public, protected 修饰&lt;/li&gt;
+&lt;li&gt;获取对象的类型可以使用 &lt;code&gt;obj.runtimeType&lt;/code&gt; 成员变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;构造方法&lt;/h4&gt;
+&lt;p&gt;如果不声明构造方法, 则类有一个无参的默认构造方法. 构造方法是不继承的. 构造方法有两种写法, 类似 java 的, 和命名构造方法&lt;/p&gt;
+&lt;h5&gt;类 Java 的构造方法&lt;/h5&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class Point {
+  num x, y;
+
+  // 也可以简写成 Point(this.x, this.y);
+  Point(num x, num y) {
+    this.x = x;
+    this.y = y;
+  }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5&gt;命名构造方法&lt;/h5&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;  // 命名构造方法
+  Point.origin() {
+    x = 0;
+    y = 0;
+
+// 调用
+var p1 = Point(1, 2);
+var p2 = Point.origin();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;使用构造方法初始化列表&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 类的初始化列表
+class MyPoint {
+    num x, y;
+
+  // : 后面是初始化表, 会先方法内部进行调用, 类似 C++, 也可以是其他表达式, 比如 assert(x &amp;gt;= 0)
+  MyPoint.fromJson(Map&amp;lt;String, num&amp;gt; json):
+        x = json['x'],
+        y = json['y'] {
+    print('In MyPoint.fromJson: ($x, $y)');      
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;constant 类&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// Constant constructors, 其成员变量必须都是 final
+class ImmutablePoint {
+    final num x, y;
+
+  const ImmutablePoint(this.x, this.y);
+}
+
+// 调用
+var immutablePoint = const ImmutablePoint(1, 2);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;使用 &lt;code&gt;factory&lt;/code&gt; 设置工厂方法&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 工厂方法 constructor, 使用 factory 关键字, 工厂方法不能访问 this
+class Logger {
+  final String name;
+
+  static final Map&amp;lt;String, Logger&amp;gt; _cache = &amp;lt;String, Logger&amp;gt;{};
+
+  factory Logger(String name) {
+        if (_cache.containsKey(name) {
+        return _cache[name];
+      } else {
+        final logger = Logger._internal(name);
+        _cache[name] = logger;
+        return logger;
+      }
+   }
+
+     Logger._internal(this.name);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;抽象类: &lt;code&gt;abstract&lt;/code&gt;&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 抽象类, 使用 abstract 关键字, 继承时必须要覆写
+abstract class Dog {
+  // 抽象类中不写方法体的便是抽象方法, 不用 abstract 关键字
+  void doSomething();
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;&lt;code&gt;as&lt;/code&gt; 向上/下转型&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class Person {}
+class Employee extends Person {}
+
+var em = Employee();
+(em as Person).doSomething();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;隐式接口 implicit interfaces&lt;/h4&gt;
+&lt;p&gt;每一个类都是一个隐式的接口, dart 里没有像 java 的 interface 关键字, 当我们使用 &lt;code&gt;extends&lt;/code&gt; 继承类时, 会继承类的实现, 而实现 &lt;code&gt;implements&lt;/code&gt; 接口的话, 并不会继承原类里的实现. 可以实现多个接口. 实现接口的时候必须要实现&lt;strong&gt;所有的成员变量和成员方法&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class Person {
+  final _name;
+  Person(this._name);
+
+  String greet(String who) =&amp;gt; 'Hello, $who. I am $_name.';
+}
+
+class Impostor implements Person {
+  // 别忘实现成员变量
+  String _name;
+
+  // 实现成员方法
+  String greet(String who) =&amp;gt; 'Hi, $who';
+}
+
+String greetBob(Person person) =&amp;gt; person.greet('Bob');
+
+greetBob(Person('Kathy'));
+greetBob(Impostor());&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;继承及调用父类&lt;/h4&gt;
+&lt;p&gt;使用 &lt;code&gt;extends&lt;/code&gt; 继承类, 只能单继承. 子类构造方法会默认调用父类的&lt;strong&gt;无参&lt;/strong&gt;, &lt;strong&gt;非命名&lt;/strong&gt; 的构造方法, 如果不存在的话, 要手动使用 &lt;code&gt;super&lt;/code&gt; 调用, 调用要放在初始化列表中, 在构造方法函数体之前.&lt;/p&gt;
+&lt;p&gt;可以使用 &lt;code&gt;@overirde&lt;/code&gt; 注解标识覆写的方法.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;构造方法不会被继承的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class A {
+  final _name;
+  A(this._name);
+
+  void print() =&amp;gt; print(_name);
+}
+
+class B extends A {
+  B(String name) : super(name);
+
+  @override
+  void print() =&amp;gt; print('hello, $_name');
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;覆写操作符&lt;/h4&gt;
+&lt;p&gt;dart 支持类似 C++ 对操作符进行覆写, 支持以下操作符, 使用 &lt;code&gt;operator&lt;/code&gt; 关键字. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;=&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;+&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;/&lt;/code&gt;, &lt;code&gt;~/&lt;/code&gt;, &lt;code&gt;%&lt;/code&gt;, &lt;code&gt;~&lt;/code&gt;, &lt;code&gt;==&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;, &lt;code&gt;|&lt;/code&gt;, &lt;code&gt;^&lt;/code&gt;, &lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[]&lt;/code&gt;, &lt;code&gt;[]=&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意 &lt;code&gt;!=&lt;/code&gt; 并不支持覆写, 如要判断 &lt;code&gt;e1 != e2&lt;/code&gt;, 只能取巧 &lt;code&gt;!(e1 == e2)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果覆写 &lt;code&gt;==&lt;/code&gt; 一定要同时覆写 &lt;code&gt;hashCode&lt;/code&gt; 方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class Vector {
+  final int x, y;
+
+  Vector(this.x, this.y);
+
+  Vector operator +(Vector v) =&amp;gt; Vector(x + v.x, y + v.y);
+  Vector operator -(Vector v) =&amp;gt; Vector(x - v.x, y - v.y);
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;&lt;code&gt;noSuchMethod&lt;/code&gt; 方法&lt;/h4&gt;
+&lt;p&gt;当访问不存在的&lt;strong&gt;方法或变量&lt;/strong&gt;时, 会调用该方法, 默认的实现抛出 &lt;code&gt;NoSuchMethodError&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class A {
+  @override
+  void noSuchMethod(Invocation invocation) {
+    print("no such $(invocatino.memberName);");
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;枚举类型 Enumerated types&lt;/h3&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;enum Color { red, green, blue }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;mixins 类(dart 2.1 之后)&lt;/h3&gt;
+&lt;p&gt;Mixins 是为了重用类, 解决单继承的另一种方式, 定义一个 mixin 类需要使用 &lt;code&gt;mixin 关键字, 使用&lt;/code&gt;with` 关键字来继承 mixin 类&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 定义 mixin 类
+mixin Musical {
+  bool canPlayPiano = false;
+
+  void entertainMe() {
+    // do something....
+  }
+}
+
+// 使用 with 关键字
+class Musician extends Performer with Musical {}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以限制哪个类可以继承 mixin 类, 使用 &lt;code&gt;on&lt;/code&gt; 关键字&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;mixin MusicalPerformer on Musician {
+  // something...
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;泛型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;dart 里的泛型类似 java 的泛型, 如定义  &lt;code&gt;class Cache&amp;lt;T&amp;gt;&lt;/code&gt;, 另外还可以限制泛型的类型 &lt;code&gt;class Cache&amp;lt;T extends SomeBaseClass&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;泛型方法, &lt;code&gt;T first&amp;lt;T&amp;gt;(List&amp;lt;T&amp;gt; ts)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;参数化 collection 字面量和构造方法&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;var nameList = &amp;lt;String&amp;gt;['a', 'b', 'c'];
+var nameSet = &amp;lt;String&amp;gt;{'a', 'b', 'c'};
+var nameMap = &amp;lt;String, String&amp;gt;{
+  'a': 'a',
+  'b': 'b'
+};
+
+var nameSet2 = Set&amp;lt;String&amp;gt;.from[nameSet];&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Libraries&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;import&lt;/code&gt; 和 &lt;code&gt;library&lt;/code&gt; 关键字用来导入和定义模块, 使用 &lt;code&gt;_&lt;/code&gt; 开始的只能在模块内可见, 每一个 dart app 都是一个模块, 无论是否有用 &lt;code&gt;library&lt;/code&gt; 声明&lt;/p&gt;
+&lt;p&gt;导入语句 &lt;code&gt;import 'package:test/test.dart';&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;对于内置的模块, 其包名都为 &lt;code&gt;dart&lt;/code&gt;, 如 &lt;code&gt;import dart:html;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;对导入的包重命别名: &lt;code&gt;import 'package:lib2/lib2.dart' as lib2;&lt;/code&gt;, 使用 &lt;code&gt;as&lt;/code&gt; 关键字&lt;/p&gt;
+&lt;h4&gt;部分导入&lt;/h4&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 只导入 foo
+import 'package:lib1/lib1.dart' show foo;
+// 导入除 foo 之外
+import 'package:lib2/lib2.dart' hide foo;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;懒导入(deferred loading 或 lazy loading)&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;懒导入只能在 dart2js 中使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;// 使用 deferred as 语句
+import 'package:greetings/hello.dart' deferred as hello;
+
+// 调用懒导入的库, 调用之前要先调用 loadLibrary 方法
+Future greet() async {
+  await hello.loadLibrary();
+  hello.printGreeting();
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;异步&lt;/h3&gt;
+&lt;p&gt;异步使用 &lt;code&gt;async&lt;/code&gt; 和 &lt;code&gt;await&lt;/code&gt;, 使用 &lt;code&gt;async&lt;/code&gt; 的函数总是会返回 &lt;code&gt;Future&lt;/code&gt; 对象, 不用显示的返回 &lt;code&gt;Future&lt;/code&gt;, 程序会自动包装, 如果没有返回值则是 &lt;code&gt;Future&amp;lt;void&amp;gt;&lt;/code&gt; 类型. &lt;code&gt;awati&lt;/code&gt; 只能在 &lt;code&gt;async&lt;/code&gt; 函数中使用&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;Future checkVersion() async {
+  var version = await lookUpVersion();
+  // do something
+}
+
+// 在 main 中也可以使用 async
+Future main() async {
+  checkVersion();
+  print('.....');
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;异步流 Streams&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code&gt;await for&lt;/code&gt; 可以获取异步循环, &lt;code&gt;await for (var id in expression)&lt;/code&gt;. 可以使用 &lt;code&gt;break&lt;/code&gt; 或者 &lt;code&gt;return&lt;/code&gt; 中断循环. 注意 &lt;code&gt;await for&lt;/code&gt; 只能在 &lt;code&gt;async&lt;/code&gt; 函数中使用&lt;/p&gt;
+&lt;h3&gt;生成器 Generators&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;同步生成器 Synchronous generator, 返回 &lt;code&gt;Iterable&lt;/code&gt; 对象, 使用 &lt;code&gt;sync*&lt;/code&gt; 修饰函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;Iterable&amp;lt;int&amp;gt; naturalsTo(int n) sync* {
+  int k = 0;
+  while (k &amp;lt; n) {
+    yield k++;
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;异步生成器 Asynchronous generator, 返回 &lt;code&gt;Stream&lt;/code&gt; 对象, 使用 &lt;code&gt;async*&lt;/code&gt; 修饰函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;Stream&amp;lt;int&amp;gt; asynchronousNaturalsTo(int n) async* {
+  int k = 0;
+  while (k &amp;lt; n) {
+    yield k++;
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似 Python 里的 yield from, 使用 &lt;code&gt;yield*&lt;/code&gt; 在生成器中返回生成器&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;Iterable&amp;lt;int&amp;gt; naturalsDownFrom(int n) sync* {
+  if (n &amp;gt; 0) {
+    yield n;
+    yield* naturalsDownFrom(n - 1);
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;可调用的类对象 Callable classes&lt;/h3&gt;
+&lt;p&gt;类似 Python 类对象可调用的魔术方法 &lt;code&gt;__call__&lt;/code&gt;, dart 里也有一个类内置的方法 &lt;code&gt;call()&lt;/code&gt;, 实现这个方法类对象便也可以像函数一样调用&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class WannableFunction {
+  call(String a, String b, String c) =&amp;gt; '$a, $b, $c';
+}
+
+var wf = WannableFunction();
+print(wf('Hi', 'there', 'gang'));&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Typedefs&lt;/h3&gt;
+&lt;p&gt;类似 C 中的 typedef, 定义类型别名, typedefs 让我们能保持类型的信息, 比如&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;class SortedCollection {
+  Function compare;
+
+  SortedCollection(int f(Ojbect a, Object b)) {
+    compare = f;
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原先 &lt;code&gt;f&lt;/code&gt; 是一个接受两个参数并返回 &lt;code&gt;int&lt;/code&gt; 的函数, 但传给 &lt;code&gt;compare&lt;/code&gt; 之后, 便只能得到一个 &lt;code&gt;Function&lt;/code&gt; 类型, 已经没有参数和返回值的信息, 使用 &lt;code&gt;typedef&lt;/code&gt; 可以解决这问题&lt;/p&gt;
+&lt;pre class="highlight line-numbers"&gt;&lt;code class="language-dart"&gt;typedef Compare = int Function(Object a, Object b);
+
+class SortedCollection {
+  Compare compare;
+
+  SortedCollection(this.compare);
+}
+
+// 也可以使用泛型
+typedef Compare&amp;lt;T&amp;gt; = int Function(T a, T b);&lt;/code&gt;&lt;/pre&gt;</content><category term="dart"></category></entry><entry><title>WSGI 协议</title><link href="https://ivicel.info/2018/06/wsgi-xie-yi.html" rel="alternate"></link><published>2018-06-01T00:00:00+08:00</published><updated>2018-06-01T00:00:00+08:00</updated><author><name>ivicel</name></author><id>tag:ivicel.info,2018-06-01:/2018/06/wsgi-xie-yi.html</id><summary type="html">&lt;h4&gt;1. 简介&lt;/h4&gt;
 &lt;p&gt;WSGI(Web Server Gateway Interface) 定义在 &lt;a href="https://www.python.org/dev/peps/pep-3333/"&gt;PEP 3333&lt;/a&gt; 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.&lt;/p&gt;
 &lt;p&gt;WSGI 实现分为 client 端和 server 端, 并且 WSGI 是可以按层堆叠的, 中间层称为 middleware. middleware 其实质就是实现了 client, server 两种, 这样来看, 上层总是下层的 server, 下层是上层的 client …&lt;/p&gt;</summary><content type="html">&lt;h4&gt;1. 简介&lt;/h4&gt;
 &lt;p&gt;WSGI(Web Server Gateway Interface) 定义在 &lt;a href="https://www.python.org/dev/peps/pep-3333/"&gt;PEP 3333&lt;/a&gt; 中, WSGI 不是要重新创造一个 web server 或者 framework, 而是定义一个标准接口, 实现这个标准接口的 web server 都可以通过该接口调用 python 程序, 从而使用 python 程序来处理网络数据, 然后再发回给 client.&lt;/p&gt;
