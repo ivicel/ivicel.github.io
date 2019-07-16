@@ -148,6 +148,20 @@ Ambertime - Articles by ivicel        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/04/android-ipcji-zhi.html">
+            <h2 class="post-title">
+                Android IPC机制
+            </h2>
+            <div class="post-content-preview">
+                    1. 开启多进程的方法 Android 应用启动时会自动创建一个新的进程, 其进程名默认为包名, 为四大组件(Activity , Service, ContentProvider, BroadcastReceiver)启动一个新的进程, 最简单的是在Manifest.xml中为其配置android:process进程名称. 有两种写法. 一是指定进程的全称:android:process="info.ivicel.github.android_ipc.another_process", 此时进程为一个全局进程, 其他应用可以通过ShareUID方式和它跑在同一进程中 二是简写:...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 01 April 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/04/zai-androidzhong-shi-yong-aidljin-xing-ipc.html">
             <h2 class="post-title">
                 在Android中使用AIDL进行IPC
@@ -196,20 +210,6 @@ Ambertime - Articles by ivicel        </title>
             </h2>
             <div class="post-content-preview">
                     在页面滑动时会回调ViewPager.OnPageChangeListener接口里的方法. 用ViewPage.addOnPageChangeListener添加和ViewPage.removeOnPageChangeListener删除监听回调方法. 如果不想实现所有方法, ViewPager内有个空的类SimpleOnPageChangeListener实现了这个接口, 继承这个类便可. 注意可以多次调用addOnPageChangeListener方法添加多个回调, ViewPager按添加顺序进行调用, 所以在不需要回调时,...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">
-            <h2 class="post-title">
-                Android高效加载图片防止OOM
-            </h2>
-            <div class="post-content-preview">
-                    想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 *1/option.inSampleSize * 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize * 1/option.inSampleSize 大小. inSampleSize 一般取为 2 的指数 …
             </div>
         </a>
         <p class="post-meta">

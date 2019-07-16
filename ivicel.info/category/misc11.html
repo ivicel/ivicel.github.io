@@ -148,6 +148,20 @@ Ambertime - misc category        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2017/04/matserting-algorithms-with-c-7-pai-xu-he-sou-suo.html">
+            <h2 class="post-title">
+                Matserting Algorithms with C-7: 排序和搜索
+            </h2>
+            <div class="post-content-preview">
+                    插入排序(选择排序, 冒泡排序Insertion Sort) 插入排序每次从数组里选出一个元素, 和新数组里的元素一一进行对比, 然后将新元素排到比它最大/小的元素的左或右边, 时间复杂度为 O(n2) /* issort.c */ #include <stdlib.h> #include <string.h> /* data 指向数组, size 是数组中元素个数, esize 是每个元素的大小, compare 是元素之间的比较函数 */ iint issort(void *data, int size, int esize, int (*compare)(const void...
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Sun 02 April 2017
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2017/04/matserting-algorithms-with-c-7-tu.html">
             <h2 class="post-title">
                 Matserting Algorithms with C-7: 图
@@ -200,20 +214,6 @@ Ambertime - misc category        </title>
         </a>
         <p class="post-meta">
             Posted by ivicel on Fri 24 March 2017
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2017/03/mastering-algroithms-with-c-3-ji-he.html">
-            <h2 class="post-title">
-                Mastering Algroithms with C-3: 集合
-            </h2>
-            <div class="post-content-preview">
-                    集合是不同对象的无序聚集 集合的成员是无序的 每一个成员只在集合中出现一次 集合的定义: 空集 集合相等 子集 集合操作: 交集 并集 差集 实现集合的一种好的方法是采用链表. 但每一次插入删除数据都需要遍历集合中的每一个成员, 时间复杂度 O(n) 由于性能问题, 顺序查找的方式只适合比较小型的集合数据, 可以使用哈希等查找技术提高效率 集合的抽象数据类型头文件定义 /* set.h */ #ifndef SET_H #define SET_H #include <stdlib.h> /* 集合元素 */ typedef struct SetElmt_ { void *data;...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 23 March 2017
         </p>
     </div>
     <hr>

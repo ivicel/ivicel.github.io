@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="google-site-verification" content="WpfeDx8HRNQcT7jzjSsZ0vhtfw8M7gFo-YoDmXZRGHg"/>
+        <meta name="google-site-verification" content="H97dWyn-QYy4n8BEw7ZAX8bFDDin_BwYiEOb3v_4dEs" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        
+  
+        <title>
+Ambertime        </title>
+
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="https://ivicel.info/assets/pwa/manifest.json" />
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="https://ivicel.info/assets/images/favicon.ico"/>
+        <!-- Canonical URL -->
+        <link rel="canonical" href="" />
+        <link rel="stylesheet" href="https://ivicel.info/theme/css/bootstrap.min.css" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="https://ivicel.info/theme/css/hux-blog.min.css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://ivicel.info/theme/css/prism.css" />
+        <link rel="stylesheet" href="https://ivicel.info/theme/css/ivicel.css" />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+
+
+    <style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('https://ivicel.info/assets/images/header.jpg');
+    }
+
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, 0.3);
+    }
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+    </head>
+
+
+    <!-- hack iOS CSS :active style -->
+    <body ontouchstart="">
+<!-- Navigation -->
+<!-- <nav class="navbar navbar-default navbar-custom navbar-fixed-top invert"> -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://ivicel.info/">Ambertime</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://ivicel.info/">Home</a>
+                    </li>
+                        <li>
+                            <a href="https://ivicel.info/archives.html">ARCHIVES</a>
+                        </li>
+                        <li>
+                            <a href="https://ivicel.info/about.html">ABOUT</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script> 
+        
+<!-- Post Header -->
+
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        <a class="tag" href="#" title="dart">dart</a>
+                    </div>
+                    <h1>Dart Tutor</h1>
+                    <span class="meta">Posted by ivicel on 2018-07-01</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<div class="container">
+    <article>
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+                <h3>一个基本的 Dart 程序</h3>
+<pre class="highlight line-numbers"><code class="language-dart">printInteger(int aNumber) {
+  print('The number is $aNumber.')
+}
+
+// 程序入口
+main() {
+  var number = 42;
+  printInteger(number);
+}</code></pre>
+
+<h3>一些重要的概念</h3>
+<ul>
+<li>在 Dart 中, 所有的一切都是对象, 继承自 <code>Object</code> 类, <code>null</code> 类型也是一个对象</li>
+<li>Dart 是强类型语言, 但变量的声明是可以省略类型的, 程序会在第一次赋值时自动推断类型. 也可以使用 <code>dynamic</code> 关键字来声明动态类型</li>
+<li>Dart 支持泛型, 如 <code>List&lt;int&gt;</code> 或 <code>List&lt;dynamic&gt;</code></li>
+<li>Dart 支持 top-level 函数(C 语言中的函数定义), 类成员方法, 静态方法, 也同样支持在函数中再定义函数</li>
+<li>Dart 支持 top-level 变量, 类成员变量, 静态变量</li>
+<li>Dart 没有 <code>pulibc</code>, <code>private</code>, <code>protected</code> 关键字, 使用前置下划线 <code>_</code> 来表示变量只能 library 访问</li>
+<li><em>Identifiers</em> 可以以下划线 <code>_</code> 或大小写字母开始, 可以包含数字</li>
+<li>Dart 编译工具编译时会产生: <code>warnings</code> 和 <code>errors</code>, warning 只能产生警告而不会中止程序运行. errors 可能会在编译时或运行产生, 程序不会继续运行, 并产生 exception</li>
+</ul>
+<h3>Keywords</h3>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abstract</code></td>
+<td><code>dynamic</code></td>
+<td><code>implements</code></td>
+<td><code>show</code></td>
+</tr>
+<tr>
+<td><code>as</code></td>
+<td><code>else</code></td>
+<td><code>import</code></td>
+<td><code>static</code></td>
+</tr>
+<tr>
+<td><code>assert</code></td>
+<td><code>enum</code></td>
+<td><code>in</code></td>
+<td><code>super</code></td>
+</tr>
+<tr>
+<td><code>async</code></td>
+<td><code>export</code></td>
+<td><code>interface</code></td>
+<td><code>switch</code></td>
+</tr>
+<tr>
+<td><code>await</code></td>
+<td><code>extends</code></td>
+<td><code>is</code></td>
+<td><code>sync</code></td>
+</tr>
+<tr>
+<td><code>break</code></td>
+<td><code>external</code></td>
+<td><code>library</code></td>
+<td><code>this</code></td>
+</tr>
+<tr>
+<td><code>case</code></td>
+<td><code>factory</code></td>
+<td><code>mixin</code></td>
+<td><code>throw</code></td>
+</tr>
+<tr>
+<td><code>catch</code></td>
+<td><code>false</code></td>
+<td><code>new</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td><code>final</code></td>
+<td><code>null</code></td>
+<td><code>try</code></td>
+</tr>
+<tr>
+<td><code>const</code></td>
+<td><code>finally</code></td>
+<td><code>on</code></td>
+<td><code>typedef</code></td>
+</tr>
+<tr>
+<td><code>continue</code></td>
+<td><code>for</code></td>
+<td><code>operator</code></td>
+<td><code>var</code></td>
+</tr>
+<tr>
+<td><code>convariant</code></td>
+<td><code>Function</code></td>
+<td><code>part</code></td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td><code>get</code></td>
+<td><code>rethrow</code></td>
+<td><code>while</code></td>
+</tr>
+<tr>
+<td><code>deferred</code></td>
+<td><code>hide</code></td>
+<td><code>return</code></td>
+<td><code>with</code></td>
+</tr>
+<tr>
+<td><code>do</code></td>
+<td><code>if</code></td>
+<td><code>set</code></td>
+<td><code>yield</code></td>
+</tr>
+</tbody>
+</table>
+<h3>变量</h3>
+<p>Dart 可以使用 <code>var</code> 关键字来定义变量, 如 <code>var name = 'Bob'</code>, Dart 会自动推断会变量的类型, Dart 也可以显示的设置变量类型 <code>String name = 'Bob'</code>, 设置一但设置便不能更改, 若要使用动态类型, 可以使用 <code>dynamic</code> 类型</p>
+<h4>默认值</h4>
+<p>未初始化的变量是默认值为 <code>null</code>, 即使其类型为 <code>int</code></p>
+<h4>Final 和 const 修饰</h4>
+<p><code>final</code> 关键字表示变量在定义之后再无法修改, 其值在运行时确定</p>
+<p><code>const</code> 关键字表示变量的值在编译(<strong>compile-time constants</strong>)时就已经确定, 并且无法更改, 也就是</p>
+<pre class="highlight line-numbers"><code class="language-dart">final name = 'Bob';    // name 无法再重新赋值
+
+const age = 12;        // 正确, 12 是一个确定的值
+
+int get(int i) {
+  return i * i;
+}
+const j = get(2);      // 错误, j 的值要到运行时才能确定</code></pre>
+
+<h3>Built-in types</h3>
+<ul>
+<li>numbers</li>
+<li>strings</li>
+<li>booleans</li>
+<li>lists ( 列表或数组)</li>
+<li>sets</li>
+<li>maps</li>
+<li>runes (Unicode 字符)</li>
+<li>symbols</li>
+</ul>
+<h4>Numbers</h4>
+<p>Dart 数值在 <code>int</code> 和 <code>double</code> 两种类型. <code>int</code> 最大为 64 bits, double 为双精度 64 bits</p>
+<p><code>int</code> 和 <code>double</code> 都是 <code>num</code> 的子类型, 可以使用 <code>num i = 3</code> 来定义变量数值</p>
+<h4>Strings</h4>
+<p>字符串可以使用单引号 <code>'</code> 或双引号 <code>"</code> 来定义, 引号内可以使用 <code>$</code> 来引用变量的值, 和 java 不同的是, 字符串值使用 <code>==</code> 比较</p>
+<pre class="highlight line-numbers"><code class="language-dart">var s = 'word';
+var str = 'Hello, $s';
+print(str);     // Hello, word</code></pre>
+
+<p>另外, dart 中还支持和 python 中一样的多行字符, <code>'''</code> 和 <code>"""</code>, 原始字符 <code>r</code></p>
+<pre class="highlight line-numbers"><code class="language-dart">var s` = '''
+You can create
+multi-line strings like this one.
+''';
+
+var s2 = """This is also a
+multi-line string.""";
+
+// 使用 r 标志, \n 不会被转义为换行
+var s = r'abc,\n gets special';</code></pre>
+
+<h4>Booleans</h4>
+<p>只有 <code>true</code> 和 <code>false</code> 两个值, 在 dart 中 if 判断只能是这两个值, 不会自动推断, 和 java 是一样的. <code>if (a == null)</code></p>
+<h4>List</h4>
+<p>列表或者数组, <code>var list = [1, 2, 3, 4];</code> list 类型为 <code>List&lt;int&gt;</code>. 在 dart 2.3 添加了 <strong>spread operator</strong>(<code>…</code>) 和 <strong>null-aware spread operator</strong>(<code>…?</code>) 用来添加列表</p>
+<pre class="highlight line-numbers"><code class="language-dart">var list = [1, 2, 3];
+var list2 = [0, ...list];    // [0, 1, 2, 3, 4]
+
+var l1;
+var l2 = [0, ...?l1];    // [0], ...? 用来判断 null 值
+
+// collection if 语句
+var nav = [
+  'Home',
+  'Furniture',
+  'Plants',
+  if (promoActive) 'Outlet'
+];
+
+// collection for 语句
+var listOfInts = [1, 2, 3];
+var listOfStrings = [
+  '#0',
+  for (var i in listOfInts) '#$i'
+];</code></pre>
+
+<h4>Sets</h4>
+<p>无序不重复的集合.</p>
+<pre class="highlight line-numbers"><code class="language-dart">// 字面量定义, 使用 {} 定义
+var halogens = {'fluorine', 'bromine'};
+
+// {} 指的是空 map, 当要定义空 set 时, 使用 Set 类
+var s = &lt;String&gt;{};</code></pre>
+
+<h4>Map</h4>
+<pre class="highlight line-numbers"><code class="language-dart">var gifts = {
+  'first': 'partridge',
+  'second': 'turtledoves',
+  'fifth': 'golden rings'
+};
+
+// dart 2 中 new 关键字可以省略
+var gift2 = Map();
+gift2['first'] = 'partridge';</code></pre>
+
+<h4>Runes</h4>
+<p>在 dart 中, runes 是 UTF-32 code points 字符串.</p>
+<pre class="highlight line-numbers"><code class="language-dart">Runes input = Runes('\u2665 \u{1f605}');</code></pre>
+
+<h4>Symbols</h4>
+<p><code>Symbols</code> 对象代表的是一个操作符或标识符, 比如 <code>#radix</code>, 可用于类似 C 中的 goto 跳转</p>
+<h3>Functions</h3>
+<p>Dart 是一个纯面向对象语言, 函数也是一个对象, 所以可以将函数当作一个参数传递给另一个函数. 函数如果没有写返回值, 则默认返回 <code>null</code></p>
+<pre class="highlight line-numbers"><code class="language-dart">// number 的类型和返回值都可以省略, 但为代码阅读方便, 最好不要省略
+bool isNoble(int number) {
+  return _nobleGases[number] != null;
+}
+
+// return 可以简写成 =&gt;, 但和 javascript 的 =&gt; 函数不同
+// 这里只是一个语法糖, =&gt; 后面只能是一条表达式, 不能有多条
+bool isNoble(int number) =&gt; _nobleGases[number] != null;</code></pre>
+
+<h4>可选参数和默认参数值</h4>
+<p>有两种方法表示可选参数, 命名参数(Optional named parameters), 使用 <code>{...}</code>,  位置参数(Optional positional parameters), 使用 <code>[…]</code>, 两种方式不能混合使用. 另外在可选参数中还可以使用 <code>@required</code> 标识注明该参数必须传值. 默认的参数值只能是使用在可选参数中设置</p>
+<pre class="highlight line-numbers"><code class="language-dart">// 命名参数, 定义时使用 {paramType paramName}
+void namedParamFunc({bool bold, bool hidden}) {...}
+// 调用时 paramName: value
+namedParamFunc(bold: true, hidden: false);
+
+// 也可以使用 @required 表明该参数 hidden 必须传一个值
+void namedParamWithRequired({bool bold, @required bool hidden) {...}
+
+// 位置参数, 使用 [], 位置可选参数必须位于必传参数后面
+void positionalParamFunc(String from, String msg, [String device]) {...}
+
+// 设置默认参数, 默认参数必须是 const
+void defaultParamFunc1({bool bold = false, bool hidden}) {...}
+void defaultParamFunc2(String from, String msg, [String device = 'android']) {...}
+void defaultParamFunc1({bool bold = false, List&lt;int&gt; numbers = const [1, 2, 3}) {...}</code></pre>
+
+<h4>匿名函数</h4>
+<pre class="highlight line-numbers"><code class="language-dart">/* 
+([[Type] param [, ...]]) {
+  codeBlock;
+};
+*/
+
+var list = ['apples', 'bananas', 'oranges'];
+  list.forEach((item) {
+    print('${list.indexOf(item)}: $item');
+  });</code></pre>
+
+<h3>几个特殊操作符</h3>
+<h4>级联操作符(Cascade notation ..)</h4>
+<p>类似于 java 中类返回 <code>this</code> 里可级联的操作, dart 中不必显示返回 this</p>
+<pre class="highlight line-numbers"><code class="language-dart">querySelector('#confirm') // Get an object.
+  ..text = 'Confirm' // Use its members.
+  ..classes.add('important')
+  ..onClick.listen((e) =&gt; window.alert('Confirmed!'));
+
+// 相当于, 这里 querySelector 一定要返回一个对象
+var button = querySelector('#confirm');
+button.text = 'Confirm';
+button.classes.add('important');
+button.onClick.listen((e) =&gt; window.alert('Confirmed!'));</code></pre>
+
+<h4>判断 null 操作符</h4>
+<h4><code>is</code>, <code>as</code>, <code>is!</code>, <code>??</code>, <code>?.</code></h4>
+<p><code>is</code> 相当于 java 中 <code>instaceof</code>, 判断 对象是否是某个类的实例, <code>is!</code> 反之</p>
+<p><code>as</code> 用于类型强制转换或在 library import 中重命别名</p>
+<p><code>?.</code> 用于在类对象访问成员方法/成员变量, 先进行判断 <code>null</code> 操作, 以免产生错误</p>
+<pre class="highlight line-numbers"><code class="language-dart">// 用于判断 obj 是否为 null, 以免产生错误
+var a = obj?.a;</code></pre>
+
+<p><code>??</code> 用于判断是是否为 <code>null</code></p>
+<pre class="highlight line-numbers"><code class="language-dart">// 如果 b 为 null, a 保持不变, 否则则把 b 的值赋给 a
+var a = 'abc';
+a ??= b;
+
+// 如果 name 为 null, 则返回 Guest
+String playerName(String name) =&gt; name ?? 'Guest';
+// 相当
+String playerName(String name) =&gt; name != null ? name : 'Guest';</code></pre>
+
+<h3>控制流程</h3>
+<p><code>switch</code> 语句中, 如果  <code>case</code> 里面有写了语句, 则 <code>break</code> 不能缺少, 否则会产生错误. 另外还支持跳转到类似锚点的形式, 使用 <code>continue [tagPosition]</code> 语句</p>
+<pre class="highlight line-numbers"><code class="language-dart">switch (c) {
+  case 'OPEN':
+    doA();
+    // 错误, 缺少 break
+  case 'CLOSED':
+    doB();
+    break;
+}
+
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED':
+    executeClosed();
+    continue nowClosed;
+  // Continues executing at the nowClosed label.
+
+  nowClosed:
+  case 'NOW_CLOSED':
+    // Runs for both CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}</code></pre>
+
+<h3>异常 Exceptions</h3>
+<p>抛出异常 <code>throw FormatException('error…')</code>, dart 可以抛出任何非 null 对象, 如 <code>throw 123</code>. 捕获异常使用 <code>on</code> 和 <code>catch</code> 关键字</p>
+<pre class="highlight line-numbers"><code class="language-dart">try {
+  breedMoreLlamas();
+} on OutOfLlamasException {
+    // 捕获特定异常
+} on Exception catch (e, s) {
+  // 捕获特定异常, e 是异常对象, s 是栈错误对象 StackTrace, 可以省略
+  print('Unknown exception: $e');
+} catch (e) {
+  // 捕获所有异常
+} finally {
+    // 一定执行的语句 
+}
+</code></pre>
+
+<h3>类 Classes</h3>
+<ul>
+<li>类的初始化顺序: 1. 参数列表, 2. 父类 constructor, 3. 本类 constructor</li>
+<li>类的成员变量默认都有 getter/setter 方法, 和 python 中一样直接赋值, 以 <code>_</code> 开始的为可在 library 内访问, 没有 private, public, protected 修饰</li>
+<li>获取对象的类型可以使用 <code>obj.runtimeType</code> 成员变量</li>
+</ul>
+<h4>构造方法</h4>
+<p>如果不声明构造方法, 则类有一个无参的默认构造方法. 构造方法是不继承的. 构造方法有两种写法, 类似 java 的, 和命名构造方法</p>
+<h5>类 Java 的构造方法</h5>
+<pre class="highlight line-numbers"><code class="language-dart">class Point {
+  num x, y;
+
+  // 也可以简写成 Point(this.x, this.y);
+  Point(num x, num y) {
+    this.x = x;
+    this.y = y;
+  }</code></pre>
+
+<h5>命名构造方法</h5>
+<pre class="highlight line-numbers"><code class="language-dart">  // 命名构造方法
+  Point.origin() {
+    x = 0;
+    y = 0;
+
+// 调用
+var p1 = Point(1, 2);
+var p2 = Point.origin();</code></pre>
+
+<h4>使用构造方法初始化列表</h4>
+<pre class="highlight line-numbers"><code class="language-dart">// 类的初始化列表
+class MyPoint {
+    num x, y;
+
+  // : 后面是初始化表, 会先方法内部进行调用, 类似 C++, 也可以是其他表达式, 比如 assert(x &gt;= 0)
+  MyPoint.fromJson(Map&lt;String, num&gt; json):
+        x = json['x'],
+        y = json['y'] {
+    print('In MyPoint.fromJson: ($x, $y)');      
+  }
+}</code></pre>
+
+<h4>constant 类</h4>
+<pre class="highlight line-numbers"><code class="language-dart">// Constant constructors, 其成员变量必须都是 final
+class ImmutablePoint {
+    final num x, y;
+
+  const ImmutablePoint(this.x, this.y);
+}
+
+// 调用
+var immutablePoint = const ImmutablePoint(1, 2);</code></pre>
+
+<h4>使用 <code>factory</code> 设置工厂方法</h4>
+<pre class="highlight line-numbers"><code class="language-dart">// 工厂方法 constructor, 使用 factory 关键字, 工厂方法不能访问 this
+class Logger {
+  final String name;
+
+  static final Map&lt;String, Logger&gt; _cache = &lt;String, Logger&gt;{};
+
+  factory Logger(String name) {
+        if (_cache.containsKey(name) {
+        return _cache[name];
+      } else {
+        final logger = Logger._internal(name);
+        _cache[name] = logger;
+        return logger;
+      }
+   }
+
+     Logger._internal(this.name);
+}</code></pre>
+
+<h4>抽象类: <code>abstract</code></h4>
+<pre class="highlight line-numbers"><code class="language-dart">// 抽象类, 使用 abstract 关键字, 继承时必须要覆写
+abstract class Dog {
+  // 抽象类中不写方法体的便是抽象方法, 不用 abstract 关键字
+  void doSomething();
+}</code></pre>
+
+<h4><code>as</code> 向上/下转型</h4>
+<pre class="highlight line-numbers"><code class="language-dart">class Person {}
+class Employee extends Person {}
+
+var em = Employee();
+(em as Person).doSomething();</code></pre>
+
+<h4>隐式接口 implicit interfaces</h4>
+<p>每一个类都是一个隐式的接口, dart 里没有像 java 的 interface 关键字, 当我们使用 <code>extends</code> 继承类时, 会继承类的实现, 而实现 <code>implements</code> 接口的话, 并不会继承原类里的实现. 可以实现多个接口. 实现接口的时候必须要实现<strong>所有的成员变量和成员方法</strong></p>
+<pre class="highlight line-numbers"><code class="language-dart">class Person {
+  final _name;
+  Person(this._name);
+
+  String greet(String who) =&gt; 'Hello, $who. I am $_name.';
+}
+
+class Impostor implements Person {
+  // 别忘实现成员变量
+  String _name;
+
+  // 实现成员方法
+  String greet(String who) =&gt; 'Hi, $who';
+}
+
+String greetBob(Person person) =&gt; person.greet('Bob');
+
+greetBob(Person('Kathy'));
+greetBob(Impostor());</code></pre>
+
+<h4>继承及调用父类</h4>
+<p>使用 <code>extends</code> 继承类, 只能单继承. 子类构造方法会默认调用父类的<strong>无参</strong>, <strong>非命名</strong> 的构造方法, 如果不存在的话, 要手动使用 <code>super</code> 调用, 调用要放在初始化列表中, 在构造方法函数体之前.</p>
+<p>可以使用 <code>@overirde</code> 注解标识覆写的方法.</p>
+<blockquote>
+<p>构造方法不会被继承的</p>
+</blockquote>
+<pre class="highlight line-numbers"><code class="language-dart">class A {
+  final _name;
+  A(this._name);
+
+  void print() =&gt; print(_name);
+}
+
+class B extends A {
+  B(String name) : super(name);
+
+  @override
+  void print() =&gt; print('hello, $_name');
+}</code></pre>
+
+<h4>覆写操作符</h4>
+<p>dart 支持类似 C++ 对操作符进行覆写, 支持以下操作符, 使用 <code>operator</code> 关键字. </p>
+<ul>
+<li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+<li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>~/</code>, <code>%</code>, <code>~</code>, <code>==</code></li>
+<li><code>&gt;&gt;</code>, <code>&lt;&lt;</code>, <code>|</code>, <code>^</code>, <code>&amp;</code></li>
+<li><code>[]</code>, <code>[]=</code></li>
+</ul>
+<blockquote>
+<p>注意 <code>!=</code> 并不支持覆写, 如要判断 <code>e1 != e2</code>, 只能取巧 <code>!(e1 == e2)</code></p>
+<p>如果覆写 <code>==</code> 一定要同时覆写 <code>hashCode</code> 方法</p>
+</blockquote>
+<pre class="highlight line-numbers"><code class="language-dart">class Vector {
+  final int x, y;
+
+  Vector(this.x, this.y);
+
+  Vector operator +(Vector v) =&gt; Vector(x + v.x, y + v.y);
+  Vector operator -(Vector v) =&gt; Vector(x - v.x, y - v.y);
+}</code></pre>
+
+<h4><code>noSuchMethod</code> 方法</h4>
+<p>当访问不存在的<strong>方法或变量</strong>时, 会调用该方法, 默认的实现抛出 <code>NoSuchMethodError</code></p>
+<pre class="highlight line-numbers"><code class="language-dart">class A {
+  @override
+  void noSuchMethod(Invocation invocation) {
+    print("no such $(invocatino.memberName);");
+  }
+}</code></pre>
+
+<h3>枚举类型 Enumerated types</h3>
+<pre class="highlight line-numbers"><code class="language-dart">enum Color { red, green, blue }</code></pre>
+
+<h3>mixins 类(dart 2.1 之后)</h3>
+<p>Mixins 是为了重用类, 解决单继承的另一种方式, 定义一个 mixin 类需要使用 <code>mixin 关键字, 使用</code>with` 关键字来继承 mixin 类</p>
+<pre class="highlight line-numbers"><code class="language-dart">// 定义 mixin 类
+mixin Musical {
+  bool canPlayPiano = false;
+
+  void entertainMe() {
+    // do something....
+  }
+}
+
+// 使用 with 关键字
+class Musician extends Performer with Musical {}</code></pre>
+
+<p>可以限制哪个类可以继承 mixin 类, 使用 <code>on</code> 关键字</p>
+<pre class="highlight line-numbers"><code class="language-dart">mixin MusicalPerformer on Musician {
+  // something...
+}</code></pre>
+
+<h3>泛型</h3>
+<ul>
+<li>
+<p>dart 里的泛型类似 java 的泛型, 如定义  <code>class Cache&lt;T&gt;</code>, 另外还可以限制泛型的类型 <code>class Cache&lt;T extends SomeBaseClass&gt;</code></p>
+</li>
+<li>
+<p>泛型方法, <code>T first&lt;T&gt;(List&lt;T&gt; ts)</code></p>
+</li>
+</ul>
+<h4>参数化 collection 字面量和构造方法</h4>
+<pre class="highlight line-numbers"><code class="language-dart">var nameList = &lt;String&gt;['a', 'b', 'c'];
+var nameSet = &lt;String&gt;{'a', 'b', 'c'};
+var nameMap = &lt;String, String&gt;{
+  'a': 'a',
+  'b': 'b'
+};
+
+var nameSet2 = Set&lt;String&gt;.from[nameSet];</code></pre>
+
+<h3>Libraries</h3>
+<p><code>import</code> 和 <code>library</code> 关键字用来导入和定义模块, 使用 <code>_</code> 开始的只能在模块内可见, 每一个 dart app 都是一个模块, 无论是否有用 <code>library</code> 声明</p>
+<p>导入语句 <code>import 'package:test/test.dart';</code></p>
+<p>对于内置的模块, 其包名都为 <code>dart</code>, 如 <code>import dart:html;</code></p>
+<p>对导入的包重命别名: <code>import 'package:lib2/lib2.dart' as lib2;</code>, 使用 <code>as</code> 关键字</p>
+<h4>部分导入</h4>
+<pre class="highlight line-numbers"><code class="language-dart">// 只导入 foo
+import 'package:lib1/lib1.dart' show foo;
+// 导入除 foo 之外
+import 'package:lib2/lib2.dart' hide foo;</code></pre>
+
+<h4>懒导入(deferred loading 或 lazy loading)</h4>
+<blockquote>
+<p>懒导入只能在 dart2js 中使用</p>
+</blockquote>
+<pre class="highlight line-numbers"><code class="language-dart">// 使用 deferred as 语句
+import 'package:greetings/hello.dart' deferred as hello;
+
+// 调用懒导入的库, 调用之前要先调用 loadLibrary 方法
+Future greet() async {
+  await hello.loadLibrary();
+  hello.printGreeting();
+}</code></pre>
+
+<h3>异步</h3>
+<p>异步使用 <code>async</code> 和 <code>await</code>, 使用 <code>async</code> 的函数总是会返回 <code>Future</code> 对象, 不用显示的返回 <code>Future</code>, 程序会自动包装, 如果没有返回值则是 <code>Future&lt;void&gt;</code> 类型. <code>awati</code> 只能在 <code>async</code> 函数中使用</p>
+<pre class="highlight line-numbers"><code class="language-dart">Future checkVersion() async {
+  var version = await lookUpVersion();
+  // do something
+}
+
+// 在 main 中也可以使用 async
+Future main() async {
+  checkVersion();
+  print('.....');
+}</code></pre>
+
+<h3>异步流 Streams</h3>
+<p>使用 <code>await for</code> 可以获取异步循环, <code>await for (var id in expression)</code>. 可以使用 <code>break</code> 或者 <code>return</code> 中断循环. 注意 <code>await for</code> 只能在 <code>async</code> 函数中使用</p>
+<h3>生成器 Generators</h3>
+<ul>
+<li>同步生成器 Synchronous generator, 返回 <code>Iterable</code> 对象, 使用 <code>sync*</code> 修饰函数</li>
+</ul>
+<pre class="highlight line-numbers"><code class="language-dart">Iterable&lt;int&gt; naturalsTo(int n) sync* {
+  int k = 0;
+  while (k &lt; n) {
+    yield k++;
+  }
+}</code></pre>
+
+<ul>
+<li>异步生成器 Asynchronous generator, 返回 <code>Stream</code> 对象, 使用 <code>async*</code> 修饰函数</li>
+</ul>
+<pre class="highlight line-numbers"><code class="language-dart">Stream&lt;int&gt; asynchronousNaturalsTo(int n) async* {
+  int k = 0;
+  while (k &lt; n) {
+    yield k++;
+  }
+}</code></pre>
+
+<p>类似 Python 里的 yield from, 使用 <code>yield*</code> 在生成器中返回生成器</p>
+<pre class="highlight line-numbers"><code class="language-dart">Iterable&lt;int&gt; naturalsDownFrom(int n) sync* {
+  if (n &gt; 0) {
+    yield n;
+    yield* naturalsDownFrom(n - 1);
+  }
+}</code></pre>
+
+<h3>可调用的类对象 Callable classes</h3>
+<p>类似 Python 类对象可调用的魔术方法 <code>__call__</code>, dart 里也有一个类内置的方法 <code>call()</code>, 实现这个方法类对象便也可以像函数一样调用</p>
+<pre class="highlight line-numbers"><code class="language-dart">class WannableFunction {
+  call(String a, String b, String c) =&gt; '$a, $b, $c';
+}
+
+var wf = WannableFunction();
+print(wf('Hi', 'there', 'gang'));</code></pre>
+
+<h3>Typedefs</h3>
+<p>类似 C 中的 typedef, 定义类型别名, typedefs 让我们能保持类型的信息, 比如</p>
+<pre class="highlight line-numbers"><code class="language-dart">class SortedCollection {
+  Function compare;
+
+  SortedCollection(int f(Ojbect a, Object b)) {
+    compare = f;
+  }
+}</code></pre>
+
+<p>原先 <code>f</code> 是一个接受两个参数并返回 <code>int</code> 的函数, 但传给 <code>compare</code> 之后, 便只能得到一个 <code>Function</code> 类型, 已经没有参数和返回值的信息, 使用 <code>typedef</code> 可以解决这问题</p>
+<pre class="highlight line-numbers"><code class="language-dart">typedef Compare = int Function(Object a, Object b);
+
+class SortedCollection {
+  Compare compare;
+
+  SortedCollection(this.compare);
+}
+
+// 也可以使用泛型
+typedef Compare&lt;T&gt; = int Function(T a, T b);</code></pre>
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                </ul>
+                <hr style="visibility: hidden;">
+
+
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+            </div>  
+            <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+
+ 
+        
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Ambertime 2019                    <br>
+                    Powered by <a href="http://getpelican.com/">Pelican</a> | Theme by <a href="http://huangxuan.me">HuxPro</a>
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=ivicel&repo=ivicel.github.io&type=star&count=true" >
+                    </iframe>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer> 
+        
+        <script src="https://ivicel.info/theme/js/jquery.min.js"></script>
+        <script src="https://ivicel.info/theme/js/bootstrap.min.js"></script>
+        <script src="https://ivicel.info/theme/js/animatescroll.min.js"></script>
+        <script src="https://ivicel.info/theme/js/prism.js"></script>
+        <script src="https://ivicel.info/theme/js/hux-blog.min.js"></script>
+        <script src="https://ivicel.info/theme/js/snackbar.js"></script>
+        <!--fastClick.js -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                TeX: {
+                equationNumbers: {
+                    autoNumber: "AMS"
+                }
+                },
+                tex2jax: {
+                inlineMath: [ ['$','$'] ],
+                displayMath: [ ['$$','$$'] ],
+                processEscapes: true,
+                }
+            });
+            </script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <!-- Google Analytics -->
+        <script>
+            var _gaId = "UA-113622715-2";
+            var _gaDomain = "https://ivicel.info";
+
+            // Originial
+            (function(i, s, o, g, r, a, m) {
+                i["GoogleAnalyticsObject"] = r;
+                (i[r] =
+                    i[r] ||
+                    function() {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    }),
+                    (i[r].l = 1 * new Date());
+                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(
+                window,
+                document,
+                "script",
+                "//www.google-analytics.com/analytics.js",
+                "ga"
+            );
+
+            ga("create", _gaId, _gaDomain);
+            ga("send", "pageview");
+        </script>
+
+        <!-- Side Catalog -->
+
+<script type="text/javascript">
+    
+
+</script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
+<script src="https://ivicel.info/theme/js/jquery.nav.js"></script>
+
+<script type="text/javascript">
+    anchors.options = {
+        visible: 'always',
+        placement: 'right',
+        icon: '#'
+    };
+    anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }));
+    
+    var disqus_config = function () {
+        this.page.url = 'https://ivicel.info/2018/07/dart-tutor.html';
+        this.page.identifier = 'Dart Tutor';
+        this.page.title = 'Dart Tutor';
+    };
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//ambertime.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </body>
+</html>

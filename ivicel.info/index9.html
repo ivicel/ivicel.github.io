@@ -148,6 +148,20 @@ Ambertime        </title>
         <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 
             col-xs-12 postlist-container">
     <div class="post-preview">
+        <a href="2018/02/androidgao-xiao-jia-zai-tu-pian-fang-zhi-oom.html">
+            <h2 class="post-title">
+                Android高效加载图片防止OOM
+            </h2>
+            <div class="post-content-preview">
+                    想要高效的加载 Bitmap, 最主要的思想就是只加载能显示的尺寸大小. 其通 BitmapFactory.Options 里的 option.inSampleSize 来设置图片的采样率. 图片的长和宽都会被设置成 *1/option.inSampleSize * 大小.即当为 1 时, 为原始大小; 当为 2 时, 图片为 (长 * 1/2) * (宽 * 1/2) * 4(ARGB8888), 缩小了 4 倍. 即图片会被设置成 1/option.inSampleSize * 1/option.inSampleSize 大小. inSampleSize 一般取为 2 的指数 …
+            </div>
+        </a>
+        <p class="post-meta">
+            Posted by ivicel on Thu 22 February 2018
+        </p>
+    </div>
+    <hr>
+    <div class="post-preview">
         <a href="2018/02/anroid-fileproviderde-shi-yong.html">
             <h2 class="post-title">
                 Anroid FileProvider的使用
@@ -196,20 +210,6 @@ Ambertime        </title>
             </h2>
             <div class="post-content-preview">
                     Java类中的变量会按照定义的先后顺序来进行初始化, 并且优先于任何方法(包括构造方法) 另外, static变量会优先于普通变量进行初始化, static变量也是按顺序 只有static初始化完成, 普通变量才会初始化 1. static修饰类 // 修饰内部类时, 内部类是一个嵌套类, 不含有指向外部类的引用 // 只能使用外部类的 static 变量和方法 public class OutterClass { public OutterClass() {} public static class InnerClass {} } 2. static修饰成员变量 //...
-            </div>
-        </a>
-        <p class="post-meta">
-            Posted by ivicel on Thu 22 February 2018
-        </p>
-    </div>
-    <hr>
-    <div class="post-preview">
-        <a href="2018/02/view-shi-jian-ti-xi.html">
-            <h2 class="post-title">
-                View 事件体系
-            </h2>
-            <div class="post-content-preview">
-                    view坐标和滑动方法 触摸事件MotionEvent和TouchSlop 单指触摸屏幕时, 一般会产生MotionEvent.ACTION_DOWN(手指接触屏幕时), MotionEvent.ACTION_MOVE(手指移动时), MotionEvent.ACTION_UP(手指离开屏幕时). 触摸事件产生时, 可以获取其位置. 获取其相对当前View的位置: 相对左边MotionEvent.getX(), 相对上边MotionEvent.getY() 获取共相对屏幕的位置: 相对屏幕左边MotionEvent.getRawX(),...
             </div>
         </a>
         <p class="post-meta">

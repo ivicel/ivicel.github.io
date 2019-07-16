@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://ivicel.info/</loc>
-<lastmod>2019-05-11T14:36:15-00:00</lastmod>
+<lastmod>2019-07-16T19:40:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/archives.html</loc>
-<lastmod>2019-05-11T14:36:15-00:00</lastmod>
+<lastmod>2019-07-16T19:40:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/tags.html</loc>
-<lastmod>2019-05-11T14:36:15-00:00</lastmod>
+<lastmod>2019-07-16T19:40:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://ivicel.info/categories.html</loc>
-<lastmod>2019-05-11T14:36:15-00:00</lastmod>
+<lastmod>2019-07-16T19:40:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -160,6 +160,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://ivicel.info/2018/07/a-simple-steamkit-implement-with-using-pythonyi.html</loc>
 <lastmod>2018-07-18T00:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/2018/07/dart-tutor.html</loc>
+<lastmod>2018-07-01T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -692,6 +699,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://ivicel.info/tag/steamkit.html</loc>
 <lastmod>2018-07-18T00:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://ivicel.info/tag/dart.html</loc>
+<lastmod>2018-07-01T00:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
