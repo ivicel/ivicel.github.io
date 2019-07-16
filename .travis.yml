@@ -1,0 +1,12 @@
+language: python
+branches:
+  only:
+    - master
+install:
+  - pip install pelican
+script:
+  -
+before_install:
+  - openssl aes-256-cbc -K $encrypted_59ce41fee125_key -iv $encrypted_59ce41fee125_iv
+    -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  - chmod 600 ~\/.ssh/id_rsa
