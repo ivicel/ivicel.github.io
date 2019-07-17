@@ -1,12 +1,23 @@
 language: python
 branches:
   only:
-  - master
-install:
-- pip install pelican
-script:
-- make publish
+    - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_59ce41fee125_key -iv $encrypted_59ce41fee125_iv
-  -in deploy_key.enc -out deploy_key -d
-- chmod 600 deploy_key
+  - openssl aes-256-cbc -K $encrypted_59ce41fee125_key -iv $encrypted_59ce41fee125_iv
+    -in deploy_key.enc -out deploy_key -d
+  - chmod 600 deploy_key
+install:
+  - pip install pelican
+script:
+  - pelican content -s publishconf.py -t themes/clean-blog
+aftersuccess:
+  - tar -zcvf target.tgz ivicel.info
+  - scp -P $ssh_port target.tgz $ssh_host:$source
+  - ssh -P $ssh_port $ssh_host
+  - tar -zxvf $source/target.tgz -C $target
+env:
+  global:
+    - secure: jihs385a849eR3eATYFkucVwrJqArkth1PSxOjqLfNwBN0sEj+NI97gLJf+RFWO15p1xqe0Hn1K/mm+GqGVRFy5N6ztV1vDsM3hw0ussdQqk4W4uWYdUVzPEGwIoic0VlChJs7KK5ddg+adh9xQau0LdN5rUJHL0uKs3yHquDASAhhFquhgpMgn9tbvUPvjqRa+HNaaxmjOn5zGUqSYizsPR1XWLgs+oit2+LnDKcU9bI9e93a/XVorHlp47Cb1p0tZ9fstdgG//H7D++07twcp8mHyqP3CjaDwVn14m0CSoy8fkW1wz06U/iywJMwXPtQMa1EKPFn04/QawDueGCxevORy13SCPcGDBvhnjfWlmhGDlhZtX8X7HB96buqmUbgYmXEU0HGL/S+izMp1uA+Mav+q1ZkxIgXURAQxoKB9wQpUgXY6UZ+wL9rOTDy6kV7R8L5Uky3iGgqCgxK0kshgHFRjmaS/LZC8nx56P4980QyitP1Z9X3oou6scWh9FsvgLY7JndSJPXP6M4lhlUzkwgI0qPIWz7kmWYEDXRpn83pgOips7TPIhfZHeCKfmw8f6rsJnH96ujLta5TjkHUcVuFJrt317qMepp9Xi+wZ/ZMzR8bmHGfw3IQGpwNQpymAYVxWfyMz52eZUVSJI+ysZVrsjGHHAcf88y3LmiD4=
+    - secure: uyUBrGQyCAqUwVgd8QGnV+Wo3UtqF9bQ4TiPQy6e+OAUMDKBzXUs4hLdm8Ul1dD6KcOF+sl5xHKVU3CKXnYkCg/oCWamD1Es/vM75Kv5jKoudwiz3M+FeqCBXD2rxpzW4nRU3dWcpfhc9CJEsTb1A6KTV13+aUqYOINLkLGvkDDjG+f0bHkVx4xGM+ycWuqvk8bN41aH9/4UjUaeLeeFV2gN8yAxTx121YpwD6MB8xYPSloo31scswe3UrxYcGSpuLIVmkju/lwG33zxs/N1Oc6M2ym6zYI8iRtWK7/IcNu2O082OCgpNZWqTAYLd3PatmJVt04INm47yS9oFCw80IDr4CMELphTwXxnSPrhBLpdJnjj/BX/8mFLNgmYAsElzWkokZ1lmRwPD0NWeqX1P6aH4K9uVSXIQJURwdaKsOYZrmhcUiiU92e5V5zHJ7vkf1j5nvrUoww/cnEWDcT2eJIxYfZ4rp6Bjk6C7V6AkA21wV76MZBdV9gSzGFgnh3FZ2mENqc7kY5ofJ43rQdh7EhtGNRpGfzOB/vGcr/dNPwodWIULNzZRAacEFWkIVG+2zLYbLqSfYF+9hwvYQp2pboP+ngGjUS2Cri0uvS+bPCbIwBZVjGzzvDH49wWwEXnOlfmDU5jMcNhzwDohIm+DHOj6lOrLWGPVR6pqrEfhnI=
+    - secure: YmFpAu1SUlAZYDMnCkVP6VrhpFr6Zc5BCJVFe4nHdTNKU5al1ZsUF8zn2cGm5SdRW45b/9J7WCeWF0VZJSg7I3wq3xIG4Lr94ePCXbPVIR2teuTghrD7DyDVYiEz+V52+9l/6i3YDhYs2PV2mWIWIua9xYm51mcC82oTNlERqZbNRShRdRkBCXnXv82+Atc6/iU4uu994oqomI9DXlrElhuDdgJ5hnjRxwdjWDZnG6abd4jQf7BTaiBoqD6xFxAh7Cjh4lU4epir+eU5i4omSwX1SyESnN0v2Vz61h5KnmqmXKrYasPyGU2XpfipqvliCbcfOpA0lZfrFuxokEy1UPw3WoKeQFYDuRw0VMnp0THHP06rdg8Y6ds7dJxcYDTIfDG0jZa026b4Mm5xQSZedHuYEgrDl3BEb/d2QFB7kd/WDBNFANCaCPofmCxijhw1hOc35FsKguj91XSfw9qZV/rwrJudbq9BCjF9KSxdMj2GVrYt1BWOHgTBf2FfimAw7DikIiCgHZXGh4ZnzFSvhsMhFEEh0fZnspQSk5U9OQWhaeZP1J1cJp1gk4w/WuEt7xsJUIMn4j0vIpzGnmyexLWj/J2/izDrTrKKi+51Wm3sp86/cJVKTIN8mX7BtHydEeYZL9PituR4qgl/XOjdmBKfmkPODcnBxTJZgziVROI=
+    - secure: wukrUIl4RIPrcm51Zk7+I5ImUbQce7amlS5FqVJijQY0BShbQbr0P9xHmovYJEKGWCEGrpxSnljthj+t2y7eCHN/bfYI17BARtIybjPL8MeokQwOvVGb+6YDNgao+lkJZtsvIc+agqIDERTMcClLizNtaOJmoBl9eBok9PiUrkOfn+f0w8VKIjMJaeqs+pV81IicDcaZ5Nc8SpymIuJSAF5fyRCg++94xz6G1lUzfya+Vg6KIRkuke3aCkNWHB5uwbUoMdyb7GfHxIcsD7eFifKB+YjdrOB3SlUe9uQ0vnVqALb2wALj/RkdfCBVjhnTdFjKWH1B6M1P/dcKN23WMPF0JPgziKSwlTo7FsurHX/iMg7cyJkX5/DCemOqcDBgioFYeHNMzoJA/nzIClwZV7VoUV3iIZvY8rqHnrwtejRcoNtkIo9gI6r5AZK5u1P2mwYJU90PSOL5jdBLvtjGe9i2d61Pmr35GoYvO/0FoTNP2TN4KQ1Ha6AJnTxfdWVWnW/tZTyX6mTqE6KZEII2Ki2+k+3m0dX5BeM+pqNGGubXZR2uRHatR4i6NXaTvBjq28fWOaVfWwNM5fDNulv0hLRp1OaV5vcHuIWcJnWayJ3v5ezRg8H8VNmWYrc6FyyjWDYTk/fZ6UfFRuJhVSt8GHaU31xYMhsy76O1Y2hqVhA=
