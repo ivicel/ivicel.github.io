@@ -11,13 +11,12 @@ install:
   - pip install pelican
 script:
   - pelican content -s publishconf.py -t themes/clean-blog
+  - echo $known_hosts >> ~/.ssh/known_hosts
 after_success:
   - tar -zcvf target.tgz ivicel.info
   - scp -P $ssh_port target.tgz $ssh_host:$source
   - ssh -P $ssh_port $ssh_host
   - tar -zxvf $source/target.tgz -C $target
-addons:
-  ssh_known_hosts: $host
 env:
   global:
     - secure: jihs385a849eR3eATYFkucVwrJqArkth1PSxOjqLfNwBN0sEj+NI97gLJf+RFWO15p1xqe0Hn1K/mm+GqGVRFy5N6ztV1vDsM3hw0ussdQqk4W4uWYdUVzPEGwIoic0VlChJs7KK5ddg+adh9xQau0LdN5rUJHL0uKs3yHquDASAhhFquhgpMgn9tbvUPvjqRa+HNaaxmjOn5zGUqSYizsPR1XWLgs+oit2+LnDKcU9bI9e93a/XVorHlp47Cb1p0tZ9fstdgG//H7D++07twcp8mHyqP3CjaDwVn14m0CSoy8fkW1wz06U/iywJMwXPtQMa1EKPFn04/QawDueGCxevORy13SCPcGDBvhnjfWlmhGDlhZtX8X7HB96buqmUbgYmXEU0HGL/S+izMp1uA+Mav+q1ZkxIgXURAQxoKB9wQpUgXY6UZ+wL9rOTDy6kV7R8L5Uky3iGgqCgxK0kshgHFRjmaS/LZC8nx56P4980QyitP1Z9X3oou6scWh9FsvgLY7JndSJPXP6M4lhlUzkwgI0qPIWz7kmWYEDXRpn83pgOips7TPIhfZHeCKfmw8f6rsJnH96ujLta5TjkHUcVuFJrt317qMepp9Xi+wZ/ZMzR8bmHGfw3IQGpwNQpymAYVxWfyMz52eZUVSJI+ysZVrsjGHHAcf88y3LmiD4=
