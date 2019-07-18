@@ -2,9 +2,12 @@ language: python
 branches:
   only:
     - source
-cache: pip
+
 install:
-  - pip install pelican markdown pymdown-extensions
-script:
-  - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
-  - rsync -rzP ivicel.info $user@$host::blog
+  - rsync -v
+# cache: pip
+# install:
+#   - pip install pelican markdown pymdown-extensions
+# script:
+#   - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
+#   - rsync -rzP ivicel.info $user@$host::blog
