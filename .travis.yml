@@ -6,5 +6,5 @@ cache: pip
 install:
   - pip install pelican
 script:
-  - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
-  - rsync -rvzogP --chown=$user:$user ivicel.info $user@$host::blog
+  - pelican ./content -s ./publishconf.py -t ./themes/clean-blog -o ivicel.info
+  - rsync -rvzogP --chown=$user:$user ivicel.info/ $user@$host::blog
