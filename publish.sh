@@ -2,4 +2,4 @@
 
 git add .
 git commit -m "generate blog at $(date)"
-git push origin master
+git push origin source
