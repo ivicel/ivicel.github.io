@@ -7,4 +7,4 @@ install:
   - pip install pelican markdown pymdown-extensions
 script:
   - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
-  - rsync -rzogP --chown=$user:$user ivicel.info/ $user@$host::blog
+  - rsync -rzogP --super --chown=$user:$user ivicel.info/ $user@$host::blog
