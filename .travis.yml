@@ -8,4 +8,4 @@ install:
 script:
   - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
 after_success:
-  - rsync -vzP ivicel.info $user@$host::blog
+  - rsync -rvzP ivicel.info $user@$host::blog -o $user -g $user
