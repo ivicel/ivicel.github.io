@@ -11,11 +11,11 @@ install:
   - pip install pelican
 script:
   - pelican content -s publishconf.py -t themes/clean-blog
-  - echo $known_hosts >> ~/.ssh/known_hosts
+  - echo -e "$known_hosts\n\tStrictHostKeyChecking no\n" >> ~/.ssh/known_hosts
 after_success:
   - tar -zcvf target.tgz ivicel.info
   - scp -P $ssh_port target.tgz $ssh_host:$source
-  - ssh -P $ssh_port $ssh_host
+  - ssh -p $ssh_port $ssh_host
   - tar -zxvf $source/target.tgz -C $target
 env:
   global:
