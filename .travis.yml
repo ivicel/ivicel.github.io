@@ -7,5 +7,4 @@ install:
   - pip install pelican
 script:
   - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
-after_success:
-  - rsync -rvzP ivicel.info $user@$host::blog -o $user -g $user
+  - rsync -rvzP -o $user -g $user ivicel.info $user@$host::blog
