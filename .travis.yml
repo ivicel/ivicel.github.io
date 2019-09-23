@@ -1,10 +1,13 @@
 language: python
 branches:
   only:
-    - source
+  - source
 cache: pip
 install:
-  - pip install pelican markdown pymdown-extensions
+- pip install pelican markdown pymdown-extensions
 script:
-  - pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
-  - rsync -rzogP --super --usermap=*:$user --groupmap=*:$user ivicel.info/ $user@$host::blog
+- pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
+- rsync -rzogP --super --usermap=*:$user --groupmap=*:$user ivicel.info/ $user@$host::blog
+before_install:
+- openssl aes-256-cbc -K $encrypted_59ce41fee125_key -iv $encrypted_59ce41fee125_iv
+  -in deploy_key -out deploy_key.pub -d
