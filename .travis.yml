@@ -10,4 +10,7 @@ script:
 - rsync -rzogP ivicel.info/* $target
 before_install:
 - openssl aes-256-cbc -K $encrypted_59ce41fee125_key -iv $encrypted_59ce41fee125_iv
-  -in deploy_key -out deploy_key.pub -d
+  -in deploy_key -out /tmp/deploy_key.pub -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_key.pub
+- ssh-add /tmp/deploy_key.pub
