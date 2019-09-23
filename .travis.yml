@@ -14,5 +14,4 @@ before_install:
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_key.pub
 - ssh-add /tmp/deploy_key.pub
-- mkdir $HOME/.ssh
 - ssh-keygen -F $host > $HOME/.ssh/known_hosts
