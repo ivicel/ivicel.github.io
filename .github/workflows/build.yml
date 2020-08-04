@@ -5,21 +5,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v1.2.0
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          python-version: 3.7
+          hugo-version: "0.74.2"
 
       # Runs a single command using the runners shell
-      - name: Install required package and build
-        run: |
-          pip install pelican markdown pymdown-extensions
-          pelican content -s publishconf.py -t themes/clean-blog -o ivicel.info
+      - name: Build
+        run: hugo --minify
 
       # Runs a set of commands using the runners shell
       - name: Deploy

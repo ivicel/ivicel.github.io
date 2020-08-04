@@ -1,0 +1,232 @@
+---
+title: "Android内存缓存LruCache"
+date: 2018-04-04
+tags: ["缓存", "lrucache"]
+categories: ['Android']
+cover: "/images/beverage.jpg"
+---
+
+### 1. LruCahe 的使用
+
+`LruCache` 类的构造方法为 `public LruCache(int maxSize)`, 其需要传入一个缓存大小, 单位为 **byte**, 一般我们会通过计算应用可以使用的最大内存是多少, 然后取其中的一部分作为值来传入.
+
+> 传入的内存最大值的**单位**要和 `sizeOf()` 返回的单位一致即可
+
+另然最重要的需要重写这个类的 `sizeOf()` 方法, 该方法返回值表示了每个元素的大小, 以便确定缓存是否需要删除旧的元素. 这个方法的默认实现是返回 1.
+
+```java
+// 获得应用可使用的最大内存, 取 1/8 作为缓存
+final int maxSize = Runtime.getRuntime().maxMemory() / 8;
+LruCache<String, Bitmap> bitmapCache = new LruCache<>(maxSize) {
+  	@Override
+    protected int sizeOf(String key, Bitmap value) {
+        // 图片缓存, 返回每个 bitmap 的大小
+        // sdk 19 之后不再使用 Bitmap#getByteCount
+        // Bitmap#getAllocationByteCount 可能会比 getByteCount 返回的值大
+     	return value.getAllocationByteCount();
+    }
+};
+```
+
+在获得 `LruCache` 对象之后, 便可以对其进行读, 写, 删除
+
+```java
+Bitmap bitmap = bitmapCache.get(key);
+// 如果缓存中已经存在, 那么旧的会被返回, 不存在则返回 null
+Bitmap prevBitmap = bitmapCache.put(key, bitmap);
+// 删除缓存
+Btimap bitmap = bitmap.remove(key);
+
+// 一般图片都是从网络上下载下来, 所以使用图片的 url 来作为 key 值是最好了
+// 但 url 会有特殊的字符不能作为 key, 常用的方法是将 url 转为其 md5 值
+public String urlToMD5(String url) {
+    String key;
+    try {
+	    final MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(url.getBytes());
+        key = bytesToHexString(md.digest());
+    } catch (NoSuchAlgorithmException e) {
+        key = String.valueOf(url.hashCode());
+    }
+    return key;
+}
+
+public String bytesToHexString(byte[] input) {
+	// 将 byte 数组转为 16 进制字符
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < input.length; i++) {
+     	String hex = Integer.toHexString(0xFF && input[i]);
+        if (hex.lenght() == 1) {
+            // 只有一位时在前面补 0
+            sb.append("0");
+        }
+        sb.append(hex);
+    }
+
+    return sb.toString();
+}
+```
+
+另外还可以重写 `entryRemove()` 方法, 这个方法会在**元素被删除**(内存不足时, remove 操作时), **元素被替换**(put 操作时)被调用, 默认的实现是一个空实现, 并且这个调用不是 `synchronization`
+
+```java
+// @param evicted. 空间不足引起的删除时为 true. put, remove 操作引起的为 false
+// @param key 元素的 key
+// @param oldValue 元素的旧值
+// @param newValue 元素是被替换时的新值, 被删除时该值为 null
+protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue);
+```
+
+### 2. 源码解析
+
+由于需要不断重新排序, `LruCache` 内部使用了一个 `LinkHashMap` 数据结构来存储实际内容. 这是一个**双向链表** 实现的 **HashMap**. `LinkHashMap`可以设置成**基于插入顺序优先**, 或者**基于访问顺序优先**, 把优先的元素放在链表**末端**, 这样链表头结点总是表示**最后插入**/**最少访问**的元素, 可以把头结点从链接中删除
+
+```Java
+public class LruCache<K, V> {
+ 	public LruCache(int maxSize) {
+     	if (maxSize) {
+         	throw new IllegalArgumentException("maxSize <= 0");
+        }
+        this.maxSize = maxSize;
+        // 第一个参数为初始容量, 第二个为 map 的负载因子, 第三个为是否基于访问顺序
+        this.map = new LinkHashMap<K, V>(0, 0.75f, true);
+    }
+}
+```
+
+在每次 `put`, `get` 之后, 都要使用 `trimToSize()` 来确保使用的内存容量是在规定的范围内
+
+```java
+// 传的参数是最大内存容量, 如果大于这个数, 就把头结点从链表中删除
+public void trimToSize(int maxSize) {
+    // 不断循环的删除头结点, 直到使用的内存小于 maxSize
+	while (true) {
+     	K key;
+        V value;
+        synchronized (this) {
+            // size 为当前使用的缓存容量
+         	if (size < 0 || (map.isEmpty() && size != 0)) {
+                throw new IllegalStateException(getClass().getName() +
+					".sizeOf() is reporting inconsistent results!");
+            }
+
+            // 当现使用的容量 <= 最大容量时退出循环
+            if (size <= maxSize) {
+                break;
+            }
+
+            // LinkHashMap#eldest() 方法是 Android 实现 LinkHashMap 时添加的方法
+            // 其简单的返回了链表头结点
+            Map.Entry<K, V> toEvict = map.eldest();
+            if (toEvict == null) {
+                break;
+            }
+
+            // 删除头结点, 并把现使用的内存容量减小
+            key = toEvict.getKey();
+            value = toEvict.getValue();
+            map.remove(key);
+            // safeSizeOf 只是对 sizeOf 的再次封装, 其只是返回 sizeOf 并确保该值不能 < 0
+            size -= safeSizeOf(key, value);
+            // 记录收回的元素数量
+            evictionCount++;
+        }
+
+        // 调用
+        entryRemoved(true, key, value, null);
+    }
+}
+```
+
+`LruCache#put()`, `LruCache#get()`方法的实现
+
+```java
+// LruCache#put()
+public final V put(K key, V value) {
+ 	if (key == null || value == null) {
+        throw new NullPointerException("key == null || value == null");
+    }
+
+    // 如果添加进去的新的元素已经在内存中的话, 更新之后, 再减去旧的元素的大小
+    V previous;
+    synchronized (this) {
+     	putCount++;
+        size += safeSizeOf(key, value);
+        previous = map.put(key, value);
+        if (previous != null) {
+            size -= safeSizeOf(key, previous);
+        }
+    }
+
+    if (previous != null) {
+        entryRemoved(false, key, previous, value);
+    }
+    // 保证内存大小不超过设定
+    trimToSize(maxSize);
+
+    return previous;
+}
+
+// LruCache#get()
+public final V get(K key) {
+ 	if (key == null) {
+        throw new NullPointerException("key == null");
+    }
+
+    V mapValue;
+    synchronized (this) {
+        // 查找链表中的元素, 如果找到了就返回该值
+     	mapValue = map.get(key);
+        if (mapValue != null) {
+            hitCount++;
+            return mapValue;
+        }
+        missCount++;
+    }
+
+    // 如果对应值不存在的话, 调用 create() 方法尝试新建一个
+    // create() 方法非线程安全, 可能会在调用的时候, 其他的线程又对该 key 进行操作
+    /*
+     * Attemp to create a value. This may take a long time, and the map
+     * may be different when create() returns. If a conflicting value was
+     * added to the map while create() was working, we leave that value in
+     * the map and release the created value
+     */
+    V createdValue = create();
+    if (createValue == null) {
+        return null;
+    }
+
+    // 如果重写了 create() 并返回非 null
+    // 之后我们要重新查看下缓存之中是不是有了该 key
+    synchronized (this) {
+        createCount++;
+        mapValue = map.put(key, createdValue);;
+        // 如果有了该 key 的值, 不要对其做更改
+        if (mapValue != null) {
+            // There was a conflict so undo that last put
+            map.put(mapValue);
+        } else {
+            size += safeSizeOf(key, createdValue);
+        }
+    }
+
+    if (mapValue != null) {
+        entryRemoved(false, key, createdValue, mapValue);
+        return mapValue;
+    } else {
+        trimeToSize(maxSize);
+        return createdValue;
+    }
+}
+
+// LruCache#create(), 默认返回 null
+protected V create(K key) {
+    return null;
+}
+```
+
+### Reference:
+
+1. <<Android 开发艺术探索>>
+2. [https://blog.csdn.net/shakespeare001/article/details/51695358](https://blog.csdn.net/shakespeare001/article/details/51695358)
