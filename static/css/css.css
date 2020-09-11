@@ -1,3 +1,41 @@
+.highlight   {
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+}
+
 a.terms-link {
     font-size: 18px;
+}
+
+.post .post-content {
+    line-height: 1.75;
+}
+
+.post .post-content h1,
+.post .post-content h2,
+.post .post-content h3,
+.post .post-content h4,
+.post .post-content h5,
+.post .post-content h6 {
+    font-weight: 600;
+}
+
+.post .post-content code {
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+.mjx-math {
+    color: #d33682;
+    padding: 1px;
+}
+
+figure figcaption {
+    text-align: center;
+    font-size: 16px;
+    font-style: oblique;
+    font-weight: 600;
+    padding: 15px;
 }

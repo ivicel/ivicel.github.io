@@ -4,12 +4,13 @@ title: "Spring Security 的使用"
 date: 2019-01-03
 tags: ["spring", "spring security"]
 categories: ['Java']
+lastmod: 2020-08-08
 
 ---
 
 
 
-#### 1. Spring Security 的开启方式
+## 1. Spring Security 的开启方式
 
 在 Java Web 中一般使用 Filter 来对请求进行拦截, Spring Security 基于此来对在进入 DispatcherServlet 前对 Spring MVC 进行请求拦截, 进行统一难, 从而决定是否放行
 
@@ -25,9 +26,9 @@ categories: ['Java']
 * `configure(HttpSecurity http)` 用来配置拦截保护请求, 决定哪些请求放行, 哪些请求需要验证
 * `configure(WebSecurity web)` 用来配置 Filter 链
 
-#### 2. 验证用户(用户名, 密码, 角色...)
+## 2. 验证用户(用户名, 密码, 角色...)
 
-##### 2.1 使用内存签名
+### 2.1 使用内存签名
 
 在 Spring 5 之后要求使用一个密码编码器, 用来对密码进行加密以及密码匹配, 其要实现接口 `PasswordEncoder`, 以使用内存签名服务为例
 
@@ -62,7 +63,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 * `disabled(boolean)` 是否禁用用户
 * `username(String)` 定义用户名
 
-##### 2.2 使用数据库定义用户认证服务
+### 2.2 使用数据库定义用户认证服务
 
 `AuthenticationManagerBuilder#jdbcAuthentication` 方法会返回  `JdbcUserDetailsManagerConfigurer` 对象, 数据库用户表为  `org.springframework.security.core.userdetails.User`, 数据库至少要实现 4 个字段(`id`, `username`, `password`, `available`), 并且这顺序是固定的, 另外角色的权限表, 权限表要实现 2 个字段(`id`, `name`), 并且顺序也是固定的, 角色权限查询返回的是一个 List.
 
@@ -138,7 +139,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-#### 3. 限制请求(对 url 的配置)
+## 3. 限制请求(对 url 的配置)
 
 限制请求主要是对不同的路径(url)实现不同的策略, 通过这能够实现对不同角色赋予不同权限.
 
@@ -182,7 +183,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 有时候我们需要更加强大的验证功能, 可以使用 SpEL(Spring 表达式), 比如 `access("hasRole('USER') or hasRole('ADMIN')")` 来表示需要 USER 或 ADMIN 角色
 
-#### 3.1. 自定义登录页面
+## 4. 自定义登录页面
 
 在登录页面都有一个 Remember Me 的功能, 默认的实现是**记住一天**, 记录在浏览器的 Cookie 中, 其键为 `remember-me-key`, 其值为 MD5 Hash 过的值
 
@@ -204,7 +205,7 @@ protected void configure(HttpSecurity http) throws Exception {
 }
 ```
 
-#### 5. 防止跨站请求伪造(CSRF)
+## 5. 防止跨站请求伪造(CSRF)
 
 添加 Spring Security 后, 会自动添加 CSRF 认证, 可以使用 `HttpSecurity#csrf().disable()` 来关闭. Spring Security 会生成一个 `_csrf` 变量, 可以在页面模版中使用这个变量
 
