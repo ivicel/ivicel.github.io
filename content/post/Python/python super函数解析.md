@@ -37,9 +37,22 @@ class B1:
 
 class C1(A1, B1):
     pass
+
+c1 = C1()
+c1.spam()
 ```
 
-直接调用 A1 的实例对象, 出错
+上面的是正常调用, 这里你会发现类 `A1` 并没有继承关系, 当我们调用 `super().spam` 里, 其实是在调用 `C1.__mro__` 链中 `A1` 的下一个位置, 也就是 `B1`
+
+> 注意 A1 此时的实例对象是 c1, 也就是子类实例对象, 这里是类的多态
+
+```text
+C1 的 mro: (<class '__main__.C1'>, <class '__main__.A1'>, <class '__main__.B1'>, <class 'object'>)
+当前类 A1, 当前对象: <__main__.C1 object at 0x103bc19a0> , 类 A1 本身的 mro: (<class '__main__.A1'>, <class 'object'>)
+当前类 B1, 当前对象: <__main__.C1 object at 0x103bc19a0> , 类 B1 本身的 mro: (<class '__main__.B1'>, <class 'object'>)
+```
+
+而如果我们直接调用 A1 的实例对象, 则会出错
 
 ```text
 a1 = A1()
