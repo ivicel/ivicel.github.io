@@ -1,0 +1,42 @@
+name: Build blog
+on:
+  workflow_dispatch:
+  push:
+    branches: source
+
+jobs:
+  build:
+    environment: github-pages
+    runs-on: ubuntu-18.04
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.74.2"
+          extended: true
+
+      # Runs a single command using the runners shell
+      - name: Build
+        run: hugo --minify
+        
+      - name: Adding Known Hosts
+        run: |
+          mkdir ~/.ssh
+          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
+      # Runs a set of commands using the runners shell
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.1.2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: ${{ secrets.SOURCE }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
